@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://duppv4psxjqh1"]
+
+[ext_resource type="Script" path="res://resources/item/item_data.gd" id="1_irl3o"]
+[ext_resource type="Texture2D" uid="uid://b6y8na6rm2gcb" path="res://resources/item/#1 - Transparent Icons.png" id="2_s5g14"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyw67"]
+atlas = ExtResource("2_s5g14")
+region = Rect2(32, 160, 32, 32)
+
+[resource]
+script = ExtResource("1_irl3o")
+name = "Sword"
+description = "A warrior's best friend for slashing and slapping!"
+stackable = false
+texture = SubResource("AtlasTexture_iyw67")

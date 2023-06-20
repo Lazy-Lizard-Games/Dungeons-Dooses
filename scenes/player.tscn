@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvu7bdrfa8e16"]
+
+[ext_resource type="Texture2D" uid="uid://by7uuoqlwhwng" path="res://assets/characters/Knight.png" id="1_7g6q7"]
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_dxhpx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t4n5u"]
+size = Vector2(14, 14)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dbmv1"]
+radius = 3.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+floor_stop_on_slope = false
+script = ExtResource("1_dxhpx")
+speed = 200
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_7g6q7")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_t4n5u")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="InterractArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractArea"]
+shape = SubResource("CircleShape2D_dbmv1")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Interactions" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="InterractLabel" type="Label" parent="UI/Interactions"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
