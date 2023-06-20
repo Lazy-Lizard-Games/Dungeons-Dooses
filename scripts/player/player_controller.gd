@@ -7,7 +7,6 @@ extends Character
 signal toggle_inventory
 
 func _unhandled_input(event: InputEvent) -> void:
-	
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 	
@@ -17,7 +16,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interract"):
 		if interract_area.has_overlapping_bodies():
 			var interactable = interract_area.get_overlapping_bodies()[0]
-			interactable.player_interact()
+			if global_position.distance_to(interactable.global_position) <= reach:
+				interactable.player_interact()
 
 func _physics_process(delta) -> void:
 	# Update interract area

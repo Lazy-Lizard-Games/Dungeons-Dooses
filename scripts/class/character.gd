@@ -5,3 +5,4 @@ class_name Character
 @export var max_health = 10
 @export var max_stamina = 10
 @export var speed = 100
+@export var reach = 150
