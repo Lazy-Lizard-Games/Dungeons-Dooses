@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cvu7bdrfa8e16"]
+[gd_scene load_steps=6 format=3 uid="uid://cvu7bdrfa8e16"]
 
-[ext_resource type="Texture2D" uid="uid://by7uuoqlwhwng" path="res://assets/characters/Knight.png" id="1_7g6q7"]
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_dxhpx"]
+[ext_resource type="Texture2D" uid="uid://b6y8na6rm2gcb" path="res://resources/item/#1 - Transparent Icons.png" id="2_wk3bt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnatr"]
+atlas = ExtResource("2_wk3bt")
+region = Rect2(256, 96, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4n5u"]
 size = Vector2(14, 14)
@@ -16,7 +20,7 @@ script = ExtResource("1_dxhpx")
 speed = 200
 
 [node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_7g6q7")
+texture = SubResource("AtlasTexture_lnatr")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
@@ -25,12 +29,12 @@ shape = SubResource("RectangleShape2D_t4n5u")
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 
-[node name="InterractArea" type="Area2D" parent="."]
+[node name="InteractArea" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 4
 input_pickable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InterractArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
 shape = SubResource("CircleShape2D_dbmv1")
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -41,8 +45,12 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="InterractLabel" type="Label" parent="UI/Interactions"]
+[node name="InteractLabel" type="Label" parent="UI/Interactions"]
 visible = false
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 30
+text = "AHH"
