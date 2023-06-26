@@ -31,3 +31,5 @@ theme_override_constants/shadow_outline_size = 0
 text = "x99"
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="MarginContainer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/TextureRect" to="." method="_on_texture_rect_mouse_exited"]

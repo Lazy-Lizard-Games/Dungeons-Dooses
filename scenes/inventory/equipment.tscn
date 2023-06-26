@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://c838ylxa0evhk"]
+
+[ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="2_7cldw"]
+
+[sub_resource type="GDScript" id="GDScript_4o1pu"]
+script/source = "extends PanelContainer
+
+@onready var item_grid: GridContainer = $MarginContainer/ItemGrid
+
+func set_equipment_data(inventory_data: InventoryData) -> void:
+	inventory_data.inventory_updated.connect(populate_item_grid)
+	populate_item_grid(inventory_data)
+
+func clear_inventory_data(inventory_data: InventoryData) -> void:
+	inventory_data.inventory_updated.disconnect(populate_item_grid)
+
+func populate_item_grid(inventory_data: InventoryData) -> void:
+	for i in range(item_grid.get_child_count()):
+		pass
+"
+
+[node name="Equipment" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_4o1pu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Slot" parent="MarginContainer/ItemGrid" instance=ExtResource("2_7cldw")]
+layout_mode = 2
+
+[node name="Slot2" parent="MarginContainer/ItemGrid" instance=ExtResource("2_7cldw")]
+layout_mode = 2
+
+[node name="Slot3" parent="MarginContainer/ItemGrid" instance=ExtResource("2_7cldw")]
+layout_mode = 2
+
+[node name="Slot4" parent="MarginContainer/ItemGrid" instance=ExtResource("2_7cldw")]
+layout_mode = 2
+
+[node name="Slot5" parent="MarginContainer/ItemGrid" instance=ExtResource("2_7cldw")]
+layout_mode = 2
+
+[node name="Slot6" parent="MarginContainer/ItemGrid" instance=ExtResource("2_7cldw")]
+layout_mode = 2

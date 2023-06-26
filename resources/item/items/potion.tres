@@ -11,5 +11,6 @@ region = Rect2(0, 288, 32, 32)
 script = ExtResource("1_uvry8")
 name = "Potion"
 description = "Double, double toil and trouble; Fire burn, and cauldron bubble."
+item_type = 5
 stackable = true
 texture = SubResource("AtlasTexture_7mgxd")

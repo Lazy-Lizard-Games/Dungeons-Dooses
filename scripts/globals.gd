@@ -1,0 +1,4 @@
+extends Node
+
+
+enum ITEM_TYPES {ITEM, HEAD, BODY, FEET, WEAPON , CONSUMABLE}

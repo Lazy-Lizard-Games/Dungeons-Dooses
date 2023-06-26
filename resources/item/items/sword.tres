@@ -11,5 +11,6 @@ region = Rect2(32, 160, 32, 32)
 script = ExtResource("1_irl3o")
 name = "Sword"
 description = "A warrior's best friend for slashing and slapping!"
+item_type = 3
 stackable = false
 texture = SubResource("AtlasTexture_iyw67")

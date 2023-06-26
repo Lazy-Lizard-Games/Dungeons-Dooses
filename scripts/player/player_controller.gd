@@ -1,5 +1,7 @@
 extends Character
 
+const THROW_FORCE: int = 10
+
 @export var inventory_data: InventoryData
 @onready var interact_area: Area2D = $InteractArea
 @onready var interact_label: Label = $UI/Interactions/InteractLabel

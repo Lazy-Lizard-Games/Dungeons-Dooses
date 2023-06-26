@@ -14,10 +14,10 @@ size = Vector2(14, 14)
 radius = 3.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_dxhpx")
-speed = 200
 
 [node name="Sprite" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_lnatr")
@@ -27,6 +27,7 @@ position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_t4n5u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
 [node name="InteractArea" type="Area2D" parent="."]
@@ -44,6 +45,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
 [node name="InteractLabel" type="Label" parent="UI/Interactions"]
 visible = false

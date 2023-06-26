@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://8u7kb5sknskf"]
+[gd_scene load_steps=19 format=3 uid="uid://8u7kb5sknskf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0h6jt"]
 [ext_resource type="Texture2D" uid="uid://dgb0pqbj2g824" path="res://assets/tilesheets/tile_map_V4.png" id="1_ism7i"]
@@ -11,6 +11,8 @@
 [ext_resource type="Resource" uid="uid://cbi7hxjywfd2m" path="res://resources/item/items/potion.tres" id="5_g8cv7"]
 [ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="6_lsoxq"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="7_eibdl"]
+[ext_resource type="PackedScene" uid="uid://biv6bo2ifthr8" path="res://resources/item/pickup.tscn" id="7_f5w4x"]
+[ext_resource type="PackedScene" uid="uid://ca8ctygsnlwmc" path="res://scenes/inventory/info_card.tscn" id="13_aqgwa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yodlx"]
 texture = ExtResource("1_ism7i")
@@ -390,11 +392,15 @@ quantity = 5
 
 [sub_resource type="Resource" id="Resource_khpt8"]
 script = ExtResource("4_cwqjo")
-slot_datas = Array[ExtResource("6_lsoxq")]([null, SubResource("Resource_l3ba5"), null, null, null, null])
+slot_datas = Array[ExtResource("6_lsoxq")]([null, SubResource("Resource_l3ba5"), null, null, null, null, null, null, null, null, null, null])
+
+[sub_resource type="Resource" id="Resource_o1esh"]
+script = ExtResource("6_lsoxq")
+item_data = ExtResource("5_g8cv7")
+quantity = 84
 
 [node name="Node2D" type="Node2D"]
 y_sort_enabled = true
-scale = Vector2(3, 3)
 script = ExtResource("1_0h6jt")
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -408,37 +414,65 @@ layer_0/tile_data = PackedInt32Array(65537, 327682, 8, 131073, 327682, 4, 196609
 position = Vector2(103, 72)
 inventory_data = SubResource("Resource_khpt8")
 
+[node name="Pickups" type="Node2D" parent="."]
+
+[node name="Pickup" parent="Pickups" instance=ExtResource("7_f5w4x")]
+position = Vector2(168.333, 71.6667)
+slot_data = SubResource("Resource_o1esh")
+
 [node name="Player" parent="." instance=ExtResource("2_7jbwv")]
 inventory_data = ExtResource("4_38ufs")
-speed = 300
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="InventoryInterface" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("4_72jsd")
 
 [node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("3_0nsk3")]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -202.0
+offset_top = 128.0
+offset_right = 202.0
+offset_bottom = 192.0
+grow_horizontal = 2
 
 [node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("3_0nsk3")]
 visible = false
-layout_mode = 0
-offset_left = 731.0
-offset_top = 19.0
-offset_right = 1135.0
-offset_bottom = 83.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = 60.0
+offset_right = 202.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("7_eibdl")]
 visible = false
 modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
+
+[node name="InfoCard" parent="UI/InventoryInterface" instance=ExtResource("13_aqgwa")]
+visible = false
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 100.0
+mouse_filter = 1
+
+[connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
+[connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

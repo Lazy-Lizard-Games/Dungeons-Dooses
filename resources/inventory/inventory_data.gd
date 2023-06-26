@@ -3,11 +3,20 @@ class_name InventoryData
 
 signal inventory_updated(inventory_data: InventoryData)
 signal inventory_interact(inventory_data: InventoryData, index: int, button: int)
+signal toggle_slot_info(slot_data: SlotData)
 
 @export var slot_datas: Array[SlotData]
 
 func on_slot_clicked(index: int, button: int) -> void:
 	inventory_interact.emit(self, index, button)
+
+func on_slot_focused(index: int):
+	if slot_datas[index]:
+		toggle_slot_info.emit(slot_datas[index])
+
+func on_slot_unfocused(index: int):
+	if slot_datas[index]:
+		toggle_slot_info.emit()
 
 func grab_slot_data(index: int) -> SlotData:
 	var slot_data = slot_datas[index]
@@ -39,3 +48,21 @@ func drop_single_slot_data(dropped_slot_data: SlotData, index: int) -> SlotData:
 	if dropped_slot_data.quantity > 0:
 		return_slot_data = dropped_slot_data
 	return return_slot_data
+
+func pick_up_slot_data(slot_data: SlotData) -> bool:
+	for index in slot_datas.size():
+		if slot_datas[index] and slot_datas[index].can_merge_with(slot_data):
+			slot_data = slot_datas[index].merge_with(slot_data)
+			inventory_updated.emit(self)
+			if not slot_data:
+				return true
+	
+	for index in slot_datas.size():
+		if not slot_datas[index]:
+			slot_datas[index] = slot_data
+			inventory_updated.emit(self)
+			return true
+	return false
+
+
+
