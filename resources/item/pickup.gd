@@ -6,9 +6,11 @@ extends RigidBody2D
 
 var time_alive = 0
 var ignore_pickup_timer = 0
+var _name = ""
 
 func _ready() -> void:
 	sprite_2d.texture = slot_data.item_data.texture
+	_name = slot_data.item_data.name
 
 func _physics_process(delta: float) -> void:
 	if ignore_pickup_timer:

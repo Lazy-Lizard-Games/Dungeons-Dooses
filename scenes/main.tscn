@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://8u7kb5sknskf"]
+[gd_scene load_steps=21 format=3 uid="uid://8u7kb5sknskf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0h6jt"]
 [ext_resource type="Texture2D" uid="uid://dgb0pqbj2g824" path="res://assets/tilesheets/tile_map_V4.png" id="1_ism7i"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="6_lsoxq"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="7_eibdl"]
 [ext_resource type="PackedScene" uid="uid://biv6bo2ifthr8" path="res://resources/item/pickup.tscn" id="7_f5w4x"]
+[ext_resource type="Resource" uid="uid://x21xv1si7a61" path="res://test_equip.tres" id="10_usxbu"]
+[ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="12_5cl3d"]
 [ext_resource type="PackedScene" uid="uid://ca8ctygsnlwmc" path="res://scenes/inventory/info_card.tscn" id="13_aqgwa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yodlx"]
@@ -422,6 +424,7 @@ slot_data = SubResource("Resource_o1esh")
 
 [node name="Player" parent="." instance=ExtResource("2_7jbwv")]
 inventory_data = ExtResource("4_38ufs")
+equipment_data = ExtResource("10_usxbu")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -445,6 +448,13 @@ offset_top = 128.0
 offset_right = 202.0
 offset_bottom = 192.0
 grow_horizontal = 2
+
+[node name="PlayerEquipment" parent="UI/InventoryInterface" instance=ExtResource("12_5cl3d")]
+layout_mode = 1
+offset_left = 256.0
+offset_top = 84.0
+offset_right = 320.0
+offset_bottom = 488.0
 
 [node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("3_0nsk3")]
 visible = false

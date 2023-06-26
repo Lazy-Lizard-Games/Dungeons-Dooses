@@ -3,11 +3,15 @@ extends Character
 const THROW_FORCE: int = 10
 
 @export var inventory_data: InventoryData
+@export var equipment_data: InventoryData
 @onready var interact_area: Area2D = $InteractArea
 @onready var interact_label: Label = $UI/Interactions/InteractLabel
 @onready var interact_hover: TextureRect = $UI/Interactions/InteractHover
 
 signal toggle_inventory
+
+func _ready() -> void:
+	equipment_data.inventory_updated.connect(on_equipment_updated)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -28,7 +32,7 @@ func _physics_process(delta) -> void:
 	interact_label.hide()
 	if interact_area.has_overlapping_bodies():
 		var interactable = interact_area.get_overlapping_bodies()[0]
-		interact_label.text = interactable.name
+		interact_label.text = interactable._name
 		# Center label below cursor
 		interact_label.global_position = get_viewport().get_mouse_position()
 		interact_label.global_position += Vector2(-interact_label.get_rect().size.x/2, 10)
@@ -43,3 +47,7 @@ func _physics_process(delta) -> void:
 		velocity.y = move_toward(velocity.y, 0, speed)
 
 	move_and_slide()
+
+func on_equipment_updated(inventory_data: InventoryData) -> void:
+	# Reset equipment buffs/nerfs and revaluate
+	print("Update!")

@@ -9,13 +9,13 @@ const PickUp = preload("res://resources/item/pickup.tscn")
 func _ready() -> void:
 	player.toggle_inventory.connect(toggle_inventory_interface)
 	inventory_interface.set_player_inventory_data(player.inventory_data)
+	inventory_interface.set_player_equipment_data(player.equipment_data)
 	
 	for node in get_tree().get_nodes_in_group("external_inventory"):
 		node.toggle_inventory.connect(toggle_inventory_interface)
 
 func toggle_inventory_interface(external_inventory_owner = null) -> void:
 	inventory_interface.toggle_inventory(external_inventory_owner)
-
 
 func _on_inventory_interface_drop_slot_data(slot_data) -> void:
 	var pickup = PickUp.instantiate()
