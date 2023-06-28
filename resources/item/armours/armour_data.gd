@@ -9,3 +9,4 @@ class_name ArmourData
 
 func setup() -> void:
 	item_type = Globals.ITEM_TYPES.ARMOUR
+	item_card = preload("res://scenes/inventory/info_cards/armour_card.tscn")

@@ -84,6 +84,7 @@ func on_equipment_updated(equipment_data: InventoryData) -> void:
 	weapon_b = null
 	if equipment[5]:
 		weapon_b = equipment[5].item_data
+	
 	print("||------------------------------||")
 	for stat in stats:
 		print("%s: %s" % [stat, stats[stat]])

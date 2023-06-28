@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://8u7kb5sknskf"]
+[gd_scene load_steps=20 format=3 uid="uid://8u7kb5sknskf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0h6jt"]
 [ext_resource type="Texture2D" uid="uid://dgb0pqbj2g824" path="res://assets/tilesheets/tile_map_V4.png" id="1_ism7i"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://biv6bo2ifthr8" path="res://resources/item/pickup.tscn" id="7_f5w4x"]
 [ext_resource type="Resource" uid="uid://x21xv1si7a61" path="res://test_equip.tres" id="10_usxbu"]
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="12_5cl3d"]
-[ext_resource type="PackedScene" uid="uid://ca8ctygsnlwmc" path="res://scenes/inventory/info_card.tscn" id="13_aqgwa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yodlx"]
 texture = ExtResource("1_ism7i")
@@ -477,12 +476,10 @@ modulate = Color(1, 1, 1, 0.498039)
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 
-[node name="InfoCard" parent="UI/InventoryInterface" instance=ExtResource("13_aqgwa")]
-visible = false
-layout_mode = 0
-offset_right = 150.0
-offset_bottom = 100.0
-mouse_filter = 1
+[node name="InfoCard" type="Control" parent="UI/InventoryInterface"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

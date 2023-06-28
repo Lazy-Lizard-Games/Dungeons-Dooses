@@ -9,7 +9,7 @@ var external_inventory_owner
 @onready var player_equipment: PanelContainer = $PlayerEquipment
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 @onready var external_inventory: PanelContainer = $ExternalInventory
-@onready var info_card: PanelContainer = $InfoCard
+@onready var info_card: Control = $InfoCard
 
 func _physics_process(delta: float) -> void:
 	if grabbed_slot.visible:
@@ -35,10 +35,10 @@ func set_player_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.toggle_slot_info.connect(on_toggle_slot_info)
 	player_inventory.set_inventory_data(inventory_data)
 
-func set_player_equipment_data(inventory_data: InventoryData) -> void:
-	inventory_data.inventory_interact.connect(on_inventory_interact)
-	inventory_data.toggle_slot_info.connect(on_toggle_slot_info)
-	player_equipment.set_inventory_data(inventory_data)
+func set_player_equipment_data(equipment_data: InventoryData) -> void:
+	equipment_data.inventory_interact.connect(on_inventory_interact)
+	equipment_data.toggle_slot_info.connect(on_toggle_slot_info)
+	player_equipment.set_inventory_data(equipment_data)
 
 func set_external_inventory(_external_inventory_owner) -> void:
 	external_inventory_owner = _external_inventory_owner
@@ -77,10 +77,14 @@ func on_inventory_interact(inventory_data: InventoryData, index: int, button: in
 	update_grabbed_slot()
 
 func on_toggle_slot_info(slot_data: SlotData = null) -> void:
+	for child in info_card.get_children():
+		info_card.remove_child(child)
 	info_card.hide()
 	if slot_data:
 		var item_data = slot_data.item_data
-		info_card.set_info(item_data.name, item_data.description)
+		var card = item_data.item_card.instantiate()
+		info_card.add_child(card)
+		card.set_info(item_data)
 		info_card.show()
 
 func update_grabbed_slot() -> void:
