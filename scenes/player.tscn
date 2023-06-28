@@ -1,14 +1,50 @@
-[gd_scene load_steps=6 format=3 uid="uid://cvu7bdrfa8e16"]
+[gd_scene load_steps=12 format=3 uid="uid://cvu7bdrfa8e16"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_dxhpx"]
-[ext_resource type="Texture2D" uid="uid://b6y8na6rm2gcb" path="res://resources/item/#1 - Transparent Icons.png" id="2_wk3bt"]
+[ext_resource type="Texture2D" uid="uid://d1yyafybnoiet" path="res://assets/characters/humans/human1/human1_animation5.png" id="2_glu7w"]
+[ext_resource type="Texture2D" uid="uid://ord2rhtdpeh0" path="res://assets/characters/humans/human1/human1_animation6.png" id="3_4nb8b"]
+[ext_resource type="Texture2D" uid="uid://ek1p08crbie4" path="res://assets/characters/humans/human1/human1_animation7.png" id="4_nsggh"]
+[ext_resource type="Texture2D" uid="uid://b73fgctoiifo7" path="res://assets/characters/humans/human1/human1_animation1.png" id="5_vaqin"]
+[ext_resource type="Texture2D" uid="uid://rx1xyajpjiv0" path="res://assets/characters/humans/human1/human1_animation2.png" id="6_ewpi5"]
+[ext_resource type="Texture2D" uid="uid://t5waxiuuwljm" path="res://assets/characters/humans/human1/human1_animation3.png" id="7_c2lyn"]
+[ext_resource type="Texture2D" uid="uid://br4yv54g3irt0" path="res://assets/characters/humans/human1/human1_animation4.png" id="8_tcxnu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lnatr"]
-atlas = ExtResource("2_wk3bt")
-region = Rect2(256, 96, 32, 32)
+[sub_resource type="SpriteFrames" id="SpriteFrames_t1jp6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_glu7w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4nb8b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nsggh")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_vaqin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ewpi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_c2lyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tcxnu")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4n5u"]
-size = Vector2(14, 14)
+size = Vector2(9, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dbmv1"]
 radius = 3.0
@@ -19,11 +55,14 @@ motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_dxhpx")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_lnatr")
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_t1jp6")
+animation = &"idle"
+frame_progress = 0.340299
+offset = Vector2(1, -11)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5)
+position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_t4n5u")
 
 [node name="Camera2D" type="Camera2D" parent="."]

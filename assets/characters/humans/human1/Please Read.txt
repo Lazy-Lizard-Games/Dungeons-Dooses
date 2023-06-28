@@ -1,0 +1,3 @@
+First 4 frames is walk animation set to a delay of 150 milliseconds
+
+Last 3 frames idol animation set to a delay of 200 milliseconds

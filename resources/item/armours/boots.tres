@@ -1,0 +1,31 @@
+[gd_resource type="Resource" script_class="ArmourData" load_steps=7 format=3 uid="uid://bhail2qsbeuga"]
+
+[ext_resource type="Script" path="res://resources/item/armours/armour_data.gd" id="1_hnpib"]
+[ext_resource type="Script" path="res://resources/stats/stat_modifier.gd" id="2_5qyq4"]
+[ext_resource type="Texture2D" uid="uid://b6y8na6rm2gcb" path="res://resources/item/#1 - Transparent Icons.png" id="2_67425"]
+
+[sub_resource type="Resource" id="Resource_vshfa"]
+script = ExtResource("2_5qyq4")
+stat = 0
+value = 10
+
+[sub_resource type="Resource" id="Resource_w0ie3"]
+script = ExtResource("2_5qyq4")
+stat = 3
+value = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ikqy"]
+atlas = ExtResource("2_67425")
+region = Rect2(96, 256, 32, 32)
+
+[resource]
+script = ExtResource("1_hnpib")
+defence = 10
+armour_type = 3
+damage_modifiers = Array[Resource("res://resources/stats/damage_modifier.gd")]([])
+resist_modifiers = Array[Resource("res://resources/stats/resistance_modifier.gd")]([])
+stat_modifiers = Array[ExtResource("2_5qyq4")]([SubResource("Resource_vshfa"), SubResource("Resource_w0ie3")])
+name = "Steel Boots"
+description = "Harder than iron!"
+stackable = false
+texture = SubResource("AtlasTexture_5ikqy")

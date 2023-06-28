@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StatModifier" load_steps=2 format=3 uid="uid://cdga4xem4844u"]
+
+[ext_resource type="Script" path="res://resources/stats/stat_modifier.gd" id="1_4mimx"]
+
+[resource]
+script = ExtResource("1_4mimx")
+stat = 0
+value = 0

@@ -20,20 +20,23 @@ type_restriction = 1
 
 [node name="Slot2" parent="MarginContainer/ItemGrid" instance=ExtResource("1_7nrqr")]
 layout_mode = 2
-type_restriction = 2
+type_restriction = 1
+armour_type_restriciton = 1
 
 [node name="Slot3" parent="MarginContainer/ItemGrid" instance=ExtResource("1_7nrqr")]
 layout_mode = 2
-type_restriction = 3
+type_restriction = 1
+armour_type_restriciton = 2
 
 [node name="Slot4" parent="MarginContainer/ItemGrid" instance=ExtResource("1_7nrqr")]
 layout_mode = 2
-type_restriction = 4
+type_restriction = 1
+armour_type_restriciton = 3
 
 [node name="Slot5" parent="MarginContainer/ItemGrid" instance=ExtResource("1_7nrqr")]
 layout_mode = 2
-type_restriction = 5
+type_restriction = 2
 
 [node name="Slot6" parent="MarginContainer/ItemGrid" instance=ExtResource("1_7nrqr")]
 layout_mode = 2
-type_restriction = 5
+type_restriction = 2

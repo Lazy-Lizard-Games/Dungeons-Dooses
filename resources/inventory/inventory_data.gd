@@ -2,13 +2,13 @@ extends Resource
 class_name InventoryData
 
 signal inventory_updated(inventory_data: InventoryData)
-signal inventory_interact(inventory_data: InventoryData, index: int, button: int, type: Globals.ITEM_TYPES)
+signal inventory_interact(inventory_data: InventoryData, index: int, button: int, type: Globals.ITEM_TYPES, armour_type: Globals.ARMOUR_TYPES)
 signal toggle_slot_info(slot_data: SlotData)
 
 @export var slot_datas: Array[SlotData]
 
-func on_slot_clicked(index: int, button: int, type: Globals.ITEM_TYPES = Globals.ITEM_TYPES.ITEM) -> void:
-	inventory_interact.emit(self, index, button, type)
+func on_slot_clicked(index: int, button: int, type: Globals.ITEM_TYPES = Globals.ITEM_TYPES.ITEM, armour_type: Globals.ARMOUR_TYPES = Globals.ARMOUR_TYPES.BODY) -> void:
+	inventory_interact.emit(self, index, button, type, armour_type)
 
 func on_slot_focused(index: int):
 	if slot_datas[index]:

@@ -57,14 +57,18 @@ func clear_external_inventory() -> void:
 		external_inventory.hide()
 		external_inventory_owner = null
 
-func on_inventory_interact(inventory_data: InventoryData, index: int, button: int, type: Globals.ITEM_TYPES = Globals.ITEM_TYPES.ITEM) -> void:
+func on_inventory_interact(inventory_data: InventoryData, index: int, button: int, type: Globals.ITEM_TYPES = Globals.ITEM_TYPES.ITEM, armour_type: Globals.ARMOUR_TYPES = Globals.ARMOUR_TYPES.BODY) -> void:
 	match [grabbed_slot_data, button]:
 		[null, MOUSE_BUTTON_LEFT]:
 			grabbed_slot_data = inventory_data.grab_slot_data(index)
 			info_card.hide()
 		[_, MOUSE_BUTTON_LEFT]:
 			if type == Globals.ITEM_TYPES.ITEM or type == grabbed_slot_data.item_data.item_type:
-				grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
+				if type == Globals.ITEM_TYPES.ARMOUR:
+					if armour_type == grabbed_slot_data.item_data.armour_type:
+						grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
+				else:
+					grabbed_slot_data = inventory_data.drop_slot_data(grabbed_slot_data, index)
 		[null, MOUSE_BUTTON_RIGHT]:
 			# Grab half of slot stack (full grab if quantity = 1)
 			pass
