@@ -17,9 +17,10 @@ const THROW_FORCE: int = 10
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
 
 signal toggle_inventory
+signal swap_weapon(index: int)
 
-var weapon_a = null
-var weapon_b = null
+var weapons: Array[WeaponData] = [null, null, null]
+var held_index = 0
 var armour = []
 var speed = get_stat("speed") * get_stat("speed_mult")
 
@@ -38,6 +39,20 @@ func _unhandled_input(event: InputEvent) -> void:
 			var interactable = interact_area.get_overlapping_bodies()[0]
 			if global_position.distance_to(interactable.global_position) <= reach:
 				interactable.player_interact()
+	
+	if Input.is_action_just_pressed("primary"):
+		if weapons[held_index]:
+			weapons[held_index].primary()
+	
+	if Input.is_action_just_pressed("secondary"):
+		if weapons[held_index]:
+			weapons[held_index].secondary()
+	
+	if Input.is_action_just_pressed("scroll_up"):
+		swap_held_weapon(-1)
+	
+	if Input.is_action_just_pressed("scroll_down"):
+		swap_held_weapon(1)
 
 func _physics_process(delta) -> void:
 	# Update interract area
@@ -78,20 +93,20 @@ func on_equipment_updated(equipment_data: InventoryData) -> void:
 	for item in equipment.slice(0, 4):
 		if item:
 			equip(item.item_data)
-	weapon_a = null
+	weapons[0] = null
 	if equipment[4]:
-		weapon_a = equipment[4].item_data
-	weapon_b = null
+		weapons[0] = equipment[4].item_data
+	weapons[1] = null
 	if equipment[5]:
-		weapon_b = equipment[5].item_data
+		weapons[1] = equipment[5].item_data
 	
 	print("||------------------------------||")
 	for stat in stats:
 		print("%s: %s" % [stat, stats[stat]])
-	print("Weapon A: %s" % weapon_a.name if weapon_a else "Weapon A: ...")
-	print("Weapon B: %s" % weapon_b.name if weapon_b else "Weapon B: ...")
+	print("Weapon A: %s" % weapons[0].name if weapons[0] else "Weapon A: ...")
+	print("Weapon B: %s" % weapons[1].name if weapons[1] else "Weapon B: ...")
 
-func equip(armour: ArmourData):
+func equip(armour: ArmourData) -> void:
 	mod_stat("defence", armour.defence)
 	for sm in armour.stat_modifiers:
 		mod_stat(sm.get_stat(), sm.get_value())
@@ -100,3 +115,9 @@ func equip(armour: ArmourData):
 	for rm in armour.resist_modifiers:
 		mod_damage_resist(rm.get_stat(), rm.get_value())
 
+func swap_held_weapon(offset: int) -> void:
+	held_index = held_index+offset
+	if held_index < 0:
+		held_index = 2
+	held_index = held_index%3
+	swap_weapon.emit(held_index)

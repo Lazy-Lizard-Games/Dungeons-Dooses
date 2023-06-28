@@ -7,3 +7,9 @@ class_name WeaponData
 func setup() -> void:
 	item_type = Globals.ITEM_TYPES.WEAPON
 	item_card = preload("res://scenes/inventory/info_cards/weapon_card.tscn")
+
+func primary() -> void:
+	print("Main attack")
+
+func secondary() -> void:
+	print("Special attack")

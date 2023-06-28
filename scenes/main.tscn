@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://8u7kb5sknskf"]
+[gd_scene load_steps=22 format=3 uid="uid://8u7kb5sknskf"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_0h6jt"]
 [ext_resource type="Texture2D" uid="uid://dgb0pqbj2g824" path="res://assets/tilesheets/tile_map_V4.png" id="1_ism7i"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://biv6bo2ifthr8" path="res://resources/item/pickup.tscn" id="7_f5w4x"]
 [ext_resource type="Resource" uid="uid://x21xv1si7a61" path="res://test_equip.tres" id="10_usxbu"]
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="12_5cl3d"]
+[ext_resource type="Script" path="res://scenes/hud/hud.gd" id="15_2papl"]
+[ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/equipment.tscn" id="15_udl2x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yodlx"]
 texture = ExtResource("1_ism7i")
@@ -480,6 +482,15 @@ layout_mode = 0
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("15_2papl")
+
+[node name="Equipment" parent="UI/HUD" instance=ExtResource("15_udl2x")]
+layout_mode = 1
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
