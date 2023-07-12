@@ -27,3 +27,8 @@ var STATS = [
 	"crit_hit_mult",
 	"attack_speed_mult",
 ]
+
+func create_weapon(weapon_data: WeaponData) -> Sprite2D:
+	var weapon = Sprite2D.new()
+	weapon.texture = weapon_data.texture
+	return weapon

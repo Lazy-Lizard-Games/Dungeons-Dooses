@@ -15,13 +15,15 @@ const THROW_FORCE: int = 10
 @onready var interact_label: Label = $UI/Interactions/InteractLabel
 @onready var interact_hover: TextureRect = $UI/Interactions/InteractHover
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+@onready var holster_a = $Back/HolsterA
+@onready var holster_b = $Back/HolsterB
 
 signal toggle_inventory
 signal swap_weapon(index: int)
 
+var armours: Array[ArmourData] = []
 var weapons: Array[WeaponData] = [null, null, null]
 var held_index = 0
-var armour = []
 var speed = get_stat("speed") * get_stat("speed_mult")
 
 func init_setup() -> void:
@@ -88,23 +90,21 @@ func on_equipment_updated(equipment_data: InventoryData) -> void:
 	# Inventory uses a fixed size of 6 right now
 	# 1-4 is armour
 	# 5-6 is weapon
-	reset_stats()
 	var equipment: Array[SlotData] = equipment_data.slot_datas
-	for item in equipment.slice(0, 4):
-		if item:
-			equip(item.item_data)
-	weapons[0] = null
-	if equipment[4]:
-		weapons[0] = equipment[4].item_data
-	weapons[1] = null
-	if equipment[5]:
-		weapons[1] = equipment[5].item_data
+	print(equipment)
+	equip_armours(equipment.slice(0, 4))
+	equip_weapons(equipment.slice(4, 6))
 	
 	print("||------------------------------||")
 	for stat in stats:
 		print("%s: %s" % [stat, stats[stat]])
 	print("Weapon A: %s" % weapons[0].name if weapons[0] else "Weapon A: ...")
 	print("Weapon B: %s" % weapons[1].name if weapons[1] else "Weapon B: ...")
+
+func equip_armours(equipment: Array[SlotData]) -> void:
+	for item in equipment:
+		if item:
+			equip(item.item_data)
 
 func equip(armour: ArmourData) -> void:
 	mod_stat("defence", armour.defence)
@@ -114,6 +114,20 @@ func equip(armour: ArmourData) -> void:
 		mod_damage_mult(dm.get_stat(), dm.get_value())
 	for rm in armour.resist_modifiers:
 		mod_damage_resist(rm.get_stat(), rm.get_value())
+
+func equip_weapons(equipment: Array[SlotData]) -> void:
+	weapons[0] = null
+	for child in holster_a.get_children():
+		holster_a.remove_child(child)
+	if equipment[0]:
+		weapons[0] = equipment[0].item_data
+		holster_a.add_child(Globals.create_weapon(weapons[0]))
+	weapons[1] = null
+	for child in holster_b.get_children():
+		holster_b.remove_child(child)
+	if equipment[1]:
+		weapons[1] = equipment[1].item_data
+		holster_b.add_child(Globals.create_weapon(weapons[1]))
 
 func swap_held_weapon(offset: int) -> void:
 	held_index = held_index+offset

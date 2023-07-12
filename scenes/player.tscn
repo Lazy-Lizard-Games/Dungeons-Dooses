@@ -55,6 +55,16 @@ motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_dxhpx")
 
+[node name="Back" type="Node2D" parent="."]
+
+[node name="HolsterA" type="Node2D" parent="Back"]
+position = Vector2(-1, -3)
+rotation = -0.261799
+
+[node name="HolsterB" type="Node2D" parent="Back"]
+position = Vector2(0, -3)
+rotation = 0.261799
+
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_t1jp6")
 animation = &"idle"
