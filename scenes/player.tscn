@@ -54,6 +54,18 @@ collision_layer = 2
 motion_mode = 1
 floor_stop_on_slope = false
 script = ExtResource("1_dxhpx")
+reach = null
+base_health = null
+base_health_mult = null
+base_speed = null
+base_speed_mult = null
+base_defence = null
+base_defence_mult = null
+base_crit_chance = null
+base_crit_mult = null
+base_attack_mult = null
+base_damage_mults = null
+base_damage_resists = null
 
 [node name="Back" type="Node2D" parent="."]
 
