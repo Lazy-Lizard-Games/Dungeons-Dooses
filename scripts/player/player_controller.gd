@@ -15,8 +15,13 @@ const THROW_FORCE: int = 10
 @onready var interact_label: Label = $UI/Interactions/InteractLabel
 @onready var interact_hover: TextureRect = $UI/Interactions/InteractHover
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite
+<<<<<<< Updated upstream
 @onready var holster_a: Node2D = $Back/HolsterA
 @onready var holster_b: Node2D = $Back/HolsterB
+=======
+@onready var holster_a = $AnimatedSprite/Back/HolsterA
+@onready var holster_b = $AnimatedSprite/Back/HolsterB
+>>>>>>> Stashed changes
 
 signal toggle_inventory
 signal swap_weapon(index: int)
@@ -90,9 +95,9 @@ func _physics_process(delta) -> void:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction:
 		if direction.x > 0:
-			animated_sprite.flip_h = false
+			animated_sprite.scale.x = 1
 		elif direction.x < 0:
-			animated_sprite.flip_h = true
+			animated_sprite.scale.x = -1
 		animated_sprite.play("walk")
 		velocity = direction * speed
 	else:
@@ -108,11 +113,11 @@ func on_equipment_updated(equipment_data: InventoryData) -> void:
 	# 1-4 is armour
 	# 5-6 is weapon
 	var equipment: Array[SlotData] = equipment_data.slot_datas
-	print(equipment)
+	armours.clear()
 	equip_armours(equipment.slice(0, 4))
 	equip_weapons(equipment.slice(4, 6))
-	
 	print("||------------------------------||")
+	update_stats()
 	for stat in stats:
 		print("%s: %s" % [stat, stats[stat]])
 	print("Weapon A: %s" % worn_weapons[0].name if worn_weapons[0] else "Weapon A: ...")
@@ -123,6 +128,7 @@ func equip_armours(armours: Array[SlotData]) -> void:
 		if armour:
 			equip_armour(armour.item_data)
 
+<<<<<<< Updated upstream
 func equip_armour(armour: ArmourData) -> void:
 	mod_stat("defence", armour.defence)
 	for sm in armour.stat_modifiers:
@@ -131,11 +137,16 @@ func equip_armour(armour: ArmourData) -> void:
 		mod_damage_mult(dm.get_stat(), dm.get_value())
 	for rm in armour.resist_modifiers:
 		mod_damage_resist(rm.get_stat(), rm.get_value())
+=======
+func equip(armour: ArmourData) -> void:
+	armours.append(armour)
+>>>>>>> Stashed changes
 
 func equip_weapons(weapons: Array[SlotData]) -> void:
 	for i in weapons.size():
 		equip_weapon(i, holsters[i], weapons[i])
 
+<<<<<<< Updated upstream
 func equip_weapon(index: int, holster: Node2D, weapon: SlotData) -> void:
 	worn_weapons[index] = null
 	for child in holster.get_children():
@@ -146,6 +157,22 @@ func equip_weapon(index: int, holster: Node2D, weapon: SlotData) -> void:
 
 func swap_held_weapon(index: int) -> void:
 	held_index = index
+=======
+func update_stats() -> void:
+	reset_stats()
+	apply_buffs()
+	for armour in armours:
+		mod_stat("defence", armour.defence)
+		for sm in armour.stat_modifiers:
+			mod_stat(sm.get_stat(), sm.get_value())
+		for dm in armour.damage_modifiers:
+			mod_damage_mult(dm.get_stat(), dm.get_value())
+		for rm in armour.resist_modifiers:
+			mod_damage_resist(rm.get_stat(), rm.get_value())
+
+func swap_held_weapon(offset: int) -> void:
+	held_index = held_index+offset
+>>>>>>> Stashed changes
 	if held_index < 0:
 		held_index = 1
 	held_index = held_index%2

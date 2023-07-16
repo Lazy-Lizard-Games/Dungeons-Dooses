@@ -78,6 +78,7 @@ var damage_resists = {
 	Globals.DAMAGE_TYPES.POISON: 0,
 	Globals.DAMAGE_TYPES.EXPLOSION: 0,
 }
+var buffs: Array[Buff] = []
 
 func reset_stats() -> void:
 	set_stat("health", base_health)
@@ -128,6 +129,15 @@ func mod_damage_mult(type: Globals.DAMAGE_TYPES, value: int) -> void:
 func mod_damage_resist(type: Globals.DAMAGE_TYPES, value: int) -> void:
 	if damage_resists.has(type):
 		damage_resists[type] += value
+
+func apply_buffs() -> void:
+	for buff in buffs:
+		for sm in buff.stat_modifiers:
+			mod_stat(sm.get_stat(), sm.get_value())
+		for dm in buff.damage_modifiers:
+			mod_damage_mult(dm.get_stat(), dm.get_value())
+		for rm in buff.resist_modifiers:
+			mod_damage_resist(rm.get_stat(), rm.get_value())
 
 func _ready() -> void:
 	reset_stats()
