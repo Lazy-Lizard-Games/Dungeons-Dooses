@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://biv6bo2ifthr8"]
+
+[ext_resource type="Script" path="res://interactable/pickup.gd" id="1_y7jof"]
+[ext_resource type="Texture2D" uid="uid://b6y8na6rm2gcb" path="res://resources/item/#1 - Transparent Icons.png" id="2_8bmxu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jsop2"]
+atlas = ExtResource("2_8bmxu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7roox"]
+radius = 20.0
+
+[node name="Pickup" type="StaticBody2D" groups=["interactable"]]
+collision_layer = 4
+script = ExtResource("1_y7jof")
+action_name = "Pickup"
+interact_name = "Item"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_jsop2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7roox")

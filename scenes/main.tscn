@@ -11,7 +11,7 @@
 [ext_resource type="Resource" uid="uid://cbi7hxjywfd2m" path="res://resources/item/items/potion.tres" id="5_g8cv7"]
 [ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="6_lsoxq"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="7_eibdl"]
-[ext_resource type="PackedScene" uid="uid://biv6bo2ifthr8" path="res://resources/item/pickup.tscn" id="7_f5w4x"]
+[ext_resource type="PackedScene" uid="uid://biv6bo2ifthr8" path="res://interactable/pickup.tscn" id="7_f5w4x"]
 [ext_resource type="Resource" uid="uid://x21xv1si7a61" path="res://test_equip.tres" id="10_usxbu"]
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="12_5cl3d"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="15_2papl"]
@@ -430,7 +430,6 @@ equipment_data = ExtResource("10_usxbu")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="InventoryInterface" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -440,18 +439,23 @@ grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("4_72jsd")
 
-[node name="PlayerInventory" parent="UI/InventoryInterface" instance=ExtResource("3_0nsk3")]
+[node name="Player" type="Control" parent="UI/InventoryInterface"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerInventory" parent="UI/InventoryInterface/Player" instance=ExtResource("3_0nsk3")]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -202.0
+offset_left = 354.0
 offset_top = 128.0
-offset_right = 202.0
+offset_right = 758.0
 offset_bottom = 192.0
 grow_horizontal = 2
 
-[node name="PlayerEquipment" parent="UI/InventoryInterface" instance=ExtResource("12_5cl3d")]
+[node name="PlayerEquipment" parent="UI/InventoryInterface/Player" instance=ExtResource("12_5cl3d")]
 layout_mode = 1
 offset_left = 256.0
 offset_top = 84.0
@@ -486,12 +490,27 @@ offset_bottom = 40.0
 
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("15_2papl")
 
 [node name="Equipment" parent="UI/HUD" instance=ExtResource("15_udl2x")]
 layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1152.0
+offset_top = -83.0
+offset_right = -1152.0
+offset_bottom = -83.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

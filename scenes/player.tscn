@@ -47,10 +47,9 @@ animations = [{
 size = Vector2(9, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dbmv1"]
-radius = 3.0
+radius = 25.0
 
 [node name="Player" type="CharacterBody2D"]
-y_sort_enabled = true
 collision_layer = 2
 motion_mode = 1
 floor_stop_on_slope = false
@@ -72,13 +71,13 @@ rotation = 0.261799
 sprite_frames = SubResource("SpriteFrames_t1jp6")
 animation = &"idle"
 frame_progress = 0.340299
-offset = Vector2(1, -11)
+offset = Vector2(1.5, -10)
 
 [node name="Hand" type="Node2D" parent="Sprites"]
 position = Vector2(-4, -1)
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_t4n5u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -94,20 +93,23 @@ input_pickable = false
 shape = SubResource("CircleShape2D_dbmv1")
 
 [node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
-[node name="Interactions" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
+[node name="Interactions" type="VBoxContainer" parent="UI"]
 offset_right = 40.0
 offset_bottom = 40.0
-metadata/_edit_use_anchors_ = true
+theme_override_constants/separation = 0
 
-[node name="InteractLabel" type="Label" parent="UI/Interactions"]
-visible = false
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="ActionName" type="Label" parent="UI/Interactions"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 30
+text = "AHH"
+
+[node name="InteractName" type="Label" parent="UI/Interactions"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
 text = "AHH"

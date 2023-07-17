@@ -1,6 +1,6 @@
 extends Node2D
 
-const PickUp = preload("res://resources/item/pickup.tscn")
+const PickUp = preload("res://interactable/pickup.tscn")
 
 @onready var player: Character = $Player
 @onready var inventory_interface: Control = $UI/InventoryInterface
@@ -24,6 +24,3 @@ func _on_inventory_interface_drop_slot_data(slot_data) -> void:
 	pickup.slot_data = slot_data
 	pickup.position = player.position
 	pickups.add_child(pickup)
-	pickup.set_ignore_timer(1)
-	var force = player.global_position.direction_to(get_global_mouse_position())
-	pickup.apply_central_force(force*100)

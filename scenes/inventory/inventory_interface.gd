@@ -5,8 +5,9 @@ signal drop_slot_data(slot_data: SlotData)
 var grabbed_slot_data: SlotData
 var external_inventory_owner
 
-@onready var player_inventory: PanelContainer = $PlayerInventory
-@onready var player_equipment: PanelContainer = $PlayerEquipment
+@onready var player: Control = $Player
+@onready var player_inventory: PanelContainer = $Player/PlayerInventory
+@onready var player_equipment: PanelContainer = $Player/PlayerEquipment
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
 @onready var external_inventory: PanelContainer = $ExternalInventory
 @onready var info_card: Control = $InfoCard
@@ -55,6 +56,7 @@ func clear_external_inventory() -> void:
 		inventory_data.toggle_slot_info.connect(on_toggle_slot_info)
 		external_inventory.clear_inventory_data(inventory_data)
 		external_inventory.hide()
+		external_inventory_owner.clear_body()
 		external_inventory_owner = null
 
 func on_inventory_interact(inventory_data: InventoryData, index: int, button: int, type: Globals.ITEM_TYPES = Globals.ITEM_TYPES.ITEM, armour_type: Globals.ARMOUR_TYPES = Globals.ARMOUR_TYPES.BODY) -> void:

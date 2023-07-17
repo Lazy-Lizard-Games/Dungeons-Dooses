@@ -12,8 +12,9 @@ const THROW_FORCE: int = 10
 @export var reach: int = 100
 
 @onready var interact_area: Area2D = $InteractArea
-@onready var interact_label: Label = $UI/Interactions/InteractLabel
-@onready var interact_hover: TextureRect = $UI/Interactions/InteractHover
+@onready var interactions: VBoxContainer = $UI/Interactions
+@onready var action_name: Label = $UI/Interactions/ActionName
+@onready var interact_name: Label = $UI/Interactions/InteractName
 @onready var sprites: Node2D = $Sprites
 @onready var animated_sprite: AnimatedSprite2D = $Sprites/AnimatedSprite
 @onready var holster_a: Node2D = $Sprites/Back/HolsterA
@@ -42,11 +43,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("inventory"):
 		toggle_inventory.emit()
 	
-	if Input.is_action_just_pressed("interract"):
+	if Input.is_action_just_pressed("interact"):
 		if interact_area.has_overlapping_bodies():
-			var interactable = interact_area.get_overlapping_bodies()[0]
-			if global_position.distance_to(interactable.global_position) <= reach:
-				interactable.player_interact()
+			var interactable = get_closest_body(interact_area.get_overlapping_bodies())
+			interactable.interact(self)
 	
 	if Input.is_action_just_pressed("primary"):
 		if worn_weapons[held_index]:
@@ -61,9 +61,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			print("Super Punch!")
 	
 	if Input.is_action_just_pressed("scroll_up"):
+		holstered = false
 		swap_held_weapon(held_index-1)
 	
 	if Input.is_action_just_pressed("scroll_down"):
+		holstered = false
 		swap_held_weapon(held_index+1)
 	
 	if Input.is_action_just_pressed("holster"):
@@ -75,15 +77,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta) -> void:
 	# Update interract area
-	interact_area.global_position = get_global_mouse_position()
-	interact_label.hide()
+	interactions.hide()
 	if interact_area.has_overlapping_bodies():
-		var interactable = interact_area.get_overlapping_bodies()[0]
-		interact_label.text = interactable._name
-		# Center label below cursor
-		interact_label.global_position = get_viewport().get_mouse_position()
-		interact_label.global_position += Vector2(-interact_label.get_rect().size.x/2, 10)
-		interact_label.show()
+		var interactable = get_closest_body(interact_area.get_overlapping_bodies())
+		action_name.text = interactable.get_action_name()
+		interact_name.text = interactable.get_interact_name()
+		interactions.position = interactable.position
+		interactions.show()
 	
 	# Get the input direction and handle the movement/deceleration.
 	speed = get_stat("speed") * get_stat("speed_mult")
@@ -176,3 +176,12 @@ func holster_weapon(index) -> void:
 	for child in hand.get_children():
 		hand.remove_child(child)
 	holsters[index].add_child(Globals.create_weapon(worn_weapons[index]))
+
+func get_closest_body(bodies: Array[Node2D]) -> Node2D:
+	if bodies.size() == 1:
+		return bodies[0]
+	var closest = bodies[0]
+	for body in bodies:
+		if position.distance_to(body.position) < position.distance_to(closest.position):
+			closest = body
+	return closest
