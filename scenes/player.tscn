@@ -75,16 +75,14 @@ offset = Vector2(1.5, -10)
 
 [node name="Hand" type="Node2D" parent="Sprites"]
 position = Vector2(-4, -1)
+rotation = -1.0472
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_t4n5u")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-
 [node name="InteractArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 4
 input_pickable = false
@@ -96,6 +94,7 @@ shape = SubResource("CircleShape2D_dbmv1")
 follow_viewport_enabled = true
 
 [node name="Interactions" type="VBoxContainer" parent="UI"]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_constants/separation = 0
@@ -113,3 +112,7 @@ size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 4
 text = "AHH"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true

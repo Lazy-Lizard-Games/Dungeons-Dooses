@@ -1,5 +1,6 @@
 extends Node
 
+@onready var weapon_scene = preload("res://scenes/weapon/weapon.tscn")
 
 enum ITEM_TYPES {ITEM, ARMOUR, WEAPON, CONSUMABLE}
 enum ARMOUR_TYPES {HEAD, BODY, HANDS, FEET}
@@ -28,7 +29,8 @@ var STATS = [
 	"attack_speed_mult",
 ]
 
-func create_weapon(weapon_data: WeaponData) -> Sprite2D:
-	var weapon = Sprite2D.new()
-	weapon.texture = weapon_data.texture
+func create_weapon(weapon_data: WeaponData) -> Node2D:
+	var weapon = weapon_scene.instantiate()
+	weapon.setup()
+	weapon.load_data(weapon_data)
 	return weapon

@@ -31,6 +31,7 @@ var held_index = 2
 var old_index = 2
 var holstered = false
 var speed = get_stat("speed") * get_stat("speed_mult")
+var attacking = false
 
 func init_setup() -> void:
 	holsters = [holster_a, holster_b]
@@ -49,16 +50,16 @@ func _unhandled_input(event: InputEvent) -> void:
 			interactable.interact(self)
 	
 	if Input.is_action_just_pressed("primary"):
-		if worn_weapons[held_index]:
-			worn_weapons[held_index].primary()
+		if hand.get_children():
+			hand.get_child(0).primary()
 		else:
-			print("Punch!")
+			print("Flop helplessly!")
 	
 	if Input.is_action_just_pressed("secondary"):
-		if worn_weapons[held_index]:
-			worn_weapons[held_index].secondary()
+		if hand.get_children():
+			hand.get_child(0).secondary()
 		else:
-			print("Super Punch!")
+			print("Flail helpfully?")
 	
 	if Input.is_action_just_pressed("scroll_up"):
 		holstered = false
@@ -89,9 +90,9 @@ func _physics_process(delta) -> void:
 	speed = get_stat("speed") * get_stat("speed_mult")
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction:
-		if direction.x > 0:
+		if direction.x > 0 and not attacking:
 			sprites.scale.x = 1
-		elif direction.x < 0:
+		elif direction.x < 0 and not attacking:
 			sprites.scale.x = -1
 		animated_sprite.play("walk")
 		velocity = direction * speed
@@ -170,12 +171,19 @@ func swap_held_weapon(index: int) -> void:
 func hold_weapon(index) -> void:
 	for child in holsters[index].get_children():
 		holsters[index].remove_child(child)
-	hand.add_child(Globals.create_weapon(worn_weapons[index]))
+	var weapon = Globals.create_weapon(worn_weapons[index])
+	weapon.attack.connect(on_weapon_attack)
+	weapon.idle.connect(on_weapon_idle)
+	hand.add_child(weapon)
+	attacking = false
 
 func holster_weapon(index) -> void:
 	for child in hand.get_children():
+		child.attack.disconnect(on_weapon_attack)
+		child.idle.disconnect(on_weapon_idle)
 		hand.remove_child(child)
 	holsters[index].add_child(Globals.create_weapon(worn_weapons[index]))
+	attacking = false
 
 func get_closest_body(bodies: Array[Node2D]) -> Node2D:
 	if bodies.size() == 1:
@@ -185,3 +193,16 @@ func get_closest_body(bodies: Array[Node2D]) -> Node2D:
 		if position.distance_to(body.position) < position.distance_to(closest.position):
 			closest = body
 	return closest
+
+func on_weapon_attack() -> void:
+	print("Weapon Attacking")
+	attacking = true
+	var mouse = get_global_mouse_position()
+	sprites.scale.x = 1
+	if mouse.x < position.x:
+		sprites.scale.x = -1
+	hand.look_at(mouse)
+
+func on_weapon_idle() -> void:
+	print("Weapon Idling")
+	attacking = false
