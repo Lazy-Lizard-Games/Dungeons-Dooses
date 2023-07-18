@@ -14,7 +14,6 @@ func load_data(weapon_data: WeaponData) -> void:
 	sprite.texture = weapon_data.texture
 
 func primary() -> void:
-	print("Main attack")
 	animator.play("primary")
 
 func secondary() -> void:

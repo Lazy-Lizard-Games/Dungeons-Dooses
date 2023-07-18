@@ -20,6 +20,7 @@ const THROW_FORCE: int = 10
 @onready var holster_a: Node2D = $Sprites/Back/HolsterA
 @onready var holster_b: Node2D = $Sprites/Back/HolsterB
 @onready var hand: Node2D = $Sprites/Hand
+@onready var animator: AnimationPlayer = $Animator
 
 signal toggle_inventory
 signal swap_weapon(index: int)
@@ -94,10 +95,12 @@ func _physics_process(delta) -> void:
 			sprites.scale.x = 1
 		elif direction.x < 0 and not attacking:
 			sprites.scale.x = -1
-		animated_sprite.play("walk")
+		#animated_sprite.play("walk")
+		animator.play("walk")
 		velocity = direction * speed
 	else:
-		animated_sprite.play("idle")
+		#animated_sprite.play("idle")
+		animator.play("idle")
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)
 
@@ -114,13 +117,13 @@ func on_equipment_updated(equipment_data: InventoryData) -> void:
 	equip_armours(equipment.slice(0, 4))
 	# Equip new weapons
 	equip_weapons(equipment.slice(4, 6))
-	print("||------------------------------||")
+#	print("||------------------------------||")
 	# Update new stats
 	update_stats()
-	for stat in stats:
-		print("%s: %s" % [stat, stats[stat]])
-	print("Weapon A: %s" % worn_weapons[0].name if worn_weapons[0] else "Weapon A: ...")
-	print("Weapon B: %s" % worn_weapons[1].name if worn_weapons[1] else "Weapon B: ...")
+#	for stat in stats:
+#		print("%s: %s" % [stat, stats[stat]])
+#	print("Weapon A: %s" % worn_weapons[0].name if worn_weapons[0] else "Weapon A: ...")
+#	print("Weapon B: %s" % worn_weapons[1].name if worn_weapons[1] else "Weapon B: ...")
 
 func equip_armours(armours: Array[SlotData]) -> void:
 	for armour in armours:
@@ -195,7 +198,6 @@ func get_closest_body(bodies: Array[Node2D]) -> Node2D:
 	return closest
 
 func on_weapon_attack() -> void:
-	print("Weapon Attacking")
 	attacking = true
 	var mouse = get_global_mouse_position()
 	sprites.scale.x = 1
@@ -204,5 +206,5 @@ func on_weapon_attack() -> void:
 	hand.look_at(mouse)
 
 func on_weapon_idle() -> void:
-	print("Weapon Idling")
+	hand.rotation_degrees = -60
 	attacking = false
