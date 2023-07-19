@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 
 [autoload]
 
-Globals="*res://scripts/globals.gd"
+Globals="*res://autoloads/globals.gd"
 
 [input]
 

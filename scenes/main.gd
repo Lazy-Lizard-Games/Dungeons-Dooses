@@ -1,6 +1,6 @@
 extends Node2D
 
-const PickUp = preload("res://interactable/pickup.tscn")
+const PickUp = preload("res://assets/interactable/pickup/pickup.tscn")
 
 @onready var player: Character = $Player
 @onready var inventory_interface: Control = $UI/InventoryInterface
