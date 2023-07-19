@@ -16,7 +16,6 @@ const THROW_FORCE: int = 10
 @onready var action_name: Label = $UI/Interactions/ActionName
 @onready var interact_name: Label = $UI/Interactions/InteractName
 @onready var sprites: Node2D = $Sprites
-@onready var animated_sprite: AnimatedSprite2D = $Sprites/AnimatedSprite
 @onready var holster_a: Node2D = $Sprites/Back/HolsterA
 @onready var holster_b: Node2D = $Sprites/Back/HolsterB
 @onready var hand: Node2D = $Sprites/Hand

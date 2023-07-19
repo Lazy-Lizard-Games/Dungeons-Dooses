@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=4 format=3 uid="uid://cxwychaynn3sa"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=6 format=3 uid="uid://cxwychaynn3sa"]
 
+[ext_resource type="Resource" uid="uid://dav1k3hwxet0e" path="res://assets/attacks/slash/slash.tres" id="1_8xkxo"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_dfjtc"]
 [ext_resource type="Texture2D" uid="uid://brxsknuahh7mr" path="res://assets/item/weapons/WeaponSheet.png" id="2_bpjxo"]
+[ext_resource type="Resource" uid="uid://b755v5wlpdw21" path="res://assets/attacks/spin/spin.tres" id="3_mc6yb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_60t5l"]
 atlas = ExtResource("2_bpjxo")
@@ -11,6 +13,8 @@ region = Rect2(80, 16, 32, 32)
 script = ExtResource("1_dfjtc")
 attack_damage = 10.0
 attack_rate = 2.0
+primary_attack = ExtResource("1_8xkxo")
+secondary_attack = ExtResource("3_mc6yb")
 name = "Old Sword"
 description = "A rusty old blade from a distant empire."
 stackable = false

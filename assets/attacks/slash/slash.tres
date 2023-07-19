@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AttackData" load_steps=3 format=3 uid="uid://dav1k3hwxet0e"]
+
+[ext_resource type="Animation" uid="uid://dfy47n67p67ym" path="res://assets/attacks/slash/slash.res" id="1_mfbs8"]
+[ext_resource type="Script" path="res://assets/attacks/attack_data.gd" id="2_s41u5"]
+
+[resource]
+script = ExtResource("2_s41u5")
+name = "Slash"
+animation = ExtResource("1_mfbs8")

@@ -1,78 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://rdciriddgpe5"]
+[gd_scene load_steps=5 format=3 uid="uid://rdciriddgpe5"]
 
 [ext_resource type="Script" path="res://scenes/weapon/weapon.gd" id="1_at56h"]
-[ext_resource type="Texture2D" uid="uid://bpjrryfi5bgn3" path="res://assets/effects/slash/Slash_Animation_1_6 Frames1.png" id="3_2nmls"]
-[ext_resource type="Texture2D" uid="uid://d4dhb4eehqdbu" path="res://assets/effects/slash/Slash_Animation_1_6 Frames2.png" id="4_fdjp3"]
-[ext_resource type="Texture2D" uid="uid://s2fsmtrbh41d" path="res://assets/effects/slash/Slash_Animation_1_6 Frames3.png" id="5_sfrom"]
-[ext_resource type="Texture2D" uid="uid://bntosm0ijh2q5" path="res://assets/effects/slash/Slash_Animation_1_6 Frames4.png" id="6_1f3nu"]
-[ext_resource type="Texture2D" uid="uid://b14g5801dekt3" path="res://assets/effects/slash/Slash_Animation_1_6 Frames5.png" id="7_r71l6"]
-[ext_resource type="Texture2D" uid="uid://b7wpqtc3f0tm4" path="res://assets/effects/slash/Slash_Animation_1_6 Frames6.png" id="8_jhkd8"]
-
-[sub_resource type="Animation" id="Animation_kpeek"]
-resource_name = "idle"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-
-[sub_resource type="Animation" id="Animation_bunr1"]
-resource_name = "primary"
-length = 0.35
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.2, 0.35),
-"transitions": PackedFloat32Array(1, 0.378929, 200, 1e-05),
-"update": 0,
-"values": [-0.436332, 0.383972, 1.309, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("3_2nmls"), ExtResource("4_fdjp3"), ExtResource("5_sfrom"), ExtResource("6_1f3nu"), ExtResource("7_r71l6"), ExtResource("8_jhkd8"), null]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"emit_attacking"
-}, {
-"args": [],
-"method": &"emit_idle"
-}]
-}
+[ext_resource type="Texture2D" uid="uid://8486pyv0ruck" path="res://assets/item/weapons/weapon_atlas.tres" id="2_chp10"]
+[ext_resource type="Animation" uid="uid://dyl4ny56apve0" path="res://assets/attacks/spin/spin.res" id="3_twchg"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5lrfq"]
 _data = {
-"idle": SubResource("Animation_kpeek"),
-"primary": SubResource("Animation_bunr1")
+"spin": ExtResource("3_twchg")
 }
 
 [node name="Weapon" type="Node2D"]
@@ -80,6 +14,7 @@ script = ExtResource("1_at56h")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 rotation = -0.436332
+texture = ExtResource("2_chp10")
 offset = Vector2(8.5, -8.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
