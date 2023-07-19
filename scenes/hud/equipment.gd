@@ -21,20 +21,14 @@ func swap_weapon(index: int):
 		0:
 			if weapon_a.item_data:
 				set_weapon(weapon_a.item_data)
-			else:
-				print("The rum is gone!")
 		1:
 			if weapon_b.item_data:
 				set_weapon(weapon_b.item_data)
-			else:
-				print("Why is the rum gone?")
 		_:
 			clear_weapon()
 
 func set_weapon(weapon: WeaponData) -> void:
-	print("Ah! The mighty %s!" % weapon.name)
 	pass
 
 func clear_weapon() -> void:
-	print("Fists of fury!")
 	pass

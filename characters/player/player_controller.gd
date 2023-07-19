@@ -50,25 +50,21 @@ func _unhandled_input(event: InputEvent) -> void:
 			var interactable = get_closest_body(interact_area.get_overlapping_bodies())
 			interactable.interact(self)
 	
-	if Input.is_action_just_pressed("primary"):
-		if hand.get_children():
-			hand.get_child(0).primary()
+	if Input.is_action_just_pressed("weapon_A"):
+		if held_index != 0:
+			holstered = false
+			swap_held_weapon(0)
 		else:
-			print("Flop helplessly!")
+			holstered = true
+			swap_held_weapon(2)
 	
-	if Input.is_action_just_pressed("secondary"):
-		if hand.get_children():
-			hand.get_child(0).secondary()
+	if Input.is_action_just_pressed("weapon_B"):
+		if held_index != 1:
+			holstered = false
+			swap_held_weapon(1)
 		else:
-			print("Flail helpfully?")
-	
-	if Input.is_action_just_pressed("scroll_up"):
-		holstered = false
-		swap_held_weapon(held_index-1)
-	
-	if Input.is_action_just_pressed("scroll_down"):
-		holstered = false
-		swap_held_weapon(held_index+1)
+			holstered = true
+			swap_held_weapon(2)
 	
 	if Input.is_action_just_pressed("holster"):
 		holstered = not holstered
@@ -78,6 +74,15 @@ func _unhandled_input(event: InputEvent) -> void:
 			swap_held_weapon(old_index)
 
 func _physics_process(delta) -> void:
+	# Check if player is attacking
+	if Input.is_action_pressed("primary") and not attacking:
+		if hand.get_children():
+			hand.get_child(0).primary()
+	
+	if Input.is_action_pressed("secondary") and not attacking:
+		if hand.get_children():
+			hand.get_child(0).secondary()
+	
 	# Update interract area
 	interactions.hide()
 	if interact_area.has_overlapping_bodies():
@@ -95,11 +100,9 @@ func _physics_process(delta) -> void:
 			sprites.scale.x = 1
 		elif direction.x < 0 and not attacking:
 			sprites.scale.x = -1
-		#animated_sprite.play("walk")
 		animator.play("walk")
 		velocity = direction * speed
 	else:
-		#animated_sprite.play("idle")
 		animator.play("idle")
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)
@@ -117,13 +120,8 @@ func on_equipment_updated(equipment_data: InventoryData) -> void:
 	equip_armours(equipment.slice(0, 4))
 	# Equip new weapons
 	equip_weapons(equipment.slice(4, 6))
-#	print("||------------------------------||")
 	# Update new stats
 	update_stats()
-#	for stat in stats:
-#		print("%s: %s" % [stat, stats[stat]])
-#	print("Weapon A: %s" % worn_weapons[0].name if worn_weapons[0] else "Weapon A: ...")
-#	print("Weapon B: %s" % worn_weapons[1].name if worn_weapons[1] else "Weapon B: ...")
 
 func equip_armours(armours: Array[SlotData]) -> void:
 	for armour in armours:
@@ -150,6 +148,9 @@ func equip_weapon(index: int, holster: Node2D, weapon: SlotData) -> void:
 func update_stats() -> void:
 	reset_stats()
 	apply_buffs()
+	apply_armour_stats()
+
+func apply_armour_stats() -> void:
 	for armour in worn_armours:
 		mod_stat("defence", armour.defence)
 		for sm in armour.stat_modifiers:
@@ -164,9 +165,6 @@ func swap_held_weapon(index: int) -> void:
 		holster_weapon(held_index)
 	old_index = held_index
 	held_index = index
-	if held_index < 0:
-		held_index = 1
-	held_index = held_index%2
 	swap_weapon.emit(held_index)
 	if worn_weapons[held_index]:
 		hold_weapon(held_index)
@@ -206,5 +204,5 @@ func on_weapon_attack() -> void:
 	hand.look_at(mouse)
 
 func on_weapon_idle() -> void:
-	hand.rotation_degrees = -60
+	hand.rotation_degrees = 0
 	attacking = false

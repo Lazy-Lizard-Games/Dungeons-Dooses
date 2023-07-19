@@ -1,8 +1,10 @@
 extends ItemData
 class_name WeaponData
 
-@export var attack_damage = 10
-@export var attack_rate = 2
+@export var attack_damage: float = 10
+@export var attack_rate: float = 2
+@export var primary_animation: Animation
+@export var special_animation: Animation
 
 func setup() -> void:
 	item_type = Globals.ITEM_TYPES.WEAPON
