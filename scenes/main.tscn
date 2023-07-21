@@ -24,6 +24,14 @@ format = 2
 [node name="Player" parent="." instance=ExtResource("2_xjm37")]
 inventory_data = ExtResource("3_rgk5n")
 equipment_data = ExtResource("4_v5jmf")
+base_damage_mults = {
+"Explosion": 0,
+"Fire": 0,
+"Frost": 0,
+"Physical": 30,
+"Poison": 0,
+"Shock": 0
+}
 
 [node name="UI" type="CanvasLayer" parent="."]
 

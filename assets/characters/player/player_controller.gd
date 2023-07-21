@@ -23,6 +23,11 @@ const THROW_FORCE: int = 10
 
 signal toggle_inventory
 signal swap_weapon(index: int)
+signal primary_down
+signal primary_up
+signal secondary_down
+signal secondary_up
+
 
 var worn_armours: Array[ArmourData] = []
 var worn_weapons: Array[WeaponData] = [null, null, null]
@@ -71,6 +76,18 @@ func _unhandled_input(event: InputEvent) -> void:
 			swap_held_weapon(2)
 		else:
 			swap_held_weapon(old_index)
+	
+	if Input.is_action_just_pressed("primary"):
+		primary_down.emit()
+	
+	if Input.is_action_just_released("primary"):
+		primary_up.emit()
+	
+	if Input.is_action_just_pressed("secondary"):
+		secondary_down.emit()
+	
+	if Input.is_action_just_released("secondary"):
+		secondary_up.emit()
 
 func _physics_process(delta) -> void:
 	# Check if player is attacking
@@ -142,7 +159,7 @@ func equip_weapon(index: int, holster: Node2D, weapon: SlotData) -> void:
 		if held_index == index:
 			swap_held_weapon(2)
 		worn_weapons[index] = weapon.item_data
-		holster.add_child(Globals.create_weapon(weapon.item_data))
+		holster.add_child(Globals.create_weapon(weapon.item_data, self))
 
 func update_stats() -> void:
 	reset_stats()
@@ -171,9 +188,13 @@ func swap_held_weapon(index: int) -> void:
 func hold_weapon(index) -> void:
 	for child in holsters[index].get_children():
 		holsters[index].remove_child(child)
-	var weapon = Globals.create_weapon(worn_weapons[index])
+	var weapon = Globals.create_weapon(worn_weapons[index], self)
 	weapon.attack.connect(on_weapon_attack)
 	weapon.idle.connect(on_weapon_idle)
+	primary_down.connect(weapon.on_primary_down)
+	primary_up.connect(weapon.on_primary_up)
+	secondary_down.connect(weapon.on_secondary_down)
+	secondary_up.connect(weapon.on_secondary_up)
 	hand.add_child(weapon)
 	attacking = false
 
@@ -181,8 +202,12 @@ func holster_weapon(index) -> void:
 	for child in hand.get_children():
 		child.attack.disconnect(on_weapon_attack)
 		child.idle.disconnect(on_weapon_idle)
+		primary_down.disconnect(child.on_primary_down)
+		primary_up.disconnect(child.on_primary_up)
+		secondary_down.disconnect(child.on_secondary_down)
+		secondary_up.disconnect(child.on_secondary_up)
 		hand.remove_child(child)
-	holsters[index].add_child(Globals.create_weapon(worn_weapons[index]))
+	holsters[index].add_child(Globals.create_weapon(worn_weapons[index], self))
 	attacking = false
 
 func get_closest_body(bodies: Array[Node2D]) -> Node2D:
