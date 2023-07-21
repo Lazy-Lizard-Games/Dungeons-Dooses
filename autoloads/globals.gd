@@ -29,8 +29,8 @@ var STATS = [
 	"attack_speed_mult",
 ]
 
-func create_weapon(weapon_data: WeaponData) -> Node2D:
+func create_weapon(weapon_data: WeaponData, parent: Character) -> Node2D:
 	var weapon = weapon_scene.instantiate()
 	weapon.setup()
-	weapon.load_data(weapon_data)
+	weapon.load_data(weapon_data, parent)
 	return weapon
