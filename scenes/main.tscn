@@ -1,15 +1,20 @@
-[gd_scene load_steps=11 format=3 uid="uid://cnejr6en1l20m"]
+[gd_scene load_steps=14 format=3 uid="uid://cnejr6en1l20m"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7ovwk"]
 [ext_resource type="PackedScene" uid="uid://cvu7bdrfa8e16" path="res://scenes/player.tscn" id="2_xjm37"]
 [ext_resource type="Resource" uid="uid://brvpyhf3ac6vk" path="res://assets/characters/player/player_inv.tres" id="3_rgk5n"]
 [ext_resource type="Resource" uid="uid://bcluclja3vcgi" path="res://assets/characters/player/player_equip.tres" id="4_v5jmf"]
 [ext_resource type="Script" path="res://scenes/inventory/inventory_interface.gd" id="5_1xcbx"]
+[ext_resource type="Script" path="res://assets/characters/character.gd" id="5_6hc2u"]
 [ext_resource type="PackedScene" uid="uid://dc0wi684sh6m6" path="res://scenes/inventory/inventory.tscn" id="6_dwmyn"]
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="7_qibmg"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="8_6qolb"]
 [ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/equipment.tscn" id="9_pue8j"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="9_xijki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pubt"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8e0dw"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_7ovwk")
@@ -24,14 +29,20 @@ format = 2
 [node name="Player" parent="." instance=ExtResource("2_xjm37")]
 inventory_data = ExtResource("3_rgk5n")
 equipment_data = ExtResource("4_v5jmf")
-base_damage_mults = {
-"Explosion": 0,
-"Fire": 0,
-"Frost": 0,
-"Physical": 30,
-"Poison": 0,
-"Shock": 0
-}
+
+[node name="TestDummy" type="CharacterBody2D" parent="."]
+position = Vector2(150, 0)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("5_6hc2u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestDummy"]
+shape = SubResource("RectangleShape2D_4pubt")
+
+[node name="Sprite2D" type="Sprite2D" parent="TestDummy"]
+position = Vector2(2.86102e-06, 0)
+scale = Vector2(20, 20)
+texture = SubResource("PlaceholderTexture2D_8e0dw")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

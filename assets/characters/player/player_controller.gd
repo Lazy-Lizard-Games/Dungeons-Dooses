@@ -28,12 +28,11 @@ signal primary_up
 signal secondary_down
 signal secondary_up
 
-
 var worn_armours: Array[ArmourData] = []
-var worn_weapons: Array[WeaponData] = [null, null, null]
+var worn_weapons: Array[Node2D] = [null, null]
 var holsters: Array[Node2D]
-var held_index = 2
-var old_index = 2
+var held_index = -1
+var old_index = 0
 var holstered = false
 var speed = get_stat("speed") * get_stat("speed_mult")
 var attacking = false
@@ -60,7 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			swap_held_weapon(0)
 		else:
 			holstered = true
-			swap_held_weapon(2)
+			swap_held_weapon(-1)
 	
 	if Input.is_action_just_pressed("weapon_B"):
 		if held_index != 1:
@@ -68,12 +67,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			swap_held_weapon(1)
 		else:
 			holstered = true
-			swap_held_weapon(2)
+			swap_held_weapon(-1)
 	
 	if Input.is_action_just_pressed("holster"):
 		holstered = not holstered
 		if holstered:
-			swap_held_weapon(2)
+			swap_held_weapon(-1)
 		else:
 			swap_held_weapon(old_index)
 	
@@ -127,9 +126,13 @@ func _physics_process(delta) -> void:
 
 func on_equipment_updated(equipment_data: InventoryData) -> void:
 	# Clear old equipment
-	for child in hand.get_children():
-		hand.remove_child(child)
+	if held_index >= 0:
+		swap_held_weapon(-1)
+	for weapon in worn_weapons:
+		if weapon:
+			weapon.queue_free()
 	worn_armours.clear()
+	worn_weapons.clear()
 	# Fetch new equipment
 	var equipment: Array[SlotData] = equipment_data.slot_datas
 	# Equip new armours
@@ -149,17 +152,15 @@ func equip_armour(armour: ArmourData) -> void:
 
 func equip_weapons(weapons: Array[SlotData]) -> void:
 	for i in weapons.size():
-		equip_weapon(i, holsters[i], weapons[i])
+		equip_weapon(holsters[i], weapons[i])
 
-func equip_weapon(index: int, holster: Node2D, weapon: SlotData) -> void:
-	worn_weapons[index] = null
-	for child in holster.get_children():
-		holster.remove_child(child)
-	if weapon:
-		if held_index == index:
-			swap_held_weapon(2)
-		worn_weapons[index] = weapon.item_data
-		holster.add_child(Globals.create_weapon(weapon.item_data, self))
+func equip_weapon(holster: Node2D, weapon_slot: SlotData) -> void:
+	if weapon_slot:
+		var weapon = Globals.create_weapon(weapon_slot.item_data, self)
+		worn_weapons.append(weapon)
+		holster.add_child(weapon)
+	else:
+		worn_weapons.append(null)
 
 func update_stats() -> void:
 	reset_stats()
@@ -177,37 +178,36 @@ func apply_armour_stats() -> void:
 			mod_damage_resist(rm.get_stat(), rm.get_value())
 
 func swap_held_weapon(index: int) -> void:
-	if worn_weapons[held_index]:
+	if held_index == index:
+		return
+	if held_index >= 0 and worn_weapons[held_index]:
 		holster_weapon(held_index)
 	old_index = held_index
 	held_index = index
 	swap_weapon.emit(held_index)
-	if worn_weapons[held_index]:
+	if index >= 0 and worn_weapons[held_index]:
 		hold_weapon(held_index)
 
 func hold_weapon(index) -> void:
-	for child in holsters[index].get_children():
-		holsters[index].remove_child(child)
-	var weapon = Globals.create_weapon(worn_weapons[index], self)
+	var weapon = worn_weapons[index]
 	weapon.attack.connect(on_weapon_attack)
 	weapon.idle.connect(on_weapon_idle)
 	primary_down.connect(weapon.on_primary_down)
 	primary_up.connect(weapon.on_primary_up)
 	secondary_down.connect(weapon.on_secondary_down)
 	secondary_up.connect(weapon.on_secondary_up)
-	hand.add_child(weapon)
+	weapon.reparent(hand, false)
 	attacking = false
 
 func holster_weapon(index) -> void:
-	for child in hand.get_children():
-		child.attack.disconnect(on_weapon_attack)
-		child.idle.disconnect(on_weapon_idle)
-		primary_down.disconnect(child.on_primary_down)
-		primary_up.disconnect(child.on_primary_up)
-		secondary_down.disconnect(child.on_secondary_down)
-		secondary_up.disconnect(child.on_secondary_up)
-		hand.remove_child(child)
-	holsters[index].add_child(Globals.create_weapon(worn_weapons[index], self))
+	var weapon = worn_weapons[index]
+	weapon.attack.disconnect(on_weapon_attack)
+	weapon.idle.disconnect(on_weapon_idle)
+	primary_down.disconnect(weapon.on_primary_down)
+	primary_up.disconnect(weapon.on_primary_up)
+	secondary_down.disconnect(weapon.on_secondary_down)
+	secondary_up.disconnect(weapon.on_secondary_up)
+	weapon.reparent(holsters[index], false)
 	attacking = false
 
 func get_closest_body(bodies: Array[Node2D]) -> Node2D:

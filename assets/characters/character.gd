@@ -146,3 +146,5 @@ func _ready() -> void:
 func init_setup() -> void:
 	pass
 
+func damage(damage_data: DamageData) -> void:
+	print("Hit for %s of type %s" % [damage_data.get_damage(), damage_data.get_type()])

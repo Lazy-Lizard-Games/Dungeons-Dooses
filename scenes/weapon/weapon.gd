@@ -56,7 +56,7 @@ func spawn_projectile() -> void:
 	var projectile = attack.projectile.instantiate()
 	var damage = damage_data.copy()
 	damage.mod_damage(character.get_damage_mult(damage.get_type()))
-	projectile.load_damage(damage)
+	projectile.set_damage(damage)
 	add_child(projectile)
 	# Possibility of projectiles being deleted when weapon is deleted
 	# Solution could be to spawn projectiles as a child of the map instead
