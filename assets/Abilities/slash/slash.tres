@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=6 format=3 uid="uid://dav1k3hwxet0e"]
+
+[ext_resource type="Animation" uid="uid://dfy47n67p67ym" path="res://assets/Abilities/slash/slash.res" id="1_mfbs8"]
+[ext_resource type="Script" path="res://assets/Abilities/damage_stats.gd" id="2_cikmg"]
+[ext_resource type="PackedScene" uid="uid://du2vvq4uh2lg2" path="res://assets/Abilities/slash/slash.tscn" id="2_pcpv0"]
+[ext_resource type="Script" path="res://assets/Abilities/ability_data.gd" id="2_s41u5"]
+
+[sub_resource type="Resource" id="Resource_ojddw"]
+script = ExtResource("2_cikmg")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = []
+
+[resource]
+script = ExtResource("2_s41u5")
+name = "Slash"
+animation = ExtResource("1_mfbs8")
+projectile = ExtResource("2_pcpv0")
+damage_stats = SubResource("Resource_ojddw")

@@ -164,7 +164,6 @@ func equip_weapon(holster: Node2D, weapon_slot: SlotData) -> void:
 
 func update_stats() -> void:
 	reset_stats()
-	apply_buffs()
 	apply_armour_stats()
 
 func apply_armour_stats() -> void:
