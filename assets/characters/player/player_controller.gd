@@ -1,15 +1,13 @@
 extends Character
 
-const THROW_FORCE: int = 10
-
 ## Player's inventory data
 @export var inventory_data: InventoryData
-
 ## Player's equipment data
 @export var equipment_data: InventoryData
-
 ## Player's reach for interaction
 @export var reach: int = 100
+## Abilities known by the player
+@export var known_abilities: Array[AbilityData]
 
 @onready var interact_area: Area2D = $InteractArea
 @onready var interactions: VBoxContainer = $UI/Interactions
