@@ -3,13 +3,15 @@ extends Node2D
 var sprite: Sprite2D
 var animator: AnimationPlayer
 var damage_data: DamageData
-var primary_attack: AttackData = null
-var secondary_attack: AttackData = null
-var current_attack = -1
+var primary_ability: AbilityData
+var secondary_ability: AbilityData
+var tertiary_ability: AbilityData
+var current_ability = -1
 var character: Character 
 
 var primary_fire = false
 var secondary_fire = false
+var tertiary_fire = false
 
 signal attack
 signal idle
@@ -20,63 +22,77 @@ func setup() -> void:
 
 func load_data(weapon_data: WeaponData, creator: Character) -> void:
 	character = creator
-	damage_data = weapon_data.get_damage()
+	damage_data = weapon_data.get_damage_data()
 	sprite.texture = weapon_data.texture
-	primary_attack = weapon_data.primary_attack
-	secondary_attack = weapon_data.secondary_attack
+	primary_ability = weapon_data.primary_ability
+	secondary_ability = weapon_data.secondary_ability
+	tertiary_ability = weapon_data.tertiary_ability
 	load_animations()
 
 func load_animations() -> void:
 	var anim_library = AnimationLibrary.new()
-	if primary_attack:
-		anim_library.add_animation("primary", primary_attack.animation)
-	if secondary_attack:
-		anim_library.add_animation("secondary", secondary_attack.animation)
-	animator.add_animation_library("attacks", anim_library)
+	if primary_ability:
+		anim_library.add_animation("primary", primary_ability.animation)
+	if secondary_ability:
+		anim_library.add_animation("secondary", secondary_ability.animation)
+	if tertiary_ability:
+		anim_library.add_animation("tertiary", tertiary_ability.animation)
+	animator.add_animation_library("ability", anim_library)
 
 func _physics_process(delta: float) -> void:
-	if primary_fire and current_attack < 0:
+	if primary_fire and current_ability < 0:
 		primary()
 	
-	if secondary_fire and current_attack < 0:
+	if secondary_fire and current_ability < 0:
 		secondary()
+	
+	if tertiary_fire and current_ability < 0:
+		tertiary()
 
 func primary() -> void:
-	if primary_attack:
-		current_attack = 0
-		animator.play("attacks/primary")
+	if primary_ability:
+		current_ability = 0
+		animator.play("ability/primary")
 
 func secondary() -> void:
-	if secondary_attack:
-		current_attack = 1
-		animator.play("attacks/secondary")
+	if secondary_ability:
+		current_ability = 1
+		animator.play("ability/secondary")
+
+func tertiary() -> void:
+	if tertiary_ability:
+		current_ability = 2
+		animator.play("ability/tertiary")
 
 func spawn_projectile() -> void:
-	var attack = get_attack()
-	var projectile = attack.projectile.instantiate()
+	var projectile: Projectile = get_ability().create_projectile()
+	#projectile.damage_data = DamageData.new()
 	var damage = damage_data.copy()
-	damage.mod_damage(character.get_damage_mult(damage.get_type()))
-	projectile.set_damage(damage)
+	# Modify damage with character stats and projectile stats
+	damage.mod_stats(character.get_damage_stats())
+	projectile.mod_damage_data(damage)
 	add_child(projectile)
 	# Possibility of projectiles being deleted when weapon is deleted
 	# Solution could be to spawn projectiles as a child of the map instead
 
-func get_attack() -> AttackData:
-	var attack = null
-	match current_attack:
+func get_ability() -> AbilityData:
+	var ability = null
+	match current_ability:
 		0:
-			attack = primary_attack
+			ability = primary_ability
 		1:
-			attack = secondary_attack
+			ability = secondary_ability
+		2:
+			ability = tertiary_ability
 		_:
 			print("Not Attacking")
-	return attack
+	return ability
 
 func emit_attacking() -> void:
 	attack.emit()
 
 func emit_idle() -> void:
-	current_attack = -1
+	current_ability = -1
 	idle.emit()
 
 func on_primary_down() -> void:

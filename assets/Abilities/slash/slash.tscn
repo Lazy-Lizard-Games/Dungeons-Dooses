@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://du2vvq4uh2lg2"]
 
-[ext_resource type="Script" path="res://assets/attacks/slash/slash.gd" id="1_rihml"]
+[ext_resource type="Script" path="res://assets/Abilities/slash/slash.gd" id="1_rihml"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_erok7"]
 size = Vector2(40, 40)

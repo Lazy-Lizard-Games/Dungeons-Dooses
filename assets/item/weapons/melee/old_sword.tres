@@ -1,21 +1,23 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://cxwychaynn3sa"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=9 format=3 uid="uid://cxwychaynn3sa"]
 
-[ext_resource type="Resource" uid="uid://dav1k3hwxet0e" path="res://assets/attacks/slash/slash.tres" id="1_8xkxo"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_dfjtc"]
-[ext_resource type="Script" path="res://assets/attacks/damage_data.gd" id="1_giqtd"]
-[ext_resource type="Script" path="res://assets/stats/damage_modifier.gd" id="2_85rsr"]
+[ext_resource type="Script" path="res://assets/Abilities/damage_stats.gd" id="1_qqhp3"]
 [ext_resource type="Texture2D" uid="uid://brxsknuahh7mr" path="res://assets/item/weapons/WeaponSheet.png" id="2_bpjxo"]
-[ext_resource type="Resource" uid="uid://b755v5wlpdw21" path="res://assets/attacks/spin/spin.tres" id="3_mc6yb"]
+[ext_resource type="Script" path="res://assets/Abilities/damage_data.gd" id="2_ho2ha"]
+[ext_resource type="Resource" uid="uid://dav1k3hwxet0e" path="res://assets/Abilities/slash/slash.tres" id="3_jo20w"]
 
-[sub_resource type="Resource" id="Resource_rswko"]
-script = ExtResource("1_giqtd")
+[sub_resource type="Resource" id="Resource_x67rd"]
+script = ExtResource("1_qqhp3")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = []
+
+[sub_resource type="Resource" id="Resource_eua54"]
+script = ExtResource("2_ho2ha")
 damage = 10.0
 damage_type = 0
-
-[sub_resource type="Resource" id="Resource_dxpvp"]
-script = ExtResource("2_85rsr")
-type = 0
-value = 20
+damage_stats = SubResource("Resource_x67rd")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_60t5l"]
 atlas = ExtResource("2_bpjxo")
@@ -23,11 +25,13 @@ region = Rect2(80, 16, 32, 32)
 
 [resource]
 script = ExtResource("1_dfjtc")
-damage_data = SubResource("Resource_rswko")
-primary_attack = ExtResource("1_8xkxo")
-secondary_attack = ExtResource("3_mc6yb")
-damage_modifiers = Array[ExtResource("2_85rsr")]([SubResource("Resource_dxpvp")])
+damage_data = SubResource("Resource_eua54")
+primary_ability = ExtResource("3_jo20w")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = []
 name = "Old Sword"
 description = "A rusty old blade from a distant empire."
-stackable = false
+stackable = null
 texture = SubResource("AtlasTexture_60t5l")

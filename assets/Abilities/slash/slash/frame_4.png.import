@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4dhb4eehqdbu"
-path="res://.godot/imported/frame_2.png-5e6fea72dcbf9e6ab42fd8b9c44667f8.ctex"
+uid="uid://bntosm0ijh2q5"
+path="res://.godot/imported/frame_4.png-bd1e3a75cddd6643a265a796dff47995.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/attacks/slash/slash/frame_2.png"
-dest_files=["res://.godot/imported/frame_2.png-5e6fea72dcbf9e6ab42fd8b9c44667f8.ctex"]
+source_file="res://assets/Abilities/slash/slash/frame_4.png"
+dest_files=["res://.godot/imported/frame_4.png-bd1e3a75cddd6643a265a796dff47995.ctex"]
 
 [params]
 

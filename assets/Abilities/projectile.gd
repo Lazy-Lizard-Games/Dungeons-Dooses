@@ -1,11 +1,14 @@
 extends Node2D
 class_name Projectile
 
-var damage_data: DamageData
+var damage_data = DamageData.new()
 var hit_bodies = []
 
-func set_damage(damage: DamageData) -> void:
-	damage_data = damage
+func mod_stats(stats: DamageStats) -> void:
+	damage_data.mod_stats(stats)
+
+func mod_damage_data(data: DamageData) -> void:
+	damage_data.mod_data(data)
 
 func _ready() -> void:
 	start()
