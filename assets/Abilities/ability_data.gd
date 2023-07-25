@@ -9,6 +9,8 @@ class_name AbilityData
 @export var cooldown: float
 
 func create_projectile() -> Node2D:
-	var p = projectile.instantiate()
-	p.mod_stats(damage_stats)
+	var p = null
+	if projectile:
+		p = projectile.instantiate()
+		p.mod_stats(damage_stats)
 	return p

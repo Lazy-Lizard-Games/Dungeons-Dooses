@@ -66,12 +66,12 @@ func tertiary() -> void:
 
 func spawn_projectile() -> void:
 	var projectile: Projectile = get_ability().create_projectile()
-	#projectile.damage_data = DamageData.new()
-	var damage = damage_data.copy()
-	# Modify damage with character stats and projectile stats
-	damage.mod_stats(character.get_damage_stats())
-	projectile.mod_damage_data(damage)
-	add_child(projectile)
+	if projectile:
+		# Modify damage with character stats and projectile stats
+		var damage = damage_data.copy()
+		damage.mod_stats(character.get_damage_stats())
+		projectile.mod_damage_data(damage)
+		add_child(projectile)
 	# Possibility of projectiles being deleted when weapon is deleted
 	# Solution could be to spawn projectiles as a child of the map instead
 

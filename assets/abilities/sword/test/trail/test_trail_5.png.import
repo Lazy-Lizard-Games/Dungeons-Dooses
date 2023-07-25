@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b6y8na6rm2gcb"
-path="res://.godot/imported/#1 - Transparent Icons.png-7f2a460ca6a488ce588fe8e640985803.ctex"
+uid="uid://cqh18udkvb3ra"
+path="res://.godot/imported/test_trail_5.png-8aa76df7744fc43eb4cce1a2c7c78d7e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/item/#1 - Transparent Icons.png"
-dest_files=["res://.godot/imported/#1 - Transparent Icons.png-7f2a460ca6a488ce588fe8e640985803.ctex"]
+source_file="res://assets/abilities/sword/test/trail/test_trail_5.png"
+dest_files=["res://.godot/imported/test_trail_5.png-8aa76df7744fc43eb4cce1a2c7c78d7e.ctex"]
 
 [params]
 

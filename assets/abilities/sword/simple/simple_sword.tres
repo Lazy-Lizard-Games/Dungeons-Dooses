@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://c35wyvrjrak3m"]
+
+[ext_resource type="Animation" uid="uid://cs806rpiqslue" path="res://assets/abilities/sword/simple/simple_sword.res" id="1_m88u1"]
+[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_mih5r"]
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="2_gbm6i"]
+
+[sub_resource type="Resource" id="Resource_l4774"]
+script = ExtResource("2_gbm6i")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[resource]
+script = ExtResource("1_mih5r")
+weapon_type = 0
+name = "Simple"
+animation = ExtResource("1_m88u1")
+damage_stats = SubResource("Resource_l4774")
+cooldown = 0.0
