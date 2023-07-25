@@ -9,10 +9,12 @@ script = ExtResource("2_7tie1")
 crit_chance = 0.0
 crit_mult = 0.0
 damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
-effects = []
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
 
 [resource]
 script = ExtResource("1_da23l")
-name = "Spin"
+weapon_type = 0
+name = "Whirlwind"
 animation = ExtResource("1_obkf2")
 damage_stats = SubResource("Resource_105gi")
+cooldown = 0.0

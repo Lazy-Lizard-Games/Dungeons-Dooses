@@ -18,7 +18,7 @@ func start() -> void:
 	print("Killing Projectile")
 	queue_free()
 
-func _on_body_entered(body: Node2D) -> void:
+func _on_body_entered(body: Character) -> void:
 	if body not in hit_bodies:
 		hit_bodies.append(body)
 		body.damage(damage_data)

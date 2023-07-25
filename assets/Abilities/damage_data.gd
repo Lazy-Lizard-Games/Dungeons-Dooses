@@ -1,7 +1,7 @@
 extends Resource
 class_name DamageData
 
-@export var damage: float = 10
+@export var damage: float = 0
 @export var damage_type: Globals.DAMAGE_TYPES
 @export var damage_stats = DamageStats.new()
 

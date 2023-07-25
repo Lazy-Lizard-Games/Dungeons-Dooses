@@ -11,7 +11,7 @@ script = ExtResource("1_qqhp3")
 crit_chance = 0.0
 crit_mult = 0.0
 damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
-effects = []
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
 
 [sub_resource type="Resource" id="Resource_eua54"]
 script = ExtResource("2_ho2ha")
@@ -25,12 +25,9 @@ region = Rect2(80, 16, 32, 32)
 
 [resource]
 script = ExtResource("1_dfjtc")
+weapon_type = 0
 damage_data = SubResource("Resource_eua54")
 primary_ability = ExtResource("3_jo20w")
-crit_chance = 0.0
-crit_mult = 0.0
-damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
-effects = []
 name = "Old Sword"
 description = "A rusty old blade from a distant empire."
 stackable = null
