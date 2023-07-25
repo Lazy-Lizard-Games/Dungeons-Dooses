@@ -1,20 +1,87 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://c35wyvrjrak3m"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=11 format=3 uid="uid://c35wyvrjrak3m"]
 
-[ext_resource type="Animation" uid="uid://cs806rpiqslue" path="res://assets/abilities/sword/simple/simple_sword.res" id="1_m88u1"]
-[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_mih5r"]
-[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="2_gbm6i"]
+[ext_resource type="Texture2D" uid="uid://vudo27ta0cx5" path="res://assets/abilities/sword/simple/trail/simple_1.png" id="1_s42w5"]
+[ext_resource type="Texture2D" uid="uid://yfvf7wysk34l" path="res://assets/abilities/sword/simple/trail/simple_2.png" id="2_1yhqv"]
+[ext_resource type="Texture2D" uid="uid://ds1kbmcgaqi0n" path="res://assets/abilities/sword/simple/trail/simple_3.png" id="3_0h1lr"]
+[ext_resource type="Texture2D" uid="uid://c56qjv17wlsu" path="res://assets/abilities/sword/simple/trail/simple_4.png" id="4_d3oj3"]
+[ext_resource type="Texture2D" uid="uid://b6fblottnc4qg" path="res://assets/abilities/sword/simple/trail/simple_5.png" id="5_17vkw"]
+[ext_resource type="Texture2D" uid="uid://wvljf5hsiu88" path="res://assets/abilities/sword/simple/trail/simple_6.png" id="6_ddjo4"]
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="7_ys4ny"]
+[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="8_0cke3"]
+
+[sub_resource type="Animation" id="Animation_5aeih"]
+resource_name = "simple_sword"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trail:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [null, ExtResource("1_s42w5"), ExtResource("2_1yhqv"), ExtResource("3_0h1lr"), ExtResource("4_d3oj3"), ExtResource("5_17vkw"), ExtResource("6_ddjo4"), null]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Trail:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(26, 5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 100, 1e-05),
+"update": 0,
+"values": [-0.261799, 0.418879, 0.907571, 1.15192, 1.39626, -0.261799]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"emit_attacking"
+}, {
+"args": [],
+"method": &"spawn_projectile"
+}, {
+"args": [],
+"method": &"emit_idle"
+}]
+}
 
 [sub_resource type="Resource" id="Resource_l4774"]
-script = ExtResource("2_gbm6i")
+script = ExtResource("7_ys4ny")
 crit_chance = 0.0
 crit_mult = 0.0
 damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
 effects = Array[Resource("res://assets/stats/effect.gd")]([])
 
 [resource]
-script = ExtResource("1_mih5r")
+script = ExtResource("8_0cke3")
 weapon_type = 0
 name = "Simple"
-animation = ExtResource("1_m88u1")
+animation = SubResource("Animation_5aeih")
 damage_stats = SubResource("Resource_l4774")
 cooldown = 0.0
+pop = 1

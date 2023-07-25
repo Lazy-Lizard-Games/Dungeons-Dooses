@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://crunyy2js8r51"]
+
+[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_a1hdu"]
+[ext_resource type="Animation" uid="uid://cfnlyx5xc80gh" path="res://assets/abilities/great_sword/slash/slash.res" id="1_fevyg"]
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="2_o2xm6"]
+
+[sub_resource type="Resource" id="Resource_kgmfv"]
+script = ExtResource("2_o2xm6")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[resource]
+script = ExtResource("1_a1hdu")
+weapon_type = 5
+name = "Slash"
+animation = ExtResource("1_fevyg")
+damage_stats = SubResource("Resource_kgmfv")
+cooldown = 0.0
+pop = 1

@@ -7,6 +7,7 @@ class_name AbilityData
 @export var projectile: PackedScene
 @export var damage_stats = DamageStats.new()
 @export var cooldown: float
+@export var pop = 1
 
 func create_projectile() -> Node2D:
 	var p = null
