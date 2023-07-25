@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bntosm0ijh2q5"
-path="res://.godot/imported/frame_4.png-bd1e3a75cddd6643a265a796dff47995.ctex"
+uid="uid://yfvf7wysk34l"
+path="res://.godot/imported/simple_2.png-0876937bd7d61ea3f752cfc2adf47ce9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Abilities/slash/slash/frame_4.png"
-dest_files=["res://.godot/imported/frame_4.png-bd1e3a75cddd6643a265a796dff47995.ctex"]
+source_file="res://assets/abilities/sword/simple/trail/simple_2.png"
+dest_files=["res://.godot/imported/simple_2.png-0876937bd7d61ea3f752cfc2adf47ce9.ctex"]
 
 [params]
 
