@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://dcjgpo8snwnhh"]
+
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_jlr6b"]
+[ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_ptgbj"]
+[ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="2_wdsas"]
+[ext_resource type="Resource" uid="uid://bu3mlme7ypbko" path="res://assets/abilities/great_sword/big_slash/big_slash.tres" id="3_g8vrn"]
+[ext_resource type="Resource" uid="uid://chbc6lbohpu5i" path="res://assets/abilities/great_sword/round_slash/round_slash.tres" id="5_il6v4"]
+[ext_resource type="Texture2D" uid="uid://ds1k6hjsaecyq" path="res://assets/item/weapons/weapon_sheet.png" id="5_ujjnl"]
+
+[sub_resource type="Resource" id="Resource_78oby"]
+script = ExtResource("1_jlr6b")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_im6dk"]
+script = ExtResource("2_wdsas")
+damage = 0.0
+damage_type = 0
+damage_stats = SubResource("Resource_78oby")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_naydo"]
+atlas = ExtResource("5_ujjnl")
+region = Rect2(112, 16, 32, 32)
+
+[resource]
+script = ExtResource("1_ptgbj")
+weapon_type = 5
+damage_data = SubResource("Resource_im6dk")
+primary_ability = ExtResource("3_g8vrn")
+secondary_ability = ExtResource("5_il6v4")
+name = "Great Sword"
+description = ""
+stackable = false
+texture = SubResource("AtlasTexture_naydo")

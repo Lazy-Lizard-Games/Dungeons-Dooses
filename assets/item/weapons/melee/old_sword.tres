@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_dfjtc"]
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_fypdf"]
 [ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="2_hw04o"]
-[ext_resource type="Resource" uid="uid://c35wyvrjrak3m" path="res://assets/abilities/sword/simple/simple_sword.tres" id="3_nde0i"]
+[ext_resource type="Resource" uid="uid://c35wyvrjrak3m" path="res://assets/abilities/sword/simple/simple_sword.tres" id="3_pgu68"]
 [ext_resource type="Texture2D" uid="uid://8486pyv0ruck" path="res://assets/item/weapons/weapon_atlas.tres" id="5_oyssw"]
 
 [sub_resource type="Resource" id="Resource_x67rd"]
@@ -23,7 +23,7 @@ damage_stats = SubResource("Resource_x67rd")
 script = ExtResource("1_dfjtc")
 weapon_type = 0
 damage_data = SubResource("Resource_eua54")
-primary_ability = ExtResource("3_nde0i")
+primary_ability = ExtResource("3_pgu68")
 name = "Old Sword"
 description = "A rusty old blade from a distant empire."
 stackable = null
