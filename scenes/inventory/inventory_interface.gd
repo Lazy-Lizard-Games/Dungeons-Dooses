@@ -24,6 +24,10 @@ func toggle_inventory(external_owner = null) -> void:
 			set_external_inventory(external_owner)
 	else:
 		visible = not visible
+		if grabbed_slot_data:
+			drop_slot_data.emit(grabbed_slot_data)
+			grabbed_slot_data = null
+			update_grabbed_slot()
 		if visible:
 			if external_owner:
 				set_external_inventory(external_owner)

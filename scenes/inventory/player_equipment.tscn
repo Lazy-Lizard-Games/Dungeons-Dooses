@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://scenes/inventory/player_equipment.gd" id="1_xks5t"]
 
 [node name="PlayerEquipment" type="PanelContainer"]
-offset_right = 64.0
-offset_bottom = 404.0
+offset_right = 48.0
+offset_bottom = 308.0
 script = ExtResource("1_xks5t")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
