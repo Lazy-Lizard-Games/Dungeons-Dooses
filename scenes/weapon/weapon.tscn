@@ -1,6 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://rdciriddgpe5"]
+[gd_scene load_steps=17 format=3 uid="uid://rdciriddgpe5"]
 
 [ext_resource type="Script" path="res://scenes/weapon/weapon.gd" id="1_at56h"]
+[ext_resource type="Animation" uid="uid://chby44vuymj31" path="res://assets/abilities/great_sword/big_slash/great_swoard_big_slash.res" id="2_4r6fk"]
 [ext_resource type="Texture2D" uid="uid://dyrx4bvqrs8s0" path="res://assets/abilities/sword/test/trail/test_trail_1.png" id="2_f8n4w"]
 [ext_resource type="Animation" uid="uid://cs806rpiqslue" path="res://assets/abilities/sword/simple/simple_sword.res" id="3_nn5y4"]
 [ext_resource type="Texture2D" uid="uid://sx5o7jhuvix4" path="res://assets/abilities/sword/test/trail/test_trail_2.png" id="4_s1mu1"]
@@ -9,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cqh18udkvb3ra" path="res://assets/abilities/sword/test/trail/test_trail_5.png" id="7_po2o2"]
 [ext_resource type="Texture2D" uid="uid://d223b2uvr02cr" path="res://assets/abilities/sword/test/trail/test_trail_6.png" id="8_1ieox"]
 [ext_resource type="Animation" uid="uid://cfnlyx5xc80gh" path="res://assets/abilities/great_sword/slash/slash.res" id="10_0ccvh"]
+[ext_resource type="Animation" uid="uid://bisikkmk1mbkw" path="res://assets/abilities/great_sword/round_slash/great_sword_round_slash.res" id="19_plenw"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8ltfj"]
 load_path = "res://.godot/imported/weapon_sheet.png-f0cd9f287f338edb75775a05acfc55b0.ctex"
@@ -16,6 +18,45 @@ load_path = "res://.godot/imported/weapon_sheet.png-f0cd9f287f338edb75775a05acfc
 [sub_resource type="AtlasTexture" id="AtlasTexture_jtboe"]
 atlas = SubResource("CompressedTexture2D_8ltfj")
 region = Rect2(112, 16, 32, 32)
+
+[sub_resource type="Animation" id="Animation_112a4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Trail:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.563741]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Trail:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5, 3)]
+}
 
 [sub_resource type="Animation" id="Animation_6jwut"]
 resource_name = "test"
@@ -46,24 +87,11 @@ tracks/1/keys = {
 "values": [-0.261799]
 }
 
-[sub_resource type="Animation" id="Animation_112a4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.34383]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5lrfq"]
 _data = {
 "RESET": SubResource("Animation_112a4"),
+"great_swoard_big_slash": ExtResource("2_4r6fk"),
+"great_sword_round_slash": ExtResource("19_plenw"),
 "simple_sword": ExtResource("3_nn5y4"),
 "slash": ExtResource("10_0ccvh"),
 "test": SubResource("Animation_6jwut")
@@ -73,10 +101,11 @@ _data = {
 script = ExtResource("1_at56h")
 
 [node name="Trail" type="Sprite2D" parent="."]
-offset = Vector2(26, 5)
+position = Vector2(-5, 3)
 
 [node name="Sprite" type="Sprite2D" parent="."]
-rotation = 0.34383
+rotation = 0.563741
+scale = Vector2(0.986293, 1.00905)
 texture = SubResource("AtlasTexture_jtboe")
 offset = Vector2(12, -12)
 
