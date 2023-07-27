@@ -19,15 +19,15 @@ layout_mode = 2
 
 [node name="Name" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 text = "Sword"
-horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 14
-text = "A weapon for slashing a slapping"
+text = "A weapon for slashing and slapping"
 autowrap_mode = 2
