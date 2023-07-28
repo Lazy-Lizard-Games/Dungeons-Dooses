@@ -8,7 +8,7 @@ atlas = ExtResource("1_mbngb")
 region = Rect2(352, 352, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6u4ot"]
-size = Vector2(26, 25)
+size = Vector2(26, 13)
 
 [node name="Chest" type="StaticBody2D" groups=["external_inventory", "interactable"]]
 collision_layer = 5
@@ -21,5 +21,5 @@ interact_name = "Chest"
 texture = SubResource("AtlasTexture_biuf4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
+position = Vector2(0, 6.5)
 shape = SubResource("RectangleShape2D_6u4ot")

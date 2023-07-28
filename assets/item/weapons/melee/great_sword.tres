@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://dcjgpo8snwnhh"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://opckhhwuxfg8"]
 
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_jlr6b"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_ptgbj"]
