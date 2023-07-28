@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://berr841k420f8"]
+
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_14fpf"]
+[ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_a0cks"]
+[ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="2_bx6jk"]
+[ext_resource type="Resource" uid="uid://bf5u745q2evpl" path="res://assets/abilities/spear/triple_thrust/triple_thrust.tres" id="3_8wvwq"]
+[ext_resource type="Texture2D" uid="uid://ds1k6hjsaecyq" path="res://assets/item/weapons/weapon_sheet.png" id="4_hmpfk"]
+[ext_resource type="Resource" uid="uid://bos1peocwoy64" path="res://assets/abilities/spear/heavy_thrust/heavy_thrust.tres" id="5_7a2uv"]
+
+[sub_resource type="Resource" id="Resource_7q002"]
+script = ExtResource("1_14fpf")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_gdr14"]
+script = ExtResource("2_bx6jk")
+damage = 0.0
+damage_type = 0
+damage_stats = SubResource("Resource_7q002")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2clx"]
+atlas = ExtResource("4_hmpfk")
+region = Rect2(112, 144, 32, 32)
+
+[resource]
+script = ExtResource("1_a0cks")
+weapon_type = 3
+damage_data = SubResource("Resource_gdr14")
+primary_ability = ExtResource("3_8wvwq")
+secondary_ability = ExtResource("5_7a2uv")
+name = "Spear"
+description = ""
+stackable = false
+texture = SubResource("AtlasTexture_m2clx")
