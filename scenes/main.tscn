@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://assets/inventory/slot_data.gd" id="6_lhqcf"]
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="7_qibmg"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="8_6qolb"]
-[ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/equipment.tscn" id="9_pue8j"]
+[ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/hotbar.tscn" id="9_pue8j"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="9_xijki"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d6kcd"]
@@ -580,6 +580,7 @@ slot_datas = Array[ExtResource("6_lhqcf")]([null, null, SubResource("Resource_4e
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8e0dw"]
 
 [node name="Main" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_7ovwk")
 
 [node name="Ground" type="TileMap" parent="."]
@@ -633,30 +634,45 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("5_1xcbx")
 
-[node name="Player" type="VBoxContainer" parent="UI/InventoryInterface"]
+[node name="Inventories" type="HBoxContainer" parent="UI/InventoryInterface"]
 layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 404.0
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -160.0
+offset_bottom = 160.0
+grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 0
 
-[node name="PlayerEquipment" parent="UI/InventoryInterface/Player" instance=ExtResource("7_qibmg")]
+[node name="MarginLeft" type="MarginContainer" parent="UI/InventoryInterface/Inventories"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 100
+
+[node name="Player" type="HBoxContainer" parent="UI/InventoryInterface/Inventories"]
+layout_mode = 2
+
+[node name="PlayerEquipment" parent="UI/InventoryInterface/Inventories/Player" instance=ExtResource("7_qibmg")]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="PlayerInventory" parent="UI/InventoryInterface/Player" instance=ExtResource("6_dwmyn")]
+[node name="PlayerInventory" parent="UI/InventoryInterface/Inventories/Player" instance=ExtResource("6_dwmyn")]
 layout_mode = 2
 
-[node name="ExternalInventory" parent="UI/InventoryInterface" instance=ExtResource("6_dwmyn")]
+[node name="MarginCentre" type="MarginContainer" parent="UI/InventoryInterface/Inventories"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ExternalInventory" parent="UI/InventoryInterface/Inventories" instance=ExtResource("6_dwmyn")]
 visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -404.0
-offset_right = 0.0
-offset_bottom = 64.0
-grow_horizontal = 0
+layout_mode = 2
+
+[node name="MarginRight" type="MarginContainer" parent="UI/InventoryInterface/Inventories"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/margin_right = 100
 
 [node name="GrabbedSlot" parent="UI/InventoryInterface" instance=ExtResource("8_6qolb")]
 visible = false
@@ -685,12 +701,18 @@ size_flags_vertical = 0
 
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -80.0
+offset_right = 80.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource("9_xijki")
 
-[node name="Equipment" parent="UI/HUD" instance=ExtResource("9_pue8j")]
+[node name="Hotbar" parent="UI/HUD" instance=ExtResource("9_pue8j")]
+layout_mode = 1
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]
