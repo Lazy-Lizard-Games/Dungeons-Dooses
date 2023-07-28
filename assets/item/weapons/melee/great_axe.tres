@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=8 format=3 uid="uid://b6yjx71vv3cbu"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=9 format=3 uid="uid://b6yjx71vv3cbu"]
 
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_m1b4u"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_syw6g"]
 [ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="2_f810p"]
+[ext_resource type="Resource" uid="uid://dd0r4lauergw" path="res://assets/abilities/great_axe/large_slash/large_trail.tres" id="3_5w8vi"]
 [ext_resource type="Texture2D" uid="uid://ds1k6hjsaecyq" path="res://assets/item/weapons/weapon_sheet.png" id="4_xtit6"]
 
 [sub_resource type="Resource" id="Resource_w8cnb"]
@@ -26,6 +27,7 @@ region = Rect2(112, 112, 32, 32)
 script = ExtResource("1_syw6g")
 weapon_type = 6
 damage_data = SubResource("Resource_hdfn3")
+primary_ability = ExtResource("3_5w8vi")
 name = "Great Axe"
 description = ""
 stackable = false
