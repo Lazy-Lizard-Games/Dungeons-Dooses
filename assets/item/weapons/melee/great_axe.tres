@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="WeaponData" load_steps=8 format=3 uid="uid://b6yjx71vv3cbu"]
+
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_m1b4u"]
+[ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_syw6g"]
+[ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="2_f810p"]
+[ext_resource type="Texture2D" uid="uid://ds1k6hjsaecyq" path="res://assets/item/weapons/weapon_sheet.png" id="4_xtit6"]
+
+[sub_resource type="Resource" id="Resource_w8cnb"]
+script = ExtResource("1_m1b4u")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[sub_resource type="Resource" id="Resource_hdfn3"]
+script = ExtResource("2_f810p")
+damage = 0.0
+damage_type = 0
+damage_stats = SubResource("Resource_w8cnb")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uk0f"]
+atlas = ExtResource("4_xtit6")
+region = Rect2(112, 112, 32, 32)
+
+[resource]
+script = ExtResource("1_syw6g")
+weapon_type = 6
+damage_data = SubResource("Resource_hdfn3")
+name = "Great Axe"
+description = ""
+stackable = false
+texture = SubResource("AtlasTexture_2uk0f")

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://5727ftebb0nk"]
+
+[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_7wqhn"]
+[ext_resource type="Animation" uid="uid://dg0suyi6vhorx" path="res://assets/abilities/short_sword/double_slash/short_sword_double_slash.res" id="1_ynwe4"]
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="2_o7geo"]
+
+[sub_resource type="Resource" id="Resource_r1hdy"]
+script = ExtResource("2_o7geo")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[resource]
+script = ExtResource("1_7wqhn")
+weapon_type = 0
+name = "Double Slash"
+animation = ExtResource("1_ynwe4")
+damage_stats = SubResource("Resource_r1hdy")
+cooldown = 0.0
+pop = 1

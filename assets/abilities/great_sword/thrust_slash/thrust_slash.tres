@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://tycay1nnrygk"]
+
+[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_3sbwn"]
+[ext_resource type="Animation" uid="uid://ixdfys44dltq" path="res://assets/abilities/great_sword/thrust_slash/great_sword_thrust_slash.res" id="1_hac67"]
+[ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="2_q2r5g"]
+
+[sub_resource type="Resource" id="Resource_eav23"]
+script = ExtResource("2_q2r5g")
+crit_chance = 0.0
+crit_mult = 0.0
+damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
+effects = Array[Resource("res://assets/stats/effect.gd")]([])
+
+[resource]
+script = ExtResource("1_3sbwn")
+weapon_type = 5
+name = "Thrust Slash"
+animation = ExtResource("1_hac67")
+damage_stats = SubResource("Resource_eav23")
+cooldown = 0.0
+pop = 1
