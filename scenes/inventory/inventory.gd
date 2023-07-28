@@ -3,6 +3,7 @@ extends PanelContainer
 const Slot = preload("res://scenes/inventory/slot.tscn")
 
 @onready var item_grid: GridContainer = $MarginContainer/ItemGrid
+@onready var inv_bg: TileMap = $MarginContainer/InventoryBackground
 
 func set_inventory_data(inventory_data: InventoryData) -> void:
 	inventory_data.inventory_updated.connect(populate_item_grid)
@@ -25,3 +26,12 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 		
 		if slot_data:
 			slot.set_slot_data(slot_data)
+	
+	var inv_size = inventory_data.slot_datas.size()
+	var cols = item_grid.columns
+	inv_bg.clear()
+	var cells: Array[Vector2i]
+	for x in range(cols):
+		for y in range(ceil(inv_size/cols)):
+			cells.append(Vector2i(x, y))
+	inv_bg.set_cells_terrain_connect(0, cells, 0, 0)

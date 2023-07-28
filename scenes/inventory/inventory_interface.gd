@@ -6,10 +6,10 @@ var grabbed_slot_data: SlotData
 var external_inventory_owner
 
 @onready var player: Control = $Player
-@onready var player_inventory: PanelContainer = $Player/PlayerInventory
-@onready var player_equipment: PanelContainer = $Player/PlayerEquipment
+@onready var player_inventory: PanelContainer = $Inventories/Player/PlayerInventory
+@onready var player_equipment: PanelContainer = $Inventories/Player/PlayerEquipment
 @onready var grabbed_slot: PanelContainer = $GrabbedSlot
-@onready var external_inventory: PanelContainer = $ExternalInventory
+@onready var external_inventory: PanelContainer = $Inventories/ExternalInventory
 @onready var info_card: Control = $InfoCard
 
 func _physics_process(delta: float) -> void:
@@ -24,6 +24,10 @@ func toggle_inventory(external_owner = null) -> void:
 			set_external_inventory(external_owner)
 	else:
 		visible = not visible
+		if grabbed_slot_data:
+			drop_slot_data.emit(grabbed_slot_data)
+			grabbed_slot_data = null
+			update_grabbed_slot()
 		if visible:
 			if external_owner:
 				set_external_inventory(external_owner)

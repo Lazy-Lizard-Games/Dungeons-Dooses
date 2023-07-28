@@ -1,18 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://documyiknvvde"]
+[gd_scene load_steps=5 format=3 uid="uid://documyiknvvde"]
 
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="1_7nrqr"]
 [ext_resource type="Script" path="res://scenes/inventory/player_equipment.gd" id="1_xks5t"]
+[ext_resource type="TileSet" uid="uid://lvmo0p58kkln" path="res://assets/inventory/inventory_ui/inventory_tileset.tres" id="2_vpkxy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwrml"]
 
 [node name="PlayerEquipment" type="PanelContainer"]
-offset_right = 64.0
-offset_bottom = 404.0
+offset_right = 48.0
+offset_bottom = 288.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gwrml")
 script = ExtResource("1_xks5t")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="EquipBackground" type="TileMap" parent="MarginContainer"]
+position = Vector2(16, 16)
+tile_set = ExtResource("2_vpkxy")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 262146, 0, 65536, 196610, 1, 131072, 196610, 1, 196608, 196610, 1, 262144, 196610, 1, 327680, 262146, 1)
 
 [node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 
 [node name="Slot" parent="MarginContainer/ItemGrid" instance=ExtResource("1_7nrqr")]
 layout_mode = 2

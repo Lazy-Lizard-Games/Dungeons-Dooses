@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=11 format=3 uid="uid://dcjgpo8snwnhh"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://opckhhwuxfg8"]
 
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_jlr6b"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_ptgbj"]
@@ -29,9 +29,6 @@ region = Rect2(112, 16, 32, 32)
 script = ExtResource("1_ptgbj")
 weapon_type = 5
 damage_data = SubResource("Resource_im6dk")
-primary_ability = ExtResource("3_axa8h")
-secondary_ability = ExtResource("5_il6v4")
-tertiary_ability = ExtResource("6_fx5nx")
 name = "Great Sword"
 description = ""
 stackable = false
