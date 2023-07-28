@@ -200,7 +200,7 @@ func holster_weapon(index) -> void:
 	var weapon = worn_weapons[index]
 	# TODO: ideally animation should be stopped immediately here
 	weapon.on_primary_up()
-	weapon.on_secondary_down()
+	weapon.on_secondary_up()
 	
 	weapon.attack.disconnect(on_weapon_attack)
 	weapon.idle.disconnect(on_weapon_idle)
