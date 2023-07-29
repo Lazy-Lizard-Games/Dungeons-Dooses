@@ -1,8 +1,9 @@
-[gd_scene load_steps=40 format=3 uid="uid://rdciriddgpe5"]
+[gd_scene load_steps=23 format=3 uid="uid://rdciriddgpe5"]
 
 [ext_resource type="Script" path="res://scenes/weapon/weapon.gd" id="1_at56h"]
 [ext_resource type="Animation" uid="uid://chby44vuymj31" path="res://assets/abilities/great_sword/big_slash/great_swoard_big_slash.res" id="2_4r6fk"]
 [ext_resource type="Texture2D" uid="uid://dyrx4bvqrs8s0" path="res://assets/abilities/sword/test/trail/test_trail_1.png" id="2_f8n4w"]
+[ext_resource type="Animation" uid="uid://cyob78fyicpnq" path="res://assets/abilities/great_axe/large_slash/great_axe_large_slash.res" id="2_l3ls7"]
 [ext_resource type="Animation" uid="uid://cs806rpiqslue" path="res://assets/abilities/sword/simple/simple_sword.res" id="3_nn5y4"]
 [ext_resource type="Texture2D" uid="uid://sx5o7jhuvix4" path="res://assets/abilities/sword/test/trail/test_trail_2.png" id="4_s1mu1"]
 [ext_resource type="Texture2D" uid="uid://bbj56gvd08pwk" path="res://assets/abilities/sword/test/trail/test_trail_3.png" id="5_ti0cm"]
@@ -15,22 +16,7 @@
 [ext_resource type="Animation" uid="uid://dg0suyi6vhorx" path="res://assets/abilities/short_sword/double_slash/short_sword_double_slash.res" id="15_ruvdu"]
 [ext_resource type="Animation" uid="uid://clv42b1s00ebk" path="res://assets/abilities/spear/triple_thrust/spear_triple_thrust.res" id="15_yjxje"]
 [ext_resource type="Animation" uid="uid://bjn6jglvxs6s5" path="res://assets/abilities/spear/heavy_thrust/spear_heavy_thrust.res" id="17_ry8yo"]
-[ext_resource type="Texture2D" uid="uid://cvuvfmmvidvgb" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation1.png" id="17_yedgv"]
-[ext_resource type="Texture2D" uid="uid://cqppdmti8e55f" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation2.png" id="18_0pu1i"]
-[ext_resource type="Texture2D" uid="uid://cbhhv1wy6tish" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation3.png" id="19_330gp"]
 [ext_resource type="Animation" uid="uid://bisikkmk1mbkw" path="res://assets/abilities/great_sword/round_slash/great_sword_round_slash.res" id="19_plenw"]
-[ext_resource type="Texture2D" uid="uid://gc1d8iyhiekj" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation4.png" id="20_mbrtk"]
-[ext_resource type="Texture2D" uid="uid://dj6jv6ujb2j64" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation5.png" id="21_iqv2m"]
-[ext_resource type="Texture2D" uid="uid://dr8ec3ceva7vu" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation6.png" id="22_oqiej"]
-[ext_resource type="Texture2D" uid="uid://k656ajyia8gy" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation7.png" id="23_7hej2"]
-[ext_resource type="Texture2D" uid="uid://cpyth0npdrpft" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation8.png" id="24_lwnil"]
-[ext_resource type="Texture2D" uid="uid://cks2txyipmh1g" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation9.png" id="25_781hu"]
-[ext_resource type="Texture2D" uid="uid://dhynrogvuxdya" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation10.png" id="26_se67g"]
-[ext_resource type="Texture2D" uid="uid://ckf7aya52euy1" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation11.png" id="27_yqegm"]
-[ext_resource type="Texture2D" uid="uid://chxm8n5atmf5f" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation12.png" id="28_t1pel"]
-[ext_resource type="Texture2D" uid="uid://d176ubaah53j5" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation13.png" id="29_5ychx"]
-[ext_resource type="Texture2D" uid="uid://dxy4eb0jmj0ga" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation14.png" id="30_5s8rl"]
-[ext_resource type="Texture2D" uid="uid://btyahfyx58exe" path="res://assets/abilities/great_axe/large_slash/trail/large_slash_great_axe_animation15.png" id="31_2vkks"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8ltfj"]
 load_path = "res://.godot/imported/weapon_sheet.png-f0cd9f287f338edb75775a05acfc55b0.ctex"
@@ -144,104 +130,10 @@ tracks/1/keys = {
 "values": [-0.261799]
 }
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c3n3l"]
-load_path = "res://.godot/imported/weapon_sheet.png-f0cd9f287f338edb75775a05acfc55b0.ctex"
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_krvc0"]
-atlas = SubResource("CompressedTexture2D_c3n3l")
-region = Rect2(112, 112, 32, 32)
-
-[sub_resource type="Animation" id="Animation_nhabm"]
-resource_name = "great_axe_large_slash"
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Trail:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [null, ExtResource("17_yedgv"), ExtResource("18_0pu1i"), ExtResource("19_330gp"), ExtResource("20_mbrtk"), ExtResource("21_iqv2m"), ExtResource("22_oqiej"), ExtResource("23_7hej2"), ExtResource("24_lwnil"), ExtResource("25_781hu"), ExtResource("26_se67g"), ExtResource("27_yqegm"), ExtResource("28_t1pel"), ExtResource("29_5ychx"), ExtResource("30_5s8rl"), ExtResource("31_2vkks"), null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Trail:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5), Vector2(-3, 5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Trail:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316, 0.162316]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0"), SubResource("AtlasTexture_krvc0")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14), Vector2(0, 1.42109e-14)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite:rotation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [-0.253073, -0.333358, -0.172788, -0.0907571, 0.151844, 0.394444, 0.637045, 0.879646, 1.20602, 1.52891, 1.93557, 2.09614, 2.42077, 2.58309, 2.90597, 2.74366, -0.253073]
-}
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath(".")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5lrfq"]
 _data = {
 "RESET": SubResource("Animation_112a4"),
-"great_axe_large_slash": SubResource("Animation_nhabm"),
+"great_axe_large_slash": ExtResource("2_l3ls7"),
 "great_swoard_big_slash": ExtResource("2_4r6fk"),
 "great_sword_round_slash": ExtResource("19_plenw"),
 "great_sword_thrust_slash": ExtResource("12_vh3hi"),
@@ -260,8 +152,10 @@ script = ExtResource("1_at56h")
 [node name="Trail" type="Sprite2D" parent="."]
 position = Vector2(-5, 3)
 rotation = 0.891863
+offset = Vector2(1, 15)
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(3, -2)
 rotation = -0.261799
 scale = Vector2(0.986293, 1.00905)
 texture = SubResource("AtlasTexture_jtboe")
