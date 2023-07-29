@@ -25,6 +25,8 @@ signal primary_down
 signal primary_up
 signal secondary_down
 signal secondary_up
+signal tertiary_down
+signal tertiary_up
 
 var worn_armours: Array[ArmourData] = []
 var worn_weapons: Array[Node2D] = [null, null]
@@ -85,17 +87,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_released("secondary"):
 		secondary_up.emit()
+	
+	if Input.is_action_just_pressed("tertiary"):
+		tertiary_down.emit()
+	
+	if Input.is_action_just_pressed("tertiary"):
+		tertiary_up.emit()
 
 func _physics_process(delta) -> void:
-	# Check if player is attacking
-	if Input.is_action_pressed("primary") and not attacking:
-		if hand.get_children():
-			hand.get_child(0).primary()
-	
-	if Input.is_action_pressed("secondary") and not attacking:
-		if hand.get_children():
-			hand.get_child(0).secondary()
-	
 	# Update interract area
 	interactions.hide()
 	if interact_area.has_overlapping_bodies():
@@ -187,29 +186,36 @@ func swap_held_weapon(index: int) -> void:
 
 func hold_weapon(index) -> void:
 	var weapon = worn_weapons[index]
+	connect_actions(weapon)
+	weapon.reparent(hand, false)
+	attacking = false
+
+func holster_weapon(index) -> void:
+	var weapon = worn_weapons[index]
+	weapon.end_actions()
+	disconnect_actions(weapon)
+	weapon.reparent(holsters[index], false)
+	attacking = false
+
+func connect_actions(weapon) -> void:
 	weapon.attack.connect(on_weapon_attack)
 	weapon.idle.connect(on_weapon_idle)
 	primary_down.connect(weapon.on_primary_down)
 	primary_up.connect(weapon.on_primary_up)
 	secondary_down.connect(weapon.on_secondary_down)
 	secondary_up.connect(weapon.on_secondary_up)
-	weapon.reparent(hand, false)
-	attacking = false
+	tertiary_down.connect(weapon.on_tertiary_down)
+	tertiary_up.connect(weapon.on_tertiary_up)
 
-func holster_weapon(index) -> void:
-	var weapon = worn_weapons[index]
-	# TODO: ideally animation should be stopped immediately here
-	weapon.on_primary_up()
-	weapon.on_secondary_up()
-	
+func disconnect_actions(weapon) -> void:
 	weapon.attack.disconnect(on_weapon_attack)
 	weapon.idle.disconnect(on_weapon_idle)
 	primary_down.disconnect(weapon.on_primary_down)
 	primary_up.disconnect(weapon.on_primary_up)
 	secondary_down.disconnect(weapon.on_secondary_down)
 	secondary_up.disconnect(weapon.on_secondary_up)
-	weapon.reparent(holsters[index], false)
-	attacking = false
+	tertiary_down.disconnect(weapon.on_tertiary_down)
+	tertiary_up.disconnect(weapon.on_tertiary_up)
 
 func get_closest_body(bodies: Array[Node2D]) -> Node2D:
 	if bodies.size() == 1:
