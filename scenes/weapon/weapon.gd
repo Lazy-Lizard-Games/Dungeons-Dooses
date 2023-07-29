@@ -1,8 +1,10 @@
 extends Node2D
 
+var title: String
 var sprite: Sprite2D
 var animator: AnimationPlayer
 var damage_data: DamageData
+var weapon_data: WeaponData
 var primary_ability: AbilityData
 var secondary_ability: AbilityData
 var tertiary_ability: AbilityData
@@ -20,13 +22,15 @@ func setup() -> void:
 	sprite = $Sprite
 	animator = $AnimationPlayer
 
-func load_data(weapon_data: WeaponData, creator: Character) -> void:
+func load_data(weapon: WeaponData, creator: Character) -> void:
+	title = weapon.name
 	character = creator
-	damage_data = weapon_data.get_damage_data()
-	sprite.texture = weapon_data.texture
-	primary_ability = weapon_data.primary_ability
-	secondary_ability = weapon_data.secondary_ability
-	tertiary_ability = weapon_data.tertiary_ability
+	weapon_data = weapon
+	damage_data = weapon.get_damage_data()
+	sprite.texture = weapon.texture
+	primary_ability = weapon.primary_ability
+	secondary_ability = weapon.secondary_ability
+	tertiary_ability = weapon.tertiary_ability
 	load_animations()
 
 func load_animations() -> void:

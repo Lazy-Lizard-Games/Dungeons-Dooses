@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cnejr6en1l20m"]
+[gd_scene load_steps=28 format=3 uid="uid://cnejr6en1l20m"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7ovwk"]
 [ext_resource type="Texture2D" uid="uid://dgb0pqbj2g824" path="res://assets/tilesheets/ground_tilesheet.png" id="2_0dow1"]
@@ -12,10 +12,13 @@
 [ext_resource type="Resource" uid="uid://cbi7hxjywfd2m" path="res://assets/item/items/potion.tres" id="5_g047v"]
 [ext_resource type="PackedScene" uid="uid://dc0wi684sh6m6" path="res://scenes/inventory/inventory.tscn" id="6_dwmyn"]
 [ext_resource type="Script" path="res://assets/inventory/slot_data.gd" id="6_lhqcf"]
+[ext_resource type="PackedScene" uid="uid://qgphn0k0vn51" path="res://assets/interactable/ability_manager/campfire.tscn" id="7_0e7am"]
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="7_qibmg"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="8_6qolb"]
 [ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/hotbar.tscn" id="9_pue8j"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="9_xijki"]
+[ext_resource type="Script" path="res://scenes/ability_manager/ability_interface.gd" id="15_jrmry"]
+[ext_resource type="PackedScene" uid="uid://c8o76jwbiv8ko" path="res://scenes/ability_manager/ability_manager.tscn" id="17_oor72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d6kcd"]
 texture = ExtResource("2_0dow1")
@@ -602,6 +605,9 @@ inventory_data = SubResource("Resource_g062o")
 position = Vector2(268, 326)
 inventory_data = SubResource("Resource_xvfkq")
 
+[node name="campfire" parent="Interactables" instance=ExtResource("7_0e7am")]
+position = Vector2(231, 248)
+
 [node name="Pickups" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("2_xjm37")]
@@ -626,12 +632,14 @@ texture = SubResource("PlaceholderTexture2D_8e0dw")
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="InventoryInterface" type="Control" parent="UI"]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("5_1xcbx")
 
 [node name="Inventories" type="HBoxContainer" parent="UI/InventoryInterface"]
@@ -689,7 +697,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="AbilityInterface" type="Control" parent="UI"]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -698,6 +705,17 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+script = ExtResource("15_jrmry")
+
+[node name="AbilityManager" parent="UI/AbilityInterface" instance=ExtResource("17_oor72")]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HUD" type="Control" parent="UI"]
 layout_mode = 3
@@ -709,10 +727,12 @@ offset_right = 80.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 2
 script = ExtResource("9_xijki")
 
 [node name="Hotbar" parent="UI/HUD" instance=ExtResource("9_pue8j")]
 layout_mode = 1
+mouse_filter = 2
 
 [connection signal="drop_slot_data" from="UI/InventoryInterface" to="." method="_on_inventory_interface_drop_slot_data"]
 [connection signal="gui_input" from="UI/InventoryInterface" to="UI/InventoryInterface" method="_on_gui_input"]

@@ -28,6 +28,7 @@ signal secondary_up
 signal tertiary_down
 signal tertiary_up
 
+var title = "Player"
 var worn_armours: Array[ArmourData] = []
 var worn_weapons: Array[Node2D] = [null, null]
 var holsters: Array[Node2D]

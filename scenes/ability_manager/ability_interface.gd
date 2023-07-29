@@ -1,11 +1,8 @@
-extends Node
+extends Control
 
+@onready var ability_manager: Control = $AbilityManager
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func toggle_ability_manager(player: Character = null) -> void:
+	visible = not visible
+	if visible:
+		ability_manager.set_manager_data(player)
