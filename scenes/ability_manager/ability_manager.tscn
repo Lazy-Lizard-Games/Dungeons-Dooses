@@ -65,3 +65,7 @@ layout_mode = 2
 custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 columns = 6
+
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/PlayerOption" to="." method="_on_option_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponAOption" to="." method="_on_option_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponBOption" to="." method="_on_option_clicked"]

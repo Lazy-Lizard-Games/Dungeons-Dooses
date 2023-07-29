@@ -18,4 +18,3 @@ name = "Double Slash"
 animation = ExtResource("1_ynwe4")
 damage_stats = SubResource("Resource_r1hdy")
 cooldown = 0.0
-pop = 1

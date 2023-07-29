@@ -9,8 +9,12 @@ signal slot_unfocused(index: int)
 var ability_data: AbilityData = null
 
 func set_ability_data(ability: AbilityData) -> void:
-	ability_data = ability
-	ability_icon.texture = ability.texture
+	if ability:
+		ability_data = ability
+		ability_icon.texture = ability.icon
+	else:
+		ability_data = null
+		ability_icon.texture = null
 
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \

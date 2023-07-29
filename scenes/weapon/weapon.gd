@@ -34,6 +34,8 @@ func load_data(weapon: WeaponData, creator: Character) -> void:
 	load_animations()
 
 func load_animations() -> void:
+	if animator.has_animation_library("ability"):
+		animator.remove_animation_library("ability")
 	var anim_library = AnimationLibrary.new()
 	if primary_ability:
 		anim_library.add_animation("primary", primary_ability.animation)
@@ -67,6 +69,19 @@ func tertiary() -> void:
 	if tertiary_ability:
 		current_ability = 2
 		animator.play("ability/tertiary")
+
+func set_ability(ability: AbilityData, index: int) -> void:
+	match index:
+		0:
+			weapon_data.primary_ability = ability
+		1:
+			weapon_data.secondary_ability = ability
+		2:
+			weapon_data.tertiary_ability = ability
+	load_data(weapon_data, character)
+
+func get_abilities() -> Array[AbilityData]:
+	return [primary_ability, secondary_ability, tertiary_ability]
 
 func spawn_projectile() -> void:
 	var projectile: Projectile = get_ability().create_projectile()

@@ -1,6 +1,26 @@
 extends PanelContainer
 
+signal slot_clicked(index: int)
+
 @onready var option_name: Label = $MarginContainer/OptionName
 
-func set_title(title: String) -> void:
-	option_name.text = title
+var option = null
+
+func set_option(object) -> void:
+	option = object
+	visible = false
+	if option:
+		visible = true
+		option_name.text = option.name
+
+func get_abilities() -> Array[AbilityData]:
+	if option:
+		return option.get_abilities()
+	else:
+		return [null, null, null]
+
+func _on_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton \
+			and (event.button_index == MOUSE_BUTTON_LEFT) \
+			and event.is_pressed():
+		slot_clicked.emit(get_index())

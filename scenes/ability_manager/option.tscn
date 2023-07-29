@@ -23,3 +23,5 @@ theme_override_constants/margin_bottom = 2
 [node name="OptionName" type="Label" parent="MarginContainer"]
 layout_mode = 2
 text = "Option"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

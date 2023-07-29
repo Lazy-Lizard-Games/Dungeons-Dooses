@@ -18,4 +18,3 @@ name = "Big Slash"
 animation = ExtResource("1_oegs8")
 damage_stats = SubResource("Resource_4lbcb")
 cooldown = 0.0
-pop = 1
