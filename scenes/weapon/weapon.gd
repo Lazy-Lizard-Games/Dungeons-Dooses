@@ -88,6 +88,13 @@ func get_ability() -> AbilityData:
 			print("Not Attacking")
 	return ability
 
+func end_actions() -> void:
+	primary_fire = false
+	secondary_fire = false
+	tertiary_fire = false
+	animator.stop()
+	emit_idle()
+
 func emit_attacking() -> void:
 	attack.emit()
 
@@ -106,3 +113,9 @@ func on_secondary_down() -> void:
 
 func on_secondary_up() -> void:
 	secondary_fire = false
+
+func on_tertiary_down() -> void:
+	tertiary_fire = true
+
+func on_tertiary_up() -> void:
+	tertiary_fire = false
