@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://4lgpmpvfenn2"]
+
+[ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_dhrkn"]
+
+[resource]
+script = ExtResource("1_dhrkn")
+weapon_type = 0
+name = ""
+cooldown = 0.0
+pop = 1
