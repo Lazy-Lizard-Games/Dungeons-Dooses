@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://qgphn0k0vn51"]
+
+[ext_resource type="Script" path="res://assets/interactable/ability_manager/campfire.gd" id="1_pdoie"]
+[ext_resource type="Texture2D" uid="uid://d22vih2q4mv7w" path="res://assets/interactable/ability_manager/campfire.png" id="2_ln4ng"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nltsl"]
+
+[node name="campfire" type="StaticBody2D" groups=["ability_manager", "interactable"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_pdoie")
+action_name = "Manage Abilities"
+interact_name = "Campfire"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ln4ng")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nltsl")

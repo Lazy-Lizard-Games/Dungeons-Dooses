@@ -1,8 +1,10 @@
 extends Node2D
 
+var title: String
 var sprite: Sprite2D
 var animator: AnimationPlayer
 var damage_data: DamageData
+var weapon_data: WeaponData
 var primary_ability: AbilityData
 var secondary_ability: AbilityData
 var tertiary_ability: AbilityData
@@ -20,16 +22,20 @@ func setup() -> void:
 	sprite = $Sprite
 	animator = $AnimationPlayer
 
-func load_data(weapon_data: WeaponData, creator: Character) -> void:
+func load_data(weapon: WeaponData, creator: Character) -> void:
+	title = weapon.name
 	character = creator
-	damage_data = weapon_data.get_damage_data()
-	sprite.texture = weapon_data.texture
-	primary_ability = weapon_data.primary_ability
-	secondary_ability = weapon_data.secondary_ability
-	tertiary_ability = weapon_data.tertiary_ability
+	weapon_data = weapon
+	damage_data = weapon.get_damage_data()
+	sprite.texture = weapon.texture
+	primary_ability = weapon.primary_ability
+	secondary_ability = weapon.secondary_ability
+	tertiary_ability = weapon.tertiary_ability
 	load_animations()
 
 func load_animations() -> void:
+	if animator.has_animation_library("ability"):
+		animator.remove_animation_library("ability")
 	var anim_library = AnimationLibrary.new()
 	if primary_ability:
 		anim_library.add_animation("primary", primary_ability.animation)
@@ -63,6 +69,19 @@ func tertiary() -> void:
 	if tertiary_ability:
 		current_ability = 2
 		animator.play("ability/tertiary")
+
+func set_ability(ability: AbilityData, index: int) -> void:
+	match index:
+		0:
+			weapon_data.primary_ability = ability
+		1:
+			weapon_data.secondary_ability = ability
+		2:
+			weapon_data.tertiary_ability = ability
+	load_data(weapon_data, character)
+
+func get_abilities() -> Array[AbilityData]:
+	return [primary_ability, secondary_ability, tertiary_ability]
 
 func spawn_projectile() -> void:
 	var projectile: Projectile = get_ability().create_projectile()

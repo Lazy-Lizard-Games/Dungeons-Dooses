@@ -18,4 +18,3 @@ name = "Round Slash"
 animation = ExtResource("1_6b5j0")
 damage_stats = SubResource("Resource_gb1h8")
 cooldown = 0.0
-pop = 1
