@@ -66,6 +66,14 @@ custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
 columns = 6
 
+[node name="GrabbedSlot" parent="." instance=ExtResource("2_0g1bc")]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/PlayerOption" to="." method="_on_option_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponAOption" to="." method="_on_option_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponBOption" to="." method="_on_option_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityPrimary" to="." method="_on_ability_slot_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilitySecondary" to="." method="_on_ability_slot_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityTertiary" to="." method="_on_ability_slot_clicked"]

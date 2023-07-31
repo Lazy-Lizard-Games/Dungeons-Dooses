@@ -22,6 +22,13 @@ func get_abilities() -> Array[AbilityData]:
 func get_type() -> Globals.WEAPON_TYPES:
 	return option.get_type()
 
+func can_edit(index: int) -> bool:
+	if option:
+		return true
+	else:
+		return false
+
+
 func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 			and (event.button_index == MOUSE_BUTTON_LEFT) \

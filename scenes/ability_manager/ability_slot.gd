@@ -16,7 +16,10 @@ func set_ability_data(ability: AbilityData) -> void:
 		ability_data = null
 		ability_icon.texture = null
 
-func _on_gui_input(event: InputEvent) -> void:
+func get_ability() -> AbilityData:
+	return ability_data
+
+func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton \
 			and (event.button_index == MOUSE_BUTTON_LEFT) \
 			and event.is_pressed():
