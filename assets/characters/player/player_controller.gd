@@ -94,7 +94,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("tertiary"):
 		tertiary_down.emit()
 	
-	if Input.is_action_just_pressed("tertiary"):
+	if Input.is_action_just_released("tertiary"):
 		tertiary_up.emit()
 
 func _physics_process(delta) -> void:
