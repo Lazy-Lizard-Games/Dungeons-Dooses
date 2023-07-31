@@ -121,6 +121,7 @@ func emit_attacking() -> void:
 	attack.emit()
 
 func emit_idle() -> void:
+	animator.stop()
 	current_ability = -1
 	idle.emit()
 

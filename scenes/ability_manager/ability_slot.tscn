@@ -9,6 +9,7 @@ region = Rect2(352, 96, 32, 32)
 
 [node name="AbilitySlot" type="AspectRatioContainer"]
 custom_minimum_size = Vector2(100, 100)
+mouse_filter = 0
 script = ExtResource("1_oihqh")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
