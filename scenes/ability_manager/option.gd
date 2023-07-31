@@ -19,6 +19,9 @@ func get_abilities() -> Array[AbilityData]:
 	else:
 		return [null, null, null]
 
+func set_ability(index: int, grabbed_ability: AbilityData) -> void:
+	option.set_ability(index, grabbed_ability)
+
 func get_type() -> Globals.WEAPON_TYPES:
 	return option.get_type()
 

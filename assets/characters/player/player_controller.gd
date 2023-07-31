@@ -232,7 +232,7 @@ func get_closest_body(bodies: Array[Node2D]) -> Node2D:
 func get_abilities() -> Array[AbilityData]:
 	return abilities
 
-func set_ability(ability: AbilityData, index: int) -> void:
+func set_ability(index: int, ability: AbilityData) -> void:
 	abilities[index] = ability
 
 func get_type() -> Globals.WEAPON_TYPES:

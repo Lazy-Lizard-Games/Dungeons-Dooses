@@ -71,9 +71,17 @@ visible = false
 layout_mode = 0
 mouse_filter = 2
 
+[node name="MarginContainer" parent="GrabbedSlot" index="0"]
+mouse_filter = 2
+
+[node name="AbilityIcon" parent="GrabbedSlot/MarginContainer" index="0"]
+mouse_filter = 2
+
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/PlayerOption" to="." method="_on_option_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponAOption" to="." method="_on_option_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponBOption" to="." method="_on_option_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityPrimary" to="." method="_on_ability_slot_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilitySecondary" to="." method="_on_ability_slot_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityTertiary" to="." method="_on_ability_slot_clicked"]
+
+[editable path="GrabbedSlot"]

@@ -59,7 +59,6 @@ func update_equipped_abilities() -> void:
 		slot.slot_unfocused.connect(on_slot_unfocused)
 
 func on_slot_clicked(index: int) -> void:
-	print("Slot #%s clicked!" % index)
 	grabbed_ability = ability_list.get_child(index).get_ability()
 	update_grabbed_slot()
 
@@ -81,5 +80,7 @@ func _on_option_clicked(index: int) -> void:
 	update_equipped_abilities()
 
 func _on_ability_slot_clicked(index) -> void:
-	if options[selected_index].can_edit(index):
-		print("Can edit!")
+	if options[selected_index].can_edit(index) and grabbed_ability:
+		print("Setting #%s with %" % [index, grabbed_ability])
+		options[selected_index].set_ability(index, grabbed_ability)
+		update_equipped_abilities()
