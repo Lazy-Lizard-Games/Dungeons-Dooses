@@ -70,7 +70,7 @@ func tertiary() -> void:
 		current_ability = 2
 		animator.play("ability/tertiary")
 
-func set_ability(ability: AbilityData, index: int) -> void:
+func set_ability(index: int, ability: AbilityData) -> void:
 	match index:
 		0:
 			weapon_data.primary_ability = ability
