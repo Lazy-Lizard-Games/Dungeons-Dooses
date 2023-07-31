@@ -10,6 +10,7 @@ extends Control
 
 @onready var ability_slot = preload("res://scenes/ability_manager/ability_slot.tscn")
 
+@onready var options = [player_option, weapon_a_option, weapon_b_option]
 var selected_index = 0
 
 func set_manager_data(player: Character) -> void:
@@ -24,18 +25,10 @@ func clear_data() -> void:
 	weapon_b_option.visible = false
 
 func get_equipped_abilities() -> Array[AbilityData]:
-	match selected_index:
-		0:
-			return player_option.get_abilities()
-		1:
-			return weapon_a_option.get_abilities()
-		2:
-			return weapon_b_option.get_abilities()
-		_:
-			return [null, null, null]
+	return options[selected_index].get_abilities()
 
-func get_ability_list() -> Array[AbilityData]:
-	return []
+func get_ability_list() -> Array:
+	return Globals.get_abilities(options[selected_index].get_type())
 
 func set_equipped_abilities(abilities: Array[AbilityData]) -> void:
 	ability_primary.set_ability_data(abilities[0])

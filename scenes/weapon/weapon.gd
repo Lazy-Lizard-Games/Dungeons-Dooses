@@ -83,6 +83,9 @@ func set_ability(ability: AbilityData, index: int) -> void:
 func get_abilities() -> Array[AbilityData]:
 	return [primary_ability, secondary_ability, tertiary_ability]
 
+func get_type() -> Globals.WEAPON_TYPES:
+	return weapon_data.weapon_type
+
 func spawn_projectile() -> void:
 	var projectile: Projectile = get_ability().create_projectile()
 	if projectile:
