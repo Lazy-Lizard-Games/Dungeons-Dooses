@@ -18,4 +18,3 @@ name = "Slam"
 animation = ExtResource("1_8av3b")
 damage_stats = SubResource("Resource_pfrv8")
 cooldown = 0.0
-pop = 1

@@ -40,6 +40,7 @@ var attacking = false
 var abilities: Array[AbilityData] = [null, null, null]
 
 func init_setup() -> void:
+	Globals.add_ability(preload("res://assets/abilities/spear/triple_thrust/triple_thrust.tres"))
 	holsters = [holster_a, holster_b]
 	equipment_data.inventory_updated.connect(on_equipment_updated)
 
@@ -233,6 +234,9 @@ func get_abilities() -> Array[AbilityData]:
 
 func set_ability(ability: AbilityData, index: int) -> void:
 	abilities[index] = ability
+
+func get_type() -> Globals.WEAPON_TYPES:
+	return Globals.WEAPON_TYPES.CHARACTER
 
 func on_weapon_attack() -> void:
 	attacking = true
