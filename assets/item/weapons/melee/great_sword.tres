@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=10 format=3 uid="uid://opckhhwuxfg8"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=11 format=3 uid="uid://opckhhwuxfg8"]
 
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_jlr6b"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_ptgbj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://bu3mlme7ypbko" path="res://assets/abilities/great_sword/big_slash/big_slash.tres" id="3_uaigd"]
 [ext_resource type="Resource" uid="uid://chbc6lbohpu5i" path="res://assets/abilities/great_sword/round_slash/round_slash.tres" id="5_pfi6c"]
 [ext_resource type="Texture2D" uid="uid://ds1k6hjsaecyq" path="res://assets/item/weapons/weapon_sheet.png" id="5_ujjnl"]
+[ext_resource type="Resource" uid="uid://tycay1nnrygk" path="res://assets/abilities/great_sword/thrust_slash/thrust_slash.tres" id="6_ck0nx"]
 
 [sub_resource type="Resource" id="Resource_78oby"]
 script = ExtResource("1_jlr6b")
@@ -30,6 +31,7 @@ weapon_type = 5
 damage_data = SubResource("Resource_im6dk")
 primary_ability = ExtResource("3_uaigd")
 secondary_ability = ExtResource("5_pfi6c")
+tertiary_ability = ExtResource("6_ck0nx")
 name = "Great Sword"
 description = ""
 stackable = false
