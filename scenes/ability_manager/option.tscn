@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6d0eh65qu3k1"]
+
+[ext_resource type="Script" path="res://scenes/ability_manager/option.gd" id="1_r540s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_084we"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.498039)
+
+[node name="Option" type="PanelContainer"]
+custom_minimum_size = Vector2(150, 0)
+offset_right = 150.0
+offset_bottom = 26.0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_084we")
+script = ExtResource("1_r540s")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="OptionName" type="Label" parent="MarginContainer"]
+layout_mode = 2
+text = "Option"
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

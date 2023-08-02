@@ -7,7 +7,7 @@ extends Character
 ## Player's reach for interaction
 @export var reach: int = 100
 ## Abilities known by the player
-@export var known_abilities: Array[AbilityData]
+@export var known_abilities: Dictionary
 
 @onready var interact_area: Area2D = $InteractArea
 @onready var interactions: VBoxContainer = $UI/Interactions
@@ -28,6 +28,7 @@ signal secondary_up
 signal tertiary_down
 signal tertiary_up
 
+var title = "Player"
 var worn_armours: Array[ArmourData] = []
 var worn_weapons: Array[Node2D] = [null, null]
 var holsters: Array[Node2D]
@@ -36,8 +37,10 @@ var old_index = 0
 var holstered = false
 var speed = get_stat("speed") * get_stat("speed_mult")
 var attacking = false
+var abilities: Array[AbilityData] = [null, null, null]
 
 func init_setup() -> void:
+	Globals.add_ability(preload("res://assets/abilities/spear/triple_thrust/triple_thrust.tres"))
 	holsters = [holster_a, holster_b]
 	equipment_data.inventory_updated.connect(on_equipment_updated)
 
@@ -91,7 +94,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("tertiary"):
 		tertiary_down.emit()
 	
-	if Input.is_action_just_pressed("tertiary"):
+	if Input.is_action_just_released("tertiary"):
 		tertiary_up.emit()
 
 func _physics_process(delta) -> void:
@@ -225,6 +228,15 @@ func get_closest_body(bodies: Array[Node2D]) -> Node2D:
 		if position.distance_to(body.position) < position.distance_to(closest.position):
 			closest = body
 	return closest
+
+func get_abilities() -> Array[AbilityData]:
+	return abilities
+
+func set_ability(index: int, ability: AbilityData) -> void:
+	abilities[index] = ability
+
+func get_type() -> Globals.WEAPON_TYPES:
+	return Globals.WEAPON_TYPES.CHARACTER
 
 func on_weapon_attack() -> void:
 	attacking = true

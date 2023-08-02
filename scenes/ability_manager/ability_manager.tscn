@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8o76jwbiv8ko"]
+
+[ext_resource type="Script" path="res://scenes/ability_manager/ability_manager.gd" id="1_ktraq"]
+[ext_resource type="PackedScene" uid="uid://bci42av15xo4x" path="res://scenes/ability_manager/ability_slot.tscn" id="2_0g1bc"]
+[ext_resource type="PackedScene" uid="uid://b6d0eh65qu3k1" path="res://scenes/ability_manager/option.tscn" id="2_flil0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiwy6"]
+bg_color = Color(0.12549, 0.12549, 0.12549, 0.498039)
+
+[node name="AbilityManager" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_ktraq")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ManagerBackground" type="PanelContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wiwy6")
+
+[node name="ManagerContainer" type="VBoxContainer" parent="CenterContainer/ManagerBackground"]
+layout_mode = 2
+
+[node name="EquippedContainer" type="HBoxContainer" parent="CenterContainer/ManagerBackground/ManagerContainer"]
+layout_mode = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="PlayerOption" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer" instance=ExtResource("2_flil0")]
+layout_mode = 2
+
+[node name="WeaponAOption" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer" instance=ExtResource("2_flil0")]
+layout_mode = 2
+
+[node name="WeaponBOption" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer" instance=ExtResource("2_flil0")]
+layout_mode = 2
+
+[node name="EquippedAbilities" type="GridContainer" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+columns = 3
+
+[node name="AbilityPrimary" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities" instance=ExtResource("2_0g1bc")]
+layout_mode = 2
+
+[node name="AbilitySecondary" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities" instance=ExtResource("2_0g1bc")]
+layout_mode = 2
+
+[node name="AbilityTertiary" parent="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities" instance=ExtResource("2_0g1bc")]
+layout_mode = 2
+
+[node name="AbilityList" type="GridContainer" parent="CenterContainer/ManagerBackground/ManagerContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+columns = 6
+
+[node name="GrabbedSlot" parent="." instance=ExtResource("2_0g1bc")]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+
+[node name="MarginContainer" parent="GrabbedSlot" index="0"]
+mouse_filter = 2
+
+[node name="AbilityIcon" parent="GrabbedSlot/MarginContainer" index="0"]
+mouse_filter = 2
+
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/PlayerOption" to="." method="_on_option_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponAOption" to="." method="_on_option_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponBOption" to="." method="_on_option_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityPrimary" to="." method="_on_ability_slot_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilitySecondary" to="." method="_on_ability_slot_clicked"]
+[connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityTertiary" to="." method="_on_ability_slot_clicked"]
+
+[editable path="GrabbedSlot"]

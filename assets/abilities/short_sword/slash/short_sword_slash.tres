@@ -18,4 +18,3 @@ name = "Short Sword"
 animation = ExtResource("1_3ea0s")
 damage_stats = SubResource("Resource_f56fd")
 cooldown = 0.0
-pop = 1
