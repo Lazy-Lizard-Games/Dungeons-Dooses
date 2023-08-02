@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://dd0r4lauergw"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=7 format=3 uid="uid://dd0r4lauergw"]
 
 [ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_5tpo6"]
 [ext_resource type="Animation" uid="uid://cyob78fyicpnq" path="res://assets/abilities/great_axe/large_slash/great_axe_large_slash.res" id="1_in3bk"]
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_tpoot"]
+[ext_resource type="Texture2D" uid="uid://btj8gnuppi5aw" path="res://assets/abilities/weapon_attack_icon_sheet.png" id="3_syyxw"]
 
 [sub_resource type="Resource" id="Resource_2q3yy"]
 script = ExtResource("1_tpoot")
@@ -11,10 +12,15 @@ crit_mult = 0.0
 damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
 effects = Array[Resource("res://assets/stats/effect.gd")]([])
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qd6p"]
+atlas = ExtResource("3_syyxw")
+region = Rect2(0, 96, 32, 32)
+
 [resource]
 script = ExtResource("1_5tpo6")
 weapon_type = 6
 name = "Large Slash"
+icon = SubResource("AtlasTexture_8qd6p")
 animation = ExtResource("1_in3bk")
 damage_stats = SubResource("Resource_2q3yy")
 cooldown = 0.0
