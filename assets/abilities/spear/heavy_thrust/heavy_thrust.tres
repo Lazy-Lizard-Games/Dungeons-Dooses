@@ -19,7 +19,8 @@ region = Rect2(320, 96, 32, 32)
 [resource]
 script = ExtResource("1_le8ve")
 weapon_type = 3
-name = "Heavy Thrust"
+ability_name = "Thrust"
+ability_description = "Stab your spear at you enemies!"
 icon = SubResource("AtlasTexture_sg3du")
 animation = ExtResource("1_nr5vi")
 damage_stats = SubResource("Resource_k4qvp")

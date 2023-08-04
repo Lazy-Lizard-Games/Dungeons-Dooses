@@ -19,7 +19,8 @@ region = Rect2(256, 0, 32, 32)
 [resource]
 script = ExtResource("1_5k2r7")
 weapon_type = 3
-name = "Spear"
+ability_name = "Triple Thrust"
+ability_description = "Rapidly thrust your spear forward, littering your foes with holes!"
 icon = SubResource("AtlasTexture_7kq0u")
 animation = ExtResource("1_t6ox8")
 damage_stats = SubResource("Resource_atl27")

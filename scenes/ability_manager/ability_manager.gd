@@ -8,6 +8,7 @@ extends Control
 @onready var ability_tertiary: AspectRatioContainer = $CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/EquippedAbilities/AbilityTertiary
 @onready var ability_list: GridContainer = $CenterContainer/ManagerBackground/ManagerContainer/AbilityList
 @onready var grabbed_slot: AspectRatioContainer = $GrabbedSlot
+@onready var ability_card: Control = $AbilityCard
 
 @onready var ability_slot = preload("res://scenes/ability_manager/ability_slot.tscn")
 
@@ -18,6 +19,9 @@ var grabbed_ability = null
 func _physics_process(delta: float) -> void:
 	if grabbed_slot.visible:
 		grabbed_slot.global_position = get_global_mouse_position()
+	
+	if ability_card.visible:
+		ability_card.global_position = get_global_mouse_position()
 
 func set_manager_data(player: Character) -> void:
 	clear_data()
@@ -63,10 +67,12 @@ func on_slot_clicked(index: int) -> void:
 	update_grabbed_slot()
 
 func on_slot_focused(index: int) -> void:
-	print(ability_list.get_child(index).get_ability().name)
+	ability_card.set_data(ability_list.get_child(index).get_ability())
+	ability_card.visible = true
 
 func on_slot_unfocused(index: int) -> void:
-	pass
+	ability_card.clear_data()
+	ability_card.visible = false
 
 func update_grabbed_slot() -> void:
 	grabbed_slot.hide()
@@ -81,6 +87,5 @@ func _on_option_clicked(index: int) -> void:
 
 func _on_ability_slot_clicked(index) -> void:
 	if options[selected_index].can_edit(index) and grabbed_ability:
-		print("Setting #%s with %" % [index, grabbed_ability])
 		options[selected_index].set_ability(index, grabbed_ability)
 		update_equipped_abilities()

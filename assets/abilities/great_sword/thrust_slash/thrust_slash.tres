@@ -18,4 +18,3 @@ name = "Thrust Slash"
 animation = ExtResource("1_hac67")
 damage_stats = SubResource("Resource_eav23")
 cooldown = 0.0
-pop = 1

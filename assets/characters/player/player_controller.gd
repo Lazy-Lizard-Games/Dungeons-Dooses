@@ -6,8 +6,6 @@ extends Character
 @export var equipment_data: InventoryData
 ## Player's reach for interaction
 @export var reach: int = 100
-## Abilities known by the player
-@export var known_abilities: Dictionary
 
 @onready var interact_area: Area2D = $InteractArea
 @onready var interactions: VBoxContainer = $UI/Interactions
@@ -38,6 +36,8 @@ var holstered = false
 var speed = get_stat("speed") * get_stat("speed_mult")
 var attacking = false
 var abilities: Array[AbilityData] = [null, null, null]
+
+var lerp_offset = 30
 
 func init_setup() -> void:
 	Globals.add_ability(preload("res://assets/abilities/spear/triple_thrust/triple_thrust.tres"))
@@ -121,7 +121,6 @@ func _physics_process(delta) -> void:
 		animator.play("idle")
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)
-
 	move_and_slide()
 
 func on_equipment_updated(equipment_data: InventoryData) -> void:

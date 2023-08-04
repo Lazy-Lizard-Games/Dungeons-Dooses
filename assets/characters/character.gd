@@ -11,6 +11,7 @@ var types = {
 }
 
 ## Base character stats
+@export var character_name: String
 @export_category("Character Properties")
 @export_group("Resources")
 @export_subgroup("Health")
@@ -180,3 +181,6 @@ func init_setup() -> void:
 
 func damage(damage_data: DamageData) -> void:
 	print("Hit for %s of type %s" % [damage_data.get_damage(), damage_data.get_type()])
+
+func get_item_name() -> String:
+	return character_name

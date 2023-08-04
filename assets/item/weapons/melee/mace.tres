@@ -26,7 +26,12 @@ region = Rect2(112, 80, 32, 32)
 script = ExtResource("1_yqh2n")
 weapon_type = 2
 damage_data = SubResource("Resource_fer5i")
+<<<<<<< Updated upstream
 name = "Mace"
+=======
+primary_ability = ExtResource("3_y7df1")
+item_name = "Mace"
+>>>>>>> Stashed changes
 description = ""
 stackable = false
 texture = SubResource("AtlasTexture_7e116")

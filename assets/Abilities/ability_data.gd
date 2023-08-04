@@ -2,7 +2,8 @@ extends Resource
 class_name AbilityData
 
 @export var weapon_type: Globals.WEAPON_TYPES
-@export var name: String
+@export var ability_name: String
+@export_multiline var ability_description: String
 @export var icon: Texture2D
 @export var animation: Animation
 @export var projectile: PackedScene
@@ -15,3 +16,9 @@ func create_projectile() -> Node2D:
 		p = projectile.instantiate()
 		p.mod_stats(damage_stats)
 	return p
+
+func get_ability_name() -> String:
+	return ability_name
+
+func get_description() -> String:
+	return ability_description

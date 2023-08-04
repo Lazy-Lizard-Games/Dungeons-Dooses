@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cnejr6en1l20m"]
+[gd_scene load_steps=26 format=3 uid="uid://cnejr6en1l20m"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_7ovwk"]
 [ext_resource type="TileSet" uid="uid://d2yfghjav54wt" path="res://assets/tilesheets/testing_map.tres" id="2_in2bx"]
@@ -17,8 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="8_6qolb"]
 [ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/hotbar.tscn" id="9_pue8j"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="9_xijki"]
-[ext_resource type="Resource" uid="uid://bos1peocwoy64" path="res://assets/abilities/spear/heavy_thrust/heavy_thrust.tres" id="11_sgoex"]
-[ext_resource type="Resource" uid="uid://bf5u745q2evpl" path="res://assets/abilities/spear/triple_thrust/triple_thrust.tres" id="12_xifk6"]
 [ext_resource type="Script" path="res://scenes/ability_manager/ability_interface.gd" id="15_jrmry"]
 [ext_resource type="PackedScene" uid="uid://c8o76jwbiv8ko" path="res://scenes/ability_manager/ability_manager.tscn" id="17_oor72"]
 
@@ -82,9 +80,7 @@ position = Vector2(231, 248)
 position = Vector2(131, 257)
 inventory_data = ExtResource("3_rgk5n")
 equipment_data = ExtResource("4_v5jmf")
-known_abilities = {
-"Spear": [ExtResource("11_sgoex"), ExtResource("12_xifk6")]
-}
+character_name = "Player"
 
 [node name="TestDummy" type="CharacterBody2D" parent="."]
 position = Vector2(270, 248)

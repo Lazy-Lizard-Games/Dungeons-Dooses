@@ -145,7 +145,7 @@ text = "AHH"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
-position_smoothing_enabled = true
+process_callback = 0
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {

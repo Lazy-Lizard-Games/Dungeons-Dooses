@@ -7,4 +7,3 @@ script = ExtResource("1_dhrkn")
 weapon_type = 0
 name = ""
 cooldown = 0.0
-pop = 1

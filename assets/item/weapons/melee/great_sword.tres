@@ -30,7 +30,12 @@ weapon_type = 5
 damage_data = SubResource("Resource_im6dk")
 primary_ability = ExtResource("3_uaigd")
 secondary_ability = ExtResource("5_pfi6c")
+<<<<<<< Updated upstream
 name = "Great Sword"
+=======
+tertiary_ability = ExtResource("6_ck0nx")
+item_name = "Great Sword"
+>>>>>>> Stashed changes
 description = ""
 stackable = false
 texture = SubResource("AtlasTexture_naydo")

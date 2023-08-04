@@ -11,7 +11,7 @@ func set_option(object) -> void:
 	visible = false
 	if option:
 		visible = true
-		option_name.text = option.name
+		option_name.text = option.get_item_name()
 
 func get_abilities() -> Array[AbilityData]:
 	if option:
