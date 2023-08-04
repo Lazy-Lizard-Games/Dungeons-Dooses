@@ -1,10 +1,15 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://cfugwm01i7gk"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://cfugwm01i7gk"]
 
 [ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_2giy7"]
+[ext_resource type="Texture2D" uid="uid://btj8gnuppi5aw" path="res://assets/abilities/weapon_attack_icon_sheet.png" id="1_mivmm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_033wi"]
+atlas = ExtResource("1_mivmm")
+region = Rect2(32, 64, 32, 32)
 
 [resource]
 script = ExtResource("1_2giy7")
 weapon_type = 0
 name = ""
+icon = SubResource("AtlasTexture_033wi")
 cooldown = 0.0
-pop = 1

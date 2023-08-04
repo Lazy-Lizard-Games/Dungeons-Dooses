@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponData" load_steps=8 format=3 uid="uid://bmrrdcxchnhxo"]
+[gd_resource type="Resource" script_class="WeaponData" load_steps=9 format=3 uid="uid://bmrrdcxchnhxo"]
 
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="1_f5w3l"]
 [ext_resource type="Script" path="res://assets/item/weapons/weapon_data.gd" id="1_yqh2n"]
 [ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="2_58ea0"]
+[ext_resource type="Resource" uid="uid://4lgpmpvfenn2" path="res://assets/abilities/mace/swing/swing.tres" id="3_y7df1"]
 [ext_resource type="Texture2D" uid="uid://ds1k6hjsaecyq" path="res://assets/item/weapons/weapon_sheet.png" id="4_vi11e"]
 
 [sub_resource type="Resource" id="Resource_5g6bc"]
@@ -26,12 +27,8 @@ region = Rect2(112, 80, 32, 32)
 script = ExtResource("1_yqh2n")
 weapon_type = 2
 damage_data = SubResource("Resource_fer5i")
-<<<<<<< Updated upstream
-name = "Mace"
-=======
 primary_ability = ExtResource("3_y7df1")
 item_name = "Mace"
->>>>>>> Stashed changes
 description = ""
 stackable = false
 texture = SubResource("AtlasTexture_7e116")

@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=5 format=3 uid="uid://6pcybha733rq"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=7 format=3 uid="uid://6pcybha733rq"]
 
 [ext_resource type="Animation" uid="uid://rvpg60ck21jx" path="res://assets/abilities/short_sword/slash/short_sword_slash.res" id="1_3ea0s"]
 [ext_resource type="Script" path="res://assets/abilities/ability_data.gd" id="1_qe1mk"]
 [ext_resource type="Script" path="res://assets/abilities/damage_stats.gd" id="2_xbss7"]
+[ext_resource type="Texture2D" uid="uid://btj8gnuppi5aw" path="res://assets/abilities/weapon_attack_icon_sheet.png" id="3_cgksy"]
 
 [sub_resource type="Resource" id="Resource_f56fd"]
 script = ExtResource("2_xbss7")
@@ -11,10 +12,15 @@ crit_mult = 0.0
 damage_modifiers = Array[Resource("res://assets/stats/damage_modifier.gd")]([])
 effects = Array[Resource("res://assets/stats/effect.gd")]([])
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueh74"]
+atlas = ExtResource("3_cgksy")
+region = Rect2(0, 0, 32, 32)
+
 [resource]
 script = ExtResource("1_qe1mk")
 weapon_type = 0
 name = "Short Sword"
+icon = SubResource("AtlasTexture_ueh74")
 animation = ExtResource("1_3ea0s")
 damage_stats = SubResource("Resource_f56fd")
 cooldown = 0.0
