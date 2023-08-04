@@ -4,7 +4,6 @@
 [ext_resource type="TileSet" uid="uid://d2yfghjav54wt" path="res://assets/tilesheets/testing_map.tres" id="2_in2bx"]
 [ext_resource type="PackedScene" uid="uid://cvu7bdrfa8e16" path="res://scenes/player.tscn" id="2_xjm37"]
 [ext_resource type="PackedScene" uid="uid://clt3wipmabvpb" path="res://assets/interactable/chest/chest.tscn" id="3_pigsg"]
-[ext_resource type="Resource" uid="uid://brvpyhf3ac6vk" path="res://assets/characters/player/player_inv.tres" id="3_rgk5n"]
 [ext_resource type="Resource" uid="uid://bcluclja3vcgi" path="res://assets/characters/player/player_equip.tres" id="4_v5jmf"]
 [ext_resource type="Script" path="res://assets/inventory/inventory_data.gd" id="4_wwgxy"]
 [ext_resource type="Script" path="res://scenes/inventory/inventory_interface.gd" id="5_1xcbx"]
@@ -16,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://documyiknvvde" path="res://scenes/inventory/player_equipment.tscn" id="7_qibmg"]
 [ext_resource type="PackedScene" uid="uid://cscgcd10ibwak" path="res://scenes/inventory/slot.tscn" id="8_6qolb"]
 [ext_resource type="PackedScene" uid="uid://bd4vahyf4bm52" path="res://scenes/hud/hotbar.tscn" id="9_pue8j"]
+[ext_resource type="Resource" uid="uid://dhcyjrwjxmgni" path="res://assets/characters/player/player_inv.tres" id="9_rfcv2"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="9_xijki"]
 [ext_resource type="Script" path="res://scenes/ability_manager/ability_interface.gd" id="15_jrmry"]
 [ext_resource type="PackedScene" uid="uid://c8o76jwbiv8ko" path="res://scenes/ability_manager/ability_manager.tscn" id="17_oor72"]
@@ -79,7 +79,7 @@ position = Vector2(231, 248)
 
 [node name="Player" parent="." instance=ExtResource("2_xjm37")]
 position = Vector2(131, 257)
-inventory_data = ExtResource("3_rgk5n")
+inventory_data = ExtResource("9_rfcv2")
 equipment_data = ExtResource("4_v5jmf")
 character_name = "Player"
 

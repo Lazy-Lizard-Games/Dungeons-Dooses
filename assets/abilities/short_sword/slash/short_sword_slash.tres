@@ -19,7 +19,8 @@ region = Rect2(0, 0, 32, 32)
 [resource]
 script = ExtResource("1_qe1mk")
 weapon_type = 0
-name = "Short Sword"
+ability_name = ""
+ability_description = ""
 icon = SubResource("AtlasTexture_ueh74")
 animation = ExtResource("1_3ea0s")
 damage_stats = SubResource("Resource_f56fd")

@@ -184,3 +184,7 @@ func damage(damage_data: DamageData) -> void:
 
 func get_item_name() -> String:
 	return character_name
+
+func apply_force(force: int, direction: Vector2) -> void:
+	velocity = Vector2.ZERO
+	velocity = direction * force

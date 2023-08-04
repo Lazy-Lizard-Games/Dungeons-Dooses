@@ -15,7 +15,7 @@ var primary_fire = false
 var secondary_fire = false
 var tertiary_fire = false
 
-signal attack
+signal attack(move_penalty: float)
 signal idle
 
 func setup() -> void:
@@ -121,7 +121,7 @@ func end_actions() -> void:
 	emit_idle()
 
 func emit_attacking() -> void:
-	attack.emit()
+	attack.emit(get_ability().get_move_penalty())
 
 func emit_idle() -> void:
 	animator.stop()

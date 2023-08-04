@@ -18,3 +18,6 @@ func setup() -> void:
 
 func get_item_name() -> String:
 	return item_name
+
+func get_description()-> String:
+	return description
