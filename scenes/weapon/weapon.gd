@@ -15,7 +15,7 @@ var primary_fire = false
 var secondary_fire = false
 var tertiary_fire = false
 
-signal attack
+signal attack(move_penalty: float)
 signal idle
 
 func setup() -> void:
@@ -23,7 +23,7 @@ func setup() -> void:
 	animator = $AnimationPlayer
 
 func load_data(weapon: WeaponData, creator: Character) -> void:
-	title = weapon.name
+	title = weapon.get_item_name()
 	character = creator
 	weapon_data = weapon
 	damage_data = weapon.get_damage_data()
@@ -110,15 +110,18 @@ func get_ability() -> AbilityData:
 			print("Not Attacking")
 	return ability
 
+func get_item_name() -> String:
+	return weapon_data.get_item_name()
+
 func end_actions() -> void:
 	primary_fire = false
 	secondary_fire = false
 	tertiary_fire = false
-	animator.stop()
+	animator.play("RESET")
 	emit_idle()
 
 func emit_attacking() -> void:
-	attack.emit()
+	attack.emit(get_ability().get_move_penalty())
 
 func emit_idle() -> void:
 	animator.stop()

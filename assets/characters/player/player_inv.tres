@@ -1,38 +1,14 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=13 format=3 uid="uid://brvpyhf3ac6vk"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=5 format=3 uid="uid://dhcyjrwjxmgni"]
 
-[ext_resource type="Script" path="res://assets/inventory/inventory_data.gd" id="1_17rvg"]
+[ext_resource type="Script" path="res://assets/inventory/inventory_data.gd" id="1_ws64q"]
+[ext_resource type="Resource" uid="uid://cgmvmdkdk3dlx" path="res://assets/item/weapons/melee/spear.tres" id="2_nt7og"]
 [ext_resource type="Script" path="res://assets/inventory/slot_data.gd" id="3_xq536"]
-[ext_resource type="Resource" uid="uid://eny21h0q2nqj" path="res://assets/item/weapons/melee/sword.tres" id="4_d77vi"]
-[ext_resource type="Resource" uid="uid://opckhhwuxfg8" path="res://assets/item/weapons/melee/great_sword.tres" id="4_vdxif"]
-[ext_resource type="Resource" uid="uid://berr841k420f8" path="res://assets/item/weapons/melee/spear.tres" id="5_pcvws"]
-[ext_resource type="Resource" uid="uid://b6yjx71vv3cbu" path="res://assets/item/weapons/melee/great_axe.tres" id="6_2y7gn"]
-[ext_resource type="Resource" uid="uid://bmrrdcxchnhxo" path="res://assets/item/weapons/melee/mace.tres" id="7_cvgoy"]
 
-[sub_resource type="Resource" id="Resource_211sp"]
+[sub_resource type="Resource" id="Resource_vj21d"]
 script = ExtResource("3_xq536")
-item_data = ExtResource("4_vdxif")
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_n3yvs"]
-script = ExtResource("3_xq536")
-item_data = ExtResource("4_d77vi")
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_36x4i"]
-script = ExtResource("3_xq536")
-item_data = ExtResource("5_pcvws")
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_7ecl8"]
-script = ExtResource("3_xq536")
-item_data = ExtResource("6_2y7gn")
-quantity = 1
-
-[sub_resource type="Resource" id="Resource_uut3v"]
-script = ExtResource("3_xq536")
-item_data = ExtResource("7_cvgoy")
+item_data = ExtResource("2_nt7og")
 quantity = 1
 
 [resource]
-script = ExtResource("1_17rvg")
-slot_datas = Array[ExtResource("3_xq536")]([SubResource("Resource_211sp"), SubResource("Resource_n3yvs"), SubResource("Resource_36x4i"), SubResource("Resource_7ecl8"), SubResource("Resource_uut3v"), null, null, null, null, null, null, null, null, null, null, null, null, null])
+script = ExtResource("1_ws64q")
+slot_datas = Array[ExtResource("3_xq536")]([null, SubResource("Resource_vj21d"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])

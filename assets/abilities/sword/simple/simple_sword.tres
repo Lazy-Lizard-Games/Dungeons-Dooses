@@ -80,8 +80,8 @@ effects = Array[Resource("res://assets/stats/effect.gd")]([])
 [resource]
 script = ExtResource("8_0cke3")
 weapon_type = 0
-name = "Simple"
+ability_name = ""
+ability_description = ""
 animation = SubResource("Animation_5aeih")
 damage_stats = SubResource("Resource_l4774")
 cooldown = 0.0
-pop = 1

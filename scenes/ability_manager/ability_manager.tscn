@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8o76jwbiv8ko"]
+[gd_scene load_steps=6 format=3 uid="uid://c8o76jwbiv8ko"]
 
 [ext_resource type="Script" path="res://scenes/ability_manager/ability_manager.gd" id="1_ktraq"]
 [ext_resource type="PackedScene" uid="uid://bci42av15xo4x" path="res://scenes/ability_manager/ability_slot.tscn" id="2_0g1bc"]
 [ext_resource type="PackedScene" uid="uid://b6d0eh65qu3k1" path="res://scenes/ability_manager/option.tscn" id="2_flil0"]
+[ext_resource type="PackedScene" uid="uid://c2bfdq3cel8du" path="res://scenes/ability_manager/ability_card.tscn" id="4_rsrar"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiwy6"]
 bg_color = Color(0.12549, 0.12549, 0.12549, 0.498039)
@@ -76,6 +77,9 @@ mouse_filter = 2
 
 [node name="AbilityIcon" parent="GrabbedSlot/MarginContainer" index="0"]
 mouse_filter = 2
+
+[node name="AbilityCard" parent="." instance=ExtResource("4_rsrar")]
+visible = false
 
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/PlayerOption" to="." method="_on_option_clicked"]
 [connection signal="slot_clicked" from="CenterContainer/ManagerBackground/ManagerContainer/EquippedContainer/OptionsContainer/WeaponAOption" to="." method="_on_option_clicked"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cvu7bdrfa8e16"]
+[gd_scene load_steps=15 format=3 uid="uid://cvu7bdrfa8e16"]
 
 [ext_resource type="Script" path="res://assets/characters/player/player_controller.gd" id="1_cjbgx"]
 [ext_resource type="Texture2D" uid="uid://d1yyafybnoiet" path="res://assets/characters/humans/human1/human1_animation5.png" id="2_glu7w"]
@@ -45,18 +45,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(3, -1), Vector2(3, -2), Vector2(3, -1.5)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/Back:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_8a8m6"]
 resource_name = "walk"
@@ -87,37 +75,9 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(3, -1), Vector2(3, -2), Vector2(3, -1), Vector2(3, -2)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/Back:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector2(0, 0), Vector2(0, -0.5), Vector2(0, 0), Vector2(0, -0.5)]
-}
-
-[sub_resource type="Animation" id="Animation_o0x3n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Back:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uk3ic"]
 _data = {
-"RESET": SubResource("Animation_o0x3n"),
 "idle": SubResource("Animation_obri6"),
 "walk": SubResource("Animation_8a8m6")
 }
@@ -131,7 +91,6 @@ script = ExtResource("1_cjbgx")
 [node name="Sprites" type="Node2D" parent="."]
 
 [node name="Back" type="Node2D" parent="Sprites"]
-position = Vector2(0, -1)
 
 [node name="HolsterA" type="Node2D" parent="Sprites/Back"]
 position = Vector2(-5, -25)
@@ -149,8 +108,27 @@ position = Vector2(3, -1)
 texture = ExtResource("2_glu7w")
 offset = Vector2(1.5, -10)
 
-[node name="Interactions" type="Node2D" parent="."]
+[node name="Interactions" type="CanvasLayer" parent="."]
 script = ExtResource("3_4pr0l")
+
+[node name="InteractLabel" type="VBoxContainer" parent="Interactions"]
+offset_right = 40.0
+offset_bottom = 52.0
+theme_override_constants/separation = 0
+
+[node name="ActionName" type="Label" parent="Interactions/InteractLabel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "AHH"
+
+[node name="InteractName" type="Label" parent="Interactions/InteractLabel"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "AHH"
 
 [node name="InteractArea" type="Area2D" parent="Interactions"]
 visible = false
@@ -160,35 +138,6 @@ input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/InteractArea"]
 shape = SubResource("CircleShape2D_dbmv1")
-
-[node name="Canvas" type="CanvasLayer" parent="Interactions"]
-
-[node name="Interactable" type="CenterContainer" parent="Interactions/Canvas"]
-visible = false
-size_flags_horizontal = 0
-size_flags_vertical = 0
-use_top_left = true
-
-[node name="HBox" type="VBoxContainer" parent="Interactions/Canvas/Interactable"]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="ActionName" type="Label" parent="Interactions/Canvas/Interactable/HBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-text = "AHH"
-
-[node name="InteractName" type="Label" parent="Interactions/Canvas/Interactable/HBox"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 4
-text = "AHH"
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0, 0.5)

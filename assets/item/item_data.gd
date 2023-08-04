@@ -1,7 +1,7 @@
 extends Resource
 class_name ItemData
 
-@export var name: String = ""
+@export var item_name: String = ""
 @export_multiline var description: String = ""
 @export var stackable: bool = false
 @export var texture: AtlasTexture
@@ -15,3 +15,9 @@ func _init() -> void:
 func setup() -> void:
 	item_type = Globals.ITEM_TYPES.ITEM
 	item_card = preload("res://scenes/inventory/info_cards/item_card.tscn")
+
+func get_item_name() -> String:
+	return item_name
+
+func get_description()-> String:
+	return description
