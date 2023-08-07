@@ -1,4 +1,4 @@
-[gd_scene load_steps=111 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=113 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/characters/player/player.gd" id="1_n6v21"]
 [ext_resource type="Texture2D" uid="uid://dysx6j2v2bqap" path="res://assets/characters/player/player.png" id="2_7nd8y"]
@@ -6,10 +6,11 @@
 [ext_resource type="PackedScene" uid="uid://88bculsfiyuv" path="res://components/stats/stats_component.tscn" id="4_xg1r5"]
 [ext_resource type="PackedScene" uid="uid://bhqj15dn3fxry" path="res://components/velocity/velocity_component.tscn" id="5_7r1cp"]
 [ext_resource type="Script" path="res://assets/characters/player/hud.gd" id="6_innw2"]
+[ext_resource type="PackedScene" uid="uid://ckwedti3q6wd3" path="res://components/hitbox/hitbox_component.tscn" id="6_quhf5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yaysh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr4l7"]
 atlas = ExtResource("2_7nd8y")
-region = Rect2(8, 448, 32, 32)
+region = Rect2(8, 256, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -180,6 +181,10 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yaysh"]
+atlas = ExtResource("2_7nd8y")
+region = Rect2(8, 448, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oa707"]
 atlas = ExtResource("2_7nd8y")
@@ -635,10 +640,6 @@ tracks/1/keys = {
 "values": [false]
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rr4l7"]
-atlas = ExtResource("2_7nd8y")
-region = Rect2(8, 256, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_8vjnc"]
 atlas = ExtResource("2_7nd8y")
 region = Rect2(56, 256, 32, 32)
@@ -876,6 +877,9 @@ states/Walk/position = Vector2(700, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_q2ui7"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_iujkw"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_aelmo"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_7n748"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_j04bd")]
 graph_offset = Vector2(79, -86)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sthwu"]
+size = Vector2(10, 9)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component")]
 collision_layer = 2
 script = ExtResource("1_n6v21")
@@ -883,7 +887,7 @@ velocity_component = NodePath("VelocityComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_yaysh")
+texture = SubResource("AtlasTexture_rr4l7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -913,11 +917,21 @@ position_smoothing_enabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_4p6c1")]
 stats = NodePath("../StatsComponent")
+max_health = null
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_xg1r5")]
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("5_7r1cp")]
 stats = NodePath("../StatsComponent")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "stats_component") instance=ExtResource("6_quhf5")]
+health_component = NodePath("../HealthComponent")
+stats_component = NodePath("../StatsComponent")
+faction = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_sthwu")
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_component", "velocity_component")]
 script = ExtResource("6_innw2")
@@ -943,4 +957,7 @@ size_flags_horizontal = 0
 layout_mode = 2
 
 [node name="VelocityLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SpeedLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2

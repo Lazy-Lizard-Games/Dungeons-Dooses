@@ -58,13 +58,16 @@ func check_attack_state() -> bool:
 	await at.animation_finished
 	state_manager.change_state(normal)
 	at["parameters/conditions/is_attack"] = false
+	at["parameters/Idle/blend_position"] = attack_direction
+	at["parameters/Walk/blend_position"] = attack_direction
 	return true
 
 func check_dash_state() -> bool:
 	await at.animation_finished
 	state_manager.change_state(normal)
 	at["parameters/conditions/is_dash"] = false
-	direction = dash_direction
+	at["parameters/Idle/blend_position"] = dash_direction
+	at["parameters/Walk/blend_position"] = dash_direction
 	return true
 # ------------------------------------------------------------------------------------------------ #
 
