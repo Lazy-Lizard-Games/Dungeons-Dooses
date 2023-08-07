@@ -19,8 +19,10 @@ region = Rect2(0, 96, 32, 32)
 [resource]
 script = ExtResource("1_5tpo6")
 weapon_type = 6
-name = "Large Slash"
+ability_name = ""
+ability_description = ""
 icon = SubResource("AtlasTexture_8qd6p")
 animation = ExtResource("1_in3bk")
 damage_stats = SubResource("Resource_2q3yy")
+movement_penalty = 0.0
 cooldown = 0.0

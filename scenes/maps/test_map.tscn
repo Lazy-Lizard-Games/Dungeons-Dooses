@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dap4fb6jeula0"]
+
+[ext_resource type="Texture2D" uid="uid://d22vih2q4mv7w" path="res://assets/interactable/ability_manager/campfire.png" id="1_peh4c"]
+[ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://assets/characters/player/player.tscn" id="2_qc57j"]
+
+[node name="TestMap" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-48, 16)
+texture = ExtResource("1_peh4c")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(32, 42)
+texture = ExtResource("1_peh4c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(34, -21)
+texture = ExtResource("1_peh4c")
+
+[node name="Player" parent="." instance=ExtResource("2_qc57j")]
