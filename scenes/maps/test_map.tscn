@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=5 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="Texture2D" uid="uid://d22vih2q4mv7w" path="res://assets/interactable/ability_manager/campfire.png" id="1_peh4c"]
+[ext_resource type="PackedScene" uid="uid://ckwedti3q6wd3" path="res://components/hitbox/hitbox_component.tscn" id="2_8ixra"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://assets/characters/player/player.tscn" id="2_qc57j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aihpr"]
 
 [node name="TestMap" type="Node2D"]
 
@@ -16,5 +19,11 @@ texture = ExtResource("1_peh4c")
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(34, -21)
 texture = ExtResource("1_peh4c")
+
+[node name="HitboxComponent" parent="Sprite2D2" instance=ExtResource("2_8ixra")]
+detect_only = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/HitboxComponent"]
+shape = SubResource("RectangleShape2D_aihpr")
 
 [node name="Player" parent="." instance=ExtResource("2_qc57j")]

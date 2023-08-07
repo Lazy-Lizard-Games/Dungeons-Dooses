@@ -17,3 +17,5 @@ class_name StatsComponent
 # Handle damage dealt modifiers
 # - apply_damage_multipliers(damage) return damage
 
+func transform_damage(damage: float, damage_type: Globals.DAMAGE_TYPES) -> float:
+	return damage

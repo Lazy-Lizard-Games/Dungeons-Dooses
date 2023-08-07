@@ -2,6 +2,7 @@ extends Node
 
 @onready var weapon_scene = preload("res://scenes/weapon/weapon.tscn")
 
+enum FACTIONS {NONE, HUMAN, CREATURE, MONSTER}
 enum ITEM_TYPES {ITEM, ARMOUR, WEAPON, CONSUMABLE}
 enum ARMOUR_TYPES {HEAD, BODY, HANDS, FEET}
 enum WEAPON_TYPES {SWORD, AXE, MACE, SPEAR, DAGGER, GREAT_SWORD, GREAT_AXE, FIRE, FROST, SHOCK, CHARACTER}
