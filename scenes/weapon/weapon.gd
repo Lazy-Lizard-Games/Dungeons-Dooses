@@ -45,7 +45,7 @@ func load_animations() -> void:
 		anim_library.add_animation("tertiary", tertiary_ability.animation)
 	animator.add_animation_library("ability", anim_library)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if primary_fire and current_ability < 0:
 		primary()
 	
