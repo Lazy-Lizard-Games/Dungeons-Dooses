@@ -96,6 +96,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_released("tertiary"):
 		tertiary_up.emit()
 	
+	if Input.is_action_just_pressed("ui_left"):
+		apply_force(1000, Vector2.RIGHT)
+	
 # ---------------------------------------------------------------------------- #
 
 # Physics updates ------------------------------------------------------------ #
@@ -115,10 +118,8 @@ func update_position() -> void:
 	var speed = get_stat("speed") * get_stat("speed_mult")
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction:
-		
 		velocity = velocity.lerp(direction * speed * movement_scale, 1)
 	else:
-		
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.y = move_toward(velocity.y, 0, speed)
 	

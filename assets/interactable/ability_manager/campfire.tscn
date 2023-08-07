@@ -1,9 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://qgphn0k0vn51"]
+[gd_scene load_steps=6 format=3 uid="uid://qgphn0k0vn51"]
 
 [ext_resource type="Script" path="res://assets/interactable/ability_manager/campfire.gd" id="1_pdoie"]
 [ext_resource type="Texture2D" uid="uid://d22vih2q4mv7w" path="res://assets/interactable/ability_manager/campfire.png" id="2_ln4ng"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nltsl"]
+
+[sub_resource type="Curve" id="Curve_jmkgx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.753138, 0.505263), -1.58402, -1.58402, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_wuyps"]
+offsets = PackedFloat32Array(0, 0.490385, 1)
+colors = PackedColorArray(0.999231, 0, 0.0674178, 1, 0.840411, 0.58998, 0, 1, 1, 0.944009, 0.602051, 1)
 
 [node name="campfire" type="StaticBody2D" groups=["ability_manager", "interactable"]]
 collision_layer = 4
@@ -16,4 +24,18 @@ interact_name = "Campfire"
 texture = ExtResource("2_ln4ng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_nltsl")
+
+[node name="EmberEmitter" type="CPUParticles2D" parent="."]
+lifetime = 2.0
+emission_shape = 1
+emission_sphere_radius = 3.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+scale_amount_curve = SubResource("Curve_jmkgx")
+color_ramp = SubResource("Gradient_wuyps")

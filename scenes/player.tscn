@@ -16,6 +16,21 @@ radius = 25.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4n5u"]
 size = Vector2(9, 9)
 
+[sub_resource type="Animation" id="Animation_o0x3n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Back:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -1)]
+}
+
 [sub_resource type="Animation" id="Animation_obri6"]
 resource_name = "idle"
 length = 0.60002
@@ -98,21 +113,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector2(0, 0), Vector2(0, -0.5), Vector2(0, 0), Vector2(0, -0.5)]
-}
-
-[sub_resource type="Animation" id="Animation_o0x3n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Back:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uk3ic"]
