@@ -3,8 +3,12 @@
 [ext_resource type="Script" path="res://assets/characters/player/player.gd" id="1_n6v21"]
 [ext_resource type="Texture2D" uid="uid://dysx6j2v2bqap" path="res://assets/characters/player/player.png" id="2_7nd8y"]
 [ext_resource type="PackedScene" uid="uid://datk0irfypdeu" path="res://components/health/health_component.tscn" id="3_4p6c1"]
+[ext_resource type="AnimationNodeAnimation" uid="uid://eraowaylqasm" path="res://assets/characters/player/attacks/attack_left.tres" id="3_28a3y"]
+[ext_resource type="AnimationNodeAnimation" uid="uid://dgd7o2278x2di" path="res://assets/characters/player/attacks/attack_right.tres" id="4_wpl2d"]
 [ext_resource type="PackedScene" uid="uid://88bculsfiyuv" path="res://components/stats/stats_component.tscn" id="4_xg1r5"]
 [ext_resource type="PackedScene" uid="uid://bhqj15dn3fxry" path="res://components/velocity/velocity_component.tscn" id="5_7r1cp"]
+[ext_resource type="AnimationNodeAnimation" uid="uid://c4ekl21cgrri8" path="res://assets/characters/player/attacks/attack_up.tres" id="5_qihjl"]
+[ext_resource type="AnimationNodeAnimation" uid="uid://c3nlqhk716ex" path="res://assets/characters/player/attacks/attack_down.tres" id="6_eay5d"]
 [ext_resource type="Script" path="res://assets/characters/player/hud.gd" id="6_innw2"]
 [ext_resource type="PackedScene" uid="uid://ckwedti3q6wd3" path="res://components/hitbox/hitbox_component.tscn" id="6_quhf5"]
 
@@ -709,26 +713,14 @@ _data = {
 "walk_up": SubResource("Animation_4uuc1")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cehny"]
-animation = &"attack_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tu311"]
-animation = &"attack_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ffm26"]
-animation = &"attack_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jqgkh"]
-animation = &"attack_down"
-
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_65yxu"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_cehny")
+blend_point_0/node = ExtResource("3_28a3y")
 blend_point_0/pos = Vector2(-1.1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_tu311")
+blend_point_1/node = ExtResource("4_wpl2d")
 blend_point_1/pos = Vector2(1.1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_ffm26")
+blend_point_2/node = ExtResource("5_qihjl")
 blend_point_2/pos = Vector2(0, -1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_jqgkh")
+blend_point_3/node = ExtResource("6_eay5d")
 blend_point_3/pos = Vector2(0, 1)
 min_space = Vector2(-1.1, -1)
 max_space = Vector2(1.1, 1)
@@ -875,15 +867,20 @@ states/Start/position = Vector2(223, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_5wl5g")
 states/Walk/position = Vector2(700, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_q2ui7"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_iujkw"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_aelmo"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_7n748"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_j04bd")]
-graph_offset = Vector2(79, -86)
+graph_offset = Vector2(-27, -85)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sthwu"]
 size = Vector2(10, 9)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component")]
 collision_layer = 2
 script = ExtResource("1_n6v21")
 velocity_component = NodePath("VelocityComponent")
+hitbox_component = NodePath("HitboxComponent")
+attack_left = "res://assets/characters/player/attacks/attack_left.tres"
+attack_right = "res://assets/characters/player/attacks/attack_right_tres"
+attack_up = "res://assets/characters/player/attacks/attack_up_tres"
+attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)

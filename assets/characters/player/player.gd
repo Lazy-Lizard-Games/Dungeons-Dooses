@@ -1,6 +1,13 @@
 extends CharacterBody2D
 
 @export var velocity_component: VelocityComponent
+@export var hitbox_component: HitboxComponent
+
+@export_category("Animation Resource Paths")
+@export_file var attack_left
+@export_file var attack_right
+@export_file var attack_up
+@export_file var attack_down
 
 @onready var at: AnimationTree = $AnimationTree
 @onready var state_manager: StateManager = StateManager.new()
@@ -43,10 +50,17 @@ func normal() -> void:
 
 func attack() -> void:
 	at["parameters/Attack/blend_position"] = attack_direction
+	velocity_component.accelerate_in_direction(direction*0.1)
+	velocity_component.move(self)
 	check_dash()
 
 func dash() -> void:
-	velocity_component.accelerate_in_direction(dash_direction*1.2)
+	at["parameters/Dash/blend_position"] = dash_direction
+	if direction:
+		direction = dash_direction.rotated(dash_direction.angle_to(direction)*0.2)
+	else:
+		direction = dash_direction
+	velocity_component.accelerate_in_direction(direction*1.2)
 	velocity_component.move(self)
 # ------------------------------------------------------------------------------------------------ #
 
@@ -68,6 +82,7 @@ func check_dash_state() -> bool:
 	at["parameters/conditions/is_dash"] = false
 	at["parameters/Idle/blend_position"] = dash_direction
 	at["parameters/Walk/blend_position"] = dash_direction
+	hitbox_component.detect_only = false
 	return true
 # ------------------------------------------------------------------------------------------------ #
 
@@ -85,4 +100,5 @@ func check_dash() -> void:
 		dash_direction = direction if direction \
 		 		else transform.origin.direction_to(get_global_mouse_position())
 		state_manager.change_state(dash)
+		hitbox_component.detect_only = true
 # ------------------------------------------------------------------------------------------------ #

@@ -1,6 +1,5 @@
 extends Node
 
-
 func get_closest_body(this: Node2D ,bodies: Array[Node2D]) -> Node2D:
 	if bodies.size() == 1:
 		return bodies[0]
