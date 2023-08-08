@@ -917,7 +917,6 @@ position_smoothing_enabled = true
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_4p6c1")]
 stats = NodePath("../StatsComponent")
-max_health = null
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_xg1r5")]
 

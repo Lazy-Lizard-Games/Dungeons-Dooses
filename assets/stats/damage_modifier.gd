@@ -1,13 +1,11 @@
 extends Resource
 class_name DamageModifier
 
-## Type of damage
-@export var type: Globals.DAMAGE_TYPES
-## Percentage modifier
-@export var value: float = 0
-
-func get_type() -> Globals.DAMAGE_TYPES:
-	return type
-
-func get_value() -> float:
-	return value
+## Damage Type
+@export var type: Globals.DAMAGE_TYPES :
+	get:
+		return type
+## Damage multiplier, a value of 0.5 will decrease by 50% and 2.0 will increase by 100%
+@export var value: float = 1 :
+	get:
+		return value

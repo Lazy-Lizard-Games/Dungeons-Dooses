@@ -1,10 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=7 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="Texture2D" uid="uid://d22vih2q4mv7w" path="res://assets/interactable/ability_manager/campfire.png" id="1_peh4c"]
-[ext_resource type="PackedScene" uid="uid://ckwedti3q6wd3" path="res://components/hitbox/hitbox_component.tscn" id="2_8ixra"]
+[ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_argao"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://assets/characters/player/player.tscn" id="2_qc57j"]
+[ext_resource type="Script" path="res://assets/abilities/damage_data.gd" id="3_8hth5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aihpr"]
+[sub_resource type="Resource" id="Resource_38mf1"]
+script = ExtResource("3_8hth5")
+damage = 5.0
+type = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ewh6"]
 
 [node name="TestMap" type="Node2D"]
 
@@ -20,10 +26,10 @@ texture = ExtResource("1_peh4c")
 position = Vector2(34, -21)
 texture = ExtResource("1_peh4c")
 
-[node name="HitboxComponent" parent="Sprite2D2" instance=ExtResource("2_8ixra")]
-detect_only = true
+[node name="HurtboxComponent" parent="Sprite2D2" instance=ExtResource("2_argao")]
+damage = SubResource("Resource_38mf1")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/HitboxComponent"]
-shape = SubResource("RectangleShape2D_aihpr")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D2/HurtboxComponent"]
+shape = SubResource("RectangleShape2D_7ewh6")
 
 [node name="Player" parent="." instance=ExtResource("2_qc57j")]
