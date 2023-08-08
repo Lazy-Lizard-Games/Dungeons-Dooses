@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name HealthComponent
 
 signal health_changed(health_update)
@@ -34,9 +34,10 @@ var current_health: float :
 func _ready() -> void:
 	call_deferred("initialise_health")
 
-func damage(value: float) -> void:
-	current_health -= value
-	# create floating damage text
+func damage(damage: float) -> void:
+	current_health -= damage
+	var damage_float = FloatingTextManager.create_damage_float(global_position, damage)
+	add_child(damage_float)
 
 func heal(value: float) -> void:
 	damage(-value)
