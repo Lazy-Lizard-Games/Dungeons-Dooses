@@ -23,12 +23,16 @@
 [ext_resource type="Script" path="res://resources/weapon_skill.gd" id="11_hsx6r"]
 [ext_resource type="PackedScene" uid="uid://dixetaankuxor" path="res://components/projectile/projectile_component.tscn" id="11_vh8ew"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ehb1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_413fk"]
 atlas = ExtResource("2_7nd8y")
-region = Rect2(8, 16, 32, 32)
+region = Rect2(248, 16, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ehb1"]
+atlas = ExtResource("2_7nd8y")
+region = Rect2(8, 16, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4r34k"]
 atlas = ExtResource("2_7nd8y")
@@ -48,10 +52,6 @@ region = Rect2(152, 16, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lllp"]
 atlas = ExtResource("2_7nd8y")
 region = Rect2(200, 16, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_413fk"]
-atlas = ExtResource("2_7nd8y")
-region = Rect2(248, 16, 32, 32)
 
 [sub_resource type="Animation" id="Animation_orkbb"]
 resource_name = "idle_down"
@@ -610,6 +610,7 @@ size = Vector2(10, 9)
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "weapon_component")]
 collision_layer = 2
 script = ExtResource("1_n6v21")
+move_modifier = null
 velocity_component = NodePath("VelocityComponent")
 hitbox_component = NodePath("HitboxComponent")
 weapon_component = NodePath("WeaponComponent")
@@ -620,7 +621,7 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_8ehb1")
+texture = SubResource("AtlasTexture_413fk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
