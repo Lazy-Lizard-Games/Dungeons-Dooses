@@ -1,0 +1,4 @@
+[gd_resource type="AnimationNodeAnimation" format=3 uid="uid://c3nlqhk716ex"]
+
+[resource]
+animation = &"slash_down"
