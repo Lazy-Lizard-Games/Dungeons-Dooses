@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://scenes/entities/player/player.tscn" id="2_qc57j"]
 [ext_resource type="Script" path="res://components/hitbox/hitbox_component.gd" id="2_rpsqs"]
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_se5sb"]
-[ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="3_seqgs"]
+[ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="4_s45e4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3j64n"]
 size = Vector2(20, 20)
@@ -14,9 +14,9 @@ size = Vector2(20, 20)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_irtap"]
 size = Vector2(20, 20)
 
-[sub_resource type="Resource" id="Resource_o32sl"]
-script = ExtResource("3_seqgs")
-damage = 1.0
+[sub_resource type="Resource" id="Resource_to4d4"]
+script = ExtResource("4_s45e4")
+damage = 5.0
 type = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgk83"]
@@ -35,6 +35,7 @@ collision_layer = 4
 collision_mask = 4
 script = ExtResource("2_rpsqs")
 health_component = NodePath("../HealthComponent")
+faction = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/HitboxComponent"]
 shape = SubResource("RectangleShape2D_wrdqi")
@@ -44,7 +45,7 @@ position = Vector2(-49, 0)
 texture = SubResource("PlaceholderTexture2D_irtap")
 
 [node name="HurtboxComponent" parent="Spikes" instance=ExtResource("2_se5sb")]
-damage_data = SubResource("Resource_o32sl")
+damage_datas = Array[ExtResource("4_s45e4")]([SubResource("Resource_to4d4")])
 damage_rate = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/HurtboxComponent"]

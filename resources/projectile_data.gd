@@ -1,4 +1,4 @@
 extends Resource
-class_name Projectile
+class_name ProjectileData
 
 @export var projectile_scene: PackedScene

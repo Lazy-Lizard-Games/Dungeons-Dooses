@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var faction: Globals.FACTIONS
 @export var move_modifier: float = 1
 @export_range(0, 1) var dash_control: float = 0.05
 @export_group("Components")
@@ -26,6 +27,7 @@ func _ready() -> void:
 	state_manager.add_state(attack)
 	state_manager.add_state(dash)
 	state_manager.set_initial_state(normal)
+	hitbox_component.faction = faction
 # ------------------------------------------------------------------------------------------------ #
 
 # Update handling -------------------------------------------------------------------------------- #
@@ -83,13 +85,13 @@ func check_dash_state() -> bool:
 
 # Input Checks ----------------------------------------------------------------------------------- #
 func check_attack() -> void:
-	if Input.is_action_just_pressed("primary"):
+	if Input.is_action_pressed("primary"):
 		set_attack(0)
 	
-	if Input.is_action_just_pressed("secondary"):
+	if Input.is_action_pressed("secondary"):
 		set_attack(1)
 	
-	if Input.is_action_just_pressed("tertiary"):
+	if Input.is_action_pressed("tertiary"):
 		set_attack(2)
 
 func check_dash() -> void:
@@ -123,4 +125,4 @@ func set_normal(condition: String, direction: Vector2) -> void:
 
 # Animation Callables ---------------------------------------------------------------------------- #
 func spawn_projectile() -> void:
-	weapon_component.spawn_projectile(attack_direction)
+	weapon_component.spawn_projectile(attack_direction, faction)

@@ -1,10 +1,7 @@
-extends CharacterBody2D
+extends Projectile
 
-@export var velocity_component: VelocityComponent
-@export var hurtbox_component: Area2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var direction: Vector2
 var state_manager: StateManager
 
 func _ready() -> void:
@@ -17,12 +14,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	state_manager.update()
-
-func set_damage_data(damage_data: DamageData) -> void:
-	hurtbox_component.damage_data = damage_data
-
-func set_direction(dir: Vector2) -> void:
-	direction = dir
 
 func normal() -> void:
 	velocity_component.accelerate_in_direction(direction)
