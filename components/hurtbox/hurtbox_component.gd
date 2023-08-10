@@ -5,8 +5,8 @@ signal entity_hit(entity: Node2D)
 
 ## Faction that the hurtbox belongs
 @export var faction: Globals.FACTIONS = 0
-## Damage data of the hurtbox
-@export var damage_data: DamageData
+## Damage datas of the hurtbox
+@export var damage_datas: Array[DamageData]
 ## Number of damage instances per second per entity
 @export var damage_rate: float = 0
 

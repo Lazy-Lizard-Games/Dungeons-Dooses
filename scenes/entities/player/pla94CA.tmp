@@ -21,8 +21,9 @@
 [ext_resource type="AnimationNodeAnimation" uid="uid://dgd7o2278x2di" path="res://assets/entities/player/res/attack_right.tres" id="12_x4nxg"]
 [ext_resource type="AnimationNodeAnimation" uid="uid://c4ekl21cgrri8" path="res://assets/entities/player/res/attack_up.tres" id="13_e13ly"]
 [ext_resource type="AnimationNodeAnimation" uid="uid://c3nlqhk716ex" path="res://assets/entities/player/res/attack_down.tres" id="14_p01qx"]
-[ext_resource type="Script" path="res://resources/damage_instance.gd" id="19_c5ib4"]
+[ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="19_coqia"]
 [ext_resource type="PackedScene" uid="uid://d0ny7ql64g663" path="res://scenes/projectiles/fireball/fireball.tscn" id="21_382ld"]
+[ext_resource type="Script" path="res://resources/projectile_data.gd" id="22_s4ykl"]
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nonpg"]
@@ -594,31 +595,29 @@ states/Walk/position = Vector2(700, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_q2ui7"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_iujkw"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_aelmo"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_7n748"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_j04bd")]
 graph_offset = Vector2(-13, 5)
 
-[sub_resource type="Resource" id="Resource_sbqij"]
-script = ExtResource("19_c5ib4")
-damage_type = 0
-percent_of_base = 1.0
+[sub_resource type="Resource" id="Resource_pp1y5"]
+script = ExtResource("19_coqia")
+damage = 10.0
+type = 0
 
-[sub_resource type="Resource" id="Resource_jcudv"]
-script = ExtResource("19_c5ib4")
-damage_type = 1
-percent_of_base = 0.1
+[sub_resource type="Resource" id="Resource_anxdx"]
+script = ExtResource("11_hsx6r")
+move_modifier = 1.5
+damage_modifier = 1.0
+down_animation = ExtResource("2_qnpvv")
+left_animation = ExtResource("3_fynad")
+right_animation = ExtResource("4_a38sx")
+up_animation = ExtResource("5_4riq7")
 
-[sub_resource type="Resource" id="Resource_25g6w"]
-script = ExtResource("19_c5ib4")
-damage_type = 2
-percent_of_base = 1.5
-
-[sub_resource type="Resource" id="Resource_beann"]
-script = ExtResource("19_c5ib4")
-damage_type = 3
-percent_of_base = 0.5
+[sub_resource type="Resource" id="Resource_wvy2u"]
+script = ExtResource("22_s4ykl")
+projectile_scene = ExtResource("21_382ld")
 
 [sub_resource type="Resource" id="Resource_tl48r"]
 script = ExtResource("11_hsx6r")
 move_modifier = 0.5
-damage_instances = Array[ExtResource("19_c5ib4")]([SubResource("Resource_jcudv"), SubResource("Resource_25g6w"), SubResource("Resource_beann")])
-projectile_scene = ExtResource("21_382ld")
+damage_modifier = 1.0
+projectile = SubResource("Resource_wvy2u")
 down_animation = ExtResource("7_g7qsq")
 left_animation = ExtResource("8_r0hvr")
 right_animation = ExtResource("9_n351u")
@@ -628,9 +627,8 @@ up_animation = ExtResource("10_x1oud")
 size = Vector2(10, 9)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "weapon_component")]
-collision_layer = 4
+collision_layer = 2
 script = ExtResource("1_xpihs")
-faction = 1
 velocity_component = NodePath("VelocityComponent")
 hitbox_component = NodePath("HitboxComponent")
 weapon_component = NodePath("WeaponComponent")
@@ -678,9 +676,10 @@ stats = NodePath("../StatsComponent")
 stats = NodePath("../StatsComponent")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("projectile_component") instance=ExtResource("10_gr555")]
-damage_instances = Array[ExtResource("19_c5ib4")]([SubResource("Resource_sbqij")])
+move_modifier = null
+damage_data = SubResource("Resource_pp1y5")
 projectile_component = NodePath("../ProjectileComponent")
-weapon_skills = Array[ExtResource("11_hsx6r")]([SubResource("Resource_tl48r"), null, null])
+weapon_skills = Array[ExtResource("11_hsx6r")]([SubResource("Resource_anxdx"), null, SubResource("Resource_tl48r")])
 attack_up_res = ExtResource("13_e13ly")
 attack_down_res = ExtResource("14_p01qx")
 attack_left_res = ExtResource("11_xh1i2")
@@ -690,7 +689,6 @@ attack_right_res = ExtResource("12_x4nxg")
 stats_component = NodePath("../StatsComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "stats_component") instance=ExtResource("6_quhf5")]
-collision_mask = 0
 health_component = NodePath("../HealthComponent")
 stats_component = NodePath("../StatsComponent")
 faction = 1
