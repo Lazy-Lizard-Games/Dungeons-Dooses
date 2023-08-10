@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=115 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -17,17 +17,18 @@
 [ext_resource type="Animation" uid="uid://bsv5yrpk84mms" path="res://assets/entities/player/anim/slash/slash_up.res" id="10_x1oud"]
 [ext_resource type="Script" path="res://resources/weapon_skill.gd" id="11_hsx6r"]
 [ext_resource type="PackedScene" uid="uid://dixetaankuxor" path="res://components/projectile/projectile_component.tscn" id="11_vh8ew"]
-[ext_resource type="AnimationNodeAnimation" uid="uid://eraowaylqasm" path="res://assets/entities/player/res/attack_left.tres" id="11_xh1i2"]
-[ext_resource type="AnimationNodeAnimation" uid="uid://dgd7o2278x2di" path="res://assets/entities/player/res/attack_right.tres" id="12_x4nxg"]
-[ext_resource type="AnimationNodeAnimation" uid="uid://c4ekl21cgrri8" path="res://assets/entities/player/res/attack_up.tres" id="13_e13ly"]
-[ext_resource type="AnimationNodeAnimation" uid="uid://c3nlqhk716ex" path="res://assets/entities/player/res/attack_down.tres" id="14_p01qx"]
+[ext_resource type="AnimationNodeAnimation" path="res://assets/entities/player/res/attack_left.tres" id="11_xh1i2"]
+[ext_resource type="AnimationNodeAnimation" path="res://assets/entities/player/res/attack_right.tres" id="12_x4nxg"]
+[ext_resource type="AnimationNodeAnimation" path="res://assets/entities/player/res/attack_up.tres" id="13_e13ly"]
+[ext_resource type="AnimationNodeAnimation" path="res://assets/entities/player/res/attack_down.tres" id="14_p01qx"]
+[ext_resource type="AnimationNodeTimeScale" uid="uid://b631adnidy378" path="res://assets/entities/player/res/attack_time_scale.tres" id="15_3faym"]
 [ext_resource type="Script" path="res://resources/damage_instance.gd" id="19_c5ib4"]
 [ext_resource type="PackedScene" uid="uid://d0ny7ql64g663" path="res://scenes/projectiles/fireball/fireball.tscn" id="21_382ld"]
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nonpg"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sg542"]
 atlas = ExtResource("6_o1pdo")
-region = Rect2(8, 400, 32, 32)
+region = Rect2(104, 64, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -96,10 +97,6 @@ region = Rect2(8, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5p8xm"]
 atlas = ExtResource("6_o1pdo")
 region = Rect2(56, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sg542"]
-atlas = ExtResource("6_o1pdo")
-region = Rect2(104, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5r431"]
 atlas = ExtResource("6_o1pdo")
@@ -438,18 +435,24 @@ _data = {
 "walk_up": SubResource("Animation_4uuc1")
 }
 
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_65yxu"]
-blend_point_0/node = ExtResource("11_xh1i2")
-blend_point_0/pos = Vector2(-1.1, 0)
-blend_point_1/node = ExtResource("12_x4nxg")
-blend_point_1/pos = Vector2(1.1, 0)
-blend_point_2/node = ExtResource("13_e13ly")
-blend_point_2/pos = Vector2(0, -1)
-blend_point_3/node = ExtResource("14_p01qx")
-blend_point_3/pos = Vector2(0, 1)
-min_space = Vector2(-1.1, -1)
-max_space = Vector2(1.1, 1)
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_bt5hj"]
+blend_point_0/node = ExtResource("13_e13ly")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = ExtResource("14_p01qx")
+blend_point_1/pos = Vector2(0, 1)
+blend_point_2/node = ExtResource("11_xh1i2")
+blend_point_2/pos = Vector2(-1, 0)
+blend_point_3/node = ExtResource("12_x4nxg")
+blend_point_3/pos = Vector2(1, 0)
 blend_mode = 1
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_cneh2"]
+graph_offset = Vector2(-388, 28)
+nodes/BlendSpace/node = SubResource("AnimationNodeBlendSpace2D_bt5hj")
+nodes/BlendSpace/position = Vector2(-160, 100)
+nodes/TimeScale/node = ExtResource("15_3faym")
+nodes/TimeScale/position = Vector2(80, 120)
+node_connections = [&"output", 0, &"TimeScale", &"TimeScale", 0, &"BlendSpace"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m05h7"]
 animation = &"dash_left"
@@ -537,26 +540,6 @@ advance_condition = &"is_move"
 advance_mode = 2
 advance_condition = &"is_idle"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2ui7"]
-advance_mode = 2
-advance_condition = &"is_attack"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_iujkw"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"is_idle"
-advance_expression = "check_attack_state()"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aelmo"]
-advance_mode = 2
-advance_condition = &"is_attack"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7n748"]
-switch_mode = 2
-advance_mode = 2
-advance_condition = &"is_move"
-advance_expression = "check_attack_state()"
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cuba6"]
 advance_mode = 2
 advance_condition = &"is_dash"
@@ -577,22 +560,42 @@ advance_expression = "check_dash_state()"
 advance_mode = 2
 advance_condition = &"is_dash"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j04bd"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k3p2s"]
+advance_mode = 2
+advance_condition = &"is_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wteab"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"is_idle"
+advance_expression = "check_attack_state()"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p2u3d"]
 advance_mode = 2
 advance_condition = &"is_dash"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fr5ur"]
+advance_mode = 2
+advance_condition = &"is_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8267o"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"is_move"
+advance_expression = "check_attack_state()"
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0bets"]
-states/Attack/node = SubResource("AnimationNodeBlendSpace2D_65yxu")
-states/Attack/position = Vector2(556, -25)
+states/Attack/node = SubResource("AnimationNodeBlendTree_cneh2")
+states/Attack/position = Vector2(556, -19)
 states/Dash/node = SubResource("AnimationNodeBlendSpace2D_yca1l")
 states/Dash/position = Vector2(556, 224)
 states/Idle/node = SubResource("AnimationNodeBlendSpace2D_xyoyx")
 states/Idle/position = Vector2(423, 100)
 states/Start/position = Vector2(223, 100)
 states/Walk/node = SubResource("AnimationNodeBlendSpace2D_5wl5g")
-states/Walk/position = Vector2(700, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_q2ui7"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_iujkw"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_aelmo"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_7n748"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_j04bd")]
-graph_offset = Vector2(-13, 5)
+states/Walk/position = Vector2(698, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_k3p2s"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_wteab"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_p2u3d"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_fr5ur"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_8267o")]
+graph_offset = Vector2(4, -54)
 
 [sub_resource type="Resource" id="Resource_sbqij"]
 script = ExtResource("19_c5ib4")
@@ -614,15 +617,32 @@ script = ExtResource("19_c5ib4")
 damage_type = 3
 percent_of_base = 0.5
 
+[sub_resource type="Resource" id="Resource_4ccg5"]
+script = ExtResource("19_c5ib4")
+damage_type = 4
+percent_of_base = 1.5
+
 [sub_resource type="Resource" id="Resource_tl48r"]
 script = ExtResource("11_hsx6r")
 move_modifier = 0.5
-damage_instances = Array[ExtResource("19_c5ib4")]([SubResource("Resource_jcudv"), SubResource("Resource_25g6w"), SubResource("Resource_beann")])
+damage_instances = Array[ExtResource("19_c5ib4")]([SubResource("Resource_jcudv"), SubResource("Resource_25g6w"), SubResource("Resource_beann"), SubResource("Resource_4ccg5")])
 projectile_scene = ExtResource("21_382ld")
 down_animation = ExtResource("7_g7qsq")
 left_animation = ExtResource("8_r0hvr")
 right_animation = ExtResource("9_n351u")
 up_animation = ExtResource("10_x1oud")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_olman"]
+animation = &"slash_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rnx2q"]
+animation = &"slash_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qbgsr"]
+animation = &"slash_left"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uuxwh"]
+animation = &"slash_right"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sthwu"]
 size = Vector2(10, 9)
@@ -641,7 +661,8 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_nonpg")
+texture = SubResource("AtlasTexture_sg542")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -656,13 +677,15 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_0bets")
 anim_player = NodePath("../Animator")
 advance_expression_base_node = NodePath("..")
+active = true
 parameters/conditions/is_attack = false
 parameters/conditions/is_dash = false
 parameters/conditions/is_idle = false
 parameters/conditions/is_move = false
-parameters/Attack/blend_position = Vector2(0.387457, -0.877729)
+parameters/Attack/BlendSpace/blend_position = Vector2(0, 0)
+parameters/Attack/TimeScale/scale = 1.0
 parameters/Dash/blend_position = Vector2(0.000873685, 0.0105263)
-parameters/Idle/blend_position = Vector2(0, 0)
+parameters/Idle/blend_position = Vector2(-1.09822, 0.00288177)
 parameters/Walk/blend_position = Vector2(0, 0)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -681,10 +704,10 @@ stats = NodePath("../StatsComponent")
 damage_instances = Array[ExtResource("19_c5ib4")]([SubResource("Resource_sbqij")])
 projectile_component = NodePath("../ProjectileComponent")
 weapon_skills = Array[ExtResource("11_hsx6r")]([SubResource("Resource_tl48r"), null, null])
-attack_up_res = ExtResource("13_e13ly")
-attack_down_res = ExtResource("14_p01qx")
-attack_left_res = ExtResource("11_xh1i2")
-attack_right_res = ExtResource("12_x4nxg")
+attack_up_res = SubResource("AnimationNodeAnimation_olman")
+attack_down_res = SubResource("AnimationNodeAnimation_rnx2q")
+attack_left_res = SubResource("AnimationNodeAnimation_qbgsr")
+attack_right_res = SubResource("AnimationNodeAnimation_uuxwh")
 
 [node name="ProjectileComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("11_vh8ew")]
 stats_component = NodePath("../StatsComponent")

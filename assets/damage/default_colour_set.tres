@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DamageColourSet" load_steps=2 format=3 uid="uid://bp7fi4qy3x4lf"]
+
+[ext_resource type="Script" path="res://assets/damage/damage_colour_set.gd" id="1_k8gj2"]
+
+[resource]
+script = ExtResource("1_k8gj2")
+physical = Color(0.505882, 0.513726, 0.439216, 1)
+fire = Color(1, 0.261226, 0.189069, 1)
+frost = Color(0.423529, 0.682353, 0.921569, 1)
+poison = Color(0.627451, 1, 0.45098, 1)
+shock = Color(1, 0.996078, 0.360784, 1)
+explosion = Color(1, 0.505882, 0.196078, 1)

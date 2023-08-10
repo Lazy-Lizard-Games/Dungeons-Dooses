@@ -34,13 +34,10 @@ var current_health: float :
 func _ready() -> void:
 	call_deferred("initialise_health")
 
-func damage(damage: float) -> void:
-	current_health -= damage
-	var damage_float = FloatingTextManager.create_damage_float(global_position, damage)
+func damage(damage_data: DamageData) -> void:
+	current_health -= damage_data.damage
+	var damage_float = FloatingTextManager.create_damage_float(global_position, damage_data)
 	add_child(damage_float)
-
-func heal(value: float) -> void:
-	damage(-value)
 
 func set_max_health(value: float) -> void:
 	max_health = value
