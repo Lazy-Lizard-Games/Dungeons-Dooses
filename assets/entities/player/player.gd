@@ -107,17 +107,17 @@ func check_dash() -> void:
 # Utility ---------------------------------------------------------------------------------------- #
 func set_attack(index) -> void:
 	if weapon_component.attack(index):
+		attack_direction = transform.origin.direction_to(get_global_mouse_position())
 		at["parameters/conditions/is_attack"] = true
 		at["parameters/Attack/blend_position"] = attack_direction
-		attack_direction = transform.origin.direction_to(get_global_mouse_position())
 		state_manager.change_state(attack)
 		move_modifier = weapon_component.move_modifier
 
 func set_normal(condition: String, direction: Vector2) -> void:
 	state_manager.change_state(normal)
 	at[condition] = false
-	at["parameters/Idle/blend_position"] = dash_direction
-	at["parameters/Walk/blend_position"] = dash_direction
+	at["parameters/Idle/blend_position"] = direction
+	at["parameters/Walk/blend_position"] = direction
 	move_modifier = 1.0
 # ------------------------------------------------------------------------------------------------ #
 

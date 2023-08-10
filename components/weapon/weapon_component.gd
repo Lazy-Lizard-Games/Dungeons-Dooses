@@ -1,7 +1,8 @@
 extends Node2D
 class_name WeaponComponent
 
-@export var move_modifier: float
+@export var move_modifier: float = 1
+@export var damage_data: DamageData
 @export var projectile_component: ProjectileComponent
 @export_group("Weapon Skills")
 @export var weapon_skills: Array[WeaponSkill]
@@ -25,6 +26,7 @@ func set_weapon_skill(skill: WeaponSkill) -> void:
 	set_attack_animations(skill)
 	set_projectile(skill.projectile)
 	set_move_modifier(skill.move_modifier)
+	damage_data = skill.transform_damage_data(damage_data)
 
 func set_attack_animations(skill: WeaponSkill) -> void:
 	attack_up_res.animation = skill.up_animation.resource_name
@@ -32,7 +34,7 @@ func set_attack_animations(skill: WeaponSkill) -> void:
 	attack_left_res.animation = skill.left_animation.resource_name
 	attack_right_res.animation = skill.right_animation.resource_name
 
-func set_projectile(projectile: PackedScene) -> void:
+func set_projectile(projectile: Projectile) -> void:
 	if projectile_component == null:
 		return
 	projectile_component.projectile = projectile
@@ -41,4 +43,5 @@ func set_move_modifier(modifier: float) -> void:
 	move_modifier = modifier
 
 func spawn_projectile(direction: Vector2) -> void:
-	projectile_component.spawn_projectile(direction)
+	if projectile_component.projectile:
+		projectile_component.spawn_projectile(damage_data, direction)

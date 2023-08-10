@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=103 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -21,14 +21,11 @@
 [ext_resource type="AnimationNodeAnimation" uid="uid://dgd7o2278x2di" path="res://assets/entities/player/res/attack_right.tres" id="12_x4nxg"]
 [ext_resource type="AnimationNodeAnimation" uid="uid://c4ekl21cgrri8" path="res://assets/entities/player/res/attack_up.tres" id="13_e13ly"]
 [ext_resource type="AnimationNodeAnimation" uid="uid://c3nlqhk716ex" path="res://assets/entities/player/res/attack_down.tres" id="14_p01qx"]
-[ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="19_coqia"]
-[ext_resource type="PackedScene" uid="uid://d0ny7ql64g663" path="res://scenes/projectiles/fireball/fireball.tscn" id="21_382ld"]
-[ext_resource type="Script" path="res://resources/projectile.gd" id="21_ln8vk"]
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_oa707"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_413fk"]
 atlas = ExtResource("6_o1pdo")
-region = Rect2(56, 448, 32, 32)
+region = Rect2(248, 16, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -55,10 +52,6 @@ region = Rect2(152, 16, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lllp"]
 atlas = ExtResource("6_o1pdo")
 region = Rect2(200, 16, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_413fk"]
-atlas = ExtResource("6_o1pdo")
-region = Rect2(248, 16, 32, 32)
 
 [sub_resource type="Animation" id="Animation_orkbb"]
 resource_name = "idle_down"
@@ -595,29 +588,17 @@ states/Walk/position = Vector2(700, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_q2ui7"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_iujkw"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_aelmo"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_7n748"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_j04bd")]
 graph_offset = Vector2(-13, 5)
 
-[sub_resource type="Resource" id="Resource_pp1y5"]
-script = ExtResource("19_coqia")
-damage = 10.0
-type = 0
-
 [sub_resource type="Resource" id="Resource_anxdx"]
 script = ExtResource("11_hsx6r")
 move_modifier = 1.5
-damage_modifier = 1.0
 down_animation = ExtResource("2_qnpvv")
 left_animation = ExtResource("3_fynad")
 right_animation = ExtResource("4_a38sx")
 up_animation = ExtResource("5_4riq7")
 
-[sub_resource type="Resource" id="Resource_wvy2u"]
-script = ExtResource("21_ln8vk")
-projectile_scene = ExtResource("21_382ld")
-
 [sub_resource type="Resource" id="Resource_tl48r"]
 script = ExtResource("11_hsx6r")
 move_modifier = 0.5
-damage_modifier = 1.0
-projectile = SubResource("Resource_wvy2u")
 down_animation = ExtResource("7_g7qsq")
 left_animation = ExtResource("8_r0hvr")
 right_animation = ExtResource("9_n351u")
@@ -639,7 +620,7 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_oa707")
+texture = SubResource("AtlasTexture_413fk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -654,6 +635,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_0bets")
 anim_player = NodePath("../Animator")
 advance_expression_base_node = NodePath("..")
+active = true
 parameters/conditions/is_attack = false
 parameters/conditions/is_dash = false
 parameters/conditions/is_idle = false
@@ -676,7 +658,7 @@ stats = NodePath("../StatsComponent")
 stats = NodePath("../StatsComponent")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("projectile_component") instance=ExtResource("10_gr555")]
-damage_data = SubResource("Resource_pp1y5")
+move_modifier = null
 projectile_component = NodePath("../ProjectileComponent")
 weapon_skills = Array[ExtResource("11_hsx6r")]([SubResource("Resource_anxdx"), null, SubResource("Resource_tl48r")])
 attack_up_res = ExtResource("13_e13ly")
