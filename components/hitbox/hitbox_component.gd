@@ -24,7 +24,7 @@ func handle_projectile_collision(projectile) -> void:
 func handle_hurbox_collision(hurtbox) -> void:
 	var damage = 0.0
 	if not detect_only:
-		damage = hurtbox.damage
+		damage = hurtbox.damage_data
 		damage = deal_damage_with_transforms(damage)
 	hit_by_hurtbox.emit(hurtbox, damage)
 
