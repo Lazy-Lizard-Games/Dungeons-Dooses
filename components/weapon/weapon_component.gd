@@ -32,10 +32,13 @@ func set_attack_animations(skill: WeaponSkill) -> void:
 	attack_left_res.animation = skill.left_animation.resource_name
 	attack_right_res.animation = skill.right_animation.resource_name
 
-func set_projectile(projectile: Projectile) -> void:
+func set_projectile(projectile: PackedScene) -> void:
 	if projectile_component == null:
 		return
 	projectile_component.projectile = projectile
 
 func set_move_modifier(modifier: float) -> void:
 	move_modifier = modifier
+
+func spawn_projectile(direction: Vector2) -> void:
+	projectile_component.spawn_projectile(direction)

@@ -1,6 +1,0 @@
-[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://53qvvuq37unj"]
-
-[ext_resource type="Texture2D" uid="uid://btj8gnuppi5aw" path="res://assets/abilities/weapon_attack_icon_sheet.png" id="1_2oh40"]
-
-[resource]
-atlas = ExtResource("1_2oh40")
