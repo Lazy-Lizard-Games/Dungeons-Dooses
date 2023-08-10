@@ -22,5 +22,5 @@ func handle_hurbox_collision(hurtbox) -> void:
 func deal_damage_with_transforms(damage: DamageData) -> DamageData:
 	var final_damage = stats_component.apply_damage_resistances(damage) if stats_component != null \
 			 else damage
-	if health_component != null: health_component.damage(final_damage.damage)
+	if health_component != null: health_component.damage(final_damage)
 	return final_damage

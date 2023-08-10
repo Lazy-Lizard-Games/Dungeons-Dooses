@@ -46,7 +46,7 @@ texture = SubResource("PlaceholderTexture2D_irtap")
 
 [node name="HurtboxComponent" parent="Spikes" instance=ExtResource("2_se5sb")]
 damage_datas = Array[ExtResource("4_s45e4")]([SubResource("Resource_to4d4")])
-damage_rate = 0.5
+damage_rate = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/HurtboxComponent"]
 shape = SubResource("RectangleShape2D_rgk83")
