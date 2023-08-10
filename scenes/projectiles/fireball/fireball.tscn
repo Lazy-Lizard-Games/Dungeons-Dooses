@@ -93,6 +93,7 @@ _data = {
 [node name="Fireball" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hurtbox_component")]
 collision_layer = 8
 script = ExtResource("1_dtgsb")
+base_speed = null
 velocity_component = NodePath("VelocityComponent")
 hurtbox_component = NodePath("HurtboxComponent")
 
@@ -105,6 +106,7 @@ position = Vector2(14, 0)
 shape = SubResource("CircleShape2D_he6q8")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_bbj4x")]
+max_speed = 200.0
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_04by2")]
 faction = 1
@@ -119,6 +121,7 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
 autostart = true
 
 [connection signal="entity_hit" from="HurtboxComponent" to="." method="_on_hurtbox_component_entity_hit"]

@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var faction: Globals.FACTIONS
 @export var move_modifier: float = 1
+@export_range(0, 5) var attack_speed_modifier: float = 1
 @export_range(0, 1) var dash_control: float = 0.05
 @export_group("Components")
 @export var velocity_component: VelocityComponent
@@ -60,8 +61,8 @@ func attack() -> void:
 
 func dash() -> void:
 	if direction:
-		var control = dash_direction.angle_to(direction)*dash_control
-		dash_direction = dash_direction.rotated(control)
+		var control = dash_direction.angle_to(direction) * dash_control
+		dash_direction = dash_direction.rotated(control).normalized()
 	direction = dash_direction
 	velocity_component.accelerate_in_direction(direction * move_modifier)
 	velocity_component.move(self)
@@ -96,14 +97,7 @@ func check_attack() -> void:
 
 func check_dash() -> void:
 	if Input.is_action_just_pressed("dash"):
-		at["parameters/conditions/is_dash"] = true
-		at["parameters/conditions/is_attack"] = false
-		at["parameters/Dash/blend_position"] = direction
-		dash_direction = direction if direction \
-		 		else transform.origin.direction_to(get_global_mouse_position())
-		state_manager.change_state(dash)
-		hitbox_component.detect_only = true
-		move_modifier = 1.2
+		set_dash()
 # ------------------------------------------------------------------------------------------------ #
 
 # Utility ---------------------------------------------------------------------------------------- #
@@ -111,7 +105,8 @@ func set_attack(index) -> void:
 	if weapon_component.attack(index):
 		attack_direction = transform.origin.direction_to(get_global_mouse_position())
 		at["parameters/conditions/is_attack"] = true
-		at["parameters/Attack/blend_position"] = attack_direction
+		at["parameters/Attack/BlendSpace/blend_position"] = attack_direction
+		at["parameters/Attack/TimeScale/scale"] = attack_speed_modifier
 		state_manager.change_state(attack)
 		move_modifier = weapon_component.move_modifier
 
@@ -121,6 +116,16 @@ func set_normal(condition: String, direction: Vector2) -> void:
 	at["parameters/Idle/blend_position"] = direction
 	at["parameters/Walk/blend_position"] = direction
 	move_modifier = 1.0
+
+func set_dash() -> void:
+	at["parameters/conditions/is_dash"] = true
+	at["parameters/conditions/is_attack"] = false
+	at["parameters/Dash/blend_position"] = direction
+	dash_direction = direction if direction \
+	 		else transform.origin.direction_to(get_global_mouse_position())
+	state_manager.change_state(dash)
+	hitbox_component.detect_only = true
+	move_modifier = 1.2
 # ------------------------------------------------------------------------------------------------ #
 
 # Animation Callables ---------------------------------------------------------------------------- #
