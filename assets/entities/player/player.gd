@@ -2,10 +2,13 @@ extends CharacterBody2D
 
 @export var faction: Globals.FACTIONS
 @export var move_modifier: float = 1
-@export_range(0, 5) var attack_speed_modifier: float = 1
+@export var attack_speed_mult: float:
+	get:
+		return stats_component.attack_speed_mult if stats_component else attack_speed_mult
 @export_range(0, 1) var dash_control: float = 0.05
 @export_group("Components")
 @export var velocity_component: VelocityComponent
+@export var stats_component: StatsComponent
 @export var hitbox_component: HitboxComponent
 @export var weapon_component: WeaponComponent
 @export_group("Animation Resource Paths")
@@ -41,7 +44,6 @@ func _physics_process(_delta: float) -> void:
 func normal() -> void:
 	check_attack()
 	check_dash()
-	
 	if direction:
 		velocity_component.accelerate_in_direction(direction * move_modifier)
 		velocity_component.move(self)
@@ -55,9 +57,9 @@ func normal() -> void:
 		at["parameters/conditions/is_move"] = false
 
 func attack() -> void:
+	check_dash()
 	velocity_component.accelerate_in_direction(direction * move_modifier)
 	velocity_component.move(self)
-	check_dash()
 
 func dash() -> void:
 	if direction:
@@ -101,15 +103,6 @@ func check_dash() -> void:
 # ------------------------------------------------------------------------------------------------ #
 
 # Utility ---------------------------------------------------------------------------------------- #
-func set_attack(index) -> void:
-	if weapon_component.attack(index):
-		attack_direction = transform.origin.direction_to(get_global_mouse_position())
-		at["parameters/conditions/is_attack"] = true
-		at["parameters/Attack/BlendSpace/blend_position"] = attack_direction
-		at["parameters/Attack/TimeScale/scale"] = attack_speed_modifier
-		state_manager.change_state(attack)
-		move_modifier = weapon_component.move_modifier
-
 func set_normal(condition: String, direction: Vector2) -> void:
 	state_manager.change_state(normal)
 	at[condition] = false
@@ -117,7 +110,18 @@ func set_normal(condition: String, direction: Vector2) -> void:
 	at["parameters/Walk/blend_position"] = direction
 	move_modifier = 1.0
 
+func set_attack(index) -> void:
+	if weapon_component.attack(index):
+		attack_direction = transform.origin.direction_to(get_global_mouse_position())
+		at["parameters/conditions/is_attack"] = true
+		at["parameters/Attack/BlendSpace/blend_position"] = attack_direction
+		at["parameters/Attack/TimeScale/scale"] = attack_speed_mult
+		state_manager.change_state(attack)
+		move_modifier = weapon_component.move_modifier
+
 func set_dash() -> void:
+	at["parameters/conditions/is_idle"] = false
+	at["parameters/conditions/is_move"] = false
 	at["parameters/conditions/is_dash"] = true
 	at["parameters/conditions/is_attack"] = false
 	at["parameters/Dash/blend_position"] = direction

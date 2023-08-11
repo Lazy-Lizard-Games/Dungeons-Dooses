@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=12 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://datk0irfypdeu" path="res://components/health/health_component.tscn" id="1_s68bj"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://scenes/entities/player/player.tscn" id="2_qc57j"]
 [ext_resource type="Script" path="res://components/hitbox/hitbox_component.gd" id="2_rpsqs"]
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_se5sb"]
+[ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="3_fytlx"]
 [ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="4_s45e4"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3j64n"]
@@ -16,8 +17,8 @@ size = Vector2(20, 20)
 
 [sub_resource type="Resource" id="Resource_to4d4"]
 script = ExtResource("4_s45e4")
-damage = 5.0
-type = 0
+damage = 1.0
+type = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgk83"]
 
@@ -30,15 +31,20 @@ texture = SubResource("PlaceholderTexture2D_3j64n")
 [node name="HealthComponent" parent="Dummy" instance=ExtResource("1_s68bj")]
 max_health = 100.0
 
-[node name="HitboxComponent" type="Area2D" parent="Dummy" node_paths=PackedStringArray("health_component")]
+[node name="HitboxComponent" type="Area2D" parent="Dummy" node_paths=PackedStringArray("health_component", "effect_component")]
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("2_rpsqs")
 health_component = NodePath("../HealthComponent")
+effect_component = NodePath("../EffectComponent")
 faction = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy/HitboxComponent"]
 shape = SubResource("RectangleShape2D_wrdqi")
+
+[node name="EffectComponent" parent="Dummy" node_paths=PackedStringArray("health_component", "hitbox_component") instance=ExtResource("3_fytlx")]
+health_component = NodePath("../HealthComponent")
+hitbox_component = NodePath("../HitboxComponent")
 
 [node name="Spikes" type="Sprite2D" parent="."]
 position = Vector2(-49, 0)
@@ -46,7 +52,7 @@ texture = SubResource("PlaceholderTexture2D_irtap")
 
 [node name="HurtboxComponent" parent="Spikes" instance=ExtResource("2_se5sb")]
 damage_datas = Array[ExtResource("4_s45e4")]([SubResource("Resource_to4d4")])
-damage_rate = 2.0
+damage_rate = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/HurtboxComponent"]
 shape = SubResource("RectangleShape2D_rgk83")

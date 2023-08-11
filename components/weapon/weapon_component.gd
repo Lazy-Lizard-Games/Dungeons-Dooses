@@ -4,6 +4,7 @@ class_name WeaponComponent
 @export var base_damage: float = 10
 @export var move_modifier: float = 1
 @export var damage_instances: Array[DamageInstance]
+@export var effect_instances: Array[EffectInstance]
 @export var projectile_component: ProjectileComponent
 @export_group("Weapon Skills")
 @export var weapon_skills: Array[WeaponSkill]
@@ -14,6 +15,7 @@ class_name WeaponComponent
 @export var attack_right_res: AnimationNodeAnimation
 
 var damage_datas: Array[DamageData]
+var effect_datas: Array[EffectInstance]
 
 func attack(skill_index: int) -> bool:
 	if skill_index < weapon_skills.size():
@@ -30,6 +32,7 @@ func set_weapon_skill(skill: WeaponSkill) -> void:
 	set_projectile(skill.projectile_scene)
 	set_move_modifier(skill.move_modifier)
 	set_damage_data(skill.damage_instances)
+	set_effect_data(skill.effect_instances)
 
 func set_attack_animations(skill: WeaponSkill) -> void:
 	attack_up_res.animation = skill.up_animation.resource_name
@@ -52,6 +55,10 @@ func set_damage_data(instances: Array[DamageInstance]) -> void:
 	for instance in total_instances:
 		damage_datas.append(instance.get_damage_data(base_damage))
 
+func set_effect_data(instances: Array[EffectInstance]) -> void:
+	effect_datas = effect_instances.duplicate()
+	effect_datas.append_array(instances)
+
 func spawn_projectile(direction: Vector2, faction: Globals.FACTIONS) -> void:
 	if projectile_component.projectile_scene:
-		projectile_component.spawn_projectile(damage_datas, direction, faction)
+		projectile_component.spawn_projectile(damage_datas, effect_datas, direction, faction)
