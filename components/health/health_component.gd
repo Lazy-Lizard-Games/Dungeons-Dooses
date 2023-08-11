@@ -1,7 +1,7 @@
 extends Node2D
 class_name HealthComponent
 
-signal health_changed(health_update)
+signal health_changed(prev_health: float, cur_health: float, damage: DamageData)
 signal died
 
 @export var stats: StatsComponent
@@ -9,25 +9,22 @@ signal died
 	get:
 		return max_health
 	set(value):
-		max_health = value * stats.health_mult if stats else value
+		max_health = stats.max_health * stats.health_mult if stats else value
 		if current_health > max_health:
 			current_health = max_health
-#@export var stats: StatsComponent
 
 var has_health_remaining: bool :
 	get:
 		return current_health > 0
 var has_died : bool = false
 
+var previous_health: float
 var current_health: float :
 	get:
 		return current_health
 	set(value):
+		previous_health = current_health
 		current_health = clampf(value, 0, max_health)
-		#emit an informed update about the health change (old health, new health, max health, is_heal, etc)
-		if(!has_health_remaining && !has_died):
-			died.emit()
-			has_died = true
 
 # Handle damage, heal
 
@@ -36,11 +33,12 @@ func _ready() -> void:
 
 func damage(damage_data: DamageData) -> void:
 	current_health -= damage_data.damage
+	health_changed.emit(previous_health, current_health, damage_data)
+	if(not has_health_remaining and not has_died):
+		died.emit()
+		has_died = true
 	var damage_float = FloatingTextManager.create_damage_float(global_position, damage_data)
 	add_child(damage_float)
-
-func set_max_health(value: float) -> void:
-	max_health = value
 
 func initialise_health() -> void:
 	current_health = max_health

@@ -1,12 +1,14 @@
 extends Area2D
 class_name HurtboxComponent
 
-signal entity_hit(entity: Node2D)
+signal entity_damaged(hitbox: HitboxComponent, damage_datas: Array[DamageData])
 
 ## Faction that the hurtbox belongs
 @export var faction: Globals.FACTIONS = 0
 ## Damage datas of the hurtbox
 @export var damage_datas: Array[DamageData]
+## Effect instances of the hurtbox
+@export var effect_instances: Array[EffectInstance]
 ## Number of damage instances per second per entity
 @export var damage_rate: float = 0
 
@@ -21,7 +23,7 @@ func _on_area_entered(area: Area2D) -> void:
 			hurt_entity.set_data(area, damage_rate)
 			hurt_entity.connect("timeout", remove_entity)
 			hurt_entities.append(hurt_entity)
-			entity_hit.emit(area)
+			entity_damaged.emit(area, damage_datas)
 
 func remove_entity(hurt_entity: HurtEntity) -> void:
 	hurt_entities.remove_at(hurt_entities.find(hurt_entity))
