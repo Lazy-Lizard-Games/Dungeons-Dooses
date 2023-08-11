@@ -37,12 +37,13 @@ func add_effect(effect_instance: EffectInstance) -> void:
 	var effect: Effect = effect_instance.effect_scene.instantiate()
 	for child in effects:
 		if child.effect_instance == effect_instance:
-			child.add_stack()
+			child._add_stack()
 			return
 	effect.effect_instance = effect_instance
 	effects.append(effect)
 	effect.container = self
 	add_child(effect)
+	effect._add_stack()
 
 func remove_effect(effect: Effect) -> void:
 	var effect_index = effects.find(effect)

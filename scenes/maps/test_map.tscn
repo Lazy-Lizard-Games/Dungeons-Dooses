@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=15 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://datk0irfypdeu" path="res://components/health/health_component.tscn" id="1_s68bj"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://scenes/entities/player/player.tscn" id="2_qc57j"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_se5sb"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="3_fytlx"]
 [ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="4_s45e4"]
+[ext_resource type="PackedScene" uid="uid://xqp6to0vit3c" path="res://scenes/effects/on_fire/on_fire.tscn" id="6_0jdpd"]
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="7_lac0n"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3j64n"]
 size = Vector2(20, 20)
@@ -19,6 +21,12 @@ size = Vector2(20, 20)
 script = ExtResource("4_s45e4")
 damage = 1.0
 type = 1
+
+[sub_resource type="Resource" id="Resource_1fej1"]
+script = ExtResource("7_lac0n")
+effect_scene = ExtResource("6_0jdpd")
+max_stacks = 5
+chance = 0.2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgk83"]
 
@@ -52,6 +60,7 @@ texture = SubResource("PlaceholderTexture2D_irtap")
 
 [node name="HurtboxComponent" parent="Spikes" instance=ExtResource("2_se5sb")]
 damage_datas = Array[ExtResource("4_s45e4")]([SubResource("Resource_to4d4")])
+effect_instances = Array[ExtResource("7_lac0n")]([SubResource("Resource_1fej1")])
 damage_rate = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/HurtboxComponent"]
