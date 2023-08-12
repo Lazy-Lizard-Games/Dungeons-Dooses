@@ -27,15 +27,17 @@ func _add_stack() -> void:
 	fire_stack.timeout.connect(_on_fire_stack_end)
 	fire_stack.start(fire_stack, duration)
 	fire_stacks.append(fire_stack)
-	_on_stack_change(1)
+	stacks = fire_stacks.size()
+	self.emit_signal("stack_changed", 1)
 
 func _remove_stack() -> void:
 	_on_fire_stack_end(fire_stacks[fire_stacks.size()-1])
-	_on_stack_change(-1)
 
 func _on_fire_stack_end(fire_stack: TimedVariant) -> void:
 	remove_child(fire_stack)
 	fire_stacks.remove_at(fire_stacks.find(fire_stack))
+	stacks = fire_stacks.size()
+	self.emit_signal("stack_changed", -1)
 
 func _on_stack_change(change: int) -> void:
 	if change > 0:

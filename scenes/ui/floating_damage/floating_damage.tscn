@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bjxsyr3g8xdia"]
 
-[ext_resource type="Script" path="res://scenes/ui/floating_damage.gd" id="1_ejht5"]
+[ext_resource type="Script" path="res://scenes/ui/floating_damage/floating_damage.gd" id="1_ejht5"]
 [ext_resource type="Resource" uid="uid://bp7fi4qy3x4lf" path="res://assets/damage/default_colour_set.tres" id="2_dno2m"]
 
 [node name="DamageFloat" type="Marker2D"]

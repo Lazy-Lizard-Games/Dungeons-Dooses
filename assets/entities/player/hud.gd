@@ -3,6 +3,7 @@ extends CanvasLayer
 @export var health_component: HealthComponent
 @export var velocity_component: VelocityComponent
 @export var weapon_component: WeaponComponent
+@export var effect_component: EffectComponent
 
 @onready var health_label: Label = $MarginContainer/VBoxContainer/HealthLabel
 @onready var velocity_label: Label = $MarginContainer/VBoxContainer/VelocityLabel
@@ -10,7 +11,12 @@ extends CanvasLayer
 @onready var skill_1: CenterContainer = $MarginContainer/SkillsContainer/Skill1
 @onready var skill_2: CenterContainer = $MarginContainer/SkillsContainer/Skill2
 @onready var skill_3: CenterContainer = $MarginContainer/SkillsContainer/Skill3
+@onready var effects_container: GridContainer = $MarginContainer/EffectsContainer
 
+var effect_container = preload("res://scenes/ui/hud/effect_container.tscn")
+
+func _ready() -> void:
+	effect_component.effect_added.connect(on_effect_added)
 
 func _process(_delta: float) -> void:
 	check_labels()
@@ -31,3 +37,8 @@ func update_skill(index: int, skill: CenterContainer) -> void:
 		skill.modulate = Color.WHITE
 		if weapon_component.weapon_skills[index].on_cooldown:
 			skill.modulate = Color.BLACK
+
+func on_effect_added(effect: Effect) -> void:
+	var new_effect = effect_container.instantiate()
+	new_effect.effect = effect
+	effects_container.add_child(new_effect)
