@@ -1,6 +1,8 @@
 extends Node2D
 class_name WeaponComponent
 
+signal skill_casted(skill: WeaponSkill)
+
 @export var base_damage: float = 10
 @export var move_modifier: float = 1
 @export var damage_instances: Array[DamageInstance]
@@ -20,7 +22,7 @@ var effect_datas: Array[EffectInstance]
 func attack(skill_index: int) -> bool:
 	if skill_index < weapon_skills.size():
 		var skill = weapon_skills[skill_index]
-		if skill != null:
+		if skill != null and not skill.on_cooldown:
 			set_weapon_skill(skill)
 			return true
 	return false
@@ -28,11 +30,16 @@ func attack(skill_index: int) -> bool:
 func set_weapon_skill(skill: WeaponSkill) -> void:
 	if typeof(skill) == TYPE_NIL:
 		return
+	set_skill_cooldown(skill)
 	set_attack_animations(skill)
 	set_projectile(skill.projectile_scene)
 	set_move_modifier(skill.move_modifier)
 	set_damage_data(skill.damage_instances)
 	set_effect_data(skill.effect_instances)
+	skill_casted.emit(skill)
+
+func set_skill_cooldown(skill: WeaponSkill) -> void:
+	skill.start_cooldown(get_tree().root, get_parent().stats_component)
 
 func set_attack_animations(skill: WeaponSkill) -> void:
 	attack_up_res.animation = skill.up_animation.resource_name
