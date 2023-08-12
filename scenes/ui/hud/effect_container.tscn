@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ba8v11ccbem3i"]
+
+[ext_resource type="Script" path="res://scenes/ui/hud/effect_container.gd" id="1_1q2u5"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b8xxq"]
+size = Vector2(50, 50)
+
+[node name="effect_container" type="MarginContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_1q2u5")
+
+[node name="EffectIcon" type="TextureRect" parent="."]
+self_modulate = Color(0.411765, 0.686275, 0, 1)
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_b8xxq")
+
+[node name="StacksLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+text = "x2"
+vertical_alignment = 2

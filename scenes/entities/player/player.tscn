@@ -28,9 +28,9 @@
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="26_hhqhb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5r431"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fc8x"]
 atlas = ExtResource("6_o1pdo")
-region = Rect2(152, 64, 32, 32)
+region = Rect2(200, 64, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -104,9 +104,9 @@ region = Rect2(56, 64, 32, 32)
 atlas = ExtResource("6_o1pdo")
 region = Rect2(104, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0fc8x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r431"]
 atlas = ExtResource("6_o1pdo")
-region = Rect2(200, 64, 32, 32)
+region = Rect2(152, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iaegb"]
 atlas = ExtResource("6_o1pdo")
@@ -651,7 +651,7 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_5r431")
+texture = SubResource("AtlasTexture_0fc8x")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -718,11 +718,12 @@ health_component = NodePath("../HealthComponent")
 projectile_component = NodePath("../ProjectileComponent")
 hitbox_component = NodePath("../HitboxComponent")
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "weapon_component")]
+[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "weapon_component", "effect_component")]
 script = ExtResource("22_ymuqr")
 health_component = NodePath("../HealthComponent")
 velocity_component = NodePath("../VelocityComponent")
 weapon_component = NodePath("../WeaponComponent")
+effect_component = NodePath("../EffectComponent")
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 15
@@ -777,3 +778,10 @@ use_top_left = true
 [node name="TextureRect" type="TextureRect" parent="HUD/MarginContainer/SkillsContainer/Skill3"]
 layout_mode = 2
 texture = SubResource("PlaceholderTexture2D_rstvo")
+
+[node name="EffectsContainer" type="GridContainer" parent="HUD/MarginContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+columns = 3
