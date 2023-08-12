@@ -1,4 +1,4 @@
-[gd_scene load_steps=113 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=114 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -28,9 +28,9 @@
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="26_hhqhb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5p8xm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5r431"]
 atlas = ExtResource("6_o1pdo")
-region = Rect2(56, 64, 32, 32)
+region = Rect2(152, 64, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -96,13 +96,13 @@ tracks/1/keys = {
 atlas = ExtResource("6_o1pdo")
 region = Rect2(8, 64, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5p8xm"]
+atlas = ExtResource("6_o1pdo")
+region = Rect2(56, 64, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_sg542"]
 atlas = ExtResource("6_o1pdo")
 region = Rect2(104, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5r431"]
-atlas = ExtResource("6_o1pdo")
-region = Rect2(152, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0fc8x"]
 atlas = ExtResource("6_o1pdo")
@@ -607,7 +607,9 @@ chance = 1.0
 
 [sub_resource type="Resource" id="Resource_tl48r"]
 script = ExtResource("11_hsx6r")
+skill_name = ""
 move_modifier = 0.5
+base_cooldown = 1.0
 damage_instances = Array[Resource("res://resources/damage_instance.gd")]([])
 effect_instances = Array[ExtResource("22_xnjag")]([SubResource("Resource_f5by5")])
 projectile_scene = ExtResource("21_382ld")
@@ -631,6 +633,9 @@ animation = &"slash_right"
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sthwu"]
 size = Vector2(10, 9)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rstvo"]
+size = Vector2(20, 20)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "weapon_component")]
 collision_layer = 4
 script = ExtResource("1_xpihs")
@@ -646,7 +651,7 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_5p8xm")
+texture = SubResource("AtlasTexture_5r431")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -681,7 +686,6 @@ position_smoothing_enabled = true
 stats = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_xg1r5")]
-attack_speed_mult = 5.0
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("5_7r1cp")]
 stats = NodePath("../StatsComponent")
@@ -714,10 +718,11 @@ health_component = NodePath("../HealthComponent")
 projectile_component = NodePath("../ProjectileComponent")
 hitbox_component = NodePath("../HitboxComponent")
 
-[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_component", "velocity_component")]
+[node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "weapon_component")]
 script = ExtResource("22_ymuqr")
 health_component = NodePath("../HealthComponent")
 velocity_component = NodePath("../VelocityComponent")
+weapon_component = NodePath("../WeaponComponent")
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 15
@@ -742,3 +747,33 @@ layout_mode = 2
 
 [node name="SpeedLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="SkillsContainer" type="HBoxContainer" parent="HUD/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Skill1" type="CenterContainer" parent="HUD/MarginContainer/SkillsContainer"]
+layout_mode = 2
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="HUD/MarginContainer/SkillsContainer/Skill1"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_rstvo")
+
+[node name="Skill2" type="CenterContainer" parent="HUD/MarginContainer/SkillsContainer"]
+layout_mode = 2
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="HUD/MarginContainer/SkillsContainer/Skill2"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_rstvo")
+
+[node name="Skill3" type="CenterContainer" parent="HUD/MarginContainer/SkillsContainer"]
+layout_mode = 2
+use_top_left = true
+
+[node name="TextureRect" type="TextureRect" parent="HUD/MarginContainer/SkillsContainer/Skill3"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_rstvo")
