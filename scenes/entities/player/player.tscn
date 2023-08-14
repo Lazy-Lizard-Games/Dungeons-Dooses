@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=118 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -29,9 +29,12 @@
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="26_hhqhb"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0fc8x"]
-atlas = ExtResource("6_o1pdo")
-region = Rect2(200, 64, 32, 32)
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_j5ye8"]
+load_path = "res://.godot/imported/player.png-928f4d30a37c774758bcb01de07ddedf.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffbk5"]
+atlas = SubResource("CompressedTexture2D_j5ye8")
+region = Rect2(104, 448, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -108,6 +111,10 @@ region = Rect2(104, 64, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_5r431"]
 atlas = ExtResource("6_o1pdo")
 region = Rect2(152, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fc8x"]
+atlas = ExtResource("6_o1pdo")
+region = Rect2(200, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iaegb"]
 atlas = ExtResource("6_o1pdo")
@@ -657,8 +664,7 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_0fc8x")
-flip_h = true
+texture = SubResource("AtlasTexture_ffbk5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -673,7 +679,6 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_0bets")
 anim_player = NodePath("../Animator")
 advance_expression_base_node = NodePath("..")
-active = true
 parameters/conditions/is_attack = false
 parameters/conditions/is_dash = false
 parameters/conditions/is_idle = false
