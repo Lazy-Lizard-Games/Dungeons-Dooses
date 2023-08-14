@@ -17,7 +17,7 @@ func _ready() -> void:
 	timer.wait_time = randf_range(1, 1.5)
 	speed = randf_range(2, 2.5)
 	direction = direction.rotated(deg_to_rad(randf_range(-10, 10))).normalized()
-	label.text = str(damage)
+	label.text = "%.1f" % damage if damage < 1.0 else "%s" % damage
 	label["theme_override_colors/font_color"] = colour
 	timer.start()
 
@@ -27,7 +27,7 @@ func _process(delta: float) -> void:
 
 func update(pos: Vector2, damage_data: DamageData) -> void:
 	global_position = pos
-	damage = roundf(damage_data.damage)
+	damage = damage_data.damage
 	colour = get_colour(damage_data.type)
 
 func get_colour(damage_type: Globals.DAMAGE_TYPES) -> Color:
