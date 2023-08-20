@@ -83,6 +83,7 @@ func check_dash_state() -> bool:
 	await at.animation_finished
 	set_normal("parameters/conditions/is_dash", dash_direction)
 	hitbox_component.detect_only = false
+	$CollisionShape2D.disabled = false
 	return true
 # ------------------------------------------------------------------------------------------------ #
 
@@ -120,6 +121,7 @@ func set_attack(index) -> void:
 		move_modifier = weapon_component.move_modifier
 
 func set_dash() -> void:
+	$CollisionShape2D.disabled = true
 	at["parameters/conditions/is_idle"] = false
 	at["parameters/conditions/is_move"] = false
 	at["parameters/conditions/is_dash"] = true

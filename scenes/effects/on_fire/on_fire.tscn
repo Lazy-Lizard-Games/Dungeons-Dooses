@@ -11,7 +11,7 @@ one_shot = true
 autostart = true
 
 [node name="TickRate" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.25
 autostart = true
 
 [connection signal="stack_changed" from="." to="." method="_on_stack_change"]

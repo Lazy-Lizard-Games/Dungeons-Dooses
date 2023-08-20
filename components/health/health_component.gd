@@ -26,7 +26,7 @@ var current_health: float :
 		previous_health = current_health
 		current_health = clampf(value, 0, max_health)
 
-# Handle damage, heal
+# Handle damage
 
 func _ready() -> void:
 	call_deferred("initialise_health")

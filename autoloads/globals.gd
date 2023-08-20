@@ -2,7 +2,8 @@ extends Node
 
 enum FACTIONS 
 {
-	NONE, 
+	NONE,
+	PLAYER, 
 	HUMAN, 
 	CREATURE, 
 	MONSTER,
