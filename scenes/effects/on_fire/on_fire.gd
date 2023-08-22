@@ -49,7 +49,7 @@ func _on_timer_timeout() -> void:
 	queue_free()
 
 func _on_tick_rate_timeout() -> void:
-	if not container.health_component:
+	if not container.hitbox_component:
 		return
 	damage.damage = damage_per_tick * fire_stacks.size()
-	container.health_component.damage(damage)
+	container.hitbox_component.deal_damage_with_transforms(damage)

@@ -16,8 +16,10 @@ var hurt_entities: Array[TimedVariant] = []
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is HitboxComponent:
+		if not area.can_accept_collisions():
+			return
 		if hurt_entities.filter(func(entity: TimedVariant): return entity.variant == area).is_empty() \
-				and (area.faction != faction or area.faction == Globals.FACTIONS.NONE):
+				and area.faction not in Relationships.get_allies_for(faction):
 			area.handle_hurbox_collision(self)
 			var hurt_entity = TimedVariant.new()
 			add_child(hurt_entity)

@@ -19,6 +19,7 @@ config/features=PackedStringArray("4.1", "Forward Plus")
 Globals="*res://autoloads/globals.gd"
 Utility="*res://autoloads/utility.gd"
 FloatingTextManager="*res://autoloads/floating_text_manager.gd"
+Relationships="*res://autoloads/relationships.gd"
 
 [input]
 
