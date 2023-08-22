@@ -661,6 +661,7 @@ size = Vector2(20, 20)
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "weapon_component")]
 collision_layer = 4
 collision_mask = 5
+platform_floor_layers = 4294901760
 script = ExtResource("1_xpihs")
 faction = 1
 velocity_component = NodePath("VelocityComponent")
@@ -708,7 +709,6 @@ stats = NodePath("../StatsComponent")
 max_health = 100.0
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_xg1r5")]
-attack_speed_mult = 10.0
 damage_modifiers = Array[ExtResource("18_tgivd")]([SubResource("Resource_jkqmw")])
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("5_7r1cp")]

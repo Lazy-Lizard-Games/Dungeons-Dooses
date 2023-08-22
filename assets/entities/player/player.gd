@@ -36,6 +36,7 @@ func _ready() -> void:
 
 # Update handling -------------------------------------------------------------------------------- #
 func _physics_process(_delta: float) -> void:
+	$HealthComponent.current_health += 5
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	state_manager.update()
 # ------------------------------------------------------------------------------------------------ #
@@ -122,7 +123,7 @@ func set_attack(index) -> void:
 
 func set_dash() -> void:
 	$CollisionShape2D.disabled = true
-	at["parameters/conditions/is_idle"] = false
+	at["parameters/conditions/is_idle"] = true
 	at["parameters/conditions/is_move"] = false
 	at["parameters/conditions/is_dash"] = true
 	at["parameters/conditions/is_attack"] = false

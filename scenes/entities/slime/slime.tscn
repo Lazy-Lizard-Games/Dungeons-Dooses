@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://dlt3ha7g0ra6u"]
+[gd_scene load_steps=75 format=3 uid="uid://dlt3ha7g0ra6u"]
 
 [ext_resource type="Script" path="res://assets/entities/slime/slime.gd" id="1_ofamj"]
 [ext_resource type="PackedScene" uid="uid://bhqj15dn3fxry" path="res://components/velocity/velocity_component.tscn" id="1_s4nx0"]
@@ -8,13 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://ckwedti3q6wd3" path="res://components/hitbox/hitbox_component.tscn" id="5_emebw"]
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="6_lxtfo"]
 [ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="7_x8lll"]
+[ext_resource type="PackedScene" uid="uid://den13w6x5bc17" path="res://components/tracker/tracker_component.tscn" id="9_bx22s"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2v7n3"]
 load_path = "res://.godot/imported/slime.png-86923d59624240e3e40122e1edd2395e.ctex"
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qvkub"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7fsj"]
 atlas = SubResource("CompressedTexture2D_2v7n3")
-region = Rect2(128, 32, 32, 32)
+region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_upk1g"]
 radius = 7.0
@@ -37,10 +38,6 @@ tracks/0/keys = {
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2pn2"]
 atlas = SubResource("CompressedTexture2D_2v7n3")
 region = Rect2(0, 64, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u7fsj"]
-atlas = SubResource("CompressedTexture2D_2v7n3")
-region = Rect2(32, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1qd0r"]
 atlas = SubResource("CompressedTexture2D_2v7n3")
@@ -89,6 +86,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:move_modifier")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 1.5, 2.0, 1.25, 0.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_xrvk0"]
 resource_name = "attack_right"
@@ -116,6 +125,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:move_modifier")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0.0, 0.0, 1.5, 2.0, 1.25, 0.0, 0.0]
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p11r0"]
@@ -241,6 +262,10 @@ region = Rect2(64, 32, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_daf6c"]
 atlas = SubResource("CompressedTexture2D_2v7n3")
 region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qvkub"]
+atlas = SubResource("CompressedTexture2D_2v7n3")
+region = Rect2(128, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_euw47"]
 atlas = SubResource("CompressedTexture2D_2v7n3")
@@ -404,11 +429,13 @@ advance_condition = &"is_attack"
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"is_idle"
+advance_expression = "check_attack_state()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_r8nwp"]
 switch_mode = 2
 advance_mode = 2
 advance_condition = &"is_move"
+advance_expression = "check_attack_state()"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gtg7s"]
 advance_mode = 2
@@ -466,21 +493,27 @@ script = ExtResource("7_x8lll")
 damage = 2.0
 type = 0
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "hurtbox_component")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_slc2l"]
+radius = 100.0
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "hurtbox_component", "tracker_component")]
 collision_layer = 4
 collision_mask = 5
+platform_floor_layers = 4294901760
 script = ExtResource("1_ofamj")
 faction = 3
 velocity_component = NodePath("VelocityComponent")
 stats_component = NodePath("StatsComponent")
 hitbox_component = NodePath("HitboxComponent")
 hurtbox_component = NodePath("HurtboxComponent")
+tracker_component = NodePath("TrackerComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -5)
-texture = SubResource("AtlasTexture_qvkub")
+texture = SubResource("AtlasTexture_u7fsj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_upk1g")
 
@@ -503,8 +536,8 @@ parameters/move/blend_position = 0
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("1_s4nx0")]
 stats = NodePath("../StatsComponent")
-max_speed = 40.0
-acceleration = 5.0
+max_speed = 60.0
+acceleration = 10.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_pclgn")]
 
@@ -517,29 +550,38 @@ hitbox_component = NodePath("../HitboxComponent")
 hurtbox_component = NodePath("../HurtboxComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "effect_component", "stats_component") instance=ExtResource("5_emebw")]
-collision_mask = 0
 health_component = NodePath("../HealthComponent")
 effect_component = NodePath("../EffectComponent")
 stats_component = NodePath("../StatsComponent")
-faction = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_xxvn0")
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("6_lxtfo")]
-faction = 3
 damage_datas = Array[ExtResource("7_x8lll")]([SubResource("Resource_3mo3h")])
 damage_rate = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visible = false
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_xxvn0")
+
+[node name="TrackerComponent" parent="." instance=ExtResource("9_bx22s")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrackerComponent"]
+visible = false
+shape = SubResource("CircleShape2D_slc2l")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.2
 autostart = true
 
+[node name="LungeCooldown" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit_by_hurtbox" from="HitboxComponent" to="." method="_on_hitbox_component_hit_by_hurtbox"]
+[connection signal="target_updated" from="TrackerComponent" to="." method="_on_tracker_component_target_updated"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
