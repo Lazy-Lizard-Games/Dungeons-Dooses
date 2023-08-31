@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy1k81r6gaq0x"]
+
+[ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_tree_ui.gd" id="1_b5jw8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2roa"]
+bg_color = Color(0, 0.717647, 0.34902, 1)
+
+[node name="SkillTreeUI" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 0)
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_s2roa")
+script = ExtResource("1_b5jw8")
+
+[node name="Tree" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 25
+alignment = 1
+
+[node name="Set1" type="HBoxContainer" parent="Tree"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Set2" type="HBoxContainer" parent="Tree"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Set3" type="HBoxContainer" parent="Tree"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Set4" type="HBoxContainer" parent="Tree"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Set5" type="HBoxContainer" parent="Tree"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2

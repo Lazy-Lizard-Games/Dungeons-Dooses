@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=123 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -27,9 +27,12 @@
 [ext_resource type="Script" path="res://resources/damage_instance.gd" id="21_vais2"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="26_hhqhb"]
 [ext_resource type="PackedScene" uid="uid://kohbqslw7u3d" path="res://components/skills/skills_component.tscn" id="26_nmyqc"]
+[ext_resource type="Resource" uid="uid://dqu2ijryavq55" path="res://assets/skill_trees/warrior/berserker/berserker.tres" id="27_ffrd5"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/hud.gd" id="28_3nkrn"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/ui_controller.gd" id="28_ivycq"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/player_menu.gd" id="30_x2pea"]
+[ext_resource type="Script" path="res://assets/entities/player/ui/skill_menu.gd" id="32_ucd2u"]
+[ext_resource type="PackedScene" uid="uid://cy1k81r6gaq0x" path="res://scenes/ui/skill_menu/skill_tree_ui.tscn" id="33_5h6fn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yaysh"]
 atlas = ExtResource("6_o1pdo")
@@ -736,7 +739,7 @@ hitbox_component = NodePath("../HitboxComponent")
 
 [node name="SkillsComponent" parent="." node_paths=PackedStringArray("effect_component") instance=ExtResource("26_nmyqc")]
 effect_component = NodePath("../EffectComponent")
-skill_trees = Array[Resource("res://resources/skill_tree.gd")]([null])
+skill_trees = Array[Resource("res://resources/skill_tree.gd")]([ExtResource("27_ffrd5"), null, null])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "effect_component", "stats_component") instance=ExtResource("6_quhf5")]
 health_component = NodePath("../HealthComponent")
@@ -797,7 +800,6 @@ size_flags_vertical = 0
 columns = 3
 
 [node name="PlayerMenu" type="MarginContainer" parent="UI"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -811,11 +813,32 @@ script = ExtResource("30_x2pea")
 
 [node name="TabContainer" type="TabContainer" parent="UI/PlayerMenu"]
 layout_mode = 2
+size_flags_horizontal = 4
 tab_alignment = 1
 
 [node name="Inventory" type="MarginContainer" parent="UI/PlayerMenu/TabContainer"]
+visible = false
 layout_mode = 2
 
-[node name="Skills" type="MarginContainer" parent="UI/PlayerMenu/TabContainer"]
-visible = false
+[node name="SkillMenu" type="MarginContainer" parent="UI/PlayerMenu/TabContainer" node_paths=PackedStringArray("skills_component")]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 25
+script = ExtResource("32_ucd2u")
+skills_component = NodePath("../../../../SkillsComponent")
+
+[node name="TreesContainer" type="HBoxContainer" parent="UI/PlayerMenu/TabContainer/SkillMenu"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="SkillTreeUI" parent="UI/PlayerMenu/TabContainer/SkillMenu/TreesContainer" instance=ExtResource("33_5h6fn")]
+layout_mode = 2
+
+[node name="SkillTreeUI2" parent="UI/PlayerMenu/TabContainer/SkillMenu/TreesContainer" instance=ExtResource("33_5h6fn")]
+layout_mode = 2
+
+[node name="SkillTreeUI3" parent="UI/PlayerMenu/TabContainer/SkillMenu/TreesContainer" instance=ExtResource("33_5h6fn")]
 layout_mode = 2
