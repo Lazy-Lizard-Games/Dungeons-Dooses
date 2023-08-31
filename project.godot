@@ -21,6 +21,10 @@ Utility="*res://autoloads/utility.gd"
 FloatingTextManager="*res://autoloads/floating_text_manager.gd"
 Relationships="*res://autoloads/relationships.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [input]
 
 move_left={
@@ -109,3 +113,4 @@ dash={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0.129412, 0.317647, 0.447059, 1)

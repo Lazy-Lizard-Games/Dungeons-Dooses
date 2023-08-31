@@ -1,10 +1,12 @@
 extends Resource
 class_name SkillTree
 
+const SIZE = 5
+
 @export var name: String
-@export var theme: Theme
-@export var tier_1: Array[Skill]
-@export var tier_2: Array[Skill]
-@export var tier_3: Array[Skill]
-@export var tier_4: Array[Skill]
-@export var tier_5: Array[Skill]
+@export var color: Color
+@export var skill_sets: Array[SkillSet] = [null, null, null, null, null] :
+	set(new_sets):
+		if new_sets.size() >= SIZE:
+			new_sets.resize(SIZE)
+		skill_sets = new_sets

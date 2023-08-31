@@ -27,6 +27,7 @@ var attack_direction: Vector2 = Vector2.ZERO
 
 # Initialising ----------------------------------------------------------------------------------- #
 func _ready() -> void:
+	set_process_input(true)
 	at.active = true
 	state_manager.add_state(normal)
 	state_manager.add_state(attack)

@@ -41,7 +41,7 @@ func check_skills() -> void:
 func on_effect_added(effect: Effect) -> void:
 	var new_effect = effect_container.instantiate()
 	new_effect.effect = effect
-	effects_container.add_child(new_effect)
+	#effects_container.add_child(new_effect)
 
 
 func on_skills_updated(skills: Array[WeaponSkill]) -> void:

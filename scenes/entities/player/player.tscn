@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=121 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -32,11 +32,10 @@
 [ext_resource type="Script" path="res://assets/entities/player/ui/ui_controller.gd" id="28_ivycq"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/player_menu.gd" id="30_x2pea"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/skill_menu.gd" id="32_ucd2u"]
-[ext_resource type="PackedScene" uid="uid://cy1k81r6gaq0x" path="res://scenes/ui/skill_menu/skill_tree_ui.tscn" id="33_5h6fn"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yaysh"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rr4l7"]
 atlas = ExtResource("6_o1pdo")
-region = Rect2(8, 448, 32, 32)
+region = Rect2(8, 256, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_do8vc"]
 size = Vector2(10, 9)
@@ -49,10 +48,8 @@ region = Rect2(8, 16, 32, 32)
 atlas = ExtResource("6_o1pdo")
 region = Rect2(56, 16, 32, 32)
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yk8jn"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s6k1q"]
-atlas = SubResource("CompressedTexture2D_yk8jn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyc1a"]
+atlas = ExtResource("6_o1pdo")
 region = Rect2(104, 16, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oi712"]
@@ -82,7 +79,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("AtlasTexture_8ehb1"), SubResource("AtlasTexture_4r34k"), SubResource("AtlasTexture_s6k1q"), SubResource("AtlasTexture_oi712"), SubResource("AtlasTexture_7lllp"), SubResource("AtlasTexture_413fk")]
+"values": [SubResource("AtlasTexture_8ehb1"), SubResource("AtlasTexture_4r34k"), SubResource("AtlasTexture_qyc1a"), SubResource("AtlasTexture_oi712"), SubResource("AtlasTexture_7lllp"), SubResource("AtlasTexture_413fk")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -193,8 +190,8 @@ region = Rect2(8, 112, 32, 32)
 atlas = ExtResource("6_o1pdo")
 region = Rect2(56, 112, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_a0gr5"]
-atlas = SubResource("CompressedTexture2D_yk8jn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gwhkf"]
+atlas = ExtResource("6_o1pdo")
 region = Rect2(104, 112, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qatyj"]
@@ -223,7 +220,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("AtlasTexture_2yxu1"), SubResource("AtlasTexture_qabpt"), SubResource("AtlasTexture_a0gr5"), SubResource("AtlasTexture_qatyj"), SubResource("AtlasTexture_q1l2j"), SubResource("AtlasTexture_te0m0")]
+"values": [SubResource("AtlasTexture_2yxu1"), SubResource("AtlasTexture_qabpt"), SubResource("AtlasTexture_gwhkf"), SubResource("AtlasTexture_qatyj"), SubResource("AtlasTexture_q1l2j"), SubResource("AtlasTexture_te0m0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -258,8 +255,8 @@ region = Rect2(152, 160, 32, 32)
 atlas = ExtResource("6_o1pdo")
 region = Rect2(200, 160, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kkfj"]
-atlas = SubResource("CompressedTexture2D_yk8jn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_s74pw"]
+atlas = ExtResource("6_o1pdo")
 region = Rect2(248, 160, 32, 32)
 
 [sub_resource type="Animation" id="Animation_avwg4"]
@@ -276,7 +273,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("AtlasTexture_pebyp"), SubResource("AtlasTexture_plkwb"), SubResource("AtlasTexture_3nmii"), SubResource("AtlasTexture_bt4mm"), SubResource("AtlasTexture_gbh1w"), SubResource("AtlasTexture_1kkfj")]
+"values": [SubResource("AtlasTexture_pebyp"), SubResource("AtlasTexture_plkwb"), SubResource("AtlasTexture_3nmii"), SubResource("AtlasTexture_bt4mm"), SubResource("AtlasTexture_gbh1w"), SubResource("AtlasTexture_s74pw")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -311,8 +308,8 @@ region = Rect2(152, 208, 32, 32)
 atlas = ExtResource("6_o1pdo")
 region = Rect2(200, 208, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hln3e"]
-atlas = SubResource("CompressedTexture2D_yk8jn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vhfak"]
+atlas = ExtResource("6_o1pdo")
 region = Rect2(248, 208, 32, 32)
 
 [sub_resource type="Animation" id="Animation_wqtuf"]
@@ -329,7 +326,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("AtlasTexture_keup2"), SubResource("AtlasTexture_6imaa"), SubResource("AtlasTexture_k8jsl"), SubResource("AtlasTexture_nj2yj"), SubResource("AtlasTexture_35m11"), SubResource("AtlasTexture_hln3e")]
+"values": [SubResource("AtlasTexture_keup2"), SubResource("AtlasTexture_6imaa"), SubResource("AtlasTexture_k8jsl"), SubResource("AtlasTexture_nj2yj"), SubResource("AtlasTexture_35m11"), SubResource("AtlasTexture_vhfak")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -343,6 +340,10 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5cjxl"]
+atlas = ExtResource("6_o1pdo")
+region = Rect2(248, 208, 32, 32)
 
 [sub_resource type="Animation" id="Animation_l50ip"]
 resource_name = "walk_right"
@@ -358,7 +359,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("AtlasTexture_keup2"), SubResource("AtlasTexture_6imaa"), SubResource("AtlasTexture_k8jsl"), SubResource("AtlasTexture_nj2yj"), SubResource("AtlasTexture_35m11"), SubResource("AtlasTexture_hln3e")]
+"values": [SubResource("AtlasTexture_keup2"), SubResource("AtlasTexture_6imaa"), SubResource("AtlasTexture_k8jsl"), SubResource("AtlasTexture_nj2yj"), SubResource("AtlasTexture_35m11"), SubResource("AtlasTexture_5cjxl")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -372,10 +373,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [false]
 }
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rr4l7"]
-atlas = ExtResource("6_o1pdo")
-region = Rect2(8, 256, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8vjnc"]
 atlas = ExtResource("6_o1pdo")
@@ -393,8 +390,8 @@ region = Rect2(152, 256, 32, 32)
 atlas = ExtResource("6_o1pdo")
 region = Rect2(200, 256, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5r1i6"]
-atlas = SubResource("CompressedTexture2D_yk8jn")
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh2l0"]
+atlas = ExtResource("6_o1pdo")
 region = Rect2(248, 256, 32, 32)
 
 [sub_resource type="Animation" id="Animation_4uuc1"]
@@ -411,7 +408,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [SubResource("AtlasTexture_rr4l7"), SubResource("AtlasTexture_8vjnc"), SubResource("AtlasTexture_ajg5m"), SubResource("AtlasTexture_476d1"), SubResource("AtlasTexture_siqj5"), SubResource("AtlasTexture_5r1i6")]
+"values": [SubResource("AtlasTexture_rr4l7"), SubResource("AtlasTexture_8vjnc"), SubResource("AtlasTexture_ajg5m"), SubResource("AtlasTexture_476d1"), SubResource("AtlasTexture_siqj5"), SubResource("AtlasTexture_kh2l0")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -681,7 +678,7 @@ attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -8)
-texture = SubResource("AtlasTexture_yaysh")
+texture = SubResource("AtlasTexture_rr4l7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.5)
@@ -752,6 +749,7 @@ position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_sthwu")
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player", "hud", "menu")]
+follow_viewport_scale = 0.25
 script = ExtResource("28_ivycq")
 player = NodePath("..")
 hud = NodePath("HUD")
@@ -805,40 +803,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
 script = ExtResource("30_x2pea")
 
 [node name="TabContainer" type="TabContainer" parent="UI/PlayerMenu"]
+custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 tab_alignment = 1
 
 [node name="Inventory" type="MarginContainer" parent="UI/PlayerMenu/TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="SkillMenu" type="MarginContainer" parent="UI/PlayerMenu/TabContainer" node_paths=PackedStringArray("skills_component")]
+visible = false
 layout_mode = 2
-theme_override_constants/margin_left = 50
+theme_override_constants/margin_left = 25
 theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 50
+theme_override_constants/margin_right = 25
 theme_override_constants/margin_bottom = 25
 script = ExtResource("32_ucd2u")
 skills_component = NodePath("../../../../SkillsComponent")
 
 [node name="TreesContainer" type="HBoxContainer" parent="UI/PlayerMenu/TabContainer/SkillMenu"]
 layout_mode = 2
-theme_override_constants/separation = 50
+theme_override_constants/separation = 25
 alignment = 1
-
-[node name="SkillTreeUI" parent="UI/PlayerMenu/TabContainer/SkillMenu/TreesContainer" instance=ExtResource("33_5h6fn")]
-layout_mode = 2
-
-[node name="SkillTreeUI2" parent="UI/PlayerMenu/TabContainer/SkillMenu/TreesContainer" instance=ExtResource("33_5h6fn")]
-layout_mode = 2
-
-[node name="SkillTreeUI3" parent="UI/PlayerMenu/TabContainer/SkillMenu/TreesContainer" instance=ExtResource("33_5h6fn")]
-layout_mode = 2
