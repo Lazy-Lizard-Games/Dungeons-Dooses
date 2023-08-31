@@ -2,6 +2,7 @@ extends Node2D
 class_name WeaponComponent
 
 signal skill_casted(skill: WeaponSkill)
+signal skills_updated(weapon_skills: Array[WeaponSkill])
 
 @export var base_damage: float = 10
 @export var move_modifier: float = 1

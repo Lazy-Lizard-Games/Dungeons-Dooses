@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=2 format=3 uid="uid://ck8v41stvjg2u"]
+
+[ext_resource type="Script" path="res://resources/skill.gd" id="1_y8214"]
+
+[resource]
+script = ExtResource("1_y8214")
+name = "Thrill of the Kill"
+description = "Feel a surge of excitement as you bloody yourself in the lifeforce of your foes!"
+max_stacks = 5

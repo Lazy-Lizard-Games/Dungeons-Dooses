@@ -17,6 +17,7 @@ var effect_container = preload("res://scenes/ui/hud/effect_container.tscn")
 
 func _ready() -> void:
 	effect_component.effect_added.connect(on_effect_added)
+	weapon_component.skills_updated.connect(on_skills_updated)
 
 func _process(_delta: float) -> void:
 	check_labels()
@@ -38,7 +39,12 @@ func update_skill(index: int, skill: CenterContainer) -> void:
 		if weapon_component.weapon_skills[index].on_cooldown:
 			skill.modulate = Color.BLACK
 
+# Signal Connections --------------------------------------------------------- #
+
 func on_effect_added(effect: Effect) -> void:
 	var new_effect = effect_container.instantiate()
 	new_effect.effect = effect
 	effects_container.add_child(new_effect)
+
+func on_skills_updated(skills: Array[WeaponSkill]) -> void:
+	print(skills)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=118 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" path="res://resources/damage_instance.gd" id="21_vais2"]
 [ext_resource type="Script" path="res://assets/entities/player/hud.gd" id="22_ymuqr"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="26_hhqhb"]
+[ext_resource type="PackedScene" uid="uid://kohbqslw7u3d" path="res://components/skills/skills_component.tscn" id="26_nmyqc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pebyp"]
 atlas = ExtResource("6_o1pdo")
@@ -725,6 +726,16 @@ attack_right_res = SubResource("AnimationNodeAnimation_uuxwh")
 [node name="ProjectileComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("11_vh8ew")]
 stats_component = NodePath("../StatsComponent")
 
+[node name="EffectComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component", "projectile_component", "hitbox_component") instance=ExtResource("26_hhqhb")]
+stats_component = NodePath("../StatsComponent")
+health_component = NodePath("../HealthComponent")
+projectile_component = NodePath("../ProjectileComponent")
+hitbox_component = NodePath("../HitboxComponent")
+
+[node name="SkillsComponent" parent="." node_paths=PackedStringArray("effect_component") instance=ExtResource("26_nmyqc")]
+effect_component = NodePath("../EffectComponent")
+skill_trees = Array[Resource("res://resources/skill_tree.gd")]([null])
+
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "effect_component", "stats_component") instance=ExtResource("6_quhf5")]
 health_component = NodePath("../HealthComponent")
 effect_component = NodePath("../EffectComponent")
@@ -734,12 +745,6 @@ faction = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, -3.5)
 shape = SubResource("RectangleShape2D_sthwu")
-
-[node name="EffectComponent" parent="." node_paths=PackedStringArray("stats_component", "health_component", "projectile_component", "hitbox_component") instance=ExtResource("26_hhqhb")]
-stats_component = NodePath("../StatsComponent")
-health_component = NodePath("../HealthComponent")
-projectile_component = NodePath("../ProjectileComponent")
-hitbox_component = NodePath("../HitboxComponent")
 
 [node name="HUD" type="CanvasLayer" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "weapon_component", "effect_component")]
 script = ExtResource("22_ymuqr")

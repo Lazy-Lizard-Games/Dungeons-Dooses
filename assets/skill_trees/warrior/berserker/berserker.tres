@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SkillTree" load_steps=3 format=3 uid="uid://dqu2ijryavq55"]
+
+[ext_resource type="Script" path="res://resources/skill_tree.gd" id="1_0viyq"]
+[ext_resource type="Resource" uid="uid://ck8v41stvjg2u" path="res://assets/skill_trees/warrior/berserker/skills/kill_thrill.tres" id="2_a3hju"]
+
+[resource]
+script = ExtResource("1_0viyq")
+name = "Berserker"
+tier_1 = Array[Resource("res://resources/skill.gd")]([ExtResource("2_a3hju")])
+tier_2 = Array[Resource("res://resources/skill.gd")]([])
+tier_3 = Array[Resource("res://resources/skill.gd")]([])
+tier_4 = Array[Resource("res://resources/skill.gd")]([])
+tier_5 = Array[Resource("res://resources/skill.gd")]([])
