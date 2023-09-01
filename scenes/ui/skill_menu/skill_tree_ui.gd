@@ -2,17 +2,18 @@ extends PanelContainer
 class_name SkillTreeUI
 
 
-@export var skill_tree: SkillTree
-
-
+@export var active: bool
 @onready var tree: VBoxContainer = $MarginContainer/Tree
 
 
-func _ready() -> void:
-	update_tree(skill_tree)
+func clear() -> void:
+	var sets: Array[Node] = tree.get_children()
+	for set in sets:
+		for child in set.get_children():
+			set.remove_child(child)
 
 
-func update_tree(skill_tree: SkillTree) -> void:
+func set_tree(skill_tree: SkillTree) -> void:
 	self["theme_override_styles/panel"].bg_color = skill_tree.color
 	var sets: Array[Node] = tree.get_children()
 	for i in range(sets.size()):
@@ -29,3 +30,4 @@ func update_tree(skill_tree: SkillTree) -> void:
 				rect = MarginContainer.new()
 			rect.custom_minimum_size = Vector2(75, 75)
 			sets[i].add_child(rect)
+	pivot_offset = size/2
