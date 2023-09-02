@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://kvnnn3ax021c"]
+
+[ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_slot.gd" id="1_4652r"]
+
+[node name="SkillSlot" type="MarginContainer"]
+script = ExtResource("1_4652r")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+mouse_filter = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_focus_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_focus_exited"]

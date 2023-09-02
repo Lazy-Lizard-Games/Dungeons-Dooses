@@ -6,7 +6,7 @@
 
 [sub_resource type="Resource" id="Resource_4mghm"]
 script = ExtResource("2_62cye")
-skills = Array[Resource("res://resources/skill.gd")]([ExtResource("2_a3hju"), null, null])
+skills = Array[Resource("res://resources/skill.gd")]([null, ExtResource("2_a3hju"), null])
 
 [sub_resource type="Resource" id="Resource_rfpes"]
 script = ExtResource("2_62cye")
@@ -14,7 +14,7 @@ skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
 
 [sub_resource type="Resource" id="Resource_jkmma"]
 script = ExtResource("2_62cye")
-skills = Array[Resource("res://resources/skill.gd")]([null, ExtResource("2_a3hju"), ExtResource("2_a3hju")])
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
 
 [sub_resource type="Resource" id="Resource_y12um"]
 script = ExtResource("2_62cye")

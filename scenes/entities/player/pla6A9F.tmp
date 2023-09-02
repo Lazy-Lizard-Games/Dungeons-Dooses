@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=140 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -30,6 +30,8 @@
 [ext_resource type="Resource" uid="uid://dqu2ijryavq55" path="res://assets/skill_trees/warrior/berserker/berserker.tres" id="27_ffrd5"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/hud.gd" id="28_3nkrn"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/ui_controller.gd" id="28_ivycq"]
+[ext_resource type="Script" path="res://resources/skill_tree.gd" id="28_pke34"]
+[ext_resource type="Script" path="res://resources/skill_set.gd" id="29_2r2r7"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/player_menu.gd" id="30_x2pea"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/skill_menu.gd" id="32_ucd2u"]
 [ext_resource type="PackedScene" uid="uid://cy1k81r6gaq0x" path="res://scenes/ui/skill_menu/skill_tree_ui.tscn" id="33_ey47b"]
@@ -660,6 +662,58 @@ animation = &"slash_left"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uuxwh"]
 animation = &"slash_right"
 
+[sub_resource type="Resource" id="Resource_l0dt2"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_4l6cm"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_i6mh0"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_lhjxb"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_jlpaw"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_bx7la"]
+script = ExtResource("28_pke34")
+name = ""
+color = Color(0.145098, 0.243137, 0.803922, 1)
+skill_sets = Array[ExtResource("29_2r2r7")]([SubResource("Resource_l0dt2"), SubResource("Resource_4l6cm"), SubResource("Resource_i6mh0"), SubResource("Resource_lhjxb"), SubResource("Resource_jlpaw")])
+
+[sub_resource type="Resource" id="Resource_ullp4"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_im1ho"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_kkefk"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_vcayv"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_nabfd"]
+script = ExtResource("29_2r2r7")
+skills = Array[Resource("res://resources/skill.gd")]([null, null, null])
+
+[sub_resource type="Resource" id="Resource_afvn8"]
+script = ExtResource("28_pke34")
+name = ""
+color = Color(0.415686, 0.317647, 0, 1)
+skill_sets = Array[ExtResource("29_2r2r7")]([SubResource("Resource_ullp4"), SubResource("Resource_im1ho"), SubResource("Resource_kkefk"), SubResource("Resource_vcayv"), SubResource("Resource_nabfd")])
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sthwu"]
 size = Vector2(10, 9)
 
@@ -747,8 +801,7 @@ hitbox_component = NodePath("../HitboxComponent")
 
 [node name="SkillsComponent" parent="." node_paths=PackedStringArray("effect_component") instance=ExtResource("26_nmyqc")]
 effect_component = NodePath("../EffectComponent")
-skill_trees = Array[Resource("res://resources/skill_tree.gd")]([ExtResource("27_ffrd5"), null, null])
-skill_points = 10
+skill_trees = Array[ExtResource("28_pke34")]([ExtResource("27_ffrd5"), SubResource("Resource_bx7la"), SubResource("Resource_afvn8")])
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "effect_component", "stats_component") instance=ExtResource("6_quhf5")]
 health_component = NodePath("../HealthComponent")
@@ -810,7 +863,6 @@ size_flags_vertical = 0
 columns = 3
 
 [node name="PlayerMenu" type="MarginContainer" parent="UI"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -882,23 +934,12 @@ focus_mode = 0
 text = "Right
 "
 
-[node name="SideBar" type="VBoxContainer" parent="UI/PlayerMenu/TabContainer/SkillMenu/ForegroundContainer"]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="UI/PlayerMenu/TabContainer/SkillMenu/ForegroundContainer/SideBar"]
-layout_mode = 2
-size_flags_horizontal = 0
-
-[node name="SkillPoints" type="Label" parent="UI/PlayerMenu/TabContainer/SkillMenu/ForegroundContainer/SideBar/PanelContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-text = "Skill Points: 0"
-
-[node name="SkillInfoCard" parent="UI/PlayerMenu/TabContainer/SkillMenu/ForegroundContainer/SideBar" instance=ExtResource("36_726ae")]
+[node name="SkillInfoCard" parent="UI/PlayerMenu/TabContainer/SkillMenu/ForegroundContainer" instance=ExtResource("36_726ae")]
 layout_mode = 2
 size_flags_vertical = 0
 
 [node name="Inventory" type="MarginContainer" parent="UI/PlayerMenu/TabContainer"]
+visible = false
 layout_mode = 2
 
 [connection signal="pressed" from="UI/PlayerMenu/TabContainer/SkillMenu/ForegroundContainer/Left" to="UI/PlayerMenu/TabContainer/SkillMenu" method="_on_left_pressed"]

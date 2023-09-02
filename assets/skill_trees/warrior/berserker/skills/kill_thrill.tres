@@ -7,3 +7,4 @@ script = ExtResource("1_y8214")
 name = "Thrill of the Kill"
 description = "Feel a surge of excitement as you bloody yourself in the lifeforce of your foes!"
 max_stacks = 5
+color = Color(0.941176, 0.972549, 1, 1)

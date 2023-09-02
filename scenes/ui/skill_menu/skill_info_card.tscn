@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://jfbw485hr7ws"]
+
+[ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_info_card.gd" id="1_xoi41"]
+
+[node name="SkillInfoCard" type="PanelContainer"]
+custom_minimum_size = Vector2(250, 0)
+script = ExtResource("1_xoi41")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Description" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Stacks" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+horizontal_alignment = 1

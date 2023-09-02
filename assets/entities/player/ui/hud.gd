@@ -11,7 +11,7 @@ class_name HUD
 @onready var speed_label: Label = $VBoxContainer/SpeedLabel
 
 @onready var skills_container = $SkillsContainer
-@onready var effects_container: GridContainer = $MarginContainer/EffectsContainer
+#@onready var effects_container: GridContainer = $MarginContainer/EffectsContainer
 
 var effect_container = preload("res://scenes/ui/hud/effect_container.tscn")
 
