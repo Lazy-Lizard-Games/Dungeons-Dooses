@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://bg41x74lh4l01"]
+
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_pcwd8"]
+[ext_resource type="PackedScene" uid="uid://c516jmucrhgbb" path="res://scenes/effects/blood/blood.tscn" id="1_tv8au"]
+
+[resource]
+script = ExtResource("1_pcwd8")
+effect_scene = ExtResource("1_tv8au")
+max_stacks = 20
+chance = 1.0

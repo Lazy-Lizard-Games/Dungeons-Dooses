@@ -68,8 +68,6 @@ func _on_right_pressed():
 func _on_focus_changed(state: bool, skill: Skill) -> void:
 	if state:
 		skill_info_card.set_skill(skill)
-#	else:
-#		skill_info_card.clear_skill()
 
 
 func _on_slot_clicked(skill: Skill) -> void:

@@ -12,6 +12,7 @@ class_name Player
 @export var stats_component: StatsComponent
 @export var hitbox_component: HitboxComponent
 @export var weapon_component: WeaponComponent
+@export var skill_component: SkillsComponent
 @export_group("Animation Resource Paths")
 @export_file var attack_left
 @export_file var attack_right
@@ -36,9 +37,14 @@ func _ready() -> void:
 	hitbox_component.faction = faction
 # ------------------------------------------------------------------------------------------------ #
 
+func _unhandled_input(event):
+	if Input.is_action_just_pressed("holster"):
+		skill_component.clear_skills()
+
 # Update handling -------------------------------------------------------------------------------- #
 func _physics_process(_delta: float) -> void:
 	$HealthComponent.current_health += 5
+	
 	direction = Vector2.ZERO
 	if is_processing_input():
 		direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
@@ -92,7 +98,7 @@ func check_dash_state() -> bool:
 	return true
 # ------------------------------------------------------------------------------------------------ #
 
-# Input Checks ----------------------------------------------------------------------------------- #
+# Action Input Checks ----------------------------------------------------------------------------------- #
 func check_attack() -> void:
 	if is_processing_input():
 		if Input.is_action_pressed("primary"):

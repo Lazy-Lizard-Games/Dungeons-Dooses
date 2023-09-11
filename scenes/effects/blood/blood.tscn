@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c516jmucrhgbb"]
+
+[ext_resource type="Script" path="res://scenes/effects/blood/blood.gd" id="1_nnt4g"]
+
+[node name="Blood" type="Node2D"]
+script = ExtResource("1_nnt4g")
+attack_speed = 0.5
+
+[node name="ExpireTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ExpireTimer" to="." method="_on_expire_timer_timeout"]

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://dkla534oryfv2"]
+
+[ext_resource type="PackedScene" uid="uid://b0nutj82fkwb7" path="res://scenes/effects/thrill_kill/thrill_kill.tscn" id="1_mgru3"]
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_w6cjb"]
+
+[resource]
+script = ExtResource("1_w6cjb")
+effect_scene = ExtResource("1_mgru3")
+max_stacks = 5
+chance = 1.0

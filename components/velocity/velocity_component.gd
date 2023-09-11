@@ -8,7 +8,7 @@ class_name VelocityComponent
 
 var calculated_max_speed : float :
 	get:
-		return max_speed * stats.speed_mult if stats else max_speed
+		return max_speed * stats.move_speed_mult if stats else max_speed
 var calculated_acceleration: float :
 	get:
 		return acceleration * stats.accelerate_mult if stats else acceleration

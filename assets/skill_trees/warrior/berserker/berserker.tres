@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://resources/skill_tree.gd" id="1_0viyq"]
 [ext_resource type="Script" path="res://resources/skill_set.gd" id="2_62cye"]
-[ext_resource type="Resource" uid="uid://ck8v41stvjg2u" path="res://assets/skill_trees/warrior/berserker/skills/kill_thrill.tres" id="2_a3hju"]
+[ext_resource type="Resource" uid="uid://ck8v41stvjg2u" path="res://assets/skill_trees/warrior/berserker/skills/thrill_kill.tres" id="3_3uc4b"]
 
 [sub_resource type="Resource" id="Resource_4mghm"]
 script = ExtResource("2_62cye")
-skills = Array[Resource("res://resources/skill.gd")]([null, ExtResource("2_a3hju"), null])
+skills = Array[Resource("res://resources/skill.gd")]([null, ExtResource("3_3uc4b"), null])
 
 [sub_resource type="Resource" id="Resource_rfpes"]
 script = ExtResource("2_62cye")

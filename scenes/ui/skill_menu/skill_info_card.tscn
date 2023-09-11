@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://jfbw485hr7ws"]
+[gd_scene load_steps=3 format=3 uid="uid://jfbw485hr7ws"]
 
 [ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_info_card.gd" id="1_xoi41"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kkwhc"]
+font_color = Color(0.341176, 0.466667, 0.745098, 1)
 
 [node name="SkillInfoCard" type="PanelContainer"]
 custom_minimum_size = Vector2(250, 0)
@@ -17,6 +20,19 @@ autowrap_mode = 3
 [node name="Description" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CurrentEffect" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="NextEffect" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+label_settings = SubResource("LabelSettings_kkwhc")
 horizontal_alignment = 1
 autowrap_mode = 3
 
