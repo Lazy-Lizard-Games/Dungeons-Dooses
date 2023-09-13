@@ -18,12 +18,14 @@ func clear_skills() -> void:
 					continue
 				skill_points += skill.stacks
 				skill.stacks = 0
-				effect_component.remove_effect(skill.effect_instance)
+				for effect_instance in skill.effect_instances:
+					effect_component.remove_effect(effect_instance)
 	skill_menu.update_ui()
 
 func buy_skill(skill: Skill) -> bool:
 	if skill_points > 0 and skill.stacks < skill.max_stacks:
-		effect_component.add_effect(skill.effect_instance)
+		for effect_instance in skill.effect_instances:
+			effect_component.add_effect(effect_instance)
 		skill.stacks += 1
 		skill_points -= 1
 		return true

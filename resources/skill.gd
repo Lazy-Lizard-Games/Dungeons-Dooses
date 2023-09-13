@@ -2,18 +2,15 @@ extends Resource
 class_name Skill
 
 @export var name: String
-@export var description: String
-@export var max_stacks: int:
-	set(value):
-		if effect_instance:
-			effect_instance.max_stacks = value
-		max_stacks = value
-@export var effect_instance: EffectInstance
+@export_multiline var description: String
+@export var max_stacks: int = 5
+@export var effect_instances: Array[EffectInstance]
 @export var color: Color = Color.ALICE_BLUE
-@export_multiline var details: Array[String]
 var stacks = 0
 
-func get_detail(index) -> String:
-	if index >= details.size() or index < 0:
-		return ""
-	return details[index]
+func get_effect_description(stacks: int) -> String:
+	var desc = ""
+	for effect_instance in effect_instances:
+		desc += effect_instance.get_description(stacks)
+		desc += "\n"
+	return desc

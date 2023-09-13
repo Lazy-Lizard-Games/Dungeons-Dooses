@@ -8,14 +8,8 @@ extends Effect
 # the player currently has.
 
 @export var stamina_regen_per_stack: float = 0.025
-@export var bloodlust_instance: EffectInstance
 @export var blood_instance: EffectInstance
 var blood_effect: Effect
-
-
-func _ready():
-	if bloodlust_instance:
-		container.add_effect(bloodlust_instance)
 
 
 func _process(delta):
@@ -36,6 +30,11 @@ func _add_stack() -> void:
 		container.stats_component.stamina_regen_mult -= blood_effect.stacks * (stacks-1) * stamina_regen_per_stack
 		on_blood_stack_changed(blood_effect.stacks)
 
+
+func _get_description() -> String:
+	var effect = stamina_regen_per_stack*stacks
+	var desc = "Stamina Regen: +%s" % effect
+	return desc+"%"
 
 func on_blood_stack_changed(change: int) -> void:
 	container.stats_component.stamina_regen_mult += change * stacks * stamina_regen_per_stack

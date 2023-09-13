@@ -1,14 +1,12 @@
-[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://ck8v41stvjg2u"]
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://ck8v41stvjg2u"]
 
-[ext_resource type="Resource" uid="uid://dkla534oryfv2" path="res://assets/effects/berserker/thrill_kill.tres" id="1_tagf0"]
+[ext_resource type="Resource" uid="uid://clber6efyryq4" path="res://assets/effects/berserker/bloodlust.tres" id="1_hcki0"]
 [ext_resource type="Script" path="res://resources/skill.gd" id="2_7vy0j"]
+[ext_resource type="Resource" uid="uid://dkla534oryfv2" path="res://assets/effects/berserker/thrill_kill.tres" id="2_46n0o"]
 
 [resource]
 script = ExtResource("2_7vy0j")
 name = "Thrill of the Kill"
-description = "Feel a surge of excitement as you bloody yourself in the lifeforce of your foes!"
-max_stacks = 5
-effect_instance = ExtResource("1_tagf0")
+description = "Feel the ecstacy of blood. Increase stamina regen per stack of blood."
+effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_hcki0"), ExtResource("2_46n0o")])
 color = Color(0.941176, 0.972549, 1, 1)
-details = Array[String](["Gain stacks of blood on damaging an enemy. Stacks increase attack speed by 0.05%.
-+0.25% Stamina Regen Per Stack", "+0.5% Stamina Regen Per Stack", "+0.75% Stamina Regen Per Stack", "+1.0% Stamina Regen Per Stack", "+1.25% Stamina Regen Per Stack"])

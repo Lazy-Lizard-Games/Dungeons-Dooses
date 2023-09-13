@@ -30,6 +30,6 @@ func update() -> void:
 		return
 	skill_name.text = skill.name
 	description.text = skill.description
-	current_effect.text = skill.get_detail(skill.stacks-1)
-	next_effect.text = skill.get_detail(skill.stacks)
+	current_effect.text = skill.get_effect_description(skill.stacks)
+	next_effect.text = skill.get_effect_description(skill.stacks+1)
 	stacks.text = "%s / %s" % [skill.stacks, skill.max_stacks]
