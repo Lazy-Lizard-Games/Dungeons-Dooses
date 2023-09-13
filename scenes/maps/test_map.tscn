@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=13 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://datk0irfypdeu" path="res://components/health/health_component.tscn" id="1_s68bj"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://scenes/entities/player/player.tscn" id="2_qc57j"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="3_fytlx"]
 [ext_resource type="PackedScene" uid="uid://xqp6to0vit3c" path="res://scenes/effects/on_fire/on_fire.tscn" id="6_0jdpd"]
 [ext_resource type="Script" path="res://resources/effect_instance.gd" id="7_lac0n"]
-[ext_resource type="PackedScene" uid="uid://dlt3ha7g0ra6u" path="res://scenes/entities/slime/slime.tscn" id="8_3so2w"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3j64n"]
 size = Vector2(20, 20)
@@ -62,13 +61,3 @@ damage_rate = 1.0
 shape = SubResource("RectangleShape2D_rgk83")
 
 [node name="Player" parent="." instance=ExtResource("2_qc57j")]
-
-[node name="Slime" parent="." instance=ExtResource("8_3so2w")]
-position = Vector2(0, 67)
-
-[node name="Slime2" parent="." node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "hurtbox_component") instance=ExtResource("8_3so2w")]
-position = Vector2(-48, 3)
-velocity_component = NodePath("../Slime/VelocityComponent")
-stats_component = NodePath("../Slime/StatsComponent")
-hitbox_component = NodePath("../Slime/HitboxComponent")
-hurtbox_component = NodePath("../Slime/HurtboxComponent")

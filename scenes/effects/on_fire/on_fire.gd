@@ -4,52 +4,40 @@ extends Effect
 @export var tick_rate: float = 5
 @export var duration: float = 5
 
-@onready var timer: Timer = $Timer
-@onready var tick_timer: Timer = $TickRate
-
-var fire_stacks: Array[TimedVariant]
+@onready var damage_timer: Timer = $DamageTimer
+@onready var decay_timer: Timer = $DecayTimer
 
 var damage: DamageData
 
+
 func _ready() -> void:
-	var damage_data = DamageData.new()
-	damage_data.damage = damage_per_tick
-	damage_data.type = Globals.DAMAGE_TYPES.FIRE
-	damage = damage_data
-	tick_timer.start(1/tick_rate)
-	timer.start(duration)
+	damage = DamageData.new()
+	damage.type = Globals.DAMAGE_TYPES.FIRE
+	damage_timer.start(1/tick_rate)
+	decay_timer.start(duration)
+
 
 func _add_stack() -> void:
-	var fire_stack = TimedVariant.new()
-	add_child(fire_stack)
-	if fire_stacks.size() >= effect_instance.max_stacks:
-		fire_stacks.remove_at(0)
-	fire_stack.timeout.connect(_on_fire_stack_end)
-	fire_stack.start(fire_stack, duration)
-	fire_stacks.append(fire_stack)
-	stacks = fire_stacks.size()
-	self.emit_signal("stack_changed", 1)
+	var prev_stacks = stacks
+	stacks = min(stacks + 1, effect_instance.max_stacks)
+	decay_timer.start(duration)
+	if prev_stacks != stacks:
+		stack_changed.emit(stacks - prev_stacks)
+
 
 func _remove_stack() -> void:
-	_on_fire_stack_end(fire_stacks[fire_stacks.size()-1])
+	var prev_stacks = stacks
+	stacks = max(stacks - 1, 0)
+	if prev_stacks != stacks:
+		stack_changed.emit(stacks - prev_stacks)
 
-func _on_fire_stack_end(fire_stack: TimedVariant) -> void:
-	remove_child(fire_stack)
-	fire_stacks.remove_at(fire_stacks.find(fire_stack))
-	stacks = fire_stacks.size()
-	self.emit_signal("stack_changed", -1)
 
-func _on_stack_change(change: int) -> void:
-	if change > 0:
-		timer.stop()
-		timer.wait_time = duration
-		timer.start()
-
-func _on_timer_timeout() -> void:
-	queue_free()
-
-func _on_tick_rate_timeout() -> void:
+func _on_damage_timer_timeout() -> void:
 	if not container.hitbox_component:
 		return
-	damage.damage = damage_per_tick * fire_stacks.size()
+	damage.damage = damage_per_tick * stacks
 	container.hitbox_component.deal_damage_with_transforms(damage)
+
+
+func _on_decay_timer_timeout():
+	exit_tree()
