@@ -1,43 +1,85 @@
-[gd_scene load_steps=3 format=3 uid="uid://jfbw485hr7ws"]
+[gd_scene load_steps=2 format=3 uid="uid://jfbw485hr7ws"]
 
 [ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_info_card.gd" id="1_xoi41"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_kkwhc"]
-font_color = Color(0.341176, 0.466667, 0.745098, 1)
-
 [node name="SkillInfoCard" type="PanelContainer"]
-custom_minimum_size = Vector2(250, 0)
+custom_minimum_size = Vector2(350, 0)
 script = ExtResource("1_xoi41")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="VBoxContainer"]
+[node name="SkillName" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-horizontal_alignment = 1
-autowrap_mode = 3
+theme_override_font_sizes/bold_font_size = 24
+bbcode_enabled = true
+text = "[center][b]Skill Name[/b][/center]"
+fit_content = true
+scroll_active = false
 
-[node name="Description" type="Label" parent="VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
-horizontal_alignment = 1
-autowrap_mode = 3
+bbcode_enabled = true
+text = "The skill description that should give the player enough information about the skill so they know how to use it."
+fit_content = true
+scroll_active = false
 
-[node name="CurrentEffect" type="Label" parent="VBoxContainer"]
+[node name="CurrentContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
-horizontal_alignment = 1
-autowrap_mode = 3
 
-[node name="NextEffect" type="Label" parent="VBoxContainer"]
+[node name="TopMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/CurrentContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
-label_settings = SubResource("LabelSettings_kkwhc")
-horizontal_alignment = 1
-autowrap_mode = 3
+theme_override_constants/margin_top = 10
 
-[node name="Stacks" type="Label" parent="VBoxContainer"]
+[node name="HeaderLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CurrentContainer"]
 layout_mode = 2
-size_flags_horizontal = 8
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 20
+bbcode_enabled = true
+text = "[color=mediumspringgreen]Current Effect:[/color]"
+fit_content = true
+scroll_active = false
+
+[node name="EffectLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/CurrentContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=springgreen]The current effect being recieved by the skill."
+fit_content = true
+scroll_active = false
+
+[node name="NextContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TopMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/NextContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="HeaderLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NextContainer"]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 20
+bbcode_enabled = true
+text = "[color=darkorange]Next Effect:[/color]"
+fit_content = true
+scroll_active = false
+
+[node name="EffectLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/NextContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[color=orange]The next effect to be recieved by the skill."
+fit_content = true
+scroll_active = false
+
+[node name="Stacks" type="RichTextLabel" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
 size_flags_vertical = 0
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[right]0 / 5[/right]"
+fit_content = true
+scroll_active = false

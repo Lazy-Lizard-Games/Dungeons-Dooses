@@ -22,7 +22,7 @@ func _remove_stack() -> void:
 		exit_tree()
 
 func _get_description() -> String:
-	return "No description!"
+	return ""
 
 func exit_tree() -> void:
 	exited_tree.emit(self)

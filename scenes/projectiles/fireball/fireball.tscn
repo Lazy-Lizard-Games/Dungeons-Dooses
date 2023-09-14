@@ -41,7 +41,7 @@ region = Rect2(480, 0, 48, 40)
 
 [sub_resource type="Animation" id="Animation_y3ca7"]
 resource_name = "death"
-length = 1.2
+length = 0.6
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -49,7 +49,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [SubResource("AtlasTexture_llsyn"), SubResource("AtlasTexture_5l1ty"), SubResource("AtlasTexture_nhr04"), SubResource("AtlasTexture_fw3jd"), SubResource("AtlasTexture_t3b40"), SubResource("AtlasTexture_3hnb8")]
@@ -69,7 +69,7 @@ region = Rect2(144, 0, 48, 40)
 
 [sub_resource type="Animation" id="Animation_cqfq0"]
 resource_name = "normal"
-length = 0.8
+length = 0.4
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -78,7 +78,7 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [SubResource("AtlasTexture_x7r5r"), SubResource("AtlasTexture_yvrjw"), SubResource("AtlasTexture_1tpff"), SubResource("AtlasTexture_rykcx")]
@@ -97,6 +97,7 @@ velocity_component = NodePath("VelocityComponent")
 hurtbox_component = NodePath("HurtboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -1)
 texture = SubResource("AtlasTexture_x7r5r")
 
@@ -106,6 +107,7 @@ shape = SubResource("CircleShape2D_he6q8")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("1_bbj4x")]
 max_speed = 200.0
+acceleration = 50.0
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_04by2")]
 faction = 1

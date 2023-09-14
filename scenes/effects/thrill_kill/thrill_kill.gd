@@ -33,7 +33,7 @@ func _add_stack() -> void:
 
 func _get_description() -> String:
 	var effect = stamina_regen_per_stack*stacks
-	var desc = "Stamina Regen: +%s" % effect
+	var desc = "[b]Stamina Regen/s[/b]: +%s" % effect
 	return desc+"%"
 
 func on_blood_stack_changed(change: int) -> void:

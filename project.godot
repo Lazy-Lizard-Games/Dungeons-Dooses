@@ -25,6 +25,7 @@ Relationships="*res://autoloads/relationships.gd"
 [display]
 
 window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 
 [input]
 
@@ -110,7 +111,3 @@ dash={
 2d_physics/layer_2="Interactables"
 2d_physics/layer_3="Entities"
 2d_physics/layer_4="Projectiles"
-
-[rendering]
-
-textures/canvas_textures/default_texture_filter=0

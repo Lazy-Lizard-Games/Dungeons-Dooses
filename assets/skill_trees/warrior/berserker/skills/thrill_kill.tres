@@ -7,6 +7,13 @@
 [resource]
 script = ExtResource("2_7vy0j")
 name = "Thrill of the Kill"
-description = "Feel the ecstacy of blood. Increase stamina regen per stack of blood."
+description = "Increase [b]Stamina Regen[/b] per stack of [b][color=red]Blood[/color][/b].
+
+Gain [b][color=red]Blood[/color][/b] stacks by damaging enemies.
+
+[font_size=14][b]Max [color=red]Blood[/color] stacks[/b]: 20
+[b]Duration[/b]: 5s
+[b]Attack Speed[/b]: +0.05% per [b][color=red]Blood[/color][/b] stack[/font_size]"
+max_stacks = 5
 effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_hcki0"), ExtResource("2_46n0o")])
 color = Color(0.941176, 0.972549, 1, 1)

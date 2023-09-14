@@ -693,6 +693,7 @@ attack_up = "res://assets/characters/player/attacks/attack_up_tres"
 attack_down = "res://assets/characters/player/attacks/attack_down_tres"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(0, -8)
 texture = SubResource("AtlasTexture_yaysh")
 
