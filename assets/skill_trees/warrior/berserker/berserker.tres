@@ -1,12 +1,13 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=9 format=3 uid="uid://dqu2ijryavq55"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=10 format=3 uid="uid://dqu2ijryavq55"]
 
 [ext_resource type="Script" path="res://resources/skill_tree.gd" id="1_0viyq"]
 [ext_resource type="Script" path="res://resources/skill_set.gd" id="2_62cye"]
 [ext_resource type="Resource" uid="uid://ck8v41stvjg2u" path="res://assets/skill_trees/warrior/berserker/skills/thrill_kill.tres" id="3_3uc4b"]
+[ext_resource type="Resource" uid="uid://bxvfh1k1uj5xi" path="res://assets/skill_trees/warrior/berserker/skills/thrill_hunt.tres" id="3_rcsyo"]
 
 [sub_resource type="Resource" id="Resource_4mghm"]
 script = ExtResource("2_62cye")
-skills = Array[Resource("res://resources/skill.gd")]([null, ExtResource("3_3uc4b"), null])
+skills = Array[Resource("res://resources/skill.gd")]([ExtResource("3_rcsyo"), null, ExtResource("3_3uc4b")])
 
 [sub_resource type="Resource" id="Resource_rfpes"]
 script = ExtResource("2_62cye")
