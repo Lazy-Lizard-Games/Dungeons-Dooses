@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cj785qoixkkq8"]
+
+[ext_resource type="Script" path="res://resources/skill.gd" id="1_lvqrp"]
+[ext_resource type="Resource" uid="uid://darhymqp1jhff" path="res://assets/effects/berserker/vampire.tres" id="1_shtns"]
+
+[resource]
+script = ExtResource("1_lvqrp")
+name = "Vampire"
+description = "Gain a percent of your kill's [b]Max Health[/b] per [b][color=red]blood[/color][/b] stack."
+max_stacks = 4
+effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_shtns")])
+color = Color(0.941176, 0.972549, 1, 1)

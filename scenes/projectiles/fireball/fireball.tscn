@@ -5,19 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_04by2"]
 [ext_resource type="Texture2D" uid="uid://dcq0w5nqqosb0" path="res://assets/projectiles/fireball/fireball_spritesheet.png" id="2_htqsr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x7r5r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_llsyn"]
 atlas = ExtResource("2_htqsr")
-region = Rect2(0, 0, 48, 40)
+region = Rect2(240, 0, 48, 40)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_he6q8"]
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yumrq"]
 radius = 7.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_llsyn"]
-atlas = ExtResource("2_htqsr")
-region = Rect2(240, 0, 48, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5l1ty"]
 atlas = ExtResource("2_htqsr")
@@ -54,6 +50,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [SubResource("AtlasTexture_llsyn"), SubResource("AtlasTexture_5l1ty"), SubResource("AtlasTexture_nhr04"), SubResource("AtlasTexture_fw3jd"), SubResource("AtlasTexture_t3b40"), SubResource("AtlasTexture_3hnb8")]
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7r5r"]
+atlas = ExtResource("2_htqsr")
+region = Rect2(0, 0, 48, 40)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yvrjw"]
 atlas = ExtResource("2_htqsr")
@@ -99,7 +99,7 @@ hurtbox_component = NodePath("HurtboxComponent")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -1)
-texture = SubResource("AtlasTexture_x7r5r")
+texture = SubResource("AtlasTexture_llsyn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(14, 0)
@@ -126,4 +126,5 @@ wait_time = 5.0
 autostart = true
 
 [connection signal="entity_damaged" from="HurtboxComponent" to="." method="_on_entity_damaged"]
+[connection signal="entity_killed" from="HurtboxComponent" to="." method="_on_hurtbox_component_entity_killed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

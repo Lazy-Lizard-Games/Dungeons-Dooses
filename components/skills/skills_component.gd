@@ -8,18 +8,17 @@ class_name SkillsComponent
 
 func clear_skills() -> void:
 	for skill_tree in skill_trees:
-		if not skill_tree:
-			continue
-		for skill_set in skill_tree.skill_sets:
-			if not skill_set:
-				continue
-			for skill in skill_set.skills:
-				if not skill:
-					continue
-				skill_points += skill.stacks
-				skill.stacks = 0
-				for effect_instance in skill.effect_instances:
-					effect_component.remove_effect(effect_instance)
+		if skill_tree:
+			for skill_set in skill_tree.skill_sets:
+				if skill_set:
+					for skill in skill_set.skills:
+						if skill:
+							if skill.stacks == 0:
+								continue
+							skill_points += skill.stacks
+							skill.stacks = 0
+							for effect_instance in skill.effect_instances:
+								effect_component.remove_effect(effect_instance)
 	skill_menu.update_ui()
 
 func buy_skill(skill: Skill) -> bool:

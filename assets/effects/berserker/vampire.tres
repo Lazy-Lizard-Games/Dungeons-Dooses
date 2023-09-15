@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://darhymqp1jhff"]
+
+[ext_resource type="PackedScene" uid="uid://de8p56aftiaap" path="res://scenes/effects/vampire/vampire.tscn" id="1_0m52y"]
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_wtnn6"]
+
+[resource]
+script = ExtResource("1_wtnn6")
+effect_scene = ExtResource("1_0m52y")
+max_stacks = 4
+chance = 1.0
+duration = 0.0

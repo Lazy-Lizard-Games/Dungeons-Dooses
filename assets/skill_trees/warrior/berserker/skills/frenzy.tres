@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://d0wnoqrlj1m7k"]
+
+[ext_resource type="Script" path="res://resources/skill.gd" id="1_asmf3"]
+[ext_resource type="Resource" uid="uid://boeagpxtp1iun" path="res://assets/effects/berserker/frenzy.tres" id="1_jawn2"]
+
+[resource]
+script = ExtResource("1_asmf3")
+name = "Frenzy"
+description = "Increases [b]Attack Speed[/b] per stack of [b][color=red]Blood[/color][/b]."
+max_stacks = 4
+effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_jawn2")])
+color = Color(0.941176, 0.972549, 1, 1)

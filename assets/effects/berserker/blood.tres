@@ -8,3 +8,4 @@ script = ExtResource("1_pcwd8")
 effect_scene = ExtResource("1_tv8au")
 max_stacks = 20
 chance = 1.0
+duration = 2.0

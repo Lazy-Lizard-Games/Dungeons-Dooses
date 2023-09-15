@@ -29,9 +29,16 @@ func _add_stack() -> void:
 
 
 func _get_description() -> String:
-	var effect = move_speed_per_stack*stacks
+	var effect = move_speed_per_stack*stacks*100
 	var desc = "[b]Movement Speed[/b]: +%s" % effect
 	return desc+"%"
+
+
+func _clear_effect() -> void:
+	if blood_effect:
+		container.stats_component.move_speed_mult -= blood_effect.stacks * stacks * move_speed_per_stack
+		container.stats_component.accelerate_mult -= blood_effect.stacks * stacks * move_speed_per_stack
+
 
 func on_blood_stack_changed(change: int) -> void:
 	container.stats_component.move_speed_mult += change * stacks * move_speed_per_stack

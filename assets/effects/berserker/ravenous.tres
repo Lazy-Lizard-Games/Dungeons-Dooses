@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://47xvpm1pq71y"]
+
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_4qf04"]
+[ext_resource type="PackedScene" uid="uid://boli52xs3lvyd" path="res://scenes/effects/ravenous/ravenous.tscn" id="1_u3rok"]
+
+[resource]
+script = ExtResource("1_4qf04")
+effect_scene = ExtResource("1_u3rok")
+max_stacks = 5
+chance = 1.0
+duration = 0.0

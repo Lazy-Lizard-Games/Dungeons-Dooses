@@ -142,7 +142,7 @@ func _on_timer_timeout() -> void:
 
 
 func _on_health_component_died() -> void:
-	set_death()
+	call_deferred("set_death")
 
 
 func _on_tracker_component_target_updated(target) -> void:

@@ -26,10 +26,11 @@ var current_health: float :
 		previous_health = current_health
 		current_health = clampf(value, 0, max_health)
 
-# Handle damage
 
+# Handle damage
 func _ready() -> void:
 	call_deferred("initialise_health")
+
 
 func damage(damage_data: DamageData) -> void:
 	current_health -= damage_data.damage
@@ -40,6 +41,14 @@ func damage(damage_data: DamageData) -> void:
 	if damage_data.damage != 0:
 		var damage_float = FloatingTextManager.create_damage_float(global_position, damage_data)
 		add_child(damage_float)
+
+
+func heal(heal: int) -> void:
+	current_health += heal
+	if heal != 0:
+		var heal_float = FloatingTextManager.create_heal_float(global_position, heal)
+		add_child(heal_float)
+
 
 func initialise_health() -> void:
 	current_health = max_health

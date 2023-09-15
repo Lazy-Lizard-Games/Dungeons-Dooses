@@ -21,8 +21,15 @@ func _remove_stack() -> void:
 	if stacks == 0:
 		exit_tree()
 
+
 func _get_description() -> String:
 	return ""
 
+
+func _clear_effect() -> void:
+	pass
+
+
 func exit_tree() -> void:
+	_clear_effect()
 	exited_tree.emit(self)

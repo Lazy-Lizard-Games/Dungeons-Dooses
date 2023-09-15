@@ -754,7 +754,7 @@ hitbox_component = NodePath("../HitboxComponent")
 [node name="SkillsComponent" parent="." node_paths=PackedStringArray("effect_component", "skill_menu") instance=ExtResource("26_nmyqc")]
 effect_component = NodePath("../EffectComponent")
 skill_trees = Array[Resource("res://resources/skill_tree.gd")]([ExtResource("27_ffrd5"), null, null])
-skill_points = 10
+skill_points = 35
 skill_menu = NodePath("../UI/PlayerMenu/TabContainer/SkillMenu")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "effect_component", "stats_component") instance=ExtResource("6_quhf5")]

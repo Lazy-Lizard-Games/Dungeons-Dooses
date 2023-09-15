@@ -2,6 +2,7 @@ extends Node2D
 class_name ProjectileComponent
 
 signal entity_damaged(hitbox: HitboxComponent, damage_datas: Array[DamageData])
+signal entity_killed(hitbox: HitboxComponent, damage_datas: Array[DamageData])
 
 @export var projectile_scene: PackedScene
 @export var stats_component: StatsComponent

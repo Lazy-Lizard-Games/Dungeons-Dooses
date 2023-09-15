@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://boeagpxtp1iun"]
+
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_ccqdu"]
+[ext_resource type="PackedScene" uid="uid://b854hymje8qvn" path="res://scenes/effects/frenzy/frenzy.tscn" id="1_pjogf"]
+
+[resource]
+script = ExtResource("1_ccqdu")
+effect_scene = ExtResource("1_pjogf")
+max_stacks = 4
+chance = 1.0

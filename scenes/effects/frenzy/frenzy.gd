@@ -1,14 +1,8 @@
 extends Effect
 
-# Give increased stamina regen to the player based
-# on the number of blood stacks that the player has.
-# Could remove the previous stamina regen increase 
-# before adding the new stamina regen increase.
-# Need access to the number of blood stacks that
-# the player currently has.
-
-@export var stamina_regen_per_stack: float = 0.025
 @export var blood_instance: EffectInstance
+@export var attack_speed_per_point: float = 0.005
+
 var blood_effect: Effect
 
 
@@ -27,23 +21,23 @@ func _add_stack() -> void:
 		stacks += 1
 	stack_changed.emit(1)
 	if blood_effect:
-		container.stats_component.stamina_regen_mult -= blood_effect.stacks * (stacks-1) * stamina_regen_per_stack
+		container.stats_component.attack_speed_mult -= blood_effect.stacks * (stacks-1) * attack_speed_per_point
 		on_blood_stack_changed(blood_effect.stacks)
 
 
 func _get_description() -> String:
-	var effect = stamina_regen_per_stack*stacks*100
-	var desc = "[b]Stamina Regen/s[/b]: +%s" % effect
+	var effect = attack_speed_per_point*stacks*100
+	var desc = "[b]Attack Speed[/b]: +%s" % effect
 	return desc+"%"
 
 
 func _clear_effect() -> void:
 	if blood_effect:
-		container.stats_component.stamina_regen_mult -= blood_effect.stacks * stacks * stamina_regen_per_stack
+		container.stats_component.attack_speed_mult -= blood_effect.stacks * stacks * attack_speed_per_point
 
 
 func on_blood_stack_changed(change: int) -> void:
-	container.stats_component.stamina_regen_mult += change * stacks * stamina_regen_per_stack
+	container.stats_component.attack_speed_mult += change * stacks * attack_speed_per_point
 
 
 func on_blood_stack_exited(effect: Effect) -> void:

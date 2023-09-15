@@ -10,10 +10,10 @@ name = "Thrill of the Hunt"
 description = "Increase [b]Movement Speed[/b] per stack of [b][color=red]Blood[/color][/b].
 
 Gain [b][color=red]Blood[/color][/b] stacks by damaging enemies.
+Stacks begin to decay after a time of not damaging an enemy.
 
 [font_size=14][b]Max [color=red]Blood[/color] stacks[/b]: 20
-[b]Duration[/b]: 5s
-[b]Attack Speed[/b]: +0.05% per [b][color=red]Blood[/color][/b] stack[/font_size]"
+[b]Duration[/b]: 2s"
 max_stacks = 5
 effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_a15yk"), ExtResource("2_iwj4a")])
 color = Color(0.941176, 0.972549, 1, 1)

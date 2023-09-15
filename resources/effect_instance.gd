@@ -4,6 +4,7 @@ class_name EffectInstance
 @export var effect_scene: PackedScene
 @export var max_stacks: int = 1
 @export_range(0, 1) var chance: float = 1
+@export var duration: float = 0
 
 
 func get_description(stacks: int) -> String:

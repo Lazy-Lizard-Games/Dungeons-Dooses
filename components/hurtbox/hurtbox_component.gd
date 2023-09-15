@@ -2,6 +2,7 @@ extends Area2D
 class_name HurtboxComponent
 
 signal entity_damaged(hitbox: HitboxComponent, damage_datas: Array[DamageData])
+signal entity_killed(hitbox: HitboxComponent, damage_datas: Array[DamageData])
 
 ## Faction that the hurtbox belongs
 @export var faction: Globals.FACTIONS = 0
@@ -30,8 +31,10 @@ func _on_area_entered(area: Area2D) -> void:
 			hurt_entity.timeout.connect(check_entity)
 			if damage_rate > 0:
 				hurt_entity.start(1/damage_rate)
+			if area.health_component:
+				if area.health_component.has_died:
+					entity_killed.emit(area, damage_datas)
 			entity_damaged.emit(area, damage_datas)
-			
 
 
 func remove_entity(hurt_entity: TimedVariant) -> void:

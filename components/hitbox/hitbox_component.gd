@@ -13,7 +13,8 @@ signal hit_by_hurtbox(hurtbox: HurtboxComponent, damage: float)
 func can_accept_collisions() -> bool:
 	return health_component.has_health_remaining if health_component != null else false
 
-func handle_hurbox_collision(hurtbox) -> void:
+
+func handle_hurbox_collision(hurtbox: HurtboxComponent) -> void:
 	var final_damage = 0.0
 	if not detect_only:
 		for damage_data in hurtbox.damage_datas:
@@ -22,11 +23,13 @@ func handle_hurbox_collision(hurtbox) -> void:
 			apply_effect(effect_instance)
 	hit_by_hurtbox.emit(hurtbox, final_damage)
 
+
 func deal_damage_with_transforms(damage: DamageData) -> DamageData:
 	var final_damage = stats_component.apply_damage_resistances(damage) if stats_component != null \
 			 else damage
 	if health_component != null: health_component.damage(final_damage)
 	return final_damage
+
 
 func apply_effect(effect: EffectInstance) -> void:
 	if randf_range(0, 1) < effect.chance:
