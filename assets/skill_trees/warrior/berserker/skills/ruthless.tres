@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://nksnetjse4gd"]
+
+[ext_resource type="Script" path="res://resources/skill.gd" id="1_2vix6"]
+[ext_resource type="Resource" uid="uid://b31n3w7r71nf" path="res://assets/effects/berserker/ruthless.tres" id="1_128vj"]
+
+[resource]
+script = ExtResource("1_2vix6")
+name = "Ruthless"
+description = "Gain stacks of [b][color=red]Blood[/color][/b] when killing enemies."
+max_stacks = 5
+effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_128vj")])
+color = Color(0.941176, 0.972549, 1, 1)

@@ -22,6 +22,10 @@ func handle_hurbox_collision(hurtbox: HurtboxComponent) -> void:
 		for effect_instance in hurtbox.effect_instances:
 			apply_effect(effect_instance)
 	hit_by_hurtbox.emit(hurtbox, final_damage)
+	hurtbox.entity_damaged.emit(self, hurtbox.damage_datas)
+	if health_component:
+		if health_component.has_died:
+			hurtbox.entity_killed.emit(self, hurtbox.damage_datas)
 
 
 func deal_damage_with_transforms(damage: DamageData) -> DamageData:

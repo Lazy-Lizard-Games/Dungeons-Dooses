@@ -10,4 +10,3 @@ func _ready() -> void:
 
 func on_entity_damaged(hitbox: HitboxComponent, damage_datas: Array[DamageData]) -> void:
 	container.add_effect(blood_instance)
-

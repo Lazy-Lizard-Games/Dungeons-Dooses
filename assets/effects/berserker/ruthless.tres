@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://b31n3w7r71nf"]
+
+[ext_resource type="PackedScene" uid="uid://br5jubha4xqch" path="res://scenes/effects/ruthless/ruthless.tscn" id="1_fms4n"]
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_i517u"]
+
+[resource]
+script = ExtResource("1_i517u")
+effect_scene = ExtResource("1_fms4n")
+max_stacks = 5
+chance = 1.0
+duration = 0.0

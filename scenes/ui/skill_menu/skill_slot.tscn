@@ -2,12 +2,37 @@
 
 [ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_slot.gd" id="1_4652r"]
 
-[node name="SkillSlot" type="MarginContainer"]
+[node name="SkillSlot" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 script = ExtResource("1_4652r")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="LeftSpacer" type="MarginContainer" parent="."]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ColorContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ColorRect" type="ColorRect" parent="ColorContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 1
+
+[node name="RightSpacer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_focus_entered"]

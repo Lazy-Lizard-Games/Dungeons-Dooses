@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @export var player: Player
 @export var hud: HUD
-@export var menu: PlayerMenu
+@export var menu: Control
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("inventory"):

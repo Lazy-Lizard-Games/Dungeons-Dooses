@@ -1,62 +1,71 @@
-[gd_scene load_steps=3 format=3 uid="uid://cy1k81r6gaq0x"]
+[gd_scene load_steps=2 format=3 uid="uid://cy1k81r6gaq0x"]
 
 [ext_resource type="Script" path="res://scenes/ui/skill_menu/skill_tree_ui.gd" id="1_b5jw8"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s2roa"]
-bg_color = Color(0, 0.717647, 0.34902, 1)
-
-[node name="SkillTreeUI" type="PanelContainer"]
+[node name="SkillTreeUI" type="VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.0
-offset_top = -75.0
-offset_right = 125.0
-offset_bottom = 75.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(125, 0)
 size_flags_horizontal = 0
-size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_s2roa")
+theme_override_constants/separation = 0
 script = ExtResource("1_b5jw8")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="TopSpacer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 25
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 25
-theme_override_constants/margin_bottom = 25
+size_flags_vertical = 3
 
-[node name="Tree" type="VBoxContainer" parent="MarginContainer"]
+[node name="TreeContainer" type="PanelContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 25
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0
 
-[node name="Set1" type="HBoxContainer" parent="MarginContainer/Tree"]
+[node name="Background" type="ColorRect" parent="TreeContainer"]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 25
+color = Color(0.223529, 0.223529, 0.223529, 1)
+
+[node name="Overlay" type="ColorRect" parent="TreeContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(1, 0.117647, 0.141176, 0.498039)
+
+[node name="Tree" type="VBoxContainer" parent="TreeContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Set1" type="HBoxContainer" parent="TreeContainer/Tree"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Set2" type="HBoxContainer" parent="MarginContainer/Tree"]
+[node name="Set2" type="HBoxContainer" parent="TreeContainer/Tree"]
 layout_mode = 2
-theme_override_constants/separation = 25
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Set3" type="HBoxContainer" parent="MarginContainer/Tree"]
+[node name="Set3" type="HBoxContainer" parent="TreeContainer/Tree"]
 layout_mode = 2
-theme_override_constants/separation = 25
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Set4" type="HBoxContainer" parent="MarginContainer/Tree"]
+[node name="Set4" type="HBoxContainer" parent="TreeContainer/Tree"]
 layout_mode = 2
-theme_override_constants/separation = 25
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Set5" type="HBoxContainer" parent="MarginContainer/Tree"]
+[node name="Set5" type="HBoxContainer" parent="TreeContainer/Tree"]
 layout_mode = 2
-theme_override_constants/separation = 25
+size_flags_vertical = 3
+theme_override_constants/separation = 0
 alignment = 1
+
+[node name="BottomSpacer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3

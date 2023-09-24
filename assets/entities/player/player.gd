@@ -39,7 +39,7 @@ func _ready() -> void:
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("holster"):
-		skill_component.clear_skills()
+		skill_component.reset()
 
 # Update handling -------------------------------------------------------------------------------- #
 func _physics_process(_delta: float) -> void:

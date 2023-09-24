@@ -35,7 +35,7 @@ func _ready() -> void:
 # Update handling -------------------------------------------------------------------------------- #
 func _physics_process(_delta: float) -> void:
 	state_manager.update()
-	#print("%s - %s" % [state_manager.current_state, move_modifier])
+
 
 func update_attack_direction() -> void:
 	attack_direction = global_position.direction_to(tracker_component.target.global_position)
