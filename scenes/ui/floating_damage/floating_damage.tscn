@@ -5,7 +5,7 @@
 
 [node name="DamageFloat" type="Marker2D"]
 script = ExtResource("1_ejht5")
-damage_colours = ExtResource("2_dno2m")
+damage_colors = ExtResource("2_dno2m")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 8

@@ -5,8 +5,8 @@ extends Effect
 # skills into either of the tier 1 skills will
 # give you a stack of blood up to the maximum
 @export var decay_rate: int = 2
-@onready var idle_timer = $IdleTimer
-@onready var decay_timer = $DecayTimer
+@onready var idle_timer: Timer = $IdleTimer
+@onready var decay_timer: Timer = $DecayTimer
 
 
 func _add_stack() -> void:

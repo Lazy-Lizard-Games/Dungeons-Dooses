@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://c7nsy1odpgww8"]
+
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_rxm33"]
+[ext_resource type="PackedScene" uid="uid://cy3nhec5nbdjb" path="res://scenes/effects/senseless/senseless.tscn" id="1_vr82j"]
+
+[resource]
+script = ExtResource("1_rxm33")
+effect_scene = ExtResource("1_vr82j")
+max_stacks = 5
+chance = 1.0
+duration = 0.0

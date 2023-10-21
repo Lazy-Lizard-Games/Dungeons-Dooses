@@ -5,6 +5,7 @@ class_name EffectInstance
 @export var max_stacks: int = 1
 @export_range(0, 1) var chance: float = 1
 @export var duration: float = 0
+@export var decay_rate: int = 2
 
 
 func get_description(stacks: int) -> String:

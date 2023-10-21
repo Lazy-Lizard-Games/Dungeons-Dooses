@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b0nutj82fkwb7"]
-
-[ext_resource type="Script" path="res://scenes/effects/thrill_kill/thrill_kill.gd" id="1_rhwuv"]
-[ext_resource type="Resource" uid="uid://bg41x74lh4l01" path="res://assets/effects/berserker/blood.tres" id="2_rr2p1"]
-
-[node name="ThrillKill" type="Node2D"]
-script = ExtResource("1_rhwuv")
-blood_instance = ExtResource("2_rr2p1")

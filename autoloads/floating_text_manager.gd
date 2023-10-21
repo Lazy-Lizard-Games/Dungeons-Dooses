@@ -1,11 +1,11 @@
 extends Node
 
 @onready var root = get_tree().root
-@onready var floating_damage = preload("res://scenes/ui/floating_damage/floating_damage.tscn")
+@onready var damage_float_scene = preload("res://scenes/ui/floating_damage/floating_damage.tscn")
 
 
 func create_damage_float(position: Vector2, damage_data: DamageData) -> DamageFloat:
-	var damage_float: DamageFloat = floating_damage.instantiate()
+	var damage_float = damage_float_scene.instantiate()
+	damage_float.init(damage_data.type, damage_data.damage, 1)
 	damage_float.position = position
-	damage_float.damage_data = damage_data
 	return damage_float

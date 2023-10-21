@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy3nhec5nbdjb"]
+
+[ext_resource type="Script" path="res://scenes/effects/senseless/senseless.gd" id="1_5r4yd"]
+
+[node name="senseless" type="Node2D"]
+script = ExtResource("1_5r4yd")

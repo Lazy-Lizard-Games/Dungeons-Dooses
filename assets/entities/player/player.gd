@@ -39,6 +39,9 @@ func _ready() -> void:
 
 func _unhandled_input(event):
 	if Input.is_action_just_pressed("holster"):
+		#                                 #
+		# REMEMBER TO REMOVE/CHANGE LATER #
+		#                                 #
 		skill_component.reset()
 
 # Update handling -------------------------------------------------------------------------------- #

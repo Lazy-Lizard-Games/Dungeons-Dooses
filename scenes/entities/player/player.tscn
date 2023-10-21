@@ -28,9 +28,9 @@
 [ext_resource type="Script" path="res://resources/damage_instance.gd" id="21_vais2"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="26_hhqhb"]
 [ext_resource type="PackedScene" uid="uid://kohbqslw7u3d" path="res://components/skills/skills_component.tscn" id="26_nmyqc"]
-[ext_resource type="Resource" uid="uid://dqu2ijryavq55" path="res://assets/skill_trees/warrior/berserker/berserker.tres" id="27_ffrd5"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/hud.gd" id="28_3nkrn"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/ui_controller.gd" id="28_ivycq"]
+[ext_resource type="Resource" uid="uid://bjfifa88ed4qs" path="res://assets/skill_trees/warrior/wolf/wolf.tres" id="28_xwe72"]
 [ext_resource type="Script" path="res://assets/entities/player/ui/skill_menu.gd" id="32_ucd2u"]
 [ext_resource type="PackedScene" uid="uid://cy1k81r6gaq0x" path="res://scenes/ui/skill_menu/skill_tree_ui.tscn" id="33_ey47b"]
 [ext_resource type="PackedScene" uid="uid://jfbw485hr7ws" path="res://scenes/ui/skill_menu/skill_info_card.tscn" id="36_726ae"]
@@ -750,7 +750,7 @@ hitbox_component = NodePath("../HitboxComponent")
 
 [node name="SkillsComponent" parent="." node_paths=PackedStringArray("effect_component") instance=ExtResource("26_nmyqc")]
 effect_component = NodePath("../EffectComponent")
-skill_trees = Array[Resource("res://resources/skill_tree.gd")]([ExtResource("27_ffrd5"), null, null])
+skill_trees = Array[Resource("res://resources/skill_tree.gd")]([ExtResource("28_xwe72"), null, null])
 skill_points = 35
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "effect_component", "stats_component") instance=ExtResource("6_quhf5")]

@@ -1,8 +1,8 @@
 [gd_scene load_steps=3 format=3 uid="uid://boli52xs3lvyd"]
 
 [ext_resource type="Script" path="res://scenes/effects/ravenous/ravenous.gd" id="1_5ymu4"]
-[ext_resource type="Resource" uid="uid://clber6efyryq4" path="res://assets/effects/berserker/bloodlust.tres" id="2_tk2ac"]
+[ext_resource type="Resource" uid="uid://clber6efyryq4" path="res://assets/effects/wolf/bloodlust.tres" id="2_g17cl"]
 
 [node name="Ravenous" type="Node2D"]
 script = ExtResource("1_5ymu4")
-bloodlust_instance = ExtResource("2_tk2ac")
+bloodlust_instance = ExtResource("2_g17cl")
