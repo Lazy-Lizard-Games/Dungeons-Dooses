@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://d02dmv0nk6ijf"]
+[gd_scene load_steps=125 format=3 uid="uid://d02dmv0nk6ijf"]
 
 [ext_resource type="Script" path="res://assets/entities/player/player.gd" id="1_xpihs"]
 [ext_resource type="Animation" uid="uid://b1ple7ke6wu81" path="res://assets/entities/player/anim/dash/dash_down.res" id="2_qnpvv"]
@@ -22,6 +22,7 @@
 [ext_resource type="AnimationNodeAnimation" uid="uid://c4ekl21cgrri8" path="res://assets/entities/player/res/attack_up.tres" id="13_e13ly"]
 [ext_resource type="AnimationNodeAnimation" uid="uid://c3nlqhk716ex" path="res://assets/entities/player/res/attack_down.tres" id="14_p01qx"]
 [ext_resource type="AnimationNodeTimeScale" uid="uid://b631adnidy378" path="res://assets/entities/player/res/attack_time_scale.tres" id="15_3faym"]
+[ext_resource type="Script" path="res://assets/stats/resistance_modifier.gd" id="18_4hdso"]
 [ext_resource type="Script" path="res://assets/stats/damage_modifier.gd" id="18_tgivd"]
 [ext_resource type="PackedScene" uid="uid://d0ny7ql64g663" path="res://scenes/projectiles/fireball/fireball.tscn" id="21_382ld"]
 [ext_resource type="Script" path="res://resources/damage_instance.gd" id="21_vais2"]
@@ -610,6 +611,11 @@ states/Walk/position = Vector2(698, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_k4fs6"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_y0ss2"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_fgaih"), "Idle", "Dash", SubResource("AnimationNodeStateMachineTransition_cuba6"), "Dash", "Idle", SubResource("AnimationNodeStateMachineTransition_hhoft"), "Dash", "Walk", SubResource("AnimationNodeStateMachineTransition_vt8e5"), "Walk", "Dash", SubResource("AnimationNodeStateMachineTransition_dxcbk"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_k3p2s"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_wteab"), "Attack", "Dash", SubResource("AnimationNodeStateMachineTransition_p2u3d"), "Walk", "Attack", SubResource("AnimationNodeStateMachineTransition_fr5ur"), "Attack", "Walk", SubResource("AnimationNodeStateMachineTransition_8267o")]
 graph_offset = Vector2(4, -54)
 
+[sub_resource type="Resource" id="Resource_klwgx"]
+script = ExtResource("18_4hdso")
+type = 6
+value = 2.0
+
 [sub_resource type="Resource" id="Resource_jkqmw"]
 script = ExtResource("18_tgivd")
 type = 2
@@ -714,11 +720,12 @@ parameters/Walk/blend_position = Vector2(0, 0)
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_4p6c1")]
-stats = NodePath("../StatsComponent")
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_4p6c1")]
+stats_component = NodePath("../StatsComponent")
 max_health = 100.0
 
 [node name="StatsComponent" parent="." instance=ExtResource("4_xg1r5")]
+damage_resistances = Array[ExtResource("18_4hdso")]([SubResource("Resource_klwgx")])
 damage_modifiers = Array[ExtResource("18_tgivd")]([SubResource("Resource_jkqmw")])
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("5_7r1cp")]
@@ -806,6 +813,7 @@ size_flags_vertical = 0
 columns = 3
 
 [node name="PlayerMenu" type="HBoxContainer" parent="UI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

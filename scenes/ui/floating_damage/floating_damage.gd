@@ -6,9 +6,9 @@ class_name DamageFloat
 @onready var label: Label = $Label
 @onready var timer: Timer = $Timer
 
-var colour: Color
-var damage: float
-var speed: float
+var colour: Color = Color.ALICE_BLUE
+var damage: float = 0
+var speed: float = 1
 var gravity: Vector2 = Vector2.DOWN
 var direction: Vector2 = Vector2.UP
 
@@ -22,13 +22,9 @@ func _ready() -> void:
 	timer.start()
 
 func _process(delta: float) -> void:
-	gravity *= 1.01
-	global_position += (gravity + (direction * speed))
+	direction += gravity * delta
+	global_position += direction * speed
 
-func update(pos: Vector2, damage_data: DamageData) -> void:
-	global_position = pos
-	damage = damage_data.damage
-	colour = get_colour(damage_data.type)
 
 func get_colour(damage_type: Globals.DAMAGE_TYPES) -> Color:
 	match damage_type:
@@ -44,6 +40,8 @@ func get_colour(damage_type: Globals.DAMAGE_TYPES) -> Color:
 			return damage_colours.shock
 		Globals.DAMAGE_TYPES.EXPLOSION:
 			return damage_colours.explosion
+		Globals.DAMAGE_TYPES.LIGHT:
+			return damage_colours.light
 		_:
 			return colour
 

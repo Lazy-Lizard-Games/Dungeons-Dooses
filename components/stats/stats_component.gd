@@ -1,29 +1,25 @@
 extends Node
 class_name StatsComponent
 
+## General Stats for living/living-dead creatures.
 @export_category("Stats")
-@export var max_health: float = 10
-@export var health_regen: float = 1
-@export var max_stamina: float = 10
-@export var stamina_regen: float = 1
-@export_category("Stat Multipliers")
 @export var health_mult: float = 1.0
+@export var health_regen: float = 1
 @export var health_regen_mult: float = 1.0
 @export var stamina_mult: float = 1.0
+@export var stamina_regen: float = 1
 @export var stamina_regen_mult: float = 1.0
 @export var attack_speed_mult: float = 1.0
 @export var move_speed_mult: float = 1.0
 @export var accelerate_mult: float = 1.0
 @export var defence_mult: float = 1.0
-
-@export_category("Damage Multipliers")
-## Array of damage resistances applied when recieving damage
+## Resistances to specific damage types
+@export_category("Resistances")
 @export var damage_resistances: Array[ResistModifier]
-## Array of damage multipliers applied when dealing damage
+## Modifiers to specific damage types
+@export_category("Modifiers")
 @export var damage_modifiers: Array[DamageModifier]
 
-# TODO
-# Handle stat modifiers (add, remove)
 
 func apply_damage_resistances(damage: DamageData) -> DamageData:
 	var final_damage = damage.copy()

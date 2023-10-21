@@ -7,3 +7,4 @@ class_name DamageColourSet
 @export var poison: Color
 @export var shock: Color
 @export var explosion: Color
+@export var light: Color

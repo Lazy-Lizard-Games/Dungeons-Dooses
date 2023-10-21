@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="SkillTree" load_steps=15 format=3 uid="uid://dqu2ijryavq55"]
+[gd_resource type="Resource" script_class="SkillTree" load_steps=14 format=3 uid="uid://dqu2ijryavq55"]
 
 [ext_resource type="Script" path="res://resources/skill_tree.gd" id="1_0viyq"]
 [ext_resource type="Script" path="res://resources/skill_set.gd" id="2_62cye"]
@@ -6,7 +6,6 @@
 [ext_resource type="Resource" uid="uid://bxvfh1k1uj5xi" path="res://assets/skill_trees/warrior/berserker/skills/thrill_hunt.tres" id="3_rcsyo"]
 [ext_resource type="Resource" uid="uid://d0wnoqrlj1m7k" path="res://assets/skill_trees/warrior/berserker/skills/frenzy.tres" id="5_1ov44"]
 [ext_resource type="Resource" uid="uid://ds5apnqde4qju" path="res://assets/skill_trees/warrior/berserker/skills/savour.tres" id="5_6k2hw"]
-[ext_resource type="Resource" uid="uid://cj785qoixkkq8" path="res://assets/skill_trees/warrior/berserker/skills/vampire.tres" id="5_pcstd"]
 [ext_resource type="Resource" uid="uid://4pk3k5sfpi0l" path="res://assets/skill_trees/warrior/berserker/skills/ravenous.tres" id="8_dnmi0"]
 [ext_resource type="Resource" uid="uid://nksnetjse4gd" path="res://assets/skill_trees/warrior/berserker/skills/ruthless.tres" id="9_au3f0"]
 
@@ -17,7 +16,6 @@ skill_c = ExtResource("3_3uc4b")
 
 [sub_resource type="Resource" id="Resource_ftpml"]
 script = ExtResource("2_62cye")
-skill_a = ExtResource("5_pcstd")
 skill_b = ExtResource("5_6k2hw")
 skill_c = ExtResource("5_1ov44")
 

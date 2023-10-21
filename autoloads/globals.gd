@@ -17,6 +17,7 @@ enum DAMAGE_TYPES
 	POISON, 
 	SHOCK, 
 	EXPLOSION,
+	LIGHT,
 }
 
 enum STAT_TYPES 

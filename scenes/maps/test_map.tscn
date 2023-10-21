@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=16 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://datk0irfypdeu" path="res://components/health/health_component.tscn" id="1_s68bj"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://scenes/entities/player/player.tscn" id="2_qc57j"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_se5sb"]
 [ext_resource type="PackedScene" uid="uid://d2fbg0yiqyq34" path="res://components/effect/effect_component.tscn" id="3_fytlx"]
 [ext_resource type="PackedScene" uid="uid://xqp6to0vit3c" path="res://scenes/effects/on_fire/on_fire.tscn" id="6_0jdpd"]
+[ext_resource type="Script" path="res://assets/stats/damage_data.gd" id="7_c7vso"]
 [ext_resource type="Script" path="res://resources/effect_instance.gd" id="7_lac0n"]
 [ext_resource type="PackedScene" uid="uid://dlt3ha7g0ra6u" path="res://scenes/entities/slime/slime.tscn" id="8_71whg"]
 
@@ -25,6 +26,11 @@ chance = 1.0
 duration = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rgk83"]
+
+[sub_resource type="Resource" id="Resource_dlon6"]
+script = ExtResource("7_c7vso")
+damage = 5.0
+type = 6
 
 [node name="TestMap" type="Node2D"]
 y_sort_enabled = true
@@ -60,6 +66,17 @@ effect_instances = Array[ExtResource("7_lac0n")]([SubResource("Resource_1fej1")]
 damage_rate = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/HurtboxComponent"]
+shape = SubResource("RectangleShape2D_rgk83")
+
+[node name="BloodPool" type="Sprite2D" parent="Spikes"]
+position = Vector2(49, -58)
+texture = SubResource("PlaceholderTexture2D_irtap")
+
+[node name="HurtboxComponent" parent="Spikes/BloodPool" instance=ExtResource("2_se5sb")]
+damage_datas = Array[ExtResource("7_c7vso")]([SubResource("Resource_dlon6")])
+damage_rate = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/BloodPool/HurtboxComponent"]
 shape = SubResource("RectangleShape2D_rgk83")
 
 [node name="Player" parent="." instance=ExtResource("2_qc57j")]

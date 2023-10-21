@@ -11,7 +11,7 @@ class_name HUD
 @onready var speed_label: Label = $VBoxContainer/SpeedLabel
 
 @onready var skills_container = $SkillsContainer
-#@onready var effects_container: GridContainer = $MarginContainer/EffectsContainer
+@onready var effects_container = $EffectsContainer
 
 var effect_container = preload("res://scenes/ui/hud/effect_container.tscn")
 
@@ -19,6 +19,7 @@ var effect_container = preload("res://scenes/ui/hud/effect_container.tscn")
 func _ready() -> void:
 	effect_component.effect_added.connect(on_effect_added)
 	weapon_component.skills_updated.connect(on_skills_updated)
+	health_component.health_changed.connect(on_health_changed)
 
 
 func _process(_delta: float) -> void:
@@ -41,8 +42,12 @@ func check_skills() -> void:
 func on_effect_added(effect: Effect) -> void:
 	var new_effect = effect_container.instantiate()
 	new_effect.effect = effect
-	#effects_container.add_child(new_effect)
+	effects_container.add_child(new_effect)
 
 
 func on_skills_updated(skills: Array[WeaponSkill]) -> void:
 	print(skills)
+
+
+func on_health_changed() -> void:
+	pass
