@@ -1,7 +1,6 @@
 extends Effect
 
 @export var blood_instance: EffectInstance
-@export var blood_gain_bonus: float = 0
 
 
 func _ready() -> void:

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://da66k2mn3e7v"]
+
+[ext_resource type="Resource" uid="uid://dho5dmhx0da3k" path="res://assets/effects/insatiable.tres" id="1_mdj7b"]
+[ext_resource type="Script" path="res://resources/skill.gd" id="1_qbovj"]
+
+[resource]
+script = ExtResource("1_qbovj")
+name = "Insatiable"
+description = "Chance to gain an extra stack of [b][color=red]Blood[/color][/b] when dealing damage.
+"
+max_stacks = 5
+effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_mdj7b")])
+color = Color(0.941176, 0.972549, 1, 1)

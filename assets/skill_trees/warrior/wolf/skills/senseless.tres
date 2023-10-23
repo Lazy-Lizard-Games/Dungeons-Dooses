@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://cive3ltxett8j"]
 
-[ext_resource type="Resource" uid="uid://c7nsy1odpgww8" path="res://assets/effects/wolf/senseless.tres" id="1_0h8yp"]
+[ext_resource type="Resource" uid="uid://c7nsy1odpgww8" path="res://assets/effects/senseless.tres" id="1_0h8yp"]
 [ext_resource type="Script" path="res://resources/skill.gd" id="1_4vm3c"]
-[ext_resource type="Resource" uid="uid://clber6efyryq4" path="res://assets/effects/wolf/bloodlust.tres" id="2_yi3tl"]
+[ext_resource type="Resource" uid="uid://clber6efyryq4" path="res://assets/effects/bloodlust.tres" id="2_yi3tl"]
 
 [resource]
 script = ExtResource("1_4vm3c")

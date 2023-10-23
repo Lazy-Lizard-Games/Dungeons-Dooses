@@ -9,3 +9,4 @@ effect_scene = ExtResource("1_tv8au")
 max_stacks = 20
 chance = 1.0
 duration = 2.0
+decay_rate = 5

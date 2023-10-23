@@ -46,8 +46,8 @@ func on_effect_added(effect: Effect) -> void:
 
 
 func on_skills_updated(skills: Array[WeaponSkill]) -> void:
-	print(skills)
+	pass
 
 
-func on_health_changed() -> void:
+func on_health_changed(prev_health: float, cur_health: float, damage: DamageData) -> void:
 	pass

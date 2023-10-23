@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://b854hymje8qvn"]
-
-[ext_resource type="Script" path="res://scenes/effects/frenzy/frenzy.gd" id="1_2myo1"]
-[ext_resource type="Resource" uid="uid://bg41x74lh4l01" path="res://assets/effects/wolf/blood.tres" id="2_lqaom"]
-
-[node name="Frenzy" type="Node2D"]
-script = ExtResource("1_2myo1")
-blood_instance = ExtResource("2_lqaom")

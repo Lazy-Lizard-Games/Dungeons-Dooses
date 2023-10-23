@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EffectInstance" load_steps=3 format=3 uid="uid://dho5dmhx0da3k"]
+
+[ext_resource type="Script" path="res://resources/effect_instance.gd" id="1_4b158"]
+[ext_resource type="PackedScene" uid="uid://mp3tf4tivmgc" path="res://scenes/effects/insatiable/insatiable.tscn" id="1_52vf4"]
+
+[resource]
+script = ExtResource("1_4b158")
+effect_scene = ExtResource("1_52vf4")
+max_stacks = 5
+chance = 1.0
+duration = 0.0
+decay_rate = 2

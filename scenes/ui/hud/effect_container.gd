@@ -3,7 +3,7 @@ class_name EffectContainer
 
 @onready var effect_icon: TextureRect = $EffectIcon
 @onready var stacks_label: Label = $StacksLabel
-@onready var decay_overlay: TextureRect = $DecayOverlay
+@onready var decay_overlay: ColorRect = $DecayOverlay
 
 var effect: Effect
 

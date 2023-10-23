@@ -7,25 +7,29 @@ signal stack_changed(change: int)
 var effect_instance: EffectInstance
 var container: EffectComponent
 var stacks: int = 0
-var idle_timer: Timer
-var decay_timer: Timer
+var idle_timer: Timer = Timer.new()
+var decay_timer: Timer = Timer.new()
 
 
-func _ready():
-	idle_timer = Timer.new()
+## Overwritten by children
+func init() -> void:
+	pass
+
+
+func _ready() -> void:
 	idle_timer.one_shot = true
 	idle_timer.timeout.connect(_on_idle_timer_timeout)
-	
-	decay_timer = Timer.new()
+	add_child(idle_timer)
 	decay_timer.one_shot = false
 	decay_timer.timeout.connect(_on_decay_timer_timeout)
+	add_child(decay_timer)
+	init()
 
 
 func _add_stack() -> void:
 	if stacks < effect_instance.max_stacks:
 		stacks += 1
 	stack_changed.emit(1)
-	
 	idle_timer.start(effect_instance.duration)
 	decay_timer.stop()
 

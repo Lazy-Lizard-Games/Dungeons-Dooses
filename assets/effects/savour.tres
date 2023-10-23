@@ -9,3 +9,4 @@ effect_scene = ExtResource("1_aj6f3")
 max_stacks = 5
 chance = 1.0
 duration = 0.0
+decay_rate = 2
