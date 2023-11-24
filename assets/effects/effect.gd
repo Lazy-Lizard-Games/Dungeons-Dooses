@@ -7,8 +7,9 @@ signal stack_changed(change: int)
 var effect_instance: EffectInstance
 var container: EffectComponent
 var stacks: int = 0
-var idle_timer: Timer = Timer.new()
-var decay_timer: Timer = Timer.new()
+
+@onready var idle_timer: Timer = Timer.new()
+@onready var decay_timer: Timer = Timer.new()
 
 
 ## Overwritten by children
@@ -23,10 +24,11 @@ func _ready() -> void:
 	decay_timer.one_shot = false
 	decay_timer.timeout.connect(_on_decay_timer_timeout)
 	add_child(decay_timer)
+	add_stack()
 	init()
 
 
-func _add_stack() -> void:
+func add_stack() -> void:
 	if stacks < effect_instance.max_stacks:
 		stacks += 1
 	stack_changed.emit(1)
@@ -34,18 +36,18 @@ func _add_stack() -> void:
 	decay_timer.stop()
 
 
-func _remove_stack() -> void:
+func remove_stack() -> void:
 	stacks = max(0, stacks-1)
 	stack_changed.emit(-1)
 	if stacks == 0:
 		exit_tree()
 
 
-func _get_description() -> String:
+func get_description() -> String:
 	return ""
 
 
-func _clear_effect() -> void:
+func clear_effect() -> void:
 	pass
 
 
@@ -54,9 +56,9 @@ func _on_idle_timer_timeout() -> void:
 
 
 func _on_decay_timer_timeout() -> void:
-	_remove_stack()
+	remove_stack()
 
 
 func exit_tree() -> void:
-	_clear_effect()
+	clear_effect()
 	exited_tree.emit(self)

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Slime
 
 
 @export var move_modifier: float = 1.0
@@ -10,6 +11,7 @@ extends CharacterBody2D
 @export var hitbox_component: HitboxComponent
 @export var hurtbox_component: HurtboxComponent
 @export var tracker_component: TrackerComponent
+@export var health_component: HealthComponent
 
 @onready var at: AnimationTree = $AnimationTree
 @onready var state_manager: StateManager = StateManager.new()

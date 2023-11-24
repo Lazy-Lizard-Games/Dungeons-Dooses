@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_4sk4h")
 name = "Savour"
-description = "Reduce [b]Stamina Cost[/b] of attacks per stack of [b][color=red]Blood[/color][/b]."
+description = "Increases the duration before stacks of  [color=red]Blood[/color][/b] begin to decay."
 max_stacks = 5
 effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_2cul8")])
 color = Color(0.941176, 0.972549, 1, 1)

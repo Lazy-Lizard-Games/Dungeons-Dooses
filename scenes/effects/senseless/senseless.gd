@@ -4,6 +4,7 @@ extends Effect
 @export var blood_instance: EffectInstance
 var blood_effect: Effect
 
+
 func _process(delta):
 	if blood_effect:
 		return
@@ -14,7 +15,7 @@ func _process(delta):
 		blood_effect.exited_tree.connect(on_blood_stack_exited)
 
 
-func _add_stack() -> void:
+func add_stack() -> void:
 	if stacks < effect_instance.max_stacks:
 		stacks += 1
 	stack_changed.emit(1)
@@ -23,13 +24,13 @@ func _add_stack() -> void:
 		on_blood_stack_changed(blood_effect.stacks)
 
 
-func _get_description() -> String:
+func get_description() -> String:
 	var effect = stam_reduce_per_stack * stacks
 	var desc = "[b]Stamina Cost[/b]: -%s" % effect
 	return desc+"%"
 
 
-func _clear_effect() -> void:
+func clear_effect() -> void:
 	if blood_effect:
 		container.stats_component.stamina_cost_mult -= blood_effect.stacks * (stacks-1) * stam_reduce_per_stack
 

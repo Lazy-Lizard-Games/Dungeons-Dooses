@@ -39,4 +39,5 @@ func apply_damage_modifiers(damage: DamageData) -> DamageData:
 	for mod in damage_modifiers:
 		if mod.type == damage.type:
 			final_damage.damage *= mod.value
+	final_damage.damage *= damage_mult
 	return final_damage

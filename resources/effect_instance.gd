@@ -13,6 +13,6 @@ func get_description(stacks: int) -> String:
 		return ""
 	var effect: Effect = effect_scene.instantiate()
 	effect.stacks = stacks
-	var desc = effect._get_description()
+	var desc = effect.get_description()
 	effect.queue_free()
 	return desc

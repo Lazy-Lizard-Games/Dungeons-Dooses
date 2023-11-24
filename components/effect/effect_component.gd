@@ -17,14 +17,13 @@ var skill_effects: Array[Effect]
 func add_effect(effect_instance: EffectInstance) -> void:
 	for child in effects:
 		if child.effect_instance == effect_instance:
-			child._add_stack()
+			child.add_stack()
 			return
 	var effect: Effect = effect_instance.effect_scene.instantiate()
 	effect.effect_instance = effect_instance
 	effects.append(effect)
 	effect.container = self
 	add_child(effect)
-	effect._add_stack()
 	effect.exited_tree.connect(on_exited_tree)
 	effect_added.emit(effect)
 

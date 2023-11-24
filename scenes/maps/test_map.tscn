@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=14 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://datk0irfypdeu" path="res://components/health/health_component.tscn" id="1_s68bj"]
+[ext_resource type="Script" path="res://SlimeSpawner.gd" id="1_u1p2h"]
 [ext_resource type="PackedScene" uid="uid://d02dmv0nk6ijf" path="res://scenes/entities/player/player.tscn" id="2_qc57j"]
 [ext_resource type="Script" path="res://components/hitbox/hitbox_component.gd" id="2_rpsqs"]
 [ext_resource type="PackedScene" uid="uid://cyds65pm1tk3p" path="res://components/hurtbox/hurtbox_component.tscn" id="2_se5sb"]
@@ -25,6 +26,14 @@ type = 6
 
 [node name="TestMap" type="Node2D"]
 y_sort_enabled = true
+
+[node name="SlimeSpawner" type="Node2D" parent="."]
+position = Vector2(-116, 0)
+script = ExtResource("1_u1p2h")
+slime_scene = ExtResource("8_71whg")
+
+[node name="DelayTimer" type="Timer" parent="SlimeSpawner"]
+one_shot = true
 
 [node name="Dummy" type="Sprite2D" parent="."]
 position = Vector2(48, 0)
@@ -63,3 +72,5 @@ damage_rate = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BloodPool/HurtboxComponent"]
 shape = SubResource("RectangleShape2D_rgk83")
+
+[connection signal="timeout" from="SlimeSpawner/DelayTimer" to="SlimeSpawner" method="_on_delay_timer_timeout"]

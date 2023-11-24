@@ -524,7 +524,7 @@ type = 0
 [sub_resource type="CircleShape2D" id="CircleShape2D_slc2l"]
 radius = 100.0
 
-[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "hurtbox_component", "tracker_component")]
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "stats_component", "hitbox_component", "hurtbox_component", "tracker_component", "health_component")]
 collision_layer = 4
 collision_mask = 5
 platform_floor_layers = 4294901760
@@ -535,6 +535,7 @@ stats_component = NodePath("StatsComponent")
 hitbox_component = NodePath("HitboxComponent")
 hurtbox_component = NodePath("HurtboxComponent")
 tracker_component = NodePath("TrackerComponent")
+health_component = NodePath("HealthComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -5)
@@ -567,7 +568,8 @@ stats = NodePath("../StatsComponent")
 max_speed = 60.0
 acceleration = 10.0
 
-[node name="HealthComponent" parent="." instance=ExtResource("2_pclgn")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_pclgn")]
+stats_component = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("3_tkd2y")]
 

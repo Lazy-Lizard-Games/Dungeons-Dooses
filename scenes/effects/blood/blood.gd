@@ -7,7 +7,7 @@ extends Effect
 @export var decay_rate: int = 2
 
 
-func _add_stack() -> void:
+func add_stack() -> void:
 	var previous_stacks = stacks
 	stacks = min(stacks + 1, effect_instance.max_stacks)
 	stack_changed.emit(stacks - previous_stacks)
@@ -15,7 +15,7 @@ func _add_stack() -> void:
 	decay_timer.stop()
 
 
-func _remove_stack() -> void:
+func remove_stack() -> void:
 	var previous_stacks = stacks
 	stacks = max(0, stacks - 1)
 	stack_changed.emit(stacks - previous_stacks)

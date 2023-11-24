@@ -3,7 +3,7 @@ extends Effect
 # Give increased movement speed to the player based
 # on the number of blood stacks that the player has.
 
-@export var move_speed_per_stack: float = 0.01
+@export var attack_speed_per_stack: float = 0.01
 @export var blood_instance: EffectInstance
 var blood_effect: Effect
 
@@ -23,26 +23,23 @@ func add_stack() -> void:
 		stacks += 1
 	stack_changed.emit(1)
 	if blood_effect:
-		container.stats_component.move_speed_mult -= blood_effect.stacks * (stacks-1) * move_speed_per_stack
-		container.stats_component.accelerate_mult -= blood_effect.stacks * (stacks-1) * move_speed_per_stack
+		clear_effect()
 		on_blood_stack_changed(blood_effect.stacks)
 
 
 func get_description() -> String:
-	var effect = move_speed_per_stack*stacks*100
-	var desc = "[b]Movement Speed[/b]: +%s" % effect
+	var effect = attack_speed_per_stack*stacks*100
+	var desc = "[b]Attack Speed[/b]: +%s" % effect
 	return desc+"%"
 
 
 func clear_effect() -> void:
 	if blood_effect:
-		container.stats_component.move_speed_mult -= blood_effect.stacks * stacks * move_speed_per_stack
-		container.stats_component.accelerate_mult -= blood_effect.stacks * stacks * move_speed_per_stack
+		container.stats_component.attack_speed_mult -= blood_effect.stacks * (stacks-1) * attack_speed_per_stack
 
 
 func on_blood_stack_changed(change: int) -> void:
-	container.stats_component.move_speed_mult += change * stacks * move_speed_per_stack
-	container.stats_component.accelerate_mult += change * stacks * move_speed_per_stack
+	container.stats_component.attack_speed_mult += change * stacks * attack_speed_per_stack
 
 
 func on_blood_stack_exited(effect: Effect) -> void:
