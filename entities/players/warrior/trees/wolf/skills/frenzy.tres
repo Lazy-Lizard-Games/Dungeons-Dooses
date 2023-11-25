@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://cnq4rrxw54byy"]
 
-[ext_resource type="Resource" uid="uid://copu1gpuqc0sk" path="res://src/effects/frenzy.tres" id="1_2r7j8"]
+[ext_resource type="Resource" uid="uid://copu1gpuqc0sk" path="res://scenes/effects/frenzy/frenzy.tres" id="1_2r7j8"]
 [ext_resource type="Script" path="res://resources/skill.gd" id="1_5umtd"]
 
 [resource]

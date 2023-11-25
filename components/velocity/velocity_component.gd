@@ -15,8 +15,8 @@ func set_velocity(_velocity: Vector2) -> void:
 
 ## Updates the the current velotiy by the provided velocity. 
 ## This method is designed to be used by 
-func accelerate_to_velocity(_velocity: Vector2, _acceleration := acceleration) -> void:
-	velocity = velocity.lerp(_velocity, _acceleration / max_speed)
+func accelerate_to_velocity(_velocity: Vector2, _speed := max_speed, _acceleration := acceleration) -> void:
+	velocity = velocity.lerp(_velocity, _acceleration / _speed)
 
 
 ## Updates the body's position by the velocity

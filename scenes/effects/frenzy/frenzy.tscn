@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://1mfj2sfgwre5"]
 
 [ext_resource type="Script" path="res://scenes/effects/frenzy/frenzy.gd" id="1_0v83k"]
-[ext_resource type="Resource" uid="uid://bg41x74lh4l01" path="res://src/effects/blood.tres" id="2_3mq4b"]
+[ext_resource type="Resource" uid="uid://bg41x74lh4l01" path="res://scenes/effects/blood/blood.tres" id="2_3mq4b"]
 
 [node name="Frenzy" type="Node2D"]
 script = ExtResource("1_0v83k")

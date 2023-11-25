@@ -18,9 +18,6 @@ boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 [autoload]
 
 Globals="*res://autoloads/globals.gd"
-Utility="*res://autoloads/utility.gd"
-FloatingTextManager="*res://autoloads/floating_text_manager.gd"
-Relationships="*res://autoloads/relationships.gd"
 
 [display]
 

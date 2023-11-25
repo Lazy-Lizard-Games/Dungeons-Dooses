@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://pp65elh4ami7"]
 
 [ext_resource type="Script" path="res://scenes/effects/savour/savour.gd" id="1_1weul"]
-[ext_resource type="Resource" uid="uid://bg41x74lh4l01" path="res://src/effects/blood.tres" id="2_mvoia"]
+[ext_resource type="Resource" uid="uid://bg41x74lh4l01" path="res://scenes/effects/blood/blood.tres" id="2_mvoia"]
 
 [node name="Savour" type="Node2D"]
 script = ExtResource("1_1weul")

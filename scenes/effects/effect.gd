@@ -5,7 +5,6 @@ signal exited_tree(effect: Effect)
 signal stack_changed(change: int)
 
 var effect_instance: EffectInstance
-var container: EffectComponent
 var stacks: int = 0
 
 @onready var idle_timer: Timer = Timer.new()

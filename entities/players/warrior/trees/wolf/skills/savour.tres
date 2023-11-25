@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Skill" load_steps=3 format=3 uid="uid://dyag3cb8er2kc"]
 
-[ext_resource type="Resource" uid="uid://dvfhm2bcdnns8" path="res://src/effects/savour.tres" id="1_2cul8"]
+[ext_resource type="Resource" uid="uid://dvfhm2bcdnns8" path="res://scenes/effects/savour/savour.tres" id="1_2cul8"]
 [ext_resource type="Script" path="res://resources/skill.gd" id="1_4sk4h"]
 
 [resource]

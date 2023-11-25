@@ -11,7 +11,7 @@ enum FACTION
 
 enum DAMAGE 
 {
-	PHYSICAL, 
+	NORMAL, 
 	FIRE, 
 	FROST, 
 	POISON, 
