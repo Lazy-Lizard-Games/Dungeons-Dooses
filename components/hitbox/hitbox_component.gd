@@ -8,6 +8,8 @@ signal hit_by_effect(effect: EffectData, source: HurtboxComponent)
 ## Triggered whenever the hitbox is knocked back by an attack.
 signal hit_by_knockback(knockback: KnockbackData, source: HurtboxComponent)
 
+@export
+var faction := Globals.FACTION.NONE
 
 @export
 var detect_only := false

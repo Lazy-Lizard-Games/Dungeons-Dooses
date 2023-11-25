@@ -5,6 +5,9 @@ signal entity_damaged(damage: DamageData, target: Entity)
 signal entity_killed(damage: DamageData, target: Entity)
 
 @export
+var faction := Globals.FACTION.NONE
+
+@export
 var collision : CollisionData
 
 @export
@@ -29,4 +32,6 @@ func on_timeout() -> void:
 
 func on_area_collision(area: Area2D) -> void:
 	if area is HitboxComponent:
+		if area.detect_only or (faction != Globals.FACTION.NONE and area.faction == faction):
+			return
 		area.handle_collision(collision, self)

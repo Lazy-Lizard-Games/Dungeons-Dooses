@@ -6,9 +6,12 @@ extends Entity
 
 
 func _ready() -> void:
+	faction_changed.connect(on_faction_changed)
+	faction_changed.emit(faction)
 	if hitbox_component:
 		hitbox_component.hit_by_damage.connect(on_hit_by_damage)
 		hitbox_component.hit_by_knockback.connect(on_hit_by_knockback)
+	if health_component:
 		health_component.died.connect(on_died)
 
 
@@ -32,3 +35,8 @@ func on_died(damage: DamageData, source: HurtboxComponent) -> void:
 	print("Died!")
 	source.entity_killed.emit(damage, self)
 	health_component.current_health = health_component.max_health
+
+
+func on_faction_changed(faction: Globals.FACTION) -> void:
+	if hitbox_component:
+		hitbox_component.faction = faction

@@ -15,7 +15,6 @@ var max_health := 10.0:
 @onready
 var current_health := max_health:
 	set(h):
-		print(h)
 		current_health = clamp(h, 0, max_health)
 
 @export_category("Resistances")
