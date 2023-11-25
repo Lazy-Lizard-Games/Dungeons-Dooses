@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=13 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://c5br8pxsh5rqx" path="res://components/stats/stats_component.tscn" id="2_85aeg"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/weapon/weapon_component.tscn" id="4_qstg1"]
 [ext_resource type="Resource" uid="uid://bumydg1tckblw" path="res://abilities/charge/charge_example.tres" id="6_gxodg"]
+[ext_resource type="Resource" uid="uid://bdaxsuukj4p87" path="res://abilities/dash/dash_ability.tres" id="8_qyhqf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)
@@ -20,13 +21,14 @@ colors = PackedColorArray(0.501407, 0.501406, 0.501406, 1, 1, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "weapon_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "weapon_component", "stats")]
 motion_mode = 1
 script = ExtResource("1_dwma1")
 velocity_component = NodePath("VelocityComponent")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 weapon_component = NodePath("WeaponComponent")
+stats = NodePath("StatsComponent")
 id = "Warrior"
 faction = 1
 
@@ -57,6 +59,8 @@ color_initial_ramp = SubResource("Gradient_0ns0p")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_85aeg")]
+max_speed = 250.0
+acceleration = 50.0
 knockback_resist = 0.0
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("2_ry1uk")]
@@ -69,11 +73,11 @@ stats = NodePath("../StatsComponent")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("4_qstg1")]
 stats = NodePath("../StatsComponent")
-abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gxodg"), null, null, null, null])
+abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gxodg"), ExtResource("6_gxodg"), null, null, ExtResource("8_qyhqf")])
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_58ky6")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_fktii")
 
-[connection signal="accelerate_player" from="WeaponComponent" to="VelocityComponent" method="accelerate_to_velocity"]
+[connection signal="accelerate_entity" from="WeaponComponent" to="VelocityComponent" method="accelerate_to_velocity"]

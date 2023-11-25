@@ -5,6 +5,7 @@ func start() -> void:
 	add_child(timer)
 	timer.timeout.connect(stop)
 	timer.start(1)
+	activated = true
 	if weapon.stats:
 		weapon.stats.ignore_knockback = true
 
@@ -16,5 +17,5 @@ func stop() -> void:
 
 var speed = 500
 func _process(delta: float) -> void:
-	if weapon:
-		weapon.accelerate_player.emit(direction * speed, speed, 250)
+	if activated and weapon:
+		weapon.accelerate_entity.emit(direction * speed, speed, 250)

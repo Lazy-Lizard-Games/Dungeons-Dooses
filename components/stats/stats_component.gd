@@ -22,6 +22,8 @@ class_name StatsComponent
 		return acceleration * acceleration_modifier
 ## How much the acceleration is modified before using.
 @export var acceleration_modifier := 1.0
+## How much control the entity has over active movement.
+@export_range(0, 1) var control := 1.0
 ## How quickly it will slow down when not moving.
 @export_range(0, 1) var friction := 0.5
 ## How much impact knockback has on the entity.

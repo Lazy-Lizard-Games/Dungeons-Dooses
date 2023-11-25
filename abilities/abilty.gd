@@ -3,7 +3,7 @@ class_name Ability
 
 signal expired
 
-var started := false
+var activated := false
 var weapon: WeaponComponent
 var direction: Vector2
 
