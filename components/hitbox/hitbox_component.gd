@@ -6,7 +6,7 @@ signal hit_by_damage(damage: DamageData, source: HurtboxComponent)
 ## Triggered whenever an effect is applied to the hitbox.
 signal hit_by_effect(effect: EffectData, source: HurtboxComponent)
 ## Triggered whenever the hitbox is knocked back by an attack.
-signal hit_by_knockback(knockback: KnockbackData, source: HurtboxComponent)
+signal hit_by_knockback(knockback: KnockbackData)
 
 @export
 var faction := Globals.FACTION.NONE
@@ -45,4 +45,4 @@ func handle_knockback(knockback: KnockbackData, source: HurtboxComponent) -> voi
 	if detect_only:
 		return
 	knockback.direction = source.global_position.direction_to(global_position)
-	hit_by_knockback.emit(knockback, source)
+	hit_by_knockback.emit(knockback)

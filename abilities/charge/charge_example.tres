@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://bumydg1tckblw"]
+
+[ext_resource type="PackedScene" uid="uid://4wgwg5tqcdlw" path="res://abilities/charge/charge_ability.tscn" id="1_33naj"]
+[ext_resource type="Script" path="res://resources/abilty_data.gd" id="1_pm0qx"]
+
+[resource]
+script = ExtResource("1_pm0qx")
+id = "Charge"
+cooldown = 5.0
+ability = ExtResource("1_33naj")

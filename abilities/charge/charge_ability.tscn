@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://4wgwg5tqcdlw"]
+
+[ext_resource type="Script" path="res://abilities/charge/charge_ability.gd" id="1_la2nc"]
+
+[node name="ChargeAbility" type="Node"]
+script = ExtResource("1_la2nc")
