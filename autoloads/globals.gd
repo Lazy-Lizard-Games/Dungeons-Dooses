@@ -1,6 +1,6 @@
 extends Node
 
-enum FACTIONS 
+enum FACTION
 {
 	NONE,
 	PLAYER, 
@@ -9,38 +9,11 @@ enum FACTIONS
 	MONSTER,
 }
 
-enum DAMAGE_TYPES 
+enum DAMAGE 
 {
 	PHYSICAL, 
 	FIRE, 
 	FROST, 
 	POISON, 
-	SHOCK, 
-	EXPLOSION,
-	LIGHT,
+	SHOCK,
 }
-
-enum STAT_TYPES 
-{
-	HEALTH,
-	HEALTH_MULT,
-	SPEED,
-	SPEED_MULT,
-	DEFENCE,
-	DEFENCE_MULT,
-	CRIT_HIT_CHANCE,
-	CRIT_HIT_MULT,
-	ATTACK_SPEED_MULT,
-}
-
-var STATS = [
-	"health",
-	"health_mult",
-	"speed",
-	"speed_mult",
-	"defence",
-	"defence_mult",
-	"crit_hit_chance",
-	"crit_hit_mult",
-	"attack_speed_mult",
-]

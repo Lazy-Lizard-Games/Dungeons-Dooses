@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Skill" load_steps=4 format=3 uid="uid://co25phpdefqy8"]
+
+[ext_resource type="Resource" uid="uid://djrr6efq53jbe" path="res://src/effects/bloodhound.tres" id="1_btqw3"]
+[ext_resource type="Resource" uid="uid://clber6efyryq4" path="res://src/effects/bloodlust.tres" id="2_yukem"]
+[ext_resource type="Script" path="res://resources/skill.gd" id="3_s12fv"]
+
+[resource]
+script = ExtResource("3_s12fv")
+name = "Bloodhound"
+description = "Increase [b]Movement Speed[/b] per stack of [b][color=red]Blood[/color][/b].
+
+Gain [b][color=red]Blood[/color][/b] stacks by damaging enemies.
+Stacks begin to decay after a time of not damaging an enemy.
+
+[font_size=14][b]Max [color=red]Blood[/color] stacks[/b]: 20
+[b]Duration[/b]: 2s"
+max_stacks = 5
+effect_instances = Array[Resource("res://resources/effect_instance.gd")]([ExtResource("1_btqw3"), ExtResource("2_yukem")])
+color = Color(0.941176, 0.972549, 1, 1)
