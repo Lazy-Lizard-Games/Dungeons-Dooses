@@ -1,10 +1,11 @@
 extends Area2D
+class_name HurtboxComponent
+
+signal entity_damaged(damage: DamageData, target: Entity)
+signal entity_killed(damage: DamageData, target: Entity)
 
 @export
 var collision : CollisionData
-
-@export
-var source : Entity
 
 @export
 var rate := 0.0
@@ -28,4 +29,4 @@ func on_timeout() -> void:
 
 func on_area_collision(area: Area2D) -> void:
 	if area is HitboxComponent:
-		area.handle_collision(collision, source)
+		area.handle_collision(collision, self)

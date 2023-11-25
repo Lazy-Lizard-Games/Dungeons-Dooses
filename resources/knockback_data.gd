@@ -9,7 +9,4 @@ class_name KnockbackData
 var direction := Vector2.ZERO
 ## Magnitude of knockback.
 @export
-var speed := 0
-## Force behind knockback.
-@export
-var acceleration := 0
+var force := 0
