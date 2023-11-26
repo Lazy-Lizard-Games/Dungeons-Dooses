@@ -39,6 +39,10 @@ func release() -> void:
 ## Signals the end of the ability and that it should probably go home.
 func cancel() -> void:
 	charge_timer.stop()
+	if weapon and weapon.stats:
+		if not fully_charged:
+			weapon.stats.speed_modifier += 0.2
+		weapon.stats.speed_modifier += 0.3
 	print("Charging cancelled!")
 	expire()
 

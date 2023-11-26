@@ -7,6 +7,10 @@ extends Entity
 @export var stats: StatsComponent
 @export var state_component: StateComponent
 
+var selected_ability = 0:
+	set(s):
+		selected_ability = s % 3
+
 
 func _ready() -> void:
 	state_component.init(self)
@@ -20,31 +24,22 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("shift_up"):
+		selected_ability += 1
+	
+	if Input.is_action_just_pressed("shift_up"):
+		selected_ability -= 1
+	
 	state_component.process_input(event)
-	pass
 
 
 func _process(delta: float) -> void:
 	state_component.process_frame(delta)
-	pass
 
 
 func _physics_process(delta):
 	state_component.process_physics(delta)
-	
-	if Input.is_action_just_pressed("ui_cancel"):
-		weapon_component.cancel()
-		
-	if Input.is_action_just_pressed("primary"):
-		weapon_component.start(0, global_position.direction_to(get_global_mouse_position()))
-	if Input.is_action_just_released("primary"):
-		weapon_component.release(0)
-		
-	if Input.is_action_just_pressed("dash"):
-		var dir = global_position.direction_to(get_global_mouse_position())
-		weapon_component.start(4, dir)
-	if Input.is_action_just_released("dash"):
-		weapon_component.release(4)
+
 
 func on_hit_by_damage(damage: DamageData, source: HurtboxComponent) -> void:
 	health_component.damage(damage, source)

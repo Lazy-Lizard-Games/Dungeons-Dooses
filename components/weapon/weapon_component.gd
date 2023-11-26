@@ -6,6 +6,7 @@ class_name WeaponComponent
 signal accelerate_entity(velocity: Vector2, max_speed: float, acceleration: float)
 signal entity_damaged(damage: DamageData, target: Entity)
 signal entity_killed(damage: DamageData, target: Entity)
+signal ability_expired()
 
 ## References the stats component for manipulation by the activated ability.
 @export
@@ -52,6 +53,7 @@ func cancel() -> void:
 
 ## Clean up the ability when it is finished.
 func on_ability_expired() -> void:
+	ability_expired.emit()
 	remove_child(active_ability)
 	active_ability.queue_free()
 	active_ability = null
