@@ -1,11 +1,15 @@
-[gd_scene load_steps=13 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=17 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://c5br8pxsh5rqx" path="res://components/stats/stats_component.tscn" id="2_85aeg"]
+[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="Script" path="res://entities/players/warrior/states/idle.gd" id="3_un612"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="Script" path="res://entities/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/weapon/weapon_component.tscn" id="4_qstg1"]
+[ext_resource type="Resource" uid="uid://160o21fy5njm" path="res://abilities/slash/slash.tres" id="5_qoxwq"]
 [ext_resource type="Resource" uid="uid://bumydg1tckblw" path="res://abilities/charge/charge_example.tres" id="6_gxodg"]
 [ext_resource type="Resource" uid="uid://bdaxsuukj4p87" path="res://abilities/dash/dash_ability.tres" id="8_qyhqf"]
 
@@ -21,7 +25,7 @@ colors = PackedColorArray(0.501407, 0.501406, 0.501406, 1, 1, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "weapon_component", "stats")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "weapon_component", "stats", "state_component")]
 motion_mode = 1
 script = ExtResource("1_dwma1")
 velocity_component = NodePath("VelocityComponent")
@@ -29,6 +33,7 @@ hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 weapon_component = NodePath("WeaponComponent")
 stats = NodePath("StatsComponent")
+state_component = NodePath("StateComponent")
 id = "Warrior"
 faction = 1
 
@@ -58,6 +63,23 @@ color_initial_ramp = SubResource("Gradient_0ns0p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "velocity_component", "stats_component")]
+script = ExtResource("3_un612")
+color_rect = NodePath("../../ColorRect")
+move_state = NodePath("../Move")
+velocity_component = NodePath("../../VelocityComponent")
+stats_component = NodePath("../../StatsComponent")
+
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "velocity_component", "stats_component")]
+script = ExtResource("4_lhxmr")
+color_rect = NodePath("../../ColorRect")
+idle_state = NodePath("../Idle")
+velocity_component = NodePath("../../VelocityComponent")
+stats_component = NodePath("../../StatsComponent")
+
 [node name="StatsComponent" parent="." instance=ExtResource("2_85aeg")]
 max_speed = 250.0
 acceleration = 50.0
@@ -73,7 +95,7 @@ stats = NodePath("../StatsComponent")
 
 [node name="WeaponComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("4_qstg1")]
 stats = NodePath("../StatsComponent")
-abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gxodg"), ExtResource("6_gxodg"), null, null, ExtResource("8_qyhqf")])
+abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("5_qoxwq"), ExtResource("6_gxodg"), null, null, ExtResource("8_qyhqf")])
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_58ky6")]
 

@@ -46,6 +46,10 @@ func accelerate_in_direction(direction: Vector2) -> void:
 	accelerate_to_velocity(direction * max_speed)
 
 
+func decelerate(friction: float) -> void:
+	velocity = velocity.lerp(Vector2.ZERO, friction)
+
+
 ## Used to handle any recieved knockback.
 ## [br]
 ## TODO: implement duration and movement restrictions to knockback.

@@ -4,12 +4,14 @@ extends Entity
 @export var hitbox_component: HitboxComponent
 @export var health_component: HealthComponent
 @export var weapon_component: WeaponComponent
-@export var stats := StatsComponent
+@export var stats: StatsComponent
+@export var state_component: StateComponent
 
 
 func _ready() -> void:
+	state_component.init(self)
 	faction_changed.connect(on_faction_changed)
-	faction_changed.emit(faction)
+	faction_changed.emit()
 	if hitbox_component:
 		hitbox_component.hit_by_damage.connect(on_hit_by_damage)
 		hitbox_component.hit_by_knockback.connect(on_hit_by_knockback)
@@ -17,12 +19,18 @@ func _ready() -> void:
 		health_component.died.connect(on_died)
 
 
-func _physics_process(_delta):
-	var direction := Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
-	if stats:
-		direction *= stats.control
-	velocity_component.accelerate_in_direction(direction)
-	velocity_component.move(self)
+func _unhandled_input(event: InputEvent) -> void:
+	state_component.process_input(event)
+	pass
+
+
+func _process(delta: float) -> void:
+	state_component.process_frame(delta)
+	pass
+
+
+func _physics_process(delta):
+	state_component.process_physics(delta)
 	
 	if Input.is_action_just_pressed("ui_cancel"):
 		weapon_component.cancel()
@@ -33,7 +41,7 @@ func _physics_process(_delta):
 		weapon_component.release(0)
 		
 	if Input.is_action_just_pressed("dash"):
-		var dir = global_position.direction_to(get_global_mouse_position()) if not direction else direction
+		var dir = global_position.direction_to(get_global_mouse_position())
 		weapon_component.start(4, dir)
 	if Input.is_action_just_released("dash"):
 		weapon_component.release(4)
