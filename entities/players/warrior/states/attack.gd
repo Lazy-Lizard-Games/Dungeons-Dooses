@@ -21,27 +21,20 @@ var stats_component: StatsComponent
 @export
 var weapon_component: WeaponComponent
 
-var direction := Vector2.ZERO
-var ability_expired := false
+@export
+var state_component: StateComponent
 
+var direction := Vector2.ZERO
+var ability: Ability
 
 func enter() -> void:
-	ability_expired = false
 	color_rect.color = Color.INDIAN_RED
-	weapon_component.ability_expired.connect(func(): ability_expired = true)
-	weapon_component.start(parent.selected_ability, parent.global_position.direction_to(parent.get_global_mouse_position()))
+	ability = weapon_component.start(parent.selected_ability, parent.global_position.direction_to(parent.get_global_mouse_position()))
+	ability.expired.connect(on_expired)
 
 
 func exit() -> void:
 	color_rect.color = Color.WHITE
-
-
-func process_frame(delta: float) -> State:
-	if ability_expired:
-		if direction.length() > 0:
-			return move_state
-		return idle_state
-	return null
 
 
 func process_physics(delta: float) -> State:
@@ -66,3 +59,11 @@ func process_input(event: InputEvent) -> State:
 		return dash_state
 	
 	return null
+
+
+func on_expired() -> void:
+	if direction.length() > 0:
+		state_component.change_state(move_state)
+		return
+	state_component.change_state(idle_state)
+	return

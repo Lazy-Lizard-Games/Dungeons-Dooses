@@ -3,10 +3,8 @@ class_name WeaponComponent
 
 ## Handles active damage calls, like casting a fireball or swinging a sword.
 
-signal accelerate_entity(velocity: Vector2, max_speed: float, acceleration: float)
 signal entity_damaged(damage: DamageData, target: Entity)
 signal entity_killed(damage: DamageData, target: Entity)
-signal ability_expired()
 
 ## References the stats component for manipulation by the activated ability.
 @export
@@ -19,7 +17,7 @@ var active_ability : Ability = null
 var active_index : float = -1
 
 ## Activates an ability if none it exists and is not already casting.
-func start(index: int, direction: Vector2) -> void:
+func start(index: int, direction: Vector2) -> Ability:
 	if active_ability != null:
 		print("WeaponComponent: Ability already active.")
 		return
@@ -35,6 +33,7 @@ func start(index: int, direction: Vector2) -> void:
 	active_ability.init(self, direction)
 	add_child(active_ability)
 	active_ability.start()
+	return active_ability
 
 
 ## Releases charged abilities or stops auto-fire abilities.
@@ -53,7 +52,6 @@ func cancel() -> void:
 
 ## Clean up the ability when it is finished.
 func on_ability_expired() -> void:
-	ability_expired.emit()
 	remove_child(active_ability)
 	active_ability.queue_free()
 	active_ability = null

@@ -42,11 +42,8 @@ func _physics_process(delta):
 
 
 func on_hit_by_damage(damage: DamageData, source: HurtboxComponent) -> void:
+	source.entity_damaged.emit(damage, self)
 	health_component.damage(damage, source)
-	if health_component.is_dead:
-		source.entity_killed.emit(damage, self)
-	else:
-		source.entity_damaged.emit(damage, self)
 
 
 func on_hit_by_knockback(knockback: KnockbackData) -> void:
@@ -54,6 +51,7 @@ func on_hit_by_knockback(knockback: KnockbackData) -> void:
 
 
 func on_died(damage: DamageData, source: HurtboxComponent) -> void:
+	source.entity_killed.emit(damage, self)
 	health_component.current_health = health_component.max_health
 
 

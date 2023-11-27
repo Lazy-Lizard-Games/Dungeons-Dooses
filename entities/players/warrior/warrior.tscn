@@ -85,7 +85,7 @@ dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
-[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "stats_component", "weapon_component")]
+[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "stats_component", "weapon_component", "state_component")]
 script = ExtResource("5_vbqk7")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
@@ -94,14 +94,16 @@ dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 weapon_component = NodePath("../../WeaponComponent")
+state_component = NodePath("..")
 
-[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "stats_component", "weapon_component")]
+[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "weapon_component", "state_component")]
 script = ExtResource("6_5ufd4")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
-stats_component = NodePath("../../StatsComponent")
+velocity_component = NodePath("../../VelocityComponent")
 weapon_component = NodePath("../../WeaponComponent")
+state_component = NodePath("..")
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_85aeg")]
 max_speed = 250.0
@@ -124,5 +126,3 @@ abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gx
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_fktii")
-
-[connection signal="accelerate_entity" from="WeaponComponent" to="VelocityComponent" method="accelerate_to_velocity"]

@@ -2,10 +2,10 @@ extends Ability
 
 ## How long the dash will last for. 
 @export
-var duration := 0.05
+var duration := 0.1
 ## How fast the entity can move while dashing.
 @export
-var max_speed := 7500
+var max_speed := 2500
 ## How fast the entity will reach max speed while dashing.
 @export
 var acceleration := 1250
@@ -18,15 +18,12 @@ func start() -> void:
 	add_child(timer)
 	timer.timeout.connect(on_timeout)
 	timer.start(duration)
-	if weapon and weapon.stats:
-		weapon.stats.control = 0.2 
 
 
-func _process(delta: float) -> void:
-	if timer.is_stopped() or not weapon:
+func _physics_process(delta: float) -> void:
+	if timer.is_stopped():
 		return
-	weapon.accelerate_entity.emit(direction * max_speed, max_speed, acceleration)
-	# velocity: Vector2, max_speed: float, acceleration: float
+	update_velocity.emit(direction * max_speed, max_speed, acceleration)
 
 
 func on_timeout() -> void:
