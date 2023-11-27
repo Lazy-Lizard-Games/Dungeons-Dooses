@@ -1,5 +1,5 @@
 extends Node2D
-class_name WeaponComponent
+class_name AbilityComponent
 
 ## Handles active damage calls, like casting a fireball or swinging a sword.
 

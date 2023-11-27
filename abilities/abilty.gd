@@ -10,12 +10,12 @@ signal update_color(color: Color)
 var control: float
 
 var activated := false
-var weapon: WeaponComponent
+var weapon: AbilityComponent
 var direction: Vector2
 
 
 ## Initialises required data before activating the ability. 
-func init(_weapon: WeaponComponent, _direction: Vector2) -> void:
+func init(_weapon: AbilityComponent, _direction: Vector2) -> void:
 	weapon = _weapon
 	direction = _direction
 

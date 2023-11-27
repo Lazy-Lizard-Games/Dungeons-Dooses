@@ -13,7 +13,7 @@ var move_state: State
 var velocity_component: VelocityComponent
 
 @export
-var weapon_component: WeaponComponent
+var ability_component: AbilityComponent
 
 @export
 var state_component: StateComponent
@@ -24,7 +24,7 @@ var ability: Ability
 
 func enter() -> void:
 	color_rect.color = Color.YELLOW
-	ability = weapon_component.start(4, direction)
+	ability = ability_component.start(4, direction)
 	ability.expired.connect(on_expired)
 	ability.update_velocity.connect(on_update_velocity)
 

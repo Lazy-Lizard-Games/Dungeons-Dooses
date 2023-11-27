@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://entities/players/warrior/states/idle.gd" id="3_un612"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/move.gd" id="4_lhxmr"]
-[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/weapon/weapon_component.tscn" id="4_qstg1"]
+[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/dash.gd" id="6_5ufd4"]
 [ext_resource type="Resource" uid="uid://bumydg1tckblw" path="res://abilities/charge/charge_example.tres" id="6_gxodg"]
@@ -26,13 +26,12 @@ colors = PackedColorArray(0.501407, 0.501406, 0.501406, 1, 1, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "weapon_component", "stats", "state_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "stats", "state_component")]
 motion_mode = 1
 script = ExtResource("1_dwma1")
 velocity_component = NodePath("VelocityComponent")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
-weapon_component = NodePath("WeaponComponent")
 stats = NodePath("StatsComponent")
 state_component = NodePath("StateComponent")
 id = "Warrior"
@@ -85,7 +84,7 @@ dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
-[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "stats_component", "weapon_component", "state_component")]
+[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "stats_component", "ability_component", "state_component")]
 script = ExtResource("5_vbqk7")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
@@ -93,16 +92,16 @@ move_state = NodePath("../Move")
 dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
-weapon_component = NodePath("../../WeaponComponent")
+ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
 
-[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "weapon_component", "state_component")]
+[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component")]
 script = ExtResource("6_5ufd4")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
 move_state = NodePath("../Move")
 velocity_component = NodePath("../../VelocityComponent")
-weapon_component = NodePath("../../WeaponComponent")
+ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_85aeg")]
@@ -118,7 +117,7 @@ max_speed = 300.0
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_wj1h3")]
 stats = NodePath("../StatsComponent")
 
-[node name="WeaponComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("4_qstg1")]
+[node name="AbilityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("4_qstg1")]
 stats = NodePath("../StatsComponent")
 abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gxodg"), null, null, null, ExtResource("8_qyhqf")])
 

@@ -3,7 +3,6 @@ extends Entity
 @export var velocity_component: VelocityComponent
 @export var hitbox_component: HitboxComponent
 @export var health_component: HealthComponent
-@export var weapon_component: WeaponComponent
 @export var stats: StatsComponent
 @export var state_component: StateComponent
 

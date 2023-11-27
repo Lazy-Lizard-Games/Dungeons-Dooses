@@ -19,7 +19,7 @@ var velocity_component: VelocityComponent
 var stats_component: StatsComponent
 
 @export
-var weapon_component: WeaponComponent
+var ability_component: AbilityComponent
 
 @export
 var state_component: StateComponent
@@ -29,7 +29,7 @@ var ability: Ability
 
 func enter() -> void:
 	color_rect.color = Color.INDIAN_RED
-	ability = weapon_component.start(parent.selected_ability, parent.global_position.direction_to(parent.get_global_mouse_position()))
+	ability = ability_component.start(parent.selected_ability, parent.global_position.direction_to(parent.get_global_mouse_position()))
 	ability.expired.connect(on_expired)
 
 
@@ -48,13 +48,13 @@ func process_physics(delta: float) -> State:
 
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_released("primary"):
-		weapon_component.release(parent.selected_ability)
+		ability_component.release(parent.selected_ability)
 	
 	if Input.is_action_just_pressed("secondary"):
-		weapon_component.cancel()
+		ability_component.cancel()
 	
 	if Input.is_action_just_pressed("dash"):
-		weapon_component.cancel()
+		ability_component.cancel()
 		dash_state.direction = direction
 		return dash_state
 	
