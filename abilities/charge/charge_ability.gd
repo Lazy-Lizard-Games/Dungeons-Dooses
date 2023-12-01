@@ -19,18 +19,18 @@ func start() -> void:
 	charge_timer.one_shot = true
 	charge_timer.timeout.connect(on_fully_charged)
 	charge_timer.start(total_time)
-	if weapon and weapon.stats:
-		weapon.stats.speed_modifier -= 0.5
+	if ability and ability.stats:
+		ability.stats.speed_modifier -= 0.5
 	print("Charging started!")
 
 
 ## Signals that the ability should release the charging ability or stop.
 func release() -> void:
 	var charge = (charge_time / total_time) * 100
-	if weapon and weapon.stats:
+	if ability and ability.stats:
 		if not fully_charged:
-			weapon.stats.speed_modifier += 0.2
-		weapon.stats.speed_modifier += 0.3
+			ability.stats.speed_modifier += 0.2
+		ability.stats.speed_modifier += 0.3
 	print(("Released with %s" % charge) + "% charge!")
 	fully_charged = false
 	expire()
@@ -39,16 +39,16 @@ func release() -> void:
 ## Signals the end of the ability and that it should probably go home.
 func cancel() -> void:
 	charge_timer.stop()
-	if weapon and weapon.stats:
+	if ability and ability.stats:
 		if not fully_charged:
-			weapon.stats.speed_modifier += 0.2
-		weapon.stats.speed_modifier += 0.3
+			ability.stats.speed_modifier += 0.2
+		ability.stats.speed_modifier += 0.3
 	print("Charging cancelled!")
 	expire()
 
 
 func on_fully_charged() -> void:
 	fully_charged = true
-	if weapon and weapon.stats:
-		weapon.stats.speed_modifier += 0.2
+	if ability and ability.stats:
+		ability.stats.speed_modifier += 0.2
 	print("Fully charged!")

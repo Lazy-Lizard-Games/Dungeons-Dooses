@@ -38,8 +38,9 @@ func exit() -> void:
 func process_physics(delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction:
-		var angle = ability.direction.angle_to(direction) * ability.control
-		ability.direction = ability.direction.rotated(angle)
+		var angle = velocity_component.velocity.angle_to(direction) * ability.control
+		velocity_component.velocity = velocity_component.velocity.rotated(angle)
+		# ability.direction = ability.direction.rotated(angle)
 	return null
 
 
@@ -51,8 +52,8 @@ func on_expired() -> void:
 	return
 
 
-func on_update_velocity(velocity: Vector2, speed: float, acceleration: float) -> void:
-	velocity_component.accelerate_to_velocity(velocity, speed, acceleration)
+func on_update_velocity(velocity: Vector2, weight: float) -> void:
+	velocity_component.accelerate_to_velocity(velocity, weight)
 	velocity_component.move(parent)
 
 

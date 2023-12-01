@@ -37,13 +37,13 @@ func set_velocity(_velocity: Vector2) -> void:
 
 ## Updates the the current velotiy by the provided velocity. 
 ## This method is designed to be used by 
-func accelerate_to_velocity(_velocity: Vector2, _max_speed := max_speed, _acceleration := acceleration) -> void:
-	velocity = velocity.lerp(_velocity, _acceleration / _max_speed)
+func accelerate_to_velocity(_velocity: Vector2, weight: float ) -> void:
+	velocity = velocity.lerp(_velocity, weight)
 
 
 ## Moves the velocity towards the provided direction.
-func accelerate_in_direction(direction: Vector2) -> void:
-	accelerate_to_velocity(direction * max_speed)
+func accelerate_in_direction(direction: Vector2, _max_speed := max_speed, _acceleration := acceleration) -> void:
+	accelerate_to_velocity(direction * _max_speed, _acceleration / _max_speed)
 
 
 func decelerate(friction: float) -> void:

@@ -2,7 +2,7 @@ extends Node
 class_name Ability
 
 signal expired
-signal update_velocity(velocity: Vector2, speed: float, acceleration: float)
+signal update_velocity(velocity: Vector2, weight: float)
 signal update_animation(animation: Animation)
 signal update_color(color: Color)
 
@@ -10,13 +10,13 @@ signal update_color(color: Color)
 var control: float
 
 var activated := false
-var weapon: AbilityComponent
+var ability: AbilityComponent
 var direction: Vector2
 
 
 ## Initialises required data before activating the ability. 
-func init(_weapon: AbilityComponent, _direction: Vector2) -> void:
-	weapon = _weapon
+func init(_ability: AbilityComponent, _direction: Vector2) -> void:
+	ability = _ability
 	direction = _direction
 
 

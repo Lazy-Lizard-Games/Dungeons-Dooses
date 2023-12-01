@@ -4,4 +4,5 @@
 
 [node name="DashAbility" type="Node"]
 script = ExtResource("1_0hbbr")
+duration = 0.5
 control = 0.1
