@@ -16,14 +16,18 @@ var one_timer := true
 
 ## Signals that the ability should start doing things.
 func start() -> void:
+	one_timer = true
 	timer = Timer.new()
 	add_child(timer)
 	timer.timeout.connect(on_timeout)
 	timer.start(duration)
-
+	current_state = state.ACTIVE
 
 
 func _physics_process(delta: float) -> void:
+	if current_state != state.ACTIVE:
+		return
+	
 	if one_timer:
 		update_velocity.emit(direction * max_speed, acceleration/ max_speed)
 		one_timer = false
@@ -34,6 +38,7 @@ func _physics_process(delta: float) -> void:
 
 
 func on_timeout() -> void:
-	if ability and ability.stats:
-		ability.stats.control = 1
+	ability_component.stats.control = 1
+	current_state = state.READY
+	timer.queue_free()
 	expire()

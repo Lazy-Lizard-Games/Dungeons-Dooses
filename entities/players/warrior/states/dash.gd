@@ -41,6 +41,7 @@ func process_physics(delta: float) -> State:
 		var angle = velocity_component.velocity.angle_to(direction) * ability.control
 		velocity_component.velocity = velocity_component.velocity.rotated(angle)
 		# ability.direction = ability.direction.rotated(angle)
+	velocity_component.move(parent)
 	return null
 
 
@@ -54,6 +55,5 @@ func on_expired() -> void:
 
 func on_update_velocity(velocity: Vector2, weight: float) -> void:
 	velocity_component.accelerate_to_velocity(velocity, weight)
-	velocity_component.move(parent)
 
 

@@ -9,14 +9,20 @@ signal update_color(color: Color)
 @export_range(0, 1)
 var control: float
 
-var activated := false
-var ability: AbilityComponent
+enum state {
+	ACTIVE,
+	COOLDOWN,
+	READY
+}
+
+var current_state := state.READY
+var ability_component: AbilityComponent
 var direction: Vector2
 
 
 ## Initialises required data before activating the ability. 
-func init(_ability: AbilityComponent, _direction: Vector2) -> void:
-	ability = _ability
+func init(_ability_component: AbilityComponent, _direction: Vector2) -> void:
+	ability_component = _ability_component
 	direction = _direction
 
 

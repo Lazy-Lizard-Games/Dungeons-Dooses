@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=20 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://c5br8pxsh5rqx" path="res://components/stats/stats_component.tscn" id="2_85aeg"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://entities/players/warrior/states/dash.gd" id="6_5ufd4"]
 [ext_resource type="Resource" uid="uid://bumydg1tckblw" path="res://abilities/charge/charge_example.tres" id="6_gxodg"]
 [ext_resource type="Resource" uid="uid://bdaxsuukj4p87" path="res://abilities/dash/dash_ability.tres" id="8_qyhqf"]
+[ext_resource type="PackedScene" uid="uid://4wgwg5tqcdlw" path="res://abilities/charge/charge_ability.tscn" id="13_qbjw1"]
+[ext_resource type="PackedScene" uid="uid://ci7njanoad4y6" path="res://abilities/dash/dash_ability.tscn" id="14_nyuld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)
@@ -117,9 +119,14 @@ max_speed = 300.0
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_wj1h3")]
 stats = NodePath("../StatsComponent")
 
-[node name="AbilityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("4_qstg1")]
+[node name="AbilityComponent" parent="." node_paths=PackedStringArray("stats", "temp_abilities") instance=ExtResource("4_qstg1")]
 stats = NodePath("../StatsComponent")
 abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gxodg"), null, null, null, ExtResource("8_qyhqf")])
+temp_abilities = [NodePath("ChargeAbility"), null, null, null, NodePath("DashAbility")]
+
+[node name="ChargeAbility" parent="AbilityComponent" instance=ExtResource("13_qbjw1")]
+
+[node name="DashAbility" parent="AbilityComponent" instance=ExtResource("14_nyuld")]
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_58ky6")]
 

@@ -8,7 +8,7 @@ extends Entity
 
 var selected_ability = 0:
 	set(s):
-		selected_ability = s % 3
+		selected_ability = s % 4
 
 
 func _ready() -> void:
@@ -23,11 +23,28 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("shift_up"):
-		selected_ability += 1
+	if event is InputEventMouseButton:
+		event as InputEventMouseButton
+		if event.pressed:
+			match event.button_index:
+				MOUSE_BUTTON_WHEEL_DOWN:
+					selected_ability += 1
+					print(selected_ability)
+				MOUSE_BUTTON_WHEEL_UP:
+					selected_ability -= 1
+					print(selected_ability)
 	
-	if Input.is_action_just_pressed("shift_up"):
-		selected_ability -= 1
+	if Input.is_action_just_pressed("select_ability_1"):
+		selected_ability = 0
+	
+	if Input.is_action_just_pressed("select_ability_2"):
+		selected_ability = 1
+	
+	if Input.is_action_just_pressed("select_ability_3"):
+		selected_ability = 2
+	
+	if Input.is_action_just_pressed("select_ability_4"):
+		selected_ability = 3
 	
 	state_component.process_input(event)
 

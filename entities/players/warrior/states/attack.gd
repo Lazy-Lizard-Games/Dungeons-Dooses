@@ -2,25 +2,18 @@ extends State
 
 @export
 var color_rect: ColorRect
-
 @export
 var idle_state: State
-
 @export
 var move_state: State
-
 @export
 var dash_state: State
-
 @export
 var velocity_component: VelocityComponent
-
 @export
 var stats_component: StatsComponent
-
 @export
 var ability_component: AbilityComponent
-
 @export
 var state_component: StateComponent
 
@@ -30,7 +23,11 @@ var ability: Ability
 func enter() -> void:
 	color_rect.color = Color.INDIAN_RED
 	ability = ability_component.start(parent.selected_ability, parent.global_position.direction_to(parent.get_global_mouse_position()))
+	if !ability:
+		on_expired()
+		return
 	ability.expired.connect(on_expired)
+	ability.update_color.connect(func(color: Color): color_rect.color = color)
 
 
 func exit() -> void:
@@ -48,13 +45,13 @@ func process_physics(delta: float) -> State:
 
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_released("primary"):
-		ability_component.release(parent.selected_ability)
+		ability.release()
 	
 	if Input.is_action_just_pressed("secondary"):
-		ability_component.cancel()
+		ability.cancel()
 	
 	if Input.is_action_just_pressed("dash"):
-		ability_component.cancel()
+		ability.cancel()
 		dash_state.direction = direction
 		return dash_state
 	
@@ -62,6 +59,8 @@ func process_input(event: InputEvent) -> State:
 
 
 func on_expired() -> void:
+	if ability:
+		ability.expired.disconnect(on_expired)
 	if direction.length() > 0:
 		state_component.change_state(move_state)
 		return

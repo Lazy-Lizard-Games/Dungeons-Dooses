@@ -34,7 +34,7 @@ var invulnerable := false
 
 
 ## Main method for dealing damage to an entity
-func damage(damage: DamageData, source: HurtboxComponent) -> void:
+func damage(damage_in: DamageData, source: HurtboxComponent) -> void:
 	if is_dead:
 		return
 	
@@ -42,7 +42,7 @@ func damage(damage: DamageData, source: HurtboxComponent) -> void:
 		return
 	
 	if stats:
-		damage.amount * (1-stats.get_resistance(damage.type))
-	current_health -= damage.amount
+		damage_in.amount * (1-stats.get_resistance(damage_in.type))
+	current_health -= damage_in.amount
 	if current_health == 0:
 		died.emit(damage, source)

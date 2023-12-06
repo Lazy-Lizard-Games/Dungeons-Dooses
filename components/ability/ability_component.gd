@@ -12,47 +12,37 @@ var stats: StatsComponent
 ## Stores the available abilities for the entity to use.
 @export
 var abilities : Array[AbilityData]
+@export
+var temp_abilities: Array[Ability]
 ## References the currently active ability.
 var active_ability : Ability = null
 var active_index : float = -1
 
-## Activates an ability if none it exists and is not already casting.
+
+## Assigns the ability to the given index.
+func set_ability(index: int, ability_data: AbilityData) -> void:
+	pass
+
+
+## Starts the ability at the given index.
 func start(index: int, direction: Vector2) -> Ability:
-	if active_ability != null:
-		print("WeaponComponent: Ability already active.")
-		return
-	
-	if abilities.size() < index or not abilities[index]:
-		print("WeaponComponent: Ability does not exist.")
-		return
-	
-	var ability = abilities[index]
-	active_index = index
-	active_ability = abilities[index].ability.instantiate() as Ability
-	active_ability.expired.connect(on_ability_expired)
-	active_ability.init(self, direction)
-	add_child(active_ability)
-	active_ability.start()
-	return active_ability
+	var ability = temp_abilities[index]
+	if !ability or ability.current_state != ability.state.READY:
+		return null
+	ability.init(self, direction)
+	ability.start()
+	return ability
 
 
 ## Releases charged abilities or stops auto-fire abilities.
 func release(index: int) -> void:
-	if !active_ability or index != active_index:
+	if !temp_abilities[index]:
 		return
-	active_ability.release()
+	temp_abilities[index].release()
 
 
-## Stops charged abilities, returning any cooldown.
-func cancel() -> void:
-	if !active_ability:
+## Used to stop an ability prematurely.
+func cancel(index: int) -> void:
+	if !temp_abilities[index]:
 		return
-	active_ability.cancel()
-
-
-## Clean up the ability when it is finished.
-func on_ability_expired() -> void:
-	remove_child(active_ability)
-	active_ability.queue_free()
-	active_ability = null
-	active_index = -1
+	temp_abilities[index].cancel()
