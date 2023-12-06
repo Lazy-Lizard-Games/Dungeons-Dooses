@@ -10,17 +10,23 @@ var max_speed := 2500.0
 @export
 var acceleration := 1250.0
 
-var timer: Timer
+var dash_timer: Timer
 
 var one_timer := true
 
+
+func _ready():
+	dash_timer = Timer.new()
+	dash_timer.one_shot = true
+	dash_timer.timeout.connect(on_timeout)
+	add_child(dash_timer)
+
+
 ## Signals that the ability should start doing things.
 func start() -> void:
+	update_control.emit(0.1)
 	one_timer = true
-	timer = Timer.new()
-	add_child(timer)
-	timer.timeout.connect(on_timeout)
-	timer.start(duration)
+	dash_timer.start(duration)
 	current_state = state.ACTIVE
 
 
@@ -31,14 +37,13 @@ func _physics_process(delta: float) -> void:
 	if one_timer:
 		update_velocity.emit(direction * max_speed, acceleration/ max_speed)
 		one_timer = false
-	if timer.is_stopped():
+	if dash_timer.is_stopped():
 		return
 	
 	update_velocity.emit(Vector2.ZERO, 0.05)
 
 
 func on_timeout() -> void:
-	ability_component.stats.control = 1
+	update_control.emit(1)
 	current_state = state.READY
-	timer.queue_free()
 	expire()

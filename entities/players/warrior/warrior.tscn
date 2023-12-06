@@ -1,19 +1,18 @@
-[gd_scene load_steps=20 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=19 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
-[ext_resource type="PackedScene" uid="uid://c5br8pxsh5rqx" path="res://components/stats/stats_component.tscn" id="2_85aeg"]
-[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
-[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
-[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="PackedScene" uid="uid://c5br8pxsh5rqx" path="res://components/libraries/stats/stats_component.tscn" id="2_85aeg"]
+[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/commands/state/state_component.tscn" id="2_e5t7x"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_ry1uk"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/idle.gd" id="3_un612"]
-[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/move.gd" id="4_lhxmr"]
-[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/dash.gd" id="6_5ufd4"]
-[ext_resource type="Resource" uid="uid://bumydg1tckblw" path="res://abilities/charge/charge_example.tres" id="6_gxodg"]
-[ext_resource type="Resource" uid="uid://bdaxsuukj4p87" path="res://abilities/dash/dash_ability.tres" id="8_qyhqf"]
 [ext_resource type="PackedScene" uid="uid://4wgwg5tqcdlw" path="res://abilities/charge/charge_ability.tscn" id="13_qbjw1"]
+[ext_resource type="Script" path="res://components/commands/hurtbox/hurtbox_component.gd" id="14_8mf76"]
 [ext_resource type="PackedScene" uid="uid://ci7njanoad4y6" path="res://abilities/dash/dash_ability.tscn" id="14_nyuld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
@@ -86,7 +85,7 @@ dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 
-[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "stats_component", "ability_component", "state_component")]
+[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "stats_component", "ability_component", "state_component", "hurtbox_component")]
 script = ExtResource("5_vbqk7")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
@@ -96,8 +95,9 @@ velocity_component = NodePath("../../VelocityComponent")
 stats_component = NodePath("../../StatsComponent")
 ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
+hurtbox_component = NodePath("../../HurtboxComponent")
 
-[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component")]
+[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component", "stats_component", "hurtbox_component")]
 script = ExtResource("6_5ufd4")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
@@ -105,6 +105,8 @@ move_state = NodePath("../Move")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
+stats_component = NodePath("../../StatsComponent")
+hurtbox_component = NodePath("../../HurtboxComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("2_85aeg")]
 max_speed = 250.0
@@ -119,10 +121,8 @@ max_speed = 300.0
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_wj1h3")]
 stats = NodePath("../StatsComponent")
 
-[node name="AbilityComponent" parent="." node_paths=PackedStringArray("stats", "temp_abilities") instance=ExtResource("4_qstg1")]
-stats = NodePath("../StatsComponent")
-abilities = Array[Resource("res://resources/abilty_data.gd")]([ExtResource("6_gxodg"), null, null, null, ExtResource("8_qyhqf")])
-temp_abilities = [NodePath("ChargeAbility"), null, null, null, NodePath("DashAbility")]
+[node name="AbilityComponent" parent="." node_paths=PackedStringArray("abilities") instance=ExtResource("4_qstg1")]
+abilities = [NodePath("ChargeAbility"), null, null, null, NodePath("DashAbility")]
 
 [node name="ChargeAbility" parent="AbilityComponent" instance=ExtResource("13_qbjw1")]
 
@@ -132,3 +132,6 @@ temp_abilities = [NodePath("ChargeAbility"), null, null, null, NodePath("DashAbi
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_fktii")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+script = ExtResource("14_8mf76")

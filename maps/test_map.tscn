@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/players/warrior/warrior.tscn" id="1_fiui5"]
 [ext_resource type="Script" path="res://entities/entity.gd" id="2_mqcx3"]
-[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_5s662"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="3_5s662"]
 [ext_resource type="Script" path="res://resources/damage_data.gd" id="4_kuhb3"]
 [ext_resource type="Script" path="res://resources/knockback_data.gd" id="5_qdwh2"]
 [ext_resource type="Script" path="res://resources/collision_data.gd" id="6_3q086"]

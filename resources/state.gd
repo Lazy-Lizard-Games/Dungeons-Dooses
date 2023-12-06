@@ -23,3 +23,4 @@ func process_physics(delta: float) -> State:
 
 func process_input(event: InputEvent) -> State:
 	return null
+

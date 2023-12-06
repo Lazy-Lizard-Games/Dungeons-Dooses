@@ -4,26 +4,20 @@ class_name Ability
 signal expired
 signal update_velocity(velocity: Vector2, weight: float)
 signal update_animation(animation: Animation)
+signal update_control(control: float)
 signal update_color(color: Color)
 
-@export_range(0, 1)
-var control: float
 
 enum state {
 	ACTIVE,
 	COOLDOWN,
-	READY
+	READY,
+	EXPIRED
 }
 
 var current_state := state.READY
-var ability_component: AbilityComponent
+var hurtbox_component: HurtboxComponent
 var direction: Vector2
-
-
-## Initialises required data before activating the ability. 
-func init(_ability_component: AbilityComponent, _direction: Vector2) -> void:
-	ability_component = _ability_component
-	direction = _direction
 
 
 func expire() -> void:

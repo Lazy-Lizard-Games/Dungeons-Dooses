@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://jik04cg2nmq5"]
 
-[ext_resource type="Script" path="res://components/hurtbox/hurtbox_component.gd" id="1_wfyx8"]
+[ext_resource type="Script" path="res://components/commands/hurtbox/hurtbox_component.gd" id="1_wfyx8"]
 
 [node name="HurtboxComponent" type="Area2D"]
 collision_layer = 0

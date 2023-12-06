@@ -4,4 +4,3 @@
 
 [node name="ChargeAbility" type="Node"]
 script = ExtResource("1_la2nc")
-control = 0.5

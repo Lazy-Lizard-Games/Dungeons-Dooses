@@ -16,22 +16,40 @@ var stats_component: StatsComponent
 var ability_component: AbilityComponent
 @export
 var state_component: StateComponent
+@export
+var hurtbox_component: HurtboxComponent
 
 var direction := Vector2.ZERO
 var ability: Ability
 
+
 func enter() -> void:
-	color_rect.color = Color.INDIAN_RED
-	ability = ability_component.start(parent.selected_ability, parent.global_position.direction_to(parent.get_global_mouse_position()))
+	ability = ability_component.get_ability(parent.selected_ability)
 	if !ability:
-		on_expired()
+		switch_state()
 		return
+	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
+	if direction.length() == 0:
+		direction = parent.global_position.direction_to(parent.get_global_mouse_position())
+	ability.direction = direction
+	ability.hurtbox_component = hurtbox_component
+	color_rect.color = Color.INDIAN_RED
 	ability.expired.connect(on_expired)
-	ability.update_color.connect(func(color: Color): color_rect.color = color)
+	ability.update_color.connect(on_update_color)
+	ability.update_velocity.connect(on_update_velocity)
+	ability.update_control.connect(on_update_control)
+	ability.start()
 
 
 func exit() -> void:
+	stats_component.control = 1
 	color_rect.color = Color.WHITE
+	if !ability:
+		return
+	ability.expired.disconnect(on_expired)
+	ability.update_color.disconnect(on_update_color)
+	ability.update_velocity.disconnect(on_update_velocity)
+	ability.update_control.disconnect(on_update_control)
 
 
 func process_physics(delta: float) -> State:
@@ -58,11 +76,25 @@ func process_input(event: InputEvent) -> State:
 	return null
 
 
-func on_expired() -> void:
-	if ability:
-		ability.expired.disconnect(on_expired)
+func switch_state() -> void:
 	if direction.length() > 0:
 		state_component.change_state(move_state)
 		return
 	state_component.change_state(idle_state)
-	return
+
+
+func on_expired() -> void:
+	switch_state()
+
+
+func on_update_color(color: Color) -> void:
+	color_rect.color = color
+
+
+func on_update_velocity(velocity: Vector2, weight: float) -> void:
+	velocity_component.accelerate_to_velocity(velocity, weight)
+
+
+func on_update_control(control: float) -> void:
+	stats_component.control = control
+
