@@ -30,8 +30,7 @@ func enter() -> void:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction.length() == 0:
 		direction = parent.global_position.direction_to(parent.get_global_mouse_position())
-	ability.direction = direction
-	ability.hurtbox_component = hurtbox_component
+	ability.init(parent.faction, direction, hurtbox_component)
 	ability.expired.connect(on_expired)
 	ability.update_color.connect(on_update_color)
 	ability.update_velocity.connect(on_update_velocity)

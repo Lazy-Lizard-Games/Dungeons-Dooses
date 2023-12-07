@@ -1,6 +1,7 @@
 extends Ability
 
 @export var total_time := 2.0
+@export var particle_emitter: CPUParticles2D
 
 var charge_time : float:
 	get:
@@ -9,7 +10,6 @@ var charge_time : float:
 		if charge_timer.is_stopped():
 			return 0
 		return total_time - charge_timer.time_left
-		
 
 var charge_timer: Timer
 var fully_charged := false
@@ -22,12 +22,14 @@ func _ready() -> void:
 	charge_timer.timeout.connect(on_fully_charged)
 	add_child(charge_timer)
 
+
 ## Signals that the ability should start doing things.
 func start() -> void:
 	fully_charged = false
 	charge_timer.start(total_time)
 	update_control.emit(0.5)
 	current_state = state.ACTIVE
+	particle_emitter.emitting = true
 
 
 ## Signals that the ability should release the charging ability or stop.
@@ -53,3 +55,4 @@ func on_fully_charged() -> void:
 func on_expired() -> void:
 	current_state = state.READY
 	charge_timer.stop()
+	particle_emitter.emitting = false

@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://abilities/dash/dash_ability.gd" id="1_0hbbr"]
 
-[node name="DashAbility" type="Node"]
+[node name="DashAbility" type="Node2D"]
 script = ExtResource("1_0hbbr")
 duration = 0.5
-control = 0.1

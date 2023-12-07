@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://4wgwg5tqcdlw"]
+[gd_scene load_steps=3 format=3 uid="uid://4wgwg5tqcdlw"]
 
 [ext_resource type="Script" path="res://abilities/charge/charge_ability.gd" id="1_la2nc"]
 
-[node name="ChargeAbility" type="Node"]
+[sub_resource type="Gradient" id="Gradient_pnxee"]
+colors = PackedColorArray(0.898039, 0.329412, 0.0588235, 1, 0.54902, 0.054902, 0, 1)
+
+[node name="ChargeAbility" type="Node2D" node_paths=PackedStringArray("particle_emitter")]
 script = ExtResource("1_la2nc")
+particle_emitter = NodePath("CPUParticles2D")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+emission_shape = 1
+emission_sphere_radius = 50.0
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 5.0
+scale_amount_min = 5.0
+scale_amount_max = 10.0
+color_ramp = SubResource("Gradient_pnxee")

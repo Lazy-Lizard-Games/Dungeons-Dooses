@@ -5,7 +5,7 @@ enum FACTION
 	NONE,
 	PLAYER, 
 	HUMAN, 
-	CREATURE, 
+	BEAST, 
 	MONSTER,
 }
 

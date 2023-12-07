@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name Ability
 
 signal expired
@@ -16,12 +16,19 @@ enum state {
 }
 
 var current_state := state.READY
+var faction: Globals.FACTION
 var hurtbox_component: HurtboxComponent
 var direction: Vector2
 
 
 func expire() -> void:
 	expired.emit()
+
+
+func init(_faction: Globals.FACTION, _direction: Vector2, _hurtbox_component: HurtboxComponent) -> void:
+	faction = _faction
+	direction = _direction
+	hurtbox_component = _hurtbox_component
 
 
 ## Signals that the ability should start doing things.
