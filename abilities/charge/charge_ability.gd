@@ -2,6 +2,7 @@ extends Ability
 
 @export var total_time := 2.0
 @export var particle_emitter: CPUParticles2D
+@export var charge_projectile: PackedScene
 
 var charge_time : float:
 	get:
@@ -36,7 +37,12 @@ func start() -> void:
 func release() -> void:
 	var charge = (charge_time / total_time) * 100
 	update_control.emit(1)
-	print(("Released with %s" % charge) + "% charge!")
+	var projectile = charge_projectile.instantiate() as Projectile
+	projectile.hurtbox_component = hurtbox_component
+	projectile.faction = faction
+	projectile.position = get_global_mouse_position()
+	projectile.scale = Vector2(1 + charge/100, 1 + charge/100)
+	ProjectileHandler.add(projectile)
 	expire()
 
 
