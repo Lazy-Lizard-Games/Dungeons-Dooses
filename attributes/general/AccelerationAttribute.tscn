@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://8yrwkolp6ggi"]
+
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_ibftg"]
+
+[node name="AccelerationAttribute" type="Node"]
+script = ExtResource("1_ibftg")
+type = 3
+group = 3
+description = "Base movement acceleration."

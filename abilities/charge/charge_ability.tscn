@@ -10,6 +10,7 @@ colors = PackedColorArray(0.898039, 0.329412, 0.0588235, 1, 0.54902, 0.054902, 0
 script = ExtResource("1_la2nc")
 particle_emitter = NodePath("CPUParticles2D")
 charge_projectile = ExtResource("2_rc6od")
+cooldown = 1.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

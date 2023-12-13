@@ -1,30 +1,20 @@
 extends Node
 class_name VelocityComponent
 
-## References the stats of the entity and is used more any movement values.
-@export
-var stats: StatsComponent
 ## How quickly the current velocity will reach the target velocity.
-@export
-var acceleration := 50.0:
-	get:
-		if stats:
-			return stats.acceleration
-		return acceleration
+@export var acceleration: Attribute
+
 ## The maximum speed that the entity can reach.
-@export
-var max_speed := 500.0:
-	get:
-		if stats:
-			return stats.max_speed
-		return max_speed
+@export var max_speed: Attribute
+
 ## How much knockback effects are reduced.
-@export_range(0, 1)
-var knockback_resist := 0.5:
-	get:
-		if stats:
-			return stats.knockback_resist
-		return knockback_resist
+@export var knockback_resist: Attribute
+
+## How much impact entity input has on the velocity
+@export_range(0, 1) var control: float = 1
+
+## How much impact any input has on the velocity
+@export_range(0, 1) var friction: float = 1
 
 var velocity := Vector2(0.0, 0.0)
 
@@ -42,7 +32,7 @@ func accelerate_to_velocity(_velocity: Vector2, weight: float ) -> void:
 
 
 ## Moves the velocity towards the provided direction.
-func accelerate_in_direction(direction: Vector2, _max_speed := max_speed, _acceleration := acceleration) -> void:
+func accelerate_in_direction(direction: Vector2, _max_speed := max_speed.get_final_value(), _acceleration := acceleration.get_final_value()) -> void:
 	accelerate_to_velocity(direction * _max_speed, _acceleration / _max_speed)
 
 
@@ -51,12 +41,9 @@ func decelerate(friction: float) -> void:
 
 
 ## Used to handle any recieved knockback.
-## [br]
 ## TODO: implement duration and movement restrictions to knockback.
 func handle_knockback(knockback: KnockbackData) -> void:
-	if stats and stats.ignore_knockback:
-		return
-	knockback.force *= 1-knockback_resist
+	knockback.force *= 1-(knockback_resist.get_final_value())
 	set_velocity(knockback.direction * knockback.force)
 
 

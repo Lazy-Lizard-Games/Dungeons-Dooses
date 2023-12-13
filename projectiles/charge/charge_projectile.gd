@@ -1,6 +1,13 @@
 extends Projectile
 
+@export var damager: HurtboxComponent
+
 var timer: Timer
+
+
+func _ready():
+	damager.faction = faction
+	damager.hurtbox = hurtbox_component
 
 
 func enter() -> void:
@@ -9,4 +16,3 @@ func enter() -> void:
 	timer.one_shot = true
 	timer.timeout.connect(func(): expired.emit(self) )
 	timer.start(1)
-

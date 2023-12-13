@@ -19,6 +19,8 @@ boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 
 Globals="*res://autoloads/globals.gd"
 ProjectileHandler="*res://autoloads/projectile_handler.gd"
+TextHandler="*res://autoloads/text_handler.gd"
+Enums="*res://constants/enums.gd"
 
 [display]
 

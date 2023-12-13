@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bba7sm3dljwi8"]
+
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_5bl72"]
+
+[node name="PoisonResistance" type="Node"]
+script = ExtResource("1_5bl72")
+type = 9
+group = 1
+description = "Base resistance to poison damage."

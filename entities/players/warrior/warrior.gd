@@ -68,7 +68,7 @@ func on_hit_by_knockback(knockback: KnockbackData) -> void:
 
 func on_died(damage: DamageData, source: HurtboxComponent) -> void:
 	source.entity_killed.emit(damage, self)
-	health_component.current_health = health_component.max_health
+	health_component.current_health = health_component.max_health.get_final_value()
 
 
 func on_faction_changed() -> void:

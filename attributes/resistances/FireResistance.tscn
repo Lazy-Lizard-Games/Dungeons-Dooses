@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://53i7a03xe3bf"]
+
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_og1jj"]
+
+[node name="FireResistance" type="Node"]
+script = ExtResource("1_og1jj")
+type = 6
+group = 1
+description = "Base resistance to fire damage."

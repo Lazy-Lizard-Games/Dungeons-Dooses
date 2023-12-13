@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://yf3pr68noygq"]
+
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_jkwxb"]
+
+[node name="FireAffinity" type="Node"]
+script = ExtResource("1_jkwxb")
+type = 11
+description = "Base affinity for fire damage."

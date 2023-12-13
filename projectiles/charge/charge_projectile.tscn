@@ -1,14 +1,37 @@
-[gd_scene load_steps=2 format=3 uid="uid://6e6jbeg861nt"]
+[gd_scene load_steps=8 format=3 uid="uid://6e6jbeg861nt"]
 
 [ext_resource type="Script" path="res://projectiles/charge/charge_projectile.gd" id="1_6i0yv"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_faq75"]
+[ext_resource type="Script" path="res://resources/damage_data.gd" id="3_w13gt"]
+[ext_resource type="Script" path="res://resources/collision_data.gd" id="4_ddxyr"]
 
-[node name="ChargeProjectile" type="Node2D"]
+[sub_resource type="Resource" id="Resource_1kxsn"]
+script = ExtResource("3_w13gt")
+amount = 5
+type = 1
+
+[sub_resource type="Resource" id="Resource_y3nmu"]
+script = ExtResource("4_ddxyr")
+damages = Array[ExtResource("3_w13gt")]([SubResource("Resource_1kxsn")])
+effects = Array[Resource("res://resources/effect_data.gd")]([])
+knockbacks = Array[Resource("res://resources/knockback_data.gd")]([])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucpeb"]
+size = Vector2(40, 40)
+
+[node name="ChargeProjectile" type="Node2D" node_paths=PackedStringArray("damager")]
 script = ExtResource("1_6i0yv")
+damager = NodePath("HurtboxComponent")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = -1
 offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 mouse_filter = 2
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_faq75")]
+collision = SubResource("Resource_y3nmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_ucpeb")

@@ -59,6 +59,5 @@ func on_fully_charged() -> void:
 
 
 func on_expired() -> void:
-	current_state = state.READY
 	charge_timer.stop()
 	particle_emitter.emitting = false

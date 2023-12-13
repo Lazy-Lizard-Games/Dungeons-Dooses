@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://r0v4upw0m85n"]
+
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_qn6pg"]
+
+[node name="ShockAffinity" type="Node"]
+script = ExtResource("1_qn6pg")
+type = 13
+description = "Base affinity for shock damage."

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=22 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://c5br8pxsh5rqx" path="res://components/libraries/stats/stats_component.tscn" id="2_85aeg"]
@@ -11,6 +11,11 @@
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Script" path="res://entities/players/warrior/states/dash.gd" id="6_5ufd4"]
+[ext_resource type="PackedScene" uid="uid://d3xh2tcms6mft" path="res://components/libraries/attribute/attribute_component.tscn" id="8_k4vs1"]
+[ext_resource type="PackedScene" uid="uid://dgadsb0gk255i" path="res://attributes/general/KnockbackResistAttribute.tscn" id="9_1q2uw"]
+[ext_resource type="PackedScene" uid="uid://d0ajtpnsu2fua" path="res://attributes/general/HealthAttribute.tscn" id="9_w7mk4"]
+[ext_resource type="PackedScene" uid="uid://c4a8rp8elpj0o" path="res://attributes/general/SpeedAttribute.tscn" id="10_w4yix"]
+[ext_resource type="PackedScene" uid="uid://8yrwkolp6ggi" path="res://attributes/general/AccelerationAttribute.tscn" id="12_jm41c"]
 [ext_resource type="PackedScene" uid="uid://4wgwg5tqcdlw" path="res://abilities/charge/charge_ability.tscn" id="13_qbjw1"]
 [ext_resource type="Script" path="res://components/commands/hurtbox/hurtbox_component.gd" id="14_8mf76"]
 [ext_resource type="PackedScene" uid="uid://ci7njanoad4y6" path="res://abilities/dash/dash_ability.tscn" id="14_nyuld"]
@@ -92,13 +97,26 @@ max_speed = 250.0
 acceleration = 50.0
 knockback_resist = 0.0
 
-[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("2_ry1uk")]
-stats = NodePath("../StatsComponent")
-acceleration = 25.0
-max_speed = 300.0
+[node name="AttributeComponent" parent="." instance=ExtResource("8_k4vs1")]
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats") instance=ExtResource("3_wj1h3")]
-stats = NodePath("../StatsComponent")
+[node name="KnockbackResistAttribute" parent="AttributeComponent" instance=ExtResource("9_1q2uw")]
+
+[node name="HealthAttribute" parent="AttributeComponent" instance=ExtResource("9_w7mk4")]
+raw_value = 100.0
+
+[node name="AccelerationAttribute" parent="AttributeComponent" instance=ExtResource("12_jm41c")]
+raw_value = 50.0
+
+[node name="SpeedAttribute" parent="AttributeComponent" instance=ExtResource("10_w4yix")]
+raw_value = 250.0
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("acceleration", "max_speed", "knockback_resist") instance=ExtResource("2_ry1uk")]
+acceleration = NodePath("../AttributeComponent/AccelerationAttribute")
+max_speed = NodePath("../AttributeComponent/SpeedAttribute")
+knockback_resist = NodePath("../AttributeComponent/KnockbackResistAttribute")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("max_health") instance=ExtResource("3_wj1h3")]
+max_health = NodePath("../AttributeComponent/HealthAttribute")
 
 [node name="AbilityComponent" parent="." node_paths=PackedStringArray("abilities") instance=ExtResource("4_qstg1")]
 abilities = [NodePath("ChargeAbility"), null, null, null, NodePath("DashAbility")]
