@@ -8,6 +8,7 @@ enum AttributeType {
 	Stamina,
 	Speed,
 	Acceleration,
+	Friction,
 	KnockbackResistance,
 	
 	# Damage Resistances

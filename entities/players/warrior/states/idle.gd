@@ -28,7 +28,7 @@ func exit() -> void:
 
 
 func process_physics(delta: float) -> State:
-	velocity_component.decelerate(stats_component.friction)
+	velocity_component.decelerate()
 	velocity_component.move(parent)
 	return null
 

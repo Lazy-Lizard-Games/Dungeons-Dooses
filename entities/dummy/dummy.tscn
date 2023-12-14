@@ -1,23 +1,23 @@
-[gd_scene load_steps=12 format=3 uid="uid://jjvhsqdgkdrn"]
+[gd_scene load_steps=13 format=3 uid="uid://jjvhsqdgkdrn"]
 
 [ext_resource type="Script" path="res://entities/dummy/dummy.gd" id="1_h1qw8"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="1_qsfqk"]
-[ext_resource type="Script" path="res://resources/damage_data.gd" id="2_iombb"]
+[ext_resource type="PackedScene" uid="uid://csrxncv275ptr" path="res://effects/poisoned/poisoned_effect.tscn" id="3_c76ni"]
+[ext_resource type="Script" path="res://resources/effect_data.gd" id="4_5g0h7"]
 [ext_resource type="Script" path="res://resources/collision_data.gd" id="4_m2e5f"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="5_yv4rs"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="7_rm0ve"]
 [ext_resource type="PackedScene" uid="uid://d0ajtpnsu2fua" path="res://attributes/general/HealthAttribute.tscn" id="8_5w88t"]
 
-[sub_resource type="Resource" id="Resource_idho0"]
-script = ExtResource("2_iombb")
-amount = 15
-type = 3
+[sub_resource type="Resource" id="Resource_6303s"]
+script = ExtResource("4_5g0h7")
+effect = ExtResource("3_c76ni")
 
 [sub_resource type="Resource" id="Resource_e2m67"]
 script = ExtResource("4_m2e5f")
-damages = Array[ExtResource("2_iombb")]([SubResource("Resource_idho0")])
-effects = Array[Resource("res://resources/effect_data.gd")]([])
-knockbacks = Array[Resource("res://resources/knockback_data.gd")]([])
+damage_datas = Array[Resource("res://resources/damage_data.gd")]([])
+effect_datas = Array[ExtResource("4_5g0h7")]([SubResource("Resource_6303s")])
+knockback_datas = Array[Resource("res://resources/knockback_data.gd")]([])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f7wua"]
 
@@ -56,4 +56,4 @@ max_health = NodePath("../HealthAttribute")
 [node name="HealthAttribute" parent="." instance=ExtResource("8_5w88t")]
 raw_value = 50.0
 
-[connection signal="hit_by_damage" from="HitboxComponent" to="." method="_on_hitbox_component_hit_by_damage"]
+[connection signal="hit_by_damage" from="HitboxComponent" to="HealthComponent" method="damage"]

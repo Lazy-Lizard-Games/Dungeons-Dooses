@@ -4,10 +4,10 @@ class_name CollisionData
 ## Packs damage, effects, and knockbacks into one transmittable box.
 
 @export
-var damages : Array[DamageData] = []
+var damage_datas : Array[DamageData] = []
 
 @export
-var effects : Array[EffectData] = []
+var effect_datas : Array[EffectData] = []
 
 @export
-var knockbacks : Array[KnockbackData] = []
+var knockback_datas : Array[KnockbackData] = []

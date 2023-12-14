@@ -3,7 +3,6 @@ extends Entity
 @export var velocity_component: VelocityComponent
 @export var hitbox_component: HitboxComponent
 @export var health_component: HealthComponent
-@export var stats: StatsComponent
 @export var state_component: StateComponent
 
 var selected_ability = 0:
@@ -12,15 +11,9 @@ var selected_ability = 0:
 
 
 func _ready() -> void:
-	print(health_component.current_health)
 	state_component.init(self)
 	faction_changed.connect(on_faction_changed)
 	faction_changed.emit()
-	if hitbox_component:
-		hitbox_component.hit_by_damage.connect(on_hit_by_damage)
-		hitbox_component.hit_by_knockback.connect(on_hit_by_knockback)
-	if health_component:
-		health_component.died.connect(on_died)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -58,13 +51,6 @@ func _physics_process(delta):
 	state_component.process_physics(delta)
 
 
-func on_hit_by_damage(damage: DamageData, source: HurtboxComponent) -> void:
-	source.entity_damaged.emit(damage, self)
-	health_component.damage(damage, source)
-
-
-func on_hit_by_knockback(knockback: KnockbackData) -> void:
-	velocity_component.handle_knockback(knockback)
 
 
 func on_died(damage: DamageData, source: HurtboxComponent) -> void:
@@ -75,3 +61,11 @@ func on_died(damage: DamageData, source: HurtboxComponent) -> void:
 func on_faction_changed() -> void:
 	if hitbox_component:
 		hitbox_component.faction = faction
+
+
+func _on_health_component_damaged(damage, source):
+	pass # Replace with function body.
+
+
+func _on_health_component_died(damage, source):
+	pass # Replace with function body.

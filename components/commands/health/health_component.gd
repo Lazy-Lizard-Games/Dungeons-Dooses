@@ -22,13 +22,13 @@ var is_dead := false:
 
 ## Main method for dealing damage to an entity
 ## TODO: Setup resistances with new attributes
-func damage(damage_in: DamageData, source: HurtboxComponent) -> void:
+func damage(damage_data: DamageData, source: HurtboxComponent) -> void:
 	if is_dead:
 		return
 	
 	if !invulnerable:
-		current_health -= damage_in.amount
-		damaged.emit(damage_in, source)
-	TextHandler.create_damage_text(damage_in, global_position)
+		current_health -= damage_data.amount
+		damaged.emit(damage_data, source)
+	TextHandler.create_damage_text(damage_data, global_position)
 	if current_health == 0:
-		died.emit(damage_in, source)
+		died.emit(damage_data, source)

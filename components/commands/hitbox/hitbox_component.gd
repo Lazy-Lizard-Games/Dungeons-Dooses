@@ -2,11 +2,11 @@ extends Area2D
 class_name HitboxComponent
 
 ## Triggered whenever damage is dealt to the hitbox.
-signal hit_by_damage(damage: DamageData, source: HurtboxComponent)
+signal hit_by_damage(damage_data: DamageData, source: HurtboxComponent)
 ## Triggered whenever an effect is applied to the hitbox.
-signal hit_by_effect(effect: EffectData, source: HurtboxComponent)
+signal hit_by_effect(effect: Effect)
 ## Triggered whenever the hitbox is knocked back by an attack.
-signal hit_by_knockback(knockback: KnockbackData)
+signal hit_by_knockback(knockback_data: KnockbackData, source: HurtboxComponent)
 
 @export
 var faction := Globals.FACTION.NONE
@@ -15,34 +15,34 @@ var faction := Globals.FACTION.NONE
 var detect_only := false
 
 
-func handle_collision(collision: CollisionData, source: HurtboxComponent) -> void:
+func handle_collision(collision_data: CollisionData, source: HurtboxComponent) -> void:
 	if detect_only:
 		return
 	
-	for damage in collision.damages:
-		handle_damage(damage, source)
+	for damage_data in collision_data.damage_datas:
+		handle_damage(damage_data, source)
 	
-	for effect in collision.effects:
-		handle_effect(effect, source)
+	for effect_data in collision_data.effect_datas:
+		handle_effect(effect_data, source)
 	
-	for knockback in collision.knockbacks:
-		handle_knockback(knockback, source)
+	for knockback_data in collision_data.knockback_datas:
+		handle_knockback(knockback_data, source)
 
 
-func handle_damage(damage: DamageData, source: HurtboxComponent) -> void:
+func handle_damage(damage_data: DamageData, source: HurtboxComponent) -> void:
 	if detect_only:
 		return
-	hit_by_damage.emit(damage, source)
+	hit_by_damage.emit(damage_data, source)
 
 
-func handle_effect(effect: EffectData, source: HurtboxComponent) -> void:
+func handle_effect(effect_data: EffectData, source: HurtboxComponent) -> void:
 	if detect_only:
 		return
-	hit_by_effect.emit(effect, source)
+	var effect = effect_data.effect.instantiate() as Effect
+	hit_by_effect.emit(effect)
 
 
-func handle_knockback(knockback: KnockbackData, source: HurtboxComponent) -> void:
+func handle_knockback(knockback_data: KnockbackData, source: HurtboxComponent) -> void:
 	if detect_only:
 		return
-	knockback.direction = source.global_position.direction_to(global_position)
-	hit_by_knockback.emit(knockback)
+	hit_by_knockback.emit(knockback_data, source)

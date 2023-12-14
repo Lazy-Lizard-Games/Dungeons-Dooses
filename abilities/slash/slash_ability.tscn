@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4h8kah8ero1r"]
-
-[ext_resource type="Script" path="res://abilities/slash/slash_ability.gd" id="1_fyvqa"]
-
-[node name="SlashAbility" type="Node"]
-script = ExtResource("1_fyvqa")
