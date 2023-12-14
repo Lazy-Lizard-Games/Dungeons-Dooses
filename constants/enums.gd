@@ -32,3 +32,8 @@ enum AttributeGroup {
 	General,
 	Speed
 }
+
+enum AttributeBonusType {
+	Raw,
+	Multiplier
+}

@@ -12,6 +12,7 @@ var selected_ability = 0:
 
 
 func _ready() -> void:
+	print(health_component.current_health)
 	state_component.init(self)
 	faction_changed.connect(on_faction_changed)
 	faction_changed.emit()
