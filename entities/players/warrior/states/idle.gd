@@ -15,9 +15,6 @@ var dash_state: State
 @export
 var velocity_component: VelocityComponent
 
-@export
-var stats_component: StatsComponent
-
 
 func enter() -> void:
 	color_rect.color = Color.AQUAMARINE

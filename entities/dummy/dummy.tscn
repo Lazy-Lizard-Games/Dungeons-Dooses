@@ -57,3 +57,5 @@ max_health = NodePath("../HealthAttribute")
 raw_value = 50.0
 
 [connection signal="hit_by_damage" from="HitboxComponent" to="HealthComponent" method="damage"]
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

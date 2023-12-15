@@ -63,9 +63,14 @@ func on_faction_changed() -> void:
 		hitbox_component.faction = faction
 
 
-func _on_health_component_damaged(damage, source):
-	pass # Replace with function body.
+func _on_health_component_damaged(damage_data: DamageData, source: HurtboxComponent) -> void:
+	print("%s %s damage taken." % [damage_data.amount, Globals.DAMAGE.find_key(damage_data.type)])
+	TextHandler.create_damage_text(damage_data, global_position)
+	if source:
+		source.entity_damaged.emit(self)
 
 
-func _on_health_component_died(damage, source):
-	pass # Replace with function body.
+func _on_health_component_died(damage_data: DamageData, source: HurtboxComponent) -> void:
+	health_component.current_health = health_component.max_health.get_final_value()
+	if source:
+		source.entity_killed.emit(self)

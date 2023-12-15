@@ -1,9 +1,9 @@
-extends Node2D
+extends Node
 class_name HealthComponent
 
 ## Triggered when health reaches 0.
-signal died(damage: DamageData, source: HurtboxComponent)
-signal damaged(damage: DamageData, source: HurtboxComponent)
+signal died(damage_data: DamageData, source: HurtboxComponent)
+signal damaged(damage_data: DamageData, source: HurtboxComponent)
 
 @export var invulnerable := false
 
@@ -29,6 +29,5 @@ func damage(damage_data: DamageData, source: HurtboxComponent) -> void:
 	if !invulnerable:
 		current_health -= damage_data.amount
 		damaged.emit(damage_data, source)
-	TextHandler.create_damage_text(damage_data, global_position)
 	if current_health == 0:
 		died.emit(damage_data, source)

@@ -13,7 +13,7 @@ class_name EffectComponent
 
 func add_effect(effect: Effect) -> void:
 	for child in get_children() as Array[Effect]:
-		if child != effect:
+		if child.id != effect.id:
 			continue
 		child.add_stack()
 		return

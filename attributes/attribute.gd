@@ -17,7 +17,7 @@ func get_final_value() -> float:
 			Enums.AttributeBonusType.Raw:
 				temp_raw += attribute_bonus.bonus
 			Enums.AttributeBonusType.Multiplier:
-				temp_multiplier += attribute_bonus.bonus
+				temp_multiplier *= attribute_bonus.bonus
 			_:
 				break
 	return temp_raw * temp_multiplier

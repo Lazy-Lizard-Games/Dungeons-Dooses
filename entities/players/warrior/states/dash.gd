@@ -1,21 +1,12 @@
 extends State
 
-@export
-var color_rect: ColorRect
-@export
-var idle_state: State
-@export
-var move_state: State
-@export
-var velocity_component: VelocityComponent
-@export
-var ability_component: AbilityComponent
-@export
-var state_component: StateComponent
-@export
-var stats_component: StatsComponent
-@export
-var hurtbox_component: HurtboxComponent
+@export var color_rect: ColorRect
+@export var idle_state: State
+@export var move_state: State
+@export var velocity_component: VelocityComponent
+@export var ability_component: AbilityComponent
+@export var state_component: StateComponent
+@export var hurtbox_component: HurtboxComponent
 
 var direction := Vector2.ZERO
 var ability: Ability
@@ -51,7 +42,7 @@ func exit() -> void:
 func process_physics(delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction:
-		var angle = velocity_component.velocity.angle_to(direction) * stats_component.control
+		var angle = velocity_component.velocity.angle_to(direction) * velocity_component.control
 		velocity_component.velocity = velocity_component.velocity.rotated(angle)
 	velocity_component.move(parent)
 	return null
@@ -77,5 +68,5 @@ func on_update_color(color: Color) -> void:
 
 
 func on_update_control(control: float) -> void:
-	stats_component.control = control
+	velocity_component.control = control
 

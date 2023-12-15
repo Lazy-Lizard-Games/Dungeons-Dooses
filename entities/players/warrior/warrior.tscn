@@ -50,23 +50,21 @@ shape = SubResource("RectangleShape2D_ts4su")
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "attack_state", "dash_state", "velocity_component", "stats_component")]
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "attack_state", "dash_state", "velocity_component")]
 script = ExtResource("3_un612")
 color_rect = NodePath("../../ColorRect")
 move_state = NodePath("../Move")
 attack_state = NodePath("../Attack")
 dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
-stats_component = NodePath("")
 
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "attack_state", "dash_state", "velocity_component", "stats_component")]
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "attack_state", "dash_state", "velocity_component")]
 script = ExtResource("4_lhxmr")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
 attack_state = NodePath("../Attack")
 dash_state = NodePath("../Dash")
 velocity_component = NodePath("../../VelocityComponent")
-stats_component = NodePath("")
 
 [node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "dash_state", "velocity_component", "ability_component", "state_component", "hurtbox_component")]
 script = ExtResource("5_vbqk7")
@@ -79,7 +77,7 @@ ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
 hurtbox_component = NodePath("../../HurtboxComponent")
 
-[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component", "stats_component", "hurtbox_component")]
+[node name="Dash" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component", "hurtbox_component")]
 script = ExtResource("6_5ufd4")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
@@ -87,7 +85,6 @@ move_state = NodePath("../Move")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
-stats_component = NodePath("")
 hurtbox_component = NodePath("../../HurtboxComponent")
 
 [node name="AttributeComponent" parent="." instance=ExtResource("8_k4vs1")]
@@ -133,5 +130,7 @@ shape = SubResource("RectangleShape2D_fktii")
 [node name="HurtboxComponent" type="Area2D" parent="."]
 script = ExtResource("14_8mf76")
 
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit_by_damage" from="HitboxComponent" to="HealthComponent" method="damage"]
 [connection signal="hit_by_effect" from="HitboxComponent" to="EffectComponent" method="add_effect"]
