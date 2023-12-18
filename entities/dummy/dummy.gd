@@ -16,3 +16,4 @@ func _on_health_component_damaged(damage_data: DamageData, source: HurtboxCompon
 
 func _on_health_component_died(damage_data: DamageData, source: HurtboxComponent) -> void:
 	health.current_health = health.max_health.get_final_value()
+

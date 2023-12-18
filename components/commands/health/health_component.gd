@@ -25,9 +25,8 @@ var is_dead := false:
 func damage(damage_data: DamageData, source: HurtboxComponent) -> void:
 	if is_dead:
 		return
-	
 	if !invulnerable:
 		current_health -= damage_data.amount
-		damaged.emit(damage_data, source)
+	damaged.emit(damage_data, source)
 	if current_health == 0:
 		died.emit(damage_data, source)

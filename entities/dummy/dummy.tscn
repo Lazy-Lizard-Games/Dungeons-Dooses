@@ -50,7 +50,6 @@ shape = SubResource("RectangleShape2D_f7wua")
 shape = SubResource("RectangleShape2D_souaw")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("max_health") instance=ExtResource("7_rm0ve")]
-invulnerable = true
 max_health = NodePath("../HealthAttribute")
 
 [node name="HealthAttribute" parent="." instance=ExtResource("8_5w88t")]

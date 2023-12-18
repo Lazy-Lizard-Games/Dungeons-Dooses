@@ -7,7 +7,6 @@ signal update_animation(animation: Animation)
 signal update_control(control: float)
 signal update_color(color: Color)
 
-
 enum state {
 	ACTIVE,
 	COOLDOWN,

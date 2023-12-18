@@ -1,8 +1,10 @@
 extends Area2D
 class_name HurtboxComponent
 
+signal entity_knocked(knockback: KnockbackData, target: Entity)
+signal entity_effected(effect: EffectData, target: Entity)
 signal entity_damaged(damage: DamageData, target: Entity)
-signal entity_killed(damage: DamageData, target: Entity)
+signal entity_killed(target: Entity)
 
 @export
 var faction := Globals.FACTION.NONE

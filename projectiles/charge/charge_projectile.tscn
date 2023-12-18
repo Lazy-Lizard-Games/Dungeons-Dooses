@@ -1,20 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://6e6jbeg861nt"]
+[gd_scene load_steps=9 format=3 uid="uid://6e6jbeg861nt"]
 
 [ext_resource type="Script" path="res://projectiles/charge/charge_projectile.gd" id="1_6i0yv"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_faq75"]
 [ext_resource type="Script" path="res://resources/damage_data.gd" id="3_w13gt"]
 [ext_resource type="Script" path="res://resources/collision_data.gd" id="4_ddxyr"]
 
-[sub_resource type="Resource" id="Resource_1kxsn"]
+[sub_resource type="Resource" id="Resource_ld3e7"]
+script = ExtResource("3_w13gt")
+amount = 10
+type = 1
+
+[sub_resource type="Resource" id="Resource_fuev0"]
 script = ExtResource("3_w13gt")
 amount = 5
-type = 1
+type = 0
 
 [sub_resource type="Resource" id="Resource_y3nmu"]
 script = ExtResource("4_ddxyr")
-damages = Array[ExtResource("3_w13gt")]([SubResource("Resource_1kxsn")])
-effects = Array[Resource("res://resources/effect_data.gd")]([])
-knockbacks = Array[Resource("res://resources/knockback_data.gd")]([])
+damage_datas = Array[ExtResource("3_w13gt")]([SubResource("Resource_ld3e7"), SubResource("Resource_fuev0")])
+effect_datas = Array[Resource("res://resources/effect_data.gd")]([])
+knockback_datas = Array[Resource("res://resources/knockback_data.gd")]([])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ucpeb"]
 size = Vector2(40, 40)

@@ -1,19 +1,12 @@
 extends State
 
-@export
-var color_rect: ColorRect
+@export var color_rect: ColorRect
+@export var move_state: State
+@export var attack_state: State
+@export var dash_state: State
+@export var velocity_component: VelocityComponent
 
-@export
-var move_state: State
-
-@export
-var attack_state: State
-
-@export
-var dash_state: State
-
-@export
-var velocity_component: VelocityComponent
+var interactable: InteractableComponent
 
 
 func enter() -> void:
@@ -42,3 +35,4 @@ func process_input(event: InputEvent) -> State:
 		return dash_state
 	
 	return null
+

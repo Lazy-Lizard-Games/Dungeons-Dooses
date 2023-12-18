@@ -7,6 +7,7 @@ extends Effect
 ## Effect construction logic
 func enter() -> void:
 	print("Poisoned entering...")
+	take_damage()
 	var timer = Timer.new()
 	add_child(timer)
 	timer.timeout.connect(take_damage)

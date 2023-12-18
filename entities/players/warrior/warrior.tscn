@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=24 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/commands/state/state_component.tscn" id="2_e5t7x"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://components/commands/hurtbox/hurtbox_component.gd" id="14_8mf76"]
 [ext_resource type="PackedScene" uid="uid://ci7njanoad4y6" path="res://abilities/dash/dash_ability.tscn" id="14_nyuld"]
 [ext_resource type="PackedScene" uid="uid://cnnjcpgn5lnsw" path="res://components/libraries/effect/effect_component.tscn" id="17_lu61f"]
+[ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)
@@ -26,13 +27,17 @@ size = Vector2(40, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "state_component")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
+radius = 50.0
+
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "state_component", "interactor_component")]
 motion_mode = 1
 script = ExtResource("1_dwma1")
 velocity_component = NodePath("VelocityComponent")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 state_component = NodePath("StateComponent")
+interactor_component = NodePath("InteractorComponent")
 id = "Warrior"
 faction = 1
 
@@ -126,11 +131,19 @@ health = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_fktii")
+debug_color = Color(0.796078, 0.423529, 0, 0.419608)
 
 [node name="HurtboxComponent" type="Area2D" parent="."]
 script = ExtResource("14_8mf76")
+
+[node name="InteractorComponent" parent="." instance=ExtResource("20_rtrp4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
+shape = SubResource("CircleShape2D_ep403")
+debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit_by_damage" from="HitboxComponent" to="HealthComponent" method="damage"]
 [connection signal="hit_by_effect" from="HitboxComponent" to="EffectComponent" method="add_effect"]
+[connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]

@@ -4,10 +4,13 @@ extends Entity
 @export var hitbox_component: HitboxComponent
 @export var health_component: HealthComponent
 @export var state_component: StateComponent
+@export var interactor_component: InteractorComponent
 
 var selected_ability = 0:
 	set(s):
 		selected_ability = s % 4
+
+var interactable: InteractableComponent
 
 
 func _ready() -> void:
@@ -39,6 +42,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("select_ability_4"):
 		selected_ability = 3
+	
+	if Input.is_action_just_pressed("interact"):
+		if interactable:
+			interactable.interact(interactor_component)
 	
 	state_component.process_input(event)
 
@@ -74,3 +81,7 @@ func _on_health_component_died(damage_data: DamageData, source: HurtboxComponent
 	health_component.current_health = health_component.max_health.get_final_value()
 	if source:
 		source.entity_killed.emit(self)
+
+
+func _on_interactor_component_interactables_updated() -> void:
+	interactable = interactor_component.get_first_interactable()
