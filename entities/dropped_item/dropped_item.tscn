@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://286jvnj5kcl4"]
+
+[ext_resource type="Script" path="res://entities/dropped_item/dropped_item.gd" id="1_j15nx"]
+[ext_resource type="PackedScene" uid="uid://brwcuxfey5gph" path="res://components/commands/interactable/interactable_component.tscn" id="2_j4c2k"]
+[ext_resource type="Script" path="res://resources/inventory/item_data.gd" id="2_xan2q"]
+
+[sub_resource type="Resource" id="Resource_cukf5"]
+script = ExtResource("2_xan2q")
+type = 0
+id = "Test Item"
+description = "Random test item lol."
+max_stack = 8
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_830nr"]
+
+[node name="DroppedItem" type="Node2D" node_paths=PackedStringArray("interactable")]
+script = ExtResource("1_j15nx")
+interactable = NodePath("InteractableComponent")
+item = SubResource("Resource_cukf5")
+
+[node name="InteractableComponent" parent="." instance=ExtResource("2_j4c2k")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+shape = SubResource("RectangleShape2D_830nr")
+debug_color = Color(0.0313726, 0.65098, 0, 0.419608)

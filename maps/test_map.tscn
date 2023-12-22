@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=5 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/players/warrior/warrior.tscn" id="1_fiui5"]
 [ext_resource type="PackedScene" uid="uid://jjvhsqdgkdrn" path="res://entities/dummy/dummy.tscn" id="2_tnaqk"]
 [ext_resource type="PackedScene" uid="uid://dan3ceoofenl8" path="res://entities/chest/chest.tscn" id="3_uw3jq"]
+[ext_resource type="PackedScene" uid="uid://286jvnj5kcl4" path="res://entities/dropped_item/dropped_item.tscn" id="4_jchf1"]
 
 [node name="TestMap" type="Node2D"]
 y_sort_enabled = true
@@ -14,3 +15,14 @@ position = Vector2(-123, 0)
 
 [node name="Chest" parent="." instance=ExtResource("3_uw3jq")]
 position = Vector2(0, 127)
+
+[node name="DroppedItem" parent="." instance=ExtResource("4_jchf1")]
+position = Vector2(-50, 39)
+count = 2
+
+[node name="DroppedItem2" parent="." instance=ExtResource("4_jchf1")]
+count = 3
+
+[node name="DroppedItem3" parent="." instance=ExtResource("4_jchf1")]
+position = Vector2(4, 43)
+count = 4

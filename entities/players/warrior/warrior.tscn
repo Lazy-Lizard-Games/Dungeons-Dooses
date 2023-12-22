@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=37 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/commands/state/state_component.tscn" id="2_e5t7x"]
@@ -17,12 +17,61 @@
 [ext_resource type="PackedScene" uid="uid://8yrwkolp6ggi" path="res://attributes/general/AccelerationAttribute.tscn" id="12_jm41c"]
 [ext_resource type="PackedScene" uid="uid://4wgwg5tqcdlw" path="res://abilities/charge/charge_ability.tscn" id="13_qbjw1"]
 [ext_resource type="Script" path="res://components/commands/hurtbox/hurtbox_component.gd" id="14_8mf76"]
+[ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="PackedScene" uid="uid://ci7njanoad4y6" path="res://abilities/dash/dash_ability.tscn" id="14_nyuld"]
+[ext_resource type="Script" path="res://resources/inventory/inventory_data.gd" id="15_1nwxg"]
+[ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="16_lgmi6"]
 [ext_resource type="PackedScene" uid="uid://cnnjcpgn5lnsw" path="res://components/libraries/effect/effect_component.tscn" id="17_lu61f"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
+[ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)
+
+[sub_resource type="Resource" id="Resource_ye0kr"]
+script = ExtResource("16_lgmi6")
+type = 1
+stack = 0
+
+[sub_resource type="Resource" id="Resource_k2emd"]
+script = ExtResource("16_lgmi6")
+type = 2
+stack = 0
+
+[sub_resource type="Resource" id="Resource_sl54h"]
+script = ExtResource("16_lgmi6")
+type = 3
+stack = 0
+
+[sub_resource type="Resource" id="Resource_yp28b"]
+script = ExtResource("16_lgmi6")
+type = 4
+stack = 0
+
+[sub_resource type="Resource" id="Resource_rgv8t"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_688wk"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_ntahc"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_541va"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_tr2rb"]
+script = ExtResource("15_1nwxg")
+type = 0
+slots = Array[ExtResource("16_lgmi6")]([SubResource("Resource_ye0kr"), SubResource("Resource_k2emd"), SubResource("Resource_sl54h"), SubResource("Resource_yp28b"), SubResource("Resource_rgv8t"), SubResource("Resource_688wk"), SubResource("Resource_ntahc"), SubResource("Resource_541va"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)
@@ -114,6 +163,9 @@ friction = 0.1
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("max_health") instance=ExtResource("3_wj1h3")]
 max_health = NodePath("../AttributeComponent/HealthAttribute")
 
+[node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
+inventory = SubResource("Resource_tr2rb")
+
 [node name="AbilityComponent" parent="." node_paths=PackedStringArray("abilities") instance=ExtResource("4_qstg1")]
 abilities = [NodePath("ChargeAbility"), null, null, null, NodePath("DashAbility")]
 
@@ -142,8 +194,15 @@ script = ExtResource("14_8mf76")
 shape = SubResource("CircleShape2D_ep403")
 debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory") instance=ExtResource("24_8v6vb")]
+health = NodePath("../../HealthComponent")
+inventory = NodePath("../../InventoryComponent")
+
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="hit_by_damage" from="HitboxComponent" to="HealthComponent" method="damage"]
 [connection signal="hit_by_effect" from="HitboxComponent" to="EffectComponent" method="add_effect"]
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
+[connection signal="picked_up" from="InteractorComponent" to="InventoryComponent" method="pickup_item"]

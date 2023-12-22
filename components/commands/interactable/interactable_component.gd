@@ -3,6 +3,8 @@ class_name InteractableComponent
 
 signal interacted(interactor: InteractorComponent)
 
+## Interation type
+@export var type: Enums.InteractionType
 ## Interaction name
 @export var action: String
 

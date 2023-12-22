@@ -2,14 +2,24 @@ extends Area2D
 class_name InteractorComponent
 
 signal interactables_updated
+signal picked_up(item: ItemData, count: int) # Item data (id, stack)
+signal opened(inventory: InventoryData) # Inventory data (slots, type)
 
 var interactables: Array[InteractableComponent] = []
 
 
+func interact() -> void:
+	var interactable = get_first_interactable()
+	if interactable:
+		interactable.interact(self)
+
+
 func get_first_interactable() -> InteractableComponent:
 	if interactables.size() == 0:
-		return
-	interactables.sort_custom(i_sort)
+		return null
+	if interactables.size() == 1:
+		return interactables[0]
+	interactables.sort_custom(distance_sort)
 	return interactables[0]
 
 
@@ -25,7 +35,7 @@ func _on_area_exited(area: Area2D) -> void:
 		interactables_updated.emit()
 
 
-func i_sort(a: InteractableComponent, b: InteractableComponent) -> bool:
-	if position.distance_to(a.position) < position.distance_to(b.position):
+func distance_sort(a: InteractableComponent, b: InteractableComponent) -> bool:
+	if global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position):
 		return true
 	return false

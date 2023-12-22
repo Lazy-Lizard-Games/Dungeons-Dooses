@@ -37,3 +37,24 @@ enum AttributeBonusType {
 	Raw,
 	Multiplier
 }
+
+enum InteractionType {
+	Pickup,
+	Open,
+	Use
+}
+
+enum InventoryType {
+	Chest,
+	Sack,
+	Crate,
+}
+
+enum ItemType {
+	Item,
+	Ring,
+	Necklace,
+	Circlet,
+	Charm,
+	Consumable
+}

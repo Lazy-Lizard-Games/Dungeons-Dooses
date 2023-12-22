@@ -6,7 +6,6 @@ extends Effect
 
 ## Effect construction logic
 func enter() -> void:
-	print("Poisoned entering...")
 	take_damage()
 	var timer = Timer.new()
 	add_child(timer)
@@ -16,7 +15,7 @@ func enter() -> void:
 
 ## Effect deconstruction logic
 func exit() -> void:
-	print("Poisoned exiting...")
+	pass
 
 
 func add_stack() -> void:

@@ -1,6 +1,8 @@
 extends Node
 class_name Attribute
 
+signal updated
+
 @export var type: Enums.AttributeType
 @export var group: Enums.AttributeGroup
 @export_multiline var description: String
@@ -25,9 +27,11 @@ func get_final_value() -> float:
 ## Adds a bonus to the attribute
 func add_attribute_bonus(attribute_bonus: AttributeBonus) -> void:
 	attribute_bonuses.append(attribute_bonus)
+	updated.emit()
 
 ## Removes a bonus to the attribute
 func remove_attribute_bonus(attribute_bonus: AttributeBonus) -> void:
 	var index = attribute_bonuses.find(attribute_bonus)
 	if index >= 0:
 		attribute_bonuses.remove_at(index)
+		updated.emit()

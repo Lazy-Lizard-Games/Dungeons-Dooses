@@ -21,6 +21,7 @@ Globals="*res://autoloads/globals.gd"
 ProjectileHandler="*res://autoloads/projectile_handler.gd"
 TextHandler="*res://autoloads/text_handler.gd"
 Enums="*res://constants/enums.gd"
+TimerKeeper="*res://constants/time_keeper.gd"
 
 [display]
 

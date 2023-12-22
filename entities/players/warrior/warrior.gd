@@ -44,8 +44,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		selected_ability = 3
 	
 	if Input.is_action_just_pressed("interact"):
-		if interactable:
-			interactable.interact(interactor_component)
+		interactor_component.interact()
+		#if interactable:
+			#interactable.interact(interactor_component)
 	
 	state_component.process_input(event)
 
@@ -71,7 +72,6 @@ func on_faction_changed() -> void:
 
 
 func _on_health_component_damaged(damage_data: DamageData, source: HurtboxComponent) -> void:
-	print("%s %s damage taken." % [damage_data.amount, Globals.DAMAGE.find_key(damage_data.type)])
 	TextHandler.create_damage_text(damage_data, global_position)
 	if source:
 		source.entity_damaged.emit(self)
