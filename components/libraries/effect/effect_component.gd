@@ -2,7 +2,7 @@ extends Node2D
 class_name EffectComponent
 
 ## Attribute component for attribute affecting effects.
-@export var attribute: AttributeComponent
+@export var attribute: GenericAttributes
 ## Velocity component for effects that can manipulate control or friction.
 @export var velocity: VelocityComponent
 ## Hurtbox component for effects that can hurt others.

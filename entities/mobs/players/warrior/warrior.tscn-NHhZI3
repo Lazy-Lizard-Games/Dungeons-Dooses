@@ -1,0 +1,55 @@
+[gd_scene load_steps=22 format=3 uid="uid://dfvqrbc7yfp3e"]
+
+[ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
+[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/commands/state/state_component.tscn" id="2_e5t7x"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_ry1uk"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="Script" path="res://entities/players/warrior/states/idle.gd" id="3_un612"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="Script" path="res://entities/players/warrior/states/move.gd" id="4_lhxmr"]
+[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="Script" path="res://entities/players/warrior/states/attack.gd" id="5_vbqk7"]
+[ext_resource type="Script" path="res://entities/players/warrior/states/dash.gd" id="6_5ufd4"]
+[ext_resource type="PackedScene" uid="uid://d3xh2tcms6mft" path="res://components/libraries/attribute/attribute_component.tscn" id="8_k4vs1"]
+[ext_resource type="PackedScene" uid="uid://dgadsb0gk255i" path="res://attributes/general/KnockbackResistAttribute.tscn" id="9_1q2uw"]
+[ext_resource type="PackedScene" uid="uid://d0ajtpnsu2fua" path="res://attributes/general/HealthAttribute.tscn" id="9_w7mk4"]
+[ext_resource type="PackedScene" uid="uid://c4a8rp8elpj0o" path="res://attributes/general/SpeedAttribute.tscn" id="10_w4yix"]
+[ext_resource type="PackedScene" uid="uid://8yrwkolp6ggi" path="res://attributes/general/AccelerationAttribute.tscn" id="12_jm41c"]
+[ext_resource type="PackedScene" uid="uid://4wgwg5tqcdlw" path="res://abilities/charge/charge_ability.tscn" id="13_qbjw1"]
+[ext_resource type="Script" path="res://components/commands/hurtbox/hurtbox_component.gd" id="14_8mf76"]
+[ext_resource type="PackedScene" uid="uid://ci7njanoad4y6" path="res://abilities/dash/dash_ability.tscn" id="14_nyuld"]
+[ext_resource type="PackedScene" uid="uid://cnnjcpgn5lnsw" path="res://components/libraries/effect/effect_component.tscn" id="17_lu61f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
+size = Vector2(40, 40)
+
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component", "state_component")]
+motion_mode = 1
+script = ExtResource("1_dwma1")
+velocity_component = NodePath("VelocityComponent")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+state_component = NodePath("StateComponent")
+id = "Warrior"
+faction = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ts4su")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateComponent"]
+script = ExtResource("3_un612")
+color_rect = Object(ColorRect,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":0,"texture_repeat":0,"material":null,"use_parent_material":false,"clip_contents":false,"custom_minimum_size":Vector2(0, 0),"layout_direction":

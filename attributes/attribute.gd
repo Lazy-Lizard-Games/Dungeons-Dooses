@@ -1,37 +1,41 @@
-extends Node
+extends Resource
 class_name Attribute
 
-signal updated
+signal updated(final_value: float)
 
-@export var type: Enums.AttributeType
-@export var group: Enums.AttributeGroup
-@export_multiline var description: String
 @export var raw_value: float = 0
 @export var multiplier_value: float = 1
-@export var attribute_bonuses: Array[AttributeBonus]
+@export var min_value: float = 0
+@export var max_value: float = pow(2, 63)-1
+@export var modifiers: Array[AttributeModifier]
+
 
 ## Returns the final attribute value after modifiers are applied.
 func get_final_value() -> float:
-	var temp_raw = raw_value
+	var temp_base = raw_value
 	var temp_multiplier = multiplier_value
-	for attribute_bonus in attribute_bonuses:
-		match attribute_bonus.bonus_type:
-			Enums.AttributeBonusType.Raw:
-				temp_raw += attribute_bonus.bonus
-			Enums.AttributeBonusType.Multiplier:
-				temp_multiplier *= attribute_bonus.bonus
+	for modifier in modifiers:
+		match modifier.operation:
+			Enums.OperationType.Addition:
+				temp_base += modifier.value
+			Enums.OperationType.Multiplication:
+				temp_multiplier *= modifier.value
 			_:
 				break
-	return temp_raw * temp_multiplier
+	var total = temp_base * temp_multiplier
+	for modifier in modifiers:
+		if modifier.operation == Enums.OperationType.Set:
+			total = modifier.value
+	return clamp(total, min_value, max_value)
 
-## Adds a bonus to the attribute
-func add_attribute_bonus(attribute_bonus: AttributeBonus) -> void:
-	attribute_bonuses.append(attribute_bonus)
-	updated.emit()
 
-## Removes a bonus to the attribute
-func remove_attribute_bonus(attribute_bonus: AttributeBonus) -> void:
-	var index = attribute_bonuses.find(attribute_bonus)
-	if index >= 0:
-		attribute_bonuses.remove_at(index)
-		updated.emit()
+## Adds a modifier to the attribute
+func add_modifier(modifier: AttributeModifier) -> void:
+	modifiers.append(modifier)
+	updated.emit(get_final_value())
+
+
+## Removes a modifier from the attribute
+func remove_modifier(modifier: AttributeModifier) -> void:
+	modifiers.erase(modifier)
+	updated.emit(get_final_value())

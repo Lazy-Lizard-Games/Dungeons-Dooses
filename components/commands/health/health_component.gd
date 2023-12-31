@@ -2,40 +2,62 @@ extends Node
 class_name HealthComponent
 
 ## Triggered when health reaches 0.
-signal died(damage_data: DamageData, source: HurtboxComponent)
-signal damaged(damage_data: DamageData, source: HurtboxComponent)
-signal health_changed(previous_health: float, current_health: float)
+signal died(amount: float, source: Entity)
+signal damaged(damage_data: DamageData, source: Entity)
+signal updated(previous: float, current: float)
+signal max_updated(previous: Attribute, current: Attribute)
 
 ## Immunity to all damage.
 @export var invulnerable := false
-## Maximum health.
-@export var max_health: Attribute
+## Max health if attributes not attached or no health attribute found.
+@export var max: Attribute:
+	set(a):
+		var prev = max
+		max = a
+		max_updated.emit(prev, max)
+## Health regen if attributes not attached or no health regen attribute found.
+@export var regeneration: Attribute
 ## Current health.
-@onready var current_health : float:
+@onready var current : float:
 	set(h):
-		previous_health = current_health
-		current_health = clamp(h, 0, max_health.get_final_value())
-		health_changed.emit(previous_health, current_health)
+		previous = current
+		current = clamp(h, 0, max.get_final_value())
+		updated.emit(previous, current)
 ## Previous health.
-@onready var previous_health := current_health
-
+@onready var previous := current
+## Attributes of the parent object, if any.
+var attributes: GenericAttributes:
+	set(generics):
+		attributes = generics
+		var _max = attributes.get_generic(Enums.GenericType.HealthMax)
+		if _max:
+			max = _max
+		var _regeneration = attributes.get_generic(Enums.GenericType.HealthRegeneration)
+		if _regeneration:
+			regeneration = _regeneration
+		current = max.get_final_value()
 ## Checks whether the entity is dead or alive
 var is_dead := false:
 	get:
-		return current_health == 0
+		return current == 0
 
 
-func _ready() -> void:
-	current_health = max_health.get_final_value()
+func _ready():
+	max = Attribute.new() if !max else max
+	regeneration = Attribute.new() if !regeneration else regeneration
 
 
-## Main method for dealing damage to an entity
-## TODO: Setup resistances with new attributes
-func damage(damage_data: DamageData, source: HurtboxComponent) -> void:
-	if is_dead:
+## Deals damage to the current health.
+func damage(type: Enums.DamageType, amount: float, source: Entity) -> void:
+	if is_dead or invulnerable:
 		return
-	if !invulnerable:
-		current_health -= damage_data.amount
-	damaged.emit(damage_data, source)
-	if current_health == 0:
-		died.emit(damage_data, source)
+	#if attributes:
+		#var resist = attributes.get_by_type()
+	current -= amount
+	if current == 0:
+		died.emit(amount, source)
+
+
+## Restores amount to the current health.
+func heal(amount: float) -> void:
+	current += amount

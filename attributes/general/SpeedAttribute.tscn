@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4a8rp8elpj0o"]
-
-[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_mvshn"]
-
-[node name="SpeedAttribute" type="Node"]
-script = ExtResource("1_mvshn")
-type = 2
-group = 3
-description = "Base movement speed."

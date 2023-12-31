@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2ttomyuo1qkr"]
-
-[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_cd8vc"]
-
-[node name="PoisonAffinity" type="Node"]
-script = ExtResource("1_cd8vc")
-type = 14
-description = "Base affinity for poison damage."

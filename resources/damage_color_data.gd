@@ -8,17 +8,17 @@ class_name DamageColorData
 @export var poison := Color.GREEN
 
 
-func getColorForType(type: Globals.DAMAGE) -> Color:
+func getColorForType(type: Enums.DamageType) -> Color:
 	match type:
-		Globals.DAMAGE.NORMAL:
+		Enums.DamageType.Normal:
 			return normal
-		Globals.DAMAGE.FIRE:
+		Enums.DamageType.Fire:
 			return fire
-		Globals.DAMAGE.FROST:
+		Enums.DamageType.Frost:
 			return frost
-		Globals.DAMAGE.SHOCK:
+		Enums.DamageType.Shock:
 			return shock
-		Globals.DAMAGE.POISON:
+		Enums.DamageType.Poison:
 			return poison
 		_:
 			return Color.WHITE

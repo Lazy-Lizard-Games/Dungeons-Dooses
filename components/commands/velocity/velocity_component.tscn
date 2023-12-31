@@ -1,6 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://tovqio0ufan6"]
+[gd_scene load_steps=5 format=3 uid="uid://tovqio0ufan6"]
 
 [ext_resource type="Script" path="res://components/commands/velocity/velocity_component.gd" id="1_midk5"]
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="2_vdgh6"]
+
+[sub_resource type="Resource" id="Resource_mc8xw"]
+script = ExtResource("2_vdgh6")
+raw_value = 1.0
+multiplier_value = 1.0
+min_value = 0.0
+max_value = 1.0
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_m2mh8"]
+script = ExtResource("2_vdgh6")
+raw_value = 0.8
+multiplier_value = 1.0
+min_value = 0.0
+max_value = 1.0
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [node name="VelocityComponent" type="Node"]
 script = ExtResource("1_midk5")
+control = SubResource("Resource_mc8xw")
+friction = SubResource("Resource_m2mh8")

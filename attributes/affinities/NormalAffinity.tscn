@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cy5cllgs5gofc"]
-
-[ext_resource type="Script" path="res://attributes/attribute.gd" id="1_f1ifi"]
-
-[node name="NormalAffinity" type="Node"]
-script = ExtResource("1_f1ifi")
-type = 10
-description = "Base affinity for normal damage."

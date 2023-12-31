@@ -28,7 +28,7 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 anti_aliasing_size = 0.1
 
-[node name="HudComponent" type="Control"]
+[node name="HudComponent" type="Control" node_paths=PackedStringArray("health_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -36,6 +36,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_lu4j7")
+health_bar = NodePath("StatsContainer/VBoxContainer/HealthBar")
 
 [node name="StatsContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -54,7 +55,7 @@ custom_minimum_size = Vector2(200, 25)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_j0h68")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3u423")
-value = 30.0
+value = 60.0
 
 [node name="ProgressBar2" type="ProgressBar" parent="StatsContainer/VBoxContainer"]
 visible = false

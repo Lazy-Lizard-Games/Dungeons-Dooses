@@ -5,13 +5,14 @@ class_name DamageText
 @export var timer: Timer
 @export var colors: DamageColorData
 
-var damage: DamageData:
-	set(d):
-		damage = d
-		label.text = String.num(damage.amount, 3)
-		label.add_theme_color_override('font_color', colors.getColorForType(damage.type))
-var type: Globals.DAMAGE
-
+var type: Enums.DamageType:
+	set(t):
+		type = t
+		label.add_theme_color_override('font_color', colors.getColorForType(type))
+var amount: float:
+	set(a):
+		amount = a
+		label.text = String.num(amount, 3)
 var direction := Vector2.UP
 var speed := 5.0
 

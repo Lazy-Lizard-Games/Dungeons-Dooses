@@ -4,8 +4,7 @@
 
 [node name="PoisonedEffect" type="Node2D"]
 script = ExtResource("1_acp3g")
-tick_damage = 2.0
 id = "Poisoned"
 description = "You are poisoned and taking poison damage over time!"
-max_stacks = 5
+max_stacks = 20
 duration = 5.0

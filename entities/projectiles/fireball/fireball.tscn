@@ -1,0 +1,115 @@
+[gd_scene load_steps=22 format=3 uid="uid://skvi6j3iivg0"]
+
+[ext_resource type="Script" path="res://entities/projectiles/fireball/fireball.gd" id="1_quu5j"]
+[ext_resource type="Script" path="res://attributes/affinity.gd" id="2_2ltrc"]
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="2_lhfah"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_m1yw6"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_pf2hk"]
+[ext_resource type="Script" path="res://actions/entity/general/damage.gd" id="5_h43qg"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="7_p7cfs"]
+[ext_resource type="Script" path="res://actions/bientity/general/apply_knockback.gd" id="9_gqp06"]
+[ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="11_5dw5j"]
+
+[sub_resource type="Resource" id="Resource_cnlg2"]
+script = ExtResource("2_lhfah")
+raw_value = 0.0
+multiplier_value = 1.0
+min_value = -1.0
+max_value = 9.22337e+18
+modifiers = Array[ExtResource("11_5dw5j")]([])
+
+[sub_resource type="Resource" id="Resource_hflwh"]
+script = ExtResource("2_lhfah")
+raw_value = 0.0
+multiplier_value = 1.0
+min_value = -1.0
+max_value = 9.22337e+18
+modifiers = Array[ExtResource("11_5dw5j")]([])
+
+[sub_resource type="Resource" id="Resource_fj2vt"]
+script = ExtResource("2_lhfah")
+raw_value = 0.0
+multiplier_value = 1.0
+min_value = -1.0
+max_value = 9.22337e+18
+modifiers = Array[ExtResource("11_5dw5j")]([])
+
+[sub_resource type="Resource" id="Resource_ruqdq"]
+script = ExtResource("2_lhfah")
+raw_value = 0.0
+multiplier_value = 1.0
+min_value = -1.0
+max_value = 9.22337e+18
+modifiers = Array[ExtResource("11_5dw5j")]([])
+
+[sub_resource type="Resource" id="Resource_aa5us"]
+script = ExtResource("2_lhfah")
+raw_value = 0.0
+multiplier_value = 1.0
+min_value = -1.0
+max_value = 9.22337e+18
+modifiers = Array[ExtResource("11_5dw5j")]([])
+
+[sub_resource type="Resource" id="Resource_t0ded"]
+script = ExtResource("2_2ltrc")
+normal_affinity = SubResource("Resource_fj2vt")
+fire_affinity = SubResource("Resource_cnlg2")
+frost_affinity = SubResource("Resource_hflwh")
+shock_affinity = SubResource("Resource_aa5us")
+poison_affinity = SubResource("Resource_ruqdq")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0ckhd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yayoq"]
+radius = 15.0
+
+[sub_resource type="Resource" id="Resource_bog62"]
+script = ExtResource("5_h43qg")
+type = 2
+amount = 10.0
+
+[sub_resource type="Resource" id="Resource_pchax"]
+script = ExtResource("11_5dw5j")
+operation = 2
+value = 0.25
+
+[sub_resource type="Resource" id="Resource_xi5md"]
+script = ExtResource("9_gqp06")
+speed = 1500.0
+duration = 1.0
+control_modifier = SubResource("Resource_pchax")
+
+[sub_resource type="Resource" id="Resource_6lme8"]
+script = ExtResource("2_lhfah")
+raw_value = 1.0
+multiplier_value = 1.0
+min_value = 0.0
+max_value = 1.0
+modifiers = Array[ExtResource("11_5dw5j")]([])
+
+[node name="Fireball" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "velocity_component", "action_component")]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_quu5j")
+hurtbox_component = NodePath("HurtboxComponent")
+affinity_attributes = SubResource("Resource_t0ded")
+id = "Fireball"
+velocity_component = NodePath("VelocityComponent")
+action_component = NodePath("ActionComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0ckhd")
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_m1yw6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_yayoq")
+debug_color = Color(0.545098, 0.00784314, 0, 0.419608)
+
+[node name="ActionComponent" parent="." instance=ExtResource("3_pf2hk")]
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_bog62"), SubResource("Resource_xi5md")])
+
+[node name="VelocityComponent" parent="." instance=ExtResource("7_p7cfs")]
+friction = SubResource("Resource_6lme8")
+
+[connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]
