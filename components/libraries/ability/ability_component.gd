@@ -1,11 +1,10 @@
-extends Node2D
+extends Node
 class_name AbilityComponent
 
-signal ability_updated(index: int, ability: Ability)
+signal updated(index: int, ability: Ability)
 
 ## Stores the available abilities for the entity to use.
-@export
-var abilities: Array[Ability]
+@export var abilities: Array[Ability]
 
 
 ## Assigns the ability to the given index.
@@ -13,7 +12,7 @@ func set_ability(index: int, ability: Ability) -> void:
 	if abilities.size() < index:
 		abilities.resize(index)
 	abilities.insert(index-1, ability)
-	ability_updated.emit(index, ability)
+	updated.emit(index, ability)
 
 
 ## fetches the ability at the given index.
@@ -23,7 +22,4 @@ func get_ability(index: int) -> Ability:
 	var ability = abilities[index]
 	if !ability:
 		return null
-	if ability.current_state != ability.state.READY:
-		return null
-	ability.current_state = ability.state.ACTIVE
 	return ability

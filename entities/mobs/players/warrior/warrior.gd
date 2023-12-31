@@ -23,10 +23,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			match event.button_index:
 				MOUSE_BUTTON_WHEEL_DOWN:
 					selected_ability += 1
-					print(selected_ability)
 				MOUSE_BUTTON_WHEEL_UP:
 					selected_ability -= 1
-					print(selected_ability)
 	
 	if Input.is_action_just_pressed("select_ability_1"):
 		selected_ability = 0

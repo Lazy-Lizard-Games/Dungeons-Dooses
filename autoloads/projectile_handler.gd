@@ -1,13 +1,14 @@
 extends Node
 
+var projectiles: Array[Projectile]
+
 
 func add(projectile: Projectile) -> void:
-	projectile.expired.connect(remove)
+	projectiles.append(projectile)
 	add_child(projectile)
-	projectile.enter()
 
 
 func remove(projectile: Projectile) -> void:
-	projectile.expired.disconnect(remove)
-	remove_child(projectile)
-	projectile.queue_free()
+	if projectile in projectiles:
+		projectiles.erase(projectile)
+		projectile.queue_free()

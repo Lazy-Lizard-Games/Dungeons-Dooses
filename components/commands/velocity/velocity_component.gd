@@ -54,7 +54,7 @@ func accelerate_in_direction(
 	speed := speed.get_final_value(), 
 	acceleration := acceleration.get_final_value()
 ) -> void:
-	accelerate_to_velocity(direction * speed, (acceleration / speed) * control.get_final_value())
+	accelerate_to_velocity(direction * speed, (acceleration / speed) * friction.get_final_value() * control.get_final_value())
 
 
 func decelerate() -> void:

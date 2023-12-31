@@ -3,7 +3,6 @@ extends State
 @export var color_rect: ColorRect
 @export var idle_state: State
 @export var attack_state: State
-@export var dash_state: State
 @export var velocity_component: VelocityComponent
 
 var direction := Vector2.ZERO
@@ -29,9 +28,5 @@ func process_physics(delta: float) -> State:
 func process_input(event: InputEvent) -> State:
 	if Input.is_action_just_pressed("primary"):
 		return attack_state
-	
-	if Input.is_action_just_pressed("dash"):
-		dash_state.direction = direction
-		return dash_state
 	
 	return null

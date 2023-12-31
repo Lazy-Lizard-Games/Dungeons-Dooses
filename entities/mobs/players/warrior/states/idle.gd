@@ -3,7 +3,6 @@ extends State
 @export var color_rect: ColorRect
 @export var move_state: State
 @export var attack_state: State
-@export var dash_state: State
 @export var velocity_component: VelocityComponent
 
 var interactable: InteractableComponent
@@ -29,10 +28,6 @@ func process_input(event: InputEvent) -> State:
 	
 	if Input.is_action_just_pressed("primary"):
 		return attack_state
-	
-	if Input.is_action_just_pressed("dash"):
-		dash_state.direction = parent.global_position.direction_to(parent.get_global_mouse_position())
-		return dash_state
-	
+
 	return null
 
