@@ -1,12 +1,13 @@
-[gd_scene load_steps=22 format=3 uid="uid://skvi6j3iivg0"]
+[gd_scene load_steps=25 format=3 uid="uid://skvi6j3iivg0"]
 
 [ext_resource type="Script" path="res://entities/projectiles/fireball/fireball.gd" id="1_quu5j"]
 [ext_resource type="Script" path="res://attributes/affinity.gd" id="2_2ltrc"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_lhfah"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_m1yw6"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_pf2hk"]
-[ext_resource type="Script" path="res://actions/entity/general/damage.gd" id="5_h43qg"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="7_p7cfs"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="8_0myv2"]
+[ext_resource type="Script" path="res://actions/bientity/meta/cooldown.gd" id="9_cvqcs"]
 [ext_resource type="Script" path="res://actions/bientity/general/apply_knockback.gd" id="9_gqp06"]
 [ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="11_5dw5j"]
 
@@ -63,11 +64,6 @@ poison_affinity = SubResource("Resource_ruqdq")
 [sub_resource type="CircleShape2D" id="CircleShape2D_yayoq"]
 radius = 15.0
 
-[sub_resource type="Resource" id="Resource_bog62"]
-script = ExtResource("5_h43qg")
-type = 2
-amount = 10.0
-
 [sub_resource type="Resource" id="Resource_pchax"]
 script = ExtResource("11_5dw5j")
 operation = 2
@@ -78,6 +74,23 @@ script = ExtResource("9_gqp06")
 speed = 1500.0
 duration = 1.0
 control_modifier = SubResource("Resource_pchax")
+
+[sub_resource type="Resource" id="Resource_0eda6"]
+script = ExtResource("8_0myv2")
+type = 1
+amount = 10.0
+
+[sub_resource type="Resource" id="Resource_mk006"]
+script = ExtResource("8_0myv2")
+type = 1
+amount = 5.0
+
+[sub_resource type="Resource" id="Resource_x03v1"]
+script = ExtResource("9_cvqcs")
+action_on_start = SubResource("Resource_0eda6")
+action_on_tick = SubResource("Resource_mk006")
+duration = 5.0
+tick_interval = 1.0
 
 [sub_resource type="Resource" id="Resource_6lme8"]
 script = ExtResource("2_lhfah")
@@ -107,7 +120,7 @@ shape = SubResource("CircleShape2D_yayoq")
 debug_color = Color(0.545098, 0.00784314, 0, 0.419608)
 
 [node name="ActionComponent" parent="." instance=ExtResource("3_pf2hk")]
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_bog62"), SubResource("Resource_xi5md")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_xi5md"), SubResource("Resource_x03v1")])
 
 [node name="VelocityComponent" parent="." instance=ExtResource("7_p7cfs")]
 friction = SubResource("Resource_6lme8")

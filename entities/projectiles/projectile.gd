@@ -20,4 +20,6 @@ func _ready() -> void:
 					return
 				hurt.emit(self, hitbox.entity)
 				hitbox.hit.emit(self)
+				if mob:
+					hurt.emit(mob, hitbox.entity)
 		)

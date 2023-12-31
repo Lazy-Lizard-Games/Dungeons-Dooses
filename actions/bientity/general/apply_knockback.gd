@@ -12,7 +12,7 @@ class_name ApplyKnockbackAction
 
 var add_velocity = AddVelocityAction.new()
 var modify_control = ModifyControl.new()
-var timed_action = TimedEntityAction.new()
+var timed_action = TimedModify.new()
 
 
 func execute(actor: Entity, target: Entity) -> void:

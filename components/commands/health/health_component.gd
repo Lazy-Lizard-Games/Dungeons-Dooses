@@ -3,7 +3,7 @@ class_name HealthComponent
 
 ## Triggered when health reaches 0.
 signal died(amount: float, source: Entity)
-signal damaged(damage_data: DamageData, source: Entity)
+signal damaged(amount: float, source: Entity)
 signal updated(previous: float, current: float)
 signal max_updated(previous: Attribute, current: Attribute)
 
@@ -45,6 +45,11 @@ var is_dead := false:
 func _ready():
 	max = Attribute.new() if !max else max
 	regeneration = Attribute.new() if !regeneration else regeneration
+
+
+func _process(delta):
+	if current < max.get_final_value():
+		current += regeneration.get_final_value() * delta
 
 
 ## Deals damage to the current health.

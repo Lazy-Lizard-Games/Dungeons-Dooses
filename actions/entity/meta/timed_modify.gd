@@ -1,5 +1,5 @@
 extends EntityAction
-class_name TimedEntityAction
+class_name TimedModify
 
 ## Executes a modify action at the start and removes it at the end of the duration.
 
