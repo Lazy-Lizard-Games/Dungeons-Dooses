@@ -10,22 +10,19 @@ signal hit(actor: Entity)
 ## Duration of invulnerability after being hit, 0 if none.
 @export var invulnerability_duration: float
 
-# Invulnerability Shtuff
-#invulnerable_timer = Timer.new()
-	#invulnerable_timer.timeout.connect(
-		#func():
-			#invulnerable = false
-	#)
-	#add_child(invulnerable_timer)
-	#if invulnerability_duration > 0:
-		#invulnerable = true
-		#invulnerable_timer.start(invulnerability_duration)
 
 func _ready():
 	var invulnerability_timer = Timer.new()
 	invulnerability_timer.timeout.connect(
 		func():
 			detect_only = false
+			monitoring = true
+			for area in get_overlapping_areas():
+				if area is HurtboxComponent:
+					area.on_area_collision(self)
+					monitoring = false
+					break
+			monitoring = false
 	)
 	add_child(invulnerability_timer)
 	hit.connect(

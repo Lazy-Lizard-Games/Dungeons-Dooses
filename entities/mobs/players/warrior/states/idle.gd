@@ -16,13 +16,13 @@ func exit() -> void:
 	color_rect.color = Color.WHITE
 
 
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	velocity_component.decelerate()
 	velocity_component.move(parent)
 	return null
 
 
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down").length() > 0:
 		return move_state
 	

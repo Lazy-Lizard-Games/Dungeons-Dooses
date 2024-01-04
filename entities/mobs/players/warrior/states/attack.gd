@@ -33,20 +33,10 @@ func exit() -> void:
 		return
 
 
-func process_physics(delta: float) -> State:
+func process_physics(_delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	velocity_component.accelerate_in_direction(direction)
 	velocity_component.move(parent)
-	return null
-
-
-func process_input(event: InputEvent) -> State:
-	#if Input.is_action_just_released("primary"):
-		#ability.release()
-	#
-	#if Input.is_action_just_pressed("secondary"):
-		#ability.cancel()
-	#
 	return null
 
 

@@ -11,4 +11,8 @@ func create_damage_text(type: Enums.DamageType, amount: float, position: Vector2
 	damage_text.type = type
 	damage_text.amount = amount
 	damage_text.position = position
+	if crit:
+		pass
+	if resist:
+		pass
 	add_child(damage_text)

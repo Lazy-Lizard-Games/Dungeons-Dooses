@@ -3,10 +3,14 @@ class_name Entity
 
 ## Entities are objects that can interact with the world through a variety of ways.
 
-## Triggered on self hit.
+## Triggered when hit.
 signal hit(actor: Entity, target: Entity)
-## Triggered on target hit.
+## Triggered on hit.
 signal hurt(actor: Entity, target: Entity)
+## Triggered on item pickup.
+signal pickup(actor: Entity, item: int)
+## Triggered on item consume.
+signal consume(actor: Entity, item: int)
 
 ## Identifying name for the entity.
 @export var id := ""

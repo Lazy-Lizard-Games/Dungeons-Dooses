@@ -5,23 +5,23 @@ class_name HealthComponent
 signal died(amount: float, source: Entity)
 signal damaged(amount: float, source: Entity)
 signal updated(previous: float, current: float)
-signal max_updated(previous: Attribute, current: Attribute)
+signal maximum_updated(previous: Attribute, current: Attribute)
 
 ## Immunity to all damage.
 @export var invulnerable := false
-## Max health if attributes not attached or no health attribute found.
-@export var max: Attribute:
+## Maximum health if attributes not attached or no health attribute found.
+@export var maximum: Attribute:
 	set(a):
-		var prev = max
-		max = a
-		max_updated.emit(prev, max)
+		var prev = maximum
+		maximum = a
+		maximum_updated.emit(prev, maximum)
 ## Health regen if attributes not attached or no health regen attribute found.
 @export var regeneration: Attribute
 ## Current health.
 @onready var current : float:
 	set(h):
 		previous = current
-		current = clamp(h, 0, max.get_final_value())
+		current = clamp(h, 0, maximum.get_final_value())
 		updated.emit(previous, current)
 ## Previous health.
 @onready var previous := current
@@ -29,13 +29,13 @@ signal max_updated(previous: Attribute, current: Attribute)
 var attributes: GenericAttributes:
 	set(generics):
 		attributes = generics
-		var _max = attributes.get_generic(Enums.GenericType.HealthMax)
-		if _max:
-			max = _max
+		var _maximum = attributes.get_generic(Enums.GenericType.HealthMax)
+		if _maximum:
+			maximum = _maximum
 		var _regeneration = attributes.get_generic(Enums.GenericType.HealthRegeneration)
 		if _regeneration:
 			regeneration = _regeneration
-		current = max.get_final_value()
+		current = maximum.get_final_value()
 ## Checks whether the entity is dead or alive
 var is_dead := false:
 	get:
@@ -43,17 +43,17 @@ var is_dead := false:
 
 
 func _ready():
-	max = Attribute.new() if !max else max
+	maximum = Attribute.new() if !maximum else maximum
 	regeneration = Attribute.new() if !regeneration else regeneration
 
 
 func _process(delta):
-	if current < max.get_final_value():
+	if current < maximum.get_final_value():
 		current += regeneration.get_final_value() * delta
 
 
 ## Deals damage to the current health.
-func damage(type: Enums.DamageType, amount: float, source: Entity) -> void:
+func damage(_type: Enums.DamageType, amount: float, source: Entity) -> void:
 	if is_dead or invulnerable:
 		return
 	#if attributes:

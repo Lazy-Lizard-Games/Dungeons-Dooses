@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=47 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="2_225c3"]
@@ -13,113 +13,37 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
-[ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="14_3nujm"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="Script" path="res://abilities/self_ability.gd" id="14_rfxwv"]
 [ext_resource type="Script" path="res://resources/inventory/inventory_data.gd" id="15_1nwxg"]
-[ext_resource type="Script" path="res://actions/entity/modify/modify_generic.gd" id="15_2vwp1"]
 [ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="16_lgmi6"]
-[ext_resource type="Script" path="res://actions/entity/meta/timed_modify.gd" id="16_w4ji2"]
-[ext_resource type="PackedScene" uid="uid://cnnjcpgn5lnsw" path="res://components/libraries/effect/effect_component.tscn" id="17_lu61f"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 
-[sub_resource type="Resource" id="Resource_xnje6"]
+[sub_resource type="Resource" id="Resource_tpxcr"]
 script = ExtResource("2_acrq8")
-raw_value = 0.0
+raw_value = 0.5
 multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
+min_value = 0.0
+max_value = 9.22337e+18
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
-[sub_resource type="Resource" id="Resource_xmxs6"]
+[sub_resource type="Resource" id="Resource_r73we"]
 script = ExtResource("2_acrq8")
-raw_value = 0.0
+raw_value = 0.25
 multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_60riw"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_2xvoh"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_wixn0"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
+min_value = 0.0
+max_value = 9.22337e+18
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_11kk1"]
 script = ExtResource("3_7jb43")
-normal_resistance = SubResource("Resource_60riw")
-fire_resistance = SubResource("Resource_xnje6")
-frost_resistance = SubResource("Resource_xmxs6")
-shock_resistance = SubResource("Resource_wixn0")
-poison_resistance = SubResource("Resource_2xvoh")
-
-[sub_resource type="Resource" id="Resource_7f45n"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_cji7p"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_31ol6"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_0ck06"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
-
-[sub_resource type="Resource" id="Resource_iwlsb"]
-script = ExtResource("2_acrq8")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -1.0
-max_value = 0.8
-modifiers = Array[ExtResource("14_3nujm")]([])
+fire_damage = SubResource("Resource_tpxcr")
+fire_duration = SubResource("Resource_r73we")
 
 [sub_resource type="Resource" id="Resource_fi2vl"]
 script = ExtResource("4_ggjdy")
-normal_affinity = SubResource("Resource_31ol6")
-fire_affinity = SubResource("Resource_7f45n")
-frost_affinity = SubResource("Resource_cji7p")
-shock_affinity = SubResource("Resource_iwlsb")
-poison_affinity = SubResource("Resource_0ck06")
 
 [sub_resource type="Resource" id="Resource_vjwbv"]
 script = ExtResource("2_acrq8")
@@ -127,7 +51,7 @@ raw_value = 1.0
 multiplier_value = 1.0
 min_value = 0.0
 max_value = 9.22337e+18
-modifiers = Array[ExtResource("14_3nujm")]([])
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_k3gts"]
 script = ExtResource("2_acrq8")
@@ -135,7 +59,7 @@ raw_value = 1.0
 multiplier_value = 1.0
 min_value = 0.0
 max_value = 9.22337e+18
-modifiers = Array[ExtResource("14_3nujm")]([])
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_afr3y"]
 script = ExtResource("2_acrq8")
@@ -143,7 +67,7 @@ raw_value = 100.0
 multiplier_value = 1.0
 min_value = 0.0
 max_value = 9.22337e+18
-modifiers = Array[ExtResource("14_3nujm")]([])
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_w4e4s"]
 script = ExtResource("2_acrq8")
@@ -151,7 +75,7 @@ raw_value = 5.0
 multiplier_value = 1.0
 min_value = 0.0
 max_value = 9.22337e+18
-modifiers = Array[ExtResource("14_3nujm")]([])
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_1yugu"]
 script = ExtResource("2_acrq8")
@@ -159,7 +83,7 @@ raw_value = 100.0
 multiplier_value = 1.0
 min_value = 0.0
 max_value = 9.22337e+18
-modifiers = Array[ExtResource("14_3nujm")]([])
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_7xld5"]
 script = ExtResource("2_acrq8")
@@ -167,7 +91,7 @@ raw_value = 250.0
 multiplier_value = 1.0
 min_value = 0.0
 max_value = 9.22337e+18
-modifiers = Array[ExtResource("14_3nujm")]([])
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_0xpea"]
 script = ExtResource("2_225c3")
@@ -181,30 +105,30 @@ attack_damage = SubResource("Resource_vjwbv")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)
 
-[sub_resource type="Resource" id="Resource_8k0pb"]
-script = ExtResource("14_3nujm")
-operation = 1
-value = 0.5
+[sub_resource type="Resource" id="Resource_afi7b"]
+script = ExtResource("2_acrq8")
+raw_value = 1.0
+multiplier_value = 1.0
+min_value = 0.0
+max_value = 1.0
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
-[sub_resource type="Resource" id="Resource_7fft0"]
-script = ExtResource("15_2vwp1")
-type = 2
-modifier = SubResource("Resource_8k0pb")
-should_add = true
-
-[sub_resource type="Resource" id="Resource_83wis"]
-script = ExtResource("16_w4ji2")
-modify_action = SubResource("Resource_7fft0")
-duration = 10.0
+[sub_resource type="Resource" id="Resource_ulxov"]
+script = ExtResource("2_acrq8")
+raw_value = 0.5
+multiplier_value = 1.0
+min_value = 0.0
+max_value = 1.0
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_bg3bb"]
 script = ExtResource("14_rfxwv")
 actions_on_rise = Array[Resource("res://actions/entity/entity_action.gd")]([])
-actions_on_fall = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_83wis")])
-name = "Haste"
-description = "Move 50% faster for 10 seconds."
+actions_on_fall = Array[Resource("res://actions/entity/entity_action.gd")]([])
+name = "Ignite"
+description = "Apply a stacking burn effect that lasts for 5 seconds."
 cost = 0.0
-recharge_time = 10.0
+recharge_time = 1.0
 cast_time = 0.5
 
 [sub_resource type="Resource" id="Resource_ye0kr"]
@@ -312,6 +236,8 @@ ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
+control = SubResource("Resource_afi7b")
+friction = SubResource("Resource_ulxov")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
@@ -322,10 +248,6 @@ abilities = Array[Resource("res://abilities/ability.gd")]([SubResource("Resource
 
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
 inventory = SubResource("Resource_tr2rb")
-
-[node name="EffectComponent" parent="." node_paths=PackedStringArray("velocity", "health") instance=ExtResource("17_lu61f")]
-velocity = NodePath("../VelocityComponent")
-health = NodePath("../HealthComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
 entity = NodePath("..")

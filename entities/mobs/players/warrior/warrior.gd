@@ -18,7 +18,6 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		event as InputEventMouseButton
 		if event.pressed:
 			match event.button_index:
 				MOUSE_BUTTON_WHEEL_DOWN:
@@ -54,7 +53,7 @@ func _physics_process(delta):
 	state_component.process_physics(delta)
 
 
-func _on_health_component_died(amount: float, source: Entity) -> void:
+func _on_health_component_died(_amount: float, _wsource: Entity) -> void:
 	health_component.heal(health_component.max.get_final_value())
 
 

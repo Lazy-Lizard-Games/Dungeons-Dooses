@@ -14,5 +14,6 @@ func cast(entity: Entity, direction := Vector2.ZERO) -> void:
 	casted.connect(
 		func():
 			for action in actions_on_fall:
-				action.execute(entity)
+				action.execute(entity),
+		CONNECT_ONE_SHOT
 	)

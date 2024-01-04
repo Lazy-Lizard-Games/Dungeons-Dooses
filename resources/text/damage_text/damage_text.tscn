@@ -11,7 +11,9 @@ frost = Color(0, 0, 1, 1)
 shock = Color(1, 1, 0, 1)
 poison = Color(0, 1, 0, 1)
 
-[node name="DamageText" type="Node2D" node_paths=PackedStringArray("label", "timer")]
+[node name="DamageText" type="Control" node_paths=PackedStringArray("label", "timer")]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_o24dj")
 label = NodePath("Label")
 timer = NodePath("Timer")
@@ -21,7 +23,7 @@ colors = SubResource("Resource_i1x6w")
 
 [node name="Label" type="Label" parent="."]
 texture_filter = 1
-anchors_preset = -1
+layout_mode = 0
 offset_left = -25.0
 offset_top = -15.0
 offset_right = 25.0

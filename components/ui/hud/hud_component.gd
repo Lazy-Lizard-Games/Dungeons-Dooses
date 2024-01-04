@@ -10,14 +10,14 @@ class_name Hud
 
 func _ready() -> void:
 	health.updated.connect(on_health_updated)
-	health.max_updated.connect(on_max_updated)
+	health.maximum_updated.connect(on_maximum_updated)
 
 
-func on_health_updated(previous: float, current: float) -> void:
+func on_health_updated(_previous: float, current: float) -> void:
 	health_bar.value = current
 
 
-func on_max_updated(previous: Attribute, current: Attribute) -> void:
+func on_maximum_updated(previous: Attribute, current: Attribute) -> void:
 	if previous:
 		if previous.updated.is_connected(on_attribute_updated):
 			previous.updated.disconnect(on_attribute_updated)
