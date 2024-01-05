@@ -40,4 +40,4 @@ func on_resource_added(resource: StackingResource) -> void:
 	var resource_container = resource_container_scene.instantiate() as ResourceContainer
 	resource_container.resource = resource
 	resource_containers.append(resource_container)
-	$ResourceContainer.add_child(resource_container)
+	$ResourceContainer/GridContainer.add_child(resource_container)

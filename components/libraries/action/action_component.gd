@@ -14,7 +14,7 @@ signal resource_removed(resource: StackingResource)
 @export var actions_on_hurt: Array[BientityAction]
 
 ## Stacking resources currently attached to entity.
-@export var resources: Array[StackingResource]
+var resources: Array[StackingResource]
 
 
 func add_resource(resource: StackingResource) -> void:

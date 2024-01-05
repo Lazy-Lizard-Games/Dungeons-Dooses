@@ -26,7 +26,7 @@ func start(entity: Entity) -> void:
 
 
 func end(entity: Entity) -> void:
-	modify.should_add = false
+	modify.is_add = false
 	modify.execute(entity)
 	super(entity)
 
