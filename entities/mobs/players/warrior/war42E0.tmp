@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=46 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="13_vmvw1"]
 [ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="14_03lfr"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
@@ -53,11 +52,6 @@ multiplier_value = 1.0
 min_value = -2.14748e+09
 max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_pu7ox"]
-script = ExtResource("13_vmvw1")
-type = 2
-amount = 15.0
 
 [sub_resource type="Resource" id="Resource_1n5fa"]
 script = ExtResource("14_03lfr")
@@ -133,8 +127,7 @@ size = Vector2(40, 40)
 radius = 50.0
 
 [node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
-collision_layer = 4
-collision_mask = 3
+collision_layer = 0
 motion_mode = 1
 script = ExtResource("1_dwma1")
 state_component = NodePath("StateComponent")
@@ -193,7 +186,6 @@ friction = SubResource("Resource_ulxov")
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_pu7ox")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 abilities = Array[ExtResource("18_7q27h")]([SubResource("Resource_erwjf")])

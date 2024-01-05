@@ -2,28 +2,21 @@ extends Node
 class_name VelocityComponent
 
 ## Max speed if attributes not attached or no speed attribute found.
-@export var speed: Attribute
+@export var speed = Attribute.new()
 ## How much impact entity input has on the velocity
-@export var control: Attribute
+@export var control= Attribute.new()
 ## How much impact any input has on the velocity
-@export var friction: Attribute
+@export var friction= Attribute.new()
 var velocity := Vector2.ZERO
 ## Attribute Component to fetch speed, acceleration, etc. from.
-var attributes: GenericAttributes:
-	set(ga):
-		attributes = ga
-		if !attributes:
+var generics: GenericAttributes:
+	set(g):
+		generics = g
+		if !generics:
 			return
-		var _speed = attributes.get_generic(Enums.GenericType.MovementSpeed)
-		if _speed:
-			speed = _speed
-
-func init(_attributes: GenericAttributes) -> void:
-	attributes = _attributes
-
-
-func _ready() -> void:
-	speed = Attribute.new() if !speed else speed
+		var s = generics.get_generic(Enums.GenericType.MovementSpeed)
+		if s:
+			speed = s
 
 
 ## Sets the current velocity to provided velocity. This method
@@ -44,10 +37,9 @@ func accelerate_to_velocity(_velocity: Vector2, weight: float ) -> void:
 
 ## Accelerates the velocity towards the provided direction.
 func accelerate_in_direction(
-	direction: Vector2, 
-	_speed := speed.get_final_value()
+	direction: Vector2
 ) -> void:
-	accelerate_to_velocity(direction * _speed, friction.get_final_value() * control.get_final_value())
+	accelerate_to_velocity(direction * speed.get_final_value(), friction.get_final_value() * control.get_final_value())
 
 
 ## Decelerates the velocity towards zero.

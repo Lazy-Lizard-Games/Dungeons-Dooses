@@ -1,5 +1,4 @@
 extends Mob
-class_name Warrior
 
 @export var state_component: StateComponent
 @export var interactor_component: InteractorComponent

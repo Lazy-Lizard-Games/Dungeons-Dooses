@@ -14,6 +14,6 @@ func _ready() -> void:
 	if hitbox_component:
 		hitbox_component.hit.connect(
 			func(actor: Entity):
-				hit.emit(actor, self)
+				hit.emit(actor)
 		)
 	health_component.attributes = generics

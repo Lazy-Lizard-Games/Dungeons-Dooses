@@ -24,7 +24,7 @@ func enter() -> void:
 		func():
 			switch_state()
 	)
-	ability.cast(parent, direction)
+	ability.cast(parent)
 
 
 func exit() -> void:

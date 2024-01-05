@@ -16,17 +16,21 @@ signal recharged
 @export var recharge_time: float 
 ## Cast time in seconds of the ability.
 @export var cast_time: float
+## Actions to execute on the entity when the cast timer starts.
+@export var actions_on_rise: Array[EntityAction]
+## Actions to execute on the entity when the cast timer ends.
+@export var actions_on_fall: Array[EntityAction]
 
 var is_recharging := false
 var caster: Entity
 var facing: Vector2
 
+
 ## Starts the ability with the entity as the caster.
-func cast(_entity: Entity, _direction := Vector2.ZERO) -> void:
+func cast(entity: Entity) -> void:
 	if is_recharging:
 		return
-	caster = _entity
-	facing = _direction
+	caster = entity
 	if cast_time > 0:
 		caster.get_tree().create_timer(cast_time).timeout.connect(
 			func():
@@ -36,6 +40,14 @@ func cast(_entity: Entity, _direction := Vector2.ZERO) -> void:
 	else:
 		casted.emit()
 		on_cast_timout()
+	for action in actions_on_rise:
+		action.execute(entity)
+	casted.connect(
+		func():
+			for action in actions_on_fall:
+				action.execute(entity),
+		CONNECT_ONE_SHOT
+	)
 
 
 func on_cast_timout() -> void:

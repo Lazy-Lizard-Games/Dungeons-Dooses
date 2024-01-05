@@ -1,0 +1,64 @@
+[gd_scene load_steps=13 format=3 uid="uid://cbyp6u3r6r346"]
+
+[ext_resource type="Script" path="res://entities/mobs/dummy/dummy.gd" id="1_gn2pe"]
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="2_dd2ne"]
+[ext_resource type="Script" path="res://attributes/generic.gd" id="3_ovxk7"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="4_6xhxw"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="5_12j2c"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="6_c60ux"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="7_8nhay"]
+
+[sub_resource type="Resource" id="Resource_2m82o"]
+script = ExtResource("2_dd2ne")
+raw_value = 1e+06
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_yt706"]
+script = ExtResource("2_dd2ne")
+raw_value = 100000.0
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_5qhre"]
+script = ExtResource("3_ovxk7")
+health_max = SubResource("Resource_2m82o")
+health_regeneration = SubResource("Resource_yt706")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6ql3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jlvlp"]
+
+[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "velocity_component", "action_component")]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_gn2pe")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+id = "Dummy"
+velocity_component = NodePath("VelocityComponent")
+action_component = NodePath("ActionComponent")
+generics = SubResource("Resource_5qhre")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_t6ql3")
+debug_color = Color(0, 0.52549, 1, 0.419608)
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_6xhxw")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("5_12j2c")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("6_c60ux")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_jlvlp")
+debug_color = Color(0.572549, 0.388235, 1, 0.419608)
+
+[node name="ActionComponent" parent="." instance=ExtResource("7_8nhay")]
+
+[connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

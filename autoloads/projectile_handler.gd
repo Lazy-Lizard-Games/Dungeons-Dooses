@@ -11,4 +11,4 @@ func add(projectile: Projectile) -> void:
 func remove(projectile: Projectile) -> void:
 	if projectile in projectiles:
 		projectiles.erase(projectile)
-		projectile.queue_free()
+	projectile.queue_free()
