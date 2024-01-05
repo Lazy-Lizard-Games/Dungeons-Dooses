@@ -5,9 +5,16 @@ signal updated(final_value: float)
 
 @export var raw_value: float = 0
 @export var multiplier_value: float = 1
-@export var min_value: float = 0
-@export var max_value: float = pow(2, 63)-1
+@export var min_value: float = pow(-2, 31)
+@export var max_value: float = pow(2, 31)-1
 @export var modifiers: Array[AttributeModifier]
+
+
+func _init(_raw := 0.0, _multiplier := 1.0, _min := pow(-2, 31), _max := pow(2, 31)-1) -> void:
+	raw_value = _raw
+	multiplier_value = _multiplier
+	min_value = _min
+	max_value = _max
 
 
 ## Returns the final attribute value after modifiers are applied.

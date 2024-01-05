@@ -1,11 +1,11 @@
 extends Resource
 class_name GenericAttributes
 
-@export var health_max: Attribute
-@export var health_regeneration: Attribute
-@export var movement_speed: Attribute
-@export var attack_speed: Attribute
-@export var attack_damage: Attribute
+@export var health_max = Attribute.new(100, 1, 0, pow(2, 31)-1)
+@export var health_regeneration = Attribute.new(5, 1, 0, pow(2, 31)-1)
+@export var movement_speed = Attribute.new(250, 1, 0, pow(2, 31)-1)
+@export var attack_speed = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var attack_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
 
 
 func get_generic(type: Enums.GenericType) -> Attribute:

@@ -15,17 +15,15 @@ func execute(actor: Entity, target: Entity) -> void:
 			return
 	var temp_duration = duration
 	## Apply actor affinity bonuses.
-	if "affinity_attributes" in actor:
-		var affinities = actor.affinity_attributes as AffinityAttributes
-		var duration_affinity = affinities.get_duration_affinity(type)
-		if duration_affinity:
-			temp_duration += temp_duration * duration_affinity.get_final_value()
+	var affinities = actor.affinities
+	var duration_affinity = affinities.get_duration_affinity(type)
+	if duration_affinity:
+		temp_duration += temp_duration * duration_affinity.get_final_value()
 	## Apply target resistance bonuses.
-	if "resistance_attributes" in target:
-		var resistances = target.resistance_attributes as ResistanceAttributes
-		var duration_resistance = resistances.get_duration_resistance(type)
-		if duration_resistance:
-			temp_duration -= temp_duration * duration_resistance.get_final_value()
+	var resistances = target.resistances
+	var duration_resistance = resistances.get_duration_resistance(type)
+	if duration_resistance:
+		temp_duration -= temp_duration * duration_resistance.get_final_value()
 	## Setup damage action.
 	var damage_action = DamageAction.new()
 	damage_action.amount = amount

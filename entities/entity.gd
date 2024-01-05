@@ -21,18 +21,17 @@ signal consume(actor: Entity, item: int)
 ## Action component for the entity.
 @export var action_component: ActionComponent
 ## Generic attributes for the entity.
-@export var generics: GenericAttributes
-@export var affinities: AffinityAttributes
-@export var resistances: ResistanceAttributes
+@export var generics: GenericAttributes = GenericAttributes.new()
+## Affinity attribtues for the entity.
+@export var affinities: AffinityAttributes = AffinityAttributes.new()
+## Resistance attributes for the entity.
+@export var resistances: ResistanceAttributes = ResistanceAttributes.new()
 
 
 func _ready() -> void:
-	if generics:
-		generics = generics.duplicate()
-	if affinities:
-		affinities = affinities.duplicate()
-	if resistances:
-		resistances = resistances.duplicate()
+	generics = generics.duplicate(true)
+	affinities = affinities.duplicate(true)
+	resistances = resistances.duplicate(true)
 	velocity_component.attributes = generics
 	hit.connect(on_hit)
 	hurt.connect(on_hurt)

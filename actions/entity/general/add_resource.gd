@@ -3,7 +3,7 @@ class_name AddResourceAction
 
 ## Stacking resource to add stacks to on the entity.
 @export var resource: StackingResource
-## Amount of stacks to add.
+## Amount of stacks to add if it already exists.
 @export var amount: int = 1
 
 
@@ -16,6 +16,5 @@ func execute(entity: Entity) -> void:
 		res.add_stack(amount)
 	else:
 		res = resource.duplicate() as StackingResource
-		entity.action_component.resources.append(res)
-		res.stacks = amount
+		entity.action_component.add_resource(res)
 		res.start(entity)

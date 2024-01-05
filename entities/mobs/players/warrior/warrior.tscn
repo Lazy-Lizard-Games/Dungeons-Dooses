@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=49 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -7,16 +7,33 @@
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/idle.gd" id="3_un612"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="Script" path="res://attributes/generic.gd" id="3_ww4uv"]
+[ext_resource type="Script" path="res://attributes/affinity.gd" id="4_kc31g"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
+[ext_resource type="Script" path="res://actions/resources/stacking_resource.gd" id="13_msf5t"]
+[ext_resource type="Script" path="res://actions/entity/general/revoke_resource.gd" id="14_2hve7"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="Script" path="res://abilities/self_ability.gd" id="14_rfxwv"]
 [ext_resource type="Script" path="res://resources/inventory/inventory_data.gd" id="15_1nwxg"]
+[ext_resource type="Script" path="res://actions/resources/stacking_modify_resistance.gd" id="15_in068"]
+[ext_resource type="Script" path="res://actions/entity/general/add_resource.gd" id="16_acliq"]
 [ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="16_lgmi6"]
+[ext_resource type="Script" path="res://actions/bientity/meta/target.gd" id="17_emjgp"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
+
+[sub_resource type="Resource" id="Resource_q3a8u"]
+script = ExtResource("3_ww4uv")
+
+[sub_resource type="Resource" id="Resource_8xuyt"]
+script = ExtResource("4_kc31g")
+
+[sub_resource type="Resource" id="Resource_mw36u"]
+script = ExtResource("5_078dv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)
@@ -25,17 +42,53 @@ size = Vector2(40, 40)
 script = ExtResource("2_acrq8")
 raw_value = 1.0
 multiplier_value = 1.0
-min_value = 0.0
-max_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_ulxov"]
 script = ExtResource("2_acrq8")
 raw_value = 0.5
 multiplier_value = 1.0
-min_value = 0.0
-max_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_sde16"]
+script = ExtResource("13_msf5t")
+name = "attune"
+min_stacks = 0
+max_stacks = 0
+starting_stacks = 0
+decay_interval = 0.0
+decay_amount = 1
+
+[sub_resource type="Resource" id="Resource_4x01u"]
+script = ExtResource("14_2hve7")
+resource = SubResource("Resource_sde16")
+
+[sub_resource type="Resource" id="Resource_jwi5o"]
+script = ExtResource("15_in068")
+type = 1
+resistance = 0
+operation = 0
+value = 0.1
+name = "attune"
+min_stacks = 0
+max_stacks = 5
+starting_stacks = 1
+decay_interval = 2.0
+decay_amount = 1
+action_on_min_stacks = SubResource("Resource_4x01u")
+
+[sub_resource type="Resource" id="Resource_omds8"]
+script = ExtResource("16_acliq")
+resource = SubResource("Resource_jwi5o")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_il817"]
+script = ExtResource("17_emjgp")
+entity_action = SubResource("Resource_omds8")
 
 [sub_resource type="Resource" id="Resource_bg3bb"]
 script = ExtResource("14_rfxwv")
@@ -110,6 +163,9 @@ id = "Warrior"
 faction = 1
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
+generics = SubResource("Resource_q3a8u")
+affinities = SubResource("Resource_8xuyt")
+resistances = SubResource("Resource_mw36u")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0
@@ -155,6 +211,7 @@ friction = SubResource("Resource_ulxov")
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
+actions_on_hit = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_il817")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 abilities = Array[Resource("res://abilities/ability.gd")]([SubResource("Resource_bg3bb")])
@@ -178,9 +235,10 @@ debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory") instance=ExtResource("24_8v6vb")]
+[node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
 health = NodePath("../../HealthComponent")
 inventory = NodePath("../../InventoryComponent")
+action = NodePath("../../ActionComponent")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]

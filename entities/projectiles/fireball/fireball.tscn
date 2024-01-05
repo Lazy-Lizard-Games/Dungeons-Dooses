@@ -1,16 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://skvi6j3iivg0"]
+[gd_scene load_steps=15 format=3 uid="uid://skvi6j3iivg0"]
 
 [ext_resource type="Script" path="res://entities/projectiles/fireball/fireball.gd" id="1_quu5j"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_lhfah"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_m1yw6"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_pf2hk"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="7_p7cfs"]
-[ext_resource type="Script" path="res://actions/stacking_resource.gd" id="8_67w5m"]
-[ext_resource type="Script" path="res://actions/entity/general/add_resource.gd" id="8_xrvm0"]
-[ext_resource type="Script" path="res://actions/bientity/meta/actor.gd" id="9_0y1n6"]
 [ext_resource type="Script" path="res://actions/bientity/general/apply_knockback.gd" id="9_gqp06"]
-[ext_resource type="Script" path="res://actions/entity/general/revoke_resource.gd" id="9_sdmpb"]
-[ext_resource type="Script" path="res://actions/stacking_modify_affinity.gd" id="10_3udv6"]
 [ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="11_5dw5j"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="13_bghsi"]
 
@@ -31,48 +26,16 @@ value = 0.2
 
 [sub_resource type="Resource" id="Resource_xi5md"]
 script = ExtResource("9_gqp06")
-speed = 1500.0
+speed = 1050.0
 duration = 1.0
 control_modifier = SubResource("Resource_pchax")
-
-[sub_resource type="Resource" id="Resource_kov3s"]
-script = ExtResource("8_67w5m")
-name = "attune"
-min_stacks = 0
-max_stacks = 0
-starting_stacks = 0
-
-[sub_resource type="Resource" id="Resource_vm52g"]
-script = ExtResource("9_sdmpb")
-resource = SubResource("Resource_kov3s")
-
-[sub_resource type="Resource" id="Resource_hhfpm"]
-script = ExtResource("10_3udv6")
-type = 1
-affinity = 0
-operation = 0
-value = 0.25
-name = "attune"
-min_stacks = 0
-max_stacks = 5
-starting_stacks = 1
-action_on_max_stacks = SubResource("Resource_vm52g")
-
-[sub_resource type="Resource" id="Resource_rvfls"]
-script = ExtResource("8_xrvm0")
-resource = SubResource("Resource_hhfpm")
-amount = 1
-
-[sub_resource type="Resource" id="Resource_djauh"]
-script = ExtResource("9_0y1n6")
-entity_action = SubResource("Resource_rvfls")
 
 [sub_resource type="Resource" id="Resource_6lme8"]
 script = ExtResource("2_lhfah")
 raw_value = 1.0
 multiplier_value = 1.0
-min_value = 0.0
-max_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
 modifiers = Array[ExtResource("11_5dw5j")]([])
 
 [node name="Fireball" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "velocity_component", "action_component")]
@@ -94,7 +57,7 @@ shape = SubResource("CircleShape2D_yayoq")
 debug_color = Color(0.545098, 0.00784314, 0, 0.419608)
 
 [node name="ActionComponent" parent="." instance=ExtResource("3_pf2hk")]
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_rsu0r"), SubResource("Resource_xi5md"), SubResource("Resource_djauh")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_rsu0r"), SubResource("Resource_xi5md")])
 
 [node name="VelocityComponent" parent="." instance=ExtResource("7_p7cfs")]
 friction = SubResource("Resource_6lme8")

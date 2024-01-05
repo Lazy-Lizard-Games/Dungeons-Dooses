@@ -1,7 +1,8 @@
 extends Node
 class_name ActionComponent
 
-signal effects_updated
+signal resource_added(resource: StackingResource)
+signal resource_removed(resource: StackingResource)
 
 ## Stores actions that are to be executed depending on trigger.
 
@@ -14,3 +15,14 @@ signal effects_updated
 
 ## Stacking resources currently attached to entity.
 @export var resources: Array[StackingResource]
+
+
+func add_resource(resource: StackingResource) -> void:
+	resources.append(resource)
+	resource_added.emit(resource)
+
+
+func remove_resource(resource: StackingResource) -> void:
+	if resources.has(resource):
+		resources.erase(resource)
+		resource_removed.emit(resource)

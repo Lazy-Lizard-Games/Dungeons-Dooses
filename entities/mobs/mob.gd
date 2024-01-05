@@ -16,4 +16,4 @@ func _ready() -> void:
 			func(actor: Entity):
 				hit.emit(actor, self)
 		)
-	health_component.attributes = generic_attributes
+	health_component.attributes = generics

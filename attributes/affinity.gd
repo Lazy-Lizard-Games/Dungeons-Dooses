@@ -2,18 +2,18 @@ extends Resource
 class_name AffinityAttributes
 
 @export_category("Damage Affinities")
-@export var normal_damage: Attribute
-@export var fire_damage: Attribute
-@export var frost_damage: Attribute
-@export var shock_damage: Attribute
-@export var poison_damage: Attribute
+@export var normal_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var fire_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var frost_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var shock_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var poison_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
 
 @export_category("Duration Affinities")
-@export var normal_duration: Attribute
-@export var fire_duration: Attribute
-@export var frost_duration: Attribute
-@export var shock_duration: Attribute
-@export var poison_duration: Attribute
+@export var normal_duration = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var fire_duration = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var frost_duration = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var shock_duration = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var poison_duration = Attribute.new(0, 1, -1, pow(2, 31)-1)
 
 
 func get_damage_affinity(type: Enums.DamageType) -> Attribute:
