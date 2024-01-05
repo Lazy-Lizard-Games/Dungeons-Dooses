@@ -5,5 +5,5 @@ class_name ModifyEntity
 
 ## Attribute modifier to modify attribute by.
 @export var modifier: AttributeModifier
-## If modifier should be added or removed from the attribute.
-@export var should_add: bool = true
+## If modifier is to be added or removed from the attribute.
+@export var is_add: bool = true

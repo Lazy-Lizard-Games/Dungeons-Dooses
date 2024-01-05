@@ -54,7 +54,7 @@ func _physics_process(delta):
 
 
 func _on_health_component_died(_amount: float, _wsource: Entity) -> void:
-	health_component.heal(health_component.max.get_final_value())
+	health_component.heal(health_component.maximum.get_final_value())
 
 
 func _on_interactor_component_interactables_updated() -> void:

@@ -20,9 +20,9 @@ func execute(entity: Entity) -> void:
 	timer.timeout.connect(
 		func():
 			entity.remove_child(timer)
-			modify_action.should_add = not modify_action.should_add
+			modify_action.is_add = not modify_action.is_add
 			modify_action.execute(entity)
-			modify_action.should_add = not modify_action.should_add
+			modify_action.is_add = not modify_action.is_add
 	)
 	entity.add_child(timer)
 	timer.start(duration)

@@ -46,3 +46,23 @@ func get_duration_affinity(type: Enums.DamageType) -> Attribute:
 			return poison_duration
 		_:
 			return null
+
+
+func modify_damage(type: Enums.DamageType, modifier: AttributeModifier, is_add := true) -> void:
+	var damage = get_damage_affinity(type)
+	if !damage:
+		return
+	if is_add:
+		damage.add_modifier(modifier)
+	else:
+		damage.remove_modifier(modifier)
+
+
+func modify_duration(type: Enums.DamageType, modifier: AttributeModifier, is_add := true) -> void:
+	var duration = get_duration_affinity(type)
+	if !duration:
+		return
+	if is_add:
+		duration.add_modifier(modifier)
+	else:
+		duration.remove_modifier(modifier)

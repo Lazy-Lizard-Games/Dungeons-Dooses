@@ -10,6 +10,8 @@ signal max_stacks_reached
 @export var min_stacks: int
 ## Maximum value of stacking resource.
 @export var max_stacks: int
+## Starting stacks of stacking resource when first added.
+@export var starting_stacks: int
 ## Action to be executed on minimum stacks.
 @export var action_on_min_stacks: EntityAction
 ## Action to be executed on maximum stacks.
@@ -19,6 +21,7 @@ var stacks: int = 1
 
 
 func start(entity: Entity) -> void:
+	stacks = starting_stacks
 	min_stacks_reached.connect(
 		func():
 			if action_on_min_stacks:

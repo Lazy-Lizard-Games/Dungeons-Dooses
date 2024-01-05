@@ -47,7 +47,6 @@ enum GenericType
 	HealthMax,
 	HealthRegeneration,
 	MovementSpeed,
-	MovementAcceleration,
 	AttackSpeed,
 	AttackDamage,
 }
@@ -58,3 +57,16 @@ enum OperationType
 	Multiplication,
 	Set,
 }
+
+enum AffinityType
+{
+	Damage,
+	Duration,
+}
+
+enum ResistanceType
+{
+	Damage,
+	Duration,
+}
+

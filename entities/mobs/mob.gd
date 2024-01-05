@@ -7,10 +7,6 @@ class_name Mob
 @export var hitbox_component: HitboxComponent
 ## Health component for the entity.
 @export var health_component: HealthComponent
-## Resistance attributes for the entity.
-@export var resistance_attributes: ResistanceAttributes
-## Affinity attributes for the entity.
-@export var affinity_attributes: AffinityAttributes
 
 
 func _ready() -> void:

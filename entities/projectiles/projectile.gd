@@ -5,8 +5,6 @@ class_name Projectile
 
 ## Hurtbox responsible for triggering hits.
 @export var hurtbox_component: HurtboxComponent
-## Affinity attributes for the projectile.
-@export var affinity_attributes: AffinityAttributes
 
 ## Entity responsible for spawning the projectile, if any.
 var entity: Entity
