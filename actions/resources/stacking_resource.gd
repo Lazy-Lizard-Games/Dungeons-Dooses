@@ -35,9 +35,14 @@ var decay_timer: Timer
 func start(entity: Entity) -> void:
 	stacks = starting_stacks
 	for action in actions_per_stack:
+		action = action.duplicate(true)
 		action.execute(entity)
 		action.update_stacks(stacks)
 		stack_changed.connect(action.update_stacks)
+		ended.connect(
+			func():
+				action.remove(entity)
+		)
 	min_stacks_reached.connect(
 		func():
 			for action in actions_on_min_stacks:
@@ -60,8 +65,6 @@ func start(entity: Entity) -> void:
 
 
 func end(entity: Entity) -> void:
-	for action in actions_per_stack:
-		action.remove(entity)
 	ended.emit()
 	if decay_timer:
 		entity.remove_child(decay_timer)
