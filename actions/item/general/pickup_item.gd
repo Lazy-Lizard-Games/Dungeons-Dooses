@@ -25,8 +25,8 @@ func execute(entity: Entity, item: Item) -> void:
 				var temp_slot = Slot.new()
 				temp_slot.item = item
 				temp_slot.stack = 0
-				amount = temp_slot.add_stack(amount)
 				inventory.slots[inventory.slots.find(slot)] = temp_slot
+				amount = temp_slot.add_stack(amount)
 				if amount == 0:
 					return
 	var drop_item = DropItemAction.new()

@@ -41,12 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		interactor_component.interact()
 	
 	if Input.is_action_just_pressed("ui_cancel"):
-		var inventory = inventory_component.inventory
-		for slot in inventory.slots:
-			if slot:
-				print(slot.item.name, " x", slot.stack)
-			else:
-				print("[empty]")
+		$UI.toggle()
 	
 	state_component.process_input(event)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=41 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -24,6 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
+[ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
+[ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/menu/menu_component.tscn" id="25_bfsap"]
 
 [sub_resource type="Resource" id="Resource_q3a8u"]
 script = ExtResource("3_ww4uv")
@@ -177,12 +179,19 @@ entity = NodePath("..")
 shape = SubResource("CircleShape2D_ep403")
 debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hud", "menu")]
+script = ExtResource("24_iql77")
+hud = NodePath("HudComponent")
+menu = NodePath("MenuComponent")
 
 [node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
 health = NodePath("../../HealthComponent")
 inventory = NodePath("../../InventoryComponent")
 action = NodePath("../../ActionComponent")
+
+[node name="MenuComponent" parent="UI" node_paths=PackedStringArray("inventory_component") instance=ExtResource("25_bfsap")]
+visible = false
+inventory_component = NodePath("../../InventoryComponent")
 
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
