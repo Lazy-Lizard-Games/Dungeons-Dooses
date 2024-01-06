@@ -41,7 +41,7 @@ func start(entity: Entity) -> void:
 		stack_changed.connect(action.update_stacks)
 		ended.connect(
 			func():
-				action.remove(entity)
+				action.reverse(entity)
 		)
 	min_stacks_reached.connect(
 		func():

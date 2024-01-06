@@ -2,9 +2,10 @@ extends Area2D
 class_name InteractorComponent
 
 signal interactables_updated
-signal picked_up(item: ItemData, count: int) # Item data (id, stack)
-signal opened(inventory: InventoryData) # Inventory data (slots, type)
 
+## Entity the interactor belongs to.
+@export var entity: Entity
+## Interactables currently within range.
 var interactables: Array[InteractableComponent] = []
 
 

@@ -9,6 +9,7 @@ enum InteractionType
 
 enum InventoryType 
 {
+	Player,
 	Chest,
 	Sack,
 	Crate,

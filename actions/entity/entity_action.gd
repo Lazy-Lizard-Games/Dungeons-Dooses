@@ -4,6 +4,7 @@ class_name EntityAction
 ## Condition to check whether action is executed.
 @export var condition: EntityCondition
 
-## Takes in an entity and performs some action to it.
+
+## Executes an action on the entity.
 func execute(_entity: Entity) -> void:
-	return
+	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=39 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -16,14 +16,13 @@
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://entities/projectiles/fireball/fireball.tscn" id="14_mmorl"]
-[ext_resource type="Script" path="res://resources/inventory/inventory_data.gd" id="15_1nwxg"]
 [ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="15_7v737"]
 [ext_resource type="Script" path="res://actions/entity/vector/rotate_vector.gd" id="15_qpavo"]
-[ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="16_lgmi6"]
 [ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="16_s6ckn"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="17_4e2u7"]
 [ext_resource type="Script" path="res://abilities/ability.gd" id="18_7q27h"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
+[ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 
 [sub_resource type="Resource" id="Resource_q3a8u"]
@@ -82,50 +81,9 @@ recharge_time = 0.1
 actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_30p3g")])
 
-[sub_resource type="Resource" id="Resource_ye0kr"]
-script = ExtResource("16_lgmi6")
-type = 1
-stack = 0
-
-[sub_resource type="Resource" id="Resource_k2emd"]
-script = ExtResource("16_lgmi6")
-type = 2
-stack = 0
-
-[sub_resource type="Resource" id="Resource_sl54h"]
-script = ExtResource("16_lgmi6")
-type = 3
-stack = 0
-
-[sub_resource type="Resource" id="Resource_yp28b"]
-script = ExtResource("16_lgmi6")
-type = 4
-stack = 0
-
-[sub_resource type="Resource" id="Resource_rgv8t"]
-script = ExtResource("16_lgmi6")
-type = 5
-stack = 0
-
-[sub_resource type="Resource" id="Resource_688wk"]
-script = ExtResource("16_lgmi6")
-type = 5
-stack = 0
-
-[sub_resource type="Resource" id="Resource_ntahc"]
-script = ExtResource("16_lgmi6")
-type = 5
-stack = 0
-
-[sub_resource type="Resource" id="Resource_541va"]
-script = ExtResource("16_lgmi6")
-type = 5
-stack = 0
-
-[sub_resource type="Resource" id="Resource_tr2rb"]
-script = ExtResource("15_1nwxg")
-type = 0
-slots = Array[ExtResource("16_lgmi6")]([SubResource("Resource_ye0kr"), SubResource("Resource_k2emd"), SubResource("Resource_sl54h"), SubResource("Resource_yp28b"), SubResource("Resource_rgv8t"), SubResource("Resource_688wk"), SubResource("Resource_ntahc"), SubResource("Resource_541va"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+[sub_resource type="Resource" id="Resource_bia7r"]
+script = ExtResource("21_oguyd")
+slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)
@@ -133,13 +91,14 @@ size = Vector2(40, 40)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
 radius = 50.0
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_dwma1")
 state_component = NodePath("StateComponent")
 interactor_component = NodePath("InteractorComponent")
+inventory_component = NodePath("InventoryComponent")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -201,7 +160,7 @@ friction = SubResource("Resource_ulxov")
 abilities = Array[ExtResource("18_7q27h")]([SubResource("Resource_erwjf")])
 
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
-inventory = SubResource("Resource_tr2rb")
+inventory = SubResource("Resource_bia7r")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
 entity = NodePath("..")
@@ -211,7 +170,8 @@ invulnerability_duration = 0.5
 shape = SubResource("RectangleShape2D_fktii")
 debug_color = Color(0.796078, 0.423529, 0, 0.419608)
 
-[node name="InteractorComponent" parent="." instance=ExtResource("20_rtrp4")]
+[node name="InteractorComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("20_rtrp4")]
+entity = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
 shape = SubResource("CircleShape2D_ep403")
@@ -227,4 +187,3 @@ action = NodePath("../../ActionComponent")
 [connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
-[connection signal="picked_up" from="InteractorComponent" to="InventoryComponent" method="pickup_item"]

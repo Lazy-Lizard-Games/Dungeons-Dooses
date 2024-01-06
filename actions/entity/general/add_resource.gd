@@ -8,6 +8,9 @@ class_name AddResourceAction
 
 
 func execute(entity: Entity) -> void:
+	if condition:
+		if !condition.execute(entity):
+			return
 	var res: StackingResource
 	for r in entity.action_component.resources:
 		if r.name == resource.name:

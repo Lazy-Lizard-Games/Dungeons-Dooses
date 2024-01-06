@@ -5,7 +5,7 @@ class_name StackingEntityAction
 var stacks: int
 
 
-func remove(_entity: Entity) -> void:
+func reverse(_entity: Entity) -> void:
 	pass
 
 

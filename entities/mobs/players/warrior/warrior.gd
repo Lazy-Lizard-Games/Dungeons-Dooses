@@ -2,6 +2,7 @@ extends Mob
 
 @export var state_component: StateComponent
 @export var interactor_component: InteractorComponent
+@export var inventory_component: InventoryComponent
 
 var selected_ability = 0:
 	set(s):
@@ -38,8 +39,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
-		#if interactable:
-			#interactable.interact(interactor_component)
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		var inventory = inventory_component.inventory
+		for slot in inventory.slots:
+			if slot:
+				print(slot.item.name, " x", slot.stack)
+			else:
+				print("[empty]")
 	
 	state_component.process_input(event)
 

@@ -24,7 +24,7 @@ func execute(entity: Entity) -> void:
 	modify.execute(entity)
 
 
-func remove(entity: Entity) -> void:
+func reverse(entity: Entity) -> void:
 	modify.is_add = false
 	modify.execute(entity)
 
