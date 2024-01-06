@@ -16,15 +16,12 @@ func enter() -> void:
 	if !ability or ability.is_recharging:
 		switch_state()
 		return
-	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
-	if direction.length() == 0:
-		direction = parent.global_position.direction_to(parent.get_global_mouse_position())
 	color_rect.color = Color.INDIAN_RED
 	ability.casted.connect(
 		func():
 			switch_state()
 	)
-	ability.cast(parent)
+	ability.start(parent)
 
 
 func exit() -> void:
@@ -37,6 +34,13 @@ func process_physics(_delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	velocity_component.accelerate_in_direction(direction)
 	velocity_component.move(parent)
+	return null
+
+
+func process_input(_event: InputEvent) -> State:
+	if Input.is_action_just_pressed("secondary"):
+		ability.cancel()
+		return idle_state
 	return null
 
 

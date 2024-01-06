@@ -17,6 +17,7 @@ var direction: Vector2
 ## Current pierce of the projectile
 var current_pierce: int
 
+
 func _ready() -> void:
 	super()
 	current_pierce = pierce

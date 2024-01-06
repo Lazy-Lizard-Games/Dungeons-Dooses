@@ -2,7 +2,7 @@ extends Resource
 class_name StackingResource
 
 signal ended
-signal stack_changed
+signal stack_changed(stacks: int)
 signal min_stacks_reached
 signal max_stacks_reached
 
@@ -22,25 +22,31 @@ signal max_stacks_reached
 @export var decay_interval: float
 ## Amount of stacks lost per decay interval.
 @export var decay_amount: int = 1
-## Action to be executed on minimum stacks.
-@export var action_on_min_stacks: EntityAction
-## Action to be executed on maximum stacks.
-@export var action_on_max_stacks: EntityAction
+## Actions to be executed that will scale with stacks.
+@export var actions_per_stack: Array[StackingEntityAction] 
+## Actions to be executed on minimum stacks.
+@export var actions_on_min_stacks: Array[EntityAction]
+## Actions to be executed on maximum stacks.
+@export var actions_on_max_stacks: Array[EntityAction]
 ## Current value of stacking resource.
 var stacks: int = 1
 var decay_timer: Timer
 
 func start(entity: Entity) -> void:
 	stacks = starting_stacks
+	for action in actions_per_stack:
+		action.execute(entity)
+		action.update_stacks(stacks)
+		stack_changed.connect(action.update_stacks)
 	min_stacks_reached.connect(
 		func():
-			if action_on_min_stacks:
-				action_on_min_stacks.execute(entity)
+			for action in actions_on_min_stacks:
+				action.execute(entity)
 	)
 	max_stacks_reached.connect(
 		func():
-			if action_on_max_stacks:
-				action_on_max_stacks.execute(entity)
+			for action in actions_on_max_stacks:
+				action.execute(entity)
 	)
 	if decay_interval > 0:
 		decay_timer = Timer.new()
@@ -54,6 +60,8 @@ func start(entity: Entity) -> void:
 
 
 func end(entity: Entity) -> void:
+	for action in actions_per_stack:
+		action.remove(entity)
 	ended.emit()
 	if decay_timer:
 		entity.remove_child(decay_timer)
@@ -64,7 +72,7 @@ func add_stack(amount: int = 1) -> void:
 		decay_timer.start(decay_interval)
 	if stacks < max_stacks:
 		stacks = min(max_stacks, stacks + amount)
-		stack_changed.emit()
+		stack_changed.emit(stacks)
 		if stacks == max_stacks:
 			max_stacks_reached.emit()
 
@@ -72,6 +80,6 @@ func add_stack(amount: int = 1) -> void:
 func remove_stack(amount: int = 1) -> void:
 	if stacks > min_stacks:
 		stacks = max(min_stacks, stacks - amount)
-		stack_changed.emit()
+		stack_changed.emit(stacks)
 		if stacks == min_stacks:
 			min_stacks_reached.emit()

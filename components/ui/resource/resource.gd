@@ -10,8 +10,8 @@ var resource: StackingResource
 
 func _ready() -> void:
 	resource.stack_changed.connect(
-		func():
-			label.text = "x" + String.num_int64(resource.stacks)
+		func(new_stacks: int):
+			label.text = "x" + String.num_int64(new_stacks)
 	)
 	resource.ended.connect(
 		func():

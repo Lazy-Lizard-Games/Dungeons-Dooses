@@ -1,7 +1,7 @@
-extends StackingResource
-class_name StackingModifyResistance
+extends StackingEntityAction
+class_name StackingResistanceAction
 
-## Used to apply a generic modifier that scales with stacks.
+## Used to apply a resistance modifier that scales with stacks.
 
 ## Generic type to modify.
 @export var type: Enums.DamageType
@@ -16,8 +16,7 @@ var modify: ModifyResistance
 var modifier: AttributeModifier
 
 
-func start(entity: Entity) -> void:
-	super(entity)
+func execute(entity: Entity) -> void:
 	modifier = AttributeModifier.new()
 	modifier.operation = operation
 	modifier.value = value * stacks
@@ -28,17 +27,11 @@ func start(entity: Entity) -> void:
 	modify.execute(entity)
 
 
-func end(entity: Entity) -> void:
+func remove(entity: Entity) -> void:
 	modify.is_add = false
 	modify.execute(entity)
-	super(entity)
 
 
-func add_stack(amount: int = 1) -> void:
-	super(amount)
-	modifier.value = value * stacks
-
-
-func remove_stack(amount: int = 1) -> void:
-	super(amount)
+func update_stacks(new_stacks: int) -> void:
+	super(new_stacks)
 	modifier.value = value * stacks

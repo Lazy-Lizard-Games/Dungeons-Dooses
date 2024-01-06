@@ -66,3 +66,16 @@ func modify_duration(type: Enums.DamageType, modifier: AttributeModifier, is_add
 		duration.add_modifier(modifier)
 	else:
 		duration.remove_modifier(modifier)
+
+
+func add_affinity_modifiers(affinites: AffinityAttributes) -> void:
+	normal_damage.modifiers += affinites.normal_damage.modifiers
+	fire_damage.modifiers += affinites.fire_damage.modifiers
+	frost_damage.modifiers += affinites.frost_damage.modifiers
+	shock_damage.modifiers += affinites.shock_damage.modifiers
+	poison_damage.modifiers += affinites.poison_damage.modifiers
+	normal_duration.modifiers += affinites.normal_duration.modifiers
+	fire_duration.modifiers += affinites.fire_duration.modifiers
+	frost_duration.modifiers += affinites.frost_duration.modifiers
+	shock_duration.modifiers += affinites.shock_duration.modifiers
+	poison_duration.modifiers += affinites.poison_duration.modifiers

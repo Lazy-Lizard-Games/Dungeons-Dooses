@@ -4,6 +4,7 @@ extends State
 @export var idle_state: State
 @export var attack_state: State
 @export var velocity_component: VelocityComponent
+@export var ability_component: AbilityComponent
 
 var direction := Vector2.ZERO
 
@@ -22,11 +23,9 @@ func process_physics(_delta: float) -> State:
 		return idle_state
 	velocity_component.accelerate_in_direction(direction)
 	velocity_component.move(parent)
-	return null
-
-
-func process_input(_event: InputEvent) -> State:
-	if Input.is_action_just_pressed("primary"):
+	if Input.is_action_pressed("primary"):
+		var ability = ability_component.get_ability(parent.selected_ability)
+		if !ability and ability.is_recharging:
+			return null
 		return attack_state
-	
 	return null

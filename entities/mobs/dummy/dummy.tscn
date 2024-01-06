@@ -54,11 +54,10 @@ debug_color = Color(0, 0.52549, 1, 0.419608)
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("6_c60ux")]
 entity = NodePath("..")
+invulnerability_duration = 0.05
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_jlvlp")
 debug_color = Color(0.572549, 0.388235, 1, 0.419608)
 
 [node name="ActionComponent" parent="." instance=ExtResource("7_8nhay")]
-
-[connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

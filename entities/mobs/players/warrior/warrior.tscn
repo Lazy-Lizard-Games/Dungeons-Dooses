@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=59 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -13,14 +13,19 @@
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="13_vmvw1"]
-[ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="14_03lfr"]
+[ext_resource type="Script" path="res://actions/resources/stacking_resource.gd" id="13_oaqbf"]
+[ext_resource type="Script" path="res://actions/entity/general/revoke_resource.gd" id="14_45j7d"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://entities/projectiles/fireball/fireball.tscn" id="14_mmorl"]
 [ext_resource type="Script" path="res://resources/inventory/inventory_data.gd" id="15_1nwxg"]
 [ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="15_7v737"]
+[ext_resource type="Script" path="res://actions/entity/vector/rotate_vector.gd" id="15_qpavo"]
+[ext_resource type="Script" path="res://actions/entity/stacking/stacking_affinity.gd" id="15_yfwh3"]
+[ext_resource type="Script" path="res://actions/entity/general/add_resource.gd" id="16_2m0x4"]
 [ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="16_lgmi6"]
+[ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="16_s6ckn"]
+[ext_resource type="Script" path="res://actions/bientity/meta/actor.gd" id="17_2clel"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="17_4e2u7"]
 [ext_resource type="Script" path="res://abilities/ability.gd" id="18_7q27h"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
@@ -54,32 +59,79 @@ min_value = -2.14748e+09
 max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
-[sub_resource type="Resource" id="Resource_pu7ox"]
-script = ExtResource("13_vmvw1")
-type = 2
-amount = 15.0
+[sub_resource type="Resource" id="Resource_plpyj"]
+script = ExtResource("13_oaqbf")
+name = "attune"
+description = ""
+min_stacks = 0
+max_stacks = 0
+starting_stacks = 0
+decay_interval = 0.0
+decay_amount = 1
+actions_per_stack = Array[Resource("res://actions/entity/stacking/stacking_entity.gd")]([])
+actions_on_min_stacks = Array[Resource("res://actions/entity/entity_action.gd")]([])
+actions_on_max_stacks = Array[Resource("res://actions/entity/entity_action.gd")]([])
 
-[sub_resource type="Resource" id="Resource_1n5fa"]
-script = ExtResource("14_03lfr")
+[sub_resource type="Resource" id="Resource_53e8d"]
+script = ExtResource("14_45j7d")
+resource = SubResource("Resource_plpyj")
 
-[sub_resource type="Resource" id="Resource_yx14g"]
+[sub_resource type="Resource" id="Resource_wk885"]
+script = ExtResource("15_yfwh3")
+type = 1
+affinity = 0
+operation = 0
+value = 0.05
+
+[sub_resource type="Resource" id="Resource_6ywsx"]
+script = ExtResource("13_oaqbf")
+name = "attune"
+description = ""
+min_stacks = 0
+max_stacks = 20
+starting_stacks = 1
+decay_interval = 0.5
+decay_amount = 1
+actions_per_stack = Array[Resource("res://actions/entity/stacking/stacking_entity.gd")]([SubResource("Resource_wk885")])
+actions_on_min_stacks = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_53e8d")])
+actions_on_max_stacks = Array[Resource("res://actions/entity/entity_action.gd")]([])
+
+[sub_resource type="Resource" id="Resource_dja8n"]
+script = ExtResource("16_2m0x4")
+resource = SubResource("Resource_6ywsx")
+amount = 1
+
+[sub_resource type="Resource" id="Resource_mof01"]
+script = ExtResource("17_2clel")
+entity_action = SubResource("Resource_dja8n")
+
+[sub_resource type="Resource" id="Resource_isjay"]
+script = ExtResource("16_s6ckn")
+
+[sub_resource type="Resource" id="Resource_7xgi6"]
+script = ExtResource("15_qpavo")
+vector = SubResource("Resource_isjay")
+minimum = -15
+maximum = 15
+
+[sub_resource type="Resource" id="Resource_ai56j"]
 script = ExtResource("15_7v737")
 
-[sub_resource type="Resource" id="Resource_tie5t"]
+[sub_resource type="Resource" id="Resource_30p3g"]
 script = ExtResource("17_4e2u7")
 projectile_scene = ExtResource("14_mmorl")
-position = SubResource("Resource_yx14g")
-direction = SubResource("Resource_1n5fa")
+position = SubResource("Resource_ai56j")
+direction = SubResource("Resource_7xgi6")
 
 [sub_resource type="Resource" id="Resource_erwjf"]
 script = ExtResource("18_7q27h")
 name = "Fireball"
 description = ""
 cost = 0.0
-recharge_time = 2.0
-cast_time = 0.0
-actions_on_rise = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_tie5t")])
-actions_on_fall = Array[Resource("res://actions/entity/entity_action.gd")]([])
+cast_time = 0.05
+recharge_time = 0.1
+actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_30p3g")])
 
 [sub_resource type="Resource" id="Resource_ye0kr"]
 script = ExtResource("16_lgmi6")
@@ -163,19 +215,21 @@ shape = SubResource("RectangleShape2D_ts4su")
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "attack_state", "velocity_component")]
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "attack_state", "velocity_component", "ability_component")]
 script = ExtResource("3_un612")
 color_rect = NodePath("../../ColorRect")
 move_state = NodePath("../Move")
 attack_state = NodePath("../Attack")
 velocity_component = NodePath("../../VelocityComponent")
+ability_component = NodePath("../../AbilityComponent")
 
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "attack_state", "velocity_component")]
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "attack_state", "velocity_component", "ability_component")]
 script = ExtResource("4_lhxmr")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
 attack_state = NodePath("../Attack")
 velocity_component = NodePath("../../VelocityComponent")
+ability_component = NodePath("../../AbilityComponent")
 
 [node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component")]
 script = ExtResource("5_vbqk7")
@@ -193,7 +247,7 @@ friction = SubResource("Resource_ulxov")
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_pu7ox")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_mof01")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 abilities = Array[ExtResource("18_7q27h")]([SubResource("Resource_erwjf")])

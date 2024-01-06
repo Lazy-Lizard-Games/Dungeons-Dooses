@@ -4,6 +4,7 @@ extends State
 @export var move_state: State
 @export var attack_state: State
 @export var velocity_component: VelocityComponent
+@export var ability_component: AbilityComponent
 
 var interactable: InteractableComponent
 
@@ -19,15 +20,16 @@ func exit() -> void:
 func process_physics(_delta: float) -> State:
 	velocity_component.decelerate()
 	velocity_component.move(parent)
+	if Input.is_action_pressed("primary"):
+		var ability = ability_component.get_ability(parent.selected_ability)
+		if !ability and ability.is_recharging:
+			return null
+		return attack_state
 	return null
 
 
 func process_input(_event: InputEvent) -> State:
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down").length() > 0:
 		return move_state
-	
-	if Input.is_action_just_pressed("primary"):
-		return attack_state
-
 	return null
 

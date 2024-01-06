@@ -15,4 +15,5 @@ func execute(entity: Entity) -> void:
 	projectile.faction = entity.faction
 	projectile.direction = direction.get_vector(entity)
 	projectile.global_position = position.get_vector(entity)
+	projectile.affinities.add_affinity_modifiers(entity.affinities)
 	ProjectileHandler.add(projectile)
