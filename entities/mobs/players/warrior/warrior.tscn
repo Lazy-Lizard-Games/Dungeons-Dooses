@@ -78,8 +78,8 @@ script = ExtResource("18_7q27h")
 name = "Fireball"
 description = ""
 cost = 0.0
-cast_time = 0.05
-recharge_time = 0.1
+cast_time = 0.15
+recharge_time = 0.25
 actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_30p3g")])
 
@@ -93,7 +93,7 @@ size = Vector2(40, 40)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
 radius = 50.0
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "attack_state", "hitbox_component", "health_component", "velocity_component", "action_component")]
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
@@ -101,6 +101,8 @@ script = ExtResource("1_dwma1")
 state_component = NodePath("StateComponent")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
+ability_component = NodePath("AbilityComponent")
+attack_state = NodePath("StateComponent/Attack")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -125,21 +127,21 @@ shape = SubResource("RectangleShape2D_ts4su")
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "attack_state", "velocity_component", "ability_component")]
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "velocity_component", "ability_component", "hud_component")]
 script = ExtResource("3_un612")
 color_rect = NodePath("../../ColorRect")
 move_state = NodePath("../Move")
-attack_state = NodePath("../Attack")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
+hud_component = NodePath("../../UI/HudComponent")
 
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "attack_state", "velocity_component", "ability_component")]
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "velocity_component", "ability_component", "hud_component")]
 script = ExtResource("4_lhxmr")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
-attack_state = NodePath("../Attack")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
+hud_component = NodePath("../../UI/HudComponent")
 
 [node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component")]
 script = ExtResource("5_vbqk7")

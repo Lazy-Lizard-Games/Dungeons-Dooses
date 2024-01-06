@@ -17,7 +17,7 @@ func set_ability(index: int, ability: Ability) -> void:
 
 ## fetches the ability at the given index.
 func get_ability(index: int) -> Ability:
-	if abilities.size() < index:
+	if abilities.size() <= index:
 		return null
 	var ability = abilities[index]
 	if !ability:

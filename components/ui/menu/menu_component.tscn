@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c0isv7vr83ts4"]
+[gd_scene load_steps=4 format=3 uid="uid://c0isv7vr83ts4"]
 
 [ext_resource type="Script" path="res://components/ui/menu/menu_component.gd" id="1_png4j"]
+[ext_resource type="PackedScene" uid="uid://do07ix0tnffos" path="res://components/ui/slot/slot_container.tscn" id="2_vf35g"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8iy02"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="MenuComponent" type="MarginContainer"]
 anchors_preset = 15
@@ -47,4 +51,9 @@ theme_override_constants/margin_bottom = 15
 
 [node name="GridContainer" type="GridContainer" parent="HSplitContainer/Inventory/MarginContainer"]
 layout_mode = 2
-columns = 10
+columns = 8
+
+[node name="SlotContainer" parent="." instance=ExtResource("2_vf35g")]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8iy02")

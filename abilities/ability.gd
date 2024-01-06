@@ -22,6 +22,7 @@ signal recharged
 @export var actions_on_cast: Array[EntityAction]
 
 var is_recharging := false
+var is_casting := false
 var caster: Entity
 var facing: Vector2
 
@@ -34,6 +35,7 @@ func start(entity: Entity) -> void:
 	for action in actions_on_start:
 		action.execute(caster)
 	if cast_time > 0:
+		is_casting = true
 		caster.get_tree().create_timer(cast_time).timeout.connect(
 			func():
 				cast()
@@ -43,24 +45,25 @@ func start(entity: Entity) -> void:
 
 
 func cast() -> void:
+	is_casting = false
 	casted.emit()
 	for action in actions_on_cast:
 		action.execute(caster)
-	recharge()
+	if recharge_time > 0:
+		is_recharging = true
+		caster.get_tree().create_timer(recharge_time).timeout.connect(
+			func():
+				recharge()
+		)
+	else:
+		recharge()
 
 
 
 func recharge() -> void:
-	if recharge_time <= 0:
-		recharged.emit()
-		return
-	is_recharging = true
-	var recharge_timer = Timer.new()
-	recharge_timer.timeout.connect(
-		func():
-			caster.remove_child(recharge_timer)
-			is_recharging = false
-			recharged.emit()
-	)
-	caster.add_child(recharge_timer)
-	recharge_timer.start(recharge_time)
+	is_recharging = false
+	recharged.emit()
+
+
+func cancel() -> void:
+	pass

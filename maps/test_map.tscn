@@ -19,6 +19,7 @@ description = "Stinky!"
 max_stack = 5
 
 [node name="TestMap" type="Node2D"]
+process_mode = 1
 y_sort_enabled = true
 
 [node name="Warrior" parent="." instance=ExtResource("1_fiui5")]
