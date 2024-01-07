@@ -11,6 +11,7 @@ func execute(entity: Entity) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
+	executed = true
 	var res: StackingResource
 	for r in entity.action_component.resources:
 		if r.name == resource.name:
@@ -21,3 +22,11 @@ func execute(entity: Entity) -> void:
 		res = resource.duplicate() as StackingResource
 		entity.action_component.add_resource(res)
 		res.start(entity)
+
+
+func reverse(entity: Entity) -> void:
+	if !executed:
+		return
+	var revoke_resource = RevokeResourceAction.new()
+	revoke_resource.resource = resource
+	revoke_resource.execute(entity)

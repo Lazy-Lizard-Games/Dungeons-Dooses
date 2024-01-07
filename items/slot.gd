@@ -12,9 +12,8 @@ signal updated
 
 
 func set_slot(new_item: Item, new_stack: int) -> void:
-	item = new_item
-	stack = new_stack
-	updated.emit()
+	set_item(new_item)
+	set_stack(new_stack)
 
 
 func set_item(new_item: Item) -> void:

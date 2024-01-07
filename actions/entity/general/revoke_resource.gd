@@ -13,3 +13,4 @@ func execute(entity: Entity) -> void:
 	if res:
 		entity.action_component.remove_resource(res)
 		res.end(entity)
+

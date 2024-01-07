@@ -11,6 +11,7 @@ func execute(entity: Entity) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
+	executed = true
 	var resistances = entity.resistances
 	match resistance:
 		Enums.ResistanceType.Damage:
@@ -19,4 +20,16 @@ func execute(entity: Entity) -> void:
 			resistances.modify_duration(type, modifier, is_add)
 		_:
 			pass
-	
+
+
+func reverse(entity: Entity) -> void:
+	if !executed:
+		return
+	var resistances = entity.resistances
+	match resistance:
+		Enums.ResistanceType.Damage:
+			resistances.modify_damage(type, modifier, !is_add)
+		Enums.ResistanceType.Duration:
+			resistances.modify_duration(type, modifier, !is_add)
+		_:
+			pass

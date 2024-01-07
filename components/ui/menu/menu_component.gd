@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		match [grabbed_slot, event.button_index]:
+		match [grabbed_slot.item, event.button_index]:
 			[null, _]:
 				return
 			[_, MOUSE_BUTTON_LEFT]:
@@ -76,24 +76,33 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 		[null, null, _]:
 			return
 		[null, _, MOUSE_BUTTON_LEFT]:
+			if slot.type in Enums.equipment:
+				slot.item.unequip(entity)
 			grabbed_slot.set_slot(slot.item, slot.stack)
 			slot.set_slot(null, 0)
 			return
 		[null, _, MOUSE_BUTTON_RIGHT]:
 			grabbed_slot.set_slot(slot.item, ceilf(slot.stack/2.0))
 			if slot.remove_stack(grabbed_slot.stack) != 0:
+				if slot.type in Enums.equipment:
+					slot.item.unequip(entity)
 				slot.set_slot(null, 0)
+				
 			return
 		[_, null, MOUSE_BUTTON_LEFT]:
-			if slot.type == grabbed_slot.item.type:
+			if slot.type == Enums.ItemType.Item or slot.type == grabbed_slot.item.type:
 				slot.set_slot(grabbed_slot.item, grabbed_slot.stack)
 				grabbed_slot.set_slot(null, 0)
+				if slot.type in Enums.equipment:
+					slot.item.equip(entity)
 			return
 		[_, null, MOUSE_BUTTON_RIGHT]:
-			if slot.type == grabbed_slot.item.type:
+			if slot.type == Enums.ItemType.Item or slot.type == grabbed_slot.item.type:
 				slot.set_slot(grabbed_slot.item, 1)
 				if grabbed_slot.remove_stack(1) != 0:
 					grabbed_slot.set_slot(null, 0)
+				if slot.type in Enums.equipment:
+					slot.item.equip(entity)
 			return
 		[_, _, MOUSE_BUTTON_LEFT]:
 			if grabbed_slot.item.name == slot.item.name:

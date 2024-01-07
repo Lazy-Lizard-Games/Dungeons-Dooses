@@ -21,7 +21,9 @@ func execute(entity: Entity, item: Item) -> void:
 				if amount == 0:
 					return
 		for slot in inventory.slots as Array[Slot]:
-			if !slot.item:
+			if !slot.item and (slot.type == item.type or slot.type == Enums.ItemType.Item):
+				if slot.type in Enums.equipment:
+					item.equip(entity)
 				slot.set_slot(item, 0)
 				amount = slot.add_stack(amount)
 				if amount == 0:

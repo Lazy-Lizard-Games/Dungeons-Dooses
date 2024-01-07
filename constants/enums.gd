@@ -25,6 +25,8 @@ enum ItemType
 	Consumable,
 }
 
+var equipment = [ItemType.Charm, ItemType.Circlet, ItemType.Ring, ItemType.Necklace]
+
 enum FactionType
 {
 	None,

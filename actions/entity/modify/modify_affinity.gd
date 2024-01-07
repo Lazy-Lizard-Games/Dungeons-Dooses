@@ -11,6 +11,7 @@ func execute(entity: Entity) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
+	executed = true
 	var affinities = entity.affinities
 	match affinity:
 		Enums.AffinityType.Damage:
@@ -19,4 +20,16 @@ func execute(entity: Entity) -> void:
 			affinities.modify_duration(type, modifier, is_add)
 		_:
 			pass
-	
+
+
+func reverse(entity: Entity) -> void:
+	if !executed:
+		return
+	var affinities = entity.affinities
+	match affinity:
+		Enums.AffinityType.Damage:
+			affinities.modify_damage(type, modifier, !is_add)
+		Enums.AffinityType.Duration:
+			affinities.modify_duration(type, modifier, !is_add)
+		_:
+			pass
