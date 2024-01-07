@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=15 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/mobs/players/warrior/warrior.tscn" id="1_fiui5"]
 [ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://entities/projectiles/fireball/fireball.tscn" id="2_ijalr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://items/item.gd" id="5_5q022"]
 [ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="6_46c3q"]
 [ext_resource type="Script" path="res://actions/entity/modify/modify_generic.gd" id="7_encv0"]
+[ext_resource type="Image" uid="uid://bodblwg0kwykf" path="res://items/equipment/campfire.png" id="8_elqlt"]
 [ext_resource type="Script" path="res://items/equipment/equipment.gd" id="8_io0dk"]
 
 [sub_resource type="Resource" id="Resource_axge7"]
@@ -40,6 +41,7 @@ actions_on_equip = Array[Resource("res://actions/entity/entity_action.gd")]([Sub
 type = 3
 name = "Circlet of Velocity"
 description = ""
+icon = ExtResource("8_elqlt")
 max_stack = 1
 
 [node name="TestMap" type="Node2D"]

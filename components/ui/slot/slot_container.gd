@@ -22,6 +22,7 @@ func _ready() -> void:
 
 func update_slot() -> void:
 	label.text = ""
+	texture.texture = null
 	if slot:
 		if slot.stack > 0:
 			label.text = "x" + String.num_int64(slot.stack)
