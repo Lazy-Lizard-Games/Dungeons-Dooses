@@ -1,6 +1,8 @@
 extends Resource
 class_name Item
 
+## Type of the item.
+@export var type = Enums.ItemType.Item
 ## Name of the item.
 @export var name: String
 ## Description of the item.

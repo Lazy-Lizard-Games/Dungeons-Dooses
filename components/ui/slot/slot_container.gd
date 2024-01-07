@@ -22,9 +22,9 @@ func _ready() -> void:
 
 func update_slot() -> void:
 	label.text = ""
-	texture.texture = null
 	if slot:
-		label.text = "x" + String.num_int64(slot.stack)
+		if slot.stack > 0:
+			label.text = "x" + String.num_int64(slot.stack)
 		if slot.item and slot.item.icon:
 			texture.texture = ImageTexture.create_from_image(slot.item.icon)
 

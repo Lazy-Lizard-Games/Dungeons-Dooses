@@ -8,12 +8,14 @@
 
 [sub_resource type="Resource" id="Resource_axge7"]
 script = ExtResource("5_5q022")
+type = 0
 name = "Cheese"
 description = "Stinky!"
 max_stack = 5
 
 [sub_resource type="Resource" id="Resource_3r4wy"]
 script = ExtResource("5_5q022")
+type = 0
 name = "Cheese"
 description = "Stinky!"
 max_stack = 5

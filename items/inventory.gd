@@ -10,9 +10,9 @@ signal updated
 			updated.emit()
 
 
-func set_slot(index: int, slot: Slot) -> void:
+func set_slot(index: int, new_slot: Slot) -> void:
 	if index < slots.size():
-		slots[index] = slot
+		slots[index].set_slot(new_slot.item, new_slot.stack)
 		updated.emit()
 
 

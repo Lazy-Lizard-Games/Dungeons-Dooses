@@ -6,3 +6,9 @@ class_name InventoryComponent
 	set(i):
 		inventory = i
 		inventory.updated.emit()
+
+
+func _ready() -> void:
+	for i in range(inventory.slots.size()):
+		if !inventory.slots[i]:
+			inventory.slots[i] = Slot.new()

@@ -15,18 +15,15 @@ func execute(entity: Entity, item: Item) -> void:
 			return
 	if "inventory_component" in entity:
 		var inventory = entity.inventory_component.inventory as Inventory
-		for slot in inventory.slots:
-			if slot and slot.item.name == item.name:
+		for slot in inventory.slots as Array[Slot]:
+			if slot.item and slot.item.name == item.name:
 				amount = slot.add_stack(amount)
 				if amount == 0:
 					return
-		for slot in inventory.slots:
-			if !slot:
-				var temp_slot = Slot.new()
-				temp_slot.item = item
-				temp_slot.stack = 0
-				inventory.set_slot(inventory.slots.find(slot), temp_slot)
-				amount = temp_slot.add_stack(amount)
+		for slot in inventory.slots as Array[Slot]:
+			if !slot.item:
+				slot.set_slot(item, 0)
+				amount = slot.add_stack(amount)
 				if amount == 0:
 					return
 	var drop_item = DropItemAction.new()
