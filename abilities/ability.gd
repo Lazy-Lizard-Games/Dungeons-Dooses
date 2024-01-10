@@ -36,22 +36,22 @@ func start(entity: Entity) -> void:
 		action.execute(caster)
 	if cast_time > 0:
 		is_casting = true
-		caster.get_tree().create_timer(cast_time).timeout.connect(
+		caster.get_tree().create_timer(cast_time * entity.generics.cast_time.get_final_value()).timeout.connect(
 			func():
-				cast()
+				cast(entity)
 		)
 	else:
-		cast()
+		cast(entity)
 
 
-func cast() -> void:
+func cast(entity: Entity) -> void:
 	is_casting = false
 	casted.emit()
 	for action in actions_on_cast:
 		action.execute(caster)
 	if recharge_time > 0:
 		is_recharging = true
-		caster.get_tree().create_timer(recharge_time).timeout.connect(
+		caster.get_tree().create_timer(recharge_time * entity.generics.recharge_time.get_final_value()).timeout.connect(
 			func():
 				recharge()
 		)

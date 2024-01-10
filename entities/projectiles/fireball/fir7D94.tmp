@@ -1,15 +1,17 @@
-[gd_scene load_steps=23 format=3 uid="uid://skvi6j3iivg0"]
+[gd_scene load_steps=26 format=3 uid="uid://skvi6j3iivg0"]
 
 [ext_resource type="Script" path="res://entities/projectiles/fireball/fireball.gd" id="1_quu5j"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_lhfah"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_m1yw6"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_pf2hk"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="3_x3sv4"]
-[ext_resource type="Script" path="res://attributes/affinity.gd" id="4_1ygao"]
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="6_woe2j"]
-[ext_resource type="Resource" uid="uid://baigmvt4blkrw" path="res://data/resources/heat.tres" id="7_54wca"]
-[ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="7_kyxvb"]
+[ext_resource type="Script" path="res://actions/numbers/range_number.gd" id="6_4pt3y"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="7_p7cfs"]
+[ext_resource type="Script" path="res://actions/entity/general/add_resource.gd" id="8_65hoh"]
+[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="8_ew814"]
+[ext_resource type="Script" path="res://actions/bientity/meta/target.gd" id="9_g0a8i"]
+[ext_resource type="Resource" uid="uid://d375diyqhhvqb" path="res://data/resources/heat.tres" id="9_nluyl"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="13_bghsi"]
 
 [sub_resource type="Resource" id="Resource_u5dn5"]
 script = ExtResource("2_lhfah")
@@ -23,31 +25,33 @@ modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 script = ExtResource("3_x3sv4")
 movement_speed = SubResource("Resource_u5dn5")
 
-[sub_resource type="Resource" id="Resource_0wscb"]
-script = ExtResource("2_lhfah")
-raw_value = 1.0
-multiplier_value = 5.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_7u0ht"]
-script = ExtResource("4_1ygao")
-fire_damage = SubResource("Resource_0wscb")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ckhd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yayoq"]
 radius = 15.0
 
-[sub_resource type="Resource" id="Resource_ie622"]
-script = ExtResource("6_woe2j")
+[sub_resource type="Resource" id="Resource_kxc1x"]
+script = ExtResource("6_4pt3y")
+number_min = 2.0
+number_max = 5.0
+
+[sub_resource type="Resource" id="Resource_rsu0r"]
+script = ExtResource("13_bghsi")
+type = 1
+amount = SubResource("Resource_kxc1x")
+
+[sub_resource type="Resource" id="Resource_x1b7q"]
+script = ExtResource("8_ew814")
 number = 2.0
 
-[sub_resource type="Resource" id="Resource_ph82k"]
-script = ExtResource("7_kyxvb")
-resource = ExtResource("7_54wca")
-number = SubResource("Resource_ie622")
+[sub_resource type="Resource" id="Resource_k1sm7"]
+script = ExtResource("8_65hoh")
+resource = ExtResource("9_nluyl")
+number = SubResource("Resource_x1b7q")
+
+[sub_resource type="Resource" id="Resource_t7iwi"]
+script = ExtResource("9_g0a8i")
+entity_action = SubResource("Resource_k1sm7")
 
 [sub_resource type="Resource" id="Resource_6mqx5"]
 script = ExtResource("2_lhfah")
@@ -89,7 +93,6 @@ id = "Fireball"
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_1w1mb")
-affinities = SubResource("Resource_7u0ht")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0ckhd")
@@ -101,7 +104,7 @@ shape = SubResource("CircleShape2D_yayoq")
 debug_color = Color(0.545098, 0.00784314, 0, 0.419608)
 
 [node name="ActionComponent" parent="." instance=ExtResource("3_pf2hk")]
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_ph82k")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_rsu0r"), SubResource("Resource_t7iwi")])
 
 [node name="VelocityComponent" parent="." instance=ExtResource("7_p7cfs")]
 speed = SubResource("Resource_6mqx5")

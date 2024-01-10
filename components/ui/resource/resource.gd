@@ -5,7 +5,7 @@ class_name ResourceContainer
 @export var label: Label
 @export var progress_bar: ProgressBar
 
-var resource: StackingResource
+var resource: StackingBientityResource
 
 
 func _ready() -> void:

@@ -1,5 +1,5 @@
 extends Resource
-class_name StackingResource
+class_name StackingEntityResource
 
 signal ended
 signal stack_changed(stacks: int)
@@ -76,13 +76,13 @@ func add_stack(amount: int = 1) -> void:
 	if stacks < max_stacks:
 		stacks = min(max_stacks, stacks + amount)
 		stack_changed.emit(stacks)
-		if stacks == max_stacks:
-			max_stacks_reached.emit()
+	if stacks == max_stacks:
+		max_stacks_reached.emit()
 
 
 func remove_stack(amount: int = 1) -> void:
 	if stacks > min_stacks:
 		stacks = max(min_stacks, stacks - amount)
 		stack_changed.emit(stacks)
-		if stacks == min_stacks:
-			min_stacks_reached.emit()
+	if stacks == min_stacks:
+		min_stacks_reached.emit()

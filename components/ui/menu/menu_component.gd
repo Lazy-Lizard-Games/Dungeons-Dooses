@@ -82,7 +82,7 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 			slot.set_slot(null, 0)
 			return
 		[null, _, MOUSE_BUTTON_RIGHT]:
-			grabbed_slot.set_slot(slot.item, ceilf(slot.stack/2.0))
+			grabbed_slot.set_slot(slot.item, int(ceilf(slot.stack/2.0)))
 			slot.remove_stack(grabbed_slot.stack)
 			if slot.stack == 0:
 				if slot.type in Enums.equipment:

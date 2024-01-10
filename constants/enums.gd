@@ -49,9 +49,12 @@ enum GenericType
 {
 	HealthMax,
 	HealthRegeneration,
+	StaminaMax,
+	StaminaRegeneration,
 	MovementSpeed,
-	AttackSpeed,
-	AttackDamage,
+	CastCost,
+	CastTime,
+	RechargeTime,
 }
 
 enum OperationType
@@ -72,4 +75,3 @@ enum ResistanceType
 	Damage,
 	Duration,
 }
-

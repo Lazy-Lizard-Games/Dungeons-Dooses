@@ -3,9 +3,12 @@ class_name GenericAttributes
 
 @export var health_max = Attribute.new(100, 1, 0, pow(2, 31)-1)
 @export var health_regeneration = Attribute.new(5, 1, 0, pow(2, 31)-1)
+@export var stamina_max = Attribute.new(100, 1, 0, pow(2, 31)-1)
+@export var stamina_regeneration = Attribute.new(5, 1, 0, pow(2, 31)-1)
 @export var movement_speed = Attribute.new(250, 1, 0, pow(2, 31)-1)
-@export var attack_speed = Attribute.new(0, 1, -1, pow(2, 31)-1)
-@export var attack_damage = Attribute.new(0, 1, -1, pow(2, 31)-1)
+@export var cast_cost = Attribute.new(1, 1, 0, pow(2, 31)-1)
+@export var cast_time = Attribute.new(1, 1, 0, pow(2, 31)-1)
+@export var recharge_time = Attribute.new(1, 1, 0, pow(2, 31)-1)
 
 
 func get_generic(type: Enums.GenericType) -> Attribute:
@@ -14,12 +17,18 @@ func get_generic(type: Enums.GenericType) -> Attribute:
 			return health_max
 		Enums.GenericType.HealthRegeneration:
 			return health_regeneration
+		Enums.GenericType.StaminaMax:
+			return stamina_max
+		Enums.GenericType.StaminaRegeneration:
+			return stamina_regeneration
 		Enums.GenericType.MovementSpeed:
 			return movement_speed
-		Enums.GenericType.AttackSpeed:
-			return attack_speed
-		Enums.GenericType.AttackDamage:
-			return attack_damage
+		Enums.GenericType.CastCost:
+			return cast_cost
+		Enums.GenericType.CastTime:
+			return cast_time
+		Enums.GenericType.RechargeTime:
+			return recharge_time
 		_:
 			return null
 

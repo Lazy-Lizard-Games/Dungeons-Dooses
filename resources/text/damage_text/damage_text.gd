@@ -12,7 +12,12 @@ var type: Enums.DamageType:
 var amount: float:
 	set(a):
 		amount = a
-		label.text = String.num(amount, 3)
+		if amount > 1000000:
+			label.text = String.num(amount/1000000.0, 0) + " M"
+		elif amount > 100000:
+			label.text = String.num(amount/1000.0, 0) + " K"
+		else:
+			label.text = String.num(amount, 0)
 var direction := Vector2.UP
 var speed := 5.0
 
@@ -23,6 +28,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	scale *= 0.99
 	direction = direction.lerp(Vector2.DOWN, delta)
 	position += direction * speed
 

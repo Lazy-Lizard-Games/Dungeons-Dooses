@@ -1,0 +1,59 @@
+[gd_resource type="Resource" script_class="StackingBientityResource" load_steps=16 format=3 uid="uid://baigmvt4blkrw"]
+
+[ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="1_7pplf"]
+[ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_41l04"]
+[ext_resource type="Resource" uid="uid://byvjpk2w00h1o" path="res://data/resources/burn.tres" id="2_nly4g"]
+[ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="3_n4vya"]
+[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="4_2cywv"]
+[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="5_a4ou5"]
+[ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="6_ewhjw"]
+
+[sub_resource type="Resource" id="Resource_y2yus"]
+script = ExtResource("4_2cywv")
+number = 1.0
+
+[sub_resource type="Resource" id="Resource_2t73n"]
+script = ExtResource("3_n4vya")
+resource = ExtResource("2_nly4g")
+number = SubResource("Resource_y2yus")
+
+[sub_resource type="Resource" id="Resource_sn7u3"]
+script = ExtResource("1_41l04")
+name = "Heat"
+
+[sub_resource type="Resource" id="Resource_wy7lg"]
+script = ExtResource("1_41l04")
+name = "Heat"
+
+[sub_resource type="Resource" id="Resource_x18ee"]
+script = ExtResource("6_ewhjw")
+type = 0
+operation = 1
+value = -0.005
+
+[sub_resource type="Resource" id="Resource_llrla"]
+script = ExtResource("5_a4ou5")
+stacking_entity = SubResource("Resource_x18ee")
+
+[sub_resource type="Resource" id="Resource_oac5b"]
+script = ExtResource("6_ewhjw")
+type = 2
+operation = 1
+value = -0.005
+
+[sub_resource type="Resource" id="Resource_goyif"]
+script = ExtResource("5_a4ou5")
+stacking_entity = SubResource("Resource_oac5b")
+
+[resource]
+script = ExtResource("1_7pplf")
+name = "Heat"
+description = "Reduces maximum health and stamina. Sets entity alight when at max stacks."
+min_stacks = 0
+max_stacks = 10
+starting_stacks = 1
+decay_interval = 2.0
+decay_amount = 1
+actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([SubResource("Resource_llrla"), SubResource("Resource_goyif")])
+actions_on_min_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_wy7lg")])
+actions_on_max_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_2t73n"), SubResource("Resource_sn7u3")])

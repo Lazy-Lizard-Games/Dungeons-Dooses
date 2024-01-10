@@ -1,8 +1,8 @@
 extends EntityAction
 class_name HealEntity
 
-@export var amount: float
+@export var number: NumberProvider
 
 
 func execute(entity: Entity) -> void:
-	entity.health.heal(amount)
+	entity.health_component.heal(number.execute())

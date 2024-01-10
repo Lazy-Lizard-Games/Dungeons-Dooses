@@ -36,7 +36,7 @@ func on_attribute_updated(final_value: float) -> void:
 	health_bar.max_value = final_value
 
 
-func on_resource_added(resource: StackingResource) -> void:
+func on_resource_added(resource: StackingBientityResource) -> void:
 	var resource_container = resource_container_scene.instantiate() as ResourceContainer
 	resource_container.resource = resource
 	resource_containers.append(resource_container)
