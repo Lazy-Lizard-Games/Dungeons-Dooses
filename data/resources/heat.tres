@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="StackingBientityResource" load_steps=16 format=3 uid="uid://baigmvt4blkrw"]
+[gd_resource type="Resource" script_class="StackingBientityResource" load_steps=23 format=3 uid="uid://baigmvt4blkrw"]
 
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="1_7pplf"]
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_41l04"]
 [ext_resource type="Resource" uid="uid://byvjpk2w00h1o" path="res://data/resources/burn.tres" id="2_nly4g"]
 [ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="3_n4vya"]
 [ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="4_2cywv"]
+[ext_resource type="Script" path="res://actions/comparisons/lesser_comparison.gd" id="4_wqr65"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="5_a4ou5"]
+[ext_resource type="Script" path="res://actions/conditions/entity/general/resource_condition.gd" id="5_ejey8"]
 [ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="6_ewhjw"]
+[ext_resource type="Script" path="res://actions/conditions/bientity/meta/target.gd" id="6_umscw"]
 
 [sub_resource type="Resource" id="Resource_y2yus"]
 script = ExtResource("4_2cywv")
@@ -17,9 +20,27 @@ script = ExtResource("3_n4vya")
 resource = ExtResource("2_nly4g")
 number = SubResource("Resource_y2yus")
 
+[sub_resource type="Resource" id="Resource_w8on3"]
+script = ExtResource("4_2cywv")
+number = 5.0
+
+[sub_resource type="Resource" id="Resource_i5tni"]
+script = ExtResource("4_wqr65")
+
+[sub_resource type="Resource" id="Resource_22on8"]
+script = ExtResource("5_ejey8")
+name = "Burn"
+compare_to = SubResource("Resource_w8on3")
+comparison = SubResource("Resource_i5tni")
+
+[sub_resource type="Resource" id="Resource_71oes"]
+script = ExtResource("6_umscw")
+condition = SubResource("Resource_22on8")
+
 [sub_resource type="Resource" id="Resource_sn7u3"]
 script = ExtResource("1_41l04")
 name = "Heat"
+condition = SubResource("Resource_71oes")
 
 [sub_resource type="Resource" id="Resource_wy7lg"]
 script = ExtResource("1_41l04")

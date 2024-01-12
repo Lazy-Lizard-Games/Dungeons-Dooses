@@ -19,7 +19,7 @@ func execute(actor: Entity, target: Entity) -> void:
 	if res:
 		res.add_stack(int(number.execute()))
 	else:
-		res = resource.duplicate() as StackingBientityResource
+		res = resource.duplicate(true) as StackingBientityResource
 		target.action_component.add_resource(res)
 		res.start(actor, target)
 

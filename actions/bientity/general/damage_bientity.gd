@@ -19,12 +19,12 @@ func execute(actor: Entity, target: Entity) -> void:
 		affinities = actor.affinities.duplicate(true)
 	var damage_affinity = affinities.get_damage_affinity(type)
 	if damage_affinity:
-		temp_amount *= damage_affinity.get_final_value()
+		temp_amount *= 1 + damage_affinity.get_final_value()
 	## Apply target resistance bonuses.
 	var resistances = target.resistances
 	var damage_resistance = resistances.get_damage_resistance(type)
 	if damage_resistance:
-		temp_amount /= damage_resistance.get_final_value()
+		temp_amount *= 1 - damage_resistance.get_final_value()
 	## Apply final damage.
 	if "health_component" in target:
 		var health = target.health_component as HealthComponent

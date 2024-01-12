@@ -25,7 +25,7 @@ signal max_stacks_reached
 ## Amount of stacks lost per decay interval.
 @export var decay_amount: int = 1
 ## Actions to be executed that will scale with stacks.
-@export var actions_per_stack: Array[StackingBientityAction] 
+@export var actions_per_stack: Array[StackingBientityAction]
 ## Actions to be executed on minimum stacks.
 @export var actions_on_min_stacks: Array[BientityAction]
 ## Actions to be executed on maximum stacks.
@@ -34,27 +34,48 @@ signal max_stacks_reached
 var stacks: int = 1
 var decay_timer: Timer
 
+var bientity_actor: Entity
+var actor_copy: Entity
+var bientity_target: Entity
+var target_copy: Entity
+
 
 func start(actor: Entity, target: Entity) -> void:
+	bientity_actor = actor
+	bientity_target = target
+	actor_copy = Entity.new()
+	actor_copy.affinities = bientity_actor.affinities
+	actor_copy.resistances = bientity_actor.resistances
+	actor_copy.generics = bientity_actor.generics
+	target_copy = Entity.new()
+	target_copy.affinities = bientity_target.affinities
+	target_copy.resistances = bientity_target.resistances
+	target_copy.generics = bientity_target.generics
 	stacks = starting_stacks
 	for action in actions_per_stack:
 		action = action.duplicate(true)
-		action.execute(actor, target)
+		action.execute(bientity_actor, bientity_target)
 		action.update_stacks(stacks)
 		stack_changed.connect(action.update_stacks)
 		ended.connect(
 			func():
-				action.reverse(actor, target)
+				if !bientity_actor: bientity_actor = actor_copy
+				if !bientity_target: bientity_target = target_copy
+				action.reverse(bientity_actor, bientity_target)
 		)
 	min_stacks_reached.connect(
 		func():
 			for action in actions_on_min_stacks:
-				action.execute(actor, target)
+				if !bientity_actor: bientity_actor = actor_copy
+				if !bientity_target: bientity_target = target_copy
+				action.execute(bientity_actor, bientity_target)
 	)
 	max_stacks_reached.connect(
 		func():
 			for action in actions_on_max_stacks:
-				action.execute(actor, target)
+				if !bientity_actor: bientity_actor = actor_copy
+				if !bientity_target: bientity_target = target_copy
+				action.execute(bientity_actor, bientity_target)
 	)
 	if decay_interval > 0:
 		decay_timer = Timer.new()
@@ -63,7 +84,7 @@ func start(actor: Entity, target: Entity) -> void:
 			func():
 				remove_stack(decay_amount)
 		)
-		target.add_child(decay_timer)
+		bientity_target.add_child(decay_timer)
 		decay_timer.start(decay_interval)
 
 

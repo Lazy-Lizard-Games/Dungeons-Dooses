@@ -32,10 +32,6 @@ func _ready() -> void:
 				if entity:
 					entity.hurt.emit(hitbox.entity)
 				hitbox.hit.emit(self)
-				if pierce > 0:
-					current_pierce -= 1
-					if current_pierce == 0:
-						ProjectileHandler.remove(self)
 		)
 	if duration > 0:
 		var duration_timer = Timer.new()
@@ -45,3 +41,17 @@ func _ready() -> void:
 		)
 		add_child(duration_timer)
 		duration_timer.start(duration)
+
+
+func on_hit(actor: Entity) -> void:
+	for action in action_component.actions_on_hit:
+		action.execute(actor, self)
+
+
+func on_hurt(target: Entity) -> void:
+	for action in action_component.actions_on_hurt:
+		action.execute(self, target)
+	if pierce > 0:
+		current_pierce -= 1
+		if current_pierce == 0:
+			ProjectileHandler.remove(self)

@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://skvi6j3iivg0"]
+[gd_scene load_steps=20 format=3 uid="uid://skvi6j3iivg0"]
 
 [ext_resource type="Script" path="res://entities/projectiles/fireball/fireball.gd" id="1_quu5j"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_lhfah"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_m1yw6"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_pf2hk"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="3_x3sv4"]
-[ext_resource type="Script" path="res://attributes/affinity.gd" id="4_1ygao"]
 [ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="6_woe2j"]
 [ext_resource type="Resource" uid="uid://baigmvt4blkrw" path="res://data/resources/heat.tres" id="7_54wca"]
 [ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="7_kyxvb"]
@@ -22,18 +21,6 @@ modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 [sub_resource type="Resource" id="Resource_1w1mb"]
 script = ExtResource("3_x3sv4")
 movement_speed = SubResource("Resource_u5dn5")
-
-[sub_resource type="Resource" id="Resource_0wscb"]
-script = ExtResource("2_lhfah")
-raw_value = 1.0
-multiplier_value = 5.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_7u0ht"]
-script = ExtResource("4_1ygao")
-fire_damage = SubResource("Resource_0wscb")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0ckhd"]
 
@@ -89,7 +76,6 @@ id = "Fireball"
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_1w1mb")
-affinities = SubResource("Resource_7u0ht")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_0ckhd")
