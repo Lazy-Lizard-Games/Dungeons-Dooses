@@ -29,7 +29,7 @@ radius = 15.0
 
 [sub_resource type="Resource" id="Resource_ie622"]
 script = ExtResource("6_woe2j")
-number = 2.0
+number = 5.0
 
 [sub_resource type="Resource" id="Resource_ph82k"]
 script = ExtResource("7_kyxvb")

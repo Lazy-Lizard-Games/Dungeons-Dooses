@@ -11,15 +11,6 @@
 [ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="6_ewhjw"]
 [ext_resource type="Script" path="res://actions/conditions/bientity/meta/target.gd" id="6_umscw"]
 
-[sub_resource type="Resource" id="Resource_y2yus"]
-script = ExtResource("4_2cywv")
-number = 1.0
-
-[sub_resource type="Resource" id="Resource_2t73n"]
-script = ExtResource("3_n4vya")
-resource = ExtResource("2_nly4g")
-number = SubResource("Resource_y2yus")
-
 [sub_resource type="Resource" id="Resource_w8on3"]
 script = ExtResource("4_2cywv")
 number = 5.0
@@ -41,6 +32,15 @@ condition = SubResource("Resource_22on8")
 script = ExtResource("1_41l04")
 name = "Heat"
 condition = SubResource("Resource_71oes")
+
+[sub_resource type="Resource" id="Resource_y2yus"]
+script = ExtResource("4_2cywv")
+number = 1.0
+
+[sub_resource type="Resource" id="Resource_2t73n"]
+script = ExtResource("3_n4vya")
+resource = ExtResource("2_nly4g")
+number = SubResource("Resource_y2yus")
 
 [sub_resource type="Resource" id="Resource_wy7lg"]
 script = ExtResource("1_41l04")
@@ -77,4 +77,4 @@ decay_interval = 2.0
 decay_amount = 1
 actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([SubResource("Resource_llrla"), SubResource("Resource_goyif")])
 actions_on_min_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_wy7lg")])
-actions_on_max_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_2t73n"), SubResource("Resource_sn7u3")])
+actions_on_max_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_sn7u3"), SubResource("Resource_2t73n")])

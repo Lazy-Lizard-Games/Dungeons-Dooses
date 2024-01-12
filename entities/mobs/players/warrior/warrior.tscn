@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=47 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -34,8 +34,17 @@ script = ExtResource("3_ww4uv")
 [sub_resource type="Resource" id="Resource_8xuyt"]
 script = ExtResource("4_kc31g")
 
+[sub_resource type="Resource" id="Resource_k77po"]
+script = ExtResource("2_acrq8")
+raw_value = 1.5
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
 [sub_resource type="Resource" id="Resource_mw36u"]
 script = ExtResource("5_078dv")
+fire_damage = SubResource("Resource_k77po")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)

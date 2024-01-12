@@ -5,4 +5,6 @@ class_name HealEntity
 
 
 func execute(entity: Entity) -> void:
-	entity.health_component.heal(number.execute())
+	var amount = number.execute()
+	entity.health_component.heal(amount)
+	TextHandler.create_damage_text(Enums.DamageType.Light, amount, entity.global_position)

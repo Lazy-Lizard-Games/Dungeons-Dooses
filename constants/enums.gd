@@ -42,7 +42,8 @@ enum DamageType
 	Fire, 
 	Frost, 
 	Shock,
-	Poison, 
+	Poison,
+	Light,
 }
 
 enum GenericType
