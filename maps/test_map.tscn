@@ -57,7 +57,7 @@ duration = 0.0
 
 [node name="Fireball2" parent="." instance=ExtResource("2_ijalr")]
 position = Vector2(111, 0)
-pierce = 5
+pierce = 0
 duration = 0.0
 
 [node name="Dummy" parent="." instance=ExtResource("3_q3wdq")]

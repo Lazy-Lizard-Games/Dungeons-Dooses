@@ -26,7 +26,7 @@ func get_final_value() -> float:
 			Enums.OperationType.Addition:
 				temp_base += modifier.value
 			Enums.OperationType.Multiplication:
-				temp_multiplier += temp_multiplier * modifier.value
+				temp_multiplier += modifier.value
 			_:
 				break
 	var total = temp_base * temp_multiplier

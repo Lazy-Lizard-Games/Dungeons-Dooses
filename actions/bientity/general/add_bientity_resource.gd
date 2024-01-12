@@ -22,7 +22,8 @@ func execute(actor: Entity, target: Entity) -> void:
 		res = resource.duplicate(true) as StackingBientityResource
 		target.action_component.add_resource(res)
 		res.start(actor, target)
-		res.add_stack(int(number.execute())-1)
+		if int(number.execute())-1 > 0:
+			res.add_stack(int(number.execute())-1)
 
 
 func reverse(actor: Entity, target: Entity) -> void:

@@ -28,23 +28,23 @@
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/menu/menu_component.tscn" id="25_bfsap"]
 
-[sub_resource type="Resource" id="Resource_q3a8u"]
-script = ExtResource("3_ww4uv")
-
-[sub_resource type="Resource" id="Resource_8xuyt"]
-script = ExtResource("4_kc31g")
-
-[sub_resource type="Resource" id="Resource_k77po"]
+[sub_resource type="Resource" id="Resource_eqsvv"]
 script = ExtResource("2_acrq8")
-raw_value = 1.5
+raw_value = 100.0
 multiplier_value = 1.0
 min_value = -2.14748e+09
 max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
+[sub_resource type="Resource" id="Resource_q3a8u"]
+script = ExtResource("3_ww4uv")
+health_max = SubResource("Resource_eqsvv")
+
+[sub_resource type="Resource" id="Resource_8xuyt"]
+script = ExtResource("4_kc31g")
+
 [sub_resource type="Resource" id="Resource_mw36u"]
 script = ExtResource("5_078dv")
-fire_damage = SubResource("Resource_k77po")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
 size = Vector2(40, 40)

@@ -14,3 +14,7 @@ func execute(actor: Entity, target: Entity) -> void:
 func update_stacks(new_stacks: int) -> void:
 	super(new_stacks)
 	stacking_entity.update_stacks(new_stacks)
+
+
+func reverse(actor: Entity, _target: Entity) -> void:
+	stacking_entity.reverse(actor)

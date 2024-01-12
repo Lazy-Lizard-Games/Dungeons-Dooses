@@ -24,6 +24,7 @@ func on_health_updated(_previous: float, current: float) -> void:
 
 
 func on_maximum_updated(previous: Attribute, current: Attribute) -> void:
+	print(current.get_final_value())
 	if previous:
 		if previous.updated.is_connected(on_attribute_updated):
 			previous.updated.disconnect(on_attribute_updated)
