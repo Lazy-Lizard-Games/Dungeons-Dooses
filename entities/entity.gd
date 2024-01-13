@@ -45,3 +45,15 @@ func on_hit(actor: Entity) -> void:
 func on_hurt(target: Entity) -> void:
 	for action in action_component.actions_on_hurt:
 		action.execute(self, target)
+
+
+func get_copy() -> Entity:
+	var copy = Entity.new()
+	copy.id = id
+	copy.faction = faction
+	copy.generics = generics
+	copy.affinities = affinities
+	copy.resistances = resistances
+	copy.velocity_component = VelocityComponent.new()
+	copy.action_component = ActionComponent.new()
+	return copy

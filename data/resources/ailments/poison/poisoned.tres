@@ -1,65 +1,65 @@
 [gd_resource type="Resource" script_class="StackingBientityResource" load_steps=18 format=3 uid="uid://dhp0mot2xska1"]
 
-[ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="1_gebib"]
-[ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_jusjg"]
-[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="2_xjn0n"]
-[ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="3_ew4ru"]
-[ext_resource type="Script" path="res://actions/numbers/range_number.gd" id="4_o3cc1"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="5_trice"]
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="6_c8ttm"]
-[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_damage_bientity.gd" id="7_3oy1o"]
+[ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_qv1ie"]
+[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="2_26vv5"]
+[ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="3_y6ngy"]
+[ext_resource type="Script" path="res://actions/numbers/range_number.gd" id="4_w45t0"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="5_c47x1"]
+[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="6_rapxl"]
+[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_damage_bientity.gd" id="7_vcegp"]
+[ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="8_ol3t7"]
 
 [sub_resource type="Resource" id="Resource_xicmf"]
-script = ExtResource("1_jusjg")
+script = ExtResource("1_qv1ie")
 name = "Poisoned"
 
 [sub_resource type="Resource" id="Resource_j05lj"]
-script = ExtResource("3_ew4ru")
+script = ExtResource("3_y6ngy")
 type = 1
 operation = 1
 value = -0.05
 
 [sub_resource type="Resource" id="Resource_o2m8g"]
-script = ExtResource("2_xjn0n")
+script = ExtResource("2_26vv5")
 stacking_entity = SubResource("Resource_j05lj")
 
 [sub_resource type="Resource" id="Resource_w5bma"]
-script = ExtResource("3_ew4ru")
+script = ExtResource("3_y6ngy")
 type = 3
 operation = 1
 value = -0.05
 
 [sub_resource type="Resource" id="Resource_0tndj"]
-script = ExtResource("2_xjn0n")
+script = ExtResource("2_26vv5")
 stacking_entity = SubResource("Resource_w5bma")
 
 [sub_resource type="Resource" id="Resource_1babo"]
-script = ExtResource("4_o3cc1")
+script = ExtResource("4_w45t0")
 number_min = 2.0
 number_max = 5.0
 
 [sub_resource type="Resource" id="Resource_cd75l"]
-script = ExtResource("5_trice")
+script = ExtResource("5_c47x1")
 type = 4
 amount = SubResource("Resource_1babo")
 
 [sub_resource type="Resource" id="Resource_1pgjt"]
-script = ExtResource("6_c8ttm")
-number = 1.0
+script = ExtResource("6_rapxl")
+number = 1.5
 
 [sub_resource type="Resource" id="Resource_m32y5"]
-script = ExtResource("7_3oy1o")
+script = ExtResource("7_vcegp")
 damage_bientity = SubResource("Resource_cd75l")
 interval = SubResource("Resource_1pgjt")
 
 [resource]
-script = ExtResource("1_gebib")
+script = ExtResource("8_ol3t7")
 name = "Poisoned"
 description = "Reduces health regeneration, stamina regeneration, and deals poison damage over time."
 min_stacks = 0
 max_stacks = 10
 starting_stacks = 1
-decay_interval = 2.5
+decay_interval = 3.0
 decay_amount = 1
 actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([SubResource("Resource_o2m8g"), SubResource("Resource_0tndj"), SubResource("Resource_m32y5")])
 actions_on_min_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_xicmf")])

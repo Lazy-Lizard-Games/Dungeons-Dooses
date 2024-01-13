@@ -43,14 +43,8 @@ var target_copy: Entity
 func start(actor: Entity, target: Entity) -> void:
 	bientity_actor = actor
 	bientity_target = target
-	actor_copy = Entity.new()
-	actor_copy.affinities = bientity_actor.affinities
-	actor_copy.resistances = bientity_actor.resistances
-	actor_copy.generics = bientity_actor.generics
-	target_copy = Entity.new()
-	target_copy.affinities = bientity_target.affinities
-	target_copy.resistances = bientity_target.resistances
-	target_copy.generics = bientity_target.generics
+	actor_copy = actor.get_copy()
+	target_copy = target.get_copy()
 	stacks = starting_stacks
 	for action in actions_per_stack:
 		action = action.duplicate(true)

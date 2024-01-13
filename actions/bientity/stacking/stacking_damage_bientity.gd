@@ -9,19 +9,27 @@ class_name StackingDamageBientity
 @export var interval: NumberProvider
 
 var ticking_timer: Timer
+var actor_copy: Entity
+var target_copy: Entity
+
 
 func execute(actor: Entity, target: Entity) -> void:
+	actor_copy = actor.get_copy()
+	target_copy = target.get_copy()
 	ticking_timer = Timer.new()
-	ticking_timer.timeout.connect(
-		func():
-			if stacks <= 0:
-				ticking_timer.start(interval.execute())
-				return
-			damage_bientity.execute(actor, target)
-			ticking_timer.start(interval.execute() * ((max_stacks - stacks)/float(max_stacks)))
-	)
+	ticking_timer.timeout.connect(damage.bind(actor, target))
 	target.add_child(ticking_timer)
 	ticking_timer.start(interval.execute())
+
+
+func damage(actor, target) -> void:
+	if stacks <= 0:
+		ticking_timer.start(interval.execute())
+		return
+	var a = actor as Entity if is_instance_valid(actor) else actor_copy
+	var t = target as Entity if is_instance_valid(target) else target_copy
+	damage_bientity.execute(a, t)
+	ticking_timer.start(interval.execute() * ((max_stacks - (stacks - 1))/float(max_stacks)))
 
 
 func reverse(_actor: Entity, target: Entity) -> void:
