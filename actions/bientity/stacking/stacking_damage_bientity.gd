@@ -18,7 +18,7 @@ func execute(actor: Entity, target: Entity) -> void:
 				ticking_timer.start(interval.execute())
 				return
 			damage_bientity.execute(actor, target)
-			ticking_timer.start(interval.execute()/stacks)
+			ticking_timer.start(interval.execute() * ((max_stacks - stacks)/float(max_stacks)))
 	)
 	target.add_child(ticking_timer)
 	ticking_timer.start(interval.execute())

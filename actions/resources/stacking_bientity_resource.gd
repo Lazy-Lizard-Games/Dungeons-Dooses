@@ -55,6 +55,7 @@ func start(actor: Entity, target: Entity) -> void:
 	for action in actions_per_stack:
 		action = action.duplicate(true)
 		action.execute(bientity_actor, bientity_target)
+		action.max_stacks = max_stacks
 		action.update_stacks(stacks)
 		stack_changed.connect(action.update_stacks)
 		ended.connect(

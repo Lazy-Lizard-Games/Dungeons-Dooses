@@ -2,6 +2,7 @@ extends BientityAction
 class_name StackingBientityAction
 
 
+var max_stacks: int
 var stacks: int
 
 
