@@ -4,7 +4,7 @@ class_name ResourceEntityCondition
 ## Compares the stacks of the resource to a number.
 
 @export var name: String
-@export var compare_to: NumberProvider
+@export var compare_to: Number
 @export var comparison: ComparisonProvider
 
 

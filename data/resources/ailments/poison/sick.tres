@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="StackingBientityResource" load_steps=23 format=3 uid="uid://cruc0sy0ci7sg"]
 
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="1_3qaq5"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="1_3qaq5"]
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="1_mvxu4"]
 [ext_resource type="Script" path="res://actions/comparisons/lesser_comparison.gd" id="2_cfj65"]
 [ext_resource type="Script" path="res://actions/conditions/entity/general/resource_condition.gd" id="3_kgrh0"]

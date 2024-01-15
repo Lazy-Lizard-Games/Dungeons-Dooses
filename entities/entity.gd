@@ -7,6 +7,10 @@ class_name Entity
 signal hit(actor: Entity)
 ## Triggered on hit.
 signal hurt(target: Entity)
+## Triggered when hurt entity dies.
+signal kill(entity: Entity)
+## Triggered when self dies.
+signal died
 ## Triggered on item pickup.
 signal pickup(actor: Entity, item: int)
 ## Triggered on item consume.
@@ -35,6 +39,8 @@ func _ready() -> void:
 	velocity_component.generics = generics
 	hit.connect(on_hit)
 	hurt.connect(on_hurt)
+	kill.connect(on_kill)
+	died.connect(on_died)
 
 
 func on_hit(actor: Entity) -> void:
@@ -45,6 +51,16 @@ func on_hit(actor: Entity) -> void:
 func on_hurt(target: Entity) -> void:
 	for action in action_component.actions_on_hurt:
 		action.execute(self, target)
+
+
+func on_kill(_entity: Entity) -> void:
+	for action in action_component.actions_on_kill:
+		action.execute(self)
+
+
+func on_died() -> void:
+	for action in action_component.actions_on_died:
+		action.execute(self)
 
 
 func get_copy() -> Entity:

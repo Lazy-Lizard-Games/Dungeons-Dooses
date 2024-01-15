@@ -1,32 +1,20 @@
 extends BientityAction
 class_name DamageBientityAction
 
-## Type of damage to deal.
-@export var type: Enums.DamageType
-## Amount of damage to deal.
-@export var amount: NumberProvider
-
-var affinities: AffinityAttributes
+## Damage to be dealt to the target.
+@export var damage: DamageEntityAction
 
 
 func execute(actor: Entity, target: Entity) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
-	var temp_amount = amount.execute()
 	## Apply actor affinity bonuses.
-	if !affinities:
-		affinities = actor.affinities.duplicate(true)
-	var damage_affinity = affinities.get_damage_affinity(type)
+	var affinities = actor.affinities
+	var damage_affinity = affinities.get_damage_affinity(damage.type)
+	var modifier = ConstantProvider.new(1)
 	if damage_affinity:
-		temp_amount *= 1 + damage_affinity.get_final_value()
-	## Apply target resistance bonuses.
-	var resistances = target.resistances
-	var damage_resistance = resistances.get_damage_resistance(type)
-	if damage_resistance:
-		temp_amount *= 1 - damage_resistance.get_final_value()
-	## Apply final damage.
-	if "health_component" in target:
-		var health = target.health_component as HealthComponent
-		health.damage(type, temp_amount, actor)
-		TextHandler.create_damage_text(type, temp_amount, target.global_position)
+		modifier.number = 1 + damage_affinity.get_final_value()
+	var multiplier = MultiplicationOperator.new(damage.amount.duplicate(true), modifier)
+	damage.amount = multiplier
+	damage.execute(target)

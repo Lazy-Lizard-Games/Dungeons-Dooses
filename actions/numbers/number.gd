@@ -1,5 +1,5 @@
 extends Resource
-class_name NumberProvider
+class_name Number
 
 ## Number providers aim to provide alternate ways of generating a number.
 ## Different ways of generating a number could include: constant, range, binomial, etc.

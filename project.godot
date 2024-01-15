@@ -17,8 +17,8 @@ boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 
 [autoload]
 
-ProjectileHandler="*res://autoloads/projectile_handler.gd"
-TextHandler="*res://autoloads/text_handler.gd"
+ProjectileHandler="*res://constants/projectile_handler.gd"
+TextHandler="*res://constants/text_handler.gd"
 Enums="*res://constants/enums.gd"
 TimerKeeper="*res://constants/time_keeper.gd"
 

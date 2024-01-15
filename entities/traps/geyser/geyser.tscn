@@ -1,0 +1,54 @@
+[gd_scene load_steps=16 format=3 uid="uid://brvdunlkitgi"]
+
+[ext_resource type="Script" path="res://entities/traps/geyser/geyser.gd" id="1_mi404"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_0wmj8"]
+[ext_resource type="Script" path="res://actions/entity/vector/normalize_vector.gd" id="2_syrd1"]
+[ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="3_0byuh"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_g5t5g"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="4_b3ysc"]
+[ext_resource type="PackedScene" uid="uid://dooocen4x366u" path="res://projectiles/geyser_water/geyser_water.tscn" id="4_rjp57"]
+[ext_resource type="PackedScene" uid="uid://204wbc2mh187" path="res://components/commands/trigger/timed_trigger/timed_trigger.tscn" id="7_e3l6d"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="8_ynjtq"]
+
+[sub_resource type="Resource" id="Resource_qpf3u"]
+script = ExtResource("3_0byuh")
+
+[sub_resource type="Resource" id="Resource_1nphj"]
+script = ExtResource("2_syrd1")
+vector = SubResource("Resource_qpf3u")
+
+[sub_resource type="Resource" id="Resource_wuwjq"]
+script = ExtResource("3_0byuh")
+
+[sub_resource type="Resource" id="Resource_jpk01"]
+script = ExtResource("4_b3ysc")
+projectile_scene = ExtResource("4_rjp57")
+position = SubResource("Resource_wuwjq")
+direction = SubResource("Resource_1nphj")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0uu1"]
+
+[sub_resource type="Resource" id="Resource_eqb7q"]
+script = ExtResource("8_ynjtq")
+number = 1.0
+
+[node name="Geyser" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "velocity_component", "action_component")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_mi404")
+trigger = NodePath("TimedTrigger")
+cast_projectile = SubResource("Resource_jpk01")
+id = "Geyser"
+velocity_component = NodePath("VelocityComponent")
+action_component = NodePath("ActionComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v0uu1")
+debug_color = Color(0.996078, 0.0509804, 0, 0.419608)
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_0wmj8")]
+
+[node name="ActionComponent" parent="." instance=ExtResource("3_g5t5g")]
+
+[node name="TimedTrigger" parent="." instance=ExtResource("7_e3l6d")]
+interval = SubResource("Resource_eqb7q")

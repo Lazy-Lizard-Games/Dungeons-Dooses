@@ -1,5 +1,5 @@
-extends NumberProvider
-class_name BinomialNumberProvider
+extends Number
+class_name BinomialProvider
 
 ## Returns the number of tests that pass a chance check.
 

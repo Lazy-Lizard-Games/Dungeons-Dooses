@@ -4,7 +4,7 @@ class_name AddBientityResourceAction
 ## Stacking resource to add stacks to on the entity.
 @export var resource: StackingBientityResource
 ## Number of stacks to add if it already exists.
-@export var number: NumberProvider
+@export var number: Number
 
 
 func execute(actor: Entity, target: Entity) -> void:
@@ -16,14 +16,16 @@ func execute(actor: Entity, target: Entity) -> void:
 	for r in target.action_component.resources:
 		if r.name == resource.name:
 			res = r
+	var amount = int(number.execute())
 	if res:
-		res.add_stack(int(number.execute()))
+		if amount > 0:
+			res.add_stack()
 	else:
 		res = resource.duplicate(true) as StackingBientityResource
 		target.action_component.add_resource(res)
 		res.start(actor, target)
-		if int(number.execute())-1 > 0:
-			res.add_stack(int(number.execute())-1)
+		if (amount - 1) > 0:
+			res.add_stack(amount - 1)
 
 
 func reverse(actor: Entity, target: Entity) -> void:

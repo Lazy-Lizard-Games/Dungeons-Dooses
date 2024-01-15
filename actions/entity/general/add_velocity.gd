@@ -6,11 +6,11 @@ class_name AddVelocityAction
 ## Direction of velocity.
 @export var direction: Vector2
 ## Magnitude of velocity.
-@export var speed: float
+@export var speed: Number
 
 
 func execute(entity: Entity) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
-	entity.velocity_component.add_velocity(direction * speed)
+	entity.velocity_component.add_velocity(direction * speed.execute())

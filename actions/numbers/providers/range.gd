@@ -1,5 +1,5 @@
-extends NumberProvider
-class_name RangeNumberProvider
+extends Number
+class_name RangeProvider
 
 ## Returns a random number between two numbers.
 

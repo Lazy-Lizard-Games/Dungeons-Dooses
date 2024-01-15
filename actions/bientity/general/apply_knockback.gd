@@ -4,9 +4,9 @@ class_name ApplyKnockbackAction
 ## Applies knockback on the target entity based on the position of the actor.
 
 ## Max speed for knockback.
-@export var speed: float
+@export var speed: Number
 ## Duration of knockback's control modifier.
-@export var duration: float
+@export var duration: Number
 ## Attribute modifier to modify entity control during knockback.
 @export var control_modifier: AttributeModifier
 

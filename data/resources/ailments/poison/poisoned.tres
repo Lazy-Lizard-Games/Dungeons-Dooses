@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_qv1ie"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="2_26vv5"]
 [ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="3_y6ngy"]
-[ext_resource type="Script" path="res://actions/numbers/range_number.gd" id="4_w45t0"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="5_c47x1"]
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="6_rapxl"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="4_uswmn"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="5_tagbh"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="6_j8n02"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_damage_bientity.gd" id="7_vcegp"]
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="8_ol3t7"]
 
@@ -33,23 +33,23 @@ value = -0.05
 script = ExtResource("2_26vv5")
 stacking_entity = SubResource("Resource_w5bma")
 
-[sub_resource type="Resource" id="Resource_1babo"]
-script = ExtResource("4_w45t0")
-number_min = 2.0
-number_max = 5.0
+[sub_resource type="Resource" id="Resource_s2ojo"]
+script = ExtResource("4_uswmn")
+number_min = 1.0
+number_max = 3.0
 
-[sub_resource type="Resource" id="Resource_cd75l"]
-script = ExtResource("5_c47x1")
+[sub_resource type="Resource" id="Resource_mx31t"]
+script = ExtResource("5_tagbh")
 type = 4
-amount = SubResource("Resource_1babo")
+amount = SubResource("Resource_s2ojo")
 
 [sub_resource type="Resource" id="Resource_1pgjt"]
-script = ExtResource("6_rapxl")
+script = ExtResource("6_j8n02")
 number = 1.5
 
 [sub_resource type="Resource" id="Resource_m32y5"]
 script = ExtResource("7_vcegp")
-damage_bientity = SubResource("Resource_cd75l")
+damage_entity = SubResource("Resource_mx31t")
 interval = SubResource("Resource_1pgjt")
 
 [resource]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="1_7rjov"]
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_lwcv4"]
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="2_3ou1s"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_3ou1s"]
 [ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="2_rj7xv"]
 [ext_resource type="Resource" uid="uid://nhtr3tto4mry" path="res://data/resources/ailments/frost/frozen.tres" id="3_fuxep"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="3_gp5tb"]

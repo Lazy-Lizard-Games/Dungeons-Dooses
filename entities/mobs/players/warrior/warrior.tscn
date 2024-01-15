@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=51 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -13,9 +13,11 @@
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="13_qljxc"]
+[ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
-[ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://entities/projectiles/fireball/fireball.tscn" id="14_mmorl"]
+[ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://projectiles/fireball/fireball.tscn" id="14_mmorl"]
 [ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="15_7v737"]
 [ext_resource type="Script" path="res://actions/entity/vector/rotate_vector.gd" id="15_qpavo"]
 [ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="16_s6ckn"]
@@ -65,6 +67,14 @@ min_value = -2.14748e+09
 max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
+[sub_resource type="Resource" id="Resource_mxdme"]
+script = ExtResource("13_qljxc")
+number = 50.0
+
+[sub_resource type="Resource" id="Resource_wxp2f"]
+script = ExtResource("14_1n4lw")
+number = SubResource("Resource_mxdme")
+
 [sub_resource type="Resource" id="Resource_isjay"]
 script = ExtResource("16_s6ckn")
 
@@ -74,13 +84,13 @@ vector = SubResource("Resource_isjay")
 minimum = -15
 maximum = 15
 
-[sub_resource type="Resource" id="Resource_ai56j"]
+[sub_resource type="Resource" id="Resource_8fq6r"]
 script = ExtResource("15_7v737")
 
 [sub_resource type="Resource" id="Resource_30p3g"]
 script = ExtResource("17_4e2u7")
 projectile_scene = ExtResource("14_mmorl")
-position = SubResource("Resource_ai56j")
+position = SubResource("Resource_8fq6r")
 direction = SubResource("Resource_7xgi6")
 
 [sub_resource type="Resource" id="Resource_erwjf"]
@@ -189,6 +199,7 @@ friction = SubResource("Resource_ulxov")
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
+actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 abilities = Array[ExtResource("18_7q27h")]([SubResource("Resource_erwjf")])
@@ -226,6 +237,4 @@ visible = false
 inventory_component = NodePath("../../InventoryComponent")
 entity = NodePath("../..")
 
-[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
-[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]

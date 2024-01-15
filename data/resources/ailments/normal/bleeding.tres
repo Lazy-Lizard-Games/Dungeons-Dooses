@@ -2,32 +2,32 @@
 
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_15iqx"]
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="1_81i16"]
-[ext_resource type="Script" path="res://actions/numbers/range_number.gd" id="2_uhotr"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="3_n7hpx"]
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="4_s5kau"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="2_6i14o"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="3_xnkry"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="4_5slht"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_damage_bientity.gd" id="5_1cjak"]
 
 [sub_resource type="Resource" id="Resource_e6cje"]
 script = ExtResource("1_15iqx")
 name = "Bleeding"
 
-[sub_resource type="Resource" id="Resource_dncln"]
-script = ExtResource("2_uhotr")
+[sub_resource type="Resource" id="Resource_lblv3"]
+script = ExtResource("2_6i14o")
 number_min = 3.0
 number_max = 7.0
 
-[sub_resource type="Resource" id="Resource_5chu3"]
-script = ExtResource("3_n7hpx")
+[sub_resource type="Resource" id="Resource_036ax"]
+script = ExtResource("3_xnkry")
 type = 0
-amount = SubResource("Resource_dncln")
+amount = SubResource("Resource_lblv3")
 
 [sub_resource type="Resource" id="Resource_iwiqx"]
-script = ExtResource("4_s5kau")
+script = ExtResource("4_5slht")
 number = 1.5
 
 [sub_resource type="Resource" id="Resource_4lkie"]
 script = ExtResource("5_1cjak")
-damage_bientity = SubResource("Resource_5chu3")
+damage_entity = SubResource("Resource_036ax")
 interval = SubResource("Resource_iwiqx")
 
 [resource]

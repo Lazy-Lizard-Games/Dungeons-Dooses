@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="StackingBientityResource" load_steps=16 format=3 uid="uid://byvjpk2w00h1o"]
 
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_pb1xm"]
-[ext_resource type="Script" path="res://actions/numbers/range_number.gd" id="2_r1p3d"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="3_mosi7"]
-[ext_resource type="Script" path="res://actions/numbers/constant_number.gd" id="4_63jpu"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="2_r1p3d"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="3_qctfa"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="4_63jpu"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_damage_bientity.gd" id="5_kj826"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="6_7tyx7"]
 [ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="7_yilg3"]
@@ -13,15 +13,15 @@
 script = ExtResource("1_pb1xm")
 name = "Burning"
 
-[sub_resource type="Resource" id="Resource_qcp85"]
+[sub_resource type="Resource" id="Resource_3eytw"]
 script = ExtResource("2_r1p3d")
-number_min = 5.0
-number_max = 10.0
+number_min = 2.0
+number_max = 5.0
 
-[sub_resource type="Resource" id="Resource_ffwtx"]
-script = ExtResource("3_mosi7")
+[sub_resource type="Resource" id="Resource_txqd1"]
+script = ExtResource("3_qctfa")
 type = 1
-amount = SubResource("Resource_qcp85")
+amount = SubResource("Resource_3eytw")
 
 [sub_resource type="Resource" id="Resource_7exp4"]
 script = ExtResource("4_63jpu")
@@ -29,7 +29,7 @@ number = 1.0
 
 [sub_resource type="Resource" id="Resource_loq2d"]
 script = ExtResource("5_kj826")
-damage_bientity = SubResource("Resource_ffwtx")
+damage_entity = SubResource("Resource_txqd1")
 interval = SubResource("Resource_7exp4")
 
 [sub_resource type="Resource" id="Resource_wgld4"]

@@ -1,7 +1,7 @@
 extends EntityAction
 class_name HealEntity
 
-@export var number: NumberProvider
+@export var number: Number
 
 
 func execute(entity: Entity) -> void:

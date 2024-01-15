@@ -11,9 +11,12 @@ class_name Mob
 
 func _ready() -> void:
 	super()
-	if hitbox_component:
-		hitbox_component.hit.connect(
-			func(actor: Entity):
-				hit.emit(actor)
-		)
+	hitbox_component.hit.connect(
+		func(actor: Entity):
+			hit.emit(actor)
+	)
 	health_component.attributes = generics
+	health_component.died.connect(
+		func():
+			died.emit()
+	)
