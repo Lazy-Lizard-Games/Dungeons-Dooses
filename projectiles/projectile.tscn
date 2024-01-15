@@ -1,0 +1,55 @@
+[gd_scene load_steps=11 format=3 uid="uid://qorga5me6rjl"]
+
+[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_u800b"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_5fbux"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="3_tgw5d"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="4_wh2qj"]
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="5_q153d"]
+
+[sub_resource type="Resource" id="Resource_gh8dw"]
+script = ExtResource("2_5fbux")
+number = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rhisq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sjj12"]
+
+[sub_resource type="Resource" id="Resource_m8jvk"]
+script = ExtResource("5_q153d")
+raw_value = 1.0
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_gr2he"]
+script = ExtResource("5_q153d")
+raw_value = 1.0
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[node name="Projectile" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "velocity_component")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_u800b")
+id = "Projectile"
+pierce = 1
+duration = SubResource("Resource_gh8dw")
+hurtbox_component = NodePath("HurtboxComponent")
+velocity_component = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rhisq")
+debug_color = Color(0.92549, 0, 0.67451, 0.419608)
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("3_tgw5d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_sjj12")
+debug_color = Color(0.992157, 0, 0.258824, 0.419608)
+
+[node name="VelocityComponent" parent="." instance=ExtResource("4_wh2qj")]
+control = SubResource("Resource_m8jvk")
+friction = SubResource("Resource_gr2he")

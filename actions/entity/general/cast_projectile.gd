@@ -2,7 +2,7 @@ extends EntityAction
 class_name CastProjecitleAction
 
 ## Projectile scene to create and cast for the entity.
-@export var projectile_scene: PackedScene
+@export var projectile: ProjectileObject
 ## Vector action to decide how to calculate projectile position.
 @export var position: VectorAction = VectorAction.new()
 ## Vector action to decide how to calculate projectile direction.
@@ -10,8 +10,9 @@ class_name CastProjecitleAction
 
 
 func execute(entity: Entity) -> void:
-	var projectile = projectile_scene.instantiate() as Projectile
-	projectile.entity = entity
-	projectile.direction = direction.get_vector(entity)
-	projectile.global_position = position.get_vector(entity)
-	ProjectileHandler.add(projectile)
+	var projectile_scene = load("res://projectiles/projectile.tscn").instantiate() as Projectile
+	projectile_scene.set_variables(projectile)
+	projectile_scene.entity = entity
+	projectile_scene.direction = direction.get_vector(entity)
+	projectile_scene.global_position = position.get_vector(entity)
+	ProjectileHandler.add(projectile_scene)

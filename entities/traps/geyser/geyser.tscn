@@ -1,12 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://brvdunlkitgi"]
+[gd_scene load_steps=25 format=3 uid="uid://brvdunlkitgi"]
 
 [ext_resource type="Script" path="res://entities/traps/geyser/geyser.gd" id="1_mi404"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_0wmj8"]
 [ext_resource type="Script" path="res://actions/entity/vector/normalize_vector.gd" id="2_syrd1"]
 [ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="3_0byuh"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_g5t5g"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="4_52r6a"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="4_b3ysc"]
-[ext_resource type="PackedScene" uid="uid://dooocen4x366u" path="res://projectiles/geyser_water/geyser_water.tscn" id="4_rjp57"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="5_j5y0h"]
+[ext_resource type="Script" path="res://projectiles/projectile_object.gd" id="5_q0t4s"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="6_judpx"]
 [ext_resource type="PackedScene" uid="uid://204wbc2mh187" path="res://components/commands/trigger/timed_trigger/timed_trigger.tscn" id="7_e3l6d"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="8_ynjtq"]
 
@@ -20,9 +23,40 @@ vector = SubResource("Resource_qpf3u")
 [sub_resource type="Resource" id="Resource_wuwjq"]
 script = ExtResource("3_0byuh")
 
+[sub_resource type="Resource" id="Resource_3vvb3"]
+script = ExtResource("4_52r6a")
+number_min = 3.0
+number_max = 7.0
+
+[sub_resource type="Resource" id="Resource_qlvmi"]
+script = ExtResource("5_j5y0h")
+type = 1
+amount = SubResource("Resource_3vvb3")
+
+[sub_resource type="Resource" id="Resource_hivwt"]
+script = ExtResource("6_judpx")
+damage = SubResource("Resource_qlvmi")
+
+[sub_resource type="Resource" id="Resource_3fs58"]
+script = ExtResource("4_52r6a")
+number_min = 1.0
+number_max = 1.5
+
+[sub_resource type="Resource" id="Resource_g8prq"]
+script = ExtResource("8_ynjtq")
+number = 0.0
+
+[sub_resource type="Resource" id="Resource_qn1bj"]
+script = ExtResource("5_q0t4s")
+name = "Hot Water"
+pierce = 0
+duration = SubResource("Resource_3fs58")
+speed = SubResource("Resource_g8prq")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_hivwt")])
+
 [sub_resource type="Resource" id="Resource_jpk01"]
 script = ExtResource("4_b3ysc")
-projectile_scene = ExtResource("4_rjp57")
+projectile = SubResource("Resource_qn1bj")
 position = SubResource("Resource_wuwjq")
 direction = SubResource("Resource_1nphj")
 

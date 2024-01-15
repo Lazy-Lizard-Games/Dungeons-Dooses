@@ -3,10 +3,12 @@ class_name Projectile
 
 ## Projectiles are spawned by entities and allow for hit/hurt triggers at range.
 
+## Identifying name of the projectile.
+@export var id: String
 ## Pierce maximum of the projectile, where anything less than zero results in infinite pierce.
 @export var pierce: int
 ## Duration of the projectile, where anything less than zero results in infinite duration.
-@export var duration: float
+@export var duration: Number
 ## Actions to execute on hurt.
 @export var actions_on_hurt: Array[BientityAction]
 ## Hurtbox responsible for triggering hits.
@@ -22,18 +24,32 @@ var direction: Vector2
 var current_pierce: int
 
 
+func set_variables(projectile_object: ProjectileObject) -> void:
+	id = projectile_object.name
+	pierce = projectile_object.pierce
+	duration = projectile_object.duration
+	actions_on_hurt = projectile_object.actions_on_hurt
+	velocity_component.speed.raw_value = projectile_object.speed.execute()
+
+
 func _ready() -> void:
 	current_pierce = pierce
-	if hurtbox_component:
-		hurtbox_component.hurt.connect(on_hurt)
-	if duration > 0:
+	hurtbox_component.hurt.connect(on_hurt)
+	var _duration = duration.execute()
+	if _duration > 0:
 		var duration_timer = Timer.new()
 		duration_timer.timeout.connect(
 			func():
 				ProjectileHandler.remove(self)
 		)
 		add_child(duration_timer)
-		duration_timer.start(duration)
+		duration_timer.start(_duration)
+
+
+func _physics_process(_delta):
+	if velocity_component.speed.get_final_value():
+		velocity_component.accelerate_in_direction(direction)
+		velocity_component.move(self)
 
 
 func on_hurt(hitbox: HitboxComponent):
