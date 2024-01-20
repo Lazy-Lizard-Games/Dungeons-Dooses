@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=58 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -18,16 +18,15 @@
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="15_7v737"]
-[ext_resource type="Script" path="res://actions/entity/vector/rotate_vector.gd" id="15_qpavo"]
 [ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="16_s6ckn"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="17_4e2u7"]
 [ext_resource type="Script" path="res://abilities/ability.gd" id="18_7q27h"]
+[ext_resource type="Script" path="res://projectiles/objects/travelling_projectile.gd" id="18_r37j6"]
 [ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="19_4xskb"]
 [ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="20_pl3u2"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="21_fcy7i"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
-[ext_resource type="Script" path="res://projectiles/projectile_object.gd" id="22_5ehf0"]
 [ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
@@ -78,54 +77,51 @@ number = 50.0
 script = ExtResource("14_1n4lw")
 number = SubResource("Resource_mxdme")
 
-[sub_resource type="Resource" id="Resource_isjay"]
-script = ExtResource("16_s6ckn")
-
-[sub_resource type="Resource" id="Resource_7xgi6"]
-script = ExtResource("15_qpavo")
-vector = SubResource("Resource_isjay")
-minimum = -15
-maximum = 15
-
-[sub_resource type="Resource" id="Resource_8fq6r"]
+[sub_resource type="Resource" id="Resource_4mey5"]
 script = ExtResource("15_7v737")
 
-[sub_resource type="Resource" id="Resource_bfasv"]
+[sub_resource type="Resource" id="Resource_aw276"]
 script = ExtResource("19_4xskb")
 number_min = 2.0
 number_max = 5.0
 
-[sub_resource type="Resource" id="Resource_i07qs"]
+[sub_resource type="Resource" id="Resource_4eh4h"]
 script = ExtResource("20_pl3u2")
 type = 1
-amount = SubResource("Resource_bfasv")
+amount = SubResource("Resource_aw276")
 
-[sub_resource type="Resource" id="Resource_8untk"]
+[sub_resource type="Resource" id="Resource_yvqb0"]
 script = ExtResource("21_fcy7i")
-damage = SubResource("Resource_i07qs")
+damage = SubResource("Resource_4eh4h")
 
-[sub_resource type="Resource" id="Resource_uep4c"]
-script = ExtResource("19_4xskb")
-number_min = 2.5
-number_max = 3.0
+[sub_resource type="Resource" id="Resource_cy1yo"]
+script = ExtResource("16_s6ckn")
 
-[sub_resource type="Resource" id="Resource_0r3bp"]
+[sub_resource type="Resource" id="Resource_qhuad"]
 script = ExtResource("13_qljxc")
-number = 250.0
+number = 10.0
 
-[sub_resource type="Resource" id="Resource_jdpbe"]
-script = ExtResource("22_5ehf0")
-name = "Fireball"
+[sub_resource type="Resource" id="Resource_agaox"]
+script = ExtResource("2_acrq8")
+raw_value = 50.0
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_rfv2r"]
+script = ExtResource("18_r37j6")
+speed = SubResource("Resource_agaox")
+direction = SubResource("Resource_cy1yo")
+name = ""
 pierce = 1
-duration = SubResource("Resource_uep4c")
-speed = SubResource("Resource_0r3bp")
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_8untk")])
+duration = SubResource("Resource_qhuad")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_yvqb0")])
 
 [sub_resource type="Resource" id="Resource_30p3g"]
 script = ExtResource("17_4e2u7")
-projectile = SubResource("Resource_jdpbe")
-position = SubResource("Resource_8fq6r")
-direction = SubResource("Resource_7xgi6")
+projectile_object = SubResource("Resource_rfv2r")
+position = SubResource("Resource_4mey5")
 
 [sub_resource type="Resource" id="Resource_erwjf"]
 script = ExtResource("18_7q27h")

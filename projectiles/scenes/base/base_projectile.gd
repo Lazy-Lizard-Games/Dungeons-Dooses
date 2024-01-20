@@ -1,5 +1,5 @@
 extends CharacterBody2D
-class_name Projectile
+class_name BaseProjectile
 
 ## Projectiles are spawned by entities and allow for hit/hurt triggers at range.
 
@@ -13,23 +13,18 @@ class_name Projectile
 @export var actions_on_hurt: Array[BientityAction]
 ## Hurtbox responsible for triggering hits.
 @export var hurtbox_component: HurtboxComponent
-## Velocity component to handle movement.
-@export var velocity_component: VelocityComponent
 
 ## Entity responsible for spawning the projectile, if any.
 var entity: Entity
-## Direction that the projectile is currently facing.
-var direction: Vector2
 ## Current pierce of the projectile
 var current_pierce: int
 
 
-func set_variables(projectile_object: ProjectileObject) -> void:
+func set_variables(projectile_object: BaseProjectileObject) -> void:
 	id = projectile_object.name
 	pierce = projectile_object.pierce
 	duration = projectile_object.duration
 	actions_on_hurt = projectile_object.actions_on_hurt
-	velocity_component.speed.raw_value = projectile_object.speed.execute()
 
 
 func _ready() -> void:
@@ -44,12 +39,6 @@ func _ready() -> void:
 		)
 		add_child(duration_timer)
 		duration_timer.start(_duration)
-
-
-func _physics_process(_delta):
-	if velocity_component.speed.get_final_value():
-		velocity_component.accelerate_in_direction(direction)
-		velocity_component.move(self)
 
 
 func on_hurt(hitbox: HitboxComponent):

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cr8gqjlalt0x7"]
+
+[ext_resource type="Script" path="res://projectiles/scenes/travelling/travelling_projectile.gd" id="1_i3kng"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_elha6"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="3_jejg6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxu5r"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nqwlr"]
+
+[node name="TravellingProjectile" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hurtbox_component")]
+collision_layer = 8
+script = ExtResource("1_i3kng")
+velocity_component = NodePath("VelocityComponent")
+hurtbox_component = NodePath("HurtboxComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_qxu5r")
+debug_color = Color(0.709804, 0.486275, 0, 0.419608)
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_elha6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_nqwlr")
+debug_color = Color(0.85098, 0.368627, 0, 0.419608)
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_jejg6")]

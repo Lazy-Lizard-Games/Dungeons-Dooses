@@ -1,5 +1,5 @@
 extends Resource
-class_name ProjectileObject
+class_name BaseProjectileObject
 
 ## Describes a basic projectile.
 
@@ -9,7 +9,5 @@ class_name ProjectileObject
 @export var pierce: int
 ## Projectile duration.
 @export var duration: Number
-## Projectile speed.
-@export var speed: Number
 ## Projectile actions on hurt.
 @export var actions_on_hurt: Array[BientityAction]

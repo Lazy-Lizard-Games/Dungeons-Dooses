@@ -4,9 +4,9 @@ class_name VelocityComponent
 ## Max speed if attributes not attached or no speed attribute found.
 @export var speed = Attribute.new()
 ## How much impact entity input has on the velocity
-@export var control= Attribute.new()
+@export var control= Attribute.new(1)
 ## How much impact any input has on the velocity
-@export var friction= Attribute.new()
+@export var friction= Attribute.new(1)
 var velocity := Vector2.ZERO
 ## Attribute Component to fetch speed, acceleration, etc. from.
 var generics: GenericAttributes:
