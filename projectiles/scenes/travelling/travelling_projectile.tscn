@@ -8,11 +8,13 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nqwlr"]
 
-[node name="TravellingProjectile" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hurtbox_component")]
+[node name="TravellingProjectile" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hurtbox_component", "collision_shape", "hurtbox_collision_shape")]
 collision_layer = 8
 script = ExtResource("1_i3kng")
 velocity_component = NodePath("VelocityComponent")
 hurtbox_component = NodePath("HurtboxComponent")
+collision_shape = NodePath("CollisionShape2D")
+hurtbox_collision_shape = NodePath("HurtboxComponent/CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_qxu5r")

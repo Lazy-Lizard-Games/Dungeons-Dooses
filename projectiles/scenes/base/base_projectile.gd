@@ -9,25 +9,39 @@ class_name BaseProjectile
 @export var pierce: int
 ## Duration of the projectile, where anything less than zero results in infinite duration.
 @export var duration: Number
+## Direction of the projectile.
+@export var direction: VectorAction
 ## Actions to execute on hurt.
 @export var actions_on_hurt: Array[BientityAction]
 ## Hurtbox responsible for triggering hits.
 @export var hurtbox_component: HurtboxComponent
+## Collision shape of the projectile.
+@export var collision_shape: CollisionShape2D
+## Collision shape of the hurtbox.
+@export var hurtbox_collision_shape: CollisionShape2D
 
 ## Entity responsible for spawning the projectile, if any.
 var entity: Entity
-## Current pierce of the projectile
+## Current pierce of the projectile.
 var current_pierce: int
+## Current direction of the projectile.
+var _direction: Vector2
 
 
 func set_variables(projectile_object: BaseProjectileObject) -> void:
 	id = projectile_object.name
 	pierce = projectile_object.pierce
 	duration = projectile_object.duration
+	direction = projectile_object.direction
 	actions_on_hurt = projectile_object.actions_on_hurt
+	collision_shape.shape = projectile_object.shape
+	hurtbox_collision_shape.shape = projectile_object.shape
+	self.scale = Vector2.ONE * projectile_object.scale.execute()
 
 
 func _ready() -> void:
+	_direction = direction.get_vector(entity)
+	look_at(global_position + _direction)
 	current_pierce = pierce
 	hurtbox_component.hurt.connect(on_hurt)
 	var _duration = duration.execute()

@@ -9,9 +9,9 @@ class_name CastProjecitleAction
 
 func execute(entity: Entity) -> void:
 	var projectile := get_projectile_scene(projectile_object)
-	projectile.set_variables(projectile_object)
 	projectile.entity = entity
 	projectile.global_position = position.get_vector(entity)
+	projectile.set_variables(projectile_object)
 	ProjectileHandler.add(projectile)
 
 
