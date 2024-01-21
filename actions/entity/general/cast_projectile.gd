@@ -16,6 +16,8 @@ func execute(entity: Entity) -> void:
 
 
 func get_projectile_scene(object: BaseProjectileObject) -> BaseProjectile:
-	if object is TravellingProjectileObject:
+	if object is HomingProjectileObject:
+		return load("res://projectiles/scenes/homing/homing_projectile.tscn").instantiate()
+	elif object is TravellingProjectileObject:
 		return load("res://projectiles/scenes/travelling/travelling_projectile.tscn").instantiate()
 	return load("res://projectiles/scenes/base/base_projectile.tscn").instantiate()

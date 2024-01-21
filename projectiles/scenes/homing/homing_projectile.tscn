@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk72rg4dysev5"]
+
+[ext_resource type="Script" path="res://projectiles/scenes/homing/homing_projectile.gd" id="1_s8qv1"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_hp28x"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="3_kkmw7"]
+[ext_resource type="PackedScene" uid="uid://raxmp07wnacw" path="res://components/commands/target/target_component.tscn" id="4_ufuqg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vd2xu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_et5ef"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dwnp0"]
+radius = 100.0
+
+[node name="HomingProjectile" type="CharacterBody2D" node_paths=PackedStringArray("target_component", "target_shape", "velocity_component", "hurtbox_component", "collision_shape", "hurtbox_collision_shape")]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_s8qv1")
+target_component = NodePath("TargetComponent")
+target_shape = NodePath("TargetComponent/CollisionShape2D")
+velocity_component = NodePath("VelocityComponent")
+hurtbox_component = NodePath("HurtboxComponent")
+collision_shape = NodePath("CollisionShape2D")
+hurtbox_collision_shape = NodePath("HurtboxComponent/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vd2xu")
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_hp28x")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_et5ef")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("3_kkmw7")]
+
+[node name="TargetComponent" parent="." instance=ExtResource("4_ufuqg")]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetComponent"]
+shape = SubResource("CircleShape2D_dwnp0")
+debug_color = Color(0.839216, 0, 0.929412, 0.0823529)
+
+[connection signal="target_updated" from="TargetComponent" to="." method="_on_target_component_target_updated"]

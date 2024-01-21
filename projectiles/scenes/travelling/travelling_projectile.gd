@@ -1,8 +1,12 @@
 extends BaseProjectile
 class_name TravellingProjectile
 
-@export var speed: Number
+## Travelling projectiles are projectile that have a velocity.
+
+## Velocity component used to move the projectile.
 @export var velocity_component: VelocityComponent
+## Speed of the travelling projectile.
+var speed: Number
 
 
 func _ready():
