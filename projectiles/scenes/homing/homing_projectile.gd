@@ -22,7 +22,7 @@ func set_variables(projectile_object: BaseProjectileObject) -> void:
 
 func _physics_process(_delta):
 	if current_target:
-		_direction = _direction.lerp(global_position.direction_to(current_target.global_position), homing_strength)#.normalized()
+		_direction = _direction.slerp(global_position.direction_to(current_target.global_position), homing_strength)
 	velocity_component.accelerate_in_direction(_direction)
 	velocity_component.move(self)
 
