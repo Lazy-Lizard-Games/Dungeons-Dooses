@@ -1,4 +1,4 @@
-extends VectorAction
+extends Vector
 class_name MousePositionVector
 
 ## Returns the position of the mouse.

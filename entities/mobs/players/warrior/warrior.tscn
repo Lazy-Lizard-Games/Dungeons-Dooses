@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=68 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -17,17 +17,20 @@
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
-[ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="15_7v737"]
-[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="17_4e2u7"]
+[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="16_8ak4r"]
+[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="16_b0bc5"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="16_ohp8q"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="17_q8tcr"]
+[ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="17_x0dw7"]
+[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="18_2bmry"]
 [ext_resource type="Script" path="res://abilities/ability.gd" id="18_7q27h"]
-[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="19_4xskb"]
-[ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="20_6svdo"]
-[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="20_pl3u2"]
+[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="19_ob2dw"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
-[ext_resource type="Script" path="res://projectiles/objects/homing_projectile.gd" id="21_75k3g"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="21_fcy7i"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="21_n0oxr"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="22_wkto6"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="23_02g5n"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/menu/menu_component.tscn" id="25_bfsap"]
@@ -71,66 +74,83 @@ modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_mxdme"]
 script = ExtResource("13_qljxc")
-number = 50.0
+constant = 0.0
 
 [sub_resource type="Resource" id="Resource_wxp2f"]
 script = ExtResource("14_1n4lw")
 number = SubResource("Resource_mxdme")
 
-[sub_resource type="Resource" id="Resource_4mey5"]
-script = ExtResource("15_7v737")
+[sub_resource type="Resource" id="Resource_aaxts"]
+script = ExtResource("17_q8tcr")
 
-[sub_resource type="Resource" id="Resource_6eaw8"]
-script = ExtResource("19_4xskb")
-number_min = 2.0
-number_max = 5.0
-
-[sub_resource type="Resource" id="Resource_5nlop"]
-script = ExtResource("20_pl3u2")
-type = 1
-amount = SubResource("Resource_6eaw8")
-
-[sub_resource type="Resource" id="Resource_k1ii8"]
-script = ExtResource("21_fcy7i")
-damage = SubResource("Resource_5nlop")
-
-[sub_resource type="Resource" id="Resource_fdjc5"]
-script = ExtResource("20_6svdo")
-
-[sub_resource type="Resource" id="Resource_nsyfc"]
+[sub_resource type="Resource" id="Resource_hxddk"]
 script = ExtResource("13_qljxc")
-number = 10.0
+constant = 35.0
 
-[sub_resource type="Resource" id="Resource_8h40i"]
+[sub_resource type="Resource" id="Resource_tgw18"]
 script = ExtResource("13_qljxc")
-number = 1.0
+constant = 35.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_16vw2"]
+[sub_resource type="Resource" id="Resource_fxgv0"]
+script = ExtResource("19_ob2dw")
+x = SubResource("Resource_hxddk")
+y = SubResource("Resource_tgw18")
 
-[sub_resource type="Resource" id="Resource_llrx4"]
+[sub_resource type="Resource" id="Resource_24nxp"]
+script = ExtResource("16_8ak4r")
+
+[sub_resource type="Resource" id="Resource_43b3b"]
+script = ExtResource("18_2bmry")
+vector_a = SubResource("Resource_fxgv0")
+vector_b = SubResource("Resource_24nxp")
+
+[sub_resource type="Resource" id="Resource_vydq5"]
+script = ExtResource("16_b0bc5")
+vector_a = SubResource("Resource_aaxts")
+vector_b = SubResource("Resource_43b3b")
+
+[sub_resource type="Resource" id="Resource_30hdn"]
+script = ExtResource("21_n0oxr")
+number_min = 6.0
+number_max = 9.0
+
+[sub_resource type="Resource" id="Resource_fds8j"]
+script = ExtResource("22_wkto6")
+type = 0
+amount = SubResource("Resource_30hdn")
+
+[sub_resource type="Resource" id="Resource_xilhl"]
+script = ExtResource("23_02g5n")
+damage = SubResource("Resource_fds8j")
+
+[sub_resource type="Resource" id="Resource_wjkvp"]
+script = ExtResource("16_8ak4r")
+
+[sub_resource type="Resource" id="Resource_c3ska"]
 script = ExtResource("13_qljxc")
-number = 250.0
+constant = 0.05
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7emjb"]
-radius = 100.0
+[sub_resource type="Resource" id="Resource_8jeec"]
+script = ExtResource("13_qljxc")
+constant = 1.0
 
-[sub_resource type="Resource" id="Resource_xm52q"]
-script = ExtResource("21_75k3g")
-target_shape = SubResource("CircleShape2D_7emjb")
-homing_strength = 0.015
-speed = SubResource("Resource_llrx4")
-name = ""
-pierce = 0
-duration = SubResource("Resource_nsyfc")
-direction = SubResource("Resource_fdjc5")
-scale = SubResource("Resource_8h40i")
-shape = SubResource("CircleShape2D_16vw2")
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_k1ii8")])
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ud5r"]
+size = Vector2(35, 50)
 
-[sub_resource type="Resource" id="Resource_30p3g"]
-script = ExtResource("17_4e2u7")
-projectile_object = SubResource("Resource_xm52q")
-position = SubResource("Resource_4mey5")
+[sub_resource type="Resource" id="Resource_0gq8v"]
+script = ExtResource("17_x0dw7")
+name = "Slash"
+pierce = 2
+duration = SubResource("Resource_c3ska")
+direction = SubResource("Resource_wjkvp")
+scale = SubResource("Resource_8jeec")
+shape = SubResource("RectangleShape2D_1ud5r")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_xilhl")])
+
+[sub_resource type="Resource" id="Resource_pyace"]
+script = ExtResource("16_ohp8q")
+projectile_object = SubResource("Resource_0gq8v")
+position = SubResource("Resource_vydq5")
 
 [sub_resource type="Resource" id="Resource_erwjf"]
 script = ExtResource("18_7q27h")
@@ -140,7 +160,7 @@ cost = 0.0
 cast_time = 0.15
 recharge_time = 0.25
 actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
-actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_30p3g")])
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_pyace")])
 
 [sub_resource type="Resource" id="Resource_u34i7"]
 script = ExtResource("22_uwmea")

@@ -1,4 +1,4 @@
-extends VectorAction
+extends Vector
 class_name MouseDirectionVector
 
 ## Returns the direction to the mouse from the entity.

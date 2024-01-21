@@ -1,11 +1,11 @@
 extends Number
 class_name DivisionOperator
 
-## Divides two numbers together and returns the result, or zero if division by zero.
+## Returns the result of dividing one number by another.
 
-## Numerator.
+## Number to divide from.
 @export var x: Number
-## Denominator.
+## Number to divide by.
 @export var y: Number
 
 

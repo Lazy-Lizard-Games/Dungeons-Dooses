@@ -1,24 +1,15 @@
-extends Area2D
+extends ShapeCast2D
 class_name TargetComponent
 
-signal target_updated(target: Entity)
+## Returns a target for the entity, or null if none.
+## Optionally allows for allies to be targetted.
+func get_target(entity: Entity, target_allies := false) -> Entity:
+	force_shapecast_update()
+	for i in range(get_collision_count()):
+		var body = get_collider(i)
+		if body is Entity:
+			if body == entity or (!target_allies and body.faction == entity.faction):
+				continue
+			return body
+	return null
 
-## Owner of the target component.
-var entity: Entity
-## Current target of the target component.
-var current_target: Entity:
-	set(new_target):
-		current_target = new_target
-		target_updated.emit(current_target)
-
-
-func _physics_process(_delta):
-	if !current_target:
-		for body in get_overlapping_bodies():
-			if body is Entity:
-				if body == entity or body.faction == entity.faction:
-					continue
-				current_target = body
-	else:
-		if !current_target in get_overlapping_bodies():
-			current_target = null

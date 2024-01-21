@@ -1,11 +1,11 @@
 extends Number
 class_name SubtractionOperator
 
-## Subtracts two numbers together and returns the result.
+## Returns the result of subtracting one number by another.
 
 ## Number to subtract from.
 @export var x: Number
-## Number to subtract.
+## Number to subtract by.
 @export var y: Number
 
 

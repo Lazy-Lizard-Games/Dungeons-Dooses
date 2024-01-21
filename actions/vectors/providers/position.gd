@@ -1,4 +1,4 @@
-extends VectorAction
+extends Vector
 class_name PositionVector
 
 ## Returns the position of the entity.

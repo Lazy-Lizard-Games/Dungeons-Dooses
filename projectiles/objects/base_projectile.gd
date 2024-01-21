@@ -10,7 +10,7 @@ class_name BaseProjectileObject
 ## Projectile duration.
 @export var duration: Number
 ## Projectile direction.
-@export var direction: VectorAction
+@export var direction: Vector
 ## Projectile scale.
 @export var scale: Number
 ## Projectile collision shape.

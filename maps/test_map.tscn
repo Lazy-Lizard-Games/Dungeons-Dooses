@@ -53,6 +53,15 @@ y_sort_enabled = true
 [node name="Dummy" parent="." instance=ExtResource("3_q3wdq")]
 position = Vector2(0, -129)
 
+[node name="Dummy2" parent="." instance=ExtResource("3_q3wdq")]
+position = Vector2(-54, -129)
+
+[node name="Dummy3" parent="." instance=ExtResource("3_q3wdq")]
+position = Vector2(-29, -168)
+
+[node name="Dummy4" parent="." instance=ExtResource("3_q3wdq")]
+position = Vector2(0, -210)
+
 [node name="Lootbag" parent="." instance=ExtResource("4_5mxsy")]
 position = Vector2(0, 107)
 item = SubResource("Resource_axge7")

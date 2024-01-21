@@ -1,15 +1,11 @@
 extends Number
-class_name ConstantProvider
+class_name ConstantNumber
 
-## Returns a constant number, default provider in most cases.
+## Returns a constant number.
 
-## Constant number to return on execute.
-@export var number: float
-
-
-func _init(_number: float = 0) -> void:
-	number = _number
+## Constant to return.
+@export var constant: float
 
 
 func execute() -> float:
-	return number
+	return constant if constant else 0.0

@@ -12,9 +12,12 @@ func execute(actor: Entity, target: Entity) -> void:
 	## Apply actor affinity bonuses.
 	var affinities = actor.affinities
 	var damage_affinity = affinities.get_damage_affinity(damage.type)
-	var modifier = ConstantProvider.new(1)
+	var modifier = ConstantNumber.new()
+	modifier.constant = 1
 	if damage_affinity:
-		modifier.number = 1 + damage_affinity.get_final_value()
-	var multiplier = MultiplicationOperator.new(damage.amount.duplicate(true), modifier)
-	damage.amount = multiplier
+		modifier.constant = 1 + damage_affinity.get_final_value()
+	var number = MultiplyNumber.new()
+	number.x = damage.amount
+	number.y = modifier
+	damage.amount = number
 	damage.execute(target)

@@ -1,4 +1,4 @@
-extends VectorAction
+extends Vector
 class_name VelocityVector
 
 ## Returns the velocity of the entity.

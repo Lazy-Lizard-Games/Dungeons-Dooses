@@ -16,7 +16,7 @@ var pierce: int
 ## Duration of the projectile, where anything less than zero results in infinite duration.
 var duration: Number
 ## Direction of the projectile.
-var direction: VectorAction
+var direction: Vector
 ## Actions to execute on hurt.
 var actions_on_hurt: Array[BientityAction]
 ## Entity responsible for spawning the projectile, if any.
@@ -25,6 +25,11 @@ var entity: Entity
 var current_pierce: int
 ## Current direction of the projectile.
 var _direction: Vector2
+
+## Is the projectile expired.
+var is_expired: bool:
+	get:
+		return current_pierce <= 0 and pierce > 0
 
 
 func set_variables(projectile_object: BaseProjectileObject) -> void:
@@ -55,7 +60,7 @@ func _ready() -> void:
 
 
 func on_hurt(hitbox: HitboxComponent):
-	if entity:
+	if entity and !is_expired:
 		if entity.faction != Enums.FactionType.None and hitbox.entity.faction == entity.faction:
 			return
 		if hitbox.entity:
@@ -64,5 +69,5 @@ func on_hurt(hitbox: HitboxComponent):
 			entity.hurt.emit(hitbox.entity)
 		hitbox.hit.emit(entity)
 		current_pierce -= 1
-		if current_pierce <= 0 and pierce > 0:
+		if is_expired:
 			ProjectileHandler.remove(self)

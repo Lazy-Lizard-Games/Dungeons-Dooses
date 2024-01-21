@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bv2jdsrnmje44"]
+
+[ext_resource type="Script" path="res://projectiles/scenes/laser/laser_projectile.gd" id="1_qliax"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_2uilj"]
+[ext_resource type="PackedScene" uid="uid://raxmp07wnacw" path="res://components/commands/target/target_component.tscn" id="3_frrs1"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vx64d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8cohc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i5jte"]
+radius = 100.0
+
+[node name="LaserProjectile" type="CharacterBody2D" node_paths=PackedStringArray("raycast", "target_component")]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_qliax")
+raycast = NodePath("RayCast2D")
+target_component = NodePath("TargetComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vx64d")
+disabled = true
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_2uilj")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_8cohc")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(1, 0)
+collision_mask = 5
+
+[node name="TargetComponent" parent="." instance=ExtResource("3_frrs1")]
+shape = SubResource("CircleShape2D_i5jte")

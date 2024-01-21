@@ -15,11 +15,14 @@ var target_copy: Entity
 
 func execute(actor: Entity, target: Entity) -> void:
 	var damage_affinity = actor.affinities.get_damage_affinity(damage_entity.type)
-	var modifier = ConstantProvider.new(1)
+	var modifier = ConstantNumber.new()
+	modifier.constant = 1
 	if damage_affinity:
-		modifier.number = 1 + damage_affinity.get_final_value()
-	var multiplier = MultiplicationOperator.new(damage_entity.amount, modifier)
-	damage_entity.amount = multiplier
+		modifier.constant = 1 + damage_affinity.get_final_value()
+	var number = MultiplyNumber.new()
+	number.x = damage_entity.amount
+	number.y = modifier
+	damage_entity.amount = number
 	ticking_timer = Timer.new()
 	ticking_timer.timeout.connect(damage.bind(target))
 	target.add_child(ticking_timer)

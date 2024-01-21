@@ -1,10 +1,10 @@
-extends VectorAction
+extends Vector
 class_name NormalizeVector
 
 ## Returns the vector after it has been normalized.
 
 ## Vector to be normalized.
-@export var vector: VectorAction
+@export var vector: Vector
 
 
 func get_vector(entity: Entity) -> Vector2:
