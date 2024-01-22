@@ -43,6 +43,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("select_ability_4"):
 		selected_ability = 3
 	
+	if Input.is_action_just_pressed("consumable_1"):
+		inventory_component.inventory.consume_slot(4, self)
+	
+	if Input.is_action_just_pressed("consumable_2"):
+		inventory_component.inventory.consume_slot(5, self)
+	
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
 	

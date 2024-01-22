@@ -1,4 +1,4 @@
-[gd_scene load_steps=124 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=126 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -413,27 +413,43 @@ actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
 
 [sub_resource type="Resource" id="Resource_u34i7"]
 script = ExtResource("22_uwmea")
-type = 3
+item_type = 2
 stack = 0
+equipment_type = 2
 
 [sub_resource type="Resource" id="Resource_pih7n"]
 script = ExtResource("22_uwmea")
-type = 2
+item_type = 2
 stack = 0
+equipment_type = 1
 
 [sub_resource type="Resource" id="Resource_3t68r"]
 script = ExtResource("22_uwmea")
-type = 4
+item_type = 2
 stack = 0
+equipment_type = 0
 
 [sub_resource type="Resource" id="Resource_0yhk7"]
 script = ExtResource("22_uwmea")
-type = 1
+item_type = 2
 stack = 0
+equipment_type = 3
+
+[sub_resource type="Resource" id="Resource_wkh47"]
+script = ExtResource("22_uwmea")
+item_type = 1
+stack = 0
+equipment_type = null
+
+[sub_resource type="Resource" id="Resource_r1c1s"]
+script = ExtResource("22_uwmea")
+item_type = 1
+stack = 0
+equipment_type = null
 
 [sub_resource type="Resource" id="Resource_bia7r"]
 script = ExtResource("21_oguyd")
-slots = Array[ExtResource("22_uwmea")]([SubResource("Resource_u34i7"), SubResource("Resource_pih7n"), SubResource("Resource_3t68r"), SubResource("Resource_0yhk7"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+slots = Array[ExtResource("22_uwmea")]([SubResource("Resource_u34i7"), SubResource("Resource_pih7n"), SubResource("Resource_3t68r"), SubResource("Resource_0yhk7"), SubResource("Resource_wkh47"), SubResource("Resource_r1c1s"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(40, 40)

@@ -15,17 +15,20 @@ enum InventoryType
 	Crate,
 }
 
-enum ItemType 
+enum ItemType
 {
 	Item,
+	Consumable,
+	Equipment,
+}
+
+enum EquipmentType 
+{
 	Ring,
 	Necklace,
 	Circlet,
 	Charm,
-	Consumable,
 }
-
-var equipment = [ItemType.Charm, ItemType.Circlet, ItemType.Ring, ItemType.Necklace]
 
 enum FactionType
 {

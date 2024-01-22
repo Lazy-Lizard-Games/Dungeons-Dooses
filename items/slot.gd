@@ -1,14 +1,35 @@
+@tool
 extends Resource
 class_name Slot
 
 signal updated
 
 ## Type of item that is accepted by this slot. `Item` permits any item.
-@export var type: Enums.ItemType = Enums.ItemType.Item
+@export var item_type: Enums.ItemType:
+	set(new_type):
+		item_type = new_type
+		notify_property_list_changed()
 ## Item that is loaded into the slot.
 @export var item: Item = null
 ## Stack of the item that is loaded in the slot
 @export var stack: int = 0
+## If item type is equipment, species type of equipment.
+var equipment_type: Enums.EquipmentType
+
+
+func _get_property_list():
+	var property_usage = PROPERTY_USAGE_NO_EDITOR
+	if item_type == Enums.ItemType.Equipment:
+		property_usage = PROPERTY_USAGE_DEFAULT
+	var properties = []
+	properties.append({
+		"name": "equipment_type",
+		"type": TYPE_INT,
+		"usage": property_usage, # See above assignment.
+		"hint": PROPERTY_HINT_ENUM,
+		"hint_string": "Ring,Necklace,Circlet,Charm"
+	})
+	return properties
 
 
 func set_slot(new_item: Item, new_stack: int) -> void:
