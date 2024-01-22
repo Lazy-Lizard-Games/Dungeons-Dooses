@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://vskc5vqm3r7d"]
+
+[ext_resource type="Script" path="res://components/libraries/skill/skill_component.gd" id="1_veqym"]
+
+[node name="SkillComponent" type="Node"]
+script = ExtResource("1_veqym")
