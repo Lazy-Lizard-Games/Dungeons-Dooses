@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=124 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -17,23 +17,24 @@
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
-[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="16_8ak4r"]
-[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="16_b0bc5"]
-[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="16_ohp8q"]
-[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="17_q8tcr"]
-[ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="17_x0dw7"]
-[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="18_2bmry"]
-[ext_resource type="Script" path="res://abilities/ability.gd" id="18_7q27h"]
-[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="19_ob2dw"]
+[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="16_6u2k5"]
+[ext_resource type="Script" path="res://abilities/charged_ability.gd" id="16_ecg8s"]
+[ext_resource type="Script" path="res://abilities/charge_level.gd" id="16_kbgua"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="17_fa87q"]
+[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="18_obar6"]
+[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="19_ch1ae"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
-[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="21_n0oxr"]
+[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="20_v6yld"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="21_roh45"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="22_t8som"]
 [ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
-[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="22_wkto6"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="23_02g5n"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="23_mjhuu"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
+[ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="24_tweln"]
 [ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/menu/menu_component.tscn" id="25_bfsap"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="25_xtx7g"]
 
 [sub_resource type="Resource" id="Resource_eqsvv"]
 script = ExtResource("2_acrq8")
@@ -80,87 +81,335 @@ constant = 0.0
 script = ExtResource("14_1n4lw")
 number = SubResource("Resource_mxdme")
 
-[sub_resource type="Resource" id="Resource_aaxts"]
-script = ExtResource("17_q8tcr")
-
-[sub_resource type="Resource" id="Resource_hxddk"]
-script = ExtResource("13_qljxc")
-constant = 35.0
-
-[sub_resource type="Resource" id="Resource_tgw18"]
-script = ExtResource("13_qljxc")
-constant = 35.0
-
-[sub_resource type="Resource" id="Resource_fxgv0"]
-script = ExtResource("19_ob2dw")
-x = SubResource("Resource_hxddk")
-y = SubResource("Resource_tgw18")
-
-[sub_resource type="Resource" id="Resource_24nxp"]
-script = ExtResource("16_8ak4r")
-
-[sub_resource type="Resource" id="Resource_43b3b"]
-script = ExtResource("18_2bmry")
-vector_a = SubResource("Resource_fxgv0")
-vector_b = SubResource("Resource_24nxp")
-
-[sub_resource type="Resource" id="Resource_vydq5"]
-script = ExtResource("16_b0bc5")
-vector_a = SubResource("Resource_aaxts")
-vector_b = SubResource("Resource_43b3b")
-
-[sub_resource type="Resource" id="Resource_30hdn"]
-script = ExtResource("21_n0oxr")
-number_min = 6.0
-number_max = 9.0
-
-[sub_resource type="Resource" id="Resource_fds8j"]
-script = ExtResource("22_wkto6")
-type = 0
-amount = SubResource("Resource_30hdn")
-
-[sub_resource type="Resource" id="Resource_xilhl"]
-script = ExtResource("23_02g5n")
-damage = SubResource("Resource_fds8j")
-
-[sub_resource type="Resource" id="Resource_wjkvp"]
-script = ExtResource("16_8ak4r")
-
-[sub_resource type="Resource" id="Resource_c3ska"]
-script = ExtResource("13_qljxc")
-constant = 0.05
-
-[sub_resource type="Resource" id="Resource_8jeec"]
+[sub_resource type="Resource" id="Resource_j2k36"]
 script = ExtResource("13_qljxc")
 constant = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ud5r"]
-size = Vector2(35, 50)
+[sub_resource type="Resource" id="Resource_u7kxl"]
+script = ExtResource("17_fa87q")
 
-[sub_resource type="Resource" id="Resource_0gq8v"]
-script = ExtResource("17_x0dw7")
-name = "Slash"
-pierce = 2
-duration = SubResource("Resource_c3ska")
-direction = SubResource("Resource_wjkvp")
-scale = SubResource("Resource_8jeec")
-shape = SubResource("RectangleShape2D_1ud5r")
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_xilhl")])
+[sub_resource type="Resource" id="Resource_hrmvs"]
+script = ExtResource("13_qljxc")
+constant = 35.0
 
-[sub_resource type="Resource" id="Resource_pyace"]
-script = ExtResource("16_ohp8q")
-projectile_object = SubResource("Resource_0gq8v")
-position = SubResource("Resource_vydq5")
+[sub_resource type="Resource" id="Resource_xcqed"]
+script = ExtResource("13_qljxc")
+constant = 35.0
 
-[sub_resource type="Resource" id="Resource_erwjf"]
-script = ExtResource("18_7q27h")
-name = "Fireball"
+[sub_resource type="Resource" id="Resource_i4dhp"]
+script = ExtResource("19_ch1ae")
+x = SubResource("Resource_hrmvs")
+y = SubResource("Resource_xcqed")
+
+[sub_resource type="Resource" id="Resource_7tr1f"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_xe772"]
+script = ExtResource("18_obar6")
+vector_a = SubResource("Resource_i4dhp")
+vector_b = SubResource("Resource_7tr1f")
+
+[sub_resource type="Resource" id="Resource_blqe5"]
+script = ExtResource("16_6u2k5")
+vector_a = SubResource("Resource_u7kxl")
+vector_b = SubResource("Resource_xe772")
+
+[sub_resource type="Resource" id="Resource_6pmxj"]
+script = ExtResource("21_roh45")
+number_min = 14.0
+number_max = 22.0
+
+[sub_resource type="Resource" id="Resource_uaxq0"]
+script = ExtResource("22_t8som")
+type = 0
+amount = SubResource("Resource_6pmxj")
+
+[sub_resource type="Resource" id="Resource_2jge2"]
+script = ExtResource("23_mjhuu")
+damage = SubResource("Resource_uaxq0")
+
+[sub_resource type="Resource" id="Resource_r7hb0"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_5u2g6"]
+script = ExtResource("13_qljxc")
+constant = 0.05
+
+[sub_resource type="Resource" id="Resource_r85q5"]
+script = ExtResource("13_qljxc")
+constant = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phnrb"]
+size = Vector2(45, 75)
+
+[sub_resource type="Resource" id="Resource_lvamg"]
+script = ExtResource("24_tweln")
+name = ""
+pierce = 0
+duration = SubResource("Resource_5u2g6")
+direction = SubResource("Resource_r7hb0")
+scale = SubResource("Resource_r85q5")
+shape = SubResource("RectangleShape2D_phnrb")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_2jge2")])
+
+[sub_resource type="Resource" id="Resource_jipp3"]
+script = ExtResource("25_xtx7g")
+projectile_object = SubResource("Resource_lvamg")
+position = SubResource("Resource_blqe5")
+
+[sub_resource type="Resource" id="Resource_cdkfp"]
+script = ExtResource("16_kbgua")
+minimum_charge = 1.0
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_jipp3")])
+
+[sub_resource type="Resource" id="Resource_rwkd1"]
+script = ExtResource("17_fa87q")
+
+[sub_resource type="Resource" id="Resource_3t020"]
+script = ExtResource("13_qljxc")
+constant = 30.0
+
+[sub_resource type="Resource" id="Resource_g3wn0"]
+script = ExtResource("13_qljxc")
+constant = 30.0
+
+[sub_resource type="Resource" id="Resource_o8ela"]
+script = ExtResource("19_ch1ae")
+x = SubResource("Resource_3t020")
+y = SubResource("Resource_g3wn0")
+
+[sub_resource type="Resource" id="Resource_uielm"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_ffyk8"]
+script = ExtResource("18_obar6")
+vector_a = SubResource("Resource_o8ela")
+vector_b = SubResource("Resource_uielm")
+
+[sub_resource type="Resource" id="Resource_4qple"]
+script = ExtResource("16_6u2k5")
+vector_a = SubResource("Resource_rwkd1")
+vector_b = SubResource("Resource_ffyk8")
+
+[sub_resource type="Resource" id="Resource_gb055"]
+script = ExtResource("21_roh45")
+number_min = 8.0
+number_max = 14.0
+
+[sub_resource type="Resource" id="Resource_dqyx0"]
+script = ExtResource("22_t8som")
+type = 0
+amount = SubResource("Resource_gb055")
+
+[sub_resource type="Resource" id="Resource_lid8t"]
+script = ExtResource("23_mjhuu")
+damage = SubResource("Resource_dqyx0")
+
+[sub_resource type="Resource" id="Resource_i68ml"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_ux7tm"]
+script = ExtResource("13_qljxc")
+constant = 0.05
+
+[sub_resource type="Resource" id="Resource_jj07m"]
+script = ExtResource("13_qljxc")
+constant = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e6ww"]
+size = Vector2(40, 65)
+
+[sub_resource type="Resource" id="Resource_ekvmg"]
+script = ExtResource("24_tweln")
+name = ""
+pierce = 0
+duration = SubResource("Resource_ux7tm")
+direction = SubResource("Resource_i68ml")
+scale = SubResource("Resource_jj07m")
+shape = SubResource("RectangleShape2D_5e6ww")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_lid8t")])
+
+[sub_resource type="Resource" id="Resource_k40em"]
+script = ExtResource("25_xtx7g")
+projectile_object = SubResource("Resource_ekvmg")
+position = SubResource("Resource_4qple")
+
+[sub_resource type="Resource" id="Resource_lxlk7"]
+script = ExtResource("16_kbgua")
+minimum_charge = 0.75
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_k40em")])
+
+[sub_resource type="Resource" id="Resource_3jclu"]
+script = ExtResource("17_fa87q")
+
+[sub_resource type="Resource" id="Resource_bx3fp"]
+script = ExtResource("13_qljxc")
+constant = 35.0
+
+[sub_resource type="Resource" id="Resource_1poo4"]
+script = ExtResource("13_qljxc")
+constant = 35.0
+
+[sub_resource type="Resource" id="Resource_7dfjx"]
+script = ExtResource("19_ch1ae")
+x = SubResource("Resource_bx3fp")
+y = SubResource("Resource_1poo4")
+
+[sub_resource type="Resource" id="Resource_m24fp"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_0nqwg"]
+script = ExtResource("18_obar6")
+vector_a = SubResource("Resource_7dfjx")
+vector_b = SubResource("Resource_m24fp")
+
+[sub_resource type="Resource" id="Resource_tmv36"]
+script = ExtResource("16_6u2k5")
+vector_a = SubResource("Resource_3jclu")
+vector_b = SubResource("Resource_0nqwg")
+
+[sub_resource type="Resource" id="Resource_kvy7i"]
+script = ExtResource("21_roh45")
+number_min = 4.0
+number_max = 8.0
+
+[sub_resource type="Resource" id="Resource_i840b"]
+script = ExtResource("22_t8som")
+type = 0
+amount = SubResource("Resource_kvy7i")
+
+[sub_resource type="Resource" id="Resource_ktela"]
+script = ExtResource("23_mjhuu")
+damage = SubResource("Resource_i840b")
+
+[sub_resource type="Resource" id="Resource_4f1tk"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_i4pyx"]
+script = ExtResource("13_qljxc")
+constant = 0.05
+
+[sub_resource type="Resource" id="Resource_yu2e7"]
+script = ExtResource("13_qljxc")
+constant = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ep4pm"]
+size = Vector2(35, 55)
+
+[sub_resource type="Resource" id="Resource_hwvak"]
+script = ExtResource("24_tweln")
+name = ""
+pierce = 0
+duration = SubResource("Resource_i4pyx")
+direction = SubResource("Resource_4f1tk")
+scale = SubResource("Resource_yu2e7")
+shape = SubResource("RectangleShape2D_ep4pm")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_ktela")])
+
+[sub_resource type="Resource" id="Resource_1fjdb"]
+script = ExtResource("25_xtx7g")
+projectile_object = SubResource("Resource_hwvak")
+position = SubResource("Resource_tmv36")
+
+[sub_resource type="Resource" id="Resource_77jw4"]
+script = ExtResource("16_kbgua")
+minimum_charge = 0.5
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1fjdb")])
+
+[sub_resource type="Resource" id="Resource_i7jsq"]
+script = ExtResource("17_fa87q")
+
+[sub_resource type="Resource" id="Resource_ag78x"]
+script = ExtResource("13_qljxc")
+constant = 35.0
+
+[sub_resource type="Resource" id="Resource_bkvkt"]
+script = ExtResource("13_qljxc")
+constant = 35.0
+
+[sub_resource type="Resource" id="Resource_fqtap"]
+script = ExtResource("19_ch1ae")
+x = SubResource("Resource_ag78x")
+y = SubResource("Resource_bkvkt")
+
+[sub_resource type="Resource" id="Resource_lg8xe"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_k3ogi"]
+script = ExtResource("18_obar6")
+vector_a = SubResource("Resource_fqtap")
+vector_b = SubResource("Resource_lg8xe")
+
+[sub_resource type="Resource" id="Resource_bupdk"]
+script = ExtResource("16_6u2k5")
+vector_a = SubResource("Resource_i7jsq")
+vector_b = SubResource("Resource_k3ogi")
+
+[sub_resource type="Resource" id="Resource_mlon5"]
+script = ExtResource("21_roh45")
+number_min = 2.0
+number_max = 4.0
+
+[sub_resource type="Resource" id="Resource_13hkh"]
+script = ExtResource("22_t8som")
+type = 0
+amount = SubResource("Resource_mlon5")
+
+[sub_resource type="Resource" id="Resource_qpljg"]
+script = ExtResource("23_mjhuu")
+damage = SubResource("Resource_13hkh")
+
+[sub_resource type="Resource" id="Resource_ss0eu"]
+script = ExtResource("20_v6yld")
+
+[sub_resource type="Resource" id="Resource_gwm68"]
+script = ExtResource("13_qljxc")
+constant = 0.05
+
+[sub_resource type="Resource" id="Resource_slrks"]
+script = ExtResource("13_qljxc")
+constant = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_odn4u"]
+size = Vector2(30, 45)
+
+[sub_resource type="Resource" id="Resource_3np36"]
+script = ExtResource("24_tweln")
+name = ""
+pierce = 0
+duration = SubResource("Resource_gwm68")
+direction = SubResource("Resource_ss0eu")
+scale = SubResource("Resource_slrks")
+shape = SubResource("RectangleShape2D_odn4u")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_qpljg")])
+
+[sub_resource type="Resource" id="Resource_go5hi"]
+script = ExtResource("25_xtx7g")
+projectile_object = SubResource("Resource_3np36")
+position = SubResource("Resource_bupdk")
+
+[sub_resource type="Resource" id="Resource_1ej5b"]
+script = ExtResource("16_kbgua")
+minimum_charge = 0.25
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_go5hi")])
+
+[sub_resource type="Resource" id="Resource_ffwfu"]
+script = ExtResource("13_qljxc")
+constant = 0.0
+
+[sub_resource type="Resource" id="Resource_5wqrs"]
+script = ExtResource("13_qljxc")
+constant = 1.0
+
+[sub_resource type="Resource" id="Resource_nd7mp"]
+script = ExtResource("16_ecg8s")
+charge_levels = Array[ExtResource("16_kbgua")]([SubResource("Resource_cdkfp"), SubResource("Resource_lxlk7"), SubResource("Resource_77jw4"), SubResource("Resource_1ej5b")])
+name = "Decapitate"
 description = ""
-cost = 0.0
-cast_time = 0.15
-recharge_time = 0.25
+cost = SubResource("Resource_ffwfu")
+cast_time = SubResource("Resource_j2k36")
+recharge_time = SubResource("Resource_5wqrs")
 actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
-actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_pyace")])
 
 [sub_resource type="Resource" id="Resource_u34i7"]
 script = ExtResource("22_uwmea")
@@ -261,7 +510,7 @@ friction = SubResource("Resource_ulxov")
 actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
-abilities = Array[ExtResource("18_7q27h")]([SubResource("Resource_erwjf")])
+abilities = Array[Resource("res://abilities/ability.gd")]([SubResource("Resource_nd7mp")])
 
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
 inventory = SubResource("Resource_bia7r")

@@ -27,5 +27,5 @@ func process_physics(_delta: float) -> State:
 		return idle_state
 	if hud_component.visible:
 		velocity_component.accelerate_in_direction(direction)
-		velocity_component.move(parent)
+		velocity_component.move(entity)
 	return null

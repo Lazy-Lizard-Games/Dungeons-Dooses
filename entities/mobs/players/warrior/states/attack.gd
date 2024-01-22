@@ -12,7 +12,7 @@ var ability: Ability
 
 
 func enter() -> void:
-	ability = ability_component.get_ability(parent.selected_ability)
+	ability = ability_component.get_ability(entity.selected_ability)
 	if !ability or ability.is_recharging:
 		switch_state()
 		return
@@ -21,7 +21,7 @@ func enter() -> void:
 		func():
 			switch_state()
 	)
-	ability.start(parent)
+	ability.start(entity)
 
 
 func exit() -> void:
@@ -33,13 +33,16 @@ func exit() -> void:
 func process_physics(_delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	velocity_component.accelerate_in_direction(direction)
-	velocity_component.move(parent)
+	velocity_component.move(entity)
 	return null
 
 
 func process_input(_event: InputEvent) -> State:
+	if Input.is_action_just_released("primary"):
+		ability.release(entity)
+		return null
 	if Input.is_action_just_pressed("secondary"):
-		ability.cancel()
+		ability.cancel(entity)
 		return idle_state
 	return null
 

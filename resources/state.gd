@@ -2,7 +2,7 @@ extends Node
 class_name State
 
 
-var parent: Entity
+var entity: Entity
 
 
 func enter() -> void:

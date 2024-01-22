@@ -11,20 +11,20 @@ signal recharged
 ## Icon of the ability
 @export var icon: Image
 ## Cost in stamina of the ability.
-@export var cost: float
+@export var cost: Number
 ## Cast time in seconds of the ability.
-@export var cast_time: float
+@export var cast_time: Number
 ## Recharge time in seconds of the ability.
-@export var recharge_time: float 
+@export var recharge_time: Number 
 ## Actions to execute on the caster when the ability is started.
 @export var actions_on_start: Array[EntityAction]
-## Actions to execute on the caster when the ability is cast.
-@export var actions_on_cast: Array[EntityAction]
 
 var is_recharging := false
 var is_casting := false
 var caster: Entity
 var facing: Vector2
+var recharge_timer: Timer
+var cast_timer: Timer
 
 
 ## Starts the ability with the entity as the caster.
@@ -34,36 +34,54 @@ func start(entity: Entity) -> void:
 	caster = entity
 	for action in actions_on_start:
 		action.execute(caster)
-	if cast_time > 0:
+	start_cast(entity)
+
+
+func start_cast(entity: Entity) -> void:
+	var _cast_time = cast_time.execute()
+	if _cast_time > 0:
 		is_casting = true
-		caster.get_tree().create_timer(cast_time * entity.generics.cast_time.get_final_value()).timeout.connect(
-			func():
-				cast(entity)
-		)
+		cast_timer = Timer.new()
+		cast_timer.timeout.connect(cast.bind(entity))
+		entity.add_child(cast_timer)
+		cast_timer.start(_cast_time * entity.generics.cast_time.get_final_value())
 	else:
 		cast(entity)
 
 
 func cast(entity: Entity) -> void:
+	entity.remove_child(cast_timer)
 	is_casting = false
 	casted.emit()
-	for action in actions_on_cast:
-		action.execute(caster)
-	if recharge_time > 0:
+	start_recharge(entity)
+
+
+func start_recharge(entity: Entity) -> void:
+	var _recharge_time = recharge_time.execute()
+	if _recharge_time > 0:
 		is_recharging = true
-		caster.get_tree().create_timer(recharge_time * entity.generics.recharge_time.get_final_value()).timeout.connect(
-			func():
-				recharge()
-		)
+		recharge_timer = Timer.new()
+		recharge_timer.timeout.connect(recharge.bind(entity))
+		entity.add_child(recharge_timer)
+		recharge_timer.start(_recharge_time * entity.generics.recharge_time.get_final_value())
 	else:
-		recharge()
+		recharge(entity)
 
 
-
-func recharge() -> void:
+func recharge(entity: Entity) -> void:
+	entity.remove_child(recharge_timer)
 	is_recharging = false
 	recharged.emit()
 
 
-func cancel() -> void:
+func cancel(entity: Entity) -> void:
+	if is_casting:
+		entity.remove_child(cast_timer)
+		is_casting = false
+		casted.emit()
+	start_recharge(entity)
+
+
+func release(_entity: Entity) -> void:
 	pass
+

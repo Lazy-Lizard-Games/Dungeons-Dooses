@@ -21,7 +21,7 @@ func process_physics(_delta: float) -> State:
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down").length() > 0 and hud_component.visible:
 		return move_state
 	velocity_component.decelerate()
-	velocity_component.move(parent)
+	velocity_component.move(entity)
 	return null
 
 

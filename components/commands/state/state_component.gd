@@ -7,9 +7,9 @@ var starting_state: State
 var current_state: State
 
 
-func init(_parent: Entity) -> void:
+func init(entity: Entity) -> void:
 	for child in get_children():
-		child.parent = _parent
+		child.entity = entity
 	change_state(starting_state)
 
 
