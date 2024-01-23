@@ -1,11 +1,11 @@
 extends MarginContainer
-class_name MenuComponent
+class_name InventoryMenu
 
 @export var inventory_component: InventoryComponent
 @export var entity: Entity
 
 @onready var equipment_grid_container: GridContainer = $HSplitContainer/Equipment/MarginContainer/GridContainer
-@onready var inventory_grid_container: GridContainer = $HSplitContainer/Inventory/MarginContainer/GridContainer
+@onready var inventory_grid_container: GridContainer = $HSplitContainer/Backpack/MarginContainer/GridContainer
 @onready var grabbed_slot_container: SlotContainer = $SlotContainer
 
 var slot_container_scene = preload("res://components/ui/slot/slot_container.tscn")

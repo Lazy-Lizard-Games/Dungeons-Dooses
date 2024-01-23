@@ -1,4 +1,4 @@
-[gd_scene load_steps=126 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=127 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -33,8 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="24_tweln"]
-[ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/menu/menu_component.tscn" id="25_bfsap"]
+[ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/inventory_menu/inventory_menu.tscn" id="25_bfsap"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="25_xtx7g"]
+[ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/libraries/skill/skill_component.tscn" id="28_nfmj8"]
 
 [sub_resource type="Resource" id="Resource_eqsvv"]
 script = ExtResource("2_acrq8")
@@ -439,13 +440,13 @@ equipment_type = 3
 script = ExtResource("22_uwmea")
 item_type = 1
 stack = 0
-equipment_type = null
+equipment_type = 0
 
 [sub_resource type="Resource" id="Resource_r1c1s"]
 script = ExtResource("22_uwmea")
 item_type = 1
 stack = 0
-equipment_type = null
+equipment_type = 0
 
 [sub_resource type="Resource" id="Resource_bia7r"]
 script = ExtResource("21_oguyd")
@@ -528,6 +529,8 @@ actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubR
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 abilities = Array[Resource("res://abilities/ability.gd")]([SubResource("Resource_nd7mp")])
 
+[node name="SkillComponent" parent="." instance=ExtResource("28_nfmj8")]
+
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
 inventory = SubResource("Resource_bia7r")
 
@@ -549,14 +552,14 @@ debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hud", "menu")]
 script = ExtResource("24_iql77")
 hud = NodePath("HudComponent")
-menu = NodePath("MenuComponent")
+menu = NodePath("InventoryMenuComponent")
 
 [node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
 health = NodePath("../../HealthComponent")
 inventory = NodePath("../../InventoryComponent")
 action = NodePath("../../ActionComponent")
 
-[node name="MenuComponent" parent="UI" node_paths=PackedStringArray("inventory_component", "entity") instance=ExtResource("25_bfsap")]
+[node name="InventoryMenuComponent" parent="UI" node_paths=PackedStringArray("inventory_component", "entity") instance=ExtResource("25_bfsap")]
 visible = false
 inventory_component = NodePath("../../InventoryComponent")
 entity = NodePath("../..")

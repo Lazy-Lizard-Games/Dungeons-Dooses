@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 @export var hud: HudComponent
-@export var menu: MenuComponent
+@export var menu: Menu
 
 
 func toggle(entity: Entity) -> void:
