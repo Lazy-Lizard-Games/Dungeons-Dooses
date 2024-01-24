@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=135 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -30,12 +30,16 @@
 [ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="22_t8som"]
 [ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="23_mjhuu"]
-[ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
+[ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="24_tweln"]
-[ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/inventory_menu/inventory_menu.tscn" id="25_bfsap"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="25_xtx7g"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/libraries/skill/skill_component.tscn" id="28_nfmj8"]
+[ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
+[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="30_ilkdu"]
+[ext_resource type="Script" path="res://skills/skill.gd" id="30_q706k"]
+[ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="31_hnlfe"]
+[ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
 
 [sub_resource type="Resource" id="Resource_eqsvv"]
 script = ExtResource("2_acrq8")
@@ -412,6 +416,29 @@ cast_time = SubResource("Resource_j2k36")
 recharge_time = SubResource("Resource_5wqrs")
 actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
 
+[sub_resource type="Resource" id="Resource_pabeh"]
+script = ExtResource("31_hnlfe")
+type = 4
+operation = 1
+value = 2.0
+
+[sub_resource type="Resource" id="Resource_ele1f"]
+script = ExtResource("30_ilkdu")
+stacking_entity = SubResource("Resource_pabeh")
+
+[sub_resource type="Resource" id="Resource_wjcm1"]
+script = ExtResource("30_q706k")
+name = "Chickpeas"
+description = "Chickpeas make you go really really fast!"
+max_stacks = 5
+actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([SubResource("Resource_ele1f")])
+
+[sub_resource type="Resource" id="Resource_nqfhd"]
+script = ExtResource("29_uqb7t")
+name = "Wabaloo"
+color = Color(0.545098, 1, 0, 1)
+skills = Array[ExtResource("30_q706k")]([null, SubResource("Resource_wjcm1"), null, null, null, null, null, null, null, null, null, null, null, null, null])
+
 [sub_resource type="Resource" id="Resource_u34i7"]
 script = ExtResource("22_uwmea")
 item_type = 2
@@ -492,21 +519,19 @@ shape = SubResource("RectangleShape2D_ts4su")
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "velocity_component", "ability_component", "hud_component")]
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "velocity_component", "ability_component")]
 script = ExtResource("3_un612")
 color_rect = NodePath("../../ColorRect")
 move_state = NodePath("../Move")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
-hud_component = NodePath("../../UI/HudComponent")
 
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "velocity_component", "ability_component", "hud_component")]
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "velocity_component", "ability_component")]
 script = ExtResource("4_lhxmr")
 color_rect = NodePath("../../ColorRect")
 idle_state = NodePath("../Idle")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
-hud_component = NodePath("../../UI/HudComponent")
 
 [node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component")]
 script = ExtResource("5_vbqk7")
@@ -530,6 +555,8 @@ actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubR
 abilities = Array[Resource("res://abilities/ability.gd")]([SubResource("Resource_nd7mp")])
 
 [node name="SkillComponent" parent="." instance=ExtResource("28_nfmj8")]
+skill_points = 10
+skill_trees = Array[ExtResource("29_uqb7t")]([SubResource("Resource_nqfhd")])
 
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
 inventory = SubResource("Resource_bia7r")
@@ -551,17 +578,25 @@ debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hud", "menu")]
 script = ExtResource("24_iql77")
-hud = NodePath("HudComponent")
-menu = NodePath("InventoryMenuComponent")
+hud = NodePath("Hud")
+menu = NodePath("Menu")
 
-[node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
+[node name="Hud" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
 health = NodePath("../../HealthComponent")
 inventory = NodePath("../../InventoryComponent")
 action = NodePath("../../ActionComponent")
 
-[node name="InventoryMenuComponent" parent="UI" node_paths=PackedStringArray("inventory_component", "entity") instance=ExtResource("25_bfsap")]
+[node name="Menu" parent="UI" instance=ExtResource("36_kpxb1")]
 visible = false
-inventory_component = NodePath("../../InventoryComponent")
-entity = NodePath("../..")
+
+[node name="InventoryMenu" parent="UI/Menu/MarginContainer/TabContainer" index="1" node_paths=PackedStringArray("inventory_component", "entity")]
+inventory_component = NodePath("../../../../../InventoryComponent")
+entity = NodePath("../../../../..")
+
+[node name="SkillMenu" parent="UI/Menu/MarginContainer/TabContainer" index="2" node_paths=PackedStringArray("skill_component", "entity")]
+skill_component = NodePath("../../../../../SkillComponent")
+entity = NodePath("../../../../..")
 
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
+
+[editable path="UI/Menu"]

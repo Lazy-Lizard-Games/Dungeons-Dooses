@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbib2fjatckxd"]
+[gd_scene load_steps=3 format=3 uid="uid://dbib2fjatckxd"]
 
 [ext_resource type="Script" path="res://components/ui/skill_menu/skill_menu.gd" id="1_r5itr"]
+[ext_resource type="PackedScene" uid="uid://c461v3kx2a7il" path="res://components/ui/skill_menu/skill_slot/skill_slot.tscn" id="2_wwtkd"]
 
 [node name="SkillMenu" type="MarginContainer"]
 anchors_preset = 15
@@ -14,26 +15,73 @@ script = ExtResource("1_r5itr")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
+alignment = 1
 
 [node name="LeftMarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="CurrentSkillTree" type="Panel" parent="HBoxContainer"]
+[node name="CurrentSkillTree" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_vertical = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/CurrentSkillTree"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/CurrentSkillTree/MarginContainer"]
 layout_mode = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
 columns = 3
+
+[node name="SkillSlot" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot2" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot3" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot4" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot5" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot6" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot7" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot8" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot9" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot10" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot11" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot12" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot13" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot14" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
+
+[node name="SkillSlot15" parent="HBoxContainer/CurrentSkillTree/MarginContainer/GridContainer" instance=ExtResource("2_wwtkd")]
+layout_mode = 2
 
 [node name="RightMarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2

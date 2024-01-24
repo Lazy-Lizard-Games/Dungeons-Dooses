@@ -1,5 +1,5 @@
 extends Control
-class_name HudComponent
+class_name Hud
 
 ## Health component.
 @export var health: HealthComponent

@@ -12,19 +12,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 150
-theme_override_constants/margin_top = 30
-theme_override_constants/margin_right = 150
-theme_override_constants/margin_bottom = 30
 script = ExtResource("1_f8i01")
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="HSplitContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-split_offset = 400
-dragger_visibility = 1
 
 [node name="Equipment" type="Panel" parent="HSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/Equipment"]
 layout_mode = 1
@@ -44,6 +39,8 @@ size_flags_horizontal = 8
 
 [node name="Backpack" type="Panel" parent="HSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/Backpack"]
 layout_mode = 1
@@ -62,6 +59,7 @@ layout_mode = 2
 columns = 8
 
 [node name="SlotContainer" parent="." instance=ExtResource("2_j2swy")]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_8iy02")

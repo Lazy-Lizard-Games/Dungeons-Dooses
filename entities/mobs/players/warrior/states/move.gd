@@ -4,7 +4,6 @@ extends State
 @export var idle_state: State
 @export var velocity_component: VelocityComponent
 @export var ability_component: AbilityComponent
-@export var hud_component: HudComponent
 
 var direction := Vector2.ZERO
 
@@ -25,7 +24,6 @@ func process_physics(_delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction.length() == 0:
 		return idle_state
-	if hud_component.visible:
-		velocity_component.accelerate_in_direction(direction)
-		velocity_component.move(entity)
+	velocity_component.accelerate_in_direction(direction)
+	velocity_component.move(entity)
 	return null

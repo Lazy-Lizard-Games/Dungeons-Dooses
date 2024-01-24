@@ -1,9 +1,9 @@
 extends BientityAction
 class_name AddBientityResourceAction
 
-## Stacking resource to add stacks to on the entity.
+## Stacking resource to add stacks to the entity.
 @export var resource: StackingBientityResource
-## Number of stacks to add if it already exists.
+## Number of stacks to add.
 @export var number: Number
 
 
