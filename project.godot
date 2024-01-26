@@ -38,6 +38,7 @@ folder_colors={
 "res://components/": "green",
 "res://data/": "pink",
 "res://entities/": "orange",
+"res://items/": "purple",
 "res://projectiles/": "red"
 }
 

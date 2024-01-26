@@ -1,4 +1,4 @@
-[gd_scene load_steps=137 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=135 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -73,22 +73,6 @@ modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 [sub_resource type="Resource" id="Resource_ulxov"]
 script = ExtResource("2_acrq8")
 raw_value = 0.5
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_8i5v5"]
-script = ExtResource("2_acrq8")
-raw_value = 2.0
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_p6lmc"]
-script = ExtResource("2_acrq8")
-raw_value = 0.2
 multiplier_value = 1.0
 min_value = -2.14748e+09
 max_value = 2.14748e+09
@@ -566,8 +550,6 @@ friction = SubResource("Resource_ulxov")
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
-actor_on_hurt_scale = SubResource("Resource_8i5v5")
-target_on_hurt_scale = SubResource("Resource_p6lmc")
 actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
