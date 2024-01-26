@@ -5,7 +5,7 @@ class_name RevokeBientityResourceAction
 @export var name: String
 
 
-func execute(actor: Entity, target: Entity) -> void:
+func execute(actor: Entity, target: Entity, _scale := 1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return

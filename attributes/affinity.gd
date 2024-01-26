@@ -16,6 +16,16 @@ class_name AffinityAttributes
 @export var poison_duration = Attribute.new(0, 1, -1, pow(2, 31)-1)
 
 
+func get_affinity(affinity_type: Enums.AffinityType, damage_type: Enums.DamageType) -> Attribute:
+	match affinity_type:
+		Enums.AffinityType.Damage:
+			return get_damage_affinity(damage_type)
+		Enums.AffinityType.Duration:
+			return get_duration_affinity(damage_type)
+		_:
+			return null
+
+
 func get_damage_affinity(type: Enums.DamageType) -> Attribute:
 	match type:
 		Enums.DamageType.Normal:
@@ -48,34 +58,14 @@ func get_duration_affinity(type: Enums.DamageType) -> Attribute:
 			return null
 
 
-func modify_damage(type: Enums.DamageType, modifier: AttributeModifier, is_add := true) -> void:
-	var damage = get_damage_affinity(type)
-	if !damage:
-		return
-	if is_add:
-		damage.add_modifier(modifier)
-	else:
-		damage.remove_modifier(modifier)
+func add_modifier(affinity_type: Enums.AffinityType, damage_type: Enums.DamageType, modifier: AttributeModifier) -> void:
+	var affinity = get_affinity(affinity_type, damage_type)
+	if affinity:
+		affinity.add_modifier(modifier)
 
 
-func modify_duration(type: Enums.DamageType, modifier: AttributeModifier, is_add := true) -> void:
-	var duration = get_duration_affinity(type)
-	if !duration:
-		return
-	if is_add:
-		duration.add_modifier(modifier)
-	else:
-		duration.remove_modifier(modifier)
+func remove_modifier(affinity_type: Enums.AffinityType, damage_type: Enums.DamageType, uid: String) -> void:
+	var affinity = get_affinity(affinity_type, damage_type)
+	if affinity:
+		affinity.remove_modifier(uid)
 
-
-func add_affinity_modifiers(affinites: AffinityAttributes) -> void:
-	normal_damage.modifiers += affinites.normal_damage.modifiers
-	fire_damage.modifiers += affinites.fire_damage.modifiers
-	frost_damage.modifiers += affinites.frost_damage.modifiers
-	shock_damage.modifiers += affinites.shock_damage.modifiers
-	poison_damage.modifiers += affinites.poison_damage.modifiers
-	normal_duration.modifiers += affinites.normal_duration.modifiers
-	fire_duration.modifiers += affinites.fire_duration.modifiers
-	frost_duration.modifiers += affinites.frost_duration.modifiers
-	shock_duration.modifiers += affinites.shock_duration.modifiers
-	poison_duration.modifiers += affinites.poison_duration.modifiers

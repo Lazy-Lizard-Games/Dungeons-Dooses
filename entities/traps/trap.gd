@@ -8,6 +8,7 @@ class_name Trap
 
 
 func _ready():
+	super()
 	trigger.triggered.connect(
 		func():
 			cast_projectile.execute(self)

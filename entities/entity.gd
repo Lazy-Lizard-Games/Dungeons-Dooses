@@ -4,9 +4,9 @@ class_name Entity
 ## Entities are objects that can interact with the world through a variety of ways.
 
 ## Triggered when hit.
-signal hit(actor: Entity)
+signal hit(entity: Entity)
 ## Triggered on hit.
-signal hurt(target: Entity)
+signal hurt(entity: Entity)
 ## Triggered when hurt entity dies.
 signal kill(entity: Entity)
 ## Triggered when self dies.
@@ -43,24 +43,26 @@ func _ready() -> void:
 	died.connect(on_died)
 
 
-func on_hit(actor: Entity) -> void:
+func on_hit(entity: Entity) -> void:
+	var scale_factor = action_component.actor_on_hit_scale.get_final_value() * entity.action_component.target_on_hit_scale.get_final_value()
 	for action in action_component.actions_on_hit:
-		action.execute(actor, self)
+		action.execute(self, entity, scale_factor)
 
 
-func on_hurt(target: Entity) -> void:
+func on_hurt(entity: Entity) -> void:
+	var scale_factor = action_component.actor_on_hurt_scale.get_final_value() * entity.action_component.target_on_hurt_scale.get_final_value()
 	for action in action_component.actions_on_hurt:
-		action.execute(self, target)
+		action.execute(self, entity, scale_factor)
 
 
 func on_kill(_entity: Entity) -> void:
 	for action in action_component.actions_on_kill:
-		action.execute(self)
+		action.execute(self, action_component.on_kill_scale.get_final_value())
 
 
 func on_died() -> void:
 	for action in action_component.actions_on_died:
-		action.execute(self)
+		action.execute(self, action_component.on_died_scale.get_final_value())
 
 
 func get_copy() -> Entity:

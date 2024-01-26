@@ -8,7 +8,7 @@ var executed := false
 
 
 ## Executes an action on the Pair<Entity, Entity>
-func execute(_actor: Entity, _target: Entity) -> void:
+func execute(_actor: Entity, _target: Entity, _scale := 1.0) -> void:
 	pass
 
 

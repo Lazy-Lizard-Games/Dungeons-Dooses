@@ -7,7 +7,7 @@ class_name AddBientityResourceAction
 @export var number: Number
 
 
-func execute(actor: Entity, target: Entity) -> void:
+func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
@@ -16,10 +16,16 @@ func execute(actor: Entity, target: Entity) -> void:
 	for r in target.action_component.resources:
 		if r.name == resource.name:
 			res = r
-	var amount = int(number.execute())
+	var amount = number.execute() * scale
+	var binomial_number = BinomialProvider.new()
+	binomial_number.n = 1
+	binomial_number.p = amount - floor(amount)
+	amount = int(amount + binomial_number.execute())
+	if amount <= 0:
+		return
 	if res:
 		if amount > 0:
-			res.add_stack()
+			res.add_stack(amount)
 	else:
 		res = resource.duplicate(true) as StackingBientityResource
 		target.action_component.add_resource(res)

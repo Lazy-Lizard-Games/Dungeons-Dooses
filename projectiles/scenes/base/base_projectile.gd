@@ -64,8 +64,9 @@ func on_hurt(hitbox: HitboxComponent):
 		if entity.faction != Enums.FactionType.None and hitbox.entity.faction == entity.faction:
 			return
 		if hitbox.entity:
+			var scale_factor = entity.action_component.actor_on_hurt_scale.get_final_value() * hitbox.entity.action_component.target_on_hurt_scale.get_final_value()
 			for action in actions_on_hurt:
-				action.execute(entity, hitbox.entity)
+				action.execute(entity, hitbox.entity, scale_factor)
 			entity.hurt.emit(hitbox.entity)
 		hitbox.hit.emit(entity)
 		current_pierce -= 1

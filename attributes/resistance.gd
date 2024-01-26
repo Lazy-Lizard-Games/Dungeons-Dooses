@@ -16,6 +16,16 @@ class_name ResistanceAttributes
 @export var poison_duration = Attribute.new(0, 1, pow(-2, 31), 0.8)
 
 
+func get_resistance(resistance_type: Enums.ResistanceType, damage_type: Enums.DamageType) -> Attribute:
+	match resistance_type:
+		Enums.ResistanceType.Damage:
+			return get_damage_resistance(damage_type)
+		Enums.ResistanceType.Duration:
+			return get_duration_resistance(damage_type)
+		_:
+			return null
+
+
 func get_damage_resistance(type: Enums.DamageType) -> Attribute:
 	match type:
 		Enums.DamageType.Normal:
@@ -48,21 +58,13 @@ func get_duration_resistance(type: Enums.DamageType) -> Attribute:
 			return null
 
 
-func modify_damage(type: Enums.DamageType, modifier: AttributeModifier, is_add := true) -> void:
-	var damage = get_damage_resistance(type)
-	if !damage:
-		return
-	if is_add:
-		damage.add_modifier(modifier)
-	else:
-		damage.remove_modifier(modifier)
+func add_modifier(resistance_type: Enums.ResistanceType, damage_type: Enums.DamageType, modifier: AttributeModifier) -> void:
+	var resistance = get_resistance(resistance_type, damage_type)
+	if resistance:
+		resistance.add_modifier(modifier)
 
 
-func modify_duration(type: Enums.DamageType, modifier: AttributeModifier, is_add := true) -> void:
-	var duration = get_damage_resistance(type)
-	if !duration:
-		return
-	if is_add:
-		duration.add_modifier(modifier)
-	else:
-		duration.remove_modifier(modifier)
+func remove_modifier(resistance_type: Enums.ResistanceType, damage_type: Enums.DamageType, uid: String) -> void:
+	var resistance = get_resistance(resistance_type, damage_type)
+	if resistance:
+		resistance.remove_modifier(uid)

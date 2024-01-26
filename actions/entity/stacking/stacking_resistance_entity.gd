@@ -3,35 +3,36 @@ class_name StackingResistanceAction
 
 ## Used to apply a resistance modifier that scales with stacks.
 
-## Generic type to modify.
-@export var type: Enums.DamageType
+## Unique identifier of the attribute modifier
+@export var uid: String
 ## Resistance type to modify.
-@export var resistance: Enums.ResistanceType
+@export var resistance_type: Enums.ResistanceType
+## Generic type to modify.
+@export var damage_type: Enums.DamageType
 ## Operation type to apply the modifier by.
 @export var operation: Enums.OperationType
 ## Value to modify per stack.
 @export var value: float
 
-var modify: ModifyResistance
+var add_resistance: AddResistanceModifierEntityAction
 var modifier: AttributeModifier
 
 
-func execute(entity: Entity) -> void:
+func execute(entity: Entity, scale := 1.0) -> void:
 	modifier = AttributeModifier.new()
+	modifier.uid = uid
 	modifier.operation = operation
 	modifier.value = value * stacks
-	modify = ModifyResistance.new()
-	modify.type = type
-	modify.resistance = resistance
-	modify.modifier = modifier
-	modify.execute(entity)
+	stacks_changed.connect(
+		func():
+			modifier.value = value * stacks * scale
+	)
+	add_resistance = AddResistanceModifierEntityAction.new()
+	add_resistance.resistance_type = resistance_type
+	add_resistance.damage_type = damage_type
+	add_resistance.modifier = modifier
+	add_resistance.execute(entity, scale)
 
 
 func reverse(entity: Entity) -> void:
-	modify.is_add = false
-	modify.execute(entity)
-
-
-func update_stacks(new_stacks: int) -> void:
-	super(new_stacks)
-	modifier.value = value * stacks
+	add_resistance.reverse(entity)

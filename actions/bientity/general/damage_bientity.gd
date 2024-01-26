@@ -5,7 +5,7 @@ class_name DamageBientityAction
 @export var damage: DamageEntityAction
 
 
-func execute(actor: Entity, target: Entity) -> void:
+func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
@@ -20,4 +20,4 @@ func execute(actor: Entity, target: Entity) -> void:
 	number.x = damage.amount
 	number.y = modifier
 	damage.amount = number
-	damage.execute(target)
+	damage.execute(target, scale)

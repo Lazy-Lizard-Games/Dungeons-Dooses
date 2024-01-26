@@ -30,6 +30,17 @@ window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 
+[file_customization]
+
+folder_colors={
+"res://abilities/": "teal",
+"res://actions/": "blue",
+"res://components/": "green",
+"res://data/": "pink",
+"res://entities/": "orange",
+"res://projectiles/": "red"
+}
+
 [input]
 
 move_left={

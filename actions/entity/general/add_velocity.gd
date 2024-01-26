@@ -9,8 +9,8 @@ class_name AddVelocityAction
 @export var speed: Number
 
 
-func execute(entity: Entity) -> void:
+func execute(entity: Entity, scale := 1) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
-	entity.velocity_component.add_velocity(direction * speed.execute())
+	entity.velocity_component.add_velocity(direction * speed.execute() * scale)

@@ -7,9 +7,9 @@ class_name AndBientityAction
 @export var bientity_actions: Array[BientityAction]
 
 
-func execute(actor: Entity, target: Entity) -> void:
+func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
 	for action in bientity_actions:
-		action.execute(actor, target)
+		action.execute(actor, target, scale)

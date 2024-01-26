@@ -33,11 +33,13 @@ func get_generic(type: Enums.GenericType) -> Attribute:
 			return null
 
 
-func modify_generic(type: Enums.GenericType, modifier: AttributeModifier, is_add := true) -> void:
+func add_modifier(type: Enums.GenericType, modifier: AttributeModifier) -> void:
 	var generic = get_generic(type)
-	if !generic:
-		return
-	if is_add:
+	if generic:
 		generic.add_modifier(modifier)
-	else:
-		generic.remove_modifier(modifier)
+
+
+func remove_modifier(type: Enums.GenericType, uid: String) -> void:
+	var generic = get_generic(type)
+	if generic:
+		generic.remove_modifier(uid)

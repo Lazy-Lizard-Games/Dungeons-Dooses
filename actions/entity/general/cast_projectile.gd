@@ -7,7 +7,7 @@ class_name CastProjecitleAction
 @export var position: Vector = Vector.new()
 
 
-func execute(entity: Entity) -> void:
+func execute(entity: Entity, _scale := 1.0) -> void:
 	var projectile := get_projectile_scene(projectile_object)
 	projectile.entity = entity
 	projectile.global_position = position.get_vector(entity)

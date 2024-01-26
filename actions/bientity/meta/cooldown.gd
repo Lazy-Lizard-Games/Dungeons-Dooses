@@ -15,7 +15,7 @@ class_name CooldownBientity
 @export var tick_interval: float
 
 
-func execute(actor: Entity, target: Entity) -> void:
+func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	if duration <= 0:
 		return
 	
@@ -24,13 +24,13 @@ func execute(actor: Entity, target: Entity) -> void:
 			return
 	
 	if action_on_start:
-		action_on_start.execute(actor, target)
+		action_on_start.execute(actor, target, scale)
 	
 	var tick_timer = Timer.new()
 	tick_timer.timeout.connect(
 		func():
 			if action_on_tick:
-				action_on_tick.execute(actor, target)
+				action_on_tick.execute(actor, target, scale)
 			tick_timer.start(tick_interval)
 	)
 	target.add_child(tick_timer)
@@ -40,7 +40,7 @@ func execute(actor: Entity, target: Entity) -> void:
 	cooldown_timer.timeout.connect(
 		func():
 			if action_on_end:
-				action_on_end.execute(actor, target)
+				action_on_end.execute(actor, target, scale)
 			target.remove_child(cooldown_timer)
 			target.remove_child(tick_timer)
 	)

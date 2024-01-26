@@ -1,8 +1,12 @@
 extends EntityAction
 class_name StackingEntityAction
 
+signal stacks_changed
 
-var stacks: int
+var stacks: int:
+	set(new_stacks):
+		stacks = new_stacks
+		stacks_changed.emit()
 
 
 func reverse(_entity: Entity) -> void:

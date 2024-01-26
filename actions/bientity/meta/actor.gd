@@ -6,8 +6,8 @@ class_name ActorAction
 ## Entity action to execute on the actor.
 @export var entity_action: EntityAction
 
-func execute(actor: Entity, target: Entity) -> void:
+func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
-	entity_action.execute(actor)
+	entity_action.execute(actor, scale)

@@ -3,6 +3,8 @@ class_name StackingGenericAction
 
 ## Used to apply a generic modifier that scales with stacks.
 
+## Unique identifier of the attribute modifier
+@export var uid: String
 ## Generic type to modify.
 @export var type: Enums.GenericType
 ## Operation type to apply the modifier by.
@@ -10,25 +12,25 @@ class_name StackingGenericAction
 ## Value to modify per stack.
 @export var value: float
 
-var modify: ModifyGeneric
+var add_generic: AddGenericModifierEntityAction
 var modifier: AttributeModifier
 
 
-func execute(entity: Entity) -> void:
+func execute(entity: Entity, scale := 1.0) -> void:
 	modifier = AttributeModifier.new()
+	modifier.uid = uid
 	modifier.operation = operation
 	modifier.value = value * stacks
-	modify = ModifyGeneric.new()
-	modify.type = type
-	modify.modifier = modifier
-	modify.execute(entity)
+	stacks_changed.connect(
+		func():
+			modifier.value = value * stacks * scale
+	)
+	add_generic = AddGenericModifierEntityAction.new()
+	add_generic.generic_type = type
+	add_generic.modifier = modifier
+	add_generic.execute(entity, scale)
 
 
 func reverse(entity: Entity) -> void:
-	modify.is_add = false
-	modify.execute(entity)
+	add_generic.reverse(entity)
 
-
-func update_stacks(new_stacks: int) -> void:
-	super(new_stacks)
-	modifier.value = value * stacks

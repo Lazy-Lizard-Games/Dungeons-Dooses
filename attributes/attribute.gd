@@ -43,6 +43,11 @@ func add_modifier(modifier: AttributeModifier) -> void:
 
 
 ## Removes a modifier from the attribute
-func remove_modifier(modifier: AttributeModifier) -> void:
-	modifiers.erase(modifier)
+func remove_modifier(uid: String) -> void:
+	var trash = []
+	for modifier in modifiers:
+		if modifier.uid == uid:
+			trash.append(modifier)
+	for modifier in trash:
+		modifiers.erase(modifier)
 	updated.emit(get_final_value())

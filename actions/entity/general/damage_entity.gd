@@ -9,7 +9,7 @@ class_name DamageEntityAction
 @export var amount: Number
 
 
-func execute(entity: Entity) -> void:
+func execute(entity: Entity, scale := 1.0) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
@@ -19,6 +19,7 @@ func execute(entity: Entity) -> void:
 	var damage_resistance = resistances.get_damage_resistance(type)
 	if damage_resistance:
 		temp_amount *= 1.0 - damage_resistance.get_final_value()
+	temp_amount *= scale
 	## Apply final damage.
 	if "health_component" in entity:
 		var health = entity.health_component as HealthComponent
