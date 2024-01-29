@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=141 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
+[ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/commands/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="13_qljxc"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
@@ -71,6 +72,14 @@ max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_ulxov"]
+script = ExtResource("2_acrq8")
+raw_value = 0.5
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_wp6ar"]
 script = ExtResource("2_acrq8")
 raw_value = 0.5
 multiplier_value = 1.0
@@ -162,8 +171,13 @@ script = ExtResource("25_xtx7g")
 projectile_object = SubResource("Resource_lvamg")
 position = SubResource("Resource_blqe5")
 
+[sub_resource type="Resource" id="Resource_qn5b5"]
+script = ExtResource("13_qljxc")
+constant = 25.0
+
 [sub_resource type="Resource" id="Resource_cdkfp"]
 script = ExtResource("16_kbgua")
+cost = SubResource("Resource_qn5b5")
 minimum_charge = 1.0
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_jipp3")])
 
@@ -239,8 +253,13 @@ script = ExtResource("25_xtx7g")
 projectile_object = SubResource("Resource_ekvmg")
 position = SubResource("Resource_4qple")
 
+[sub_resource type="Resource" id="Resource_wvbwj"]
+script = ExtResource("13_qljxc")
+constant = 30.0
+
 [sub_resource type="Resource" id="Resource_lxlk7"]
 script = ExtResource("16_kbgua")
+cost = SubResource("Resource_wvbwj")
 minimum_charge = 0.75
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_k40em")])
 
@@ -316,8 +335,13 @@ script = ExtResource("25_xtx7g")
 projectile_object = SubResource("Resource_hwvak")
 position = SubResource("Resource_tmv36")
 
+[sub_resource type="Resource" id="Resource_s63f1"]
+script = ExtResource("13_qljxc")
+constant = 40.0
+
 [sub_resource type="Resource" id="Resource_77jw4"]
 script = ExtResource("16_kbgua")
+cost = SubResource("Resource_s63f1")
 minimum_charge = 0.5
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1fjdb")])
 
@@ -393,14 +417,19 @@ script = ExtResource("25_xtx7g")
 projectile_object = SubResource("Resource_3np36")
 position = SubResource("Resource_bupdk")
 
+[sub_resource type="Resource" id="Resource_rmx74"]
+script = ExtResource("13_qljxc")
+constant = 50.0
+
 [sub_resource type="Resource" id="Resource_1ej5b"]
 script = ExtResource("16_kbgua")
+cost = SubResource("Resource_rmx74")
 minimum_charge = 0.25
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_go5hi")])
 
-[sub_resource type="Resource" id="Resource_ffwfu"]
+[sub_resource type="Resource" id="Resource_hrjjh"]
 script = ExtResource("13_qljxc")
-constant = 0.0
+constant = 25.0
 
 [sub_resource type="Resource" id="Resource_5wqrs"]
 script = ExtResource("13_qljxc")
@@ -411,7 +440,7 @@ script = ExtResource("16_ecg8s")
 charge_levels = Array[ExtResource("16_kbgua")]([SubResource("Resource_cdkfp"), SubResource("Resource_lxlk7"), SubResource("Resource_77jw4"), SubResource("Resource_1ej5b")])
 name = "Decapitate"
 description = ""
-cost = SubResource("Resource_ffwfu")
+reactive_energy = SubResource("Resource_hrjjh")
 cast_time = SubResource("Resource_j2k36")
 recharge_time = SubResource("Resource_5wqrs")
 actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
@@ -486,7 +515,7 @@ size = Vector2(40, 40)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
 radius = 50.0
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "attack_state", "hitbox_component", "health_component", "velocity_component", "action_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "attack_state", "stamina_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
@@ -496,6 +525,7 @@ interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 attack_state = NodePath("StateComponent/Attack")
+stamina_component = NodePath("StaminaComponent")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -549,7 +579,10 @@ friction = SubResource("Resource_ulxov")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
+[node name="StaminaComponent" parent="." instance=ExtResource("12_edvht")]
+
 [node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
+target_on_hurt_scale = SubResource("Resource_wp6ar")
 actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
@@ -582,8 +615,9 @@ script = ExtResource("24_iql77")
 hud = NodePath("Hud")
 menu = NodePath("Menu")
 
-[node name="Hud" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
+[node name="Hud" parent="UI" node_paths=PackedStringArray("health", "stamina", "inventory", "action") instance=ExtResource("24_8v6vb")]
 health = NodePath("../../HealthComponent")
+stamina = NodePath("../../StaminaComponent")
 inventory = NodePath("../../InventoryComponent")
 action = NodePath("../../ActionComponent")
 

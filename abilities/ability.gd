@@ -10,8 +10,8 @@ signal recharged
 @export_multiline var description: String
 ## Icon of the ability
 @export var icon: Image
-## Cost in stamina of the ability.
-@export var cost: Number
+## Minimum stamina required to start this ability.
+@export var reactive_energy: Number
 ## Cast time in seconds of the ability.
 @export var cast_time: Number
 ## Recharge time in seconds of the ability.
@@ -27,9 +27,19 @@ var recharge_timer: Timer
 var cast_timer: Timer
 
 
+## Checks whether the entity can start this ability.
+func can_start(entity: Entity) -> bool:
+	if 'stamina_component' in entity:
+		if entity.stamina_component.current < reactive_energy.execute():
+			return false
+	if is_recharging:
+		return false
+	return true
+
+
 ## Starts the ability with the entity as the caster.
 func start(entity: Entity) -> void:
-	if is_recharging:
+	if !can_start(entity):
 		return
 	caster = entity
 	for action in actions_on_start:

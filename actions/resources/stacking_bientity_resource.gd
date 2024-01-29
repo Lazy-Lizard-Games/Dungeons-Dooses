@@ -40,7 +40,7 @@ var bientity_target: Entity
 var target_copy: Entity
 
 
-func start(actor: Entity, target: Entity) -> void:
+func start(actor: Entity, target: Entity, scale := 1.0) -> void:
 	bientity_actor = actor
 	bientity_target = target
 	actor_copy = actor.get_copy()
@@ -48,7 +48,7 @@ func start(actor: Entity, target: Entity) -> void:
 	stacks = starting_stacks
 	for action in actions_per_stack:
 		action = action.duplicate(true)
-		action.execute(bientity_actor, bientity_target)
+		action.execute(bientity_actor, bientity_target, scale)
 		action.max_stacks = max_stacks
 		action.update_stacks(stacks)
 		stack_changed.connect(action.update_stacks)
@@ -63,14 +63,14 @@ func start(actor: Entity, target: Entity) -> void:
 			for action in actions_on_min_stacks:
 				if !bientity_actor: bientity_actor = actor_copy
 				if !bientity_target: bientity_target = target_copy
-				action.execute(bientity_actor, bientity_target)
+				action.execute(bientity_actor, bientity_target, scale)
 	)
 	max_stacks_reached.connect(
 		func():
 			for action in actions_on_max_stacks:
 				if !bientity_actor: bientity_actor = actor_copy
 				if !bientity_target: bientity_target = target_copy
-				action.execute(bientity_actor, bientity_target)
+				action.execute(bientity_actor, bientity_target, scale)
 	)
 	if decay_interval > 0:
 		decay_timer = Timer.new()

@@ -1,11 +1,11 @@
 extends EntityAction
-class_name StartAbilityEntityAction
+class_name CancelAbilityEntityAction
 
-## Starts an ability for the entity.
+## Cancels an ability for the entity.
 
-## Ability to start.
+## Ability to cancel.
 @export var ability: Ability
 
 
 func execute(entity: Entity, _scale := 1.0) -> void:
-	ability.start(entity)
+	ability.cancel(entity)

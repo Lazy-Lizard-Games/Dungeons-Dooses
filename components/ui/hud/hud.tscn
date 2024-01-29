@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bop0ftormyju2"]
+[gd_scene load_steps=7 format=3 uid="uid://bop0ftormyju2"]
 
 [ext_resource type="Script" path="res://components/ui/hud/hud.gd" id="1_8r215"]
+[ext_resource type="PackedScene" uid="uid://dmwuhrgcijqfy" path="res://components/ui/hud/resource_bar/resourceBar.tscn" id="2_x1ltt"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j0h68"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tn4oa"]
 bg_color = Color(0.207843, 0.0588235, 0, 1)
 border_width_left = 2
 border_width_top = 2
@@ -28,7 +29,33 @@ corner_radius_bottom_right = 1
 corner_radius_bottom_left = 1
 anti_aliasing_size = 0.1
 
-[node name="Hud" type="Control" node_paths=PackedStringArray("health_bar")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d1a0j"]
+bg_color = Color(0.0901961, 0.129412, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.843137, 0.72549, 0, 1)
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+anti_aliasing_size = 0.1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xu8wa"]
+bg_color = Color(0.0666667, 0.592157, 0, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+anti_aliasing_size = 0.1
+
+[node name="Hud" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -37,12 +64,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_8r215")
-health_bar = NodePath("StatsContainer/VBoxContainer/HealthBar")
 
 [node name="StatsContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 388.0
+offset_bottom = 131.0
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
@@ -50,19 +76,17 @@ theme_override_constants/margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StatsContainer"]
 layout_mode = 2
+theme_override_constants/separation = 15
 
-[node name="HealthBar" type="ProgressBar" parent="StatsContainer/VBoxContainer"]
-custom_minimum_size = Vector2(200, 25)
+[node name="HealthBar" parent="StatsContainer/VBoxContainer" instance=ExtResource("2_x1ltt")]
 layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_j0h68")
-theme_override_styles/fill = SubResource("StyleBoxFlat_3u423")
-value = 60.0
+background = SubResource("StyleBoxFlat_tn4oa")
+fill = SubResource("StyleBoxFlat_3u423")
 
-[node name="ProgressBar2" type="ProgressBar" parent="StatsContainer/VBoxContainer"]
-visible = false
-custom_minimum_size = Vector2(200, 25)
+[node name="StaminaBar" parent="StatsContainer/VBoxContainer" instance=ExtResource("2_x1ltt")]
 layout_mode = 2
-show_percentage = false
+background = SubResource("StyleBoxFlat_d1a0j")
+fill = SubResource("StyleBoxFlat_xu8wa")
 
 [node name="InventoryContainer" type="MarginContainer" parent="."]
 layout_mode = 1

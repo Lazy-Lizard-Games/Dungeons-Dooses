@@ -13,7 +13,7 @@ var ability: Ability
 
 func enter() -> void:
 	ability = ability_component.get_ability(entity.selected_ability)
-	if !ability or ability.is_recharging:
+	if !ability or !ability.can_start(entity):
 		switch_state()
 		return
 	color_rect.color = Color.INDIAN_RED

@@ -19,7 +19,6 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	modifier.constant = 1
 	if damage_affinity:
 		modifier.constant = 1 + damage_affinity.get_final_value()
-	modifier.constant *= scale
 	var number = MultiplyNumber.new()
 	number.x = damage_entity.amount
 	number.y = modifier
@@ -35,7 +34,7 @@ func damage(entity: Entity, scale := 1.0) -> void:
 		ticking_timer.start(interval.execute())
 		return
 	damage_entity.execute(entity, scale)
-	ticking_timer.start(interval.execute() * (max_stacks / float(max_stacks + stacks)))
+	ticking_timer.start(interval.execute() * (max_stacks / float(max_stacks + stacks * 2)))
 
 
 func reverse(_actor: Entity, target: Entity) -> void:

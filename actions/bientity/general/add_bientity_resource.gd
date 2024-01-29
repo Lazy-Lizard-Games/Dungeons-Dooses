@@ -29,7 +29,7 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	else:
 		res = resource.duplicate(true) as StackingBientityResource
 		target.action_component.add_resource(res)
-		res.start(actor, target)
+		res.start(actor, target, scale)
 		if (amount - 1) > 0:
 			res.add_stack(amount - 1)
 

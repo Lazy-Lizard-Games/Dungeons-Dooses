@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://brvdunlkitgi"]
+[gd_scene load_steps=32 format=3 uid="uid://brvdunlkitgi"]
 
 [ext_resource type="Script" path="res://entities/traps/geyser/geyser.gd" id="1_mi404"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_0wmj8"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="5_j5y0h"]
 [ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="5_q0t4s"]
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="6_0icco"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="6_judpx"]
+[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_damage_bientity.gd" id="6_mf388"]
 [ext_resource type="PackedScene" uid="uid://204wbc2mh187" path="res://components/commands/trigger/timed_trigger/timed_trigger.tscn" id="7_e3l6d"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="8_ynjtq"]
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="11_o67ml"]
@@ -17,20 +17,6 @@
 
 [sub_resource type="Resource" id="Resource_wuwjq"]
 script = ExtResource("2_i74y1")
-
-[sub_resource type="Resource" id="Resource_01aiq"]
-script = ExtResource("4_52r6a")
-number_min = 2.0
-number_max = 5.0
-
-[sub_resource type="Resource" id="Resource_r6bln"]
-script = ExtResource("5_j5y0h")
-type = 1
-amount = SubResource("Resource_01aiq")
-
-[sub_resource type="Resource" id="Resource_o81cu"]
-script = ExtResource("6_judpx")
-damage = SubResource("Resource_r6bln")
 
 [sub_resource type="Resource" id="Resource_h1wwd"]
 script = ExtResource("8_ynjtq")
@@ -40,6 +26,24 @@ constant = 1.0
 script = ExtResource("6_0icco")
 name = "pop"
 
+[sub_resource type="Resource" id="Resource_a36wp"]
+script = ExtResource("8_ynjtq")
+constant = 10.0
+
+[sub_resource type="Resource" id="Resource_kxtll"]
+script = ExtResource("5_j5y0h")
+type = 0
+amount = SubResource("Resource_a36wp")
+
+[sub_resource type="Resource" id="Resource_ktrtf"]
+script = ExtResource("8_ynjtq")
+constant = 1.0
+
+[sub_resource type="Resource" id="Resource_i21sc"]
+script = ExtResource("6_mf388")
+damage_entity = SubResource("Resource_kxtll")
+interval = SubResource("Resource_ktrtf")
+
 [sub_resource type="Resource" id="Resource_ue56v"]
 script = ExtResource("11_o67ml")
 name = "pop"
@@ -47,9 +51,9 @@ description = ""
 min_stacks = 0
 max_stacks = 10
 starting_stacks = 1
-decay_interval = 3.0
+decay_interval = 2.0
 decay_amount = 1
-actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([])
+actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([SubResource("Resource_i21sc")])
 actions_on_min_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_fb6so")])
 actions_on_max_stacks = Array[Resource("res://actions/bientity/bientity_action.gd")]([])
 
@@ -80,7 +84,7 @@ duration = SubResource("Resource_2gxne")
 direction = SubResource("Resource_n4sq6")
 scale = SubResource("Resource_48mh5")
 shape = SubResource("CircleShape2D_l74d1")
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_o81cu"), SubResource("Resource_ou6bh")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_ou6bh")])
 
 [sub_resource type="Resource" id="Resource_jpk01"]
 script = ExtResource("4_b3ysc")

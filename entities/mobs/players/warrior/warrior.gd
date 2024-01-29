@@ -5,6 +5,7 @@ extends Mob
 @export var inventory_component: InventoryComponent
 @export var ability_component: AbilityComponent
 @export var attack_state: State
+@export var stamina_component: StaminaComponent
 
 var selected_ability = 0:
 	set(s):
@@ -16,6 +17,7 @@ var interactable: InteractableComponent
 func _ready() -> void:
 	super()
 	state_component.init(self)
+	stamina_component.attributes = generics
 
 
 func _unhandled_input(event: InputEvent) -> void:

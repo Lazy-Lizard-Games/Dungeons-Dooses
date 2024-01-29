@@ -41,12 +41,14 @@ func cast(entity: Entity) -> void:
 	is_casting = false
 	casted.emit()
 	if charge_level:
+		var exhaust = ExhaustEntityAction.new()
+		exhaust.amount = charge_level.cost
+		exhaust.execute(entity, entity.generics.cast_cost.get_final_value())
 		for action in charge_level.actions_on_cast:
 			action.execute(caster)
 	start_recharge(entity)
 
 
 func release(entity: Entity) -> void:
-	print(current_charge)
 	if is_casting:
 		cast(entity)
