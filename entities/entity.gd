@@ -46,7 +46,7 @@ func _ready() -> void:
 func on_hit(entity: Entity) -> void:
 	var scale_factor = action_component.actor_on_hit_scale.get_final_value() * entity.action_component.target_on_hit_scale.get_final_value()
 	for action in action_component.actions_on_hit:
-		action.execute(self, entity, scale_factor)
+		action.execute(entity, self, scale_factor)
 
 
 func on_hurt(entity: Entity) -> void:

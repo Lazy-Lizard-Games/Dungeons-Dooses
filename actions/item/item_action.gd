@@ -1,4 +1,4 @@
-extends Resource
+extends BaseAction
 class_name ItemAction
 
 ## Condition to check whether action is executed.

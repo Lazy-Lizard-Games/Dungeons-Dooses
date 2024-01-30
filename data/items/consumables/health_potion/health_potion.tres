@@ -14,6 +14,7 @@ number_max = 10.0
 [sub_resource type="Resource" id="Resource_6j2rs"]
 script = ExtResource("2_mehx6")
 number = SubResource("Resource_trx78")
+_id = ""
 
 [sub_resource type="Resource" id="Resource_1u63i"]
 script = ExtResource("1_772cg")
@@ -23,6 +24,7 @@ number_max = 10.0
 [sub_resource type="Resource" id="Resource_ey1y4"]
 script = ExtResource("2_mehx6")
 number = SubResource("Resource_1u63i")
+_id = ""
 
 [sub_resource type="Resource" id="Resource_bavwn"]
 script = ExtResource("3_352di")
@@ -30,6 +32,7 @@ action_on_start = SubResource("Resource_6j2rs")
 action_on_tick = SubResource("Resource_ey1y4")
 duration = 5.0
 tick_interval = 1.0
+_id = ""
 
 [sub_resource type="Resource" id="Resource_6k1pd"]
 script = ExtResource("4_kyr5u")

@@ -12,10 +12,6 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 		if !condition.execute(actor, target):
 			return
 	executed = true
-	var res: StackingBientityResource
-	for r in target.action_component.resources:
-		if r.name == resource.name:
-			res = r
 	var amount = number.execute() * scale
 	var binomial_number = BinomialProvider.new()
 	binomial_number.n = 1
@@ -23,9 +19,12 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	amount = int(amount + binomial_number.execute())
 	if amount <= 0:
 		return
+	var res: StackingBientityResource
+	for r in target.action_component.resources:
+		if r.name == resource.name:
+			res = r
 	if res:
-		if amount > 0:
-			res.add_stack(amount)
+		res.add_stack(amount)
 	else:
 		res = resource.duplicate(true) as StackingBientityResource
 		target.action_component.add_resource(res)
@@ -38,6 +37,6 @@ func reverse(actor: Entity, target: Entity) -> void:
 	if !executed:
 		return
 	var revoke_resource = RevokeBientityResourceAction.new()
-	revoke_resource.resource = resource
+	revoke_resource.name = resource.name
 	revoke_resource.execute(actor, target)
 

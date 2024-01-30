@@ -22,18 +22,19 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	var number = MultiplyNumber.new()
 	number.x = damage_entity.amount
 	number.y = modifier
-	damage_entity.amount = number
+	var temp_damage = damage_entity.duplicate(true)
+	temp_damage.amount = number
 	ticking_timer = Timer.new()
-	ticking_timer.timeout.connect(damage.bind(target, scale))
+	ticking_timer.timeout.connect(damage.bind(target, temp_damage, scale))
 	target.add_child(ticking_timer)
 	ticking_timer.start(interval.execute())
 
 
-func damage(entity: Entity, scale := 1.0) -> void:
+func damage(entity: Entity, temp_damage: DamageEntityAction, scale := 1.0) -> void:
 	if stacks <= 0:
 		ticking_timer.start(interval.execute())
 		return
-	damage_entity.execute(entity, scale)
+	temp_damage.execute(entity, scale)
 	ticking_timer.start(interval.execute() * (max_stacks / float(max_stacks + stacks * 2)))
 
 

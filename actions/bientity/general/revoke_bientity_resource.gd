@@ -14,6 +14,6 @@ func execute(actor: Entity, target: Entity, _scale := 1.0) -> void:
 		if r.name == name:
 			res = r
 	if res:
-		target.action_component.remove_resource(res)
 		res.end(actor, target)
+		target.action_component.remove_resource(res)
 

@@ -79,3 +79,21 @@ enum ResistanceType
 	Damage,
 	Duration,
 }
+
+enum EntityActionType
+{
+	OnKill,
+	OnDied,
+}
+
+enum BientityActionType
+{
+	OnHurt,
+	OnHit,
+}
+
+enum ItemActionType
+{
+	OnConsume,
+	OnEquip,
+}

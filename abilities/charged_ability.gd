@@ -5,6 +5,8 @@ class_name ChargedAbility
 
 ## Charge levels on release.
 @export var charge_levels: Array[ChargeLevel]
+## Actions executed on the entity when released.
+@export var actions_on_release: Array[EntityAction]
 
 var current_charge: float:
 	get:
@@ -52,3 +54,5 @@ func cast(entity: Entity) -> void:
 func release(entity: Entity) -> void:
 	if is_casting:
 		cast(entity)
+	for action in actions_on_release:
+		action.execute(entity)

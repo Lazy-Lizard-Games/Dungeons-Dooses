@@ -1,4 +1,4 @@
-extends Resource
+extends BaseAction
 class_name BientityAction
 
 ## Optional condition to check the pair against.
