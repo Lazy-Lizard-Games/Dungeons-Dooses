@@ -1,0 +1,73 @@
+[gd_resource type="Resource" script_class="CastedAbility" load_steps=22 format=3 uid="uid://b1nxmba4puijc"]
+
+[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_yafm5"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_gowcy"]
+[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="3_cliqp"]
+[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="4_hc5hk"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_x3ggc"]
+[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="6_0dtu3"]
+[ext_resource type="Resource" uid="uid://bhqbxtxehvyj1" path="res://data/player/swordsman/projectiles/offensive/slash.tres" id="7_oxole"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="8_mgdh4"]
+[ext_resource type="Script" path="res://abilities/casted_ability.gd" id="9_jtp3a"]
+
+[sub_resource type="Resource" id="Resource_uv04i"]
+script = ExtResource("2_gowcy")
+
+[sub_resource type="Resource" id="Resource_wu26p"]
+script = ExtResource("5_x3ggc")
+constant = 40.0
+
+[sub_resource type="Resource" id="Resource_o48mw"]
+script = ExtResource("5_x3ggc")
+constant = 40.0
+
+[sub_resource type="Resource" id="Resource_xdag4"]
+script = ExtResource("4_hc5hk")
+x = SubResource("Resource_wu26p")
+y = SubResource("Resource_o48mw")
+
+[sub_resource type="Resource" id="Resource_tb8u0"]
+script = ExtResource("6_0dtu3")
+
+[sub_resource type="Resource" id="Resource_ec37j"]
+script = ExtResource("3_cliqp")
+vector_a = SubResource("Resource_xdag4")
+vector_b = SubResource("Resource_tb8u0")
+
+[sub_resource type="Resource" id="Resource_71sbu"]
+script = ExtResource("1_yafm5")
+vector_a = SubResource("Resource_uv04i")
+vector_b = SubResource("Resource_ec37j")
+
+[sub_resource type="Resource" id="Resource_1itrm"]
+script = ExtResource("8_mgdh4")
+projectile_object = ExtResource("7_oxole")
+position = SubResource("Resource_71sbu")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_8tl0i"]
+script = ExtResource("5_x3ggc")
+constant = 0.15
+
+[sub_resource type="Resource" id="Resource_tq377"]
+script = ExtResource("5_x3ggc")
+constant = 15.0
+
+[sub_resource type="Resource" id="Resource_tbfs2"]
+script = ExtResource("5_x3ggc")
+constant = 15.0
+
+[sub_resource type="Resource" id="Resource_uey1s"]
+script = ExtResource("5_x3ggc")
+constant = 0.75
+
+[resource]
+script = ExtResource("9_jtp3a")
+cost = SubResource("Resource_tq377")
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1itrm")])
+name = "Slash"
+description = ""
+reactive_energy = SubResource("Resource_tbfs2")
+cast_time = SubResource("Resource_8tl0i")
+recharge_time = SubResource("Resource_uey1s")
+actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])

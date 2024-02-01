@@ -1,0 +1,90 @@
+[gd_resource type="Resource" script_class="ChargedAbility" load_steps=24 format=3 uid="uid://dnentbhbgqtoh"]
+
+[ext_resource type="Script" path="res://abilities/charged_ability.gd" id="1_1siag"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="1_wfi64"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_gt4mw"]
+[ext_resource type="Resource" uid="uid://bqje5nr82puis" path="res://data/player/swordsman/projectiles/offensive/sweep/charge_3.tres" id="3_xnf1w"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="4_gitd2"]
+[ext_resource type="Script" path="res://abilities/charge_level.gd" id="5_ko6i3"]
+[ext_resource type="Resource" uid="uid://ce0mwiviqjaw1" path="res://data/player/swordsman/projectiles/offensive/sweep/charge_2.tres" id="6_d0dhb"]
+[ext_resource type="Resource" uid="uid://chnf7dyawkth" path="res://data/player/swordsman/projectiles/offensive/sweep/charge_1.tres" id="7_jkxnh"]
+
+[sub_resource type="Resource" id="Resource_x2q5w"]
+script = ExtResource("1_wfi64")
+constant = 1.5
+
+[sub_resource type="Resource" id="Resource_o7fcf"]
+script = ExtResource("2_gt4mw")
+
+[sub_resource type="Resource" id="Resource_6ii87"]
+script = ExtResource("4_gitd2")
+projectile_object = ExtResource("3_xnf1w")
+position = SubResource("Resource_o7fcf")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_602g6"]
+script = ExtResource("1_wfi64")
+constant = 25.0
+
+[sub_resource type="Resource" id="Resource_o1nn0"]
+script = ExtResource("5_ko6i3")
+cost = SubResource("Resource_602g6")
+minimum_charge = 1.0
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_6ii87")])
+
+[sub_resource type="Resource" id="Resource_j1omu"]
+script = ExtResource("2_gt4mw")
+
+[sub_resource type="Resource" id="Resource_pjo62"]
+script = ExtResource("4_gitd2")
+projectile_object = ExtResource("6_d0dhb")
+position = SubResource("Resource_j1omu")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_74086"]
+script = ExtResource("1_wfi64")
+constant = 20.0
+
+[sub_resource type="Resource" id="Resource_4uhc8"]
+script = ExtResource("5_ko6i3")
+cost = SubResource("Resource_74086")
+minimum_charge = 0.67
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_pjo62")])
+
+[sub_resource type="Resource" id="Resource_3g6gk"]
+script = ExtResource("2_gt4mw")
+
+[sub_resource type="Resource" id="Resource_rha8o"]
+script = ExtResource("4_gitd2")
+projectile_object = ExtResource("7_jkxnh")
+position = SubResource("Resource_3g6gk")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_7lvvy"]
+script = ExtResource("1_wfi64")
+constant = 16.5
+
+[sub_resource type="Resource" id="Resource_kkyqj"]
+script = ExtResource("5_ko6i3")
+cost = SubResource("Resource_7lvvy")
+minimum_charge = 0.33
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_rha8o")])
+
+[sub_resource type="Resource" id="Resource_gx3tt"]
+script = ExtResource("1_wfi64")
+constant = 20.0
+
+[sub_resource type="Resource" id="Resource_d1tx7"]
+script = ExtResource("1_wfi64")
+constant = 1.15
+
+[resource]
+script = ExtResource("1_1siag")
+charge_levels = Array[ExtResource("5_ko6i3")]([SubResource("Resource_o1nn0"), SubResource("Resource_4uhc8"), SubResource("Resource_kkyqj")])
+actions_on_release = Array[Resource("res://actions/entity/entity_action.gd")]([])
+name = "Sweep"
+description = ""
+reactive_energy = SubResource("Resource_gx3tt")
+cast_time = SubResource("Resource_x2q5w")
+recharge_time = SubResource("Resource_d1tx7")
+actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])

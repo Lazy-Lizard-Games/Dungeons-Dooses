@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="BaseProjectileObject" load_steps=14 format=3 uid="uid://bdw64i3nm2hrp"]
+
+[ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="1_7nr8p"]
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="1_gvl52"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="2_wswva"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="3_c2twv"]
+[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="4_smhkb"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_pbkdl"]
+
+[sub_resource type="Resource" id="Resource_lv55t"]
+script = ExtResource("1_gvl52")
+number_min = 12.0
+number_max = 15.0
+
+[sub_resource type="Resource" id="Resource_lrn5t"]
+script = ExtResource("2_wswva")
+type = 0
+amount = SubResource("Resource_lv55t")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_g1deu"]
+script = ExtResource("3_c2twv")
+damage = SubResource("Resource_lrn5t")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_n8pp7"]
+script = ExtResource("4_smhkb")
+
+[sub_resource type="Resource" id="Resource_csuil"]
+script = ExtResource("5_pbkdl")
+constant = 0.1
+
+[sub_resource type="Resource" id="Resource_wemis"]
+script = ExtResource("5_pbkdl")
+constant = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af5vr"]
+size = Vector2(75, 30)
+
+[resource]
+script = ExtResource("1_7nr8p")
+name = "Strike lvl1"
+pierce = 0
+duration = SubResource("Resource_csuil")
+direction = SubResource("Resource_n8pp7")
+scale = SubResource("Resource_wemis")
+shape = SubResource("RectangleShape2D_af5vr")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_g1deu")])

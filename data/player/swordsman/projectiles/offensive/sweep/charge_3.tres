@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="BaseProjectileObject" load_steps=14 format=3 uid="uid://bqje5nr82puis"]
+
+[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="1_n3ryy"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="2_n6n22"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="3_qlp31"]
+[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="4_wgp4j"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_e4gm8"]
+[ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="6_qqynq"]
+
+[sub_resource type="Resource" id="Resource_nbcv8"]
+script = ExtResource("1_n3ryy")
+number_min = 12.0
+number_max = 16.0
+
+[sub_resource type="Resource" id="Resource_3nb4g"]
+script = ExtResource("2_n6n22")
+type = 0
+amount = SubResource("Resource_nbcv8")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_4sskf"]
+script = ExtResource("3_qlp31")
+damage = SubResource("Resource_3nb4g")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_onb1c"]
+script = ExtResource("4_wgp4j")
+
+[sub_resource type="Resource" id="Resource_4ag50"]
+script = ExtResource("5_e4gm8")
+constant = 0.1
+
+[sub_resource type="Resource" id="Resource_21t5t"]
+script = ExtResource("5_e4gm8")
+constant = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rbajd"]
+radius = 85.0
+
+[resource]
+script = ExtResource("6_qqynq")
+name = "Sweep lvl3"
+pierce = 0
+duration = SubResource("Resource_4ag50")
+direction = SubResource("Resource_onb1c")
+scale = SubResource("Resource_21t5t")
+shape = SubResource("CircleShape2D_rbajd")
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_4sskf")])
