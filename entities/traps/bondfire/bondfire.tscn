@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://brvdunlkitgi"]
+[gd_scene load_steps=34 format=3 uid="uid://brvdunlkitgi"]
 
-[ext_resource type="Script" path="res://entities/traps/geyser/geyser.gd" id="1_mi404"]
+[ext_resource type="Script" path="res://entities/traps/bondfire/bondfire.gd" id="1_mi404"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_0wmj8"]
 [ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_i74y1"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="3_g5t5g"]
@@ -13,7 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://204wbc2mh187" path="res://components/commands/trigger/timed_trigger/timed_trigger.tscn" id="7_e3l6d"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="8_ynjtq"]
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="11_o67ml"]
+[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/commands/render/render_component.tscn" id="12_vcneh"]
 [ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="12_yfrm0"]
+[ext_resource type="SpriteFrames" uid="uid://d2c4f6f3r4ffw" path="res://entities/traps/bondfire/sprites/bondfire_sprite_frames.tres" id="13_udvb5"]
 
 [sub_resource type="Resource" id="Resource_wuwjq"]
 script = ExtResource("2_i74y1")
@@ -102,15 +104,21 @@ _id = ""
 script = ExtResource("8_ynjtq")
 constant = 1.0
 
-[node name="Geyser" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "velocity_component", "action_component")]
+[node name="Bondfire" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "render_component", "velocity_component", "action_component")]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_mi404")
 trigger = NodePath("TimedTrigger")
 cast_projectile = SubResource("Resource_jpk01")
 id = "Geyser"
+render_component = NodePath("RenderComponent")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
+
+[node name="RenderComponent" parent="." instance=ExtResource("12_vcneh")]
+sprite_frames = ExtResource("13_udvb5")
+animation = &"idle"
+frame_progress = 0.869611
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v0uu1")

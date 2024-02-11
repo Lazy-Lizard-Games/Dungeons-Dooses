@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://c0kpk33phak3x" path="res://interactables/lootbag/lootbag.tscn" id="4_5mxsy"]
 [ext_resource type="Script" path="res://items/item.gd" id="5_5q022"]
 [ext_resource type="Resource" uid="uid://cmweq6mlhyxwl" path="res://data/items/consumables/health_potion/health_potion.tres" id="5_vnc1w"]
-[ext_resource type="PackedScene" uid="uid://brvdunlkitgi" path="res://entities/traps/geyser/geyser.tscn" id="9_cw55t"]
+[ext_resource type="PackedScene" uid="uid://brvdunlkitgi" path="res://entities/traps/bondfire/bondfire.tscn" id="9_cw55t"]
 
 [sub_resource type="Resource" id="Resource_axge7"]
 script = ExtResource("5_5q022")
@@ -52,5 +52,5 @@ position = Vector2(76, 104)
 item = ExtResource("5_vnc1w")
 amount = 4
 
-[node name="Geyser" parent="." instance=ExtResource("9_cw55t")]
+[node name="Bondfire" parent="." instance=ExtResource("9_cw55t")]
 position = Vector2(-107, 0)
