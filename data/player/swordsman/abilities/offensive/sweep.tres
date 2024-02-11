@@ -84,6 +84,7 @@ charge_levels = Array[ExtResource("5_ko6i3")]([SubResource("Resource_o1nn0"), Su
 actions_on_release = Array[Resource("res://actions/entity/entity_action.gd")]([])
 name = "Sweep"
 description = ""
+animation_on_start = ""
 reactive_energy = SubResource("Resource_gx3tt")
 cast_time = SubResource("Resource_x2q5w")
 recharge_time = SubResource("Resource_d1tx7")

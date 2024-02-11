@@ -3,6 +3,7 @@ class_name Ability
 
 signal casted
 signal recharged
+signal finished
 
 ## Name of the ability.
 @export var name: String
@@ -10,6 +11,8 @@ signal recharged
 @export_multiline var description: String
 ## Icon of the ability
 @export var icon: Image
+## Animtion to play on start.
+@export var animation_on_start: String
 ## Minimum stamina required to start this ability.
 @export var reactive_energy: Number
 ## Cast time in seconds of the ability.
@@ -44,7 +47,12 @@ func start(entity: Entity) -> void:
 	caster = entity
 	for action in actions_on_start:
 		action.execute(caster)
+	entity.looking_at = entity.global_position.direction_to(entity.get_global_mouse_position())
 	start_cast(entity)
+	entity.render_component.animation_finished.connect(
+		func():
+			finished.emit()
+	)
 
 
 func start_cast(entity: Entity) -> void:

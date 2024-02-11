@@ -9,6 +9,7 @@ var interactable: InteractableComponent
 
 
 func enter() -> void:
+	entity.render_component.update_animation('idle')
 	color_rect.color = Color.AQUAMARINE
 
 

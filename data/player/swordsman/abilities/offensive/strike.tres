@@ -120,6 +120,7 @@ charge_levels = Array[ExtResource("9_ei3oq")]([SubResource("Resource_bkr31"), Su
 actions_on_release = Array[Resource("res://actions/entity/entity_action.gd")]([])
 name = "Strike"
 description = ""
+animation_on_start = ""
 reactive_energy = SubResource("Resource_d15pi")
 cast_time = SubResource("Resource_0oawb")
 recharge_time = SubResource("Resource_1hjm3")

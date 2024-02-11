@@ -67,6 +67,7 @@ cost = SubResource("Resource_g5l5b")
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_ytina")])
 name = "Stab"
 description = ""
+animation_on_start = ""
 reactive_energy = SubResource("Resource_qeo85")
 cast_time = SubResource("Resource_f3lkv")
 recharge_time = SubResource("Resource_281vo")

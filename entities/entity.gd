@@ -20,6 +20,8 @@ signal consume(actor: Entity, item: int)
 @export var id: String = ""
 ## Faction of the entity.
 @export var faction: Enums.FactionType = Enums.FactionType.None
+## Render component for the entity.
+@export var render_component: RenderComponent
 ## Velocity component for the entity.
 @export var velocity_component: VelocityComponent
 ## Action component for the entity.
@@ -30,6 +32,8 @@ signal consume(actor: Entity, item: int)
 @export var affinities: AffinityAttributes = AffinityAttributes.new()
 ## Resistance attributes for the entity.
 @export var resistances: ResistanceAttributes = ResistanceAttributes.new()
+## Direction the entity is looking
+var looking_at := Vector2.RIGHT
 
 
 func _ready() -> void:

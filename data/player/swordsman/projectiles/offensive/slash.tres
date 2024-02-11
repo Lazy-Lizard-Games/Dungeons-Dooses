@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="1_o5bky"]
 [ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="2_5gchj"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="3_odbe8"]
-[ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="4_j64tv"]
+[ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="4_ae7ul"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_5utof"]
 [ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="6_3tfd8"]
 
@@ -23,8 +23,8 @@ script = ExtResource("3_odbe8")
 damage = SubResource("Resource_lh3kv")
 _id = ""
 
-[sub_resource type="Resource" id="Resource_e8kax"]
-script = ExtResource("4_j64tv")
+[sub_resource type="Resource" id="Resource_8xjpk"]
+script = ExtResource("4_ae7ul")
 
 [sub_resource type="Resource" id="Resource_kdmy0"]
 script = ExtResource("5_5utof")
@@ -42,7 +42,7 @@ script = ExtResource("6_3tfd8")
 name = "Slash"
 pierce = 0
 duration = SubResource("Resource_kdmy0")
-direction = SubResource("Resource_e8kax")
+direction = SubResource("Resource_8xjpk")
 scale = SubResource("Resource_fvs8m")
 shape = SubResource("RectangleShape2D_gls0m")
 actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_j4fd3")])

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://uo447rb3skpt"]
+
+[ext_resource type="Script" path="res://components/commands/render/render_component.gd" id="1_sgcer"]
+
+[node name="RenderComponent" type="AnimatedSprite2D"]
+script = ExtResource("1_sgcer")
