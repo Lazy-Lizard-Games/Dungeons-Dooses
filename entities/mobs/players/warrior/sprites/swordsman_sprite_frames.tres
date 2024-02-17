@@ -213,7 +213,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 7.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -305,7 +305,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_down",
-"speed": 5.0
+"speed": 7.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -328,7 +328,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_sideways",
-"speed": 5.0
+"speed": 7.5
 }, {
 "frames": [{
 "duration": 1.0,
@@ -351,5 +351,5 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk_up",
-"speed": 5.0
+"speed": 7.5
 }]

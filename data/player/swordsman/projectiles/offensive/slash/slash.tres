@@ -1,11 +1,14 @@
-[gd_resource type="Resource" script_class="BaseProjectileObject" load_steps=22 format=3 uid="uid://bhqbxtxehvyj1"]
+[gd_resource type="Resource" script_class="BaseProjectileObject" load_steps=27 format=3 uid="uid://bhqbxtxehvyj1"]
 
 [ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="1_wgcja"]
 [ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="2_38xf1"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="3_gypn4"]
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="4_a2lka"]
+[ext_resource type="Script" path="res://actions/numbers/providers/binomial.gd" id="4_nf755"]
+[ext_resource type="Resource" uid="uid://h3l0iftgvwqb" path="res://data/resources/ailments/normal/bleeding.tres" id="5_di4wb"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_f525q"]
 [ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="6_40rft"]
+[ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="6_xfk1d"]
 [ext_resource type="Texture2D" uid="uid://78yp57i4n0n5" path="res://data/player/swordsman/projectiles/offensive/slash/slash_trail.png" id="7_dv0a0"]
 
 [sub_resource type="Resource" id="Resource_2evu7"]
@@ -22,6 +25,17 @@ _id = ""
 [sub_resource type="Resource" id="Resource_j4fd3"]
 script = ExtResource("3_gypn4")
 damage = SubResource("Resource_lh3kv")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_jhbmt"]
+script = ExtResource("4_nf755")
+n = 1
+p = 0.25
+
+[sub_resource type="Resource" id="Resource_y3iyp"]
+script = ExtResource("6_xfk1d")
+resource = ExtResource("5_di4wb")
+number = SubResource("Resource_jhbmt")
 _id = ""
 
 [sub_resource type="Resource" id="Resource_8xjpk"]
@@ -97,6 +111,6 @@ direction = SubResource("Resource_8xjpk")
 scale = SubResource("Resource_fvs8m")
 shape = SubResource("RectangleShape2D_gls0m")
 shape_offset = Vector2(15, 0)
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_j4fd3")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_j4fd3"), SubResource("Resource_y3iyp")])
 sprite_frames = SubResource("SpriteFrames_t7kjo")
 single_hit = true

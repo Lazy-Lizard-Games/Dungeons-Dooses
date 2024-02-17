@@ -18,11 +18,11 @@ script = ExtResource("2_gowcy")
 
 [sub_resource type="Resource" id="Resource_wu26p"]
 script = ExtResource("5_x3ggc")
-constant = 15.0
+constant = 0.0
 
 [sub_resource type="Resource" id="Resource_o48mw"]
 script = ExtResource("5_x3ggc")
-constant = 15.0
+constant = 0.0
 
 [sub_resource type="Resource" id="Resource_xdag4"]
 script = ExtResource("4_hc5hk")

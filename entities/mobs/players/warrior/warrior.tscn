@@ -195,7 +195,7 @@ resistances = SubResource("Resource_mw36u")
 
 [node name="RenderComponent" parent="." instance=ExtResource("6_lmap4")]
 sprite_frames = ExtResource("7_unfu3")
-animation = &"walk_down"
+animation = &"walk_up"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -209,7 +209,7 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_ts4su")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(3, 3)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")

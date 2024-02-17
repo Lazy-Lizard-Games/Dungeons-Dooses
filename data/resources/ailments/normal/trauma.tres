@@ -8,16 +8,20 @@
 [sub_resource type="Resource" id="Resource_gdp3t"]
 script = ExtResource("1_f2iev")
 name = "Trauma"
+_id = ""
 
 [sub_resource type="Resource" id="Resource_laohi"]
 script = ExtResource("3_nsdg3")
+uid = ""
 type = 5
 operation = 1
 value = 0.03
+_id = ""
 
 [sub_resource type="Resource" id="Resource_exgu1"]
 script = ExtResource("2_4k00u")
 stacking_entity = SubResource("Resource_laohi")
+_id = ""
 
 [resource]
 script = ExtResource("1_15fsm")
