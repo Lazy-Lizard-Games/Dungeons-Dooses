@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlr51nqryj5om"
-path="res://.godot/imported/slash_sideways.png-5ec0c8aa74d31dbac36814e23337414d.ctex"
+uid="uid://c1domedkhhc41"
+path="res://.godot/imported/slash_side.png-6b95ddcaeb4e2c8ff7de6627a54ff9ca.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/mobs/players/warrior/sprites/slash_sideways.png"
-dest_files=["res://.godot/imported/slash_sideways.png-5ec0c8aa74d31dbac36814e23337414d.ctex"]
+source_file="res://entities/mobs/players/warrior/sprites/slash_side.png"
+dest_files=["res://.godot/imported/slash_side.png-6b95ddcaeb4e2c8ff7de6627a54ff9ca.ctex"]
 
 [params]
 

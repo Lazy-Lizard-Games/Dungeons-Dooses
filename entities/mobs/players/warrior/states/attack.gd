@@ -19,10 +19,11 @@ func enter() -> void:
 	color_rect.color = Color.INDIAN_RED
 	ability.finished.connect(
 		func():
+			ability.end(entity)
 			switch_state()
 	)
 	ability.start(entity)
-	entity.render_component.play(ability.animation_on_start + '_sideways')
+	entity.render_component.play(ability.animation_on_start + '_side')
 
 
 func exit() -> void:
@@ -40,16 +41,14 @@ func process_physics(_delta: float) -> State:
 	var angle = direction.angle()
 	var current_frame = entity.render_component.get_frame()
 	var current_progress = entity.render_component.get_frame_progress()
-	entity.render_component.flip_h = false
+	entity.render_component.flip_h = direction.x < 0
 	if angle < Vector2(1, -1).angle() && angle > Vector2(-1, -1).angle():
 		entity.render_component.play(ability.animation_on_start + '_up')
 	elif angle > Vector2(1, 1).angle() && angle < Vector2(-1, 1).angle():
 		entity.render_component.play(ability.animation_on_start + '_down')
 	else:
-		entity.render_component.play(ability.animation_on_start + '_sideways')
-		entity.render_component.flip_h = direction.x < 0
+		entity.render_component.play(ability.animation_on_start + '_side')
 	entity.render_component.set_frame_and_progress(current_frame, current_progress)
-	
 	return null
 
 

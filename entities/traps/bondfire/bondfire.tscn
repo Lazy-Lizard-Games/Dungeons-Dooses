@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://brvdunlkitgi"]
+[gd_scene load_steps=35 format=3 uid="uid://brvdunlkitgi"]
 
 [ext_resource type="Script" path="res://entities/traps/bondfire/bondfire.gd" id="1_mi404"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_0wmj8"]
@@ -82,6 +82,8 @@ number_max = 2.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l74d1"]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_3nnc7"]
+
 [sub_resource type="Resource" id="Resource_aok1e"]
 script = ExtResource("5_q0t4s")
 name = "Hot water"
@@ -90,7 +92,10 @@ duration = SubResource("Resource_2gxne")
 direction = SubResource("Resource_n4sq6")
 scale = SubResource("Resource_48mh5")
 shape = SubResource("CircleShape2D_l74d1")
+shape_offset = Vector2(0, 0)
 actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_ou6bh")])
+sprite_frames = SubResource("SpriteFrames_3nnc7")
+single_hit = false
 
 [sub_resource type="Resource" id="Resource_jpk01"]
 script = ExtResource("4_b3ysc")
@@ -118,7 +123,7 @@ action_component = NodePath("ActionComponent")
 [node name="RenderComponent" parent="." instance=ExtResource("12_vcneh")]
 sprite_frames = ExtResource("13_udvb5")
 animation = &"idle"
-frame_progress = 0.869611
+frame_progress = 0.183825
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_v0uu1")

@@ -3,6 +3,8 @@ class_name BaseProjectile
 
 ## Projectiles are spawned by entities and allow for hit/hurt triggers at range.
 
+## Render component of the projectile.
+@export var render_component: RenderComponent
 ## Hurtbox responsible for triggering hits.
 @export var hurtbox_component: HurtboxComponent
 ## Collision shape of the projectile.
@@ -39,11 +41,18 @@ func set_variables(projectile_object: BaseProjectileObject) -> void:
 	direction = projectile_object.direction
 	actions_on_hurt = projectile_object.actions_on_hurt
 	collision_shape.shape = projectile_object.shape
+	collision_shape.position = projectile_object.shape_offset
 	hurtbox_collision_shape.shape = projectile_object.shape
+	hurtbox_collision_shape.position = projectile_object.shape_offset
+	hurtbox_component.single_hit = projectile_object.single_hit
+	render_component.sprite_frames = projectile_object.sprite_frames
 	self.scale = Vector2.ONE * projectile_object.scale.execute()
 
 
 func _ready() -> void:
+	render_component.frame_progress = 0
+	if 'default' in render_component.sprite_frames.get_animation_names():
+		render_component.play('default')
 	_direction = direction.get_vector(entity)
 	look_at(global_position + _direction)
 	current_pierce = pierce

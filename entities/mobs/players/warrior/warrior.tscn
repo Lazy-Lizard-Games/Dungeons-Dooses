@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=60 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -44,9 +44,18 @@ min_value = -2.14748e+09
 max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
+[sub_resource type="Resource" id="Resource_ebyaf"]
+script = ExtResource("2_acrq8")
+raw_value = 125.0
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
 [sub_resource type="Resource" id="Resource_q3a8u"]
 script = ExtResource("3_ww4uv")
 health_max = SubResource("Resource_eqsvv")
+movement_speed = SubResource("Resource_ebyaf")
 
 [sub_resource type="Resource" id="Resource_8xuyt"]
 script = ExtResource("4_kc31g")
@@ -200,6 +209,7 @@ position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_ts4su")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.5, 2.5)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")

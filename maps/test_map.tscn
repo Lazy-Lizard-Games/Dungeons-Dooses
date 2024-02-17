@@ -53,4 +53,4 @@ item = ExtResource("5_vnc1w")
 amount = 4
 
 [node name="Bondfire" parent="." instance=ExtResource("9_cw55t")]
-position = Vector2(-107, 0)
+position = Vector2(-68, 0)

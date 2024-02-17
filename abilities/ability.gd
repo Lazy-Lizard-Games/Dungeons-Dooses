@@ -21,6 +21,8 @@ signal finished
 @export var recharge_time: Number 
 ## Actions to execute on the caster when the ability is started.
 @export var actions_on_start: Array[EntityAction]
+## Actions to execute on the caster when the ability is ended.
+@export var actions_on_end: Array[EntityAction]
 
 var is_recharging := false
 var is_casting := false
@@ -53,6 +55,14 @@ func start(entity: Entity) -> void:
 		func():
 			finished.emit()
 	)
+
+
+func end(entity: Entity) -> void:
+	if !caster:
+		return
+	for action in actions_on_end:
+		action.execute(caster)
+	caster = null
 
 
 func start_cast(entity: Entity) -> void:

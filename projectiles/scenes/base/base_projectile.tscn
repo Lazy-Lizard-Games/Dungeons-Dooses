@@ -1,27 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://qorga5me6rjl"]
+[gd_scene load_steps=6 format=3 uid="uid://qorga5me6rjl"]
 
 [ext_resource type="Script" path="res://projectiles/scenes/base/base_projectile.gd" id="1_w6aco"]
-[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_3w8ak"]
+[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/commands/render/render_component.tscn" id="2_23l2a"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="3_cor1o"]
-
-[sub_resource type="Resource" id="Resource_gh8dw"]
-script = ExtResource("2_3w8ak")
-number = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rhisq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sjj12"]
 
-[node name="BaseProjectile" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "collision_shape", "hurtbox_collision_shape")]
+[node name="BaseProjectile" type="CharacterBody2D" node_paths=PackedStringArray("render_component", "hurtbox_component", "collision_shape", "hurtbox_collision_shape")]
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_w6aco")
-id = "Projectile"
-pierce = 1
-duration = SubResource("Resource_gh8dw")
+render_component = NodePath("RenderComponent")
 hurtbox_component = NodePath("HurtboxComponent")
 collision_shape = NodePath("CollisionShape2D")
 hurtbox_collision_shape = NodePath("HurtboxComponent/CollisionShape2D")
+
+[node name="RenderComponent" parent="." instance=ExtResource("2_23l2a")]
+z_index = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rhisq")
