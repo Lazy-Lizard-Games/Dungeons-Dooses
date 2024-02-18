@@ -18,12 +18,12 @@ func exit() -> void:
 
 
 func process_input(_event: InputEvent) -> State:
-	if Input.is_action_just_pressed("primary") and entity.can_attack:
-		return attack_state
 	return null
 
 
 func process_physics(_delta: float) -> State:
+	if Input.is_action_pressed("primary") and entity.can_attack:
+		return attack_state
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction.length() == 0:
 		return idle_state

@@ -778,6 +778,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 11
 vframes = 14
+frame = 7
 
 [node name="RenderComponent" parent="." instance=ExtResource("6_lmap4")]
 visible = false

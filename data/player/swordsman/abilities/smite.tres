@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="4_rs1ll"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_8h4kh"]
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="6_741xj"]
-[ext_resource type="Resource" uid="uid://c6igb8625mv34" path="res://data/player/swordsman/projectiles/smite/smite.tres" id="7_rgr3m"]
+[ext_resource type="Resource" uid="uid://c6igb8625mv34" path="res://data/player/swordsman/projectiles/smite/smite.tres" id="7_fwhfy"]
 
 [sub_resource type="Resource" id="Resource_6gdym"]
 script = ExtResource("2_ucrmn")
@@ -44,7 +44,7 @@ vector_b = SubResource("Resource_y06to")
 
 [sub_resource type="Resource" id="Resource_cs5jr"]
 script = ExtResource("1_saiaj")
-projectile_object = ExtResource("7_rgr3m")
+projectile_object = ExtResource("7_fwhfy")
 position = SubResource("Resource_uy32x")
 _id = ""
 
@@ -80,7 +80,7 @@ constant = 15.0
 
 [sub_resource type="Resource" id="Resource_nidjd"]
 script = ExtResource("5_8h4kh")
-constant = 1.0
+constant = 1.05
 
 [resource]
 script = ExtResource("1_xblru")

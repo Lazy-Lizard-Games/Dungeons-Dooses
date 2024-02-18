@@ -12,7 +12,6 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	## Apply actor affinity bonuses.
 	var affinities = actor.affinities
 	var damage_affinity = affinities.get_damage_affinity(damage.type)
-	print(actor.name)
 	var modifier = ConstantNumber.new()
 	modifier.constant = 1
 	if damage_affinity:

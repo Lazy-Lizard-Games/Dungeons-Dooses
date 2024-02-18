@@ -36,7 +36,6 @@ func update_skill_tree() -> void:
 
 
 func purchase_skill(skill: Skill) -> void:
-	print(skill.name, " - ", skill.current_stacks, " | ", skill_component.skill_points)
 	if skill_component.skill_points > 0:
 		if skill.purchase(entity):
 			skill_component.skill_points -= 1
