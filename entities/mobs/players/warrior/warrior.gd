@@ -65,10 +65,6 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta):
-	if Input.is_action_pressed("primary") and $UI/Hud.visible:
-		var ability = ability_component.get_ability(selected_ability)
-		if ability and !ability.is_casting and !ability.is_recharging:
-			state_component.change_state(attack_state)
 	state_component.process_physics(delta)
 
 

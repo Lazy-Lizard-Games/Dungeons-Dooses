@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://78yp57i4n0n5"
-path="res://.godot/imported/slash_trail.png-9bd203aa071dca339c6626461fb99d82.ctex"
+uid="uid://cw7nfaw2vl8k8"
+path="res://.godot/imported/walk_up.png-1df256c2408114e8ce8b4944cdacc7b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/player/swordsman/projectiles/offensive/slash/slash_trail.png"
-dest_files=["res://.godot/imported/slash_trail.png-9bd203aa071dca339c6626461fb99d82.ctex"]
+source_file="res://entities/mobs/players/warrior/sprites/walk/walk_up.png"
+dest_files=["res://.godot/imported/walk_up.png-1df256c2408114e8ce8b4944cdacc7b1.ctex"]
 
 [params]
 

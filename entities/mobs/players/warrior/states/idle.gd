@@ -1,20 +1,21 @@
 extends State
 
-@export var color_rect: ColorRect
 @export var move_state: State
+@export var attack_state: State
 @export var velocity_component: VelocityComponent
 @export var ability_component: AbilityComponent
+@export var animation_tree: AnimationTree
 
 var interactable: InteractableComponent
 
 
 func enter() -> void:
+	animation_tree['parameters/playback'].travel('idle')
 	entity.render_component.update_animation('idle')
-	color_rect.color = Color.AQUAMARINE
 
 
 func exit() -> void:
-	color_rect.color = Color.WHITE
+	pass
 
 
 func process_physics(_delta: float) -> State:
@@ -26,5 +27,7 @@ func process_physics(_delta: float) -> State:
 
 
 func process_input(_event: InputEvent) -> State:
+	if Input.is_action_just_pressed("primary") and entity.can_attack:
+		return attack_state
 	return null
 

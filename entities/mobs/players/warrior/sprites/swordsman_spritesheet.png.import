@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfsfjex8vjpax"
-path="res://.godot/imported/walk_sideways.png-c7fd28cf734f985de57660ed3924a3ec.ctex"
+uid="uid://b6hgtmoyxg314"
+path="res://.godot/imported/swordsman_spritesheet.png-233e50b8ae9140e165cf2baeb37a9ea8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/mobs/players/warrior/sprites/walk_sideways.png"
-dest_files=["res://.godot/imported/walk_sideways.png-c7fd28cf734f985de57660ed3924a3ec.ctex"]
+source_file="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png"
+dest_files=["res://.godot/imported/swordsman_spritesheet.png-233e50b8ae9140e165cf2baeb37a9ea8.ctex"]
 
 [params]
 

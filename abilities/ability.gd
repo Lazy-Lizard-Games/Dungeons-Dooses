@@ -11,8 +11,8 @@ signal finished
 @export_multiline var description: String
 ## Icon of the ability
 @export var icon: Image
-## Animtion to play on start.
-@export var animation_on_start: String
+## Animtion to play for the ability.
+@export var animation: String
 ## Minimum stamina required to start this ability.
 @export var reactive_energy: Number
 ## Cast time in seconds of the ability.
@@ -51,10 +51,6 @@ func start(entity: Entity) -> void:
 		action.execute(caster)
 	entity.looking_at = entity.global_position.direction_to(entity.get_global_mouse_position())
 	start_cast(entity)
-	entity.render_component.animation_finished.connect(
-		func():
-			finished.emit()
-	)
 
 
 func end(entity: Entity) -> void:
@@ -107,6 +103,7 @@ func cancel(entity: Entity) -> void:
 		entity.remove_child(cast_timer)
 		is_casting = false
 		casted.emit()
+	end(entity)
 	start_recharge(entity)
 
 

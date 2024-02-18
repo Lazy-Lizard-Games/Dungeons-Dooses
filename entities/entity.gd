@@ -34,6 +34,8 @@ signal consume(actor: Entity, item: int)
 @export var resistances: ResistanceAttributes = ResistanceAttributes.new()
 ## Direction the entity is looking
 var looking_at := Vector2.RIGHT
+## Controls attack inputs
+var can_attack := true
 
 
 func _ready() -> void:
@@ -79,3 +81,11 @@ func get_copy() -> Entity:
 	copy.velocity_component = VelocityComponent.new()
 	copy.action_component = ActionComponent.new()
 	return copy
+
+
+func enable_attack() -> void:
+	can_attack = true
+
+
+func disable_attack() -> void:
+	can_attack = false

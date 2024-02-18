@@ -1,11 +1,11 @@
 extends State
 
-@export var color_rect: ColorRect
 @export var idle_state: State
 @export var move_state: State
 @export var velocity_component: VelocityComponent
 @export var ability_component: AbilityComponent
 @export var state_component: StateComponent
+@export var animation_tree: AnimationTree
 
 var direction := Vector2.ZERO
 var ability: Ability
@@ -16,39 +16,27 @@ func enter() -> void:
 	if !ability or !ability.can_start(entity):
 		switch_state()
 		return
-	color_rect.color = Color.INDIAN_RED
-	ability.finished.connect(
-		func():
-			ability.end(entity)
-			switch_state()
-	)
+	entity.disable_attack()
 	ability.start(entity)
-	entity.render_component.play(ability.animation_on_start + '_side')
+	animation_tree['parameters/playback'].travel(ability.animation)
+	animation_tree['parameters/' + ability.animation + '/blend_position'] = entity.looking_at
+	animation_tree.animation_finished.connect(finished.bind(entity))
+
+
+func finished(_anim_name: StringName, entity: Entity) -> void:
+	animation_tree.animation_finished.disconnect(finished)
+	ability.end(entity)
+	switch_state()
 
 
 func exit() -> void:
-	color_rect.color = Color.WHITE
-	if !ability:
-		return
+	entity.enable_attack()
 
 
 func process_physics(_delta: float) -> State:
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	velocity_component.accelerate_in_direction(direction)
 	velocity_component.move(entity)
-	
-	var direction = entity.looking_at
-	var angle = direction.angle()
-	var current_frame = entity.render_component.get_frame()
-	var current_progress = entity.render_component.get_frame_progress()
-	entity.render_component.flip_h = direction.x < 0
-	if angle < Vector2(1, -1).angle() && angle > Vector2(-1, -1).angle():
-		entity.render_component.play(ability.animation_on_start + '_up')
-	elif angle > Vector2(1, 1).angle() && angle < Vector2(-1, 1).angle():
-		entity.render_component.play(ability.animation_on_start + '_down')
-	else:
-		entity.render_component.play(ability.animation_on_start + '_side')
-	entity.render_component.set_frame_and_progress(current_frame, current_progress)
 	return null
 
 

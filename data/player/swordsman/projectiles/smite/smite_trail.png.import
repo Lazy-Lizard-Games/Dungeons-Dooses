@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw7nfaw2vl8k8"
-path="res://.godot/imported/walk_up.png-f5afbbab7d1c0d4f2df79b22c739970e.ctex"
+uid="uid://7mbnwlb5se28"
+path="res://.godot/imported/smite_trail.png-81d30fb0510deccb11c2669fe19cd30e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/mobs/players/warrior/sprites/walk_up.png"
-dest_files=["res://.godot/imported/walk_up.png-f5afbbab7d1c0d4f2df79b22c739970e.ctex"]
+source_file="res://data/player/swordsman/projectiles/smite/smite_trail.png"
+dest_files=["res://.godot/imported/smite_trail.png-81d30fb0510deccb11c2669fe19cd30e.ctex"]
 
 [params]
 

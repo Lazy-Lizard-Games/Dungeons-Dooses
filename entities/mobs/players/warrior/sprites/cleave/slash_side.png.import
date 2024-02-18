@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bk4ba4d3ya473"
-path="res://.godot/imported/slash_up.png-ad62a113dd022b64165f744b384ded9a.ctex"
+uid="uid://c1domedkhhc41"
+path="res://.godot/imported/slash_side.png-0115f62b2a5081fac2c997bfb9a90f10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/mobs/players/warrior/sprites/slash_up.png"
-dest_files=["res://.godot/imported/slash_up.png-ad62a113dd022b64165f744b384ded9a.ctex"]
+source_file="res://entities/mobs/players/warrior/sprites/cleave/slash_side.png"
+dest_files=["res://.godot/imported/slash_side.png-0115f62b2a5081fac2c997bfb9a90f10.ctex"]
 
 [params]
 

@@ -1,94 +1,94 @@
 [gd_resource type="Resource" script_class="CastedAbility" load_steps=28 format=3 uid="uid://b1nxmba4puijc"]
 
-[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_yafm5"]
-[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_gowcy"]
-[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="3_cliqp"]
-[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="4_hc5hk"]
-[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_x3ggc"]
-[ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="6_fkll5"]
-[ext_resource type="Resource" uid="uid://bhqbxtxehvyj1" path="res://data/player/swordsman/projectiles/offensive/slash/slash.tres" id="7_1rk45"]
-[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="8_mgdh4"]
-[ext_resource type="Script" path="res://actions/entity/modifiers/remove_generic_modifier.gd" id="9_jeyng"]
-[ext_resource type="Script" path="res://abilities/casted_ability.gd" id="9_jtp3a"]
-[ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="10_sc4c8"]
-[ext_resource type="Script" path="res://actions/entity/modifiers/add_generic_modifier.gd" id="11_jumg7"]
+[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_it63e"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_lsvtj"]
+[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="3_ym5wd"]
+[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="4_k6cta"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_cgk0f"]
+[ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="6_8kedo"]
+[ext_resource type="Resource" uid="uid://bhqbxtxehvyj1" path="res://data/player/swordsman/projectiles/cleave/cleave.tres" id="7_x2cyx"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="8_ifwax"]
+[ext_resource type="Script" path="res://actions/entity/modifiers/remove_generic_modifier.gd" id="9_t3ifl"]
+[ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="10_xppwt"]
+[ext_resource type="Script" path="res://actions/entity/modifiers/add_generic_modifier.gd" id="11_0bdmg"]
+[ext_resource type="Script" path="res://abilities/casted_ability.gd" id="12_00sq2"]
 
 [sub_resource type="Resource" id="Resource_uv04i"]
-script = ExtResource("2_gowcy")
+script = ExtResource("2_lsvtj")
 
 [sub_resource type="Resource" id="Resource_wu26p"]
-script = ExtResource("5_x3ggc")
+script = ExtResource("5_cgk0f")
 constant = 0.0
 
 [sub_resource type="Resource" id="Resource_o48mw"]
-script = ExtResource("5_x3ggc")
+script = ExtResource("5_cgk0f")
 constant = 0.0
 
 [sub_resource type="Resource" id="Resource_xdag4"]
-script = ExtResource("4_hc5hk")
+script = ExtResource("4_k6cta")
 x = SubResource("Resource_wu26p")
 y = SubResource("Resource_o48mw")
 
 [sub_resource type="Resource" id="Resource_kmgca"]
-script = ExtResource("6_fkll5")
+script = ExtResource("6_8kedo")
 
 [sub_resource type="Resource" id="Resource_ec37j"]
-script = ExtResource("3_cliqp")
+script = ExtResource("3_ym5wd")
 vector_a = SubResource("Resource_xdag4")
 vector_b = SubResource("Resource_kmgca")
 
 [sub_resource type="Resource" id="Resource_71sbu"]
-script = ExtResource("1_yafm5")
+script = ExtResource("1_it63e")
 vector_a = SubResource("Resource_uv04i")
 vector_b = SubResource("Resource_ec37j")
 
 [sub_resource type="Resource" id="Resource_1itrm"]
-script = ExtResource("8_mgdh4")
-projectile_object = ExtResource("7_1rk45")
+script = ExtResource("8_ifwax")
+projectile_object = ExtResource("7_x2cyx")
 position = SubResource("Resource_71sbu")
 _id = ""
 
 [sub_resource type="Resource" id="Resource_o1do4"]
-script = ExtResource("9_jeyng")
+script = ExtResource("9_t3ifl")
 uid = "attack_slow"
 generic_type = 4
 _id = ""
 
 [sub_resource type="Resource" id="Resource_vd37w"]
-script = ExtResource("10_sc4c8")
+script = ExtResource("10_xppwt")
 uid = "attack_slow"
 operation = 1
 value = -0.9
 
 [sub_resource type="Resource" id="Resource_4yod2"]
-script = ExtResource("11_jumg7")
+script = ExtResource("11_0bdmg")
 modifier = SubResource("Resource_vd37w")
 generic_type = 4
 _id = ""
 
 [sub_resource type="Resource" id="Resource_8tl0i"]
-script = ExtResource("5_x3ggc")
-constant = 0.05
+script = ExtResource("5_cgk0f")
+constant = 0.3
 
 [sub_resource type="Resource" id="Resource_tq377"]
-script = ExtResource("5_x3ggc")
+script = ExtResource("5_cgk0f")
 constant = 0.0
 
 [sub_resource type="Resource" id="Resource_tbfs2"]
-script = ExtResource("5_x3ggc")
+script = ExtResource("5_cgk0f")
 constant = 15.0
 
 [sub_resource type="Resource" id="Resource_uey1s"]
-script = ExtResource("5_x3ggc")
+script = ExtResource("5_cgk0f")
 constant = 0.75
 
 [resource]
-script = ExtResource("9_jtp3a")
+script = ExtResource("12_00sq2")
 cost = SubResource("Resource_tq377")
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1itrm")])
-name = "Slash"
+name = "Cleave"
 description = ""
-animation_on_start = "slash"
+animation = "cleave"
 reactive_energy = SubResource("Resource_tbfs2")
 cast_time = SubResource("Resource_8tl0i")
 recharge_time = SubResource("Resource_uey1s")
