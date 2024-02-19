@@ -11,7 +11,6 @@ var interactable: InteractableComponent
 
 func enter() -> void:
 	animation_tree['parameters/playback'].travel('idle')
-	entity.render_component.update_animation('idle')
 
 
 func exit() -> void:

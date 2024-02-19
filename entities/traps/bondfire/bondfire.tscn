@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://brvdunlkitgi"]
+[gd_scene load_steps=39 format=3 uid="uid://brvdunlkitgi"]
 
 [ext_resource type="Script" path="res://entities/traps/bondfire/bondfire.gd" id="1_mi404"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_0wmj8"]
@@ -13,9 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://204wbc2mh187" path="res://components/commands/trigger/timed_trigger/timed_trigger.tscn" id="7_e3l6d"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="8_ynjtq"]
 [ext_resource type="Script" path="res://actions/resources/stacking_bientity_resource.gd" id="11_o67ml"]
-[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/commands/render/render_component.tscn" id="12_vcneh"]
+[ext_resource type="Texture2D" uid="uid://p5vxvuhtnt5" path="res://entities/traps/bondfire/sprites/object_bondfire.png" id="12_10p03"]
 [ext_resource type="Script" path="res://actions/bientity/general/add_bientity_resource.gd" id="12_yfrm0"]
-[ext_resource type="SpriteFrames" uid="uid://d2c4f6f3r4ffw" path="res://entities/traps/bondfire/sprites/bondfire_sprite_frames.tres" id="13_udvb5"]
 
 [sub_resource type="Resource" id="Resource_wuwjq"]
 script = ExtResource("2_i74y1")
@@ -103,30 +102,65 @@ projectile_object = SubResource("Resource_aok1e")
 position = SubResource("Resource_wuwjq")
 _id = ""
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0uu1"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ea36e"]
+radius = 5.0
 
 [sub_resource type="Resource" id="Resource_eqb7q"]
 script = ExtResource("8_ynjtq")
 constant = 1.0
 
-[node name="Bondfire" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "render_component", "velocity_component", "action_component")]
-collision_layer = 0
+[sub_resource type="Animation" id="Animation_ft0on"]
+resource_name = "idle"
+length = 1.05
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4bw5"]
+_data = {
+"idle": SubResource("Animation_ft0on")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8aob2"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xvxxd"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_0u4s4"]
+states/idle/node = SubResource("AnimationNodeAnimation_8aob2")
+states/idle/position = Vector2(306, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_xvxxd")]
+
+[node name="Bondfire" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "velocity_component", "action_component")]
+collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_mi404")
 trigger = NodePath("TimedTrigger")
 cast_projectile = SubResource("Resource_jpk01")
 id = "Geyser"
-render_component = NodePath("RenderComponent")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
 
-[node name="RenderComponent" parent="." instance=ExtResource("12_vcneh")]
-sprite_frames = ExtResource("13_udvb5")
-animation = &"idle"
-frame_progress = 0.183825
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("12_10p03")
+hframes = 7
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_v0uu1")
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_ea36e")
 debug_color = Color(0.996078, 0.0509804, 0, 0.419608)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_0wmj8")]
@@ -135,3 +169,17 @@ debug_color = Color(0.996078, 0.0509804, 0, 0.419608)
 
 [node name="TimedTrigger" parent="." instance=ExtResource("7_e3l6d")]
 interval = SubResource("Resource_eqb7q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_g4bw5")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_g4bw5")
+}
+tree_root = SubResource("AnimationNodeStateMachine_0u4s4")
+anim_player = NodePath("../AnimationPlayer")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=99 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -13,9 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
-[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/commands/render/render_component.tscn" id="6_lmap4"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
-[ext_resource type="SpriteFrames" uid="uid://jhjllihsvkie" path="res://entities/mobs/players/warrior/sprites/swordsman_sprite_frames.tres" id="7_unfu3"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/commands/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="13_qljxc"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
@@ -62,8 +60,8 @@ script = ExtResource("4_kc31g")
 [sub_resource type="Resource" id="Resource_mw36u"]
 script = ExtResource("5_078dv")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
-size = Vector2(25, 20)
+[sub_resource type="CircleShape2D" id="CircleShape2D_sned3"]
+radius = 8.0
 
 [sub_resource type="Resource" id="Resource_afi7b"]
 script = ExtResource("2_acrq8")
@@ -165,7 +163,7 @@ script = ExtResource("21_oguyd")
 slots = Array[ExtResource("22_uwmea")]([SubResource("Resource_u34i7"), SubResource("Resource_pih7n"), SubResource("Resource_3t68r"), SubResource("Resource_0yhk7"), SubResource("Resource_wkh47"), SubResource("Resource_r1c1s"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
-size = Vector2(25, 20)
+size = Vector2(16, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
 radius = 50.0
@@ -742,7 +740,7 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4pc1n"]
 states/cleave/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
-states/cleave/position = Vector2(557, 39)
+states/cleave/position = Vector2(557, 38)
 states/idle/node = SubResource("AnimationNodeAnimation_5fw13")
 states/idle/position = Vector2(303, 102)
 states/smite/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
@@ -751,9 +749,9 @@ states/walk/node = SubResource("AnimationNodeBlendSpace2D_jkldm")
 states/walk/position = Vector2(427, 102)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt")]
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "attack_state", "stamina_component", "hitbox_component", "health_component", "render_component", "velocity_component", "action_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "attack_state", "stamina_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_dwma1")
 state_component = NodePath("StateComponent")
@@ -766,7 +764,6 @@ hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
 faction = 1
-render_component = NodePath("RenderComponent")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_q3a8u")
@@ -775,17 +772,9 @@ resistances = SubResource("Resource_mw36u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("6_qqodu")
-flip_h = true
 hframes = 11
 vframes = 14
-frame = 7
-
-[node name="RenderComponent" parent="." instance=ExtResource("6_lmap4")]
-visible = false
-sprite_frames = ExtResource("7_unfu3")
-animation = &"smite_up"
-frame = 6
-frame_progress = 1.0
+frame = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -795,8 +784,8 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
-shape = SubResource("RectangleShape2D_ts4su")
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_sned3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -856,7 +845,7 @@ entity = NodePath("..")
 invulnerability_duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 6)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_fktii")
 debug_color = Color(0.796078, 0.423529, 0, 0.419608)
 
@@ -900,9 +889,9 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_4pc1n")
 anim_player = NodePath("../AnimationPlayer")
-parameters/cleave/blend_position = Vector2(0.331802, -0.118943)
-parameters/smite/blend_position = Vector2(-0.740528, 0.665198)
-parameters/walk/blend_position = Vector2(-0.0011481, 1)
+parameters/cleave/blend_position = Vector2(0.90828, -0.206349)
+parameters/smite/blend_position = Vector2(0.814013, -1.01058)
+parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
 

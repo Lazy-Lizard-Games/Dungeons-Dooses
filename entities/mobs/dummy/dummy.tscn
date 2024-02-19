@@ -1,11 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbyp6u3r6r346"]
+[gd_scene load_steps=23 format=3 uid="uid://cbyp6u3r6r346"]
 
 [ext_resource type="Script" path="res://entities/mobs/dummy/dummy.gd" id="1_gn2pe"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_dd2ne"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="3_ovxk7"]
-[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/commands/render/render_component.tscn" id="4_5p0aq"]
+[ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/sprites/dummy.png" id="4_3hsxe"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="4_6xhxw"]
-[ext_resource type="SpriteFrames" uid="uid://bxgwib84yji3x" path="res://entities/mobs/dummy/sprites/dummy_sprite_frames.tres" id="5_1r3r4"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="5_12j2c"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="6_c60ux"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="7_8nhay"]
@@ -31,28 +30,93 @@ script = ExtResource("3_ovxk7")
 health_max = SubResource("Resource_2m82o")
 health_regeneration = SubResource("Resource_yt706")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_t6ql3"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_o2tfs"]
+radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jlvlp"]
+size = Vector2(14, 25)
 
-[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "render_component", "velocity_component", "action_component")]
+[sub_resource type="Animation" id="Animation_1nh8f"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_0taog"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bdf68"]
+_data = {
+"hit": SubResource("Animation_1nh8f"),
+"idle": SubResource("Animation_0taog")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k0sc3"]
+animation = &"hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_083vk"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b7o2i"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ffw2r"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0naha"]
+advance_condition = &"hit"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vkqpj"]
+states/hit/node = SubResource("AnimationNodeAnimation_k0sc3")
+states/hit/position = Vector2(420, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_083vk")
+states/idle/position = Vector2(310, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b7o2i"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_ffw2r"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_0naha")]
+
+[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component")]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 0
 script = ExtResource("1_gn2pe")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Dummy"
-render_component = NodePath("RenderComponent")
+faction = null
+animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_5qhre")
 
-[node name="RenderComponent" parent="." instance=ExtResource("4_5p0aq")]
-sprite_frames = ExtResource("5_1r3r4")
-animation = &"idle"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("4_3hsxe")
+hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_t6ql3")
+position = Vector2(0, 10)
+shape = SubResource("CircleShape2D_o2tfs")
 debug_color = Color(0, 0.52549, 1, 0.419608)
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_6xhxw")]
@@ -64,9 +128,25 @@ entity = NodePath("..")
 invulnerability_duration = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_jlvlp")
 debug_color = Color(0.572549, 0.388235, 1, 0.419608)
 
 [node name="ActionComponent" parent="." instance=ExtResource("7_8nhay")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_bdf68")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+libraries = {
+"": SubResource("AnimationLibrary_bdf68")
+}
+tree_root = SubResource("AnimationNodeStateMachine_vkqpj")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/hit = false
 
 [connection signal="hit" from="HitboxComponent" to="." method="_on_hitbox_component_hit"]

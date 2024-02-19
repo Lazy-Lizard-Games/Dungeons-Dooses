@@ -20,8 +20,8 @@ signal consume(actor: Entity, item: int)
 @export var id: String = ""
 ## Faction of the entity.
 @export var faction: Enums.FactionType = Enums.FactionType.None
-## Render component for the entity.
-@export var render_component: RenderComponent
+## Animation tree for animating the states of the entity.
+@export var animation_tree: AnimationTree
 ## Velocity component for the entity.
 @export var velocity_component: VelocityComponent
 ## Action component for the entity.

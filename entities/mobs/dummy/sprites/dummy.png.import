@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://381458teswm6"
-path="res://.godot/imported/smite_down.png-3a01c7840827e8d1bfda2fefdac98513.ctex"
+uid="uid://cq2bj8boayyhp"
+path="res://.godot/imported/dummy.png-c55e57e4aefd2d138f867fd816ea531f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/mobs/players/warrior/sprites/smite/smite_down.png"
-dest_files=["res://.godot/imported/smite_down.png-3a01c7840827e8d1bfda2fefdac98513.ctex"]
+source_file="res://entities/mobs/dummy/sprites/dummy.png"
+dest_files=["res://.godot/imported/dummy.png-c55e57e4aefd2d138f867fd816ea531f.ctex"]
 
 [params]
 
