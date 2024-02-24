@@ -27,6 +27,8 @@ var entity: Entity
 var current_pierce: int
 ## Current direction of the projectile.
 var _direction: Vector2
+## Inverts faction check, hitting allies instead of enemies.
+var target_allies: bool
 
 ## Is the projectile expired.
 var is_expired: bool:
@@ -40,6 +42,7 @@ func set_variables(projectile_object: BaseProjectileObject) -> void:
 	duration = projectile_object.duration
 	direction = projectile_object.direction
 	actions_on_hurt = projectile_object.actions_on_hurt
+	target_allies = projectile_object.target_allies
 	collision_shape.shape = projectile_object.shape
 	collision_shape.position = projectile_object.shape_offset
 	hurtbox_collision_shape.shape = projectile_object.shape
@@ -70,8 +73,11 @@ func _ready() -> void:
 
 func on_hurt(hitbox: HitboxComponent):
 	if entity and !is_expired:
-		if entity.faction != Enums.FactionType.None and hitbox.entity.faction == entity.faction:
-			return
+		if entity.faction != Enums.FactionType.None:
+			if (target_allies and hitbox.entity.faction != entity.faction):
+				return
+			if (!target_allies and hitbox.entity.faction == entity.faction):
+				return
 		if hitbox.entity:
 			var scale_factor = entity.action_component.actor_on_hurt_scale.get_final_value() * hitbox.entity.action_component.target_on_hurt_scale.get_final_value()
 			for action in actions_on_hurt:

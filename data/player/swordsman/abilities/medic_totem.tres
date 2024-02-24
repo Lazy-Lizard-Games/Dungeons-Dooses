@@ -1,0 +1,65 @@
+[gd_resource type="Resource" script_class="CastedAbility" load_steps=18 format=3 uid="uid://tjut74lcwirc"]
+
+[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_3jcto"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="1_qdqos"]
+[ext_resource type="Script" path="res://abilities/casted_ability.gd" id="1_rkjja"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_trap.gd" id="2_jccs4"]
+[ext_resource type="PackedScene" uid="uid://clkswwgk4ubcl" path="res://entities/traps/player/warrior/medic/medic_totem.tscn" id="3_aut65"]
+[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="3_h13hd"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="4_4iwbk"]
+
+[sub_resource type="Resource" id="Resource_5x5ua"]
+script = ExtResource("1_qdqos")
+
+[sub_resource type="Resource" id="Resource_fcu3d"]
+script = ExtResource("4_4iwbk")
+constant = 0.0
+
+[sub_resource type="Resource" id="Resource_ai5bb"]
+script = ExtResource("4_4iwbk")
+constant = 7.0
+
+[sub_resource type="Resource" id="Resource_p8bh5"]
+script = ExtResource("3_h13hd")
+x = SubResource("Resource_fcu3d")
+y = SubResource("Resource_ai5bb")
+
+[sub_resource type="Resource" id="Resource_068cd"]
+script = ExtResource("1_3jcto")
+vector_a = SubResource("Resource_5x5ua")
+vector_b = SubResource("Resource_p8bh5")
+
+[sub_resource type="Resource" id="Resource_br20p"]
+script = ExtResource("2_jccs4")
+trap_scene = ExtResource("3_aut65")
+position = SubResource("Resource_068cd")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_qo3kp"]
+script = ExtResource("4_4iwbk")
+constant = 1.8
+
+[sub_resource type="Resource" id="Resource_hbgyq"]
+script = ExtResource("4_4iwbk")
+constant = 0.0
+
+[sub_resource type="Resource" id="Resource_l51el"]
+script = ExtResource("4_4iwbk")
+constant = 0.0
+
+[sub_resource type="Resource" id="Resource_0cy8g"]
+script = ExtResource("4_4iwbk")
+constant = 1.0
+
+[resource]
+script = ExtResource("1_rkjja")
+cost = SubResource("Resource_hbgyq")
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_br20p")])
+state_name = &"Medic"
+name = "Medic Totem"
+description = "Deploy a medic totem to recover yourself and your allies mid-combat."
+reactive_energy = SubResource("Resource_l51el")
+cast_time = SubResource("Resource_qo3kp")
+recharge_time = SubResource("Resource_0cy8g")
+actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
+actions_on_end = Array[Resource("res://actions/entity/entity_action.gd")]([])

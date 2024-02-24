@@ -1,0 +1,63 @@
+[gd_scene load_steps=15 format=3 uid="uid://clkswwgk4ubcl"]
+
+[ext_resource type="Script" path="res://entities/traps/player/warrior/medic/medic_totem.gd" id="1_gnqlf"]
+[ext_resource type="Texture2D" uid="uid://dje3pv8ng6cjq" path="res://entities/traps/player/warrior/medic/medic_totem_spritesheet.png" id="2_q7cat"]
+[ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_qydnc"]
+[ext_resource type="Resource" uid="uid://c8olddlr1w38" path="res://data/player/swordsman/projectiles/medic_totem/medic_totem.tres" id="3_csmmj"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="4_4d4kc"]
+[ext_resource type="PackedScene" uid="uid://204wbc2mh187" path="res://components/commands/trigger/timed_trigger/timed_trigger.tscn" id="6_0pdv6"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="7_8q1tg"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="8_8qmqk"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="9_2bbw0"]
+
+[sub_resource type="Resource" id="Resource_6j6gg"]
+script = ExtResource("2_qydnc")
+
+[sub_resource type="Resource" id="Resource_oc5gf"]
+script = ExtResource("4_4d4kc")
+projectile_object = ExtResource("3_csmmj")
+position = SubResource("Resource_6j6gg")
+_id = ""
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uplet"]
+radius = 2.0
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_i0uxj"]
+graph_offset = Vector2(-3.26096, 0)
+
+[sub_resource type="Resource" id="Resource_kwqgq"]
+script = ExtResource("7_8q1tg")
+constant = 1.5
+
+[node name="MedicTotem" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "animation_tree", "velocity_component", "action_component")]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_gnqlf")
+trigger = NodePath("TimedTrigger")
+cast_projectile = SubResource("Resource_oc5gf")
+id = "Medic_Totem"
+faction = 1
+animation_tree = NodePath("AnimationTree")
+velocity_component = NodePath("VelocityComponent")
+action_component = NodePath("ActionComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_q7cat")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_uplet")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_i0uxj")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="TimedTrigger" parent="." instance=ExtResource("6_0pdv6")]
+interval = SubResource("Resource_kwqgq")
+
+[node name="ActionComponent" parent="." instance=ExtResource("8_8qmqk")]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("9_2bbw0")]

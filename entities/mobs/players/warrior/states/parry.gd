@@ -6,7 +6,7 @@ var is_finished = false
 var ability: Ability
 var timer: Timer
 
-
+## Start
 func enter() -> void:
 	ability.start(entity)
 	animation_tree['parameters/playback'].travel('parry')
@@ -25,7 +25,7 @@ func process_physics(_delta: float) -> State:
 		return idle_state
 	return null
 
-
+## Idle
 func on_start_finished(_animation: String) -> void:
 	timer = Timer.new()
 	add_child(timer)
@@ -34,7 +34,7 @@ func on_start_finished(_animation: String) -> void:
 	timer.timeout.connect(on_timeout, CONNECT_ONE_SHOT)
 	entity.hit.connect(on_hit, CONNECT_ONE_SHOT)
 
-
+## Attack
 func on_hit(_entity: Entity) -> void:
 	remove_child(timer)
 	timer.timeout.disconnect(on_timeout)
@@ -42,13 +42,12 @@ func on_hit(_entity: Entity) -> void:
 	animation_tree.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
 	ability.cast(entity)
 
-
+## End
 func on_timeout() -> void:
 	remove_child(timer)
 	entity.hit.disconnect(on_hit)
-	animation_tree['parameters/playback'].travel('parry/attack')
+	animation_tree['parameters/playback'].travel('parry/end')
 	animation_tree.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
-	ability.cast(entity)
 
 
 func on_finished(_animation: String) -> void:

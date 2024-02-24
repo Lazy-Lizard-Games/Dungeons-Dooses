@@ -12,7 +12,7 @@ func enter() -> void:
 	animation_tree.animation_finished.connect(on_animation_finished, CONNECT_ONE_SHOT)
 
 
-func on_animation_finished(animation) -> void:
+func on_animation_finished(_animation) -> void:
 	is_finished = true
 
 
@@ -25,8 +25,4 @@ func exit() -> void:
 func process_physics(_delta: float) -> State:
 	if is_finished:
 		return idle_state
-	return null
-
-
-func process_input(_event: InputEvent) -> State:
 	return null

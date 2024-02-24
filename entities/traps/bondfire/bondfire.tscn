@@ -95,6 +95,7 @@ shape_offset = Vector2(0, 0)
 actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_ou6bh")])
 sprite_frames = SubResource("SpriteFrames_3nnc7")
 single_hit = false
+target_allies = false
 
 [sub_resource type="Resource" id="Resource_jpk01"]
 script = ExtResource("4_b3ysc")

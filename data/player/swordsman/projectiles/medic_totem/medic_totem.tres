@@ -1,0 +1,122 @@
+[gd_resource type="Resource" script_class="BaseProjectileObject" load_steps=22 format=3 uid="uid://c8olddlr1w38"]
+
+[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="1_f8mfh"]
+[ext_resource type="Script" path="res://projectiles/objects/base_projectile.gd" id="1_mp7s5"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_x4gva"]
+[ext_resource type="Texture2D" uid="uid://c8m5ykxa644qg" path="res://data/player/swordsman/projectiles/medic_totem/medic_totem_trail.png" id="4_lex4b"]
+
+[sub_resource type="Resource" id="Resource_sw1td"]
+script = ExtResource("2_x4gva")
+constant = 1.0
+
+[sub_resource type="Resource" id="Resource_63yp4"]
+script = ExtResource("2_x4gva")
+constant = 0.0
+
+[sub_resource type="Resource" id="Resource_ecw7t"]
+script = ExtResource("1_f8mfh")
+x = SubResource("Resource_sw1td")
+y = SubResource("Resource_63yp4")
+
+[sub_resource type="Resource" id="Resource_gli8l"]
+script = ExtResource("2_x4gva")
+constant = 1.0
+
+[sub_resource type="Resource" id="Resource_egipt"]
+script = ExtResource("2_x4gva")
+constant = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bbhw1"]
+radius = 35.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_emcw3"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7ulg"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v285g"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvl42"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kxvl8"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vxpif"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hc4k"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wdpqp"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c73q3"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sppds"]
+atlas = ExtResource("4_lex4b")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jd6ec"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_emcw3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7ulg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v285g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvl42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kxvl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vxpif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hc4k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wdpqp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c73q3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sppds")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[resource]
+script = ExtResource("1_mp7s5")
+name = "Medic_Pulse"
+pierce = 0
+duration = SubResource("Resource_gli8l")
+direction = SubResource("Resource_ecw7t")
+scale = SubResource("Resource_egipt")
+shape = SubResource("CircleShape2D_bbhw1")
+shape_offset = Vector2(0, 0)
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([])
+sprite_frames = SubResource("SpriteFrames_jd6ec")
+single_hit = true
+target_allies = true

@@ -7,8 +7,7 @@ var is_finished = false
 
 func enter() -> void:
 	ability.start(entity)
-	animation_tree['parameters/playback'].travel('cleave')
-	animation_tree['parameters/cleave/blend_position'] = entity.looking_at
+	animation_tree['parameters/playback'].travel('medic')
 	animation_tree.animation_finished.connect(on_animation_finished, CONNECT_ONE_SHOT)
 
 

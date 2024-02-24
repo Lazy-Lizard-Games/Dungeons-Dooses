@@ -23,3 +23,5 @@ class_name BaseProjectileObject
 @export var sprite_frames: SpriteFrames
 ## Toggles the projectile to only hit a target once, even if they remain in the collision area.
 @export var single_hit: bool
+## Toggles the projectile to inverse the faction check, hitting allies instead of enemies.
+@export var target_allies: bool
