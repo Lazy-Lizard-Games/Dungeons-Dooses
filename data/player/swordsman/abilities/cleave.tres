@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="CastedAbility" load_steps=28 format=3 uid="uid://b1nxmba4puijc"]
+[gd_resource type="Resource" script_class="CastedAbility" load_steps=22 format=3 uid="uid://b1nxmba4puijc"]
 
 [ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_vpook"]
 [ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_qk5v5"]
@@ -8,9 +8,6 @@
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="6_tjahn"]
 [ext_resource type="Resource" uid="uid://bhqbxtxehvyj1" path="res://data/player/swordsman/projectiles/cleave/cleave.tres" id="7_uxlbi"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="8_axbfu"]
-[ext_resource type="Script" path="res://actions/entity/modifiers/remove_generic_modifier.gd" id="9_brkyj"]
-[ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="10_sevai"]
-[ext_resource type="Script" path="res://actions/entity/modifiers/add_generic_modifier.gd" id="11_pr2sl"]
 [ext_resource type="Script" path="res://abilities/casted_ability.gd" id="12_vgp5l"]
 
 [sub_resource type="Resource" id="Resource_uv04i"]
@@ -48,24 +45,6 @@ projectile_object = ExtResource("7_uxlbi")
 position = SubResource("Resource_71sbu")
 _id = ""
 
-[sub_resource type="Resource" id="Resource_o1do4"]
-script = ExtResource("9_brkyj")
-uid = "attack_slow"
-generic_type = 4
-_id = ""
-
-[sub_resource type="Resource" id="Resource_vd37w"]
-script = ExtResource("10_sevai")
-uid = "attack_slow"
-operation = 1
-value = -0.9
-
-[sub_resource type="Resource" id="Resource_4yod2"]
-script = ExtResource("11_pr2sl")
-modifier = SubResource("Resource_vd37w")
-generic_type = 4
-_id = ""
-
 [sub_resource type="Resource" id="Resource_8tl0i"]
 script = ExtResource("5_4fhnc")
 constant = 0.3
@@ -86,11 +65,11 @@ constant = 0.75
 script = ExtResource("12_vgp5l")
 cost = SubResource("Resource_tq377")
 actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1itrm")])
+state_name = &"Cleave"
 name = "Cleave"
 description = ""
-animation = "cleave"
 reactive_energy = SubResource("Resource_tbfs2")
 cast_time = SubResource("Resource_8tl0i")
 recharge_time = SubResource("Resource_uey1s")
-actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_4yod2")])
-actions_on_end = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_o1do4")])
+actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
+actions_on_end = Array[Resource("res://actions/entity/entity_action.gd")]([])

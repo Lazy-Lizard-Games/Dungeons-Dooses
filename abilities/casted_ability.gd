@@ -11,7 +11,8 @@ func cast(entity: Entity) -> void:
 	var exhaust = ExhaustEntityAction.new()
 	exhaust.amount = cost
 	exhaust.execute(entity, entity.generics.cast_cost.get_final_value())
-	entity.remove_child(cast_timer)
+	if cast_timer in entity.get_children():
+		entity.remove_child(cast_timer)
 	is_casting = false
 	casted.emit()
 	for action in actions_on_cast:

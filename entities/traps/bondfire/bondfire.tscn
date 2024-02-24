@@ -156,7 +156,6 @@ action_component = NodePath("ActionComponent")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("12_10p03")
 hframes = 7
-frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)

@@ -1,11 +1,17 @@
 extends Mob
+class_name Player
 
+@export_category('Player Components')
 @export var state_component: StateComponent
 @export var interactor_component: InteractorComponent
 @export var inventory_component: InventoryComponent
 @export var ability_component: AbilityComponent
-@export var attack_state: State
 @export var stamina_component: StaminaComponent
+@export_category('Player Abilities')
+@export var ability_1: Ability
+@export var ability_2: Ability
+@export var ability_3: Ability
+@export var ability_4: Ability
 
 var selected_ability = 0:
 	set(s):

@@ -104,7 +104,6 @@ script = ExtResource("1_gn2pe")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Dummy"
-faction = null
 animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")

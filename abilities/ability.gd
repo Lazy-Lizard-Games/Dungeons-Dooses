@@ -5,14 +5,14 @@ signal casted
 signal recharged
 signal finished
 
+## Name of state to control ability.
+@export var state_name: StringName
 ## Name of the ability.
 @export var name: String
 ## Description of the ability.
 @export_multiline var description: String
 ## Icon of the ability
 @export var icon: Image
-## Animtion to play for the ability.
-@export var animation: String
 ## Minimum stamina required to start this ability.
 @export var reactive_energy: Number
 ## Cast time in seconds of the ability.
@@ -53,7 +53,7 @@ func start(entity: Entity) -> void:
 	start_cast(entity)
 
 
-func end(entity: Entity) -> void:
+func end(_entity: Entity) -> void:
 	if !caster:
 		return
 	for action in actions_on_end:
@@ -69,8 +69,8 @@ func start_cast(entity: Entity) -> void:
 		cast_timer.timeout.connect(cast.bind(entity))
 		entity.add_child(cast_timer)
 		cast_timer.start(_cast_time * entity.generics.cast_time.get_final_value())
-	else:
-		cast(entity)
+	#else:
+		#cast(entity)
 
 
 func cast(entity: Entity) -> void:

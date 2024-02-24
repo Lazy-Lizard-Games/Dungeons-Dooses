@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=129 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -14,12 +14,16 @@
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/cleave.gd" id="11_tkekq"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/commands/stamina/stamina_component.tscn" id="12_edvht"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/smite.gd" id="13_m05i3"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="13_qljxc"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/parry.gd" id="15_718h8"]
 [ext_resource type="Resource" uid="uid://b1nxmba4puijc" path="res://data/player/swordsman/abilities/cleave.tres" id="19_2lrk1"]
+[ext_resource type="Resource" uid="uid://dwlyqo1igd0r2" path="res://data/player/swordsman/abilities/parry.tres" id="20_76lod"]
 [ext_resource type="Resource" uid="uid://dx5pqk0k04c5t" path="res://data/player/swordsman/abilities/smite.tres" id="20_k1jwn"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
@@ -61,7 +65,7 @@ script = ExtResource("4_kc31g")
 script = ExtResource("5_078dv")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sned3"]
-radius = 8.0
+radius = 5.0
 
 [sub_resource type="Resource" id="Resource_afi7b"]
 script = ExtResource("2_acrq8")
@@ -311,6 +315,91 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8mgoj"]
+resource_name = "idle_unlooped"
+length = 0.001
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ieicy"]
+resource_name = "parry_attack"
+length = 0.9
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 17), Vector2i(1, 17), Vector2i(2, 17), Vector2i(3, 17), Vector2i(4, 17), Vector2i(5, 17)]
+}
+
+[sub_resource type="Animation" id="Animation_r0lti"]
+resource_name = "parry_end"
+length = 1.05
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 16), Vector2i(1, 16), Vector2i(2, 16), Vector2i(3, 16), Vector2i(4, 16), Vector2i(5, 16), Vector2i(6, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_fvsx8"]
+resource_name = "parry_idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 15), Vector2i(1, 15), Vector2i(2, 15), Vector2i(3, 15), Vector2i(4, 15), Vector2i(5, 15)]
+}
+
+[sub_resource type="Animation" id="Animation_7ji6i"]
+resource_name = "parry_start"
+length = 1.05
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14), Vector2i(4, 14), Vector2i(5, 14), Vector2i(6, 14)]
 }
 
 [sub_resource type="Animation" id="Animation_bg36c"]
@@ -626,6 +715,11 @@ _data = {
 "death": SubResource("Animation_0jos2"),
 "death_idle": SubResource("Animation_ungod"),
 "idle": SubResource("Animation_mbh1a"),
+"idle_unlooped": SubResource("Animation_8mgoj"),
+"parry_attack": SubResource("Animation_ieicy"),
+"parry_end": SubResource("Animation_r0lti"),
+"parry_idle": SubResource("Animation_fvsx8"),
+"parry_start": SubResource("Animation_7ji6i"),
 "smite_down": SubResource("Animation_bg36c"),
 "smite_left": SubResource("Animation_6jqbw"),
 "smite_left_down": SubResource("Animation_y2ph6"),
@@ -666,6 +760,58 @@ sync = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5fw13"]
 animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71i3w"]
+animation = &"parry_attack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n0dra"]
+animation = &"parry_end"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_skqfj"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oay5n"]
+animation = &"parry_start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_05hmj"]
+animation = &"parry_idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uldhj"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnb88"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atiko"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xc18k"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hlysp"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fuuj0"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wvj0n"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_re2mg"]
+state_machine_type = 2
+states/attack/node = SubResource("AnimationNodeAnimation_71i3w")
+states/attack/position = Vector2(660.922, 39)
+states/end/node = SubResource("AnimationNodeAnimation_n0dra")
+states/end/position = Vector2(660.922, 149)
+states/finish/node = SubResource("AnimationNodeBlendSpace2D_skqfj")
+states/finish/position = Vector2(785.453, 100)
+states/start/node = SubResource("AnimationNodeAnimation_oay5n")
+states/start/position = Vector2(351, 100)
+states/wait/node = SubResource("AnimationNodeAnimation_05hmj")
+states/wait/position = Vector2(533.922, 100)
+transitions = ["Start", "start", SubResource("AnimationNodeStateMachineTransition_uldhj"), "start", "wait", SubResource("AnimationNodeStateMachineTransition_jnb88"), "wait", "attack", SubResource("AnimationNodeStateMachineTransition_atiko"), "wait", "end", SubResource("AnimationNodeStateMachineTransition_xc18k"), "attack", "finish", SubResource("AnimationNodeStateMachineTransition_hlysp"), "end", "finish", SubResource("AnimationNodeStateMachineTransition_fuuj0"), "finish", "End", SubResource("AnimationNodeStateMachineTransition_wvj0n")]
+graph_offset = Vector2(162.453, 0)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sn73e"]
 animation = &"smite_up"
@@ -738,18 +884,44 @@ sync = true
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3d2vt"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4pc1n"]
-states/cleave/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
-states/cleave/position = Vector2(557, 38)
-states/idle/node = SubResource("AnimationNodeAnimation_5fw13")
-states/idle/position = Vector2(303, 102)
-states/smite/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
-states/smite/position = Vector2(557, 100)
-states/walk/node = SubResource("AnimationNodeBlendSpace2D_jkldm")
-states/walk/position = Vector2(427, 102)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt")]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c0us6"]
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "attack_state", "stamina_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxjuk"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fmvqr"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mms1k"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4oqv2"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_15i4u"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fywhd"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c8tn5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4pc1n"]
+states/Start/position = Vector2(147, 44)
+states/cleave/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
+states/cleave/position = Vector2(483, -48)
+states/idle/node = SubResource("AnimationNodeAnimation_5fw13")
+states/idle/position = Vector2(303, 44)
+states/parry/node = SubResource("AnimationNodeStateMachine_re2mg")
+states/parry/position = Vector2(303, -48)
+states/smite/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
+states/smite/position = Vector2(483, 44)
+states/walk/node = SubResource("AnimationNodeBlendSpace2D_jkldm")
+states/walk/position = Vector2(303, 140)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "cleave", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "cleave", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "smite", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "smite", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5")]
+graph_offset = Vector2(20.4717, -83.1757)
+
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -758,12 +930,15 @@ state_component = NodePath("StateComponent")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
-attack_state = NodePath("StateComponent/Attack")
 stamina_component = NodePath("StaminaComponent")
+ability_1 = ExtResource("19_2lrk1")
+ability_2 = ExtResource("20_k1jwn")
+ability_3 = ExtResource("20_76lod")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
 faction = 1
+animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_q3a8u")
@@ -772,9 +947,9 @@ resistances = SubResource("Resource_mw36u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("6_qqodu")
-hframes = 11
-vframes = 14
-frame = 2
+hframes = 12
+vframes = 19
+frame = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -818,6 +993,21 @@ ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
 animation_tree = NodePath("../../AnimationTree")
 
+[node name="Cleave" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree")]
+script = ExtResource("11_tkekq")
+idle_state = NodePath("../../Idle")
+animation_tree = NodePath("../../../AnimationTree")
+
+[node name="Smite" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree")]
+script = ExtResource("13_m05i3")
+idle_state = NodePath("../../Idle")
+animation_tree = NodePath("../../../AnimationTree")
+
+[node name="Parry" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree")]
+script = ExtResource("15_718h8")
+idle_state = NodePath("../../Idle")
+animation_tree = NodePath("../../../AnimationTree")
+
 [node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
 control = SubResource("Resource_afi7b")
 friction = SubResource("Resource_ulxov")
@@ -831,7 +1021,7 @@ target_on_hurt_scale = SubResource("Resource_wp6ar")
 actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
-abilities = Array[Resource("res://abilities/ability.gd")]([ExtResource("19_2lrk1"), ExtResource("20_k1jwn"), null, null])
+abilities = Array[Resource("res://abilities/ability.gd")]([ExtResource("19_2lrk1"), ExtResource("20_k1jwn"), ExtResource("20_76lod"), null])
 
 [node name="SkillComponent" parent="." instance=ExtResource("28_nfmj8")]
 skill_points = 10
@@ -890,6 +1080,7 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_4pc1n")
 anim_player = NodePath("../AnimationPlayer")
 parameters/cleave/blend_position = Vector2(0.90828, -0.206349)
+parameters/parry/finish/blend_position = Vector2(0, 0)
 parameters/smite/blend_position = Vector2(0.814013, -1.01058)
 parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 

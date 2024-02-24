@@ -9,35 +9,44 @@ extends State
 
 var direction := Vector2.ZERO
 var ability: Ability
+var ability_state: State
 
 
 func enter() -> void:
-	ability = ability_component.get_ability(entity.selected_ability)
-	if !ability or !ability.can_start(entity):
-		switch_state()
+	match entity.selected_ability:
+		0: ability = entity.ability_1
+		1: ability = entity.ability_2
+		2: ability = entity.ability_3
+		3: ability = entity.ability_4
+		_: ability = null
+	if !(ability and ability.can_start(entity)):
+		state_component.change_state(idle_state)
+		return
+	for child in get_children():
+		if ability.state_name == child.name:
+			ability_state = child
+			ability_state.ability = ability
+			ability_state.entity = entity
+			break
+	if !ability_state:
+		state_component.change_state(idle_state)
 		return
 	entity.disable_attack()
-	ability.start(entity)
-	animation_tree['parameters/playback'].travel(ability.animation)
-	animation_tree['parameters/' + ability.animation + '/blend_position'] = entity.looking_at
-	animation_tree.animation_finished.connect(finished.bind(entity))
-
-
-func finished(_anim_name: StringName, entity: Entity) -> void:
-	animation_tree.animation_finished.disconnect(finished)
-	ability.end(entity)
-	switch_state()
+	ability_state.enter()
 
 
 func exit() -> void:
+	if ability_state:
+		ability_state.exit()
+		ability_state = null
+	if ability:
+		ability = null
 	entity.enable_attack()
 
 
-func process_physics(_delta: float) -> State:
-	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
-	velocity_component.accelerate_in_direction(direction)
-	velocity_component.move(entity)
-	return null
+func process_physics(delta: float) -> State:
+	var state = ability_state.process_physics(delta)
+	return state
 
 
 func process_input(_event: InputEvent) -> State:
@@ -48,14 +57,3 @@ func process_input(_event: InputEvent) -> State:
 		ability.cancel(entity)
 		return idle_state
 	return null
-
-
-func switch_state() -> void:
-	if direction.length() > 0:
-		state_component.change_state(move_state)
-		return
-	state_component.change_state(idle_state)
-
-
-func on_expired() -> void:
-	switch_state()

@@ -5,3 +5,7 @@ class_name BaseAction
 
 ## Id of the action.
 @export var _id: String
+
+
+func get_id() -> String:
+	return _id
