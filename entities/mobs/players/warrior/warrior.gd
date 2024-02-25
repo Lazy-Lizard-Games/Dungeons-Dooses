@@ -24,6 +24,10 @@ func _ready() -> void:
 	super()
 	state_component.init(self)
 	stamina_component.attributes = generics
+	ability_1 = ability_component.abilities[0]
+	ability_2 = ability_component.abilities[1]
+	ability_3 = ability_component.abilities[2]
+	ability_4 = ability_component.abilities[3]
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -76,3 +80,12 @@ func _physics_process(delta):
 
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()
+
+
+func get_selected_ability() -> Ability:
+	match selected_ability:
+		0: return ability_1
+		1: return ability_2
+		2: return ability_3
+		3: return ability_4
+		_: return null

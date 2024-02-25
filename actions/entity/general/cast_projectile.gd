@@ -12,7 +12,7 @@ func execute(entity: Entity, _scale := 1.0) -> void:
 	projectile.entity = entity
 	projectile.global_position = position.get_vector(entity)
 	projectile.set_variables(projectile_object)
-	ProjectileHandler.add(projectile)
+	ProjectileHandler.add_projectile(projectile)
 
 
 func get_projectile_scene(object: BaseProjectileObject) -> BaseProjectile:

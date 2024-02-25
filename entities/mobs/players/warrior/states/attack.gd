@@ -13,12 +13,7 @@ var ability_state: State
 
 
 func enter() -> void:
-	match entity.selected_ability:
-		0: ability = entity.ability_1
-		1: ability = entity.ability_2
-		2: ability = entity.ability_3
-		3: ability = entity.ability_4
-		_: ability = null
+	ability = entity.get_selected_ability()
 	if !(ability and ability.can_start(entity)):
 		state_component.change_state(idle_state)
 		return

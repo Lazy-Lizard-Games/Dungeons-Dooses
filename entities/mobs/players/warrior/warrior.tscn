@@ -336,6 +336,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_bix7b"]
+resource_name = "medic"
+length = 1.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
+}
+
 [sub_resource type="Animation" id="Animation_ieicy"]
 resource_name = "parry_attack"
 length = 0.9
@@ -708,23 +725,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_bix7b"]
-resource_name = "medic"
-length = 1.8
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rd62t"]
 _data = {
 "cleave_down": SubResource("Animation_irgbt"),
@@ -962,10 +962,6 @@ interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 stamina_component = NodePath("StaminaComponent")
-ability_1 = ExtResource("19_2lrk1")
-ability_2 = ExtResource("20_k1jwn")
-ability_3 = ExtResource("20_76lod")
-ability_4 = ExtResource("5_ekea3")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -982,7 +978,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 6
+frame = 3
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

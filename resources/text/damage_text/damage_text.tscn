@@ -13,6 +13,7 @@ poison = Color(0, 1, 0, 1)
 light = Color(0.976471, 0.964706, 0.780392, 1)
 
 [node name="DamageText" type="Control" node_paths=PackedStringArray("label", "timer")]
+z_index = 3
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_o24dj")

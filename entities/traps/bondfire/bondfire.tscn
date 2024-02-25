@@ -96,6 +96,7 @@ actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([
 sprite_frames = SubResource("SpriteFrames_3nnc7")
 single_hit = false
 target_allies = false
+z_index_offset = 0
 
 [sub_resource type="Resource" id="Resource_jpk01"]
 script = ExtResource("4_b3ysc")

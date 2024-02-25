@@ -59,3 +59,4 @@ shape_offset = Vector2(0, 0)
 actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_sao1o")])
 sprite_frames = SubResource("SpriteFrames_gtelp")
 single_hit = true
+target_allies = false

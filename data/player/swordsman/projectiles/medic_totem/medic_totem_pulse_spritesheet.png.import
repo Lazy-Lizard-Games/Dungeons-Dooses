@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8m5ykxa644qg"
-path="res://.godot/imported/medic_totem_trail.png-c42f74881dce522c79dd643171dd92df.ctex"
+uid="uid://dyoa6ukdmxan"
+path="res://.godot/imported/medic_totem_pulse_spritesheet.png-3699cf47ceed2ad1607a2d241ad98980.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://data/player/swordsman/projectiles/medic_totem/medic_totem_trail.png"
-dest_files=["res://.godot/imported/medic_totem_trail.png-c42f74881dce522c79dd643171dd92df.ctex"]
+source_file="res://data/player/swordsman/projectiles/medic_totem/medic_totem_pulse_spritesheet.png"
+dest_files=["res://.godot/imported/medic_totem_pulse_spritesheet.png-3699cf47ceed2ad1607a2d241ad98980.ctex"]
 
 [params]
 

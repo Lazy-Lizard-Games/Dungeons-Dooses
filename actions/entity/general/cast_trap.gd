@@ -8,4 +8,4 @@ class_name CastTrapEntityAction
 func execute(entity: Entity, _scale := 1.0) -> void:
 	var trap = trap_scene.instantiate() as Trap
 	trap.position = position.get_vector(entity)
-	entity.get_tree().root.add_child(trap)
+	ProjectileHandler.add_trap(trap)

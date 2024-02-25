@@ -25,3 +25,5 @@ class_name BaseProjectileObject
 @export var single_hit: bool
 ## Toggles the projectile to inverse the faction check, hitting allies instead of enemies.
 @export var target_allies: bool
+## Z-index offset, it has use cases I swear...
+@export var z_index_offset: int

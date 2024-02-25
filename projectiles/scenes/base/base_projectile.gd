@@ -50,9 +50,11 @@ func set_variables(projectile_object: BaseProjectileObject) -> void:
 	hurtbox_component.single_hit = projectile_object.single_hit
 	render_component.sprite_frames = projectile_object.sprite_frames
 	self.scale = Vector2.ONE * projectile_object.scale.execute()
+	z_index = projectile_object.z_index_offset
 
 
 func _ready() -> void:
+	z_index += 1
 	render_component.frame_progress = 0
 	if 'default' in render_component.sprite_frames.get_animation_names():
 		render_component.play('default')
@@ -65,14 +67,14 @@ func _ready() -> void:
 		var duration_timer = Timer.new()
 		duration_timer.timeout.connect(
 			func():
-				ProjectileHandler.remove(self)
+				ProjectileHandler.remove_projectile(self)
 		)
 		add_child(duration_timer)
 		duration_timer.start(_duration)
 
 
 func on_hurt(hitbox: HitboxComponent):
-	if entity and !is_expired:
+	if (entity and !entity.is_queued_for_deletion()) and !is_expired:
 		if entity.faction != Enums.FactionType.None:
 			if (target_allies and hitbox.entity.faction != entity.faction):
 				return

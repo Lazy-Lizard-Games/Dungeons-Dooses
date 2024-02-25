@@ -23,9 +23,6 @@ var speed := 5.0
 
 
 func _ready() -> void:
-	if amount < 0:
-		type = Enums.DamageType.Light
-		amount *= -1
 	direction = direction.rotated(deg_to_rad(15-randf_range(0, 30)))
 	timer.start(1)
 

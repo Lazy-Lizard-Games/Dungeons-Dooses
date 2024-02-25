@@ -39,6 +39,7 @@ var can_attack := true
 
 
 func _ready() -> void:
+	z_index = 1
 	generics = generics.duplicate(true)
 	affinities = affinities.duplicate(true)
 	resistances = resistances.duplicate(true)
