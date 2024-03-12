@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bv2jdsrnmje44"]
 
 [ext_resource type="Script" path="res://projectiles/scenes/laser/laser_projectile.gd" id="1_qliax"]
-[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_2uilj"]
-[ext_resource type="PackedScene" uid="uid://raxmp07wnacw" path="res://components/commands/target/target_component.tscn" id="3_frrs1"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="2_2uilj"]
+[ext_resource type="PackedScene" uid="uid://raxmp07wnacw" path="res://components/target/target_component.tscn" id="3_frrs1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vx64d"]
 

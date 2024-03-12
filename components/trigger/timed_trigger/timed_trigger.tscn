@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://204wbc2mh187"]
+
+[ext_resource type="Script" path="res://components/trigger/timed_trigger/timed_trigger.gd" id="1_jawkf"]
+
+[node name="TimedTrigger" type="Node2D"]
+script = ExtResource("1_jawkf")

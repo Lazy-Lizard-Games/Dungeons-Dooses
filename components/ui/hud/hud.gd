@@ -15,7 +15,7 @@ class_name Hud
 ## Stamina bar
 @onready var stamina_bar: ResourceBar = $StatsContainer/VBoxContainer/StaminaBar
 
-var resource_container_scene = preload("res://components/ui/resource/resource.tscn")
+var resource_container_scene = preload ("res://components/ui/resource/resource.tscn")
 var resource_containers: Array[ResourceContainer]
 
 func _ready() -> void:
@@ -24,10 +24,8 @@ func _ready() -> void:
 	stamina.stamina_updated.connect(on_stamina_updates)
 	action.resource_added.connect(on_resource_added)
 
-
 func on_health_updated(_previous: float, current: float) -> void:
 	health_bar.progress_bar.value = current
-
 
 func on_health_maximum_updated(previous: Attribute, current: Attribute) -> void:
 	if previous:
@@ -37,10 +35,8 @@ func on_health_maximum_updated(previous: Attribute, current: Attribute) -> void:
 		current.updated.connect(on_health_attribute_updated)
 		on_health_attribute_updated(current.get_final_value())
 
-
 func on_stamina_updates(_previous: float, current: float) -> void:
 	stamina_bar.progress_bar.value = current
-
 
 func on_stamina_maximum_updated(previous: Attribute, current: Attribute) -> void:
 	if previous:
@@ -52,7 +48,6 @@ func on_stamina_maximum_updated(previous: Attribute, current: Attribute) -> void
 
 func on_health_attribute_updated(final_value: float) -> void:
 	health_bar.progress_bar.max_value = final_value
-
 
 func on_stamina_attribute_updated(final_value: float) -> void:
 	stamina_bar.progress_bar.max_value = final_value

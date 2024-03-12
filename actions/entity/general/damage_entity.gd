@@ -8,8 +8,7 @@ class_name DamageEntityAction
 ## Amount of damage to deal.
 @export var amount: Number
 
-
-func execute(entity: Entity, scale := 1.0) -> void:
+func execute(entity: Entity, scale:=1.0) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return

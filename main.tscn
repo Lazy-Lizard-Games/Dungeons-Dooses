@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ldjvd2vwp618"]
+[gd_scene load_steps=7 format=3 uid="uid://ldjvd2vwp618"]
 
 [ext_resource type="PackedScene" uid="uid://dap4fb6jeula0" path="res://maps/test_map.tscn" id="1_240sg"]
 [ext_resource type="Script" path="res://main.gd" id="1_xmm6q"]
 [ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/mobs/players/warrior/warrior.tscn" id="3_lkqwk"]
 [ext_resource type="PackedScene" uid="uid://cbyp6u3r6r346" path="res://entities/mobs/dummy/dummy.tscn" id="4_1v8qg"]
 [ext_resource type="PackedScene" uid="uid://brvdunlkitgi" path="res://entities/traps/bondfire/bondfire.tscn" id="5_r503u"]
+[ext_resource type="PackedScene" uid="uid://csnfm86tpg24a" path="res://entities/mobs/slime/blue/slime_blue.tscn" id="6_rb8my"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("projectiles", "entities")]
 y_sort_enabled = true
@@ -33,6 +34,9 @@ position = Vector2(-68, 0)
 
 [node name="Dummy" parent="Entities" instance=ExtResource("4_1v8qg")]
 position = Vector2(0, -129)
+
+[node name="SlimeBlue" parent="Entities" instance=ExtResource("6_rb8my")]
+position = Vector2(68, 0)
 
 [node name="Projectiles" type="Node2D" parent="."]
 y_sort_enabled = true

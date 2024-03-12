@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0kpk33phak3x"]
 
 [ext_resource type="Script" path="res://interactables/lootbag/lootbag.gd" id="1_umg1q"]
-[ext_resource type="PackedScene" uid="uid://brwcuxfey5gph" path="res://components/commands/interactable/interactable_component.tscn" id="2_xdhg5"]
+[ext_resource type="PackedScene" uid="uid://brwcuxfey5gph" path="res://components/interactable/interactable_component.tscn" id="2_xdhg5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2b3sa"]
 

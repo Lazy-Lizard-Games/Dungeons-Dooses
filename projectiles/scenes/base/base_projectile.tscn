@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://qorga5me6rjl"]
 
 [ext_resource type="Script" path="res://projectiles/scenes/base/base_projectile.gd" id="1_w6aco"]
-[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/commands/render/render_component.tscn" id="2_23l2a"]
-[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="3_cor1o"]
+[ext_resource type="PackedScene" uid="uid://uo447rb3skpt" path="res://components/render/render_component.tscn" id="2_23l2a"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_cor1o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rhisq"]
 

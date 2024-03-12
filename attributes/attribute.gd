@@ -5,17 +5,15 @@ signal updated(final_value: float)
 
 @export var raw_value: float = 0
 @export var multiplier_value: float = 1
-@export var min_value: float = pow(-2, 31)
-@export var max_value: float = pow(2, 31)-1
+@export var min_value: float = pow( - 2, 31)
+@export var max_value: float = pow(2, 31) - 1
 @export var modifiers: Array[AttributeModifier]
 
-
-func _init(_raw := 0.0, _multiplier := 1.0, _min := pow(-2, 31), _max := pow(2, 31)-1) -> void:
+func _init(_raw:=0.0, _multiplier:=1.0, _min:=pow( - 2, 31), _max:=pow(2, 31) - 1) -> void:
 	raw_value = _raw
 	multiplier_value = _multiplier
 	min_value = _min
 	max_value = _max
-
 
 ## Returns the final attribute value after modifiers are applied.
 func get_final_value() -> float:
@@ -35,12 +33,10 @@ func get_final_value() -> float:
 			total = modifier.value
 	return clamp(total, min_value, max_value)
 
-
 ## Adds a modifier to the attribute
 func add_modifier(modifier: AttributeModifier) -> void:
 	modifiers.append(modifier)
 	updated.emit(get_final_value())
-
 
 ## Removes a modifier from the attribute
 func remove_modifier(uid: String) -> void:

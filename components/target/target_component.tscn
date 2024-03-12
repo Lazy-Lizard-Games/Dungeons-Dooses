@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://raxmp07wnacw"]
+
+[ext_resource type="Script" path="res://components/target/target_component.gd" id="1_dpnvy"]
+
+[node name="TargetComponent" type="ShapeCast2D"]
+target_position = Vector2(0, 0)
+collision_mask = 4
+script = ExtResource("1_dpnvy")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bghndwn6x40gj"]
+
+[ext_resource type="Script" path="res://components/trigger/pressure_trigger/pressure_trigger.gd" id="1_b6a68"]
+
+[node name="PressureTrigger" type="Area2D"]
+script = ExtResource("1_b6a68")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

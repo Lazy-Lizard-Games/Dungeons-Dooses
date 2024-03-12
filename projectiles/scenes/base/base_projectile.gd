@@ -35,7 +35,6 @@ var is_expired: bool:
 	get:
 		return current_pierce <= 0 and pierce > 0
 
-
 func set_variables(projectile_object: BaseProjectileObject) -> void:
 	id = projectile_object.name
 	pierce = projectile_object.pierce
@@ -51,7 +50,6 @@ func set_variables(projectile_object: BaseProjectileObject) -> void:
 	render_component.sprite_frames = projectile_object.sprite_frames
 	self.scale = Vector2.ONE * projectile_object.scale.execute()
 	z_index = projectile_object.z_index_offset
-
 
 func _ready() -> void:
 	z_index += 1
@@ -71,7 +69,6 @@ func _ready() -> void:
 		)
 		add_child(duration_timer)
 		duration_timer.start(_duration)
-
 
 func on_hurt(hitbox: HitboxComponent):
 	if (entity and !entity.is_queued_for_deletion()) and !is_expired:

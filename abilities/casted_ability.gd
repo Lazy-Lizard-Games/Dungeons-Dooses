@@ -6,7 +6,6 @@ class_name CastedAbility
 ## Actions to execute on the caster when the ability is cast.
 @export var actions_on_cast: Array[EntityAction]
 
-
 func cast(entity: Entity) -> void:
 	var exhaust = ExhaustEntityAction.new()
 	exhaust.amount = cost
@@ -18,4 +17,3 @@ func cast(entity: Entity) -> void:
 	for action in actions_on_cast:
 		action.execute(caster)
 	start_recharge(entity)
-

@@ -37,7 +37,6 @@ var looking_at := Vector2.RIGHT
 ## Controls attack inputs
 var can_attack := true
 
-
 func _ready() -> void:
 	z_index = 1
 	generics = generics.duplicate(true)
@@ -49,28 +48,23 @@ func _ready() -> void:
 	kill.connect(on_kill)
 	died.connect(on_died)
 
-
 func on_hit(entity: Entity) -> void:
 	var scale_factor = action_component.actor_on_hit_scale.get_final_value() * entity.action_component.target_on_hit_scale.get_final_value()
 	for action in action_component.actions_on_hit:
 		action.execute(entity, self, scale_factor)
-
 
 func on_hurt(entity: Entity) -> void:
 	var scale_factor = action_component.actor_on_hurt_scale.get_final_value() * entity.action_component.target_on_hurt_scale.get_final_value()
 	for action in action_component.actions_on_hurt:
 		action.execute(self, entity, scale_factor)
 
-
 func on_kill(_entity: Entity) -> void:
 	for action in action_component.actions_on_kill:
 		action.execute(self, action_component.on_kill_scale.get_final_value())
 
-
 func on_died() -> void:
 	for action in action_component.actions_on_died:
 		action.execute(self, action_component.on_died_scale.get_final_value())
-
 
 func get_copy() -> Entity:
 	var copy = Entity.new()
@@ -83,10 +77,8 @@ func get_copy() -> Entity:
 	copy.action_component = ActionComponent.new()
 	return copy
 
-
 func enable_attack() -> void:
 	can_attack = true
-
 
 func disable_attack() -> void:
 	can_attack = false

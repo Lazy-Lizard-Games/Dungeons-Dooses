@@ -1,13 +1,14 @@
-[gd_scene load_steps=23 format=3 uid="uid://cbyp6u3r6r346"]
+[gd_scene load_steps=24 format=3 uid="uid://cbyp6u3r6r346"]
 
 [ext_resource type="Script" path="res://entities/mobs/dummy/dummy.gd" id="1_gn2pe"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_dd2ne"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="3_ovxk7"]
 [ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/sprites/dummy.png" id="4_3hsxe"]
-[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="4_6xhxw"]
-[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="5_12j2c"]
-[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="6_c60ux"]
-[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="7_8nhay"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="4_6xhxw"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="5_12j2c"]
+[ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="5_mdyo7"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="6_c60ux"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="7_8nhay"]
 
 [sub_resource type="Resource" id="Resource_2m82o"]
 script = ExtResource("2_dd2ne")
@@ -31,10 +32,10 @@ health_max = SubResource("Resource_2m82o")
 health_regeneration = SubResource("Resource_yt706")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2tfs"]
-radius = 5.0
+radius = 2.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jlvlp"]
-size = Vector2(14, 25)
+size = Vector2(12, 20)
 
 [sub_resource type="Animation" id="Animation_1nh8f"]
 resource_name = "hit"
@@ -110,13 +111,17 @@ action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_5qhre")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
 texture = ExtResource("4_3hsxe")
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 10)
+position = Vector2(0.5, -1.5)
 shape = SubResource("CircleShape2D_o2tfs")
 debug_color = Color(0, 0.52549, 1, 0.419608)
+
+[node name="ShadowComponent" parent="." instance=ExtResource("5_mdyo7")]
+scale = Vector2(0.5, 0.5)
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_6xhxw")]
 
@@ -127,7 +132,7 @@ entity = NodePath("..")
 invulnerability_duration = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 1.5)
+position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_jlvlp")
 debug_color = Color(0.572549, 0.388235, 1, 0.419608)
 

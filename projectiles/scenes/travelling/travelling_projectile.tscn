@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://cr8gqjlalt0x7"]
 
 [ext_resource type="Script" path="res://projectiles/scenes/travelling/travelling_projectile.gd" id="1_i3kng"]
-[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/commands/hurtbox/hurtbox_component.tscn" id="2_elha6"]
-[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="3_jejg6"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="2_elha6"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="3_jejg6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxu5r"]
 

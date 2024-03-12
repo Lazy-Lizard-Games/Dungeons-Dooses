@@ -14,8 +14,7 @@ var current_charge: float:
 			if is_casting:
 				return 1.0
 			return 0.0
-		return (1 - cast_timer.time_left/cast_timer.wait_time)
-
+		return (1 - cast_timer.time_left / cast_timer.wait_time)
 
 ## Returns the highest charge level that is satisfied by the charge. 
 func get_charge_level(charge: float) -> ChargeLevel:
@@ -23,7 +22,6 @@ func get_charge_level(charge: float) -> ChargeLevel:
 		if charge >= charge_level.minimum_charge:
 			return charge_level
 	return null
-
 
 func start_cast(entity: Entity) -> void:
 	var _cast_time = cast_time.execute()
@@ -35,7 +33,6 @@ func start_cast(entity: Entity) -> void:
 		cast_timer.start(_cast_time * entity.generics.cast_time.get_final_value())
 	else:
 		cast(entity)
-
 
 func cast(entity: Entity) -> void:
 	var charge_level = get_charge_level(current_charge)
@@ -49,7 +46,6 @@ func cast(entity: Entity) -> void:
 		for action in charge_level.actions_on_cast:
 			action.execute(caster)
 	start_recharge(entity)
-
 
 func release(entity: Entity) -> void:
 	if is_casting:

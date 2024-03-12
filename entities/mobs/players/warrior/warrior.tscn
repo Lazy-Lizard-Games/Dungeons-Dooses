@@ -1,38 +1,39 @@
-[gd_scene load_steps=135 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=136 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
-[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/commands/state/state_component.tscn" id="2_e5t7x"]
-[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_ry1uk"]
-[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/idle.gd" id="3_un612"]
-[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="3_ww4uv"]
 [ext_resource type="Script" path="res://attributes/affinity.gd" id="4_kc31g"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
-[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Resource" uid="uid://tjut74lcwirc" path="res://data/player/swordsman/abilities/medic_totem.tres" id="5_ekea3"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
+[ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/cleave.gd" id="11_tkekq"]
-[ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/commands/stamina/stamina_component.tscn" id="12_edvht"]
+[ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/smite.gd" id="13_m05i3"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="13_qljxc"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
-[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
-[ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="14_j3m7g"]
+[ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/parry.gd" id="15_718h8"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/medic.gd" id="18_idk3o"]
 [ext_resource type="Resource" uid="uid://b1nxmba4puijc" path="res://data/player/swordsman/abilities/cleave.tres" id="19_2lrk1"]
 [ext_resource type="Resource" uid="uid://dwlyqo1igd0r2" path="res://data/player/swordsman/abilities/parry.tres" id="20_76lod"]
 [ext_resource type="Resource" uid="uid://dx5pqk0k04c5t" path="res://data/player/swordsman/abilities/smite.tres" id="20_k1jwn"]
-[ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
+[ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
-[ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/libraries/skill/skill_component.tscn" id="28_nfmj8"]
+[ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="30_ilkdu"]
 [ext_resource type="Script" path="res://skills/skill.gd" id="30_q706k"]
@@ -49,7 +50,7 @@ modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_ebyaf"]
 script = ExtResource("2_acrq8")
-raw_value = 125.0
+raw_value = 75.0
 multiplier_value = 1.0
 min_value = -2.14748e+09
 max_value = 2.14748e+09
@@ -974,11 +975,11 @@ affinities = SubResource("Resource_8xuyt")
 resistances = SubResource("Resource_mw36u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
 texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 3
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -988,11 +989,15 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 8)
+position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_sned3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
+[node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
+scale = Vector2(0.75, 0.75)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1065,11 +1070,11 @@ skill_trees = Array[ExtResource("29_uqb7t")]([SubResource("Resource_nqfhd")])
 inventory = SubResource("Resource_bia7r")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
+position = Vector2(0, -13)
 entity = NodePath("..")
 invulnerability_duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_fktii")
 debug_color = Color(0.796078, 0.423529, 0, 0.419608)
 

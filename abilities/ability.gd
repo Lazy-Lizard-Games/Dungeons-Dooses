@@ -18,7 +18,7 @@ signal finished
 ## Cast time in seconds of the ability.
 @export var cast_time: Number
 ## Recharge time in seconds of the ability.
-@export var recharge_time: Number 
+@export var recharge_time: Number
 ## Actions to execute on the caster when the ability is started.
 @export var actions_on_start: Array[EntityAction]
 ## Actions to execute on the caster when the ability is ended.
@@ -31,7 +31,6 @@ var facing: Vector2
 var recharge_timer: Timer
 var cast_timer: Timer
 
-
 ## Checks whether the entity can start this ability.
 func can_start(entity: Entity) -> bool:
 	if 'stamina_component' in entity:
@@ -40,7 +39,6 @@ func can_start(entity: Entity) -> bool:
 	if is_recharging:
 		return false
 	return true
-
 
 ## Starts the ability with the entity as the caster.
 func start(entity: Entity) -> void:
@@ -52,14 +50,12 @@ func start(entity: Entity) -> void:
 	entity.looking_at = entity.global_position.direction_to(entity.get_global_mouse_position())
 	start_cast(entity)
 
-
 func end(_entity: Entity) -> void:
 	if !caster:
 		return
 	for action in actions_on_end:
 		action.execute(caster)
 	caster = null
-
 
 func start_cast(entity: Entity) -> void:
 	var _cast_time = cast_time.execute()
@@ -72,13 +68,11 @@ func start_cast(entity: Entity) -> void:
 	#else:
 		#cast(entity)
 
-
 func cast(entity: Entity) -> void:
 	entity.remove_child(cast_timer)
 	is_casting = false
 	casted.emit()
 	start_recharge(entity)
-
 
 func start_recharge(entity: Entity) -> void:
 	var _recharge_time = recharge_time.execute()
@@ -91,12 +85,10 @@ func start_recharge(entity: Entity) -> void:
 	else:
 		recharge(entity)
 
-
 func recharge(entity: Entity) -> void:
 	entity.remove_child(recharge_timer)
 	is_recharging = false
 	recharged.emit()
-
 
 func cancel(entity: Entity) -> void:
 	if is_casting:
@@ -106,7 +98,5 @@ func cancel(entity: Entity) -> void:
 	end(entity)
 	start_recharge(entity)
 
-
 func release(_entity: Entity) -> void:
 	pass
-
