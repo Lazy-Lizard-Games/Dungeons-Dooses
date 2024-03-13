@@ -145,21 +145,23 @@ states/idle/node = SubResource("AnimationNodeAnimation_8aob2")
 states/idle/position = Vector2(306, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_xvxxd")]
 
-[node name="Bondfire" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "velocity_component", "action_component")]
+[node name="Bondfire" type="CharacterBody2D" node_paths=PackedStringArray("trigger", "animation_tree", "velocity_component", "action_component")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_mi404")
 trigger = NodePath("TimedTrigger")
 cast_projectile = SubResource("Resource_jpk01")
 id = "Geyser"
+animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
+position_offset = Vector2(0, -5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -11)
 texture = ExtResource("12_10p03")
 hframes = 7
-frame = 4
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -3)

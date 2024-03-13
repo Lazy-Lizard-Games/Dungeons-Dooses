@@ -2,24 +2,18 @@ extends EntityAction
 class_name CastProjecitleAction
 
 ## Projectile scene to create and cast for the entity.
-@export var projectile_object: BaseProjectileObject
-## Vector action to decide how to calculate projectile position.
-@export var position: Vector = Vector.new()
+@export var projectile_scene: PackedScene
+## Position at which to spawn the projectile
+@export var position_vector: Vector = Vector.new()
+## Direction at which to spawn the projectile
+@export var direction_vector: Vector = Vector.new()
 
-
-func execute(entity: Entity, _scale := 1.0) -> void:
-	var projectile := get_projectile_scene(projectile_object)
-	projectile.entity = entity
-	projectile.global_position = position.get_vector(entity)
-	projectile.set_variables(projectile_object)
-	ProjectileHandler.add_projectile(projectile)
-
-
-func get_projectile_scene(object: BaseProjectileObject) -> BaseProjectile:
-	if object is HomingProjectileObject:
-		return load("res://projectiles/scenes/homing/homing_projectile.tscn").instantiate()
-	elif object is TravellingProjectileObject:
-		return load("res://projectiles/scenes/travelling/travelling_projectile.tscn").instantiate()
-	elif object is LaserProjectileObject:
-		return load("res://projectiles/scenes/laser/laser_projectile.tscn").instantiate()
-	return load("res://projectiles/scenes/base/base_projectile.tscn").instantiate()
+func execute(entity: Entity, _scale:=1.0) -> void:
+	var position = position_vector.get_vector(entity)
+	var direction = direction_vector.get_vector(entity)
+	var projectile = projectile_scene.instantiate() as Projectile
+	if projectile:
+		projectile.init(entity, position, direction)
+		ProjectileHandler.add_projectile(projectile)
+	else:
+		print_debug("Something went wrong...")

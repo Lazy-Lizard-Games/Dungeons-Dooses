@@ -5,9 +5,8 @@ class_name HasResourceEntityCondition
 
 @export var name: String
 
-
 func execute(entity: Entity) -> bool:
 	for resource in entity.action_component.resources:
 		if resource.name == name:
-			return true
-	return false
+			return false if invert else true
+	return true if invert else false

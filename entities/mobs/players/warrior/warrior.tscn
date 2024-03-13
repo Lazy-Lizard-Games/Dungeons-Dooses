@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=133 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
-[ext_resource type="Resource" uid="uid://tjut74lcwirc" path="res://data/player/swordsman/abilities/medic_totem.tres" id="5_ekea3"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
@@ -26,8 +25,6 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/parry.gd" id="15_718h8"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/medic.gd" id="18_idk3o"]
 [ext_resource type="Resource" uid="uid://b1nxmba4puijc" path="res://data/player/swordsman/abilities/cleave.tres" id="19_2lrk1"]
-[ext_resource type="Resource" uid="uid://dwlyqo1igd0r2" path="res://data/player/swordsman/abilities/parry.tres" id="20_76lod"]
-[ext_resource type="Resource" uid="uid://dx5pqk0k04c5t" path="res://data/player/swordsman/abilities/smite.tres" id="20_k1jwn"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
@@ -318,6 +315,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowComponent:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ShadowComponent:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(0.75, 0.75), Vector2(0.775, 0.775), Vector2(0.8, 0.8), Vector2(0.825, 0.825), Vector2(0.85, 0.85), Vector2(0.825, 0.825), Vector2(0.8, 0.8), Vector2(0.775, 0.775)]
 }
 
 [sub_resource type="Animation" id="Animation_8mgoj"]
@@ -981,7 +1002,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 1
+frame = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -999,7 +1020,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.8, 0.8)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1062,7 +1083,7 @@ target_on_hurt_scale = SubResource("Resource_wp6ar")
 actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
-abilities = Array[Resource("res://abilities/ability.gd")]([ExtResource("19_2lrk1"), ExtResource("20_k1jwn"), ExtResource("20_76lod"), ExtResource("5_ekea3"), null, null, null, null, null, null, null, null, null, null, null, null, null])
+abilities = Array[Resource("res://abilities/ability.gd")]([ExtResource("19_2lrk1"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [node name="SkillComponent" parent="." instance=ExtResource("28_nfmj8")]
 skill_points = 10
