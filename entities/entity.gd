@@ -32,6 +32,8 @@ signal consume(actor: Entity, item: int)
 @export var affinities: AffinityAttributes = AffinityAttributes.new()
 ## Resistance attributes for the entity.
 @export var resistances: ResistanceAttributes = ResistanceAttributes.new()
+## Off sets the "position" of the entity. (for use with position vector action)
+@export var position_offset: Vector2 = Vector2.ZERO
 ## Direction the entity is looking
 var looking_at := Vector2.RIGHT
 ## Controls attack inputs

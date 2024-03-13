@@ -9,6 +9,8 @@ var is_finished := false
 var is_jumping := false
 
 func enter() -> void:
+  entity.looking_at = Vector2(randi() % 100 - 50, randi() % 100 - 50).normalized()
+  animation_tree['parameters/move/blend_position'] = entity.looking_at.x
   animation_tree['parameters/playback'].travel('move')
   animation_tree.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
 
@@ -28,9 +30,7 @@ func process_physics(_delta: float) -> State:
 func jump() -> void:
   is_jumping = true
   velocity.control.raw_value = 0.025
-  entity.looking_at = Vector2(randi() % 100 - 50, randi() % 100 - 50).normalized()
   velocity.velocity = (entity.looking_at * jump_strength.execute())
-  sprite.flip_h = entity.looking_at.x < 0
 
 func land() -> void:
   is_jumping = false

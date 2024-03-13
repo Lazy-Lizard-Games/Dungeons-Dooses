@@ -973,6 +973,7 @@ action_component = NodePath("ActionComponent")
 generics = SubResource("Resource_q3a8u")
 affinities = SubResource("Resource_8xuyt")
 resistances = SubResource("Resource_mw36u")
+position_offset = Vector2(0, -10)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -15)
@@ -980,6 +981,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
+frame = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
