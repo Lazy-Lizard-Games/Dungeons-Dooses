@@ -1,13 +1,12 @@
 extends BientityAction
-class_name AddBientityResourceAction
+class_name AddBientityEffectAction
 
 ## Stacking resource to add stacks to the entity.
-@export var resource: StackingBientityResource
+@export var resource: StackingBientityEffect
 ## Number of stacks to add.
 @export var number: Number
 
-
-func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
+func execute(actor: Entity, target: Entity, scale:=1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
@@ -19,24 +18,22 @@ func execute(actor: Entity, target: Entity, scale := 1.0) -> void:
 	amount = int(amount + binomial_number.execute())
 	if amount <= 0:
 		return
-	var res: StackingBientityResource
+	var res: StackingBientityEffect
 	for r in target.action_component.resources:
 		if r.name == resource.name:
 			res = r
 	if res:
 		res.add_stack(amount)
 	else:
-		res = resource.duplicate(true) as StackingBientityResource
+		res = resource.duplicate(true) as StackingBientityEffect
 		target.action_component.add_resource(res)
 		res.start(actor, target, scale)
 		if (amount - 1) > 0:
 			res.add_stack(amount - 1)
 
-
 func reverse(actor: Entity, target: Entity) -> void:
 	if !executed:
 		return
-	var revoke_resource = RevokeBientityResourceAction.new()
+	var revoke_resource = RevokeBientityEffectAction.new()
 	revoke_resource.name = resource.name
 	revoke_resource.execute(actor, target)
-

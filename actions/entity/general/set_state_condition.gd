@@ -8,9 +8,6 @@ class_name SetStateConditionEntityAction
 ## State to set condition to
 @export var state: bool
 
-
-func execute(entity: Entity, _scale := 1.0) -> void:
-	print_debug(condition_path in entity.animation_tree)
+func execute(entity: Entity, _scale:=1.0) -> void:
 	if condition_path in entity.animation_tree:
-		print_debug(entity.animation_tree[condition_path])
 		entity.animation_tree[condition_path] = state

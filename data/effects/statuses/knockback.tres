@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CooldownEntity" load_steps=2 format=3 uid="uid://bhkupgb8wohsw"]
+
+[ext_resource type="Script" path="res://actions/entity/meta/cooldown.gd" id="1_3gtle"]
+
+[resource]
+script = ExtResource("1_3gtle")
+duration = 0.0
+tick_interval = 0.0
+_id = ""

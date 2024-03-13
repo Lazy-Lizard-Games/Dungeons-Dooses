@@ -14,8 +14,7 @@ class_name CooldownEntity
 ## Tick interval in seconds.
 @export var tick_interval: float
 
-
-func execute(entity: Entity, scale := 1.0) -> void:
+func execute(entity: Entity, scale:=1.0) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return

@@ -1,8 +1,8 @@
 extends Node
 class_name ActionComponent
 
-signal resource_added(resource: StackingBientityResource)
-signal resource_removed(resource: StackingBientityResource)
+signal resource_added(resource: StackingBientityEffect)
+signal resource_removed(resource: StackingBientityEffect)
 
 ## Stores actions that are to be executed depending on trigger.
 
@@ -35,15 +35,13 @@ signal resource_removed(resource: StackingBientityResource)
 @export var on_died_scale := Attribute.new(1)
 
 ## Stacking resources currently attached to entity.
-var resources: Array[StackingBientityResource]
+var resources: Array[StackingBientityEffect]
 
-
-func add_resource(resource: StackingBientityResource) -> void:
+func add_resource(resource: StackingBientityEffect) -> void:
 	resources.append(resource)
 	resource_added.emit(resource)
 
-
-func remove_resource(resource: StackingBientityResource) -> void:
+func remove_resource(resource: StackingBientityEffect) -> void:
 	if resources.has(resource):
 		resources.erase(resource)
 		resource_removed.emit(resource)

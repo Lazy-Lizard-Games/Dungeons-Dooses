@@ -86,7 +86,8 @@ func start_recharge(entity: Entity) -> void:
 		recharge(entity)
 
 func recharge(entity: Entity) -> void:
-	entity.remove_child(recharge_timer)
+	if recharge_timer:
+		entity.remove_child(recharge_timer)
 	is_recharging = false
 	recharged.emit()
 

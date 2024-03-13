@@ -1,57 +1,28 @@
-[gd_resource type="Resource" script_class="CastedAbility" load_steps=23 format=3 uid="uid://b1nxmba4puijc"]
+[gd_resource type="Resource" script_class="CastedAbility" load_steps=14 format=3 uid="uid://b1nxmba4puijc"]
 
 [ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="1_iutky"]
-[ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_vpook"]
 [ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_qk5v5"]
-[ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="3_x243c"]
-[ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="4_b44lk"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_4fhnc"]
 [ext_resource type="PackedScene" uid="uid://01mfloxbcrcs" path="res://projectiles/cleave/cleave.tscn" id="7_ga8re"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="8_axbfu"]
 [ext_resource type="Script" path="res://abilities/casted_ability.gd" id="12_vgp5l"]
 
-[sub_resource type="Resource" id="Resource_8q6ie"]
+[sub_resource type="Resource" id="Resource_2gbvp"]
 script = ExtResource("1_iutky")
 
-[sub_resource type="Resource" id="Resource_uqe6b"]
+[sub_resource type="Resource" id="Resource_104rm"]
 script = ExtResource("2_qk5v5")
 
-[sub_resource type="Resource" id="Resource_otsr7"]
-script = ExtResource("1_iutky")
-
-[sub_resource type="Resource" id="Resource_71tl8"]
-script = ExtResource("5_4fhnc")
-constant = 5.0
-
-[sub_resource type="Resource" id="Resource_co2cw"]
-script = ExtResource("5_4fhnc")
-constant = 5.0
-
-[sub_resource type="Resource" id="Resource_km2n4"]
-script = ExtResource("4_b44lk")
-x = SubResource("Resource_71tl8")
-y = SubResource("Resource_co2cw")
-
-[sub_resource type="Resource" id="Resource_jvuu1"]
-script = ExtResource("3_x243c")
-vector_a = SubResource("Resource_otsr7")
-vector_b = SubResource("Resource_km2n4")
-
-[sub_resource type="Resource" id="Resource_eulko"]
-script = ExtResource("1_vpook")
-vector_a = SubResource("Resource_uqe6b")
-vector_b = SubResource("Resource_jvuu1")
-
-[sub_resource type="Resource" id="Resource_1itrm"]
+[sub_resource type="Resource" id="Resource_r3kfc"]
 script = ExtResource("8_axbfu")
 projectile_scene = ExtResource("7_ga8re")
-position_vector = SubResource("Resource_eulko")
-direction_vector = SubResource("Resource_8q6ie")
+position_vector = SubResource("Resource_104rm")
+direction_vector = SubResource("Resource_2gbvp")
 _id = ""
 
 [sub_resource type="Resource" id="Resource_8tl0i"]
 script = ExtResource("5_4fhnc")
-constant = 0.3
+constant = 0.4
 
 [sub_resource type="Resource" id="Resource_tq377"]
 script = ExtResource("5_4fhnc")
@@ -59,16 +30,16 @@ constant = 0.0
 
 [sub_resource type="Resource" id="Resource_tbfs2"]
 script = ExtResource("5_4fhnc")
-constant = 15.0
+constant = 0.0
 
 [sub_resource type="Resource" id="Resource_uey1s"]
 script = ExtResource("5_4fhnc")
-constant = 0.75
+constant = 0.0
 
 [resource]
 script = ExtResource("12_vgp5l")
 cost = SubResource("Resource_tq377")
-actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1itrm")])
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_r3kfc")])
 state_name = &"Cleave"
 name = "Cleave"
 description = ""

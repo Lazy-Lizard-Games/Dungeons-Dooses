@@ -6,6 +6,7 @@ class_name Slime
 func _ready():
   super()
   state_component.init(self)
+  print_debug(generics.friction, generics.friction.get_final_value())
 
 func _process(delta):
   state_component.process_frame(delta)

@@ -3,7 +3,7 @@ extends Projectile
 ## Projectile for the slash ability of the warrior
 
 @export var damage: DamageBientityAction
-@export var knockback: int
+@export var knockback: KnockbackBientiyAction
 @export var animation: AnimationPlayer
 
 func _ready():
@@ -16,5 +16,7 @@ func on_finished(_anim_name: StringName) -> void:
 func _on_hurtbox_component_hurt(hitbox: HitboxComponent):
   if hitbox.entity.faction != entity.faction:
     damage.execute(entity, hitbox.entity)
-    hitbox.entity.velocity_component.set_velocity(entity.global_position.direction_to(hitbox.entity.global_position) * knockback)
+    var knockback_direction = ConstantVector.new(direction.x, direction.y)
+    knockback.direction = knockback_direction
+    knockback.execute(entity, hitbox.entity)
     entity.hurt.emit(hitbox.entity)

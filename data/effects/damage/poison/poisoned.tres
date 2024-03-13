@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="StackingBientityResource" load_steps=18 format=3 uid="uid://dhp0mot2xska1"]
+[gd_resource type="Resource" script_class="StackingBientityEffect" load_steps=18 format=3 uid="uid://dhp0mot2xska1"]
 
 [ext_resource type="Script" path="res://actions/bientity/general/revoke_bientity_resource.gd" id="1_qv1ie"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="2_26vv5"]

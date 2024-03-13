@@ -6,7 +6,5 @@ class_name TravelToStateEntityAction
 ## Path to the animation tree state.
 @export var path: String
 
-
-func execute(entity: Entity, _scale := 1.0) -> void:
-	print_debug('Travelling to: parameters/playback/', path)
+func execute(entity: Entity, _scale:=1.0) -> void:
 	entity.animation_tree['parameters/playback'].travel(path)

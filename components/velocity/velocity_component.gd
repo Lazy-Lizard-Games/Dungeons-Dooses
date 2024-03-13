@@ -20,6 +20,9 @@ var generics: GenericAttributes:
 		var a = generics.get_generic(Enums.GenericType.Acceleration)
 		if a:
 			acceleration = a
+		var f = generics.get_generic(Enums.GenericType.Friction)
+		if f:
+			friction = f
 
 ## Sets the current velocity to provided velocity. This method
 ## is designed to be used by knockback mechanics.

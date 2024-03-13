@@ -15,5 +15,3 @@ func execute(entity: Entity, _scale:=1.0) -> void:
 	if projectile:
 		projectile.init(entity, position, direction)
 		ProjectileHandler.add_projectile(projectile)
-	else:
-		print_debug("Something went wrong...")

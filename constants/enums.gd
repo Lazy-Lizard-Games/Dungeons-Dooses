@@ -57,9 +57,14 @@ enum GenericType
 	StaminaRegeneration,
 	MovementSpeed,
 	Acceleration,
+	Friction,
 	CastCost,
 	CastTime,
 	RechargeTime,
+	KnockbackStrengthAffinity,
+	KnockbackStrengthResistance,
+	KnockbackDurationAffinity,
+	KnockbackDurationResistance,
 }
 
 enum OperationType

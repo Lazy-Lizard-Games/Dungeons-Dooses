@@ -52,7 +52,7 @@ func on_health_attribute_updated(final_value: float) -> void:
 func on_stamina_attribute_updated(final_value: float) -> void:
 	stamina_bar.progress_bar.max_value = final_value
 
-func on_resource_added(resource: StackingBientityResource) -> void:
+func on_resource_added(resource: StackingBientityEffect) -> void:
 	var resource_container = resource_container_scene.instantiate() as ResourceContainer
 	resource_container.resource = resource
 	resource_containers.append(resource_container)

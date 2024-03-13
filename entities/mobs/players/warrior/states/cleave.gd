@@ -11,16 +11,13 @@ func enter() -> void:
 	animation_tree['parameters/cleave/blend_position'] = entity.looking_at
 	animation_tree.animation_finished.connect(on_animation_finished, CONNECT_ONE_SHOT)
 
-
 func on_animation_finished(_animation) -> void:
 	is_finished = true
-
 
 func exit() -> void:
 	is_finished = false
 	ability.end(entity)
 	return
-
 
 func process_physics(_delta: float) -> State:
 	if is_finished:

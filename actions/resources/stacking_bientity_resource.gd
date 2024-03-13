@@ -1,5 +1,5 @@
 extends Resource
-class_name StackingBientityResource
+class_name StackingBientityEffect
 
 ## A stacking resource that affects a bientity pair.
 
@@ -39,8 +39,7 @@ var actor_copy: Entity
 var bientity_target: Entity
 var target_copy: Entity
 
-
-func start(actor: Entity, target: Entity, scale := 1.0) -> void:
+func start(actor: Entity, target: Entity, scale:=1.0) -> void:
 	bientity_actor = actor
 	bientity_target = target
 	actor_copy = actor.get_copy()
@@ -54,22 +53,22 @@ func start(actor: Entity, target: Entity, scale := 1.0) -> void:
 		stack_changed.connect(action.update_stacks)
 		ended.connect(
 			func():
-				if !bientity_actor: bientity_actor = actor_copy
-				if !bientity_target: bientity_target = target_copy
+				if !bientity_actor: bientity_actor=actor_copy
+				if !bientity_target: bientity_target=target_copy
 				action.reverse(bientity_actor, bientity_target)
 		)
 	min_stacks_reached.connect(
 		func():
 			for action in actions_on_min_stacks:
-				if !bientity_actor: bientity_actor = actor_copy
-				if !bientity_target: bientity_target = target_copy
+				if !bientity_actor: bientity_actor=actor_copy
+				if !bientity_target: bientity_target=target_copy
 				action.execute(bientity_actor, bientity_target, scale)
 	)
 	max_stacks_reached.connect(
 		func():
 			for action in actions_on_max_stacks:
-				if !bientity_actor: bientity_actor = actor_copy
-				if !bientity_target: bientity_target = target_copy
+				if !bientity_actor: bientity_actor=actor_copy
+				if !bientity_target: bientity_target=target_copy
 				action.execute(bientity_actor, bientity_target, scale)
 	)
 	if decay_interval > 0:
@@ -82,14 +81,12 @@ func start(actor: Entity, target: Entity, scale := 1.0) -> void:
 		bientity_target.add_child(decay_timer)
 		decay_timer.start(decay_interval)
 
-
 func end(_actor: Entity, target: Entity) -> void:
 	ended.emit()
 	if decay_timer:
 		target.remove_child(decay_timer)
 
-
-func add_stack(amount: int = 1) -> void:
+func add_stack(amount: int=1) -> void:
 	if decay_timer:
 		decay_timer.start(decay_interval)
 	if stacks < max_stacks:
@@ -98,8 +95,7 @@ func add_stack(amount: int = 1) -> void:
 	if stacks == max_stacks:
 		max_stacks_reached.emit()
 
-
-func remove_stack(amount: int = 1) -> void:
+func remove_stack(amount: int=1) -> void:
 	if stacks > min_stacks:
 		stacks = max(min_stacks, stacks - amount)
 		stack_changed.emit(stacks)
