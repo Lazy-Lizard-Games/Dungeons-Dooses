@@ -1,13 +1,13 @@
 extends Node
 
-enum InteractionType 
+enum InteractionType
 {
 	Pickup,
 	Open,
 	Use,
 }
 
-enum InventoryType 
+enum InventoryType
 {
 	Player,
 	Chest,
@@ -22,7 +22,7 @@ enum ItemType
 	Equipment,
 }
 
-enum EquipmentType 
+enum EquipmentType
 {
 	Ring,
 	Necklace,
@@ -33,17 +33,17 @@ enum EquipmentType
 enum FactionType
 {
 	None,
-	Player, 
-	Human, 
-	Beast, 
+	Player,
+	Human,
+	Beast,
 	Monster,
 }
 
-enum DamageType 
+enum DamageType
 {
-	Normal, 
-	Fire, 
-	Frost, 
+	Normal,
+	Fire,
+	Frost,
 	Shock,
 	Poison,
 	Light,
@@ -56,6 +56,7 @@ enum GenericType
 	StaminaMax,
 	StaminaRegeneration,
 	MovementSpeed,
+	Acceleration,
 	CastCost,
 	CastTime,
 	RechargeTime,

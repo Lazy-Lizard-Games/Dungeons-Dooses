@@ -1,15 +1,15 @@
 extends Resource
 class_name GenericAttributes
 
-@export var health_max = Attribute.new(100, 1, 0, pow(2, 31)-1)
-@export var health_regeneration = Attribute.new(5, 1, 0, pow(2, 31)-1)
-@export var stamina_max = Attribute.new(100, 1, 0, pow(2, 31)-1)
-@export var stamina_regeneration = Attribute.new(5, 1, 0, pow(2, 31)-1)
-@export var movement_speed = Attribute.new(250, 1, 0, pow(2, 31)-1)
-@export var cast_cost = Attribute.new(1, 1, 0, pow(2, 31)-1)
-@export var cast_time = Attribute.new(1, 1, 0, pow(2, 31)-1)
-@export var recharge_time = Attribute.new(1, 1, 0, pow(2, 31)-1)
-
+@export var health_max = Attribute.new(100, 1, 0, pow(2, 31) - 1)
+@export var health_regeneration = Attribute.new(5, 1, 0, pow(2, 31) - 1)
+@export var stamina_max = Attribute.new(100, 1, 0, pow(2, 31) - 1)
+@export var stamina_regeneration = Attribute.new(5, 1, 0, pow(2, 31) - 1)
+@export var movement_speed = Attribute.new(250, 1, 0, pow(2, 31) - 1)
+@export var acceleration = Attribute.new(50, 1, 0, pow(2, 31) - 1)
+@export var cast_cost = Attribute.new(1, 1, 0, pow(2, 31) - 1)
+@export var cast_time = Attribute.new(1, 1, 0, pow(2, 31) - 1)
+@export var recharge_time = Attribute.new(1, 1, 0, pow(2, 31) - 1)
 
 func get_generic(type: Enums.GenericType) -> Attribute:
 	match type:
@@ -23,6 +23,8 @@ func get_generic(type: Enums.GenericType) -> Attribute:
 			return stamina_regeneration
 		Enums.GenericType.MovementSpeed:
 			return movement_speed
+		Enums.GenericType.Acceleration:
+			return acceleration
 		Enums.GenericType.CastCost:
 			return cast_cost
 		Enums.GenericType.CastTime:
@@ -32,12 +34,10 @@ func get_generic(type: Enums.GenericType) -> Attribute:
 		_:
 			return null
 
-
 func add_modifier(type: Enums.GenericType, modifier: AttributeModifier) -> void:
 	var generic = get_generic(type)
 	if generic:
 		generic.add_modifier(modifier)
-
 
 func remove_modifier(type: Enums.GenericType, uid: String) -> void:
 	var generic = get_generic(type)

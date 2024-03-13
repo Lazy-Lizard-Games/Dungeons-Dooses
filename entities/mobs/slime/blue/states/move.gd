@@ -20,21 +20,17 @@ func exit() -> void:
 func process_physics(_delta: float) -> State:
   if is_finished:
     return idle
-  if is_jumping:
-    velocity.accelerate_in_direction(entity.looking_at)
-  else:
+  if !is_jumping:
     velocity.accelerate_in_direction(Vector2.ZERO)
   velocity.move(entity)
   return null
 
 func jump() -> void:
   is_jumping = true
-  velocity.control.raw_value = 0.025
   velocity.velocity = (entity.looking_at * jump_strength.execute())
 
 func land() -> void:
   is_jumping = false
-  velocity.control.raw_value = 0.5
 
 func on_finished(_anim_name: StringName) -> void:
   is_finished = true

@@ -57,6 +57,7 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_1ayy0")
 damage = SubResource("Resource_2adld")
+knockback = 75
 animation = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

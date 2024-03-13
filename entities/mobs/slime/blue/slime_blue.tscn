@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://csnfm86tpg24a"]
+[gd_scene load_steps=34 format=3 uid="uid://csnfm86tpg24a"]
 
 [ext_resource type="Script" path="res://entities/mobs/slime/blue/slime_blue.gd" id="1_7kg7v"]
 [ext_resource type="Texture2D" uid="uid://cshj6qrut0bw8" path="res://entities/mobs/slime/blue/slime_spritesheet.png" id="2_khmp1"]
@@ -303,17 +303,9 @@ states/move/node = SubResource("AnimationNodeBlendSpace1D_jlo8l")
 states/move/position = Vector2(454, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_o0tdw"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_pws3h"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_wjx1j")]
 
-[sub_resource type="Resource" id="Resource_6fbxw"]
-script = ExtResource("2_xkr1t")
-raw_value = 0.0
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
 [sub_resource type="Resource" id="Resource_5f253"]
 script = ExtResource("2_xkr1t")
-raw_value = 0.9
+raw_value = 0.05
 multiplier_value = 1.0
 min_value = -2.14748e+09
 max_value = 2.14748e+09
@@ -329,8 +321,8 @@ number_max = 3.0
 
 [sub_resource type="Resource" id="Resource_d423o"]
 script = ExtResource("9_vroka")
-number_min = 100.0
-number_max = 150.0
+number_min = 40.0
+number_max = 65.0
 
 [node name="SlimeBlue" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component")]
 script = ExtResource("1_7kg7v")
@@ -350,7 +342,7 @@ texture = ExtResource("2_khmp1")
 flip_h = true
 hframes = 10
 vframes = 3
-frame = 3
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
@@ -370,10 +362,9 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/move/blend_position = -0.174603
 
 [node name="ShadowComponent" parent="." instance=ExtResource("13_tk06f")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.8, 0.8)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_tl7lt")]
-control = SubResource("Resource_6fbxw")
 friction = SubResource("Resource_5f253")
 
 [node name="ActionComponent" parent="." instance=ExtResource("4_a035f")]
