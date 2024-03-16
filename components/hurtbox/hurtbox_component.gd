@@ -8,7 +8,6 @@ signal hurt(hitbox: HitboxComponent)
 ## Collection of already hit targets. For use with single hit hurtboxes.
 var hit_targets: Array[HitboxComponent] = []
 
-
 func on_area_collision(area: Area2D) -> void:
 	if area is HitboxComponent:
 		if area.detect_only:
@@ -18,3 +17,7 @@ func on_area_collision(area: Area2D) -> void:
 				return
 			hit_targets.append(area)
 		hurt.emit(area)
+
+func force_check() -> void:
+	for area in get_overlapping_areas():
+		on_area_collision(area)

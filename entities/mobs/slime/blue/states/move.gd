@@ -27,7 +27,7 @@ func process_physics(_delta: float) -> State:
 
 func jump() -> void:
   is_jumping = true
-  velocity.velocity = (entity.looking_at * jump_strength.execute())
+  velocity.add_velocity(entity.looking_at * jump_strength.execute())
   var add_effect = AddGenericModifierEntityAction.new()
   add_effect.modifier = jump_friction_modifier
   add_effect.generic_type = Enums.GenericType.Friction

@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://b0rghhfvw8lkf"]
+
+[ext_resource type="Script" path="res://projectiles/rally/rally.gd" id="1_57rve"]
+[ext_resource type="Texture2D" uid="uid://dje3pv8ng6cjq" path="res://projectiles/rally/medic_totem_spritesheet.png" id="2_3gsu0"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="2_lglup"]
+[ext_resource type="PackedScene" uid="uid://b2rh60fvj4y5k" path="res://effects/rally/rally.tscn" id="2_ncfjh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sx25n"]
+
+[sub_resource type="Animation" id="Animation_cw73x"]
+resource_name = "trail"
+length = 0.6
+loop_mode = 1
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2rrye"]
+_data = {
+"trail": SubResource("Animation_cw73x")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_clepy"]
+radius = 50.0
+
+[node name="Rally" type="CharacterBody2D" node_paths=PackedStringArray("animation", "hurtbox", "sprite")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_57rve")
+rally_effect_scene = ExtResource("2_ncfjh")
+animation = NodePath("AnimationPlayer")
+hurtbox = NodePath("HurtboxComponent")
+duration = 15.0
+interval = 1.5
+sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_sx25n")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("2_3gsu0")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2rrye")
+}
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_lglup")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_clepy")
+debug_color = Color(0, 0.643137, 0.290196, 0.419608)
+
+[connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]

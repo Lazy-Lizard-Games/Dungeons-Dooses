@@ -30,5 +30,7 @@ func _on_hurtbox_component_hurt(hitbox: HitboxComponent):
     var add_effect = AddEffectEntityAction.new()
     add_effect.effect_scene = smite_effect_scene
     add_effect.execute(hitbox.entity)
-    ## Tell parent entity of hit
+    ## Tell hitbox it has been hit by entity
+    hitbox.hit_by(entity)
+    ## Tell entity it has hit hitbox entity
     entity.hurt.emit(hitbox.entity)

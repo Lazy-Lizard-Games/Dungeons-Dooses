@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2rh60fvj4y5k"]
+
+[ext_resource type="Script" path="res://effects/rally/rally.gd" id="1_7c0ti"]
+
+[node name="Rally" type="Node"]
+script = ExtResource("1_7c0ti")
+strength = 1.0
+uid = &"Rally"
+duration = 1.5
+max_stacks = 1
