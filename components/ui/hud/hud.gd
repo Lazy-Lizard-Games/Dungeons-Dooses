@@ -8,21 +8,21 @@ class_name Hud
 ## Inventory component.
 @export var inventory: InventoryComponent
 ## Action component.
-@export var action: ActionComponent
+@export var effect_component: EffectComponent
 
 ## Health bar
 @onready var health_bar: ResourceBar = $StatsContainer/VBoxContainer/HealthBar
 ## Stamina bar
 @onready var stamina_bar: ResourceBar = $StatsContainer/VBoxContainer/StaminaBar
-
+@onready var effect_container: GridContainer = $EffectContainer/GridContainer
 var resource_container_scene = preload ("res://components/ui/resource/resource.tscn")
-var resource_containers: Array[ResourceContainer]
 
 func _ready() -> void:
 	health.updated.connect(on_health_updated)
 	health.maximum_updated.connect(on_health_maximum_updated)
 	stamina.stamina_updated.connect(on_stamina_updates)
-	action.resource_added.connect(on_resource_added)
+	effect_component.effect_added.connect(on_effect_added)
+	effect_component.effect_removed.connect(on_effect_removed)
 
 func on_health_updated(_previous: float, current: float) -> void:
 	health_bar.progress_bar.value = current
@@ -52,8 +52,13 @@ func on_health_attribute_updated(final_value: float) -> void:
 func on_stamina_attribute_updated(final_value: float) -> void:
 	stamina_bar.progress_bar.max_value = final_value
 
-func on_resource_added(resource: StackingBientityEffect) -> void:
+func on_effect_added(effect: Effect) -> void:
 	var resource_container = resource_container_scene.instantiate() as ResourceContainer
-	resource_container.resource = resource
-	resource_containers.append(resource_container)
-	$ResourceContainer/GridContainer.add_child(resource_container)
+	resource_container.effect = effect
+	effect_container.add_child(resource_container)
+
+func on_effect_removed(effect: Effect) -> void:
+	for child in effect_container.get_children() as Array[ResourceContainer]:
+		if child.effect.uid == effect.uid:
+			effect_container.remove_child(child)
+			child.queue_free()

@@ -3,6 +3,7 @@ extends Node
 
 ## Describes the generic properties of an effect.
 
+signal stacks_changed(prev: int, cur: int)
 signal expired
 
 ## Unique identifier for the effect.
@@ -22,8 +23,10 @@ func init(entity_in: Entity) -> void:
 
 ## Adds a stack to the effect and restarts the timer.
 func add_stack() -> void:
+  var temp = stacks
   stacks = clamp(stacks + 1, 0, max_stacks)
   duration_timer.start(duration)
+  stacks_changed.emit(temp, stacks)
 
 ## Applies the effect to the entity.
 func enter() -> void:
@@ -41,7 +44,9 @@ func _ready() -> void:
   enter()
 
 func on_duration_timout() -> void:
+  var temp = stacks
   stacks -= 1
+  stacks_changed.emit(temp, stacks)
   if stacks == 0:
     exit()
     expired.emit()
