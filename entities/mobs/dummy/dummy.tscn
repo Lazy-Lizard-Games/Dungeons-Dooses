@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/mobs/dummy/dummy.gd" id="1_gn2pe"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_dd2ne"]
 [ext_resource type="Script" path="res://attributes/generic.gd" id="3_ovxk7"]
-[ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/sprites/dummy.png" id="4_3hsxe"]
+[ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/dummy.png" id="4_3hsxe"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="4_6xhxw"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="5_12j2c"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="5_mdyo7"]

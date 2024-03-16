@@ -1,4 +1,4 @@
-[gd_scene load_steps=135 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=127 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -24,19 +24,17 @@
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/parry.gd" id="15_718h8"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/rally.gd" id="15_bcfd0"]
-[ext_resource type="Resource" uid="uid://b1nxmba4puijc" path="res://data/player/swordsman/abilities/cleave.tres" id="19_2lrk1"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
-[ext_resource type="Script" path="res://items/slot.gd" id="22_uwmea"]
-[ext_resource type="Resource" uid="uid://dxk7fm63v57qp" path="res://data/player/swordsman/abilities/smite.tres" id="24_7mrrq"]
+[ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/cleave/cleave.tscn" id="23_smxhw"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
-[ext_resource type="Resource" uid="uid://byjw82nx7ahge" path="res://data/player/swordsman/abilities/rally.tres" id="25_y1fyn"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
 [ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="30_ilkdu"]
 [ext_resource type="Script" path="res://skills/skill.gd" id="30_q706k"]
 [ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="31_hnlfe"]
+[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
 
@@ -121,45 +119,9 @@ name = "Wabaloo"
 color = Color(0.545098, 1, 0, 1)
 skills = Array[ExtResource("30_q706k")]([null, SubResource("Resource_wjcm1"), null, null, null, null, null, null, null, null, null, null, null, null, null])
 
-[sub_resource type="Resource" id="Resource_u34i7"]
-script = ExtResource("22_uwmea")
-item_type = 2
-stack = 0
-equipment_type = 2
-
-[sub_resource type="Resource" id="Resource_pih7n"]
-script = ExtResource("22_uwmea")
-item_type = 2
-stack = 0
-equipment_type = 1
-
-[sub_resource type="Resource" id="Resource_3t68r"]
-script = ExtResource("22_uwmea")
-item_type = 2
-stack = 0
-equipment_type = 0
-
-[sub_resource type="Resource" id="Resource_0yhk7"]
-script = ExtResource("22_uwmea")
-item_type = 2
-stack = 0
-equipment_type = 3
-
-[sub_resource type="Resource" id="Resource_wkh47"]
-script = ExtResource("22_uwmea")
-item_type = 1
-stack = 0
-equipment_type = 0
-
-[sub_resource type="Resource" id="Resource_r1c1s"]
-script = ExtResource("22_uwmea")
-item_type = 1
-stack = 0
-equipment_type = 0
-
 [sub_resource type="Resource" id="Resource_bia7r"]
 script = ExtResource("21_oguyd")
-slots = Array[ExtResource("22_uwmea")]([SubResource("Resource_u34i7"), SubResource("Resource_pih7n"), SubResource("Resource_3t68r"), SubResource("Resource_0yhk7"), SubResource("Resource_wkh47"), SubResource("Resource_r1c1s"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(14, 16)
@@ -419,6 +381,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14), Vector2i(4, 14), Vector2i(5, 14), Vector2i(6, 14)]
+}
+
+[sub_resource type="Animation" id="Animation_bix7b"]
+resource_name = "rally"
+length = 1.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_bg36c"]
@@ -725,23 +704,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_bix7b"]
-resource_name = "rally"
-length = 1.8
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rd62t"]
 _data = {
 "cleave_down": SubResource("Animation_irgbt"),
@@ -993,12 +955,12 @@ resistances = SubResource("Resource_mw36u")
 position_offset = Vector2(0, -10)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -15)
+position = Vector2(0, -16)
 texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 2
+frame = 5
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -1016,7 +978,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.825, 0.825)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1063,10 +1025,11 @@ script = ExtResource("15_718h8")
 idle_state = NodePath("../../Idle")
 animation_tree = NodePath("../../../AnimationTree")
 
-[node name="Rally" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree")]
+[node name="Rally" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
 script = ExtResource("15_bcfd0")
 idle_state = NodePath("../../Idle")
 animation_tree = NodePath("../../../AnimationTree")
+velocity = NodePath("../../../VelocityComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
 friction = SubResource("Resource_ulxov")
@@ -1079,9 +1042,6 @@ friction = SubResource("Resource_ulxov")
 target_on_hurt_scale = SubResource("Resource_wp6ar")
 actions_on_died = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_wxp2f")])
 
-[node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
-abilities = Array[Resource("res://abilities/ability.gd")]([ExtResource("19_2lrk1"), ExtResource("24_7mrrq"), ExtResource("25_y1fyn"), null, null, null, null, null, null, null, null, null, null, null, null, null, null])
-
 [node name="SkillComponent" parent="." instance=ExtResource("28_nfmj8")]
 skill_points = 10
 skill_trees = Array[ExtResource("29_uqb7t")]([SubResource("Resource_nqfhd")])
@@ -1090,6 +1050,13 @@ skill_trees = Array[ExtResource("29_uqb7t")]([SubResource("Resource_nqfhd")])
 inventory = SubResource("Resource_bia7r")
 
 [node name="EffectComponent" parent="." instance=ExtResource("33_n4u06")]
+
+[node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
+position = Vector2(0, -11)
+
+[node name="Cleave" parent="AbilityComponent" instance=ExtResource("23_smxhw")]
+
+[node name="Smite" parent="AbilityComponent" instance=ExtResource("32_50geu")]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)

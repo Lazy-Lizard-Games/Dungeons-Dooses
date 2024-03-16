@@ -12,13 +12,11 @@ func enter() -> void:
 	animation_tree['parameters/playback'].travel('parry')
 	animation_tree.animation_finished.connect(on_start_finished, CONNECT_ONE_SHOT)
 
-
 func exit() -> void:
 	timer = null
 	is_finished = false
-	ability.end(entity)
+	ability.end()
 	return
-
 
 func process_physics(_delta: float) -> State:
 	if is_finished:
@@ -40,7 +38,7 @@ func on_hit(_entity: Entity) -> void:
 	timer.timeout.disconnect(on_timeout)
 	animation_tree['parameters/playback'].travel('parry/attack')
 	animation_tree.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
-	ability.cast(entity)
+	ability.cast()
 
 ## End
 func on_timeout() -> void:
@@ -48,7 +46,6 @@ func on_timeout() -> void:
 	entity.hit.disconnect(on_hit)
 	animation_tree['parameters/playback'].travel('parry/end')
 	animation_tree.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
-
 
 func on_finished(_animation: String) -> void:
 	is_finished = true

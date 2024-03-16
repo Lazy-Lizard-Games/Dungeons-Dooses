@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0rghhfvw8lkf"]
+[gd_scene load_steps=10 format=3 uid="uid://b0rghhfvw8lkf"]
 
 [ext_resource type="Script" path="res://projectiles/rally/rally.gd" id="1_57rve"]
 [ext_resource type="Texture2D" uid="uid://dje3pv8ng6cjq" path="res://projectiles/rally/medic_totem_spritesheet.png" id="2_3gsu0"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="2_lglup"]
 [ext_resource type="PackedScene" uid="uid://b2rh60fvj4y5k" path="res://effects/rally/rally.tscn" id="2_ncfjh"]
+[ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="4_wnr82"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sx25n"]
 
@@ -45,13 +46,17 @@ interval = 1.5
 sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_sx25n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 texture = ExtResource("2_3gsu0")
 hframes = 4
-frame = 3
+
+[node name="ShadowComponent" parent="." instance=ExtResource("4_wnr82")]
+position = Vector2(0, 1)
+scale = Vector2(0.25, 0.25)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -61,6 +66,7 @@ libraries = {
 [node name="HurtboxComponent" parent="." instance=ExtResource("2_lglup")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visible = false
 shape = SubResource("CircleShape2D_clepy")
 debug_color = Color(0, 0.643137, 0.290196, 0.419608)
 

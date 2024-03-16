@@ -18,7 +18,7 @@ func on_animation_finished(_animation) -> void:
 
 func exit() -> void:
 	is_finished = false
-	ability.end(entity)
+	ability.end()
 	return
 
 func process_physics(_delta: float) -> State:
