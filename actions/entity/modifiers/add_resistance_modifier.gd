@@ -10,10 +10,8 @@ class_name AddResistanceModifierEntityAction
 ## Damage type of resistance.
 @export var damage_type: Enums.DamageType
 
-
-func execute(entity: Entity, _scale := 1.0) -> void:
+func execute(entity: Entity, _scale:=1.0) -> void:
 	entity.resistances.add_modifier(resistance_type, damage_type, modifier)
-
 
 func reverse(entity: Entity) -> void:
 	var remove_resistance = RemoveResistanceModifierEntityAction.new()

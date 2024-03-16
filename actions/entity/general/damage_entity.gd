@@ -12,15 +12,16 @@ func execute(entity: Entity, scale:=1.0) -> void:
 	if condition:
 		if !condition.execute(entity):
 			return
-	var temp_amount = amount.execute()
 	## Apply entity resistance bonuses.
-	var resistances = entity.resistances
-	var damage_resistance = resistances.get_damage_resistance(type)
-	if damage_resistance:
-		temp_amount *= 1.0 - damage_resistance.get_final_value()
-	temp_amount *= scale
+	print_debug("Damage resistance: ", entity.resistances.get_resistance(Enums.ResistanceType.Damage, type).get_final_value() * scale)
+	var amount_multiple := MultiplyNumber.new()
+	amount_multiple.x = amount
+	var amount_multiplier := ConstantNumber.new()
+	amount_multiplier.constant = entity.resistances.get_resistance(Enums.ResistanceType.Damage, type).get_final_value() * scale
+	amount_multiple.y = amount_multiplier
 	## Apply final damage.
+	var final_amount = amount_multiple.execute()
 	if "health_component" in entity:
 		var health = entity.health_component as HealthComponent
-		health.damage(type, temp_amount)
-		TextHandler.create_damage_text(type, temp_amount, entity.global_position)
+		health.damage(type, final_amount)
+		TextHandler.create_damage_text(type, final_amount, entity.global_position)

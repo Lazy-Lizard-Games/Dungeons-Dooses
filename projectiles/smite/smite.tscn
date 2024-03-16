@@ -1,27 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://cskur4kawkovi"]
+[gd_scene load_steps=19 format=3 uid="uid://cskur4kawkovi"]
 
 [ext_resource type="Script" path="res://projectiles/smite/smite.gd" id="1_x3y2h"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_8ikkg"]
 [ext_resource type="Texture2D" uid="uid://7mbnwlb5se28" path="res://projectiles/smite/smite_trail.png" id="2_w1uub"]
-[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="3_hfox1"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_vb0yo"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="4_7yjf2"]
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="5_fs34v"]
 [ext_resource type="Script" path="res://actions/bientity/general/knockback_bientity.gd" id="6_4i05h"]
+[ext_resource type="PackedScene" uid="uid://b2vuwbvge7gtb" path="res://effects/smited/smited.tscn" id="7_12v0i"]
 
-[sub_resource type="Resource" id="Resource_2brod"]
+[sub_resource type="Resource" id="Resource_isy05"]
 script = ExtResource("2_8ikkg")
 constant = 10.0
 
-[sub_resource type="Resource" id="Resource_5tuch"]
-script = ExtResource("3_hfox1")
-type = 0
-amount = SubResource("Resource_2brod")
-_id = ""
-
 [sub_resource type="Resource" id="Resource_0syu2"]
 script = ExtResource("4_7yjf2")
-damage = SubResource("Resource_5tuch")
+type = 0
+amount = SubResource("Resource_isy05")
 _id = ""
 
 [sub_resource type="Resource" id="Resource_w4mhw"]
@@ -76,6 +71,7 @@ collision_mask = 0
 script = ExtResource("1_x3y2h")
 damage = SubResource("Resource_0syu2")
 knockback = SubResource("Resource_b7oyp")
+smite_effect_scene = ExtResource("7_12v0i")
 animation = NodePath("AnimationPlayer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

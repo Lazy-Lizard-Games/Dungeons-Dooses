@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cbyp6u3r6r346"]
+[gd_scene load_steps=25 format=3 uid="uid://cbyp6u3r6r346"]
 
 [ext_resource type="Script" path="res://entities/mobs/dummy/dummy.gd" id="1_gn2pe"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_dd2ne"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="5_mdyo7"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="6_c60ux"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="7_8nhay"]
+[ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="8_2b6gb"]
 
 [sub_resource type="Resource" id="Resource_2m82o"]
 script = ExtResource("2_dd2ne")
@@ -122,7 +123,7 @@ states/idle/node = SubResource("AnimationNodeAnimation_083vk")
 states/idle/position = Vector2(310, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b7o2i"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_ffw2r"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_0naha")]
 
-[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component")]
+[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_gn2pe")
@@ -132,6 +133,7 @@ id = "Dummy"
 animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
 action_component = NodePath("ActionComponent")
+effect_component = NodePath("EffectComponent")
 generics = SubResource("Resource_5qhre")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -150,6 +152,8 @@ scale = Vector2(0.5, 0.5)
 [node name="HealthComponent" parent="." instance=ExtResource("4_6xhxw")]
 
 [node name="VelocityComponent" parent="." instance=ExtResource("5_12j2c")]
+
+[node name="EffectComponent" parent="." instance=ExtResource("8_2b6gb")]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("6_c60ux")]
 entity = NodePath("..")

@@ -2,19 +2,18 @@ extends Resource
 class_name ResistanceAttributes
 
 @export_category("Damage Resistances")
-@export var normal_damage = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var fire_damage = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var frost_damage = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var shock_damage = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var poison_damage = Attribute.new(0, 1, pow(-2, 31), 0.8)
+@export var normal_damage = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var fire_damage = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var frost_damage = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var shock_damage = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var poison_damage = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
 
 @export_category("Duration Resistances")
-@export var normal_duration = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var fire_duration = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var frost_duration = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var shock_duration = Attribute.new(0, 1, pow(-2, 31), 0.8)
-@export var poison_duration = Attribute.new(0, 1, pow(-2, 31), 0.8)
-
+@export var normal_duration = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var fire_duration = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var frost_duration = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var shock_duration = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
+@export var poison_duration = Attribute.new(1, 1, 0.2, pow(2, 31) - 1)
 
 func get_resistance(resistance_type: Enums.ResistanceType, damage_type: Enums.DamageType) -> Attribute:
 	match resistance_type:
@@ -24,7 +23,6 @@ func get_resistance(resistance_type: Enums.ResistanceType, damage_type: Enums.Da
 			return get_duration_resistance(damage_type)
 		_:
 			return null
-
 
 func get_damage_resistance(type: Enums.DamageType) -> Attribute:
 	match type:
@@ -41,7 +39,6 @@ func get_damage_resistance(type: Enums.DamageType) -> Attribute:
 		_:
 			return null
 
-
 func get_duration_resistance(type: Enums.DamageType) -> Attribute:
 	match type:
 		Enums.DamageType.Normal:
@@ -57,12 +54,10 @@ func get_duration_resistance(type: Enums.DamageType) -> Attribute:
 		_:
 			return null
 
-
 func add_modifier(resistance_type: Enums.ResistanceType, damage_type: Enums.DamageType, modifier: AttributeModifier) -> void:
 	var resistance = get_resistance(resistance_type, damage_type)
 	if resistance:
 		resistance.add_modifier(modifier)
-
 
 func remove_modifier(resistance_type: Enums.ResistanceType, damage_type: Enums.DamageType, uid: String) -> void:
 	var resistance = get_resistance(resistance_type, damage_type)

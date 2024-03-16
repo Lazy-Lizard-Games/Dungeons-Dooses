@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2vuwbvge7gtb"]
+
+[ext_resource type="Script" path="res://effects/smited/smited.gd" id="1_2l0vx"]
+
+[node name="Smited" type="Node"]
+script = ExtResource("1_2l0vx")
+strength = 0.15
+uid = &"Smite"
+duration = 5.0
+max_stacks = 1

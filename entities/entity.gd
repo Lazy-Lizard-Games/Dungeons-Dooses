@@ -26,6 +26,8 @@ signal consume(actor: Entity, item: int)
 @export var velocity_component: VelocityComponent
 ## Action component for the entity.
 @export var action_component: ActionComponent
+## Effect component for the entity.
+@export var effect_component: EffectComponent
 ## Generic attributes for the entity.
 @export var generics: GenericAttributes = GenericAttributes.new()
 ## Affinity attribtues for the entity.
@@ -40,7 +42,6 @@ var looking_at := Vector2.RIGHT
 var can_attack := true
 
 func _ready() -> void:
-	z_index = 1
 	generics = generics.duplicate(true)
 	affinities = affinities.duplicate(true)
 	resistances = resistances.duplicate(true)

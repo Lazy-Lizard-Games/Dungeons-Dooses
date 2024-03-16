@@ -1,23 +1,26 @@
 extends BientityAction
 class_name DamageBientityAction
 
-## Damage to be dealt to the target.
-@export var damage: DamageEntityAction
+## Deals damage to the target after applying actor bonuses.`
+
+## Type of damage to deal.
+@export var type: Enums.DamageType
+## Amount of damage to deal.
+@export var amount: Number
 
 func execute(actor: Entity, target: Entity, scale:=1.0) -> void:
 	if condition:
 		if !condition.execute(actor, target):
 			return
-	## Apply actor affinity bonuses.
-	var affinities = actor.affinities
-	var damage_affinity = affinities.get_damage_affinity(damage.type)
-	var modifier = ConstantNumber.new()
-	modifier.constant = 1
-	if damage_affinity:
-		modifier.constant = 1 + damage_affinity.get_final_value()
-	var number = MultiplyNumber.new()
-	number.x = damage.amount
-	number.y = modifier
-	var temp_damage = damage.duplicate(true)
-	temp_damage.amount = number
-	temp_damage.execute(target, scale)
+	# Apply actor damage affinity
+	print_debug("Damage affinity: ", actor.affinities.get_affinity(Enums.AffinityType.Damage, type).get_final_value() * scale)
+	var amount_multiple := MultiplyNumber.new()
+	amount_multiple.x = amount
+	var amount_multiplier := ConstantNumber.new()
+	amount_multiplier.constant = actor.affinities.get_affinity(Enums.AffinityType.Damage, type).get_final_value() * scale
+	amount_multiple.y = amount_multiplier
+	# Apply damage to target
+	var damage = DamageEntityAction.new()
+	damage.amount = amount_multiple
+	damage.type = type
+	damage.execute(target, scale)

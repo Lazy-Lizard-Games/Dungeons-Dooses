@@ -1,29 +1,21 @@
-[gd_scene load_steps=21 format=3 uid="uid://01mfloxbcrcs"]
+[gd_scene load_steps=18 format=3 uid="uid://01mfloxbcrcs"]
 
 [ext_resource type="Script" path="res://projectiles/cleave/cleave.gd" id="1_1ayy0"]
-[ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="2_57ye1"]
 [ext_resource type="Texture2D" uid="uid://xbicjdlfvgwl" path="res://projectiles/cleave/slash_trail.png" id="2_ch360"]
-[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="3_v7hng"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_xbc3c"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="4_yni6o"]
 [ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="5_mxmsy"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="6_iios4"]
 [ext_resource type="Script" path="res://actions/bientity/general/knockback_bientity.gd" id="7_0mhj4"]
 
-[sub_resource type="Resource" id="Resource_xp131"]
-script = ExtResource("2_57ye1")
-number_min = 5.0
-number_max = 7.0
-
-[sub_resource type="Resource" id="Resource_b27we"]
-script = ExtResource("3_v7hng")
-type = 0
-amount = SubResource("Resource_xp131")
-_id = ""
+[sub_resource type="Resource" id="Resource_rqaf7"]
+script = ExtResource("6_iios4")
+constant = 5.0
 
 [sub_resource type="Resource" id="Resource_2adld"]
 script = ExtResource("4_yni6o")
-damage = SubResource("Resource_b27we")
+type = 0
+amount = SubResource("Resource_rqaf7")
 _id = ""
 
 [sub_resource type="Resource" id="Resource_mumsf"]
