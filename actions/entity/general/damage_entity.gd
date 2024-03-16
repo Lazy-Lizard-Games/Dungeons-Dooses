@@ -13,7 +13,6 @@ func execute(entity: Entity, scale:=1.0) -> void:
 		if !condition.execute(entity):
 			return
 	## Apply entity resistance bonuses.
-	print_debug("Damage resistance: ", entity.resistances.get_resistance(Enums.ResistanceType.Damage, type).get_final_value() * scale)
 	var amount_multiple := MultiplyNumber.new()
 	amount_multiple.x = amount
 	var amount_multiplier := ConstantNumber.new()
