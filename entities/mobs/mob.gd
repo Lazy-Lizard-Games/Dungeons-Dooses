@@ -8,7 +8,6 @@ class_name Mob
 ## Health component for the entity.
 @export var health_component: HealthComponent
 
-
 func _ready() -> void:
 	super()
 	hitbox_component.hit.connect(

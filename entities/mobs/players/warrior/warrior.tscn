@@ -160,7 +160,7 @@ script = ExtResource("21_oguyd")
 slots = Array[ExtResource("22_uwmea")]([SubResource("Resource_u34i7"), SubResource("Resource_pih7n"), SubResource("Resource_3t68r"), SubResource("Resource_0yhk7"), SubResource("Resource_wkh47"), SubResource("Resource_r1c1s"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
-size = Vector2(16, 20)
+size = Vector2(14, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
 radius = 50.0
@@ -995,7 +995,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 6
+frame = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -1013,7 +1013,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.85, 0.85)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1090,6 +1090,7 @@ entity = NodePath("..")
 invulnerability_duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_fktii")
 debug_color = Color(0.796078, 0.423529, 0, 0.419608)
 

@@ -19,4 +19,5 @@ func _on_hurtbox_component_hurt(hitbox: HitboxComponent):
     var knockback_direction = ConstantVector.new(direction.x, direction.y)
     knockback.direction = knockback_direction
     knockback.execute(entity, hitbox.entity)
+    hitbox.hit_by(entity)
     entity.hurt.emit(hitbox.entity)
