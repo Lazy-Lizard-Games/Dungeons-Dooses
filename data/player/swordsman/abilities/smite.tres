@@ -1,96 +1,79 @@
-[gd_resource type="Resource" script_class="CastedAbility" load_steps=28 format=3 uid="uid://dx5pqk0k04c5t"]
+[gd_resource type="Resource" script_class="CastedAbility" load_steps=23 format=3 uid="uid://dxk7fm63v57qp"]
 
+[ext_resource type="Script" path="res://abilities/casted_ability.gd" id="1_8ne1x"]
 [ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="1_saiaj"]
-[ext_resource type="Script" path="res://abilities/casted_ability.gd" id="1_xblru"]
 [ext_resource type="Script" path="res://actions/vectors/operators/add.gd" id="1_y6p52"]
-[ext_resource type="Script" path="res://actions/entity/modifiers/remove_generic_modifier.gd" id="2_4rk53"]
 [ext_resource type="Script" path="res://actions/vectors/providers/position.gd" id="2_ucrmn"]
-[ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="3_7myl0"]
+[ext_resource type="PackedScene" uid="uid://cskur4kawkovi" path="res://projectiles/smite/smite.tscn" id="3_by6ar"]
 [ext_resource type="Script" path="res://actions/vectors/operators/multiply.gd" id="3_kcaj8"]
-[ext_resource type="Script" path="res://actions/entity/modifiers/add_generic_modifier.gd" id="4_1nhfb"]
 [ext_resource type="Script" path="res://actions/vectors/providers/constant.gd" id="4_rs1ll"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="5_8h4kh"]
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="6_741xj"]
-[ext_resource type="Resource" uid="uid://c6igb8625mv34" path="res://data/player/swordsman/projectiles/smite/smite.tres" id="7_fwhfy"]
 
-[sub_resource type="Resource" id="Resource_6gdym"]
-script = ExtResource("2_ucrmn")
-
-[sub_resource type="Resource" id="Resource_xy2ho"]
-script = ExtResource("5_8h4kh")
-constant = 5.0
-
-[sub_resource type="Resource" id="Resource_6c4w6"]
-script = ExtResource("5_8h4kh")
-constant = 5.0
-
-[sub_resource type="Resource" id="Resource_dn10p"]
-script = ExtResource("4_rs1ll")
-x = SubResource("Resource_xy2ho")
-y = SubResource("Resource_6c4w6")
-
-[sub_resource type="Resource" id="Resource_sm6dk"]
+[sub_resource type="Resource" id="Resource_q2bf4"]
 script = ExtResource("6_741xj")
 
-[sub_resource type="Resource" id="Resource_y06to"]
-script = ExtResource("3_kcaj8")
-vector_a = SubResource("Resource_dn10p")
-vector_b = SubResource("Resource_sm6dk")
+[sub_resource type="Resource" id="Resource_ieqqd"]
+script = ExtResource("2_ucrmn")
 
-[sub_resource type="Resource" id="Resource_uy32x"]
-script = ExtResource("1_y6p52")
-vector_a = SubResource("Resource_6gdym")
-vector_b = SubResource("Resource_y06to")
+[sub_resource type="Resource" id="Resource_7o17m"]
+script = ExtResource("6_741xj")
 
-[sub_resource type="Resource" id="Resource_cs5jr"]
-script = ExtResource("1_saiaj")
-projectile_object = ExtResource("7_fwhfy")
-position = SubResource("Resource_uy32x")
-_id = ""
-
-[sub_resource type="Resource" id="Resource_bwrqj"]
-script = ExtResource("2_4rk53")
-uid = "smite_slow"
-generic_type = 4
-_id = ""
-
-[sub_resource type="Resource" id="Resource_47k65"]
-script = ExtResource("3_7myl0")
-uid = "smite_slow"
-operation = 1
-value = -0.9
-
-[sub_resource type="Resource" id="Resource_1bjhg"]
-script = ExtResource("4_1nhfb")
-modifier = SubResource("Resource_47k65")
-generic_type = 4
-_id = ""
-
-[sub_resource type="Resource" id="Resource_d2vls"]
+[sub_resource type="Resource" id="Resource_q2lio"]
 script = ExtResource("5_8h4kh")
-constant = 0.45
+constant = 10.0
 
-[sub_resource type="Resource" id="Resource_etq1x"]
+[sub_resource type="Resource" id="Resource_wso37"]
+script = ExtResource("5_8h4kh")
+constant = 10.0
+
+[sub_resource type="Resource" id="Resource_xatd5"]
+script = ExtResource("4_rs1ll")
+x = SubResource("Resource_q2lio")
+y = SubResource("Resource_wso37")
+
+[sub_resource type="Resource" id="Resource_lnoj6"]
+script = ExtResource("3_kcaj8")
+vector_a = SubResource("Resource_7o17m")
+vector_b = SubResource("Resource_xatd5")
+
+[sub_resource type="Resource" id="Resource_hjmpk"]
+script = ExtResource("1_y6p52")
+vector_a = SubResource("Resource_ieqqd")
+vector_b = SubResource("Resource_lnoj6")
+
+[sub_resource type="Resource" id="Resource_u720b"]
+script = ExtResource("1_saiaj")
+projectile_scene = ExtResource("3_by6ar")
+position_vector = SubResource("Resource_hjmpk")
+direction_vector = SubResource("Resource_q2bf4")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_2by6n"]
+script = ExtResource("5_8h4kh")
+constant = 0.5
+
+[sub_resource type="Resource" id="Resource_6f4yi"]
+script = ExtResource("5_8h4kh")
+constant = 5.0
+
+[sub_resource type="Resource" id="Resource_k64pp"]
 script = ExtResource("5_8h4kh")
 constant = 0.0
 
-[sub_resource type="Resource" id="Resource_qvouw"]
+[sub_resource type="Resource" id="Resource_ror7k"]
 script = ExtResource("5_8h4kh")
-constant = 15.0
-
-[sub_resource type="Resource" id="Resource_nidjd"]
-script = ExtResource("5_8h4kh")
-constant = 1.05
+constant = 1.0
 
 [resource]
-script = ExtResource("1_xblru")
-cost = SubResource("Resource_etq1x")
-actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_cs5jr")])
+script = ExtResource("1_8ne1x")
+cost = SubResource("Resource_6f4yi")
+actions_on_cast = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_u720b")])
 state_name = &"Smite"
 name = "Smite"
 description = ""
-reactive_energy = SubResource("Resource_qvouw")
-cast_time = SubResource("Resource_d2vls")
-recharge_time = SubResource("Resource_nidjd")
-actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_1bjhg")])
-actions_on_end = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_bwrqj")])
+reactive_energy = SubResource("Resource_k64pp")
+cast_time = SubResource("Resource_2by6n")
+recharge_time = SubResource("Resource_ror7k")
+actions_on_start = Array[Resource("res://actions/entity/entity_action.gd")]([])
+actions_on_end = Array[Resource("res://actions/entity/entity_action.gd")]([])

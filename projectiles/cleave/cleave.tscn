@@ -31,11 +31,11 @@ script = ExtResource("5_mxmsy")
 
 [sub_resource type="Resource" id="Resource_v1pkg"]
 script = ExtResource("6_iios4")
-constant = 0.35
+constant = 0.25
 
 [sub_resource type="Resource" id="Resource_2hyhn"]
 script = ExtResource("6_iios4")
-constant = 75.0
+constant = 250.0
 
 [sub_resource type="Resource" id="Resource_lt3np"]
 script = ExtResource("7_0mhj4")
@@ -46,7 +46,7 @@ _id = ""
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjwmf"]
 
-[sub_resource type="Animation" id="Animation_kcg1k"]
+[sub_resource type="Animation" id="Animation_j3cxo"]
 resource_name = "trail"
 length = 0.6
 step = 0.15
@@ -63,9 +63,9 @@ tracks/0/keys = {
 "values": [Vector2i(0, 3), Vector2i(0, 2), Vector2i(0, 1), Vector2i(0, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m4qwr"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vki4t"]
 _data = {
-"trail": SubResource("Animation_kcg1k")
+"trail": SubResource("Animation_j3cxo")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v73js"]
@@ -91,7 +91,7 @@ frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_m4qwr")
+"": SubResource("AnimationLibrary_vki4t")
 }
 
 [node name="HurtboxComponent" parent="." instance=ExtResource("3_xbc3c")]

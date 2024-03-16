@@ -1,0 +1,102 @@
+[gd_scene load_steps=20 format=3 uid="uid://cskur4kawkovi"]
+
+[ext_resource type="Script" path="res://projectiles/smite/smite.gd" id="1_x3y2h"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_8ikkg"]
+[ext_resource type="Texture2D" uid="uid://7mbnwlb5se28" path="res://projectiles/smite/smite_trail.png" id="2_w1uub"]
+[ext_resource type="Script" path="res://actions/entity/general/damage_entity.gd" id="3_hfox1"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_vb0yo"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="4_7yjf2"]
+[ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="5_fs34v"]
+[ext_resource type="Script" path="res://actions/bientity/general/knockback_bientity.gd" id="6_4i05h"]
+
+[sub_resource type="Resource" id="Resource_2brod"]
+script = ExtResource("2_8ikkg")
+constant = 10.0
+
+[sub_resource type="Resource" id="Resource_5tuch"]
+script = ExtResource("3_hfox1")
+type = 0
+amount = SubResource("Resource_2brod")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_0syu2"]
+script = ExtResource("4_7yjf2")
+damage = SubResource("Resource_5tuch")
+_id = ""
+
+[sub_resource type="Resource" id="Resource_w4mhw"]
+script = ExtResource("5_fs34v")
+
+[sub_resource type="Resource" id="Resource_uf4c7"]
+script = ExtResource("2_8ikkg")
+constant = 0.25
+
+[sub_resource type="Resource" id="Resource_j2kot"]
+script = ExtResource("2_8ikkg")
+constant = 50.0
+
+[sub_resource type="Resource" id="Resource_b7oyp"]
+script = ExtResource("6_4i05h")
+strength = SubResource("Resource_j2kot")
+duration = SubResource("Resource_uf4c7")
+direction = SubResource("Resource_w4mhw")
+_id = ""
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nle7u"]
+
+[sub_resource type="Animation" id="Animation_kcg1k"]
+resource_name = "trail"
+length = 0.6
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m4qwr"]
+_data = {
+"trail": SubResource("Animation_kcg1k")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mhn8"]
+radius = 13.0
+height = 52.0
+
+[node name="Smite" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_x3y2h")
+damage = SubResource("Resource_0syu2")
+knockback = SubResource("Resource_b7oyp")
+animation = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nle7u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_w1uub")
+hframes = 7
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m4qwr")
+}
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("3_vb0yo")]
+single_hit = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(16, 0)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_5mhn8")
+
+[connection signal="hurt" from="HurtboxComponent" to="." method="_on_hurtbox_component_hurt"]
