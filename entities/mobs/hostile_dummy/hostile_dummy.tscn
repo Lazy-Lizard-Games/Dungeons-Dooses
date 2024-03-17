@@ -7,8 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="5_gejri"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="6_4xhv8"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="6_qsmu2"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity_over_time.gd" id="7_llhoq"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_rrdij"]
-[ext_resource type="Script" path="res://actions/bientity/general/DamageBientityOverTime.gd" id="7_scliw"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="7_ta5wl"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="8_q5v5m"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="9_0n6xq"]
@@ -16,23 +16,23 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_51w1e"]
 radius = 2.0
 
-[sub_resource type="Resource" id="Resource_mgd11"]
+[sub_resource type="Resource" id="Resource_0u8hv"]
 script = ExtResource("6_qsmu2")
-constant = 1.0
+constant = 2.5
 
-[sub_resource type="Resource" id="Resource_2v4hj"]
+[sub_resource type="Resource" id="Resource_c07ld"]
 script = ExtResource("6_qsmu2")
-constant = 5.0
+constant = 10.0
 
-[sub_resource type="Resource" id="Resource_f2lhn"]
+[sub_resource type="Resource" id="Resource_q01ft"]
 script = ExtResource("6_qsmu2")
-constant = 1.0
+constant = 0.5
 
-[sub_resource type="Resource" id="Resource_qmwx7"]
-script = ExtResource("7_scliw")
-amount = SubResource("Resource_mgd11")
-duration = SubResource("Resource_2v4hj")
-interval = SubResource("Resource_f2lhn")
+[sub_resource type="Resource" id="Resource_m7uwb"]
+script = ExtResource("7_llhoq")
+amount = SubResource("Resource_0u8hv")
+duration = SubResource("Resource_c07ld")
+interval = SubResource("Resource_q01ft")
 type = 1
 _id = ""
 
@@ -126,7 +126,7 @@ hframes = 6
 [node name="VelocityComponent" parent="." instance=ExtResource("4_nb65g")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("5_gejri")]
-actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_qmwx7")])
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_m7uwb")])
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_4xhv8")]
 

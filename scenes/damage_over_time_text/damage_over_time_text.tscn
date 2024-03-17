@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://cmyhby2afiffx" path="res://assets/damage/default_colour.tres" id="2_ys2p8"]
 
 [node name="DamageOverTimeText" type="Control" node_paths=PackedStringArray("label", "timer")]
+z_index = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -26,8 +26,8 @@ func _ready() -> void:
 	timer.start(1)
 
 func _physics_process(delta: float) -> void:
-	scale *= 0.99
-	modulate = Color(1, 1, 1, scale.x)
+	scale = scale.lerp(Vector2.ZERO, delta / timer.wait_time)
+	modulate = Color(1, 1, 1, modulate.r * 0.95)
 	direction = direction.lerp(Vector2.DOWN, delta)
 	position += direction * speed
 
