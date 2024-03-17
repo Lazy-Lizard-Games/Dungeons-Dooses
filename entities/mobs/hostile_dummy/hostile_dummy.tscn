@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ca4cpxgf56im7"]
+[gd_scene load_steps=28 format=3 uid="uid://ca4cpxgf56im7"]
 
 [ext_resource type="Script" path="res://entities/mobs/hostile_dummy/hostile_dummy.gd" id="1_kohxn"]
 [ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/dummy.png" id="2_fospf"]
@@ -6,13 +6,35 @@
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="4_nb65g"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="5_gejri"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="6_4xhv8"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="6_qsmu2"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_rrdij"]
+[ext_resource type="Script" path="res://actions/bientity/general/DamageBientityOverTime.gd" id="7_scliw"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="7_ta5wl"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="8_q5v5m"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="9_0n6xq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_51w1e"]
 radius = 2.0
+
+[sub_resource type="Resource" id="Resource_mgd11"]
+script = ExtResource("6_qsmu2")
+constant = 1.0
+
+[sub_resource type="Resource" id="Resource_2v4hj"]
+script = ExtResource("6_qsmu2")
+constant = 5.0
+
+[sub_resource type="Resource" id="Resource_f2lhn"]
+script = ExtResource("6_qsmu2")
+constant = 1.0
+
+[sub_resource type="Resource" id="Resource_qmwx7"]
+script = ExtResource("7_scliw")
+amount = SubResource("Resource_mgd11")
+duration = SubResource("Resource_2v4hj")
+interval = SubResource("Resource_f2lhn")
+type = 1
+_id = ""
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bse56"]
 radius = 5.0
@@ -104,6 +126,7 @@ hframes = 6
 [node name="VelocityComponent" parent="." instance=ExtResource("4_nb65g")]
 
 [node name="ActionComponent" parent="." instance=ExtResource("5_gejri")]
+actions_on_hurt = Array[Resource("res://actions/bientity/bientity_action.gd")]([SubResource("Resource_qmwx7")])
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_4xhv8")]
 

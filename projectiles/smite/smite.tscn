@@ -63,7 +63,7 @@ _data = {
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5mhn8"]
 radius = 13.0
-height = 52.0
+height = 66.0
 
 [node name="Smite" type="CharacterBody2D" node_paths=PackedStringArray("animation")]
 collision_layer = 0
@@ -78,6 +78,7 @@ animation = NodePath("AnimationPlayer")
 shape = SubResource("CircleShape2D_nle7u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(11, -1)
 texture = ExtResource("2_w1uub")
 hframes = 7
 frame = 3
@@ -91,7 +92,7 @@ libraries = {
 single_hit = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
-position = Vector2(16, 0)
+position = Vector2(22, 0)
 rotation = -1.5708
 shape = SubResource("CapsuleShape2D_5mhn8")
 
