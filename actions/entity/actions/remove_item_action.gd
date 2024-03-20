@@ -8,9 +8,8 @@ class_name RemoveItemAction
 ## Name of the item action to remove.
 @export var id: String
 
-
-func execute(_entity: Entity, _scale: = 1.0) -> void:
-	var _actions: Array[ItemAction]
+func execute(_entity: Entity, _scale:=1.0) -> void:
+	# var _actions: Array[ItemAction]
 	match type:
 		Enums.ItemActionType.OnConsume:
 			pass

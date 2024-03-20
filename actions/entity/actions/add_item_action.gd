@@ -10,7 +10,7 @@ class_name AddItemAction
 
 ## TODO: Implement OnConsume and OnEquip actions/triggers.
 
-func execute(entity: Entity, _scale := 1.0) -> void:
+func execute(_entity: Entity, _scale:=1.0) -> void:
 	match type:
 		Enums.ItemActionType.OnConsume:
 			pass

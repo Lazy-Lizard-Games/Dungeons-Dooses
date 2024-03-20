@@ -1,5 +1,5 @@
-extends Node2D
 class_name Ability
+extends Node2D
 
 signal started
 signal casted
@@ -22,7 +22,7 @@ var caster: Entity
 ## Checks whether the entity can start this ability.
 func can_start(entity: Entity) -> bool:
 	if 'stamina_component' in entity:
-		if entity.stamina_component.current < cost.execute():
+		if entity.stamina_component.current < cost.get_number():
 			return false
 	if is_recharging or is_casting:
 		return false
