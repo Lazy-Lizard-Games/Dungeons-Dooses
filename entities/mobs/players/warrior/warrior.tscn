@@ -1,4 +1,4 @@
-[gd_scene load_steps=127 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=119 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -18,7 +18,6 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/cleave.gd" id="11_tkekq"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/smite.gd" id="13_m05i3"]
-[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="13_qljxc"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
@@ -31,9 +30,6 @@
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
-[ext_resource type="Script" path="res://actions/bientity/stacking/stacking_target_bientity.gd" id="30_ilkdu"]
-[ext_resource type="Script" path="res://skills/skill.gd" id="30_q706k"]
-[ext_resource type="Script" path="res://actions/entity/stacking/stacking_generic_entity.gd" id="31_hnlfe"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
@@ -84,40 +80,15 @@ min_value = -2.14748e+09
 max_value = 2.14748e+09
 modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
-[sub_resource type="Resource" id="Resource_mxdme"]
-script = ExtResource("13_qljxc")
-constant = 0.0
-
 [sub_resource type="Resource" id="Resource_wxp2f"]
 script = ExtResource("14_1n4lw")
-number = SubResource("Resource_mxdme")
 _id = ""
-
-[sub_resource type="Resource" id="Resource_pabeh"]
-script = ExtResource("31_hnlfe")
-uid = ""
-type = 4
-operation = 1
-value = 2.0
-_id = ""
-
-[sub_resource type="Resource" id="Resource_ele1f"]
-script = ExtResource("30_ilkdu")
-stacking_entity = SubResource("Resource_pabeh")
-_id = ""
-
-[sub_resource type="Resource" id="Resource_wjcm1"]
-script = ExtResource("30_q706k")
-name = "Chickpeas"
-description = "Chickpeas make you go really really fast!"
-max_stacks = 5
-actions_per_stack = Array[Resource("res://actions/bientity/stacking/stacking_bientity_action.gd")]([SubResource("Resource_ele1f")])
 
 [sub_resource type="Resource" id="Resource_nqfhd"]
 script = ExtResource("29_uqb7t")
 name = "Wabaloo"
 color = Color(0.545098, 1, 0, 1)
-skills = Array[ExtResource("30_q706k")]([null, SubResource("Resource_wjcm1"), null, null, null, null, null, null, null, null, null, null, null, null, null])
+skills = Array[Resource("res://skills/skill.gd")]([])
 
 [sub_resource type="Resource" id="Resource_bia7r"]
 script = ExtResource("21_oguyd")
@@ -960,7 +931,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 1
+frame = 6
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -978,7 +949,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.8, 0.8)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")

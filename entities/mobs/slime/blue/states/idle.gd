@@ -4,7 +4,7 @@ extends State
 @export var state: StateComponent
 @export var velocity: VelocityComponent
 @export var move: State
-@export var idle_move_interval: RangeProvider
+@export var idle_move_interval: RangeNumber
 var idle_move_timer: Timer
 
 func _ready():
@@ -14,7 +14,7 @@ func _ready():
 
 func enter() -> void:
   animation_tree['parameters/playback'].travel('idle')
-  idle_move_timer.start(idle_move_interval.execute())
+  idle_move_timer.start(idle_move_interval.get_number())
 
 func exit() -> void:
   idle_move_timer.stop()

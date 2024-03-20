@@ -42,7 +42,7 @@ func on_interval_timer_timeout() -> void:
 func _on_hurtbox_component_hurt(hitbox: HitboxComponent):
   if hitbox.entity.faction == entity.faction:
     # Apply rally effect
-    var add_effect = AddEffectEntityAction.new()
+    var add_effect = AddEffect.new()
     add_effect.effect_scene = rally_effect_scene
     add_effect.execute(hitbox.entity)
     ## Tell hitbox it has been hit by entity

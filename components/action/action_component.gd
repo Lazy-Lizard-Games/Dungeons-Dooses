@@ -1,9 +1,6 @@
 extends Node
 class_name ActionComponent
 
-signal resource_added(resource: StackingBientityEffect)
-signal resource_removed(resource: StackingBientityEffect)
-
 ## Stores actions that are to be executed depending on trigger.
 
 @export_group("On hit")
@@ -33,15 +30,3 @@ signal resource_removed(resource: StackingBientityEffect)
 @export var actions_on_died: Array[EntityAction]
 ## Scales actions when actor.
 @export var on_died_scale := Attribute.new(1)
-
-## Stacking resources currently attached to entity.
-var resources: Array[StackingBientityEffect]
-
-func add_resource(resource: StackingBientityEffect) -> void:
-	resources.append(resource)
-	resource_added.emit(resource)
-
-func remove_resource(resource: StackingBientityEffect) -> void:
-	if resources.has(resource):
-		resources.erase(resource)
-		resource_removed.emit(resource)

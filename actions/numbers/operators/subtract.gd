@@ -1,5 +1,5 @@
+class_name SubtractNumber
 extends Number
-class_name SubtractionOperator
 
 ## Returns the result of subtracting one number by another.
 
@@ -8,6 +8,5 @@ class_name SubtractionOperator
 ## Number to subtract by.
 @export var y: Number
 
-
-func execute() -> float:
-	return x.execute() - y.execute()
+func get_number() -> float:
+	return x.get_number() - y.get_number()

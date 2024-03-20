@@ -1,4 +1,4 @@
-class_name KnockbackBientiyAction
+class_name KnockbackEntityWithTransforms
 extends BientityAction
 
 ## Knocks back the target for a duration after applying any actor bonuses then target bonuses.
@@ -21,7 +21,7 @@ func execute(actor: Entity, target: Entity, scale: float=1) -> void:
   duration_multiplier.constant = actor.generics.get_generic(Enums.GenericType.KnockbackDurationAffinity).get_final_value() * scale
   duration_multiple.y = duration_multiplier
   # Apply target bonuses then knockback
-  var knockback = KnockbackEntityAction.new()
+  var knockback = KnockbackEntity.new()
   knockback.strength = strength_multiple
   knockback.duration = duration_multiple
   knockback.direction = direction

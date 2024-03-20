@@ -1,5 +1,5 @@
+class_name DamageEntityWithTransforms
 extends BientityAction
-class_name DamageBientityAction
 
 ## Deals damage to the target after applying actor bonuses.`
 
@@ -19,7 +19,7 @@ func execute(actor: Entity, target: Entity, scale:=1.0) -> void:
 	amount_multiplier.constant = actor.affinities.get_affinity(Enums.AffinityType.Damage, type).get_final_value() * scale
 	amount_multiple.y = amount_multiplier
 	# Apply damage to target
-	var damage = DamageEntityAction.new()
+	var damage = DamageEntity.new()
 	damage.amount = amount_multiple
 	damage.type = type
 	damage.execute(target, scale)

@@ -1,5 +1,5 @@
+class_name DamageEntity
 extends EntityAction
-class_name DamageEntityAction
 
 ## Deals damage to an entity.
 
@@ -19,7 +19,7 @@ func execute(entity: Entity, scale:=1.0) -> void:
 		amount_multiple.x = amount
 		amount_multiple.y = ConstantNumber.new(entity.resistances.get_resistance(Enums.ResistanceType.Damage, type).get_final_value() * scale)
 		## Apply final damage.
-		var final_amount = amount_multiple.execute()
+		var final_amount = amount_multiple.get_number()
 		var health = entity.health_component as HealthComponent
 		health.damage(type, final_amount)
 		TextHandler.create_damage_text(type, final_amount, entity.global_position)

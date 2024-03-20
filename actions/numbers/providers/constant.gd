@@ -1,13 +1,13 @@
-extends Number
 class_name ConstantNumber
+extends Number
 
 ## Returns a constant number.
 
 ## Constant to return.
-@export var constant: float
+@export var x: float
 
-func _init(x:=1.0):
-	constant = x
+func _init(_x:=1.0):
+	x = _x
 
-func execute() -> float:
-	return constant if constant else 0.0
+func get_number() -> float:
+	return x

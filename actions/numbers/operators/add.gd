@@ -1,5 +1,5 @@
-extends Number
 class_name AddNumber
+extends Number
 
 ## returns the result of adding one number with another.
 
@@ -8,6 +8,5 @@ class_name AddNumber
 ## Number to add by.
 @export var y: Number
 
-
-func execute() -> float:
-	return x.execute() + y.execute()
+func get_number() -> float:
+	return x.get_number() + y.get_number()

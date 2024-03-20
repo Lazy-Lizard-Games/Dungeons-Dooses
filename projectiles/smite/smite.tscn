@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_8ikkg"]
 [ext_resource type="Texture2D" uid="uid://7mbnwlb5se28" path="res://projectiles/smite/smite_trail.png" id="2_w1uub"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_vb0yo"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage_bientity.gd" id="4_7yjf2"]
+[ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="4_7yjf2"]
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="5_fs34v"]
-[ext_resource type="Script" path="res://actions/bientity/general/knockback_bientity.gd" id="6_4i05h"]
+[ext_resource type="Script" path="res://actions/bientity/general/knockback.gd" id="6_4i05h"]
 [ext_resource type="PackedScene" uid="uid://b2vuwbvge7gtb" path="res://effects/smited/smited.tscn" id="7_12v0i"]
 
 [sub_resource type="Resource" id="Resource_isy05"]
 script = ExtResource("2_8ikkg")
-constant = 10.0
+x = 0.0
 
 [sub_resource type="Resource" id="Resource_0syu2"]
 script = ExtResource("4_7yjf2")
@@ -24,11 +24,11 @@ script = ExtResource("5_fs34v")
 
 [sub_resource type="Resource" id="Resource_uf4c7"]
 script = ExtResource("2_8ikkg")
-constant = 0.25
+x = 0.0
 
 [sub_resource type="Resource" id="Resource_j2kot"]
 script = ExtResource("2_8ikkg")
-constant = 50.0
+x = 0.0
 
 [sub_resource type="Resource" id="Resource_b7oyp"]
 script = ExtResource("6_4i05h")

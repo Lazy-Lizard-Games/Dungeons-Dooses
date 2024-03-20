@@ -1,5 +1,5 @@
+class_name DivideNumber
 extends Number
-class_name DivisionOperator
 
 ## Returns the result of dividing one number by another.
 
@@ -8,9 +8,8 @@ class_name DivisionOperator
 ## Number to divide by.
 @export var y: Number
 
-
-func execute() -> float:
-	var _y = y.execute()
+func get_number() -> float:
+	var _y = y.get_number()
 	if _y == 0:
 		return 0
-	return x.execute() / _y.execute()
+	return x.get_number() / _y.get_number()

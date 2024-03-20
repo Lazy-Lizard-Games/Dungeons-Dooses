@@ -1,4 +1,4 @@
-class_name KnockbackEntityAction
+class_name KnockbackEntity
 extends EntityAction
 
 ## Knocks back an entity for a duration, after applying target bonuses.
@@ -26,7 +26,7 @@ func execute(entity: Entity, scale:=1.0) -> void:
   duration_multiplier.constant = entity.generics.get_generic(Enums.GenericType.KnockbackDurationResistance).get_final_value() * scale
   duration_multiple.y = duration_multiplier
   # Apply knockback to entity
-  entity.velocity_component.set_velocity(direction.get_vector(entity) * strength_multiple.execute() * scale)
+  entity.velocity_component.set_velocity(direction.get_vector(entity) * strength_multiple.get_number() * scale)
   # Apply knockback effect to entity
   var effect_modifier = AttributeModifier.new()
   effect_modifier.uid = KNOCKBACK_EFFECT_UID
@@ -41,6 +41,6 @@ func execute(entity: Entity, scale:=1.0) -> void:
   var knockback_effect = CooldownEntity.new()
   knockback_effect.action_on_start = add_effect
   knockback_effect.action_on_end = remove_effect
-  knockback_effect.duration = duration_multiple.execute()
+  knockback_effect.duration = duration_multiple.final_amount()
   knockback_effect.execute(entity, scale)
   

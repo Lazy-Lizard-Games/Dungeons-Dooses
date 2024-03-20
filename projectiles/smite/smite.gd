@@ -3,9 +3,9 @@ extends Projectile
 ## Projectile for the smite ability of the warrior
 
 ## The damage dealt by the projectile.
-@export var damage: DamageBientityAction
+@export var damage: DamageEntityWithTransforms
 ## The knockback dealt by the projectile.
-@export var knockback: KnockbackBientiyAction
+@export var knockback: KnockbackEntityWithTransforms
 ## The scene of the smited effect dealt by the projectile.
 @export var smite_effect_scene: PackedScene
 ## The animation player for the projectile.
@@ -27,7 +27,7 @@ func _on_hurtbox_component_hurt(hitbox: HitboxComponent):
     knockback.direction = knockback_direction
     knockback.execute(entity, hitbox.entity)
     # Apply smited effect
-    var add_effect = AddEffectEntityAction.new()
+    var add_effect = AddEffect.new()
     add_effect.effect_scene = smite_effect_scene
     add_effect.execute(hitbox.entity)
     ## Tell hitbox it has been hit by entity

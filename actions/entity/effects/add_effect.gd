@@ -1,4 +1,4 @@
-class_name AddEffectEntityAction
+class_name AddEffect
 extends EntityAction
 
 ## Adds an effect to an entity.

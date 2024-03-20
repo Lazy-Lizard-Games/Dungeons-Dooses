@@ -1,5 +1,5 @@
+class_name RangeNumber
 extends Number
-class_name RangeProvider
 
 ## Returns a random number between two numbers.
 
@@ -8,6 +8,5 @@ class_name RangeProvider
 ## Maximum number.
 @export var number_max: float
 
-
-func execute() -> float:
+func get_number() -> float:
 	return randf_range(number_min, number_max)

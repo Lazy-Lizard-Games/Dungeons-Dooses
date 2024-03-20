@@ -9,7 +9,7 @@ signal expired
 ## Unique identifier for the effect.
 @export var uid: StringName
 ## Duration of the effect.
-@export var duration: float
+@export var duration_time: float
 ## Maximum stacks of the effect.
 @export var max_stacks: int
 var duration_timer: Timer
@@ -25,7 +25,7 @@ func init(entity_in: Entity) -> void:
 func add_stack() -> void:
   var temp = stacks
   stacks = clamp(stacks + 1, 0, max_stacks)
-  duration_timer.start(duration)
+  duration_timer.start(duration_time)
   stacks_changed.emit(temp, stacks)
 
 ## Applies the effect to the entity.
@@ -40,7 +40,7 @@ func _ready() -> void:
   duration_timer = Timer.new()
   add_child(duration_timer)
   duration_timer.timeout.connect(on_duration_timout)
-  duration_timer.start(duration)
+  duration_timer.start(duration_time)
   enter()
 
 func on_duration_timout() -> void:

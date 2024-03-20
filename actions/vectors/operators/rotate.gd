@@ -1,10 +1,10 @@
 @tool
-extends VectorAction
 class_name RotateVector
+extends Vector
 
 ## Rotates the vector by a value somewhere between min and max.
 
-@export var vector: VectorAction
+@export var vector: Vector
 @export_range(-180, 180, ) var minimum: int = 0:
 	set(new_minimum):
 		minimum = new_minimum
@@ -15,7 +15,6 @@ class_name RotateVector
 		maximum = new_maximum
 		if maximum < minimum:
 			minimum = maximum
-
 
 func get_vector(entity: Entity) -> Vector2:
 	var angle = randi_range(minimum, maximum)

@@ -4,7 +4,7 @@ extends State
 @export var animation_tree: AnimationTree
 @export var velocity: VelocityComponent
 @export var idle: State
-@export var jump_strength: RangeProvider
+@export var jump_strength: RangeNumber
 @export var jump_friction_modifier: AttributeModifier
 var is_finished := false
 var is_jumping := false
@@ -27,7 +27,7 @@ func process_physics(_delta: float) -> State:
 
 func jump() -> void:
   is_jumping = true
-  velocity.add_velocity(entity.looking_at * jump_strength.execute())
+  velocity.add_velocity(entity.looking_at * jump_strength.get_number())
   var add_effect = AddGenericModifierEntityAction.new()
   add_effect.modifier = jump_friction_modifier
   add_effect.generic_type = Enums.GenericType.Friction

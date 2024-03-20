@@ -1,5 +1,5 @@
+class_name BinomialNumber
 extends Number
-class_name BinomialProvider
 
 ## Returns the number of tests that pass a chance check.
 
@@ -8,8 +8,7 @@ class_name BinomialProvider
 ## Chance that an iteration is successful
 @export_range(0, 1) var p: float
 
-
-func execute() -> float:
+func get_number() -> float:
 	var count = 0
 	for i in range(n):
 		if randf_range(0, 1) < p:
