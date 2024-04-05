@@ -5,9 +5,9 @@ extends Effect
 ## Controls the increase to damage taken as a percentage, i.e: 0.1 -> 10% increase. 
 ## Negative values reduce damage taken, i.e: -0.5 -> 50% decrease.
 @export var strength: float
+var modifier = AttributeModifier.new()
 
 func enter() -> void:
-  var modifier = AttributeModifier.new()
   modifier.uid = uid
   modifier.value = 1 + strength
   modifier.operation = Enums.OperationType.Multiplication
@@ -23,3 +23,7 @@ func exit() -> void:
   remove_modifier.damage_type = Enums.DamageType.Normal
   remove_modifier.resistance_type = Enums.ResistanceType.Damage
   remove_modifier.execute(entity)
+
+func _on_stacks_changed(_prev: int, cur: int) -> void:
+  modifier.value = 1 + (strength * cur)
+

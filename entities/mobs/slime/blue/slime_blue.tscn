@@ -360,6 +360,7 @@ texture = ExtResource("2_khmp1")
 flip_h = true
 hframes = 10
 vframes = 3
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
@@ -379,7 +380,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/move/blend_position = -0.174603
 
 [node name="ShadowComponent" parent="." instance=ExtResource("13_tk06f")]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.775, 0.775)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_tl7lt")]
 friction = SubResource("Resource_5f253")

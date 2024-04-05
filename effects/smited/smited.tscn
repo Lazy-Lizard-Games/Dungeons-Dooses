@@ -6,5 +6,7 @@
 script = ExtResource("1_2l0vx")
 strength = 0.15
 uid = &"Smite"
-duration = 5.0
-max_stacks = 1
+duration_time = 5.0
+max_stacks = 3
+
+[connection signal="stacks_changed" from="." to="." method="_on_stacks_changed"]

@@ -19,7 +19,7 @@ func add_effect(effect: Effect) -> void:
     existing_effect.add_stack()
   else:
     effect_added.emit(effect)
-    effect.expired.connect(on_effect_expired.bind(effect))
+    effect.expired.connect(on_effect_expired.bind(effect), CONNECT_ONE_SHOT)
     add_child(effect)
 
 func remove_effect(uid: StringName) -> void:

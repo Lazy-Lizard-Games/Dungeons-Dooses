@@ -11,7 +11,7 @@
 
 [sub_resource type="Resource" id="Resource_isy05"]
 script = ExtResource("2_8ikkg")
-x = 0.0
+x = 15.0
 
 [sub_resource type="Resource" id="Resource_0syu2"]
 script = ExtResource("4_7yjf2")
@@ -24,11 +24,11 @@ script = ExtResource("5_fs34v")
 
 [sub_resource type="Resource" id="Resource_uf4c7"]
 script = ExtResource("2_8ikkg")
-x = 0.0
+x = 0.5
 
 [sub_resource type="Resource" id="Resource_j2kot"]
 script = ExtResource("2_8ikkg")
-x = 0.0
+x = 50.0
 
 [sub_resource type="Resource" id="Resource_b7oyp"]
 script = ExtResource("6_4i05h")

@@ -1,9 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dap4fb6jeula0"]
+[gd_scene load_steps=4 format=3 uid="uid://dap4fb6jeula0"]
 
 [ext_resource type="Texture2D" uid="uid://m4m342o7bmrt" path="res://assets/tiles/tile_sheet_v1.png" id="1_7fqqr"]
-[ext_resource type="PackedScene" uid="uid://c0kpk33phak3x" path="res://interactables/lootbag/lootbag.tscn" id="4_5mxsy"]
-[ext_resource type="Script" path="res://items/item.gd" id="5_5q022"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ki4oe"]
 texture = ExtResource("1_7fqqr")
@@ -415,18 +412,6 @@ terrain_set_0/terrain_0/color = Color(0.717647, 0, 0.25098, 1)
 terrain_set_0/terrain_1/name = "Paths"
 terrain_set_0/terrain_1/color = Color(0.203922, 0.34902, 0.992157, 1)
 sources/0 = SubResource("TileSetAtlasSource_ki4oe")
-
-[sub_resource type="Resource" id="Resource_axge7"]
-script = ExtResource("5_5q022")
-name = "Cheese"
-description = "Stinky!"
-max_stack = 5
-
-[sub_resource type="Resource" id="Resource_3r4wy"]
-script = ExtResource("5_5q022")
-name = "Cheese"
-description = "Stinky!"
-max_stack = 5
 
 [node name="TestMap" type="Node2D"]
 process_mode = 1

@@ -17,13 +17,13 @@ func execute(entity: Entity, scale:=1.0) -> void:
   var strength_multiple := MultiplyNumber.new()
   strength_multiple.x = strength
   var strength_multiplier := ConstantNumber.new()
-  strength_multiplier.constant = entity.generics.get_generic(Enums.GenericType.KnockbackStrengthResistance).get_final_value() * scale
+  strength_multiplier.x = entity.generics.get_generic(Enums.GenericType.KnockbackStrengthResistance).get_final_value() * scale
   strength_multiple.y = strength_multiplier
   # Apply entity knockback duration resistance
   var duration_multiple := MultiplyNumber.new()
   duration_multiple.x = duration
   var duration_multiplier := ConstantNumber.new()
-  duration_multiplier.constant = entity.generics.get_generic(Enums.GenericType.KnockbackDurationResistance).get_final_value() * scale
+  duration_multiplier.x = entity.generics.get_generic(Enums.GenericType.KnockbackDurationResistance).get_final_value() * scale
   duration_multiple.y = duration_multiplier
   # Apply knockback to entity
   entity.velocity_component.set_velocity(direction.get_vector(entity) * strength_multiple.get_number() * scale)
@@ -41,6 +41,6 @@ func execute(entity: Entity, scale:=1.0) -> void:
   var knockback_effect = CooldownEntity.new()
   knockback_effect.action_on_start = add_effect
   knockback_effect.action_on_end = remove_effect
-  knockback_effect.duration = duration_multiple.final_amount()
+  knockback_effect.duration = duration_multiple.get_number()
   knockback_effect.execute(entity, scale)
   
