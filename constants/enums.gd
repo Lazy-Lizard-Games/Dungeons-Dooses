@@ -58,15 +58,12 @@ enum GenericType
 	MovementSpeed,
 	Acceleration,
 	Friction,
-	CastCost, # Deprecated
-	CastTime, # Deprecated
 	AbilityPower,
 	AbilityRange,
 	AbilityDuration,
 	AbilityEfficiency,
 	AbilityCooldown,
 	AbilityCast,
-	RechargeTime, # Deprecated
 	KnockbackStrengthAffinity,
 	KnockbackStrengthResistance,
 	KnockbackDurationAffinity,
@@ -108,4 +105,11 @@ enum ItemActionType
 {
 	OnConsume,
 	OnEquip,
+}
+
+enum AbilityType
+{
+	Attack,
+	Defence,
+	Special,
 }

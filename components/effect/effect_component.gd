@@ -27,6 +27,13 @@ func clear_effects() -> void:
 		effects_cleared.emit()
 		child.queue_free()
 
+func on_effect_expired(effect: ActiveEffect) -> void:
+	if effect in active_effects:
+		active_effects.erase(effect)
+	elif effect in damage_effects:
+		damage_effects.erase(effect)
+	effect.queue_free()
+
 # Passive effect controller --------------------------------------- #
 
 ## Adds a passive effect to be managed by the component.
@@ -95,10 +102,3 @@ func remove_damage_effect(uid: StringName) -> void:
 	damage_effects = damage_effects_copy
 
 # ----------------------------------------------------------------- #
-
-func on_effect_expired(effect: ActiveEffect) -> void:
-	if effect in active_effects:
-		active_effects.erase(effect)
-	elif effect in damage_effects:
-		damage_effects.erase(effect)
-	effect.queue_free()

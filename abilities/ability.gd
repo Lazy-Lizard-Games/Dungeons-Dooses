@@ -8,6 +8,8 @@ signal recharged
 
 ## A human readable name for identifying the ability.
 @export var uid: StringName
+## The type controls which slots the ability may be equipped in for players.
+@export var type: Enums.AbilityType
 ## A short description of what the ability does.
 @export_multiline var description: String
 ## An icon for rendering the ability in UI.
