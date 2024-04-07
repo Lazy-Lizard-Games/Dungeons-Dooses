@@ -7,4 +7,4 @@ extends EntityAction
 @export var uid: StringName
 
 func execute(entity: Entity, _scale:=1.0) -> void:
-	entity.effect_component.remove_effect(uid)
+	entity.effect_component.remove_passive_effect(uid)

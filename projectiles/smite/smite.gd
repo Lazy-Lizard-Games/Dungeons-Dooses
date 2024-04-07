@@ -27,8 +27,7 @@ func _on_hurtbox_component_hurt(hitbox: HitboxComponent):
 		knockback.direction = knockback_direction
 		knockback.execute(entity, hitbox.entity)
 		# Apply smited effect
-		var add_effect = AddActiveEffect.new()
-		add_effect.effect_scene = smite_effect_scene
+		var add_effect = AddActiveEffect.new(smite_effect_scene)
 		add_effect.execute(hitbox.entity)
 		## Tell hitbox it has been hit by entity
 		hitbox.hit_by(entity)

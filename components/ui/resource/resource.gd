@@ -5,7 +5,7 @@ class_name ResourceContainer
 @export var label: Label
 @export var progress_bar: ProgressBar
 
-var effect: PassiveEffect
+var effect: ActiveEffect
 
 func _ready() -> void:
 	label.text = "x" + String.num_int64(effect.stacks)

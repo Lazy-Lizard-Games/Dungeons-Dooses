@@ -940,6 +940,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
+frame = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -957,7 +958,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.8, 0.8)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
