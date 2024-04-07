@@ -18,37 +18,37 @@ var stacks: int
 
 ## Initialises the effect with the affected entity.
 func init(entity_in: Entity) -> void:
-  entity = entity_in
-  stacks = 1
+	entity = entity_in
+	stacks = 1
 
 ## Adds a stack to the effect and restarts the timer.
 func add_stack() -> void:
-  var temp = stacks
-  if stacks == max_stacks:
-    duration_timer.start(duration_time)
-  else:
-    stacks += 1
-  stacks_changed.emit(temp, stacks)
+	var temp = stacks
+	if stacks == max_stacks:
+		duration_timer.start(duration_time)
+	else:
+		stacks += 1
+	stacks_changed.emit(temp, stacks)
 
 ## Applies the effect to the entity.
 func enter() -> void:
-  pass
+	pass
 
 ## Removes the effect from the entity.
 func exit() -> void:
-  pass
+	pass
 
 func _ready() -> void:
-  duration_timer = Timer.new()
-  add_child(duration_timer)
-  duration_timer.timeout.connect(on_duration_timout)
-  duration_timer.start(duration_time)
-  enter()
+	duration_timer = Timer.new()
+	add_child(duration_timer)
+	duration_timer.timeout.connect(on_duration_timout)
+	duration_timer.start(duration_time)
+	enter()
 
 func on_duration_timout() -> void:
-  var temp = stacks
-  stacks -= 1
-  stacks_changed.emit(temp, stacks)
-  if stacks == 0:
-    exit()
-    expired.emit()
+	var temp = stacks
+	stacks -= 1
+	stacks_changed.emit(temp, stacks)
+	if stacks == 0:
+		exit()
+		expired.emit()

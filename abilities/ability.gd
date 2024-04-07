@@ -22,7 +22,7 @@ var caster: Entity
 ## Checks whether the entity can start this ability.
 func can_start(entity: Entity) -> bool:
 	if 'stamina_component' in entity:
-		if entity.stamina_component.current < cost.get_number():
+		if entity.stamina_component.current < (cost.get_number() * entity.generics.get_generic(Enums.GenericType.AbilityEfficiency).get_final_value()):
 			return false
 	if is_recharging or is_casting:
 		return false

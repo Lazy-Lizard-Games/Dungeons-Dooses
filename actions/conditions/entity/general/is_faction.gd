@@ -7,4 +7,4 @@ extends EntityCondition
 @export var faction: Enums.FactionType
 
 func execute(entity: Entity) -> bool:
-  return bool((int(entity.faction == faction) + int(invert)) % 2)
+	return bool((int(entity.faction == faction) + int(invert)) % 2)

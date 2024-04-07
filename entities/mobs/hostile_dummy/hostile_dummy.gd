@@ -6,4 +6,4 @@ extends Mob
 @export var ability: AbilityComponent
 
 func _on_timer_timeout():
-  ability.start_ability(0, self)
+	ability.start_ability(0, self)

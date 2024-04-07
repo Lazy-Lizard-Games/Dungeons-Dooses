@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=122 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/cleave/cleave.tscn" id="23_smxhw"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
+[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="28_hm6s3"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="32_50geu"]
@@ -93,6 +94,14 @@ skills = Array[Resource("res://skills/skill.gd")]([])
 [sub_resource type="Resource" id="Resource_bia7r"]
 script = ExtResource("21_oguyd")
 slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+
+[sub_resource type="Resource" id="Resource_38l6s"]
+script = ExtResource("28_hm6s3")
+x = 5.0
+
+[sub_resource type="Resource" id="Resource_pkmek"]
+script = ExtResource("28_hm6s3")
+x = 7.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(14, 16)
@@ -931,7 +940,6 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -949,7 +957,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.75, 0.75)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1026,8 +1034,10 @@ inventory = SubResource("Resource_bia7r")
 position = Vector2(0, -11)
 
 [node name="Cleave" parent="AbilityComponent" instance=ExtResource("23_smxhw")]
+cost = SubResource("Resource_38l6s")
 
 [node name="Smite" parent="AbilityComponent" instance=ExtResource("32_50geu")]
+cost = SubResource("Resource_pkmek")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)

@@ -58,9 +58,15 @@ enum GenericType
 	MovementSpeed,
 	Acceleration,
 	Friction,
-	CastCost,
-	CastTime,
-	RechargeTime,
+	CastCost, # Deprecated
+	CastTime, # Deprecated
+	AbilityPower,
+	AbilityRange,
+	AbilityDuration,
+	AbilityEfficiency,
+	AbilityCooldown,
+	AbilityCast,
+	RechargeTime, # Deprecated
 	KnockbackStrengthAffinity,
 	KnockbackStrengthResistance,
 	KnockbackDurationAffinity,
