@@ -949,6 +949,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
+frame = 4
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -966,7 +967,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.85, 0.85)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1073,13 +1074,13 @@ hud = NodePath("Hud")
 menu = NodePath("Menu")
 
 [node name="Hud" parent="UI" node_paths=PackedStringArray("health", "stamina", "inventory", "effect_component") instance=ExtResource("24_8v6vb")]
+visible = false
 health = NodePath("../../HealthComponent")
 stamina = NodePath("../../StaminaComponent")
 inventory = NodePath("../../InventoryComponent")
 effect_component = NodePath("../../EffectComponent")
 
 [node name="Menu" parent="UI" instance=ExtResource("36_kpxb1")]
-visible = false
 
 [node name="TabContainer" parent="UI/Menu/MarginContainer/VBoxContainer" index="0"]
 current_tab = 0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhxihp7rd76sl"]
 
-[ext_resource type="Script" path="res://components/ui/menu/button/menu_button.gd" id="1_1h02a"]
+[ext_resource type="Script" path="res://components/ui/menu/components/button/menu_button.gd" id="1_1h02a"]
 
 [node name="MenuButton" type="MarginContainer"]
 anchors_preset = 15

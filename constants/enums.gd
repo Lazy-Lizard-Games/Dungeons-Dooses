@@ -109,7 +109,9 @@ enum ItemActionType
 
 enum AbilityType
 {
-	Attack,
-	Defence,
+	Offensive,
+	Deffensive,
+	Supportive,
+	Dash,
 	Special,
 }

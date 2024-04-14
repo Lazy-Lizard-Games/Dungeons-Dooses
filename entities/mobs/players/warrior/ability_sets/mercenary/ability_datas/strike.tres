@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://safpy1xhyob"]
+
+[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="1_cuky3"]
+[ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="2_66k01"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b6nt8"]
+
+[resource]
+script = ExtResource("2_66k01")
+type = 0
+name = "Strike"
+description = "Unleash a powerful slash with your sword, cutting through all enemies in the area directly in front of you."
+icon = SubResource("PlaceholderTexture2D_b6nt8")
+scene = ExtResource("1_cuky3")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgouhr4m5oelu"]
+
+[ext_resource type="Script" path="res://features/abilities/ability_container/ability_container.gd" id="1_3nubo"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4obwu"]
+
+[node name="AbilityContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3nubo")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer"]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_4obwu")
+
+[connection signal="gui_input" from="AspectRatioContainer/TextureRect" to="." method="_on_texture_rect_gui_input"]
+[connection signal="mouse_entered" from="AspectRatioContainer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]

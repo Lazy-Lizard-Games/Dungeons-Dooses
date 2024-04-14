@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvhbawqbvysa1"]
+
+[ext_resource type="Script" path="res://components/ui/menu/components/ability/ability_menu.gd" id="1_rj7ca"]
+[ext_resource type="Resource" uid="uid://t6kgf7mb5kum" path="res://entities/mobs/players/warrior/ability_sets/mercenary/mercenary.tres" id="2_3mglh"]
+[ext_resource type="PackedScene" uid="uid://ddb7u7evpa05t" path="res://features/abilities/ability_info_container/ability_info.tscn" id="3_hmp1t"]
+
+[node name="AbilityMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rj7ca")
+ability_sets = Array[Resource("res://features/abilities/ability_set_data.gd")]([ExtResource("2_3mglh")])
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="AbilitySets" type="TabContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+tab_alignment = 1
+
+[node name="AbilityInfo" parent="HBoxContainer" instance=ExtResource("3_hmp1t")]
+layout_mode = 2
+size_flags_horizontal = 3
