@@ -1065,8 +1065,10 @@ entity = NodePath("..")
 shape = SubResource("CircleShape2D_ep403")
 debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("hud", "menu")]
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("entity", "hud", "menu")]
+process_mode = 3
 script = ExtResource("24_iql77")
+entity = NodePath("..")
 hud = NodePath("Hud")
 menu = NodePath("Menu")
 
@@ -1079,13 +1081,18 @@ effect_component = NodePath("../../EffectComponent")
 [node name="Menu" parent="UI" instance=ExtResource("36_kpxb1")]
 visible = false
 
-[node name="InventoryMenu" parent="UI/Menu/MarginContainer/TabContainer" index="1" node_paths=PackedStringArray("inventory_component", "entity")]
-inventory_component = NodePath("../../../../../InventoryComponent")
-entity = NodePath("../../../../..")
+[node name="TabContainer" parent="UI/Menu/MarginContainer/VBoxContainer" index="0"]
+current_tab = 0
 
-[node name="SkillMenu" parent="UI/Menu/MarginContainer/TabContainer" index="2" node_paths=PackedStringArray("skill_component", "entity")]
-skill_component = NodePath("../../../../../SkillComponent")
-entity = NodePath("../../../../..")
+[node name="InventoryMenu" parent="UI/Menu/MarginContainer/VBoxContainer/TabContainer" index="1" node_paths=PackedStringArray("inventory_component", "entity")]
+visible = true
+inventory_component = NodePath("../../../../../../InventoryComponent")
+entity = NodePath("../../../../../..")
+
+[node name="SkillMenu" parent="UI/Menu/MarginContainer/VBoxContainer/TabContainer" index="2" node_paths=PackedStringArray("skill_component", "entity")]
+visible = false
+skill_component = NodePath("../../../../../../SkillComponent")
+entity = NodePath("../../../../../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

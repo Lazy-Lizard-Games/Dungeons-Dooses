@@ -62,9 +62,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
 	
-	if Input.is_action_just_pressed("ui_cancel"):
-		$UI.toggle(self)
-	
 	state_component.process_input(event)
 
 func _process(delta: float) -> void:
