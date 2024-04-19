@@ -17,19 +17,19 @@ func _ready():
 
 func cast() -> void:
 	is_casting = true
-	cast_timer.start(cast_time * caster.generics.get_generic(Enums.GenericType.AbilityCast).get_final_value())
+	cast_timer.start(cast_time * entity.generics.get_generic(Enums.GenericType.AbilityCast).get_final_value())
 
 func recharge() -> void:
 	is_recharging = true
-	recharge_timer.start(recharge_time * caster.generics.get_generic(Enums.GenericType.AbilityCooldown).get_final_value())
+	recharge_timer.start(recharge_time * entity.generics.get_generic(Enums.GenericType.AbilityCooldown).get_final_value())
 
 func _on_cast_timer_timeout():
 	is_casting = false
 	casted.emit()
-	var exhaust = ExhaustEntityAction.new(cost.get_number() * caster.generics.get_generic(Enums.GenericType.AbilityEfficiency).get_final_value())
-	exhaust.execute(caster)
+	var exhaust = ExhaustEntityAction.new(cost.get_number() * entity.generics.get_generic(Enums.GenericType.AbilityEfficiency).get_final_value())
+	exhaust.execute(entity)
 	var smite_projectile: Projectile = smite_projectile_scene.instantiate()
-	smite_projectile.init(caster, global_position, caster.looking_at)
+	smite_projectile.init(entity, global_position, entity.looking_at)
 	ProjectileHandler.add_projectile(smite_projectile)
 	recharge()
 

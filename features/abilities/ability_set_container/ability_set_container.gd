@@ -5,8 +5,8 @@ extends MarginContainer
 ##   - View the description of abilities
 ##   - Equip/unequip abilities for use in game
 
-signal ability_clicked(ability: AbilityData, index: MouseButton)
-signal ability_hovered(ability: AbilityData)
+signal ability_clicked(ability: Ability, index: MouseButton)
+signal ability_hovered(ability: Ability)
 
 @export var data: AbilitySetData
 
@@ -23,23 +23,30 @@ func _ready():
 		set_data(data)
 
 func set_data(new_data: AbilitySetData) -> void:
+	data = new_data
+	# Do stuff with colour or whatever...
+
+func set_abilities(abilities: Array) -> void:
 	clear_children([offensive_row, defensive_row, supportive_row, dash_row, special_row])
-	for ability in new_data.abilities:
-		var ability_container: AbilityContainer = ability_container_scene.instantiate()
-		ability_container.ability_data = ability
-		ability_container.clicked.connect(on_ability_clicked.bind(ability))
-		ability_container.hovered.connect(on_ability_hovered.bind(ability))
-		match ability.type:
-			Enums.AbilityType.Offensive:
-				offensive_row.add_child(ability_container)
-			Enums.AbilityType.Deffensive:
-				offensive_row.add_child(ability_container)
-			Enums.AbilityType.Supportive:
-				offensive_row.add_child(ability_container)
-			Enums.AbilityType.Dash:
-				offensive_row.add_child(ability_container)
-			Enums.AbilityType.Special:
-				offensive_row.add_child(ability_container)
+	for ability in abilities:
+		if ability is Ability:
+			if ability.group != data.group:
+				continue
+			var ability_container: AbilityContainer = ability_container_scene.instantiate()
+			ability_container.ability = ability
+			ability_container.clicked.connect(on_ability_clicked.bind(ability))
+			ability_container.hovered.connect(on_ability_hovered.bind(ability))
+			match ability.type:
+				Enums.AbilityType.Attack:
+					offensive_row.add_child(ability_container)
+				Enums.AbilityType.Defend:
+					offensive_row.add_child(ability_container)
+				Enums.AbilityType.Support:
+					offensive_row.add_child(ability_container)
+				Enums.AbilityType.Dash:
+					offensive_row.add_child(ability_container)
+				Enums.AbilityType.Special:
+					offensive_row.add_child(ability_container)
 
 func clear_children(nodes: Array[Control]) -> void:
 	for node in nodes:
@@ -48,8 +55,8 @@ func clear_children(nodes: Array[Control]) -> void:
 		for child in node.get_children():
 			node.remove_child(child)
 
-func on_ability_clicked(button_index: MouseButton, ability: AbilityData) -> void:
+func on_ability_clicked(button_index: MouseButton, ability: Ability) -> void:
 	ability_clicked.emit(ability, button_index)
 
-func on_ability_hovered(ability: AbilityData) -> void:
+func on_ability_hovered(ability: Ability) -> void:
 	ability_hovered.emit(ability)

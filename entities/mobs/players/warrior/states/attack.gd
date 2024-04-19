@@ -9,37 +9,26 @@ extends State
 
 var direction := Vector2.ZERO
 var ability: Ability
-var ability_state: State
 
 func enter() -> void:
-	ability = ability_component.start_ability(entity.get_selected_ability_index(), entity)
-	for child in get_children():
-		if ability.uid == child.name:
-			ability_state = child
-			ability_state.ability = ability
-			ability_state.entity = entity
-			break
-	if !ability_state:
+	ability = ability_component.cast_ability(entity.get_selected_ability_index(), entity)
+	ability.state.entity = entity
+	ability.state.enter()
+	if !ability:
 		state_component.change_state(idle_state)
-		return
-	ability_state.enter()
 
 func exit() -> void:
-	if ability_state:
-		ability_state.exit()
-		ability_state = null
-	if ability:
-		ability = null
+	ability.state.exit()
+	pass
 
 func process_physics(delta: float) -> State:
-	var state = ability_state.process_physics(delta)
+	var state = ability.state.process_physics(delta)
 	return state
 
-func process_input(_event: InputEvent) -> State:
-	# if Input.is_action_just_released("primary"):
-	# 	ability.release(entity)
-	# 	return null
-	# if Input.is_action_just_pressed("secondary"):
-	# 	ability.cancel(entity)
-	# 	return idle_state
-	return null
+func process_frame(delta: float) -> State:
+	var state = ability.state.process_frame(delta)
+	return state
+
+func process_input(event: InputEvent) -> State:
+	var state = ability.state.process_input(event)
+	return state

@@ -21,13 +21,12 @@
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/parry.gd" id="15_718h8"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/rally.gd" id="15_bcfd0"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/cleave/cleave.tscn" id="23_smxhw"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
+[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/cleave/strike_icon.jpg" id="24_tu8lh"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="28_hm6s3"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
@@ -107,6 +106,9 @@ slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, nu
 [sub_resource type="Resource" id="Resource_38l6s"]
 script = ExtResource("28_hm6s3")
 x = 5.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iowx0"]
+size = Vector2(32, 32)
 
 [sub_resource type="Resource" id="Resource_pkmek"]
 script = ExtResource("28_hm6s3")
@@ -949,7 +951,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 4
+frame = 6
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -967,7 +969,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.85, 0.85)
+scale = Vector2(0.8, 0.8)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -997,29 +999,6 @@ ability_component = NodePath("../../AbilityComponent")
 state_component = NodePath("..")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="Cleave" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
-script = ExtResource("11_tkekq")
-idle_state = NodePath("../../Idle")
-animation_tree = NodePath("../../../AnimationTree")
-velocity = NodePath("../../../VelocityComponent")
-
-[node name="Smite" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
-script = ExtResource("13_m05i3")
-idle_state = NodePath("../../Idle")
-animation_tree = NodePath("../../../AnimationTree")
-velocity = NodePath("../../../VelocityComponent")
-
-[node name="Parry" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree")]
-script = ExtResource("15_718h8")
-idle_state = NodePath("../../Idle")
-animation_tree = NodePath("../../../AnimationTree")
-
-[node name="Rally" type="Node" parent="StateComponent/Attack" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
-script = ExtResource("15_bcfd0")
-idle_state = NodePath("../../Idle")
-animation_tree = NodePath("../../../AnimationTree")
-velocity = NodePath("../../../VelocityComponent")
-
 [node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
 friction = SubResource("Resource_ulxov")
 
@@ -1043,11 +1022,27 @@ inventory = SubResource("Resource_bia7r")
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 position = Vector2(0, -11)
 
-[node name="Cleave" parent="AbilityComponent" instance=ExtResource("23_smxhw")]
+[node name="Cleave" parent="AbilityComponent" node_paths=PackedStringArray("state") instance=ExtResource("23_smxhw")]
+icon = ExtResource("24_tu8lh")
 cost = SubResource("Resource_38l6s")
+state = NodePath("CleaveState")
 
-[node name="Smite" parent="AbilityComponent" instance=ExtResource("32_50geu")]
+[node name="CleaveState" type="Node" parent="AbilityComponent/Cleave" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
+script = ExtResource("11_tkekq")
+idle_state = NodePath("../../../StateComponent/Idle")
+animation_tree = NodePath("../../../AnimationTree")
+velocity = NodePath("../../../VelocityComponent")
+
+[node name="Smite" parent="AbilityComponent" node_paths=PackedStringArray("state") instance=ExtResource("32_50geu")]
+icon = SubResource("PlaceholderTexture2D_iowx0")
 cost = SubResource("Resource_pkmek")
+state = NodePath("SmiteState")
+
+[node name="SmiteState" type="Node" parent="AbilityComponent/Smite" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
+script = ExtResource("13_m05i3")
+idle_state = NodePath("../../../StateComponent/Idle")
+animation_tree = NodePath("../../../AnimationTree")
+velocity = NodePath("../../../VelocityComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)
@@ -1095,15 +1090,15 @@ visible = false
 skill_component = NodePath("../../../../../../SkillComponent")
 entity = NodePath("../../../../../..")
 
+[node name="AbilityMenu" parent="UI/Menu/MarginContainer/VBoxContainer/TabContainer" index="3" node_paths=PackedStringArray("ability_component")]
+ability_component = NodePath("../../../../../../AbilityComponent")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_rd62t")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_rd62t")
-}
 tree_root = SubResource("AnimationNodeStateMachine_4pc1n")
 anim_player = NodePath("../AnimationPlayer")
 parameters/cleave/blend_position = Vector2(0.90828, -0.206349)

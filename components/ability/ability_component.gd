@@ -19,10 +19,10 @@ func get_ability(index: int) -> Ability:
 		return null
 	return ability
 
-## Starts the ability at the given index for the caster and restores the started ability.
-func start_ability(index: int, caster: Entity) -> Ability:
+## Attemts to cast the ability at the given index for the entity and returns ability if successful.
+func cast_ability(index: int, entity: Entity) -> Ability:
 	var ability = get_ability(index)
-	if ability and ability.can_start(caster):
-		ability.start(caster)
+	if ability and ability.can_start(entity):
+		ability.start(entity)
 		return ability
 	return null

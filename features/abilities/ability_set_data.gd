@@ -7,7 +7,7 @@ extends Resource
 ##   - Theme
 ##   - Abilities
 
-@export var title: String
+@export var group: Enums.AbilityGroup
+@export var name: String
 @export_multiline var description: String
 @export var theme: Color
-@export var abilities: Array[AbilityData]

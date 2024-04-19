@@ -9,16 +9,16 @@ extends MarginContainer
 signal clicked(button_index: MouseButton)
 signal hovered
 
-@export var ability_data: AbilityData
+@export var ability: Ability
 
-@onready var icon: TextureRect = $AspectRatioContainer/TextureRect
+@onready var icon: TextureRect = $AspectRatioContainer/MarginContainer/TextureRect
 
 func _ready():
-	if ability_data:
-		set_ability_data(ability_data)
+	if ability:
+		set_ability(ability)
 
-func set_ability_data(new_ability_data: AbilityData) -> void:
-	icon.texture = new_ability_data.icon
+func set_ability(new_ability: Ability) -> void:
+	icon.texture = new_ability.icon
 
 func _on_texture_rect_gui_input(event: InputEvent):
 	if event is InputEventMouseButton:

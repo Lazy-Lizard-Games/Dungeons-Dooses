@@ -109,9 +109,16 @@ enum ItemActionType
 
 enum AbilityType
 {
-	Offensive,
-	Deffensive,
-	Supportive,
+	Attack,
+	Defend,
+	Support,
 	Dash,
 	Special,
+}
+
+enum AbilityGroup
+{
+	Mercenary,
+	Crusader,
+	Legionnaire
 }
