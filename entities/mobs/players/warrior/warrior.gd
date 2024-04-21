@@ -1,5 +1,5 @@
-extends Mob
 class_name Player
+extends Mob
 
 @export_category('Player Components')
 @export var state_component: StateComponent
@@ -8,14 +8,10 @@ class_name Player
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
 @export_category('Player Abilities')
-@export var ability_1_index: int
-@export var ability_2_index: int
-@export var ability_3_index: int
-@export var ability_4_index: int
-
-var selected_ability_index = 0:
-	set(s):
-		selected_ability_index = s % 4
+@export var ability_1: Ability
+@export var ability_2: Ability
+@export var ability_3: Ability
+@export var ability_4: Ability
 
 var interactable: InteractableComponent
 
@@ -23,36 +19,24 @@ func _ready() -> void:
 	super()
 	state_component.init(self)
 	stamina_component.attributes = generics
-	ability_1_index = 0
-	ability_2_index = 1
-	ability_3_index = 2
-	ability_4_index = 3
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.pressed:
-			match event.button_index:
-				MOUSE_BUTTON_WHEEL_DOWN:
-					selected_ability_index += 1
-					if selected_ability_index == 4:
-						selected_ability_index = 0
-				MOUSE_BUTTON_WHEEL_UP:
-					selected_ability_index -= 1
-					if selected_ability_index == - 1:
-						selected_ability_index = 3
-	
-	if Input.is_action_just_pressed("select_ability_1"):
-		selected_ability_index = 0
-	
-	if Input.is_action_just_pressed("select_ability_2"):
-		selected_ability_index = 1
-	
-	if Input.is_action_just_pressed("select_ability_3"):
-		selected_ability_index = 2
-	
-	if Input.is_action_just_pressed("select_ability_4"):
-		selected_ability_index = 3
-	
+	if Input.is_action_just_pressed("ability_1") and ability_1 and ability_1.can_start(self):
+		ability_1.start(self)
+		state_component.change_state(ability_1.state)
+
+	if Input.is_action_just_pressed("ability_2") and ability_2 and ability_2.can_start(self):
+		ability_2.start(self)
+		state_component.change_state(ability_2.state)
+
+	if Input.is_action_just_pressed("ability_3") and ability_3 and ability_3.can_start(self):
+		ability_3.start(self)
+		state_component.change_state(ability_3.state)
+
+	if Input.is_action_just_pressed("ability_4") and ability_4 and ability_4.can_start(self):
+		ability_4.start(self)
+		state_component.change_state(ability_4.state)
+
 	if Input.is_action_just_pressed("consumable_1"):
 		inventory_component.inventory.consume_slot(4, self)
 	
@@ -73,10 +57,13 @@ func _physics_process(delta):
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()
 
-func get_selected_ability_index() -> int:
-	match selected_ability_index:
-		0: return ability_1_index
-		1: return ability_2_index
-		2: return ability_3_index
-		3: return ability_4_index
-		_: return - 1
+func _on_ability_menu_equipped_ability_updated(index: int, ability: Ability):
+	match index:
+		0:
+			ability_1 = ability
+		1:
+			ability_2 = ability
+		2:
+			ability_3 = ability
+		3:
+			ability_4 = ability

@@ -33,19 +33,19 @@ var entity: Entity
 func can_start(entity_in: Entity) -> bool:
 	if 'stamina_component' in entity_in:
 		if entity_in.stamina_component.current < (cost.get_number() * entity_in.generics.get_generic(Enums.GenericType.AbilityEfficiency).get_final_value()):
+			failed.emit()
 			return false
 	if is_recharging or is_casting:
+		failed.emit()
 		return false
 	return true
 
 ## Starts the ability and the entity as the entity.
 func start(entity_in: Entity) -> void:
-	entity_in.looking_at = global_position.direction_to(get_global_mouse_position())
-	if !can_start(entity_in):
-		failed.emit()
-		return
-	started.emit()
 	entity = entity_in
+	state.entity = entity
+	entity.looking_at = global_position.direction_to(get_global_mouse_position())
+	started.emit()
 	cast()
 
 ## Casts the ability. Intended to be overridden.

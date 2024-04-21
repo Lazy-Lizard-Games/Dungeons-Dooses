@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://ca4cpxgf56im7"]
+[gd_scene load_steps=23 format=3 uid="uid://ca4cpxgf56im7"]
 
 [ext_resource type="Script" path="res://entities/mobs/hostile_dummy/hostile_dummy.gd" id="1_kohxn"]
 [ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/dummy.png" id="2_fospf"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="7_ta5wl"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="8_q5v5m"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="9_0n6xq"]
+[ext_resource type="Script" path="res://entities/mobs/hostile_dummy/smite_state.gd" id="10_5dn4h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_51w1e"]
 radius = 2.0
@@ -17,6 +18,27 @@ radius = 2.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bse56"]
 radius = 5.0
 height = 18.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ucjeb"]
+animation = &"hit"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6stkq"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n03u1"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xm318"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7ca1"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cfw2u"]
+states/hit/node = SubResource("AnimationNodeAnimation_ucjeb")
+states/hit/position = Vector2(449, 100)
+states/idle/node = SubResource("AnimationNodeAnimation_6stkq")
+states/idle/position = Vector2(323, 100)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_n03u1"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_xm318"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_n7ca1")]
 
 [sub_resource type="Animation" id="Animation_ub0oj"]
 resource_name = "hit"
@@ -57,27 +79,6 @@ _data = {
 "idle": SubResource("Animation_6d0en")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ucjeb"]
-animation = &"hit"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6stkq"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n03u1"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xm318"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_n7ca1"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_cfw2u"]
-states/hit/node = SubResource("AnimationNodeAnimation_ucjeb")
-states/hit/position = Vector2(449, 100)
-states/idle/node = SubResource("AnimationNodeAnimation_6stkq")
-states/idle/position = Vector2(323, 100)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_n03u1"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_xm318"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_n7ca1")]
-
 [node name="HostileDummy" type="CharacterBody2D" node_paths=PackedStringArray("ability", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
 script = ExtResource("1_kohxn")
 ability = NodePath("AbilityComponent")
@@ -113,7 +114,11 @@ scale = Vector2(0.5, 0.5)
 [node name="AbilityComponent" parent="." instance=ExtResource("8_q5v5m")]
 position = Vector2(0, -11)
 
-[node name="Smite" parent="AbilityComponent" instance=ExtResource("9_0n6xq")]
+[node name="Smite" parent="AbilityComponent" node_paths=PackedStringArray("state") instance=ExtResource("9_0n6xq")]
+state = NodePath("SmiteState")
+
+[node name="SmiteState" type="Node" parent="AbilityComponent/Smite"]
+script = ExtResource("10_5dn4h")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("7_ta5wl")]
 entity = NodePath("..")
@@ -123,9 +128,6 @@ position = Vector2(0, -15)
 shape = SubResource("CapsuleShape2D_bse56")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ogysl")
-}
 tree_root = SubResource("AnimationNodeStateMachine_cfw2u")
 anim_player = NodePath("../AnimationPlayer")
 

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://e8ey846e84ho"]
+
+[ext_resource type="PackedScene" uid="uid://cgouhr4m5oelu" path="res://features/abilities/ability_container/ability_container.tscn" id="1_dh1qv"]
+[ext_resource type="Script" path="res://features/abilities/equipped_container/equipped_container.gd" id="1_j31cd"]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j31cd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="AbilityContainer" parent="HBoxContainer" instance=ExtResource("1_dh1qv")]
+layout_mode = 2
+
+[node name="AbilityContainer2" parent="HBoxContainer" instance=ExtResource("1_dh1qv")]
+layout_mode = 2
+
+[node name="AbilityContainer3" parent="HBoxContainer" instance=ExtResource("1_dh1qv")]
+layout_mode = 2
+type = 1
+
+[node name="AbilityContainer4" parent="HBoxContainer" instance=ExtResource("1_dh1qv")]
+layout_mode = 2
+type = 2

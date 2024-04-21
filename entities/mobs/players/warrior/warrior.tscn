@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=122 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -12,7 +12,6 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/cleave.gd" id="11_tkekq"]
@@ -922,7 +921,7 @@ states/walk/position = Vector2(303, 140)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "cleave", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "cleave", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "smite", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "smite", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
 graph_offset = Vector2(20.4717, -83.1757)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "ability_1", "ability_2", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -932,6 +931,8 @@ interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 stamina_component = NodePath("StaminaComponent")
+ability_1 = NodePath("AbilityComponent/Cleave")
+ability_2 = NodePath("AbilityComponent/Smite")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -951,7 +952,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 6
+frame = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -969,34 +970,23 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.775, 0.775)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("move_state", "attack_state", "velocity_component", "ability_component", "animation_tree")]
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("move_state", "velocity_component", "ability_component", "animation_tree")]
 script = ExtResource("3_un612")
 move_state = NodePath("../Move")
-attack_state = NodePath("../Attack")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("idle_state", "attack_state", "velocity_component", "ability_component", "animation_tree")]
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("idle_state", "velocity_component", "ability_component", "animation_tree")]
 script = ExtResource("4_lhxmr")
 idle_state = NodePath("../Idle")
-attack_state = NodePath("../Attack")
 velocity_component = NodePath("../../VelocityComponent")
 ability_component = NodePath("../../AbilityComponent")
-animation_tree = NodePath("../../AnimationTree")
-
-[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("idle_state", "move_state", "velocity_component", "ability_component", "state_component", "animation_tree")]
-script = ExtResource("5_vbqk7")
-idle_state = NodePath("../Idle")
-move_state = NodePath("../Move")
-velocity_component = NodePath("../../VelocityComponent")
-ability_component = NodePath("../../AbilityComponent")
-state_component = NodePath("..")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
@@ -1069,13 +1059,13 @@ hud = NodePath("Hud")
 menu = NodePath("Menu")
 
 [node name="Hud" parent="UI" node_paths=PackedStringArray("health", "stamina", "inventory", "effect_component") instance=ExtResource("24_8v6vb")]
-visible = false
 health = NodePath("../../HealthComponent")
 stamina = NodePath("../../StaminaComponent")
 inventory = NodePath("../../InventoryComponent")
 effect_component = NodePath("../../EffectComponent")
 
 [node name="Menu" parent="UI" instance=ExtResource("36_kpxb1")]
+visible = false
 
 [node name="TabContainer" parent="UI/Menu/MarginContainer/VBoxContainer" index="0"]
 current_tab = 0
@@ -1090,8 +1080,9 @@ visible = false
 skill_component = NodePath("../../../../../../SkillComponent")
 entity = NodePath("../../../../../..")
 
-[node name="AbilityMenu" parent="UI/Menu/MarginContainer/VBoxContainer/TabContainer" index="3" node_paths=PackedStringArray("ability_component")]
+[node name="AbilityMenu" parent="UI/Menu/MarginContainer/VBoxContainer/TabContainer" index="3" node_paths=PackedStringArray("ability_component", "player")]
 ability_component = NodePath("../../../../../../AbilityComponent")
+player = NodePath("../../../../../..")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1107,5 +1098,6 @@ parameters/smite/blend_position = Vector2(0.814013, -1.01058)
 parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
+[connection signal="equipped_ability_updated" from="UI/Menu/MarginContainer/VBoxContainer/TabContainer/AbilityMenu" to="." method="_on_ability_menu_equipped_ability_updated"]
 
 [editable path="UI/Menu"]

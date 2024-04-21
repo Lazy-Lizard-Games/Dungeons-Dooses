@@ -11,5 +11,9 @@ func _ready():
 		set_ability(ability)
 
 func set_ability(new_ability: Ability) -> void:
-	name_label.text = new_ability.name
-	description_label.text = new_ability.description
+	if new_ability:
+		name_label.text = new_ability.name
+		description_label.text = new_ability.description
+	else:
+		name_label.text = "No ability equipped... yet"
+		description_label.text = "Select an ability of the correct type and place it in this slot to equip it. Once equipped, it will be usable when in combat or exploring."
