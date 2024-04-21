@@ -62,6 +62,7 @@ size_flags_horizontal = 3
 visible = false
 modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 2
+mouse_filter = 2
 
 [connection signal="container_clicked" from="HBoxContainer/VBoxContainer/EquippedSet" to="." method="_on_equipped_set_container_clicked"]
 [connection signal="container_hovered" from="HBoxContainer/VBoxContainer/EquippedSet" to="." method="_on_equipped_set_container_hovered"]

@@ -21,22 +21,6 @@ func _ready() -> void:
 	stamina_component.attributes = generics
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ability_1") and ability_1 and ability_1.can_start(self):
-		ability_1.start(self)
-		state_component.change_state(ability_1.state)
-
-	if Input.is_action_just_pressed("ability_2") and ability_2 and ability_2.can_start(self):
-		ability_2.start(self)
-		state_component.change_state(ability_2.state)
-
-	if Input.is_action_just_pressed("ability_3") and ability_3 and ability_3.can_start(self):
-		ability_3.start(self)
-		state_component.change_state(ability_3.state)
-
-	if Input.is_action_just_pressed("ability_4") and ability_4 and ability_4.can_start(self):
-		ability_4.start(self)
-		state_component.change_state(ability_4.state)
-
 	if Input.is_action_just_pressed("consumable_1"):
 		inventory_component.inventory.consume_slot(4, self)
 	
@@ -52,7 +36,25 @@ func _process(delta: float) -> void:
 	state_component.process_frame(delta)
 
 func _physics_process(delta):
+	if Input.is_action_pressed("ability_1"):
+		try_start_ability(ability_1)
+
+	if Input.is_action_pressed("ability_2"):
+		try_start_ability(ability_2)
+
+	if Input.is_action_pressed("ability_3"):
+		try_start_ability(ability_3)
+
+	if Input.is_action_pressed("ability_4"):
+		try_start_ability(ability_4)
+
 	state_component.process_physics(delta)
+
+func try_start_ability(ability: Ability) -> void:
+	if can_attack and ability and ability.can_start(self):
+		can_attack = false
+		ability.start(self)
+		state_component.change_state(ability.state)
 
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()

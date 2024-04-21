@@ -20,6 +20,10 @@ func _ready():
 	if player:
 		equipped_set_container.set_equipped_set(player)
 
+func _process(_delta):
+	if grabbed_ability_container.visible:
+		grabbed_ability_container.global_position = get_global_mouse_position()
+
 func set_ability_sets(new_ability_sets) -> void:
 	for child in ability_sets_container.get_children():
 		ability_sets_container.remove_child(child)
