@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_rrdij"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="7_ta5wl"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="8_q5v5m"]
-[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="9_0n6xq"]
+[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/stab/stab.tscn" id="9_0n6xq"]
 [ext_resource type="Script" path="res://entities/mobs/hostile_dummy/smite_state.gd" id="10_5dn4h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_51w1e"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=122 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=114 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -14,22 +14,17 @@
 [ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/cleave.gd" id="11_tkekq"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/smite.gd" id="13_m05i3"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
-[ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/cleave/cleave.tscn" id="23_smxhw"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
-[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/cleave/strike_icon.jpg" id="24_tu8lh"]
-[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="28_hm6s3"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
-[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="32_50geu"]
+[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/stab/stab.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
 
@@ -101,17 +96,6 @@ skills = Array[Resource("res://skills/skill.gd")]([])
 [sub_resource type="Resource" id="Resource_bia7r"]
 script = ExtResource("21_oguyd")
 slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
-
-[sub_resource type="Resource" id="Resource_38l6s"]
-script = ExtResource("28_hm6s3")
-x = 5.0
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_iowx0"]
-size = Vector2(32, 32)
-
-[sub_resource type="Resource" id="Resource_pkmek"]
-script = ExtResource("28_hm6s3")
-x = 7.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(14, 16)
@@ -921,7 +905,7 @@ states/walk/position = Vector2(303, 140)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "cleave", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "cleave", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "smite", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "smite", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
 graph_offset = Vector2(20.4717, -83.1757)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "ability_1", "ability_2", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "ability_1", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -931,8 +915,7 @@ interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 stamina_component = NodePath("StaminaComponent")
-ability_1 = NodePath("AbilityComponent/Cleave")
-ability_2 = NodePath("AbilityComponent/Smite")
+ability_1 = NodePath("AbilityComponent/Stab")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -952,7 +935,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 1
+frame = 5
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -970,7 +953,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.825, 0.825)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1012,27 +995,10 @@ inventory = SubResource("Resource_bia7r")
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 position = Vector2(0, -11)
 
-[node name="Cleave" parent="AbilityComponent" node_paths=PackedStringArray("state") instance=ExtResource("23_smxhw")]
-icon = ExtResource("24_tu8lh")
-cost = SubResource("Resource_38l6s")
-state = NodePath("CleaveState")
-
-[node name="CleaveState" type="Node" parent="AbilityComponent/Cleave" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
-script = ExtResource("11_tkekq")
-idle_state = NodePath("../../../StateComponent/Idle")
-animation_tree = NodePath("../../../AnimationTree")
-velocity = NodePath("../../../VelocityComponent")
-
-[node name="Smite" parent="AbilityComponent" node_paths=PackedStringArray("state") instance=ExtResource("32_50geu")]
-icon = SubResource("PlaceholderTexture2D_iowx0")
-cost = SubResource("Resource_pkmek")
-state = NodePath("SmiteState")
-
-[node name="SmiteState" type="Node" parent="AbilityComponent/Smite" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity")]
-script = ExtResource("13_m05i3")
-idle_state = NodePath("../../../StateComponent/Idle")
-animation_tree = NodePath("../../../AnimationTree")
-velocity = NodePath("../../../VelocityComponent")
+[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity") instance=ExtResource("32_50geu")]
+idle_state = NodePath("../../StateComponent/Idle")
+animation_tree = NodePath("../../AnimationTree")
+velocity = NodePath("../../VelocityComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)

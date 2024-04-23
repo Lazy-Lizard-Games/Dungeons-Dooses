@@ -3,6 +3,10 @@ extends Node2D
 
 signal updated(index: int, ability: Ability)
 
+func init(entity: Entity) -> void:
+	for child in get_children():
+		child.entity = entity
+
 ## Assigns the ability to the given index or the end if out of range.
 func set_ability(index: int, ability: Ability) -> void:
 	if get_child_count() < index:
@@ -18,11 +22,3 @@ func get_ability(index: int) -> Ability:
 	if !ability:
 		return null
 	return ability
-
-## Attemts to cast the ability at the given index for the entity and returns ability if successful.
-func cast_ability(index: int, entity: Entity) -> Ability:
-	var ability = get_ability(index)
-	if ability and ability.can_start(entity):
-		ability.start(entity)
-		return ability
-	return null

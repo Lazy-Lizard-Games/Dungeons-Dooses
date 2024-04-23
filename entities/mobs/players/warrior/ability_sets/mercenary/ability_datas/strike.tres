@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://safpy1xhyob"]
 
-[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/smite/smite.tscn" id="1_cuky3"]
+[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/stab/stab.tscn" id="1_cuky3"]
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="2_66k01"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b6nt8"]

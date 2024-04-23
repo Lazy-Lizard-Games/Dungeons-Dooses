@@ -17,6 +17,7 @@ var interactable: InteractableComponent
 
 func _ready() -> void:
 	super()
+	ability_component.init(self)
 	state_component.init(self)
 	stamina_component.attributes = generics
 
@@ -37,24 +38,26 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	if Input.is_action_pressed("ability_1"):
-		try_start_ability(ability_1)
+		start_ability(ability_1)
 
 	if Input.is_action_pressed("ability_2"):
-		try_start_ability(ability_2)
+		start_ability(ability_2)
 
 	if Input.is_action_pressed("ability_3"):
-		try_start_ability(ability_3)
+		start_ability(ability_3)
 
 	if Input.is_action_pressed("ability_4"):
-		try_start_ability(ability_4)
+		start_ability(ability_4)
 
 	state_component.process_physics(delta)
 
-func try_start_ability(ability: Ability) -> void:
-	if can_attack and ability and ability.can_start(self):
-		can_attack = false
-		ability.start(self)
-		state_component.change_state(ability.state)
+func start_ability(ability: Ability) -> void:
+	if ability:
+		if ability.state == Enums.AbilityState.Ready:
+			if stamina_component.current > (ability.cost.get_number() * generics.ability_efficiency.get_final_value()):
+				state_component.change_state(ability)
+				return
+		ability.failed.emit()
 
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()

@@ -122,3 +122,11 @@ enum AbilityGroup
 	Crusader,
 	Legionnaire
 }
+
+enum AbilityState
+{
+	Ready,
+	Charging,
+	Casting,
+	Coodown
+}
