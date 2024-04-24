@@ -1,9 +1,9 @@
 extends Ability
 
-## Thrusts the sword forward, piercing hit enemies and reduces their physical resistance.
+## Sweeps the sword in frnot of you, cleaving all those foolish enough to stand too close.
 
 ## The projectile that will be created when the ability is casted.
-@export var stab_projectile_scene: PackedScene
+@export var strike_projectile_scene: PackedScene
 ## The time in seconds it takes to charge the ability.
 @export var charge_time: float
 ## The time in seconds it takes to charge the ability.
@@ -39,8 +39,8 @@ func process_physics(_delta: float) -> State:
 	return null
 
 func enter() -> void:
-	animation_tree['parameters/playback'].travel('stab')
-	animation_tree['parameters/stab/blend_position'] = entity.global_position.direction_to(entity.get_global_mouse_position())
+	animation_tree['parameters/playback'].travel('strike')
+	animation_tree['parameters/strike/blend_position'] = entity.global_position.direction_to(entity.get_global_mouse_position())
 	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 	start()
 
@@ -63,13 +63,10 @@ func _on_started():
 func _on_charged():
 	var exhaust = ExhaustEntityAction.new(cost.get_number() * entity.generics.get_generic(Enums.GenericType.AbilityEfficiency).get_final_value())
 	exhaust.execute(entity)
-	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
-	stab_projectile.init(entity, entity.global_position, entity.global_position.direction_to(entity.get_global_mouse_position()))
-	ProjectileHandler.add_projectile(stab_projectile)
+	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
+	strike_projectile.init(entity, entity.global_position, entity.global_position.direction_to(entity.get_global_mouse_position()))
+	ProjectileHandler.add_projectile(strike_projectile)
 
 func _on_casted():
 	recharge_timer.start(recharge_time * entity.generics.get_generic(Enums.GenericType.AbilityCooldown).get_final_value())
 	is_finished = true
-
-func _on_recharged():
-	print('Recharged!')

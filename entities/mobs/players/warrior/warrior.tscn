@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=115 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
+[ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/strike/strike.tscn" id="23_413do"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
@@ -707,30 +708,6 @@ _data = {
 "walk_up": SubResource("Animation_yqcgj")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r627x"]
-animation = &"cleave_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nx640"]
-animation = &"cleave_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3khlr"]
-animation = &"cleave_down"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_irsdb"]
-animation = &"cleave_left"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2ovn1"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_r627x")
-blend_point_0/pos = Vector2(0, -1)
-blend_point_1/node = SubResource("AnimationNodeAnimation_nx640")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_3khlr")
-blend_point_2/pos = Vector2(0, 1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_irsdb")
-blend_point_3/pos = Vector2(-1, 0)
-blend_mode = 1
-sync = true
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5fw13"]
 animation = &"idle"
 
@@ -833,6 +810,30 @@ blend_point_7/pos = Vector2(0.8, 0.8)
 blend_mode = 1
 sync = true
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_r627x"]
+animation = &"cleave_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nx640"]
+animation = &"cleave_right"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3khlr"]
+animation = &"cleave_down"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_irsdb"]
+animation = &"cleave_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_2ovn1"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_r627x")
+blend_point_0/pos = Vector2(0, -1)
+blend_point_1/node = SubResource("AnimationNodeAnimation_nx640")
+blend_point_1/pos = Vector2(1, 0)
+blend_point_2/node = SubResource("AnimationNodeAnimation_3khlr")
+blend_point_2/pos = Vector2(0, 1)
+blend_point_3/node = SubResource("AnimationNodeAnimation_irsdb")
+blend_point_3/pos = Vector2(-1, 0)
+blend_mode = 1
+sync = true
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ue31t"]
 animation = &"walk_up"
 
@@ -890,22 +891,22 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4pc1n"]
 states/Start/position = Vector2(147, 44)
-states/cleave/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
-states/cleave/position = Vector2(483, -48)
 states/idle/node = SubResource("AnimationNodeAnimation_5fw13")
 states/idle/position = Vector2(303, 44)
 states/parry/node = SubResource("AnimationNodeStateMachine_re2mg")
 states/parry/position = Vector2(303, -48)
 states/rally/node = SubResource("AnimationNodeAnimation_6wonm")
 states/rally/position = Vector2(147, -48)
-states/smite/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
-states/smite/position = Vector2(483, 44)
+states/stab/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
+states/stab/position = Vector2(483, 44)
+states/strike/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
+states/strike/position = Vector2(483, -48)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_jkldm")
 states/walk/position = Vector2(303, 140)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "cleave", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "cleave", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "smite", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "smite", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
 graph_offset = Vector2(20.4717, -83.1757)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "ability_1", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "ability_1", "ability_2", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -916,6 +917,7 @@ inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 stamina_component = NodePath("StaminaComponent")
 ability_1 = NodePath("AbilityComponent/Stab")
+ability_2 = NodePath("AbilityComponent/Strike")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -935,7 +937,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 5
+frame = 7
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -953,7 +955,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.825, 0.825)
+scale = Vector2(0.775, 0.775)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -996,6 +998,11 @@ inventory = SubResource("Resource_bia7r")
 position = Vector2(0, -11)
 
 [node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity") instance=ExtResource("32_50geu")]
+idle_state = NodePath("../../StateComponent/Idle")
+animation_tree = NodePath("../../AnimationTree")
+velocity = NodePath("../../VelocityComponent")
+
+[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity") instance=ExtResource("23_413do")]
 idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
@@ -1058,9 +1065,9 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_4pc1n")
 anim_player = NodePath("../AnimationPlayer")
-parameters/cleave/blend_position = Vector2(0.90828, -0.206349)
 parameters/parry/finish/blend_position = Vector2(0, 0)
-parameters/smite/blend_position = Vector2(0.814013, -1.01058)
+parameters/stab/blend_position = Vector2(0.814013, -1.01058)
+parameters/strike/blend_position = Vector2(0.90828, -0.206349)
 parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
