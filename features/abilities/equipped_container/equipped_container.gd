@@ -15,10 +15,10 @@ func _ready():
 
 func set_equipped_set(player: Player) -> void:
 	var ability_containers = set_container.get_children() as Array[AbilityContainer]
-	ability_containers[0].set_ability(player.ability_1)
-	ability_containers[1].set_ability(player.ability_2)
-	ability_containers[2].set_ability(player.ability_3)
-	ability_containers[3].set_ability(player.ability_4)
+	ability_containers[0].set_ability(player.primary)
+	ability_containers[1].set_ability(player.secondary)
+	ability_containers[2].set_ability(player.defence)
+	ability_containers[3].set_ability(player.support)
 
 func on_ability_container_clicked(button_index: MouseButton, ability_container: AbilityContainer) -> void:
 	container_clicked.emit(button_index, ability_container)

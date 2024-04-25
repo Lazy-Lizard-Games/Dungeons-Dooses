@@ -62,8 +62,9 @@ enum GenericType
 	AbilityRange,
 	AbilityDuration,
 	AbilityEfficiency,
-	AbilityCooldown,
-	AbilityCast,
+	CastRate,
+	ChargeRate,
+	RefreshRate,
 	KnockbackStrengthAffinity,
 	KnockbackStrengthResistance,
 	KnockbackDurationAffinity,
@@ -128,5 +129,5 @@ enum AbilityState
 	Ready,
 	Charging,
 	Casting,
-	Coodown
+	Refreshing,
 }

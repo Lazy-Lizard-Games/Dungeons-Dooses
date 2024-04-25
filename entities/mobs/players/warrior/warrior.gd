@@ -8,12 +8,46 @@ extends Mob
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
 @export_category('Player Abilities')
-@export var ability_1: Ability
-@export var ability_2: Ability
-@export var ability_3: Ability
-@export var ability_4: Ability
+@export var primary: Ability
+@export var secondary: Ability
+@export var defence: Ability
+@export var support: Ability
 
 var interactable: InteractableComponent
+
+## Fetches the ability associated with the index, if any.
+func get_ability(index: int) -> Ability:
+	match index:
+		0:
+			return primary
+		1:
+			return secondary
+		2:
+			return defence
+		3:
+			return support
+		_:
+			return null
+
+func set_ability(index: int, ability: Ability) -> void:
+	match index:
+		0:
+			primary = ability
+		1:
+			secondary = ability
+		2:
+			defence = ability
+		3:
+			support = ability
+
+func start_ability(ability: Ability) -> void:
+	if ability:
+		if ability.state == Enums.AbilityState.Ready:
+			if stamina_component.current > (ability.cost * generics.ability_efficiency.get_final_value()):
+				can_attack = false
+				state_component.change_state(ability)
+				return
+		ability.failed.emit()
 
 func _ready() -> void:
 	super()
@@ -37,38 +71,14 @@ func _process(delta: float) -> void:
 	state_component.process_frame(delta)
 
 func _physics_process(delta):
-	if Input.is_action_pressed("ability_1"):
-		start_ability(ability_1)
-
-	if Input.is_action_pressed("ability_2"):
-		start_ability(ability_2)
-
-	if Input.is_action_pressed("ability_3"):
-		start_ability(ability_3)
-
-	if Input.is_action_pressed("ability_4"):
-		start_ability(ability_4)
-
 	state_component.process_physics(delta)
-
-func start_ability(ability: Ability) -> void:
-	if ability:
-		if ability.state == Enums.AbilityState.Ready:
-			if stamina_component.current > (ability.cost.get_number() * generics.ability_efficiency.get_final_value()):
-				state_component.change_state(ability)
-				return
-		ability.failed.emit()
 
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()
 
 func _on_ability_menu_equipped_ability_updated(index: int, ability: Ability):
-	match index:
-		0:
-			ability_1 = ability
-		1:
-			ability_2 = ability
-		2:
-			ability_3 = ability
-		3:
-			ability_4 = ability
+	set_ability(index, ability)
+
+func _on_ability_pressed(index: int):
+	if can_attack:
+		start_ability(get_ability(index))

@@ -906,7 +906,7 @@ states/walk/position = Vector2(303, 140)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
 graph_offset = Vector2(20.4717, -83.1757)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "ability_1", "ability_2", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "primary", "secondary", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -916,8 +916,8 @@ interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 stamina_component = NodePath("StaminaComponent")
-ability_1 = NodePath("AbilityComponent/Stab")
-ability_2 = NodePath("AbilityComponent/Strike")
+primary = NodePath("AbilityComponent/Stab")
+secondary = NodePath("AbilityComponent/Strike")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 id = "Warrior"
@@ -929,7 +929,7 @@ effect_component = NodePath("EffectComponent")
 generics = SubResource("Resource_q3a8u")
 affinities = SubResource("Resource_8xuyt")
 resistances = SubResource("Resource_mw36u")
-position_offset = Vector2(0, -10)
+position_offset = Vector2(0, -15)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
@@ -937,7 +937,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 6
+frame = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -955,7 +955,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.775, 0.775)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1071,6 +1071,8 @@ parameters/stab/blend_position = Vector2(0.814013, -1.01058)
 parameters/strike/blend_position = Vector2(0.90828, -0.206349)
 parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 
+[connection signal="ability_pressed" from="StateComponent/Idle" to="." method="_on_ability_pressed"]
+[connection signal="ability_pressed" from="StateComponent/Move" to="." method="_on_ability_pressed"]
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
 [connection signal="equipped_ability_updated" from="UI/Menu/MarginContainer/VBoxContainer/TabContainer/AbilityMenu" to="." method="_on_ability_menu_equipped_ability_updated"]
 

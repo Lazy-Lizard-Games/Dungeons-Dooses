@@ -12,8 +12,9 @@ class_name GenericAttributes
 @export var ability_range = Attribute.new(1, 1, 0, pow(2, 31) - 1)
 @export var ability_duration = Attribute.new(1, 1, 0, pow(2, 31) - 1)
 @export var ability_efficiency = Attribute.new(1, 1, 0, pow(2, 31) - 1)
-@export var ability_cooldown = Attribute.new(1, 1, 0, pow(2, 31) - 1)
-@export var ability_cast = Attribute.new(1, 1, 0, pow(2, 31) - 1)
+@export var charge_rate = Attribute.new(1, 1, 0, pow(2, 31) - 1)
+@export var cast_rate = Attribute.new(1, 1, 0, pow(2, 31) - 1)
+@export var refresh_rate = Attribute.new(1, 1, 0, pow(2, 31) - 1)
 @export var knockback_strength_affinity = Attribute.new(1, 1, 0, pow(2, 31) - 1)
 @export var knockback_strength_resistance = Attribute.new(1, 1, 0, pow(2, 31) - 1)
 @export var knockback_duration_affinity = Attribute.new(1, 1, 0, pow(2, 31) - 1)
@@ -33,10 +34,12 @@ func get_generic(type: Enums.GenericType) -> Attribute:
 			return movement_speed
 		Enums.GenericType.Acceleration:
 			return acceleration
-		Enums.GenericType.AbilityCast:
-			return ability_cast
-		Enums.GenericType.AbilityCooldown:
-			return ability_cooldown
+		Enums.GenericType.ChargeRate:
+			return charge_rate
+		Enums.GenericType.CastRate:
+			return cast_rate
+		Enums.GenericType.RefreshRate:
+			return refresh_rate
 		Enums.GenericType.AbilityEfficiency:
 			return ability_efficiency
 		Enums.GenericType.AbilityPower:
