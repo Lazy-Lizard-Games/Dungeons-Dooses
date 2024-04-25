@@ -19,22 +19,18 @@ func process_input(_event: InputEvent) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	if Input.is_action_pressed("ability_1"):
-		ability_pressed.emit(0)
-
-	if Input.is_action_pressed("ability_2"):
-		ability_pressed.emit(1)
-
-	if Input.is_action_pressed("ability_3"):
-		ability_pressed.emit(2)
-
-	if Input.is_action_pressed("ability_4"):
-		ability_pressed.emit(3)
-		
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	if direction.length() == 0:
 		return idle_state
 	velocity_component.accelerate_in_direction(direction)
 	velocity_component.move(entity)
 	animation_tree['parameters/walk/blend_position'] = direction.normalized()
+	if Input.is_action_pressed("ability_1"):
+		ability_pressed.emit(0)
+	elif Input.is_action_pressed("ability_2"):
+		ability_pressed.emit(1)
+	elif Input.is_action_pressed("ability_3"):
+		ability_pressed.emit(2)
+	elif Input.is_action_pressed("ability_4"):
+		ability_pressed.emit(3)
 	return null

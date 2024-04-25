@@ -31,34 +31,43 @@ signal readied
 ## Minimum stamina required to start this ability.
 @export var cost: int
 ## The time in seconds taken to charge the ability.
-@export var charging_time: int
+@export var charging_time: float
 ## The time in seconds taken to cast the ability.
-@export var casting_time: int
+@export var casting_time: float
 ## The time in seconds taken to refresh the ability
-@export var refreshing_time: int
+@export var refreshing_time: float
 
 ## The abilities current state.
 var state: Enums.AbilityState = Enums.AbilityState.Ready
 ## Counter used for timing the charging.
-var charging_timer: int = 0
+var charging_timer: float = 0
 ## Counter used for timing the casting.
-var casting_timer: int = 0
+var casting_timer: float = 0
 ## Counter used for timing the refreshing.
-var refreshing_timer: int = 0
+var refreshing_timer: float = 0
+## Boolean to check if ability is charging.
+var is_charging: bool = false
+## Boolean to check if ability is casting.
+var is_casting: bool = false
+## Boolean to check if ability is refreshing.
+var is_refreshing: bool = false
 
 ## Sets the the ability as charging.
 func charge() -> void:
 	state = Enums.AbilityState.Charging
+	is_charging = true
 	charging.emit()
 
 ## Sets the ability as casting.
 func cast() -> void:
 	state = Enums.AbilityState.Casting
+	is_casting = true
 	casting.emit()
 
 ## Sets the ability as refreshing.
 func refresh() -> void:
 	state = Enums.AbilityState.Refreshing
+	is_refreshing = true
 	refreshing.emit()
 
 func ready() -> void:
@@ -66,19 +75,21 @@ func ready() -> void:
 	readied.emit()
 
 func _process(delta):
-	match state:
-		Enums.AbilityState.Charging:
-			charging_timer += delta * entity.generics.charge_speed
+	if is_charging:
+			charging_timer += delta * entity.generics.charge_rate.get_final_value()
 			if charging_timer > charging_time:
-				charged.emit()
+				is_charging = false
 				charging_timer = 0
-		Enums.AbilityState.Casting:
-			casting_timer += delta * entity.generics.cast_speed
+				charged.emit()
+	if is_casting:
+			casting_timer += delta * entity.generics.cast_rate.get_final_value()
 			if casting_timer > casting_time:
-				casted.emit()
+				is_casting = false
 				casting_timer = 0
-		Enums.AbilityState.Refreshing:
-			refreshing_timer += delta * entity.generics.refresh_rate
+				casted.emit()
+	if is_refreshing:
+			refreshing_timer += delta * entity.generics.refresh_rate.get_final_value()
 			if refreshing_timer > refreshing_time:
-				refreshed.emit()
+				is_refreshing = false
 				refreshing_timer = 0
+				refreshed.emit()

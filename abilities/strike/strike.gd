@@ -5,9 +5,6 @@ extends Ability
 ## The projectile that will be created when the ability is casted.
 @export var strike_projectile_scene: PackedScene
 ## The time in seconds it takes to charge the ability.
-@export var charge_time: float
-## The time in seconds it takes to charge the ability.
-@export var recharge_time: float
 ## State to move to when ability is casted.
 @export var idle_state: State
 ## Animation tree which will play the animation.
@@ -18,6 +15,12 @@ extends Ability
 var is_finished := false
 var direction := Vector2.ZERO
 
+func enter() -> void:
+	animation_tree['parameters/playback'].travel('strike')
+	animation_tree['parameters/strike/blend_position'] = entity.looking_at
+	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
+	cast()
+
 func process_physics(_delta: float) -> State:
 	if is_finished:
 		return idle_state
@@ -25,12 +28,6 @@ func process_physics(_delta: float) -> State:
 	velocity.accelerate_in_direction(direction * 0.1)
 	velocity.move(entity)
 	return null
-
-func enter() -> void:
-	animation_tree['parameters/playback'].travel('strike')
-	animation_tree['parameters/strike/blend_position'] = entity.looking_at
-	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
-	cast()
 
 func exit() -> void:
 	is_finished = false

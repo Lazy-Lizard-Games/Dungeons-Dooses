@@ -1,23 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjytli5qnj0cq"]
+[gd_scene load_steps=4 format=3 uid="uid://cjytli5qnj0cq"]
 
 [ext_resource type="Script" path="res://abilities/strike/strike.gd" id="1_o1y1c"]
 [ext_resource type="PackedScene" uid="uid://01mfloxbcrcs" path="res://projectiles/cleave/cleave.tscn" id="2_jgwcj"]
-[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_u6dg8"]
 [ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/strike/strike_icon.jpg" id="3_dpc1j"]
-
-[sub_resource type="Resource" id="Resource_incxj"]
-script = ExtResource("2_u6dg8")
-x = 10.0
 
 [node name="Strike" type="Node"]
 script = ExtResource("1_o1y1c")
 strike_projectile_scene = ExtResource("2_jgwcj")
-charge_time = 0.15
-recharge_time = 0.5
 description = "Swing your sword at your enemies, cleaving all who may foolishly come too close."
 icon = ExtResource("3_dpc1j")
-cost = SubResource("Resource_incxj")
+casting_time = 0.25
+refreshing_time = 0.15
 
 [connection signal="casted" from="." to="." method="_on_casted"]
-[connection signal="charged" from="." to="." method="_on_charged"]
-[connection signal="started" from="." to="." method="_on_started"]
+[connection signal="refreshed" from="." to="." method="_on_refreshed"]

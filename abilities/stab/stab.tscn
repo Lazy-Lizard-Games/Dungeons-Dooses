@@ -9,6 +9,9 @@ script = ExtResource("1_wrlun")
 stab_projectile_scene = ExtResource("2_5dq1y")
 description = "Thrust your sword, skewering enemies hit and reducing their physical resistance."
 icon = ExtResource("3_12051")
+cost = 15
+casting_time = 0.5
+refreshing_time = 0.25
 
 [connection signal="casted" from="." to="." method="_on_casted"]
 [connection signal="refreshed" from="." to="." method="_on_refreshed"]

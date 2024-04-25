@@ -30,7 +30,6 @@ func process_physics(_delta: float) -> State:
 
 func exit() -> void:
 	is_finished = false
-	animation_tree.animation_finished.disconnect(_on_animation_finished)
 	refresh()
 
 func _on_animation_finished(_animation) -> void:
