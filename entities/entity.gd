@@ -34,10 +34,16 @@ signal consume(actor: Entity, item: int)
 @export var affinities: AffinityAttributes = AffinityAttributes.new()
 ## Resistance attributes for the entity.
 @export var resistances: ResistanceAttributes = ResistanceAttributes.new()
-## Off sets the "position" of the entity. (for use with position vector action)
+## Used to offset the entities position to match the sprite more accurately.
 @export var position_offset: Vector2 = Vector2.ZERO
-## Direction the entity is looking
-var looking_at := Vector2.RIGHT
+## The player's centre position found by adding `position_offset` to `global_position`.
+var centre_position := Vector2.ZERO:
+	get:
+		return global_position + position_offset
+## The direction to mouse position from the entity's `centre_position`.
+var looking_at := Vector2.ZERO:
+	get:
+		return centre_position.direction_to(get_global_mouse_position())
 ## Controls attack inputs
 var can_attack := true
 

@@ -40,7 +40,7 @@ func process_physics(_delta: float) -> State:
 
 func enter() -> void:
 	animation_tree['parameters/playback'].travel('strike')
-	animation_tree['parameters/strike/blend_position'] = entity.global_position.direction_to(entity.get_global_mouse_position())
+	animation_tree['parameters/strike/blend_position'] = entity.looking_at
 	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 	start()
 
@@ -58,15 +58,15 @@ func _on_recharge_timer_timeout():
 	recharge()
 
 func _on_started():
-	charge_timer.start(charge_time * entity.generics.get_generic(Enums.GenericType.AbilityCast).get_final_value())
+	charge_timer.start(charge_time * entity.generics.ability_cast.get_final_value())
 
 func _on_charged():
-	var exhaust = ExhaustEntityAction.new(cost.get_number() * entity.generics.get_generic(Enums.GenericType.AbilityEfficiency).get_final_value())
+	var exhaust = ExhaustEntityAction.new(cost.get_number() * entity.generics.ability_efficiency.get_final_value())
 	exhaust.execute(entity)
 	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
-	strike_projectile.init(entity, entity.global_position, entity.global_position.direction_to(entity.get_global_mouse_position()))
+	strike_projectile.init(entity, entity.centre_position, entity.looking_at)
 	ProjectileHandler.add_projectile(strike_projectile)
 
 func _on_casted():
-	recharge_timer.start(recharge_time * entity.generics.get_generic(Enums.GenericType.AbilityCooldown).get_final_value())
+	recharge_timer.start(recharge_time * entity.generics.ability_cooldown.get_final_value())
 	is_finished = true

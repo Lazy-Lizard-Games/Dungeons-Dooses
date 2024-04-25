@@ -937,7 +937,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 7
+frame = 6
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -955,7 +955,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.8, 0.8)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -1003,6 +1003,7 @@ animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 
 [node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity") instance=ExtResource("23_413do")]
+charge_time = 0.35
 idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
