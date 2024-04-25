@@ -78,7 +78,3 @@ func _on_interactor_component_interactables_updated() -> void:
 
 func _on_ability_menu_equipped_ability_updated(index: int, ability: Ability):
 	set_ability(index, ability)
-
-func _on_ability_pressed(index: int):
-	if can_attack:
-		start_ability(get_ability(index))
