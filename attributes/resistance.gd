@@ -26,7 +26,7 @@ func get_resistance(resistance_type: Enums.ResistanceType, damage_type: Enums.Da
 
 func get_damage_resistance(type: Enums.DamageType) -> Attribute:
 	match type:
-		Enums.DamageType.Normal:
+		Enums.DamageType.Slash:
 			return normal_damage
 		Enums.DamageType.Fire:
 			return fire_damage
@@ -41,7 +41,7 @@ func get_damage_resistance(type: Enums.DamageType) -> Attribute:
 
 func get_duration_resistance(type: Enums.DamageType) -> Attribute:
 	match type:
-		Enums.DamageType.Normal:
+		Enums.DamageType.Slash:
 			return normal_duration
 		Enums.DamageType.Fire:
 			return fire_duration

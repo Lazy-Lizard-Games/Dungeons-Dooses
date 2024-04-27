@@ -2,6 +2,7 @@ extends Node
 class_name HealthComponent
 
 ## Triggered when health reaches 0.
+signal damage_taken(amount: float, type: Enums.DamageType)
 signal died
 signal updated(previous: float, current: float)
 signal maximum_updated(previous: Attribute, current: Attribute)
@@ -49,10 +50,11 @@ func _process(delta):
 		current += regeneration.get_final_value() * delta
 
 ## Deals damage to the current health.
-func damage(_type: Enums.DamageType, amount: float) -> void:
+func damage(amount: float, type: Enums.DamageType) -> void:
 	if is_dead or invulnerable:
 		return
 	current -= amount
+	damage_taken.emit(amount, type)
 	if current == 0:
 		died.emit()
 

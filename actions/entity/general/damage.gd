@@ -8,7 +8,7 @@ extends EntityAction
 ## Amount of damage to deal.
 @export var amount: Number
 
-func _init(type_in: Enums.DamageType=Enums.DamageType.Normal, amount_in: float=0.0):
+func _init(type_in: Enums.DamageType=Enums.DamageType.Shock, amount_in: float=0.0):
 	type = type_in
 	amount = ConstantNumber.new(amount_in)
 

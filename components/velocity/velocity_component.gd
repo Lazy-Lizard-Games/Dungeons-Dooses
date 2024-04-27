@@ -1,6 +1,8 @@
 extends Node
 class_name VelocityComponent
 
+signal knockback_recieved(strength: float)
+
 ## Max speed if attributes not attached or no speed attribute found.
 @export var speed = Attribute.new(25)
 ## How much impact entity input has on the velocity
@@ -49,3 +51,7 @@ func decelerate() -> void:
 func move(body: CharacterBody2D) -> void:
 	body.velocity = self.velocity
 	body.move_and_slide()
+
+func knockback(strength: float, direction: Vector2) -> void:
+	set_velocity(direction * strength)
+	knockback_recieved.emit(strength)

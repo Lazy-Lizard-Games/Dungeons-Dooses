@@ -8,10 +8,9 @@ class_name DamageColorData
 @export var poison := Color.GREEN
 @export var light := Color.BEIGE
 
-
 func getColorForType(type: Enums.DamageType) -> Color:
 	match type:
-		Enums.DamageType.Normal:
+		Enums.DamageType.Slash:
 			return normal
 		Enums.DamageType.Fire:
 			return fire
@@ -21,7 +20,7 @@ func getColorForType(type: Enums.DamageType) -> Color:
 			return shock
 		Enums.DamageType.Poison:
 			return poison
-		Enums.DamageType.Light:
+		Enums.DamageType.True:
 			return light
 		_:
 			return Color.WHITE

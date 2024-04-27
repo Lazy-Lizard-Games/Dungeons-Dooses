@@ -41,12 +41,14 @@ enum FactionType
 
 enum DamageType
 {
-	Normal,
+	Slash,
+	Pierce,
+	Blunt,
 	Fire,
 	Frost,
 	Shock,
 	Poison,
-	Light,
+	True,
 }
 
 enum GenericType

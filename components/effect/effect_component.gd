@@ -7,14 +7,11 @@ signal passive_effect_added(effect: PassiveEffect)
 signal passive_effect_removed(effect: PassiveEffect)
 signal active_effect_added(effect: ActiveEffect)
 signal active_effect_removed(effect: ActiveEffect)
-signal damage_effect_added(effect: DamageEffect)
-signal damage_effect_removed(effect: DamageEffect)
 signal effect_removed(effect: PassiveEffect)
 signal effects_cleared()
 
 var passive_effects: Array[PassiveEffect] = []
 var active_effects: Array[ActiveEffect] = []
-var damage_effects: Array[DamageEffect] = []
 
 func get_effect(uid: StringName) -> PassiveEffect:
 	for child in get_children() as Array[PassiveEffect]:
@@ -30,8 +27,6 @@ func clear_effects() -> void:
 func on_effect_expired(effect: ActiveEffect) -> void:
 	if effect in active_effects:
 		active_effects.erase(effect)
-	elif effect in damage_effects:
-		damage_effects.erase(effect)
 	effect.queue_free()
 
 # Passive effect controller --------------------------------------- #
@@ -80,25 +75,5 @@ func remove_active_effect(uid: StringName) -> void:
 			active_effects_copy.erase(effect)
 			effect.queue_free()
 	active_effects = active_effects_copy
-
-# ----------------------------------------------------------------- #
-
-# Damage effect controller ---------------------------------------- #
-
-## Adds an active effect to be managed by the component.
-func add_damage_effect(effect: DamageEffect) -> void:
-	damage_effect_added.emit(effect)
-	damage_effects.append(effect)
-	add_child(effect)
-
-## Removes any damage effects matching the unique identifier.
-func remove_damage_effect(uid: StringName) -> void:
-	var damage_effects_copy = damage_effects.duplicate()
-	for effect in damage_effects:
-		if effect.uid == uid:
-			damage_effect_removed.emit(effect)
-			damage_effects_copy.erase(effect)
-			effect.queue_free()
-	damage_effects = damage_effects_copy
 
 # ----------------------------------------------------------------- #

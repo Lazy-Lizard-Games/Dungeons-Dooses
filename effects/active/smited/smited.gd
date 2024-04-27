@@ -17,14 +17,14 @@ func enter() -> void:
 	modifier.operation = Enums.OperationType.Multiplication
 	var add_modifier = AddResistanceModifierEntityAction.new()
 	add_modifier.modifier = modifier
-	add_modifier.damage_type = Enums.DamageType.Normal
+	add_modifier.damage_type = Enums.DamageType.Slash
 	add_modifier.resistance_type = Enums.ResistanceType.Damage
 	add_modifier.execute(entity)
 
 func exit() -> void:
 	var remove_modifier = RemoveResistanceModifierEntityAction.new()
 	remove_modifier.uid = uid
-	remove_modifier.damage_type = Enums.DamageType.Normal
+	remove_modifier.damage_type = Enums.DamageType.Slash
 	remove_modifier.resistance_type = Enums.ResistanceType.Damage
 	remove_modifier.execute(entity)
 
