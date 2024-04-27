@@ -2,6 +2,10 @@ extends Ability
 
 ## Thrusts the sword forward, piercing hit enemies and reduces their physical resistance.
 
+## The damage dealt by this ability.
+@export var damage: DamageData
+## The knockback applied by this ability.
+@export var knockback: float
 ## The projectile that will be created when the ability is casted.
 @export var stab_projectile_scene: PackedScene
 ## State to move to when ability is casted.
@@ -10,6 +14,8 @@ extends Ability
 @export var animation_tree: AnimationTree
 ## Velocity component which will update movement from inputs.
 @export var velocity: VelocityComponent
+## The stamina component to exhaust when the ability is cast.
+@export var stamina_component: StaminaComponent
 
 var is_finished := false
 var direction := Vector2.ZERO
@@ -36,10 +42,11 @@ func _on_animation_finished(_animation) -> void:
 	is_finished = true
 
 func _on_casted():
-	var exhaust = ExhaustEntityAction.new(cost * entity.generics.ability_efficiency.get_final_value())
-	exhaust.execute(entity)
+	if stamina_component:
+		stamina_component.exhaust(cost * entity.generics.ability_efficiency.get_final_value())
+	var impact_data = ImpactData.new([damage], knockback, [])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
-	stab_projectile.init(entity, entity.centre_position, entity.looking_at)
+	stab_projectile.init(entity.centre_position, entity.looking_at, impact_data)
 	ProjectileHandler.add_projectile(stab_projectile)
 
 func _on_refreshed():

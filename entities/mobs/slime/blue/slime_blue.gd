@@ -4,7 +4,6 @@ class_name Slime
 @export var state_component: StateComponent
 
 func _ready():
-	super()
 	state_component.init(self)
 
 func _process(delta):

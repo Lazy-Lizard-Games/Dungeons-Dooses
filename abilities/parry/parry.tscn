@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmprtd80c0rsp"]
-
-[ext_resource type="Script" path="res://abilities/parry/parry.gd" id="1_mscg2"]
-
-[node name="Parry" type="Node"]
-script = ExtResource("1_mscg2")

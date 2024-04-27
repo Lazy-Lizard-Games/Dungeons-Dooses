@@ -7,6 +7,8 @@ extends Mob
 @export var inventory_component: InventoryComponent
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
+## Animation tree for animating the states of the entity.
+@export var animation_tree: AnimationTree
 @export_category('Player Abilities')
 @export var primary: Ability
 @export var secondary: Ability

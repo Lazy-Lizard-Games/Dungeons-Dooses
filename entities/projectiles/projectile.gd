@@ -3,11 +3,10 @@ extends Entity
 
 ## Describes the generic properties of a projectile.
 
-var direction: Vector2
-var entity: Entity
+@export var hurtbox_component: HurtboxComponent
+@export var impact_data: ImpactData
 
-func init(entity_in: Entity, position_in: Vector2, direction_in: Vector2) -> void:
-	entity = entity_in
-	position = position_in
-	direction = direction_in
-	look_at(position + direction)
+func init(new_position: Vector2, new_direction: Vector2, new_impact_data: ImpactData) -> void:
+	global_position = new_position
+	impact_data = new_impact_data
+	look_at(global_position + new_direction)

@@ -2,6 +2,10 @@ extends Ability
 
 ## Sweeps the sword in frnot of you, cleaving all those foolish enough to stand too close.
 
+## The damage dealt by this ability.
+@export var damage: DamageData
+## The knockback applied by this ability.
+@export var knockback: float
 ## The projectile that will be created when the ability is casted.
 @export var strike_projectile_scene: PackedScene
 ## The time in seconds it takes to charge the ability.
@@ -11,6 +15,8 @@ extends Ability
 @export var animation_tree: AnimationTree
 ## Velocity component which will update movement from inputs.
 @export var velocity: VelocityComponent
+## The stamina component to exhaust when the ability is cast.
+@export var stamina_component: StaminaComponent
 
 var is_finished := false
 var direction := Vector2.ZERO
@@ -37,10 +43,11 @@ func _on_animation_finished(_animation) -> void:
 	is_finished = true
 
 func _on_casted():
-	var exhaust = ExhaustEntityAction.new(cost * entity.generics.ability_efficiency.get_final_value())
-	exhaust.execute(entity)
+	if stamina_component:
+		stamina_component.exhaust(cost * entity.generics.ability_efficiency.get_final_value())
+	var impact_data = ImpactData.new([damage], knockback, [])
 	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
-	strike_projectile.init(entity, entity.centre_position, entity.looking_at)
+	strike_projectile.init(entity.centre_position, entity.looking_at, impact_data)
 	ProjectileHandler.add_projectile(strike_projectile)
 
 func _on_refreshed():
