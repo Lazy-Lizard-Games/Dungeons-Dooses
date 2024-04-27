@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=106 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
@@ -7,17 +7,15 @@
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/idle.gd" id="3_un612"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
-[ext_resource type="Script" path="res://attributes/generic.gd" id="3_ww4uv"]
-[ext_resource type="Script" path="res://attributes/affinity.gd" id="4_kc31g"]
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
-[ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="Script" path="res://actions/entity/general/heal.gd" id="14_1n4lw"]
 [ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="14_j3m7g"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
+[ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="18_wakcv"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/strike/strike.tscn" id="23_413do"]
@@ -29,52 +27,8 @@
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
 
-[sub_resource type="Resource" id="Resource_2pqpn"]
-script = ExtResource("2_acrq8")
-raw_value = 2.0
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_eqsvv"]
-script = ExtResource("2_acrq8")
-raw_value = 100.0
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_ebyaf"]
-script = ExtResource("2_acrq8")
-raw_value = 75.0
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_q3a8u"]
-script = ExtResource("3_ww4uv")
-health_max = SubResource("Resource_eqsvv")
-movement_speed = SubResource("Resource_ebyaf")
-ability_power = SubResource("Resource_2pqpn")
-
-[sub_resource type="Resource" id="Resource_8xuyt"]
-script = ExtResource("4_kc31g")
-
-[sub_resource type="Resource" id="Resource_mw36u"]
-script = ExtResource("5_078dv")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_sned3"]
 radius = 5.0
-
-[sub_resource type="Resource" id="Resource_ulxov"]
-script = ExtResource("2_acrq8")
-raw_value = 0.5
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
 
 [sub_resource type="Resource" id="Resource_wp6ar"]
 script = ExtResource("2_acrq8")
@@ -906,7 +860,7 @@ states/walk/position = Vector2(303, 140)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
 graph_offset = Vector2(20.4717, -83.1757)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "primary", "secondary", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "primary", "secondary", "hitbox_component", "health_component", "effect_component", "stats_component", "animation_tree", "velocity_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -920,15 +874,12 @@ primary = NodePath("AbilityComponent/Stab")
 secondary = NodePath("AbilityComponent/Strike")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
+effect_component = NodePath("EffectComponent")
+stats_component = NodePath("StatsComponent")
 id = "Warrior"
 faction = 1
 animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
-action_component = NodePath("ActionComponent")
-effect_component = NodePath("EffectComponent")
-generics = SubResource("Resource_q3a8u")
-affinities = SubResource("Resource_8xuyt")
-resistances = SubResource("Resource_mw36u")
 position_offset = Vector2(0, -15)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -937,7 +888,7 @@ texture = ExtResource("6_qqodu")
 flip_h = true
 hframes = 12
 vframes = 19
-frame = 4
+frame = 7
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -955,7 +906,7 @@ zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.85, 0.85)
+scale = Vector2(0.775, 0.775)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
@@ -975,7 +926,6 @@ ability_component = NodePath("../../AbilityComponent")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
-friction = SubResource("Resource_ulxov")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
 
@@ -994,6 +944,8 @@ inventory = SubResource("Resource_bia7r")
 
 [node name="EffectComponent" parent="." instance=ExtResource("33_n4u06")]
 
+[node name="StatsComponent" parent="." instance=ExtResource("18_wakcv")]
+
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 position = Vector2(0, -11)
 
@@ -1007,9 +959,12 @@ idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)
-entity = NodePath("..")
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+effect_component = NodePath("../EffectComponent")
+stats_component = NodePath("../StatsComponent")
 invulnerability_duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

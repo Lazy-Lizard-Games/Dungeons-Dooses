@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://cskur4kawkovi"]
 
-[ext_resource type="Script" path="res://projectiles/smite/smite.gd" id="1_x3y2h"]
+[ext_resource type="Script" path="res://entities/projectiles/smite/smite.gd" id="1_x3y2h"]
 [ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_8ikkg"]
-[ext_resource type="Texture2D" uid="uid://7mbnwlb5se28" path="res://projectiles/smite/smite_trail.png" id="2_w1uub"]
+[ext_resource type="Texture2D" uid="uid://7mbnwlb5se28" path="res://entities/projectiles/smite/smite_trail.png" id="2_w1uub"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_vb0yo"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="4_7yjf2"]
 [ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="5_fs34v"]

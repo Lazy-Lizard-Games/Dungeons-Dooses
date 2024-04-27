@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://01mfloxbcrcs"]
 
-[ext_resource type="Script" path="res://projectiles/cleave/cleave.gd" id="1_1ayy0"]
-[ext_resource type="Texture2D" uid="uid://xbicjdlfvgwl" path="res://projectiles/cleave/slash_trail.png" id="2_ch360"]
+[ext_resource type="Script" path="res://entities/projectiles/cleave/cleave.gd" id="1_1ayy0"]
+[ext_resource type="Texture2D" uid="uid://xbicjdlfvgwl" path="res://entities/projectiles/cleave/slash_trail.png" id="2_ch360"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_xbc3c"]
 [ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="4_yni6o"]
 [ext_resource type="Script" path="res://actions/vectors/providers/mouse_direction.gd" id="5_mxmsy"]

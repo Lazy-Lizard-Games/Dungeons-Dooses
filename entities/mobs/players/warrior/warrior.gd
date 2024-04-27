@@ -43,17 +43,14 @@ func set_ability(index: int, ability: Ability) -> void:
 func start_ability(ability: Ability) -> void:
 	if ability:
 		if ability.state == Enums.AbilityState.Ready:
-			if stamina_component.current > (ability.cost * generics.ability_efficiency.get_final_value()):
-				can_attack = false
+			if stamina_component.current > (ability.cost * stats_component.ability_efficiency.get_final_value()):
 				state_component.change_state(ability)
 				return
 		ability.failed.emit()
 
 func _ready() -> void:
-	super()
 	ability_component.init(self)
 	state_component.init(self)
-	stamina_component.attributes = generics
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("consumable_1"):

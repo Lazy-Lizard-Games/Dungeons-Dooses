@@ -1,5 +1,5 @@
 class_name Projectile
-extends CharacterBody2D
+extends Entity
 
 ## Describes the generic properties of a projectile.
 

@@ -3,28 +3,27 @@ class_name VelocityComponent
 
 signal knockback_recieved(strength: float)
 
+## A stats component can be adde to transform values before being used.
+@export var stats_component: StatsComponent
 ## Max speed if attributes not attached or no speed attribute found.
-@export var speed = Attribute.new(25)
+@export var speed: float:
+	get:
+		if stats_component:
+			return speed * stats_component.movement_speed.get_final_value()
+		return speed
 ## How much impact entity input has on the velocity
-@export var acceleration = Attribute.new(10)
+@export var acceleration: float:
+	get:
+		if stats_component:
+			return acceleration * stats_component.movement_acceleration.get_final_value()
+		return acceleration
 ## How much impact any input has on the velocity
-@export var friction = Attribute.new(1)
+@export var friction: float:
+	get:
+		if stats_component:
+			return friction * stats_component.movement_friction.get_final_value()
+		return friction
 var velocity := Vector2.ZERO
-## Attribute Component to fetch speed, acceleration, etc. from.
-var generics: GenericAttributes:
-	set(g):
-		generics = g
-		if !generics:
-			return
-		var s = generics.get_generic(Enums.GenericType.MovementSpeed)
-		if s:
-			speed = s
-		var a = generics.get_generic(Enums.GenericType.Acceleration)
-		if a:
-			acceleration = a
-		var f = generics.get_generic(Enums.GenericType.Friction)
-		if f:
-			friction = f
 
 ## Sets the current velocity to provided velocity. This method
 ## is designed to be used by knockback mechanics.
@@ -37,11 +36,11 @@ func add_velocity(_velocity: Vector2) -> void:
 ## Updates the the current velotiy by the provided velocity. 
 ## This method is designed to be used by 
 func accelerate_to_velocity(velocity_to: Vector2) -> void:
-	velocity = velocity.lerp(velocity_to, (acceleration.get_final_value() / speed.get_final_value()) * friction.get_final_value())
+	velocity = velocity.lerp(velocity_to, (acceleration / speed) * friction)
 
 ## Accelerates the velocity towards the provided direction.
 func accelerate_in_direction(direction: Vector2) -> void:
-	accelerate_to_velocity(direction * speed.get_final_value())
+	accelerate_to_velocity(direction * speed)
 
 ## Decelerates the velocity towards zero.
 func decelerate() -> void:

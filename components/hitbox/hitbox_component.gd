@@ -11,7 +11,7 @@ signal impact(from: HurtboxComponent)
 ## The effect component that will handle effects applied.
 @export var effect_component: EffectComponent
 ## The stats component that will handle value transformations.
-@export var stats_component: int
+@export var stats_component: StatsComponent
 
 ## Toggles whether hitbox can handle impact events.
 @export var detect_only := false
@@ -31,14 +31,18 @@ func handle_damages(damages: Array[DamageData], from: HurtboxComponent) -> void:
 		if health_component:
 			var final_damages = apply_damage_transforms(damages)
 			for d in final_damages:
-				health_component.damage(d.amount, d.type)
-				from.damage_dealt.emit(d.amount, d.type, self)
+				var state = health_component.damage(d.amount, d.type)
+				if state == health_component.HealthState.Dead:
+					from.death_dealt.emit(d.amount, d.type, self)
+				else:
+					from.damage_dealt.emit(d.amount, d.type, self)
 
 func apply_damage_transforms(damages: Array[DamageData]) -> Array[DamageData]:
 	if stats_component:
 		var transformed_damages = []
 		for d in damages:
-			transformed_damages.append(d.amount * 1.0)
+			var resistance = stats_component.get_damage_resistance(d.type)
+			transformed_damages.append(d.amount * (1 - resistance.get_final_value()))
 		return transformed_damages
 	return damages
 
@@ -50,7 +54,7 @@ func handle_knockback(strength: float, from: HurtboxComponent) -> void:
 
 func apply_knockback_transforms(strength: float) -> float:
 	if stats_component:
-		return strength * 1.0
+		return strength * (1 - stats_component.knockback_resistance.get_final_value())
 	return strength
 
 func handle_effects(effects: Array[PackedScene], from: HurtboxComponent) -> void:

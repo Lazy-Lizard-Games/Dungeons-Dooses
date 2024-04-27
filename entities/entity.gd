@@ -24,16 +24,6 @@ signal consume(actor: Entity, item: int)
 @export var animation_tree: AnimationTree
 ## Velocity component for the entity.
 @export var velocity_component: VelocityComponent
-## Action component for the entity.
-@export var action_component: ActionComponent
-## Effect component for the entity.
-@export var effect_component: EffectComponent
-## Generic attributes for the entity.
-@export var generics: GenericAttributes = GenericAttributes.new()
-## Affinity attribtues for the entity.
-@export var affinities: AffinityAttributes = AffinityAttributes.new()
-## Resistance attributes for the entity.
-@export var resistances: ResistanceAttributes = ResistanceAttributes.new()
 ## Used to offset the entities position to match the sprite more accurately.
 @export var position_offset: Vector2 = Vector2.ZERO
 ## The player's centre position found by adding `position_offset` to `global_position`.
@@ -44,50 +34,3 @@ var centre_position := Vector2.ZERO:
 var looking_at := Vector2.ZERO:
 	get:
 		return centre_position.direction_to(get_global_mouse_position())
-## Controls attack inputs
-var can_attack := true
-
-func _ready() -> void:
-	generics = generics.duplicate(true)
-	affinities = affinities.duplicate(true)
-	resistances = resistances.duplicate(true)
-	velocity_component.generics = generics
-	hit.connect(on_hit)
-	hurt.connect(on_hurt)
-	kill.connect(on_kill)
-	died.connect(on_died)
-
-func on_hit(entity: Entity) -> void:
-	var scale_factor = action_component.actor_on_hit_scale.get_final_value() * entity.action_component.target_on_hit_scale.get_final_value()
-	for action in action_component.actions_on_hit:
-		action.execute(entity, self, scale_factor)
-
-func on_hurt(entity: Entity) -> void:
-	var scale_factor = action_component.actor_on_hurt_scale.get_final_value() * entity.action_component.target_on_hurt_scale.get_final_value()
-	for action in action_component.actions_on_hurt:
-		action.execute(self, entity, scale_factor)
-
-func on_kill(_entity: Entity) -> void:
-	for action in action_component.actions_on_kill:
-		action.execute(self, action_component.on_kill_scale.get_final_value())
-
-func on_died() -> void:
-	for action in action_component.actions_on_died:
-		action.execute(self, action_component.on_died_scale.get_final_value())
-
-func get_copy() -> Entity:
-	var copy = Entity.new()
-	copy.id = id
-	copy.faction = faction
-	copy.generics = generics
-	copy.affinities = affinities
-	copy.resistances = resistances
-	copy.velocity_component = VelocityComponent.new()
-	copy.action_component = ActionComponent.new()
-	return copy
-
-func enable_attack() -> void:
-	can_attack = true
-
-func disable_attack() -> void:
-	can_attack = false
