@@ -6,6 +6,8 @@ extends Ability
 @export var damage: DamageData
 ## The knockback applied by this ability.
 @export var knockback: float
+## The scene of the punctured effect dealt by the ability.
+@export var punctured_effect_scene: PackedScene
 ## The projectile that will be created when the ability is casted.
 @export var stab_projectile_scene: PackedScene
 ## State to move to when ability is casted.
@@ -16,7 +18,6 @@ extends Ability
 @export var velocity: VelocityComponent
 ## The stamina component to exhaust when the ability is cast.
 @export var stamina_component: StaminaComponent
-
 var is_finished := false
 var direction := Vector2.ZERO
 
@@ -44,7 +45,7 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * entity.generics.ability_efficiency.get_final_value())
-	var impact_data = ImpactData.new([damage], knockback, [])
+	var impact_data = ImpactData.new([damage], knockback, [punctured_effect_scene])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
 	stab_projectile.init(entity.centre_position, entity.looking_at, impact_data)
 	ProjectileHandler.add_projectile(stab_projectile)

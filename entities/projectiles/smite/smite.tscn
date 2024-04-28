@@ -1,42 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://cskur4kawkovi"]
+[gd_scene load_steps=9 format=3 uid="uid://cskur4kawkovi"]
 
 [ext_resource type="Script" path="res://entities/projectiles/smite/smite.gd" id="1_x3y2h"]
-[ext_resource type="Script" path="res://actions/numbers/providers/constant.gd" id="2_8ikkg"]
 [ext_resource type="Texture2D" uid="uid://7mbnwlb5se28" path="res://entities/projectiles/smite/smite_trail.png" id="2_w1uub"]
 [ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_vb0yo"]
-[ext_resource type="Script" path="res://actions/bientity/general/damage.gd" id="4_7yjf2"]
-[ext_resource type="Script" path="res://actions/vectors/providers/looking_at.gd" id="5_fs34v"]
-[ext_resource type="PackedScene" uid="uid://cjxmr5co58fw4" path="res://effects/active/smited/smited.tscn" id="6_2khfk"]
-[ext_resource type="Script" path="res://actions/bientity/general/knockback.gd" id="6_4i05h"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="7_i7ooq"]
-
-[sub_resource type="Resource" id="Resource_isy05"]
-script = ExtResource("2_8ikkg")
-x = 15.0
-
-[sub_resource type="Resource" id="Resource_0syu2"]
-script = ExtResource("4_7yjf2")
-type = 0
-amount = SubResource("Resource_isy05")
-_id = ""
-
-[sub_resource type="Resource" id="Resource_w4mhw"]
-script = ExtResource("5_fs34v")
-
-[sub_resource type="Resource" id="Resource_uf4c7"]
-script = ExtResource("2_8ikkg")
-x = 0.5
-
-[sub_resource type="Resource" id="Resource_j2kot"]
-script = ExtResource("2_8ikkg")
-x = 50.0
-
-[sub_resource type="Resource" id="Resource_b7oyp"]
-script = ExtResource("6_4i05h")
-strength = SubResource("Resource_j2kot")
-duration = SubResource("Resource_uf4c7")
-direction = SubResource("Resource_w4mhw")
-_id = ""
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nle7u"]
 
@@ -70,12 +37,9 @@ height = 66.0
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_x3y2h")
-damage = SubResource("Resource_0syu2")
-knockback = SubResource("Resource_b7oyp")
-smite_effect_scene = ExtResource("6_2khfk")
 animation = NodePath("AnimationPlayer")
 hurtbox_component = NodePath("HurtboxComponent")
-id = "Smite"
+id = "Stab"
 velocity_component = NodePath("VelocityComponent")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("7_i7ooq")]

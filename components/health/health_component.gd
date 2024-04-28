@@ -2,7 +2,7 @@ extends Node
 class_name HealthComponent
 
 enum HealthState {
-	Idle,
+	Delaying,
 	Regenerating,
 	Healthy,
 	Dead,
@@ -34,6 +34,11 @@ signal state_updated(previous: HealthState, current: HealthState)
 		if stats_component:
 			return regeneration * stats_component.health_regeneration.get_final_value()
 		return regeneration
+@export var delay_time: float:
+	get:
+		if stats_component:
+			return delay_time * stats_component.health_delay.get_final_value()
+		return delay_time
 ## Current health.
 @onready var current: float:
 	set(new):
@@ -52,12 +57,19 @@ var state: HealthState = HealthState.Healthy:
 		var old = state
 		state = new
 		state_updated.emit(old, state)
+var delay_timer: float = 0
 
 func _process(delta):
-	if state == HealthState.Regenerating:
-		current += regeneration * delta
-		if current == maximum:
-			state = HealthState.Healthy
+	match state:
+		HealthState.Delaying:
+			delay_timer += delta
+			if delay_timer >= delay_time:
+				delay_timer = 0
+				state = HealthState.Regenerating
+		HealthState.Regenerating:
+			current += regeneration * delta
+			if current == maximum:
+				state = HealthState.Healthy
 
 ## Deals damage to the current health and returns the healths state.
 func damage(amount: float, type: Enums.DamageType) -> HealthState:
@@ -65,16 +77,14 @@ func damage(amount: float, type: Enums.DamageType) -> HealthState:
 		return HealthState.Invincible
 	if is_dead:
 		return HealthState.Dead
-	
 	current = clampf(current - amount, 0, maximum)
 	if current == 0:
 		state = HealthState.Dead
 		died.emit(amount, type)
-		return HealthState.Dead
 	else:
-		state = HealthState.Idle
+		state = HealthState.Delaying
 		damaged.emit(amount, type)
-		return HealthState.Idle
+	return state
 
 ## Restores amount to the current health.
 func heal(amount: float) -> void:
