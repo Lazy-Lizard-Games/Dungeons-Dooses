@@ -18,7 +18,7 @@ signal knockback_recieved(strength: float)
 			return acceleration * stats_component.movement_acceleration.get_final_value()
 		return acceleration
 ## How much impact any input has on the velocity
-@export var friction: float:
+@export_range(0, 1) var friction: float:
 	get:
 		if stats_component:
 			return friction * stats_component.movement_friction.get_final_value()

@@ -15,6 +15,7 @@ signal current_updated(previous: float, current: float)
 signal maximum_updated(previous: Attribute, current: Attribute)
 signal state_updated(previous: HealthState, current: HealthState)
 
+## The stats component used to modify values, if any.
 @export var stats_component: StatsComponent
 ## Immunity to all damage.
 @export var invulnerable := false
@@ -43,7 +44,7 @@ signal state_updated(previous: HealthState, current: HealthState)
 @onready var current: float:
 	set(new):
 		var old = current
-		current = new
+		current = clampf(new, 0, maximum)
 		current_updated.emit(old, new)
 ## Previous health.
 @onready var previous := current

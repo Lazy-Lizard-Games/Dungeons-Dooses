@@ -75,21 +75,22 @@ func ready() -> void:
 	readied.emit()
 
 func _process(delta):
-	if is_charging:
+	match state:
+		Enums.AbilityState.Charging:
 			charging_timer += delta * entity.generics.charge_rate.get_final_value()
 			if charging_timer > charging_time:
 				is_charging = false
 				charging_timer = 0
 				charged.emit()
-	if is_casting:
-			casting_timer += delta * entity.generics.cast_rate.get_final_value()
-			if casting_timer > casting_time:
-				is_casting = false
-				casting_timer = 0
-				casted.emit()
-	if is_refreshing:
-			refreshing_timer += delta * entity.generics.refresh_rate.get_final_value()
-			if refreshing_timer > refreshing_time:
-				is_refreshing = false
-				refreshing_timer = 0
-				refreshed.emit()
+		Enums.AbilityState.Casting:
+				casting_timer += delta * entity.generics.cast_rate.get_final_value()
+				if casting_timer > casting_time:
+					is_casting = false
+					casting_timer = 0
+					casted.emit()
+		Enums.AbilityState.Refreshing:
+				refreshing_timer += delta * entity.generics.refresh_rate.get_final_value()
+				if refreshing_timer > refreshing_time:
+					is_refreshing = false
+					refreshing_timer = 0
+					refreshed.emit()

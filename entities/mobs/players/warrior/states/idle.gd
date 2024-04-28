@@ -10,7 +10,7 @@ signal ability_pressed(index: int)
 var interactable: InteractableComponent
 
 func enter() -> void:
-	entity.can_attack = true
+	# entity.can_attack = true
 	animation_tree['parameters/playback'].travel('idle')
 
 func exit() -> void:

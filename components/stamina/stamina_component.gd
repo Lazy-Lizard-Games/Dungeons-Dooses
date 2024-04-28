@@ -1,57 +1,75 @@
 extends Node
 class_name StaminaComponent
 
-## Triggered when stamina fully regenerates from zero.
-signal recovered
-## Triggered when stamina reaches zero and not already exhausted.
-signal exhausted
-signal stamina_updated(previous: float, current: float)
-signal maximum_updated(previous: Attribute, current: Attribute)
+enum StaminaState {
+	Delaying,
+	Recovering,
+	Energized,
+	Tireless,
+}
 
+signal exhausted(amount: float)
+signal current_updated(previous: float, current: float)
+signal maximum_updated(previous: float, current: float)
+signal state_updated(previous: StaminaState, current: StaminaState)
+
+## The stats component used to modify values, if any.
+@export var stats_component: StatsComponent
 ## Maximum stamina.
-@export var maximum: Attribute:
-	set(a):
-		var prev = maximum
-		maximum = a
-		maximum_updated.emit(prev, maximum)
+@export var maximum: float:
+	get:
+		if stats_component:
+			return maximum * stats_component.stamina_maximum.get_final_value()
+		return maximum
+	set(new):
+		var old = maximum
+		maximum = new
+		maximum_updated.emit(old, new)
 ## ## Regeneration of stamina.
-@export var regeneration: Attribute
+@export var regeneration: float:
+	get:
+		if stats_component:
+			return regeneration * stats_component.stamina_regeneration.get_final_value()
+		return regeneration
+@export var delay_time: float:
+	get:
+		if stats_component:
+			return delay_time * stats_component.stamina_delay.get_final_value()
+		return delay_time
 ## Current stamina.
 @onready var current: float:
-	set(h):
-		previous = current
-		current = clamp(h, 0, maximum.get_final_value())
-		stamina_updated.emit(previous, current)
-		if current == 0:
-			is_exhausted = true
-			exhausted.emit()
-		if current == maximum.get_final_value():
-			is_exhausted = false
-			recovered.emit()
+	set(new):
+		var old = current
+		current = clampf(new, 0, maximum)
+		current_updated.emit(old, new)
 ## Previous health.
 @onready var previous := current
-## Attributes of the parent object, if any.
-var attributes: GenericAttributes:
-	set(generics):
-		attributes = generics
-		var _maximum = attributes.get_generic(Enums.GenericType.StaminaMax)
-		if _maximum:
-			maximum = _maximum
-		var _regeneration = attributes.get_generic(Enums.GenericType.StaminaRegeneration)
-		if _regeneration:
-			regeneration = _regeneration
-		current = maximum.get_final_value()
 ## Stamina run out and recovering.
 var is_exhausted := false
+var state: StaminaState = StaminaState.Energized:
+	set(new):
+		var old = state
+		state = new
+		state_updated.emit(old, state)
+var delay_timer: float = 0
 
 ## Removes the amount from the current stamina.
 func exhaust(amount: float) -> void:
 	current -= amount
+	state = StaminaState.Delaying
 
 ## Adds the amount to the current stamina.
 func recover(amount: float) -> void:
 	current += amount
 
 func _process(delta):
-	if current < maximum.get_final_value():
-		current += regeneration.get_final_value() * delta
+	match state:
+		StaminaState.Delaying:
+			delay_timer += delta
+			if delay_timer >= delay_time:
+				delay_timer = 0
+				state = StaminaState.Recovering
+		StaminaState.Recovering:
+			current += regeneration * delta
+			if current == maximum:
+				state = StaminaState.Energized
