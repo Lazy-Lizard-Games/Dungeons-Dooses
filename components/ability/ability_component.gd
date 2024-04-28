@@ -3,10 +3,6 @@ extends Node2D
 
 signal updated(index: int, ability: Ability)
 
-func init(entity: Entity) -> void:
-	for child in get_children():
-		child.entity = entity
-
 ## Assigns the ability to the given index or the end if out of range.
 func set_ability(index: int, ability: Ability) -> void:
 	if get_child_count() < index:

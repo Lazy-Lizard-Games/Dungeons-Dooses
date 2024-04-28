@@ -2,15 +2,15 @@ extends State
 
 signal ability_pressed(index: int)
 
+@export var player: Player
 @export var idle_state: State
 @export var velocity_component: VelocityComponent
-@export var ability_component: AbilityComponent
 @export var animation_tree: AnimationTree
 
 var direction := Vector2.ZERO
 
 func enter() -> void:
-	animation_tree['parameters/playback'].travel('walk')
+	animation_tree['parameters/playback'].start('walk')
 
 func exit() -> void:
 	pass
@@ -23,7 +23,7 @@ func process_physics(_delta: float) -> State:
 	if direction.length() == 0:
 		return idle_state
 	velocity_component.accelerate_in_direction(direction)
-	velocity_component.move(entity)
+	velocity_component.move(player)
 	animation_tree['parameters/walk/blend_position'] = direction.normalized()
 	if Input.is_action_pressed("ability_1"):
 		ability_pressed.emit(0)

@@ -4,9 +4,7 @@ class_name StateComponent
 @export var starting_state: State
 var current_state: State
 
-func init(entity: Entity) -> void:
-	for child in get_children():
-		child.entity = entity
+func init() -> void:
 	change_state(starting_state)
 
 func change_state(new_state: State) -> void:

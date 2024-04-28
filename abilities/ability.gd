@@ -20,6 +20,8 @@ signal failed
 ## Emitted when the ability is ready again.
 signal readied
 
+## Stats component used for modifying charge, cast, refresh speeds.
+@export var stats_component: StatsComponent
 ## The group organises the ability into separate sets of abilities.
 @export var group: Enums.AbilityGroup
 ## The type controls which slots the ability may be equipped in for players.
@@ -52,6 +54,22 @@ var is_casting: bool = false
 ## Boolean to check if ability is refreshing.
 var is_refreshing: bool = false
 
+var charge_modifier: float:
+	get:
+		if stats_component:
+			return stats_component.charge_rate.get_final_value()
+		return 1
+var cast_modifier: float:
+	get:
+		if stats_component:
+			return stats_component.cast_rate.get_final_value()
+		return 1
+var refresh_modifier: float:
+	get:
+		if stats_component:
+			return stats_component.refresh_rate.get_final_value()
+		return 1
+
 ## Sets the the ability as charging.
 func charge() -> void:
 	state = Enums.AbilityState.Charging
@@ -77,19 +95,19 @@ func ready() -> void:
 func _process(delta):
 	match state:
 		Enums.AbilityState.Charging:
-			charging_timer += delta * entity.generics.charge_rate.get_final_value()
+			charging_timer += delta * charge_modifier
 			if charging_timer > charging_time:
 				is_charging = false
 				charging_timer = 0
 				charged.emit()
 		Enums.AbilityState.Casting:
-				casting_timer += delta * entity.generics.cast_rate.get_final_value()
+				casting_timer += delta * cast_modifier
 				if casting_timer > casting_time:
 					is_casting = false
 					casting_timer = 0
 					casted.emit()
 		Enums.AbilityState.Refreshing:
-				refreshing_timer += delta * entity.generics.refresh_rate.get_final_value()
+				refreshing_timer += delta * refresh_modifier
 				if refreshing_timer > refreshing_time:
 					is_refreshing = false
 					refreshing_timer = 0

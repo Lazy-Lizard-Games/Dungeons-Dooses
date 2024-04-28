@@ -2,16 +2,14 @@ extends State
 
 signal ability_pressed(index: int)
 
+@export var player: Player
 @export var move_state: State
 @export var velocity_component: VelocityComponent
-@export var ability_component: AbilityComponent
 @export var animation_tree: AnimationTree
 
-var interactable: InteractableComponent
-
 func enter() -> void:
-	# entity.can_attack = true
-	animation_tree['parameters/playback'].travel('idle')
+	animation_tree['parameters/playback'].start('idle')
+	# pass
 
 func exit() -> void:
 	pass
@@ -20,7 +18,7 @@ func process_physics(_delta: float) -> State:
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down").length() > 0:
 		return move_state
 	velocity_component.decelerate()
-	velocity_component.move(entity)
+	velocity_component.move(player)
 	if Input.is_action_pressed("ability_1"):
 		ability_pressed.emit(0)
 	elif Input.is_action_pressed("ability_2"):

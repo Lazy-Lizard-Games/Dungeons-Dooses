@@ -1,0 +1,45 @@
+[gd_scene load_steps=9 format=3 uid="uid://djp57u0n40nm"]
+
+[ext_resource type="Script" path="res://entities/mobs/test/test.gd" id="1_f152e"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="2_ssj88"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="3_qrhh4"]
+[ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="4_5s12f"]
+[ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="4_nicx8"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="5_82373"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3byb0"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxmkx"]
+
+[node name="Test" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
+script = ExtResource("1_f152e")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+effect_component = NodePath("EffectComponent")
+stats_component = NodePath("StatsComponent")
+id = "Test"
+faction = 1
+velocity_component = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3byb0")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_ssj88")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_qrhh4")]
+stats_component = NodePath("../StatsComponent")
+
+[node name="EffectComponent" parent="." instance=ExtResource("4_nicx8")]
+
+[node name="StatsComponent" parent="." instance=ExtResource("4_5s12f")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("5_82373")]
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+effect_component = NodePath("../EffectComponent")
+stats_component = NodePath("../StatsComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_rxmkx")

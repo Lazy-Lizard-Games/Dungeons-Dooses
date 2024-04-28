@@ -1,8 +1,6 @@
 extends Node
 class_name State
 
-var entity: Entity
-
 func enter() -> void:
 	return
 

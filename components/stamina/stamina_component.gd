@@ -62,6 +62,12 @@ func exhaust(amount: float) -> void:
 func recover(amount: float) -> void:
 	current += amount
 
+func initialise_current() -> void:
+	current = maximum
+
+func _ready():
+	call_deferred("initialise_current")
+
 func _process(delta):
 	match state:
 		StaminaState.Delaying:

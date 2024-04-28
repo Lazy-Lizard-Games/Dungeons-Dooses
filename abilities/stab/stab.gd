@@ -2,6 +2,7 @@ extends Ability
 
 ## Thrusts the sword forward, piercing hit enemies and reduces their physical resistance.
 
+@export var player: Player
 ## The damage dealt by this ability.
 @export var damage: DamageData
 ## The knockback applied by this ability.
@@ -18,12 +19,19 @@ extends Ability
 @export var velocity: VelocityComponent
 ## The stamina component to exhaust when the ability is cast.
 @export var stamina_component: StaminaComponent
+
 var is_finished := false
 var direction := Vector2.ZERO
 
+var cost_modifier: float:
+	get:
+		if stats_component:
+			return stats_component.ability_efficiency.get_final_value()
+		return 1
+
 func enter() -> void:
 	animation_tree['parameters/playback'].travel('stab')
-	animation_tree['parameters/stab/blend_position'] = entity.looking_at
+	animation_tree['parameters/stab/blend_position'] = player.looking_at
 	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 	cast()
 
@@ -32,7 +40,7 @@ func process_physics(_delta: float) -> State:
 		return idle_state
 	direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	velocity.accelerate_in_direction(direction * 0.1)
-	velocity.move(entity)
+	velocity.move(player)
 	return null
 
 func exit() -> void:
@@ -44,10 +52,10 @@ func _on_animation_finished(_animation) -> void:
 
 func _on_casted():
 	if stamina_component:
-		stamina_component.exhaust(cost * entity.generics.ability_efficiency.get_final_value())
+		stamina_component.exhaust(cost * cost_modifier)
 	var impact_data = ImpactData.new([damage], knockback, [punctured_effect_scene])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
-	stab_projectile.init(entity.centre_position, entity.looking_at, impact_data)
+	stab_projectile.init(player.centre_position, player.looking_at, impact_data)
 	ProjectileHandler.add_projectile(stab_projectile)
 
 func _on_refreshed():

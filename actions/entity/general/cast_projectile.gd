@@ -8,10 +8,10 @@ class_name CastProjecitleAction
 ## Direction at which to spawn the projectile
 @export var direction_vector: Vector = Vector.new()
 
-func execute(entity: Entity, _scale:=1.0) -> void:
-	var position = position_vector.get_vector(entity)
-	var direction = direction_vector.get_vector(entity)
+func execute(_entity: Entity, _scale:=1.0) -> void:
+	# var position = position_vector.get_vector(entity)
+	# var direction = direction_vector.get_vector(entity)
 	var projectile = projectile_scene.instantiate() as Projectile
 	if projectile:
-		projectile.init(entity, position, direction)
+		# projectile.init(position, direction)
 		ProjectileHandler.add_projectile(projectile)

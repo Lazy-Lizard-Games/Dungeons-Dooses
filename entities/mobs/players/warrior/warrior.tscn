@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=87 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
@@ -662,61 +662,6 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5fw13"]
 animation = &"idle"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71i3w"]
-animation = &"parry_attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n0dra"]
-animation = &"parry_end"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_skqfj"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_oay5n"]
-animation = &"parry_start"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_05hmj"]
-animation = &"parry_idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uldhj"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jnb88"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atiko"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xc18k"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hlysp"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fuuj0"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wvj0n"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_re2mg"]
-state_machine_type = 2
-states/attack/node = SubResource("AnimationNodeAnimation_71i3w")
-states/attack/position = Vector2(660.922, 39)
-states/end/node = SubResource("AnimationNodeAnimation_n0dra")
-states/end/position = Vector2(660.922, 149)
-states/finish/node = SubResource("AnimationNodeBlendSpace2D_skqfj")
-states/finish/position = Vector2(785.453, 100)
-states/start/node = SubResource("AnimationNodeAnimation_oay5n")
-states/start/position = Vector2(351, 100)
-states/wait/node = SubResource("AnimationNodeAnimation_05hmj")
-states/wait/position = Vector2(533.922, 100)
-transitions = ["Start", "start", SubResource("AnimationNodeStateMachineTransition_uldhj"), "start", "wait", SubResource("AnimationNodeStateMachineTransition_jnb88"), "wait", "attack", SubResource("AnimationNodeStateMachineTransition_atiko"), "wait", "end", SubResource("AnimationNodeStateMachineTransition_xc18k"), "attack", "finish", SubResource("AnimationNodeStateMachineTransition_hlysp"), "end", "finish", SubResource("AnimationNodeStateMachineTransition_fuuj0"), "finish", "End", SubResource("AnimationNodeStateMachineTransition_wvj0n")]
-graph_offset = Vector2(162.453, 0)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6wonm"]
-animation = &"rally"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sn73e"]
 animation = &"smite_up"
 
@@ -810,7 +755,6 @@ blend_mode = 1
 sync = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3d2vt"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c0us6"]
 
@@ -820,41 +764,23 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mms1k"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4oqv2"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_15i4u"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fywhd"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_c8tn5"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mqty2"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_44ebc"]
-switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4pc1n"]
 states/Start/position = Vector2(147, 44)
 states/idle/node = SubResource("AnimationNodeAnimation_5fw13")
 states/idle/position = Vector2(303, 44)
-states/parry/node = SubResource("AnimationNodeStateMachine_re2mg")
-states/parry/position = Vector2(303, -48)
-states/rally/node = SubResource("AnimationNodeAnimation_6wonm")
-states/rally/position = Vector2(147, -48)
 states/stab/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
-states/stab/position = Vector2(483, 44)
+states/stab/position = Vector2(303, -59)
 states/strike/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
-states/strike/position = Vector2(483, -48)
+states/strike/position = Vector2(147, -59)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_jkldm")
 states/walk/position = Vector2(303, 140)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "parry", SubResource("AnimationNodeStateMachineTransition_fywhd"), "parry", "idle", SubResource("AnimationNodeStateMachineTransition_c8tn5"), "idle", "rally", SubResource("AnimationNodeStateMachineTransition_mqty2"), "rally", "idle", SubResource("AnimationNodeStateMachineTransition_44ebc")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u")]
 graph_offset = Vector2(20.4717, -83.1757)
 
 [node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "animation_tree", "primary", "secondary", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
@@ -879,47 +805,38 @@ faction = 1
 velocity_component = NodePath("VelocityComponent")
 position_offset = Vector2(0, -15)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("6_qqodu")
-flip_h = true
 hframes = 12
 vframes = 19
-frame = 2
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -20.0
-offset_top = -20.0
-offset_right = 20.0
-offset_bottom = 20.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_sned3")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
-position_smoothing_enabled = true
-
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.8, 0.8)
+scale = Vector2(0.75, 0.75)
 
 [node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
 starting_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("move_state", "velocity_component", "ability_component", "animation_tree")]
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "move_state", "velocity_component", "animation_tree")]
 script = ExtResource("3_un612")
+player = NodePath("../..")
 move_state = NodePath("../Move")
 velocity_component = NodePath("../../VelocityComponent")
-ability_component = NodePath("../../AbilityComponent")
 animation_tree = NodePath("../../AnimationTree")
 
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("idle_state", "velocity_component", "ability_component", "animation_tree")]
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "idle_state", "velocity_component", "animation_tree")]
 script = ExtResource("4_lhxmr")
+player = NodePath("../..")
 idle_state = NodePath("../Idle")
 velocity_component = NodePath("../../VelocityComponent")
-ability_component = NodePath("../../AbilityComponent")
 animation_tree = NodePath("../../AnimationTree")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_ry1uk")]
@@ -1032,7 +949,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_4pc1n")
 anim_player = NodePath("../AnimationPlayer")
-parameters/parry/finish/blend_position = Vector2(0, 0)
 parameters/stab/blend_position = Vector2(0.814013, -1.01058)
 parameters/strike/blend_position = Vector2(0.90828, -0.206349)
 parameters/walk/blend_position = Vector2(-0.470064, 0.312169)

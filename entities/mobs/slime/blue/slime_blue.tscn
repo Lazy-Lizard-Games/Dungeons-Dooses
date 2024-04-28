@@ -1,44 +1,40 @@
-[gd_scene load_steps=38 format=3 uid="uid://csnfm86tpg24a"]
+[gd_scene load_steps=32 format=3 uid="uid://csnfm86tpg24a"]
 
 [ext_resource type="Script" path="res://entities/mobs/slime/blue/slime_blue.gd" id="1_7kg7v"]
 [ext_resource type="Texture2D" uid="uid://cshj6qrut0bw8" path="res://entities/mobs/slime/blue/slime_spritesheet.png" id="2_khmp1"]
-[ext_resource type="Script" path="res://attributes/attribute.gd" id="2_xkr1t"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="3_tl7lt"]
-[ext_resource type="Script" path="res://attributes/generic.gd" id="3_y7bym"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="3_y7476"]
-[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/action/action_component.tscn" id="4_a035f"]
 [ext_resource type="Script" path="res://entities/mobs/slime/blue/states/idle.gd" id="4_o6mcm"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="5_jyxmb"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="6_qnssr"]
+[ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="7_jowi0"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="9_cvdq8"]
 [ext_resource type="Script" path="res://entities/mobs/slime/blue/states/move.gd" id="9_js16g"]
 [ext_resource type="Script" path="res://actions/numbers/providers/range.gd" id="9_vroka"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="13_tk06f"]
 [ext_resource type="Script" path="res://attributes/attribute_modifier.gd" id="14_ecfgg"]
 
-[sub_resource type="Resource" id="Resource_7poao"]
-script = ExtResource("2_xkr1t")
-raw_value = 0.2
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[ExtResource("14_ecfgg")]([])
-
-[sub_resource type="Resource" id="Resource_m0jhl"]
-script = ExtResource("2_xkr1t")
-raw_value = 50.0
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[ExtResource("14_ecfgg")]([])
-
-[sub_resource type="Resource" id="Resource_c6o2s"]
-script = ExtResource("3_y7bym")
-movement_speed = SubResource("Resource_m0jhl")
-friction = SubResource("Resource_7poao")
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_52qcn"]
 radius = 5.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dypq5"]
+radius = 8.0
+
+[sub_resource type="Resource" id="Resource_ygpc4"]
+script = ExtResource("9_vroka")
+number_min = 1.0
+number_max = 3.0
+
+[sub_resource type="Resource" id="Resource_d423o"]
+script = ExtResource("9_vroka")
+number_min = 40.0
+number_max = 65.0
+
+[sub_resource type="Resource" id="Resource_wnmvq"]
+script = ExtResource("14_ecfgg")
+uid = &"JumpFriction"
+operation = 1
+value = 0.025
 
 [sub_resource type="Animation" id="Animation_m546g"]
 resource_name = "death"
@@ -300,7 +296,6 @@ blend_point_1/pos = 1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o0tdw"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pws3h"]
 
@@ -314,85 +309,48 @@ states/move/node = SubResource("AnimationNodeBlendSpace1D_jlo8l")
 states/move/position = Vector2(454, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_o0tdw"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_pws3h"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_wjx1j")]
 
-[sub_resource type="Resource" id="Resource_5f253"]
-script = ExtResource("2_xkr1t")
-raw_value = 0.075
-multiplier_value = 1.0
-min_value = -2.14748e+09
-max_value = 2.14748e+09
-modifiers = Array[ExtResource("14_ecfgg")]([])
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_dypq5"]
-radius = 8.0
-
-[sub_resource type="Resource" id="Resource_ygpc4"]
-script = ExtResource("9_vroka")
-number_min = 1.0
-number_max = 3.0
-
-[sub_resource type="Resource" id="Resource_d423o"]
-script = ExtResource("9_vroka")
-number_min = 40.0
-number_max = 65.0
-
-[sub_resource type="Resource" id="Resource_wnmvq"]
-script = ExtResource("14_ecfgg")
-uid = &"JumpFriction"
-operation = 1
-value = 0.025
-
-[node name="SlimeBlue" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "hitbox_component", "health_component", "animation_tree", "velocity_component", "action_component", "effect_component")]
+[node name="SlimeBlue" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
 script = ExtResource("1_7kg7v")
 state_component = NodePath("StateComponent")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
+effect_component = NodePath("EffectComponent")
+stats_component = NodePath("StatsComponent")
 id = "Blue Slime"
 faction = 4
-animation_tree = NodePath("AnimationTree")
 velocity_component = NodePath("VelocityComponent")
-action_component = NodePath("ActionComponent")
-effect_component = NodePath("EffectComponent")
-generics = SubResource("Resource_c6o2s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -4)
 texture = ExtResource("2_khmp1")
 flip_h = true
 hframes = 10
 vframes = 3
-frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_52qcn")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_kdqvj")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_kdqvj")
-}
-tree_root = SubResource("AnimationNodeStateMachine_l3brg")
-anim_player = NodePath("../AnimationPlayer")
-parameters/move/blend_position = -0.174603
-
 [node name="ShadowComponent" parent="." instance=ExtResource("13_tk06f")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.75, 0.75)
 
-[node name="VelocityComponent" parent="." instance=ExtResource("3_tl7lt")]
-friction = SubResource("Resource_5f253")
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_tl7lt")]
+stats_component = NodePath("../StatsComponent")
+speed = 50.0
+acceleration = 25.0
+friction = 1.0
 
-[node name="ActionComponent" parent="." instance=ExtResource("4_a035f")]
-
-[node name="HealthComponent" parent="." instance=ExtResource("5_jyxmb")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_jyxmb")]
+stats_component = NodePath("../StatsComponent")
+maximum = 10.0
 
 [node name="EffectComponent" parent="." instance=ExtResource("9_cvdq8")]
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("6_qnssr")]
-entity = NodePath("..")
+[node name="StatsComponent" parent="." instance=ExtResource("7_jowi0")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component") instance=ExtResource("6_qnssr")]
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+effect_component = NodePath("../EffectComponent")
 invulnerability_duration = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
@@ -418,3 +376,13 @@ velocity = NodePath("../../VelocityComponent")
 idle = NodePath("../Idle")
 jump_strength = SubResource("Resource_d423o")
 jump_friction_modifier = SubResource("Resource_wnmvq")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kdqvj")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_l3brg")
+anim_player = NodePath("../AnimationPlayer")
+parameters/move/blend_position = -0.174603

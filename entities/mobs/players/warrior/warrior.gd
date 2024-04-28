@@ -7,7 +7,6 @@ extends Mob
 @export var inventory_component: InventoryComponent
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
-## Animation tree for animating the states of the entity.
 @export var animation_tree: AnimationTree
 @export_category('Player Abilities')
 @export var primary: Ability
@@ -50,9 +49,11 @@ func start_ability(ability: Ability) -> void:
 				return
 		ability.failed.emit()
 
+func init() -> void:
+	state_component.init()
+
 func _ready() -> void:
-	ability_component.init(self)
-	state_component.init(self)
+	call_deferred("init")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("consumable_1"):

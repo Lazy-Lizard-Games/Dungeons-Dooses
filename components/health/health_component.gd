@@ -60,18 +60,6 @@ var state: HealthState = HealthState.Healthy:
 		state_updated.emit(old, state)
 var delay_timer: float = 0
 
-func _process(delta):
-	match state:
-		HealthState.Delaying:
-			delay_timer += delta
-			if delay_timer >= delay_time:
-				delay_timer = 0
-				state = HealthState.Regenerating
-		HealthState.Regenerating:
-			current += regeneration * delta
-			if current == maximum:
-				state = HealthState.Healthy
-
 ## Deals damage to the current health and returns the healths state.
 func damage(amount: float, type: Enums.DamageType) -> HealthState:
 	if invulnerable:
@@ -90,3 +78,21 @@ func damage(amount: float, type: Enums.DamageType) -> HealthState:
 ## Restores amount to the current health.
 func heal(amount: float) -> void:
 	current += amount
+
+func initialise_current() -> void:
+	current = maximum
+
+func _ready():
+	call_deferred("initialise_current")
+
+func _process(delta):
+	match state:
+		HealthState.Delaying:
+			delay_timer += delta
+			if delay_timer >= delay_time:
+				delay_timer = 0
+				state = HealthState.Regenerating
+		HealthState.Regenerating:
+			current += regeneration * delta
+			if current == maximum:
+				state = HealthState.Healthy
