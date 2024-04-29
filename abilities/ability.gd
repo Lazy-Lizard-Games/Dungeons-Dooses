@@ -93,20 +93,19 @@ func ready() -> void:
 	readied.emit()
 
 func _process(delta):
-	match state:
-		Enums.AbilityState.Charging:
+	if is_charging:
 			charging_timer += delta * charge_modifier
 			if charging_timer > charging_time:
 				is_charging = false
 				charging_timer = 0
 				charged.emit()
-		Enums.AbilityState.Casting:
+	elif is_casting:
 				casting_timer += delta * cast_modifier
 				if casting_timer > casting_time:
 					is_casting = false
 					casting_timer = 0
 					casted.emit()
-		Enums.AbilityState.Refreshing:
+	elif is_refreshing:
 				refreshing_timer += delta * refresh_modifier
 				if refreshing_timer > refreshing_time:
 					is_refreshing = false

@@ -21,7 +21,7 @@ var invulnerability_timer: Timer
 
 func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
 	handle_damages(data.damages, from)
-	handle_knockback(data.knockback_strength, from)
+	handle_knockback(data.knockback, from)
 	handle_effects(data.active_effects, from)
 	detect_only = true
 	invulnerability_timer.start(invulnerability_duration)
@@ -39,18 +39,19 @@ func handle_damages(damages: Array[DamageData], from: HurtboxComponent) -> void:
 
 func apply_damage_transforms(damages: Array[DamageData]) -> Array[DamageData]:
 	if stats_component:
-		var transformed_damages = []
+		var transformed_damages: Array[DamageData] = []
 		for d in damages:
 			var resistance = stats_component.get_damage_resistance(d.type)
-			transformed_damages.append(d.amount * (1 - resistance.get_final_value()))
+			var transformed_damage = DamageData.new(d.amount * (1 - resistance.get_final_value()), d.type)
+			transformed_damages.append(transformed_damage)
 		return transformed_damages
 	return damages
 
-func handle_knockback(strength: float, from: HurtboxComponent) -> void:
+func handle_knockback(knockback: float, from: HurtboxComponent) -> void:
 	if velocity_component:
-		var final_strength = apply_knockback_transforms(strength)
-		velocity_component.knockback(final_strength, from.global_position.direction_to(global_position))
-		from.knockback_applied.emit(strength, self)
+		var final_knockback = apply_knockback_transforms(knockback)
+		velocity_component.knockback(final_knockback, from.global_position.direction_to(global_position))
+		from.knockback_applied.emit(knockback, self)
 
 func apply_knockback_transforms(strength: float) -> float:
 	if stats_component:

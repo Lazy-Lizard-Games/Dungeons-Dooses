@@ -48,6 +48,7 @@ func exit() -> void:
 	refresh()
 
 func _on_animation_finished(_animation) -> void:
+	print('Animation out!')
 	is_finished = true
 
 func _on_casted():

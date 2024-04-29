@@ -868,17 +868,21 @@ animation_tree = NodePath("../../AnimationTree")
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 position = Vector2(0, -11)
 
-[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("animation_tree", "velocity", "stamina_component") instance=ExtResource("32_50geu")]
+[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component") instance=ExtResource("32_50geu")]
+player = NodePath("../..")
 damage = SubResource("Resource_rd43p")
 knockback = 75.0
 punctured_effect_scene = ExtResource("22_0t38a")
+idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
 
-[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("animation_tree", "velocity", "stamina_component") instance=ExtResource("23_413do")]
+[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component") instance=ExtResource("23_413do")]
+player = NodePath("../..")
 damage = SubResource("Resource_aquli")
 knockback = 100.0
+idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
@@ -952,6 +956,8 @@ parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 zoom = Vector2(3, 3)
 position_smoothing_enabled = true
 
+[connection signal="ability_pressed" from="StateComponent/Idle" to="." method="_on_ability_pressed"]
+[connection signal="ability_pressed" from="StateComponent/Walk" to="." method="_on_ability_pressed"]
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
 [connection signal="equipped_ability_updated" from="UI/Menu/MarginContainer/VBoxContainer/TabContainer/AbilityMenu" to="." method="_on_ability_menu_equipped_ability_updated"]
 
