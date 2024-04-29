@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/idle.gd" id="3_un612"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
-[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/idle.gd" id="14_stsj0"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/walk.gd" id="15_c1shl"]
 [ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="18_wakcv"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="21_kkfl7"]
@@ -805,39 +805,19 @@ faction = 1
 velocity_component = NodePath("VelocityComponent")
 position_offset = Vector2(0, -15)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
-position_smoothing_enabled = true
-
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("6_qqodu")
 hframes = 12
 vframes = 19
+frame = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_sned3")
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.75, 0.75)
-
-[node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
-starting_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "move_state", "velocity_component", "animation_tree")]
-script = ExtResource("3_un612")
-player = NodePath("../..")
-move_state = NodePath("../Move")
-velocity_component = NodePath("../../VelocityComponent")
-animation_tree = NodePath("../../AnimationTree")
-
-[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "idle_state", "velocity_component", "animation_tree")]
-script = ExtResource("4_lhxmr")
-player = NodePath("../..")
-idle_state = NodePath("../Idle")
-velocity_component = NodePath("../../VelocityComponent")
-animation_tree = NodePath("../../AnimationTree")
+scale = Vector2(0.775, 0.775)
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_ry1uk")]
 stats_component = NodePath("../StatsComponent")
@@ -868,22 +848,37 @@ inventory = SubResource("Resource_bia7r")
 
 [node name="StatsComponent" parent="." instance=ExtResource("18_wakcv")]
 
+[node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "walk_state", "velocity_component", "animation_tree")]
+script = ExtResource("14_stsj0")
+player = NodePath("../..")
+walk_state = NodePath("../Walk")
+velocity_component = NodePath("../../VelocityComponent")
+animation_tree = NodePath("../../AnimationTree")
+
+[node name="Walk" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "idle_state", "velocity_component", "animation_tree")]
+script = ExtResource("15_c1shl")
+player = NodePath("../..")
+idle_state = NodePath("../Idle")
+velocity_component = NodePath("../../VelocityComponent")
+animation_tree = NodePath("../../AnimationTree")
+
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 position = Vector2(0, -11)
 
-[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity", "stamina_component") instance=ExtResource("32_50geu")]
+[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("animation_tree", "velocity", "stamina_component") instance=ExtResource("32_50geu")]
 damage = SubResource("Resource_rd43p")
 knockback = 75.0
 punctured_effect_scene = ExtResource("22_0t38a")
-idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
 
-[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("idle_state", "animation_tree", "velocity", "stamina_component") instance=ExtResource("23_413do")]
+[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("animation_tree", "velocity", "stamina_component") instance=ExtResource("23_413do")]
 damage = SubResource("Resource_aquli")
 knockback = 100.0
-idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
@@ -953,8 +948,10 @@ parameters/stab/blend_position = Vector2(0.814013, -1.01058)
 parameters/strike/blend_position = Vector2(0.90828, -0.206349)
 parameters/walk/blend_position = Vector2(-0.470064, 0.312169)
 
-[connection signal="ability_pressed" from="StateComponent/Idle" to="." method="_on_ability_pressed"]
-[connection signal="ability_pressed" from="StateComponent/Move" to="." method="_on_ability_pressed"]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+
 [connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
 [connection signal="equipped_ability_updated" from="UI/Menu/MarginContainer/VBoxContainer/TabContainer/AbilityMenu" to="." method="_on_ability_menu_equipped_ability_updated"]
 

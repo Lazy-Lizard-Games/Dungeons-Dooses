@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cshj6qrut0bw8"
-path="res://.godot/imported/slime_spritesheet.png-0fa3fe3ecc8dee94b4b9d0cea64f9d85.ctex"
+uid="uid://dhj8x2k3vhs4x"
+path="res://.godot/imported/spritesheet.png-5eb4d717e976b0eaab3c87addd61c7e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/mobs/slime/blue/slime_spritesheet.png"
-dest_files=["res://.godot/imported/slime_spritesheet.png-0fa3fe3ecc8dee94b4b9d0cea64f9d85.ctex"]
+source_file="res://entities/mobs/warrior/spritesheet.png"
+dest_files=["res://.godot/imported/spritesheet.png-5eb4d717e976b0eaab3c87addd61c7e5.ctex"]
 
 [params]
 

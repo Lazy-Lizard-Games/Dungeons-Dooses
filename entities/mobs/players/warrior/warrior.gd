@@ -49,11 +49,8 @@ func start_ability(ability: Ability) -> void:
 				return
 		ability.failed.emit()
 
-func init() -> void:
-	state_component.init()
-
 func _ready() -> void:
-	call_deferred("init")
+	state_component.init()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("consumable_1"):
@@ -78,3 +75,7 @@ func _on_interactor_component_interactables_updated() -> void:
 
 func _on_ability_menu_equipped_ability_updated(index: int, ability: Ability):
 	set_ability(index, ability)
+
+func _on_ability_pressed(index):
+	var ability = get_ability(index)
+	start_ability(ability)

@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://cwq5rlr506y5t"]
+
+[ext_resource type="Script" path="res://entities/mobs/warrior/warrior.gd" id="1_3ef07"]
+[ext_resource type="Texture2D" uid="uid://dhj8x2k3vhs4x" path="res://entities/mobs/warrior/spritesheet.png" id="2_sqvuv"]
+[ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="3_fpxs1"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="4_olb4x"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="5_gge1x"]
+[ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="6_ytayo"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="7_8g18c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_u788i"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trpd1"]
+radius = 9.05539
+
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
+script = ExtResource("1_3ef07")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+effect_component = NodePath("EffectComponent")
+stats_component = NodePath("StatsComponent")
+id = "Warrior"
+faction = 1
+velocity_component = NodePath("VelocityComponent")
+position_offset = Vector2(0, -10)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_u788i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+texture = ExtResource("2_sqvuv")
+flip_h = true
+hframes = 12
+vframes = 19
+frame = 2
+
+[node name="StatsComponent" parent="." instance=ExtResource("3_fpxs1")]
+
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("4_olb4x")]
+stats_component = NodePath("../StatsComponent")
+speed = 500.0
+acceleration = 150.0
+friction = 1.0
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_gge1x")]
+stats_component = NodePath("../StatsComponent")
+maximum = 100.0
+regeneration = 5.0
+delay_time = 0.5
+
+[node name="EffectComponent" parent="." instance=ExtResource("6_ytayo")]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("7_8g18c")]
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+effect_component = NodePath("../EffectComponent")
+stats_component = NodePath("../StatsComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -12)
+shape = SubResource("CircleShape2D_trpd1")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
