@@ -24,7 +24,7 @@ var hit_targets: Array[HitboxComponent] = []
 
 func on_area_collision(area: Area2D) -> void:
 	if area is HitboxComponent:
-		if (target_allies and faction == area.faction) or (!target_allies and faction != area.faction) or (area.faction == Enums.FactionType.None) or (faction == Enums.FactionType.None):
+		if (target_allies and faction == area.faction) or (!target_allies and (faction != area.faction or area.faction == Enums.FactionType.None or faction == Enums.FactionType.None)):
 			if area.detect_only:
 				return
 			if area in hit_targets:
