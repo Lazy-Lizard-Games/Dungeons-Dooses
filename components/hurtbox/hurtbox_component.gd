@@ -14,18 +14,23 @@ signal hurt(hitbox: HitboxComponent)
 
 ## Data to transfer on impact with a hitbox.
 @export var impact_data: ImpactData
+## Faction that the hurtbox belongs to.
+@export var faction: Enums.FactionType
+## Toggles whether the hurtbox hits allies or enemis of the faction.
+@export var target_allies: bool
 
 ## Collection of already hit targets.
 var hit_targets: Array[HitboxComponent] = []
 
 func on_area_collision(area: Area2D) -> void:
 	if area is HitboxComponent:
-		if area.detect_only:
-			return
-		if area in hit_targets:
-			return
-		hit_targets.append(area)
-		area.handle_impact(impact_data, self)
+		if (target_allies and faction == area.faction) or (!target_allies and faction != area.faction) or (area.faction == Enums.FactionType.None) or (faction == Enums.FactionType.None):
+			if area.detect_only:
+				return
+			if area in hit_targets:
+				return
+			hit_targets.append(area)
+			area.handle_impact(impact_data, self)
 
 func force_check() -> void:
 	for area in get_overlapping_areas():

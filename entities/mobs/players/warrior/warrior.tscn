@@ -896,6 +896,7 @@ health_component = NodePath("../HealthComponent")
 velocity_component = NodePath("../VelocityComponent")
 effect_component = NodePath("../EffectComponent")
 stats_component = NodePath("../StatsComponent")
+faction = 1
 invulnerability_duration = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

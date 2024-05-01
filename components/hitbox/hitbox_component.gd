@@ -12,7 +12,8 @@ signal impacted(from: HurtboxComponent)
 @export var effect_component: EffectComponent
 ## The stats component that will handle value transformations.
 @export var stats_component: StatsComponent
-
+## The faction which the hitbox belongs to.
+@export var faction: Enums.FactionType
 ## Toggles whether hitbox can handle impact events.
 @export var detect_only := false
 ## Duration of invulnerability after being hit, 0 if none.

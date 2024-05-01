@@ -54,7 +54,7 @@ func _on_casted():
 		stamina_component.exhaust(cost * cost_modifier)
 	var impact_data = ImpactData.new([damage], knockback, [])
 	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
-	strike_projectile.init(player.centre_position, player.looking_at, impact_data)
+	strike_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
 	ProjectileHandler.add_projectile(strike_projectile)
 
 func _on_refreshed():
