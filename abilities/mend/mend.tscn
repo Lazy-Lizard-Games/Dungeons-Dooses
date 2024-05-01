@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cp74lofv8h4fl"]
+
+[ext_resource type="Script" path="res://abilities/mend/mend.gd" id="1_bbmjn"]
+
+[node name="Mend" type="Node"]
+script = ExtResource("1_bbmjn")

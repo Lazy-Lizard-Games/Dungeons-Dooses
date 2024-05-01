@@ -1,12 +1,12 @@
-[gd_scene load_steps=87 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=86 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
+[ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
-[ext_resource type="Texture2D" uid="uid://b6hgtmoyxg314" path="res://entities/mobs/players/warrior/sprites/swordsman_spritesheet.png" id="6_qqodu"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="21_kkfl7"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
-[ext_resource type="PackedScene" uid="uid://cjxmr5co58fw4" path="res://effects/active/smited/smited.tscn" id="22_0t38a"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/strike/strike.tscn" id="23_413do"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
@@ -307,23 +306,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 14), Vector2i(1, 14), Vector2i(2, 14), Vector2i(3, 14), Vector2i(4, 14), Vector2i(5, 14), Vector2i(6, 14)]
-}
-
-[sub_resource type="Animation" id="Animation_bix7b"]
-resource_name = "rally"
-length = 1.8
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_bg36c"]
@@ -630,6 +612,23 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_bix7b"]
+resource_name = "mend"
+length = 1.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rd62t"]
 _data = {
 "cleave_down": SubResource("Animation_irgbt"),
@@ -640,11 +639,11 @@ _data = {
 "death_idle": SubResource("Animation_ungod"),
 "idle": SubResource("Animation_mbh1a"),
 "idle_unlooped": SubResource("Animation_8mgoj"),
+"mend": SubResource("Animation_bix7b"),
 "parry_attack": SubResource("Animation_ieicy"),
 "parry_end": SubResource("Animation_r0lti"),
 "parry_idle": SubResource("Animation_fvsx8"),
 "parry_start": SubResource("Animation_7ji6i"),
-"rally": SubResource("Animation_bix7b"),
 "smite_down": SubResource("Animation_bg36c"),
 "smite_left": SubResource("Animation_6jqbw"),
 "smite_left_down": SubResource("Animation_y2ph6"),
@@ -807,17 +806,17 @@ position_offset = Vector2(0, -15)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("6_qqodu")
-hframes = 12
-vframes = 19
-frame = 7
+texture = ExtResource("2_4htdx")
+hframes = 15
+vframes = 51
+frame = 270
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_sned3")
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.775, 0.775)
+scale = Vector2(0.8, 0.8)
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_ry1uk")]
 stats_component = NodePath("../StatsComponent")
@@ -868,17 +867,17 @@ animation_tree = NodePath("../../AnimationTree")
 [node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
 position = Vector2(0, -11)
 
-[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component") instance=ExtResource("32_50geu")]
+[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component", "stats_component") instance=ExtResource("32_50geu")]
 player = NodePath("../..")
 damage = SubResource("Resource_rd43p")
 knockback = 75.0
-punctured_effect_scene = ExtResource("22_0t38a")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
+stats_component = NodePath("../../StatsComponent")
 
-[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component") instance=ExtResource("23_413do")]
+[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component", "stats_component") instance=ExtResource("23_413do")]
 player = NodePath("../..")
 damage = SubResource("Resource_aquli")
 knockback = 100.0
@@ -886,6 +885,7 @@ idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
+stats_component = NodePath("../../StatsComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)

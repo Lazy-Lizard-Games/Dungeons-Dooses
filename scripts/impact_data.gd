@@ -8,9 +8,9 @@ extends Resource
 ## The knockback to apply on impact.
 @export var knockback: float
 ## The active effects to apply on impact.
-@export var active_effects: Array[PackedScene]
+@export var effects: Array[Effect]
 
-func _init(default_damages: Array[DamageData], default_knockback: float, default_effects: Array[PackedScene]) -> void:
+func _init(default_damages: Array[DamageData], default_knockback: float, default_effects: Array[Effect]) -> void:
 	damages = default_damages
 	knockback = default_knockback
-	default_effects = default_effects
+	effects = default_effects

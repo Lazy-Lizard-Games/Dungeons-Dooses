@@ -22,7 +22,7 @@ var invulnerability_timer: Timer
 func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
 	handle_damages(data.damages, from)
 	handle_knockback(data.knockback, from)
-	handle_effects(data.active_effects, from)
+	handle_effects(data.effects, from)
 	detect_only = true
 	invulnerability_timer.start(invulnerability_duration)
 	impact.emit(from)
@@ -58,12 +58,11 @@ func apply_knockback_transforms(strength: float) -> float:
 		return strength * (1 - stats_component.knockback_resistance.get_final_value())
 	return strength
 
-func handle_effects(effects: Array[PackedScene], from: HurtboxComponent) -> void:
+func handle_effects(effects: Array[Effect], from: HurtboxComponent) -> void:
 	if effect_component:
 		for effect in effects:
-			var active_effect = effect.instantiate() as ActiveEffect
-			effect_component.add_active_effect(active_effect)
-			from.effect_applied.emit(active_effect, self)
+			effect_component.add_effect(effect)
+			from.effect_applied.emit(effect, self)
 
 func _ready():
 	invulnerability_timer = Timer.new()

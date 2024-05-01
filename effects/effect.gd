@@ -1,54 +1,52 @@
 class_name Effect
-extends Node
+extends Resource
 
 ## Describes the generic properties of an effect.
 
-signal stacks_changed(prev: int, cur: int)
+signal stacks_changed(old: int, current: int)
 signal expired
 
 ## Unique identifier for the effect.
-@export var uid: StringName
+@export var name: StringName
 ## Duration of the effect.
 @export var duration_time: float
 ## Maximum stacks of the effect.
 @export var max_stacks: int
-var duration_timer: Timer
-var entity: Entity
+## Increment this every frame that the effect is processed.
+var duration_timer: float
+## Current stacks of the effect.
 var stacks: int
 
-## Initialises the effect with the affected entity.
-func init(entity_in: Entity) -> void:
-	entity = entity_in
-	stacks = 1
+## Initialise the effect by connecting it to the effect component or something else.
+func init(_effect_component: EffectComponent) -> void:
+	pass
 
-## Adds a stack to the effect and restarts the timer.
-func add_stack() -> void:
-	var temp = stacks
-	if stacks == max_stacks:
-		duration_timer.start(duration_time)
-	else:
-		stacks += 1
-	stacks_changed.emit(temp, stacks)
-
-## Applies the effect to the entity.
+## Called when the effect begins processing.
 func enter() -> void:
 	pass
 
-## Removes the effect from the entity.
+## Called when the effect stops processing.
 func exit() -> void:
 	pass
 
-func _ready() -> void:
-	duration_timer = Timer.new()
-	add_child(duration_timer)
-	duration_timer.timeout.connect(on_duration_timout)
-	duration_timer.start(duration_time)
-	enter()
+## Called every frame while processing.
+func process_frame(_delta) -> void:
+	pass
 
-func on_duration_timout() -> void:
-	var temp = stacks
-	stacks -= 1
-	stacks_changed.emit(temp, stacks)
+## Adds the given amount to the current stacks, or resets the duration timer if already at max stacks.
+func add_stack(amount: int) -> void:
+	if stacks == max_stacks:
+		duration_timer = 0
+	else:
+		var old = stacks
+		stacks = clamp(stacks + amount, 0, max_stacks)
+		stacks_changed.emit(old, stacks)
+
+## Removes the given amount from the current stacks and signals the abilities expiration if it reaches zero.
+func remove_stacks(amount: int) -> void:
+	var old = stacks
+	stacks = clamp(stacks - amount, 0, max_stacks)
 	if stacks == 0:
-		exit()
 		expired.emit()
+	else:
+		stacks_changed.emit(old, stacks)
