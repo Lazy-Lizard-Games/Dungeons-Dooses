@@ -2,7 +2,7 @@ extends Area2D
 class_name HitboxComponent
 
 ## Perhaps deprecated...
-signal impact(from: HurtboxComponent)
+signal impacted(from: HurtboxComponent)
 
 ## The health component that will handle damages taken.
 @export var health_component: HealthComponent
@@ -25,7 +25,7 @@ func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
 	handle_effects(data.effects, from)
 	detect_only = true
 	invulnerability_timer.start(invulnerability_duration)
-	impact.emit(from)
+	impacted.emit(from)
 
 func handle_damages(damages: Array[DamageData], from: HurtboxComponent) -> void:
 		if health_component:

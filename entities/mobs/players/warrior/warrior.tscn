@@ -843,7 +843,11 @@ skill_trees = Array[ExtResource("29_uqb7t")]([SubResource("Resource_nqfhd")])
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
 inventory = SubResource("Resource_bia7r")
 
-[node name="EffectComponent" parent="." instance=ExtResource("33_n4u06")]
+[node name="EffectComponent" parent="." node_paths=PackedStringArray("health_component", "stamina_component", "velocity_component", "stats_component") instance=ExtResource("33_n4u06")]
+health_component = NodePath("../HealthComponent")
+stamina_component = NodePath("../StaminaComponent")
+velocity_component = NodePath("../VelocityComponent")
+stats_component = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("18_wakcv")]
 
@@ -870,7 +874,6 @@ position = Vector2(0, -11)
 [node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component", "stats_component") instance=ExtResource("32_50geu")]
 player = NodePath("../..")
 damage = SubResource("Resource_rd43p")
-knockback = 75.0
 idle_state = NodePath("../../StateComponent/Idle")
 animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")

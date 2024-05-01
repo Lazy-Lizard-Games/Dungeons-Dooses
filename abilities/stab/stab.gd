@@ -7,8 +7,8 @@ extends Ability
 @export var damage: DamageData
 ## The knockback applied by this ability.
 @export var knockback: float
-## The scene of the punctured effect dealt by the ability.
-@export var punctured_effect_scene: PackedScene
+## The effect dealt by the ability. TODO: change
+@export var burning_effect: BurningEffect
 ## The projectile that will be created when the ability is casted.
 @export var stab_projectile_scene: PackedScene
 ## State to move to when ability is casted.
@@ -54,7 +54,7 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
-	var impact_data = ImpactData.new([damage], knockback, [punctured_effect_scene])
+	var impact_data = ImpactData.new([damage], knockback, [burning_effect])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
 	stab_projectile.init(player.centre_position, player.looking_at, impact_data)
 	ProjectileHandler.add_projectile(stab_projectile)

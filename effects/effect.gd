@@ -17,12 +17,8 @@ var duration_timer: float
 ## Current stacks of the effect.
 var stacks: int
 
-## Initialise the effect by connecting it to the effect component or something else.
+## Called when the effect begins being processed.
 func init(_effect_component: EffectComponent) -> void:
-	pass
-
-## Called when the effect begins processing.
-func enter() -> void:
 	pass
 
 ## Called when the effect stops processing.
@@ -30,7 +26,7 @@ func exit() -> void:
 	pass
 
 ## Called every frame while processing.
-func process_frame(_delta) -> void:
+func process(_delta: float) -> void:
 	pass
 
 ## Adds the given amount to the current stacks, or resets the duration timer if already at max stacks.

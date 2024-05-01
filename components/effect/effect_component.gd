@@ -5,7 +5,16 @@ extends Node
 
 signal effect_added(effect: Effect)
 signal effect_removed(effect: Effect)
-signal effects_cleared()
+signal effects_cleared
+
+## The health component useable by effects.
+@export var health_component: HealthComponent
+## The stamina component useable by effects.
+@export var stamina_component: StaminaComponent
+## The velocity component useable by effects.
+@export var velocity_component: VelocityComponent
+## The stats component useable by effects.
+@export var stats_component: StatsComponent
 
 var effects: Array[Effect] = []
 
@@ -27,6 +36,7 @@ func add_effect(effect: Effect) -> void:
 	if existing_effect:
 		existing_effect.add_stack(1)
 	else:
+		effect.stacks = 1
 		effect.init(self)
 		effects.append(effect)
 		effect.expired.connect(_on_effect_expired.bind(effect), CONNECT_ONE_SHOT)
@@ -41,3 +51,7 @@ func remove_effect(effect) -> void:
 ## Called whenever an effect expires.
 func _on_effect_expired(effect: Effect) -> void:
 	remove_effect(effect)
+
+func _process(delta):
+	for effect in effects:
+		effect.process(delta)

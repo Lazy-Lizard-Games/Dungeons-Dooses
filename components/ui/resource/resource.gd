@@ -5,7 +5,7 @@ class_name ResourceContainer
 @export var label: Label
 @export var progress_bar: ProgressBar
 
-var effect: ActiveEffect
+var effect: Effect
 
 func _ready() -> void:
 	label.text = "x" + String.num_int64(effect.stacks)
@@ -15,12 +15,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if effect != null:
-		progress_bar.value = effect.duration_time - effect.duration_timer.time_left
+		progress_bar.value = effect.duration_timer
 
 func on_expired() -> void:
 	queue_free()
 
-func on_stacks_changed(_prev: int, cur: int) -> void:
+func on_stacks_changed(_old: int, current: int) -> void:
 	label.text = ''
-	if cur > 0:
-		label.text = "x" + String.num_int64(cur)
+	if current > 0:
+		label.text = "x" + String.num_int64(current)

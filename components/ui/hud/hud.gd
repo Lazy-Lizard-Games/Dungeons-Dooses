@@ -21,8 +21,8 @@ func _ready() -> void:
 	health.maximum_updated.connect(on_health_maximum_updated)
 	stamina.current_updated.connect(on_stamina_current_updated)
 	stamina.maximum_updated.connect(on_stamina_maximum_updated)
-	effect_component.active_effect_added.connect(on_effect_added)
-	effect_component.active_effect_removed.connect(on_effect_removed)
+	effect_component.effect_added.connect(on_effect_added)
+	effect_component.effect_removed.connect(on_effect_removed)
 
 func on_health_current_updated(_previous: float, current: float) -> void:
 	health_bar.progress_bar.value = current
@@ -36,13 +36,13 @@ func on_stamina_current_updated(_previous: float, current: float) -> void:
 func on_stamina_maximum_updated(_previous: float, current: float) -> void:
 	stamina_bar.progress_bar.value = current
 
-func on_effect_added(effect: ActiveEffect) -> void:
+func on_effect_added(effect: Effect) -> void:
 	var resource_container = resource_container_scene.instantiate() as ResourceContainer
 	resource_container.effect = effect
 	effect_container.add_child(resource_container)
 
-func on_effect_removed(effect: ActiveEffect) -> void:
+func on_effect_removed(effect: Effect) -> void:
 	for child in effect_container.get_children() as Array[ResourceContainer]:
-		if child.effect.uid == effect.uid:
+		if child.effect.name == effect.name:
 			effect_container.remove_child(child)
 			child.queue_free()
