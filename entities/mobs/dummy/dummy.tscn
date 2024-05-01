@@ -138,7 +138,11 @@ stats_component = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("7_fafbl")]
 
-[node name="HitboxComponent" parent="." instance=ExtResource("6_c60ux")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("6_c60ux")]
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+effect_component = NodePath("../EffectComponent")
+stats_component = NodePath("../StatsComponent")
 invulnerability_duration = 0.1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]

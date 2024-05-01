@@ -48,15 +48,14 @@ func exit() -> void:
 	refresh()
 
 func _on_animation_finished(_animation) -> void:
-	print('Animation out!')
 	is_finished = true
 
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
-	var impact_data = ImpactData.new([damage], knockback, [burning_effect])
+	var impact_data = ImpactData.new([damage], knockback, [])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
-	stab_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
+	stab_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, true)
 	ProjectileHandler.add_projectile(stab_projectile)
 
 func _on_refreshed():

@@ -828,7 +828,7 @@ friction = 1.0
 stats_component = NodePath("../StatsComponent")
 maximum = 100.0
 regeneration = 5.0
-delay_time = 0.5
+delay_time = 5.0
 
 [node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("12_edvht")]
 stats_component = NodePath("../StatsComponent")

@@ -56,7 +56,8 @@ var delay_timer: float = 0
 ## Removes the amount from the current stamina.
 func exhaust(amount: float) -> void:
 	current -= amount
-	state = StaminaState.Delaying
+	delay_timer = -0.5
+	state = StaminaState.Recovering
 
 ## Adds the amount to the current stamina.
 func recover(amount: float) -> void:
@@ -70,12 +71,8 @@ func _ready():
 
 func _process(delta):
 	match state:
-		StaminaState.Delaying:
-			delay_timer += delta
-			if delay_timer >= delay_time:
-				delay_timer = 0
-				state = StaminaState.Recovering
 		StaminaState.Recovering:
-			current += regeneration * delta
+			delay_timer += delta
+			current += regeneration * delta * (clamp(pow(delay_timer, 2) * 0.5, 0, delay_time) / delay_time)
 			if current == maximum:
 				state = StaminaState.Energized

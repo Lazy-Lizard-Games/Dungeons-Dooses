@@ -2,7 +2,6 @@ extends Node
 class_name HealthComponent
 
 enum HealthState {
-	Delaying,
 	Regenerating,
 	Healthy,
 	Dead,
@@ -71,7 +70,8 @@ func damage(amount: float, type: Enums.DamageType) -> HealthState:
 		state = HealthState.Dead
 		died.emit(amount, type)
 	else:
-		state = HealthState.Delaying
+		delay_timer = -0.5
+		state = HealthState.Regenerating
 		damaged.emit(amount, type)
 	return state
 
@@ -87,12 +87,8 @@ func _ready():
 
 func _process(delta):
 	match state:
-		HealthState.Delaying:
-			delay_timer += delta
-			if delay_timer >= delay_time:
-				delay_timer = 0
-				state = HealthState.Regenerating
 		HealthState.Regenerating:
-			current += regeneration * delta
+			delay_timer += delta
+			current += regeneration * delta * (clamp(pow(delay_timer, 2) * 0.5, 0, delay_time) / delay_time)
 			if current == maximum:
 				state = HealthState.Healthy
