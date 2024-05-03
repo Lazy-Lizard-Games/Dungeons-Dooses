@@ -10,7 +10,7 @@ extends Resource
 ## The active effects to apply on impact.
 @export var effects: Array[Effect]
 
-func _init(default_damages: Array[DamageData], default_knockback: float, default_effects: Array[Effect]) -> void:
+func _init(default_damages: Array[DamageData]=[], default_knockback: float=0, default_effects: Array[Effect]=[]) -> void:
 	damages = default_damages
 	knockback = default_knockback
 	effects = default_effects

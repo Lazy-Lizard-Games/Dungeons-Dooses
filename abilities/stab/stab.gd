@@ -53,9 +53,10 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
+	damage.amount *= stats_component.get_damage_affinity(damage.type).get_final_value()
 	var impact_data = ImpactData.new([damage], knockback, [])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
-	stab_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, true)
+	stab_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(stab_projectile)
 
 func _on_refreshed():

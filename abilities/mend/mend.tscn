@@ -4,3 +4,11 @@
 
 [node name="Mend" type="Node"]
 script = ExtResource("1_bbmjn")
+group = 1
+type = 2
+cost = 10
+casting_time = 1.0
+refreshing_time = 1.0
+
+[connection signal="casted" from="." to="." method="_on_casted"]
+[connection signal="refreshed" from="." to="." method="_on_refreshed"]

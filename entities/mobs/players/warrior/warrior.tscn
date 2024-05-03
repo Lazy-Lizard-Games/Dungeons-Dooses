@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=105 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
@@ -14,13 +14,21 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/walk.gd" id="15_c1shl"]
 [ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="18_wakcv"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
+[ext_resource type="PackedScene" uid="uid://cp74lofv8h4fl" path="res://abilities/mend/mend.tscn" id="20_tsbi3"]
+[ext_resource type="Script" path="res://effects/ability/mend.gd" id="21_dhwru"]
 [ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="21_kkfl7"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
+[ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="22_gwluk"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/strike/strike.tscn" id="23_413do"]
+[ext_resource type="PackedScene" uid="uid://5detw0usmk0y" path="res://abilities/inspire/inspire.tscn" id="23_eo67p"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
+[ext_resource type="Script" path="res://effects/ability/inspire.gd" id="24_hedtb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
+[ext_resource type="PackedScene" uid="uid://cjdoso7d8t6km" path="res://entities/projectiles/inspire/inspire.tscn" id="25_w3f32"]
+[ext_resource type="Resource" uid="uid://t6kgf7mb5kum" path="res://entities/mobs/players/warrior/ability_sets/mercenary/mercenary.tres" id="28_atffu"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
+[ext_resource type="Script" path="res://features/abilities/ability_set_data.gd" id="29_wodra"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/stab/stab.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
@@ -48,11 +56,41 @@ script = ExtResource("21_kkfl7")
 amount = 5.0
 type = 0
 
+[sub_resource type="Resource" id="Resource_6uo0j"]
+script = ExtResource("21_dhwru")
+interval_time = 1.5
+heal_amount = 5.0
+name = &"Mend"
+duration_time = 7.5
+max_stacks = 1
+
+[sub_resource type="Resource" id="Resource_ydyux"]
+script = ExtResource("24_hedtb")
+physical_resistance = 0.5
+physical_affinity = 0.5
+name = &"Inspired"
+duration_time = 10.0
+max_stacks = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(14, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
 radius = 50.0
+
+[sub_resource type="Resource" id="Resource_jf3oc"]
+script = ExtResource("29_wodra")
+group = 1
+name = "Crusader"
+description = "Supportive and proud."
+theme = Color(0.831373, 0.694118, 0.215686, 1)
+
+[sub_resource type="Resource" id="Resource_uwuwx"]
+script = ExtResource("29_wodra")
+group = 2
+name = "Legionnaire"
+description = ""
+theme = Color(0.212067, 0.333458, 0.47514, 1)
 
 [sub_resource type="Animation" id="Animation_irgbt"]
 resource_name = "cleave_down"
@@ -238,6 +276,40 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0), Vector2i(6, 0), Vector2i(7, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_03b2x"]
+resource_name = "inspire"
+length = 1.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 19), Vector2i(1, 19), Vector2i(2, 19), Vector2i(3, 19), Vector2i(4, 19), Vector2i(5, 19), Vector2i(6, 19), Vector2i(7, 19), Vector2i(8, 19), Vector2i(9, 19), Vector2i(10, 19), Vector2i(11, 19)]
+}
+
+[sub_resource type="Animation" id="Animation_bix7b"]
+resource_name = "mend"
+length = 1.8
+step = 0.15
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
 }
 
 [sub_resource type="Animation" id="Animation_ieicy"]
@@ -612,23 +684,6 @@ tracks/0/keys = {
 "values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
 }
 
-[sub_resource type="Animation" id="Animation_bix7b"]
-resource_name = "mend"
-length = 1.8
-step = 0.15
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05, 1.2, 1.35, 1.5, 1.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 18), Vector2i(1, 18), Vector2i(2, 18), Vector2i(3, 18), Vector2i(4, 18), Vector2i(5, 18), Vector2i(6, 18), Vector2i(7, 18), Vector2i(8, 18), Vector2i(9, 18), Vector2i(10, 18), Vector2i(11, 18)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rd62t"]
 _data = {
 "cleave_down": SubResource("Animation_irgbt"),
@@ -639,6 +694,7 @@ _data = {
 "death_idle": SubResource("Animation_ungod"),
 "idle": SubResource("Animation_mbh1a"),
 "idle_unlooped": SubResource("Animation_8mgoj"),
+"inspire": SubResource("Animation_03b2x"),
 "mend": SubResource("Animation_bix7b"),
 "parry_attack": SubResource("Animation_ieicy"),
 "parry_end": SubResource("Animation_r0lti"),
@@ -660,6 +716,12 @@ _data = {
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5fw13"]
 animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_txcvu"]
+animation = &"inspire"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wr6kj"]
+animation = &"mend"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sn73e"]
 animation = &"smite_up"
@@ -769,20 +831,34 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_15i4u"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pn35s"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a357h"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6puto"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8fiu0"]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4pc1n"]
 states/Start/position = Vector2(147, 44)
 states/idle/node = SubResource("AnimationNodeAnimation_5fw13")
 states/idle/position = Vector2(303, 44)
+states/inspire/node = SubResource("AnimationNodeAnimation_txcvu")
+states/inspire/position = Vector2(461.472, 44)
+states/mend/node = SubResource("AnimationNodeAnimation_wr6kj")
+states/mend/position = Vector2(461.472, -59)
 states/stab/node = SubResource("AnimationNodeBlendSpace2D_oh5pb")
 states/stab/position = Vector2(303, -59)
 states/strike/node = SubResource("AnimationNodeBlendSpace2D_2ovn1")
 states/strike/position = Vector2(147, -59)
 states/walk/node = SubResource("AnimationNodeBlendSpace2D_jkldm")
 states/walk/position = Vector2(303, 140)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u")]
-graph_offset = Vector2(20.4717, -83.1757)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "mend", SubResource("AnimationNodeStateMachineTransition_pn35s"), "mend", "idle", SubResource("AnimationNodeStateMachineTransition_a357h"), "idle", "inspire", SubResource("AnimationNodeStateMachineTransition_6puto"), "inspire", "idle", SubResource("AnimationNodeStateMachineTransition_8fiu0")]
+graph_offset = Vector2(0.471701, -123.176)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "animation_tree", "primary", "secondary", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "animation_tree", "primary", "secondary", "support", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -795,6 +871,7 @@ stamina_component = NodePath("StaminaComponent")
 animation_tree = NodePath("AnimationTree")
 primary = NodePath("AbilityComponent/Stab")
 secondary = NodePath("AbilityComponent/Strike")
+support = NodePath("AbilityComponent/Inspire")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 effect_component = NodePath("EffectComponent")
@@ -809,7 +886,7 @@ position = Vector2(0, -16)
 texture = ExtResource("2_4htdx")
 hframes = 15
 vframes = 51
-frame = 270
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3)
@@ -890,6 +967,33 @@ velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
 stats_component = NodePath("../../StatsComponent")
 
+[node name="Mend" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component", "stats_component") instance=ExtResource("20_tsbi3")]
+player = NodePath("../..")
+mend_effect = SubResource("Resource_6uo0j")
+projectile_scene = ExtResource("22_gwluk")
+idle_state = NodePath("../../StateComponent/Idle")
+animation_tree = NodePath("../../AnimationTree")
+velocity = NodePath("../../VelocityComponent")
+stamina_component = NodePath("../../StaminaComponent")
+stats_component = NodePath("../../StatsComponent")
+casting_time = 1.5
+
+[node name="Inspire" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component", "stats_component") instance=ExtResource("23_eo67p")]
+player = NodePath("../..")
+inspire_effect = SubResource("Resource_ydyux")
+projectile_scene = ExtResource("25_w3f32")
+idle_state = NodePath("../../StateComponent/Idle")
+animation_tree = NodePath("../../AnimationTree")
+velocity = NodePath("../../VelocityComponent")
+stamina_component = NodePath("../../StaminaComponent")
+stats_component = NodePath("../../StatsComponent")
+group = 2
+type = 2
+description = "Channel your inner commander and inspire all nearby allies with increased attack and defence."
+cost = 15
+casting_time = 1.5
+refreshing_time = 1.0
+
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)
 health_component = NodePath("../HealthComponent")
@@ -941,6 +1045,7 @@ skill_component = NodePath("../../../../../../SkillComponent")
 entity = NodePath("../../../../../..")
 
 [node name="AbilityMenu" parent="UI/Menu/MarginContainer/VBoxContainer/TabContainer" index="3" node_paths=PackedStringArray("ability_component", "player")]
+ability_sets = Array[ExtResource("29_wodra")]([ExtResource("28_atffu"), SubResource("Resource_jf3oc"), SubResource("Resource_uwuwx")])
 ability_component = NodePath("../../../../../../AbilityComponent")
 player = NodePath("../../../../../..")
 

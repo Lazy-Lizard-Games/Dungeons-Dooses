@@ -33,6 +33,7 @@ func handle_damages(damages: Array[DamageData], from: HurtboxComponent) -> void:
 			var final_damages = apply_damage_transforms(damages)
 			for d in final_damages:
 				var state = health_component.damage(d.amount, d.type)
+				TextHandler.create_damage_text(d.type, d.amount, self.global_position)
 				if state == health_component.HealthState.Dead:
 					from.death_dealt.emit(d.amount, d.type, self)
 				else:
@@ -43,6 +44,7 @@ func apply_damage_transforms(damages: Array[DamageData]) -> Array[DamageData]:
 		var transformed_damages: Array[DamageData] = []
 		for d in damages:
 			var resistance = stats_component.get_damage_resistance(d.type)
+			print(d.amount, " reduced by ", (resistance.get_final_value()) * 100, "%")
 			var transformed_damage = DamageData.new(d.amount * (1 - resistance.get_final_value()), d.type)
 			transformed_damages.append(transformed_damage)
 		return transformed_damages

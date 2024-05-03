@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjdoso7d8t6km"]
+
+[ext_resource type="Script" path="res://entities/projectiles/inspire/inspire.gd" id="1_msy4a"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_tuyy7"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_o338d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kwpc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oeb8l"]
+radius = 50.0
+
+[node name="Inspire" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "velocity_component")]
+script = ExtResource("1_msy4a")
+hurtbox_component = NodePath("HurtboxComponent")
+id = "Inspire"
+velocity_component = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6kwpc")
+disabled = true
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_tuyy7")]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("3_o338d")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_oeb8l")

@@ -134,7 +134,10 @@ delay_time = 0.01
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_12j2c")]
 stats_component = NodePath("../StatsComponent")
 
-[node name="EffectComponent" parent="." instance=ExtResource("8_2b6gb")]
+[node name="EffectComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "stats_component") instance=ExtResource("8_2b6gb")]
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+stats_component = NodePath("../StatsComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("7_fafbl")]
 
@@ -161,3 +164,5 @@ root_node = NodePath(".")
 tree_root = SubResource("AnimationNodeStateMachine_vkqpj")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hit = false
+
+[connection signal="impacted" from="HitboxComponent" to="." method="_on_hitbox_component_impacted"]

@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://ccrpeefi5b43"]
+[gd_scene load_steps=4 format=3 uid="uid://ccrpeefi5b43"]
 
 [ext_resource type="Script" path="res://scenes/damage_text/damage_text.gd" id="1_c4ffw"]
-[ext_resource type="Resource" uid="uid://cmyhby2afiffx" path="res://assets/damage/default_colour.tres" id="2_e3eqy"]
+[ext_resource type="Script" path="res://scripts/damage/damage_color_data.gd" id="2_3ushi"]
+
+[sub_resource type="Resource" id="Resource_ncjkg"]
+script = ExtResource("2_3ushi")
+slash = Color(0.698039, 0.133333, 0.133333, 1)
+pierce = Color(0.752941, 0.752941, 0.752941, 1)
+blunt = Color(0.690196, 0.768627, 0.870588, 1)
+fire = Color(1, 0.498039, 0.313726, 1)
+frost = Color(0.498039, 1, 0.831373, 1)
+shock = Color(1, 1, 0, 1)
+poison = Color(0.545098, 0, 0.545098, 1)
+light = Color(0.980392, 0.980392, 0.823529, 1)
 
 [node name="DamageText" type="Control" node_paths=PackedStringArray("label", "timer")]
 z_index = 3
@@ -10,7 +21,7 @@ anchors_preset = 0
 script = ExtResource("1_c4ffw")
 label = NodePath("Label")
 timer = NodePath("Timer")
-colors = ExtResource("2_e3eqy")
+colors = SubResource("Resource_ncjkg")
 
 [node name="Timer" type="Timer" parent="."]
 

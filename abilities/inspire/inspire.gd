@@ -1,15 +1,13 @@
 extends Ability
 
-## Sweeps the sword in frnot of you, cleaving all those foolish enough to stand too close.
+## Channel your inner commander and inspire all nearby allies with increased attack and defence.
 
+## The player using/affected by this ability.
 @export var player: Player
-## The damage dealt by this ability.
-@export var damage: DamageData
-## The knockback applied by this ability.
-@export var knockback: float
-## The projectile that will be created when the ability is casted.
-@export var strike_projectile_scene: PackedScene
-## The time in seconds it takes to charge the ability.
+## The inspire effect which will be applied by the projectile.
+@export var inspire_effect: InspireEffect
+## The projectile which will be used to deliver the effect.
+@export var projectile_scene: PackedScene
 ## State to move to when ability is casted.
 @export var idle_state: State
 ## Animation tree which will play the animation.
@@ -29,8 +27,8 @@ var cost_modifier: float:
 		return 1
 
 func enter() -> void:
-	animation_tree['parameters/playback'].travel('strike')
-	animation_tree['parameters/strike/blend_position'] = player.looking_at
+	animation_tree['parameters/playback'].travel('inspire')
+	animation_tree['parameters/stab/blend_position'] = player.looking_at
 	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 	cast()
 
@@ -52,11 +50,10 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
-	var transformed_damage = DamageData.new(damage.amount * (1 + stats_component.get_damage_affinity(damage.type).get_final_value()), damage.type)
-	var impact_data = ImpactData.new([transformed_damage], knockback, [])
-	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
-	strike_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
-	ProjectileHandler.add_projectile(strike_projectile)
+	var impact_data = ImpactData.new([], 0, [inspire_effect])
+	var projectile: Projectile = projectile_scene.instantiate()
+	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
+	ProjectileHandler.add_projectile(projectile)
 
 func _on_refreshed():
 	ready()
