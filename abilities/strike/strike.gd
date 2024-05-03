@@ -52,8 +52,8 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
-	var transformed_damage = DamageData.new(damage.amount * (1 + stats_component.get_damage_affinity(damage.type).get_final_value()), damage.type)
-	var impact_data = ImpactData.new([transformed_damage], knockback, [])
+	var affinity = stats_component.get_damage_affinity(damage.type)
+	var impact_data = ImpactData.new([DamageData.new(damage.amount * (1 + affinity.get_final_value()), damage.type)], knockback, [])
 	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
 	strike_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
 	ProjectileHandler.add_projectile(strike_projectile)
