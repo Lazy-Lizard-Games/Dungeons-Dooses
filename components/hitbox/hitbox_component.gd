@@ -44,7 +44,6 @@ func apply_damage_transforms(damages: Array[DamageData]) -> Array[DamageData]:
 		var transformed_damages: Array[DamageData] = []
 		for d in damages:
 			var resistance = stats_component.get_damage_resistance(d.type)
-			print(d.amount, " reduced by ", (resistance.get_final_value()) * 100, "%")
 			var transformed_damage = DamageData.new(d.amount * (1 - resistance.get_final_value()), d.type)
 			transformed_damages.append(transformed_damage)
 		return transformed_damages
@@ -64,8 +63,9 @@ func apply_knockback_transforms(strength: float) -> float:
 func handle_effects(effects: Array[Effect], from: HurtboxComponent) -> void:
 	if effect_component:
 		for effect in effects:
-			effect_component.add_effect(effect)
-			from.effect_applied.emit(effect, self)
+			var duplicated_effect = effect.duplicate(true)
+			effect_component.add_effect(duplicated_effect)
+			from.effect_applied.emit(duplicated_effect, self)
 
 func _ready():
 	invulnerability_timer = Timer.new()

@@ -30,8 +30,7 @@ func on_area_collision(area: Area2D) -> void:
 			if area in hit_targets:
 				return
 			hit_targets.append(area)
-			var duplicated_impact_data = impact_data.duplicate(true) as ImpactData
-			area.handle_impact(duplicated_impact_data, self)
+			area.handle_impact(impact_data, self)
 
 func force_check() -> void:
 	for area in get_overlapping_areas():
