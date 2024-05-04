@@ -1,4 +1,4 @@
-class_name PpisonedEffect
+class_name PoisonedEffect
 extends Effect
 
 ## The poisoned effect deals poisoned damage over time to the target. Damage scales with stacks.
@@ -23,4 +23,3 @@ func process(delta: float) -> void:
 	if duration_timer >= duration_time:
 		remove_stacks(1)
 		duration_timer -= duration_time
-		
