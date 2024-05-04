@@ -23,3 +23,4 @@ func process(delta: float) -> void:
 	if duration_timer >= duration_time:
 		remove_stacks(1)
 		duration_timer -= duration_time
+		
