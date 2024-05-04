@@ -13,6 +13,8 @@ signal effects_cleared
 @export var stamina_component: StaminaComponent
 ## The velocity component useable by effects.
 @export var velocity_component: VelocityComponent
+## The hitbox component useable by effects.
+@export var hitbox_component: HitboxComponent
 ## The stats component useable by effects.
 @export var stats_component: StatsComponent
 

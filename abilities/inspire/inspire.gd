@@ -50,7 +50,10 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
-	var impact_data = ImpactData.new([], 0, [inspire_effect])
+	var duplicated_effect = inspire_effect.duplicate(true) as InspireEffect
+	duplicated_effect.physical_resistance *= stats_component.ability_power.get_final_value()
+	duplicated_effect.physical_affinity *= stats_component.ability_power.get_final_value()
+	var impact_data = ImpactData.new([], 0, [duplicated_effect])
 	var projectile: Projectile = projectile_scene.instantiate()
 	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, true)
 	ProjectileHandler.add_projectile(projectile)
