@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://dfvqrbc7yfp3e"]
+
+[ext_resource type="Script" path="res://entities/players/warrior/warrior.gd" id="1_dwma1"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
+size = Vector2(40, 40)
+
+[sub_resource type="Gradient" id="Gradient_pxbrp"]
+colors = PackedColorArray(1, 1, 1, 1, 0.233925, 0.233925, 0.233925, 1)
+
+[sub_resource type="Gradient" id="Gradient_0ns0p"]
+colors = PackedColorArray(0.501407, 0.501406, 0.501406, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
+size = Vector2(40, 40)
+
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("velocity_component", "hitbox_component", "health_component")]
+motion_mode = 1
+script = ExtResource("1_dwma1")
+velocity_component = NodePath("VelocityComponent")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+id = "Warrior"
+faction = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ts4su")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+lifetime = 3.0
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+angle_min = -90.0
+angle_max = 90.0
+scale_amount_min = 5.0
+scale_amount_max = 7.5
+color = Color(1, 0.533333, 0, 1)
+color_ramp = SubResource("Gradient_pxbrp")
+color_initial_ramp = SubResource("Gradient_0ns0p")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
+acceleration = 25.0
+max_speed = 300.0
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_58ky6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_fktii")

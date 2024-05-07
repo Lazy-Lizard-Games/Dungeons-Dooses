@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0isv7vr83ts4"]
+
+[ext_resource type="Script" path="res://components/ui/inventory_menu/inventory_menu.gd" id="1_f8i01"]
+[ext_resource type="PackedScene" uid="uid://do07ix0tnffos" path="res://components/ui/slot/slot_container.tscn" id="2_j2swy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8iy02"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="InventoryMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f8i01")
+
+[node name="HSplitContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Equipment" type="Panel" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/Equipment"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer/Equipment/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Backpack" type="Panel" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/Backpack"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer/Backpack/MarginContainer"]
+layout_mode = 2
+columns = 8
+
+[node name="SlotContainer" parent="." instance=ExtResource("2_j2swy")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8iy02")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://cchvi4m0cblgb"]
+
+[ext_resource type="Script" path="res://scenes/damage_over_time_text/damage_over_time_text.gd" id="1_tnd3w"]
+[ext_resource type="Resource" uid="uid://cmyhby2afiffx" path="res://assets/damage/default_colour.tres" id="2_ys2p8"]
+
+[node name="DamageOverTimeText" type="Control" node_paths=PackedStringArray("label", "timer")]
+z_index = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tnd3w")
+label = NodePath("Label")
+timer = NodePath("Timer")
+colors = ExtResource("2_ys2p8")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = -25.0
+offset_top = -22.0
+offset_right = 25.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.745098, 0.0666667, 0.0588235, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_font_sizes/font_size = 24
+text = "50"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

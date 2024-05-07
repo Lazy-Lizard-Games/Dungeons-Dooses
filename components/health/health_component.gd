@@ -1,52 +1,94 @@
-extends Node2D
+extends Node
 class_name HealthComponent
 
-signal health_changed(prev_health: float, cur_health: float, damage: DamageData)
-signal died
+enum HealthState {
+	Regenerating,
+	Healthy,
+	Dead,
+	Invincible,
+}
 
-@export var stats: StatsComponent
-@export var max_health: float = 10.0 :
+signal damaged(amount: float, type: Enums.DamageType)
+signal died(amount: float, type: Enums.DamageType)
+signal current_updated(previous: float, current: float)
+signal maximum_updated(previous: Attribute, current: Attribute)
+signal state_updated(previous: HealthState, current: HealthState)
+
+## The stats component used to modify values, if any.
+@export var stats_component: StatsComponent
+## Immunity to all damage.
+@export var invulnerable := false
+## Maximum health if attributes not attached or no health attribute found.
+@export var maximum: float:
 	get:
-		return max_health
-	set(value):
-		max_health = stats.max_health * stats.health_mult if stats else value
-		if current_health > max_health:
-			current_health = max_health
-
-var has_health_remaining: bool :
+		if stats_component:
+			return maximum * stats_component.health_maximum.get_final_value()
+		return maximum
+	set(new):
+		var old = maximum
+		maximum = new
+		maximum_updated.emit(old, new)
+## Health regen if attributes not attached or no health regen attribute found.
+@export var regeneration: float:
 	get:
-		return current_health > 0
-var has_died : bool = false
-
-var previous_health: float
-var current_health: float :
+		if stats_component:
+			return regeneration * stats_component.health_regeneration.get_final_value()
+		return regeneration
+@export var delay_time: float:
 	get:
-		return current_health
-	set(value):
-		previous_health = current_health
-		current_health = clampf(value, 0, max_health)
+		if stats_component:
+			return delay_time * stats_component.health_delay.get_final_value()
+		return delay_time
+## Current health.
+@onready var current: float:
+	set(new):
+		var old = current
+		current = clampf(new, 0, maximum)
+		current_updated.emit(old, new)
+## Previous health.
+@onready var previous := current
 
-# Handle damage
+## Checks whether the entity is dead or alive
+var is_dead := false:
+	get:
+		return current == 0
+var state: HealthState = HealthState.Healthy:
+	set(new):
+		var old = state
+		state = new
+		state_updated.emit(old, state)
+var delay_timer: float = 0
 
-func _ready() -> void:
-	call_deferred("initialise_health")
+## Deals damage to the current health and returns the healths state.
+func damage(amount: float, type: Enums.DamageType) -> HealthState:
+	if invulnerable:
+		return HealthState.Invincible
+	if is_dead:
+		return HealthState.Dead
+	current = clampf(current - amount, 0, maximum)
+	if current == 0:
+		state = HealthState.Dead
+		died.emit(amount, type)
+	else:
+		delay_timer = -0.5
+		state = HealthState.Regenerating
+		damaged.emit(amount, type)
+	return state
 
-func damage(damage_data: DamageData) -> void:
-	current_health -= damage_data.damage
-	health_changed.emit(previous_health, current_health, damage_data)
-	if(not has_health_remaining and not has_died):
-		died.emit()
-		has_died = true
-	if damage_data.damage != 0:
-		var damage_float = FloatingTextManager.create_damage_float(global_position, damage_data)
-		add_child(damage_float)
+## Restores amount to the current health.
+func heal(amount: float) -> void:
+	current += amount
 
-func initialise_health() -> void:
-	current_health = max_health
+func initialise_current() -> void:
+	current = maximum
 
+func _ready():
+	call_deferred("initialise_current")
 
-
-
-
-
-
+func _process(delta):
+	match state:
+		HealthState.Regenerating:
+			delay_timer += delta
+			current += regeneration * delta * (clamp(pow(delay_timer, 2) * 0.5, 0, delay_time) / delay_time)
+			if current == maximum:
+				state = HealthState.Healthy

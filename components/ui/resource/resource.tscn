@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://1t0e7hi6g33k"]
+
+[ext_resource type="Script" path="res://components/ui/resource/resource.gd" id="1_ok8u2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3lsps"]
+bg_color = Color(1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ctlci"]
+bg_color = Color(0, 0, 0, 0.458824)
+
+[node name="Resource" type="MarginContainer" node_paths=PackedStringArray("color_rect", "label", "progress_bar")]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("1_ok8u2")
+color_rect = NodePath("ColorRect")
+label = NodePath("Label")
+progress_bar = NodePath("ProgressBar")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_styles/background = SubResource("StyleBoxFlat_3lsps")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ctlci")
+step = 0.001
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "x1"

@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhy0ov2hx8red"]
+
+[ext_resource type="Script" path="res://features/abilities/ability_set_container/ability_set_container.gd" id="1_46t6x"]
+
+[node name="AbilitySetContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_46t6x")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 2
+
+[node name="SetRows" type="VBoxContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="OffensiveRow" type="HBoxContainer" parent="AspectRatioContainer/SetRows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="DefensiveRow" type="HBoxContainer" parent="AspectRatioContainer/SetRows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="SupportiveRow" type="HBoxContainer" parent="AspectRatioContainer/SetRows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="DashRow" type="HBoxContainer" parent="AspectRatioContainer/SetRows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="SpecialRow" type="HBoxContainer" parent="AspectRatioContainer/SetRows"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+alignment = 1

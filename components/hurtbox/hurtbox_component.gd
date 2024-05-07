@@ -1,35 +1,37 @@
 extends Area2D
 class_name HurtboxComponent
 
-signal entity_damaged(hitbox: HitboxComponent, damage_datas: Array[DamageData])
+## Emitted when damage has caused a health component to die.
+signal death_dealt(amount: float, type: Enums.DamageType, to: HitboxComponent)
+## Emitted when damage has just done damage to a health component.
+signal damage_dealt(amount: float, type: Enums.DamageType, to: HitboxComponent)
+## Emiited when knockback has been applied to a velocity component.
+signal knockback_applied(strength: float, to: HitboxComponent)
+## Emitted when an effect as been added to an entity component.
+signal effect_applied(effect: Effect, to: HitboxComponent)
+## Mayhaps deprecated...
+signal hurt(hitbox: HitboxComponent)
 
-## Faction that the hurtbox belongs
-@export var faction: Globals.FACTIONS = 0
-## Damage datas of the hurtbox
-@export var damage_datas: Array[DamageData]
-## Effect instances of the hurtbox
-@export var effect_instances: Array[EffectInstance]
-## Number of damage instances per second per entity
-@export var damage_rate: float = 0
+## Data to transfer on impact with a hitbox.
+@export var impact_data: ImpactData
+## Faction that the hurtbox belongs to.
+@export var faction: Enums.FactionType
+## Toggles whether the hurtbox hits allies or enemis of the faction.
+@export var target_allies: bool
 
-var hurt_entities: Array[TimedVariant] = []
+## Collection of already hit targets.
+var hit_targets: Array[HitboxComponent] = []
 
-func _on_area_entered(area: Area2D) -> void:
+func on_area_collision(area: Area2D) -> void:
 	if area is HitboxComponent:
-		if not area.can_accept_collisions():
-			return
-		if hurt_entities.filter(func(entity: TimedVariant): return entity.variant == area).is_empty() \
-				and area.faction not in Relationships.get_allies_for(faction):
-			area.handle_hurbox_collision(self)
-			var hurt_entity = TimedVariant.new()
-			add_child(hurt_entity)
-			hurt_entity.start(area, 1/damage_rate)
-			hurt_entity.timeout.connect(remove_entity)
-			hurt_entities.append(hurt_entity)
-			entity_damaged.emit(area, damage_datas)
+		if (target_allies and faction == area.faction) or (!target_allies and (faction != area.faction or area.faction == Enums.FactionType.None or faction == Enums.FactionType.None)):
+			if area.detect_only:
+				return
+			if area in hit_targets:
+				return
+			hit_targets.append(area)
+			area.handle_impact(impact_data, self)
 
-func remove_entity(hurt_entity: TimedVariant) -> void:
-	remove_child(hurt_entity)
-	hurt_entities.remove_at(hurt_entities.find(hurt_entity))
-	if hurt_entity.variant in get_overlapping_areas():
-		_on_area_entered(hurt_entity.variant)
+func force_check() -> void:
+	for area in get_overlapping_areas():
+		on_area_collision(area)

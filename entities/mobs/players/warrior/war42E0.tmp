@@ -1,0 +1,220 @@
+[gd_scene load_steps=46 format=3 uid="uid://dfvqrbc7yfp3e"]
+
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
+[ext_resource type="Script" path="res://attributes/attribute.gd" id="2_acrq8"]
+[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/commands/state/state_component.tscn" id="2_e5t7x"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/commands/velocity/velocity_component.tscn" id="2_ry1uk"]
+[ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/commands/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/idle.gd" id="3_un612"]
+[ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/commands/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="Script" path="res://attributes/generic.gd" id="3_ww4uv"]
+[ext_resource type="Script" path="res://attributes/affinity.gd" id="4_kc31g"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/move.gd" id="4_lhxmr"]
+[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/libraries/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="Script" path="res://attributes/resistance.gd" id="5_078dv"]
+[ext_resource type="Script" path="res://entities/mobs/players/warrior/states/attack.gd" id="5_vbqk7"]
+[ext_resource type="Script" path="res://actions/entity/vector/mouse_direction_vector.gd" id="14_03lfr"]
+[ext_resource type="PackedScene" uid="uid://dcukp8busedys" path="res://components/libraries/action/action_component.tscn" id="14_j3m7g"]
+[ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/libraries/inventory/inventory_component.tscn" id="14_mdvh5"]
+[ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://entities/projectiles/fireball/fireball.tscn" id="14_mmorl"]
+[ext_resource type="Script" path="res://resources/inventory/inventory_data.gd" id="15_1nwxg"]
+[ext_resource type="Script" path="res://actions/entity/vector/position_vector.gd" id="15_7v737"]
+[ext_resource type="Script" path="res://resources/inventory/slot_data.gd" id="16_lgmi6"]
+[ext_resource type="Script" path="res://actions/entity/general/cast_projectile.gd" id="17_4e2u7"]
+[ext_resource type="Script" path="res://abilities/ability.gd" id="18_7q27h"]
+[ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/commands/interactor/interactor_component.tscn" id="20_rtrp4"]
+[ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud_component.tscn" id="24_8v6vb"]
+
+[sub_resource type="Resource" id="Resource_q3a8u"]
+script = ExtResource("3_ww4uv")
+
+[sub_resource type="Resource" id="Resource_8xuyt"]
+script = ExtResource("4_kc31g")
+
+[sub_resource type="Resource" id="Resource_mw36u"]
+script = ExtResource("5_078dv")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ts4su"]
+size = Vector2(40, 40)
+
+[sub_resource type="Resource" id="Resource_afi7b"]
+script = ExtResource("2_acrq8")
+raw_value = 1.0
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ulxov"]
+script = ExtResource("2_acrq8")
+raw_value = 0.5
+multiplier_value = 1.0
+min_value = -2.14748e+09
+max_value = 2.14748e+09
+modifiers = Array[Resource("res://attributes/attribute_modifier.gd")]([])
+
+[sub_resource type="Resource" id="Resource_1n5fa"]
+script = ExtResource("14_03lfr")
+
+[sub_resource type="Resource" id="Resource_yx14g"]
+script = ExtResource("15_7v737")
+
+[sub_resource type="Resource" id="Resource_tie5t"]
+script = ExtResource("17_4e2u7")
+projectile_scene = ExtResource("14_mmorl")
+position = SubResource("Resource_yx14g")
+direction = SubResource("Resource_1n5fa")
+
+[sub_resource type="Resource" id="Resource_erwjf"]
+script = ExtResource("18_7q27h")
+name = "Fireball"
+description = ""
+cost = 0.0
+recharge_time = 2.0
+cast_time = 0.0
+actions_on_rise = Array[Resource("res://actions/entity/entity_action.gd")]([SubResource("Resource_tie5t")])
+actions_on_fall = Array[Resource("res://actions/entity/entity_action.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ye0kr"]
+script = ExtResource("16_lgmi6")
+type = 1
+stack = 0
+
+[sub_resource type="Resource" id="Resource_k2emd"]
+script = ExtResource("16_lgmi6")
+type = 2
+stack = 0
+
+[sub_resource type="Resource" id="Resource_sl54h"]
+script = ExtResource("16_lgmi6")
+type = 3
+stack = 0
+
+[sub_resource type="Resource" id="Resource_yp28b"]
+script = ExtResource("16_lgmi6")
+type = 4
+stack = 0
+
+[sub_resource type="Resource" id="Resource_rgv8t"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_688wk"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_ntahc"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_541va"]
+script = ExtResource("16_lgmi6")
+type = 5
+stack = 0
+
+[sub_resource type="Resource" id="Resource_tr2rb"]
+script = ExtResource("15_1nwxg")
+type = 0
+slots = Array[ExtResource("16_lgmi6")]([SubResource("Resource_ye0kr"), SubResource("Resource_k2emd"), SubResource("Resource_sl54h"), SubResource("Resource_yp28b"), SubResource("Resource_rgv8t"), SubResource("Resource_688wk"), SubResource("Resource_ntahc"), SubResource("Resource_541va"), null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
+size = Vector2(40, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
+radius = 50.0
+
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "hitbox_component", "health_component", "velocity_component", "action_component")]
+collision_layer = 0
+motion_mode = 1
+script = ExtResource("1_dwma1")
+state_component = NodePath("StateComponent")
+interactor_component = NodePath("InteractorComponent")
+hitbox_component = NodePath("HitboxComponent")
+health_component = NodePath("HealthComponent")
+id = "Warrior"
+faction = 1
+velocity_component = NodePath("VelocityComponent")
+action_component = NodePath("ActionComponent")
+generics = SubResource("Resource_q3a8u")
+affinities = SubResource("Resource_8xuyt")
+resistances = SubResource("Resource_mw36u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ts4su")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "move_state", "attack_state", "velocity_component")]
+script = ExtResource("3_un612")
+color_rect = NodePath("../../ColorRect")
+move_state = NodePath("../Move")
+attack_state = NodePath("../Attack")
+velocity_component = NodePath("../../VelocityComponent")
+
+[node name="Move" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "attack_state", "velocity_component")]
+script = ExtResource("4_lhxmr")
+color_rect = NodePath("../../ColorRect")
+idle_state = NodePath("../Idle")
+attack_state = NodePath("../Attack")
+velocity_component = NodePath("../../VelocityComponent")
+
+[node name="Attack" type="Node" parent="StateComponent" node_paths=PackedStringArray("color_rect", "idle_state", "move_state", "velocity_component", "ability_component", "state_component")]
+script = ExtResource("5_vbqk7")
+color_rect = NodePath("../../ColorRect")
+idle_state = NodePath("../Idle")
+move_state = NodePath("../Move")
+velocity_component = NodePath("../../VelocityComponent")
+ability_component = NodePath("../../AbilityComponent")
+state_component = NodePath("..")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_ry1uk")]
+control = SubResource("Resource_afi7b")
+friction = SubResource("Resource_ulxov")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_wj1h3")]
+
+[node name="ActionComponent" parent="." instance=ExtResource("14_j3m7g")]
+
+[node name="AbilityComponent" parent="." instance=ExtResource("4_qstg1")]
+abilities = Array[ExtResource("18_7q27h")]([SubResource("Resource_erwjf")])
+
+[node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
+inventory = SubResource("Resource_tr2rb")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("3_58ky6")]
+entity = NodePath("..")
+invulnerability_duration = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_fktii")
+debug_color = Color(0.796078, 0.423529, 0, 0.419608)
+
+[node name="InteractorComponent" parent="." instance=ExtResource("20_rtrp4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
+shape = SubResource("CircleShape2D_ep403")
+debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HudComponent" parent="UI" node_paths=PackedStringArray("health", "inventory", "action") instance=ExtResource("24_8v6vb")]
+health = NodePath("../../HealthComponent")
+inventory = NodePath("../../InventoryComponent")
+action = NodePath("../../ActionComponent")
+
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
+[connection signal="picked_up" from="InteractorComponent" to="InventoryComponent" method="pickup_item"]

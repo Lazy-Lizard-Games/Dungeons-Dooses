@@ -1,41 +1,79 @@
-extends Node
 class_name StatsComponent
+extends Node
 
-@export_category("Stats")
-@export var max_health: float = 10
-@export var max_stamina: float = 10
-@export var max_mana: float = 10
-@export_category("Stat Multipliers")
-@export var health_mult: float = 1.0
-@export var stamina_mult: float = 1.0
-@export var mana_mult: float = 1.0
-@export var attack_speed_mult: float = 1.0
-@export var speed_mult: float = 1.0
-@export var accelerate_mult: float = 1.0
-@export var defence_mult: float = 1.0
+## Stores the stats for an entity, especially useful when handling impacts and applying effects.
 
-@export_category("Damage Multipliers")
-## Array of damage resistances applied when recieving damage
-@export var damage_resistances: Array[ResistModifier]
-## Array of damage multipliers applied when dealing damage
-@export var damage_modifiers: Array[DamageModifier]
+@export_category("General Stats")
+@export var health_maximum := Attribute.new(1, 1)
+@export var health_regeneration := Attribute.new(1, 1)
+@export var health_delay := Attribute.new(1, 1)
+@export var stamina_maximum := Attribute.new(1, 1)
+@export var stamina_regeneration := Attribute.new(1, 1)
+@export var stamina_delay := Attribute.new(1, 1)
+@export var movement_speed := Attribute.new(1, 1)
+@export var movement_acceleration := Attribute.new(1, 1)
+@export var movement_friction := Attribute.new(1, 1)
+@export_category("Ability Stats")
+@export var ability_power := Attribute.new(1, 1)
+@export var ability_efficiency := Attribute.new(1, 1)
+@export var ability_duration := Attribute.new(1, 1)
+@export var ability_range := Attribute.new(1, 1)
+@export var charge_rate := Attribute.new(1, 1)
+@export var cast_rate := Attribute.new(1, 1)
+@export var refresh_rate := Attribute.new(1, 1)
+@export_category("Offensive Stats")
+@export var knockback_affinity := Attribute.new(0, 1)
+@export var slash_affinity := Attribute.new(0, 1)
+@export var pierce_affinity := Attribute.new(0, 1)
+@export var blunt_affinity := Attribute.new(0, 1)
+@export var fire_affinity := Attribute.new(0, 1)
+@export var frost_affinity := Attribute.new(0, 1)
+@export var shock_affinity := Attribute.new(0, 1)
+@export var poison_affinity := Attribute.new(0, 1)
+@export_category("Defensive Stats")
+@export var knockback_resistance := Attribute.new(0, 1)
+@export var slash_resistance := Attribute.new(0, 1)
+@export var pierce_resistance := Attribute.new(0, 1)
+@export var blunt_resistance := Attribute.new(0, 1)
+@export var fire_resistance := Attribute.new(0, 1)
+@export var frost_resistance := Attribute.new(0, 1)
+@export var shock_resistance := Attribute.new(0, 1)
+@export var poison_resistance := Attribute.new(0, 1)
 
-@export_category("Effects")
-#@export var effect_datas: Array[EffectData]
+func get_damage_affinity(type: Enums.DamageType) -> Attribute:
+	match type:
+		Enums.DamageType.Slash:
+			return slash_affinity
+		Enums.DamageType.Pierce:
+			return pierce_affinity
+		Enums.DamageType.Blunt:
+			return blunt_affinity
+		Enums.DamageType.Fire:
+			return fire_affinity
+		Enums.DamageType.Frost:
+			return frost_affinity
+		Enums.DamageType.Shock:
+			return shock_affinity
+		Enums.DamageType.Poison:
+			return poison_affinity
+		_:
+			return Attribute.new()
 
-# TODO
-# Handle stat modifiers (add, remove)
-
-func apply_damage_resistances(damage: DamageData) -> DamageData:
-	var final_damage = damage.copy()
-	for resist in damage_resistances:
-		if resist.type == damage.type:
-			final_damage.damage *= resist.value
-	return final_damage
-
-func apply_damage_modifiers(damage: DamageData) -> DamageData:
-	var final_damage = damage.copy()
-	for mod in damage_modifiers:
-		if mod.type == damage.type:
-			final_damage.damage *= mod.value
-	return final_damage
+func get_damage_resistance(type: Enums.DamageType) -> Attribute:
+	match type:
+		Enums.DamageType.Slash:
+			return slash_resistance
+		Enums.DamageType.Pierce:
+			return pierce_resistance
+		Enums.DamageType.Blunt:
+			return blunt_resistance
+		Enums.DamageType.Fire:
+			return fire_resistance
+		Enums.DamageType.Frost:
+			return frost_resistance
+		Enums.DamageType.Shock:
+			return shock_resistance
+		Enums.DamageType.Poison:
+			return poison_resistance
+		_:
+			return Attribute.new()

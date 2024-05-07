@@ -1,28 +1,56 @@
 extends Node
 class_name VelocityComponent
 
+signal knockback_recieved(strength: float)
 
-@export var stats: StatsComponent
-@export var max_speed: float = 100
-@export var acceleration: float = 20
-
-var calculated_max_speed : float :
+## A stats component can be adde to transform values before being used.
+@export var stats_component: StatsComponent
+## Max speed if attributes not attached or no speed attribute found.
+@export var speed: float:
 	get:
-		return max_speed * stats.speed_mult if stats else max_speed
-var calculated_acceleration: float :
+		if stats_component:
+			return speed * stats_component.movement_speed.get_final_value()
+		return speed
+## How much impact entity input has on the velocity
+@export var acceleration: float:
 	get:
-		return acceleration * stats.accelerate_mult if stats else acceleration
-var velocity: Vector2 = Vector2.ZERO
+		if stats_component:
+			return acceleration * stats_component.movement_acceleration.get_final_value()
+		return acceleration
+## How much impact any input has on the velocity
+@export_range(0, 1) var friction: float:
+	get:
+		if stats_component:
+			return friction * stats_component.movement_friction.get_final_value()
+		return friction
+var velocity := Vector2.ZERO
 
-func accelerate_to_velocity(_velocity: Vector2) -> void:
-	velocity = velocity.lerp(_velocity, calculated_acceleration / calculated_max_speed)
+## Sets the current velocity to provided velocity. This method
+## is designed to be used by knockback mechanics.
+func set_velocity(_velocity: Vector2) -> void:
+	velocity = _velocity
 
+func add_velocity(_velocity: Vector2) -> void:
+	velocity += _velocity
+
+## Updates the the current velotiy by the provided velocity. 
+## This method is designed to be used by 
+func accelerate_to_velocity(velocity_to: Vector2) -> void:
+	velocity = velocity.lerp(velocity_to, (acceleration / speed) * friction)
+
+## Accelerates the velocity towards the provided direction.
 func accelerate_in_direction(direction: Vector2) -> void:
-	accelerate_to_velocity(direction * calculated_max_speed)
+	accelerate_to_velocity(direction * speed)
 
+## Decelerates the velocity towards zero.
 func decelerate() -> void:
 	accelerate_in_direction(Vector2.ZERO)
 
-func move(character_body: CharacterBody2D) -> void:
-	character_body.velocity = velocity
-	character_body.move_and_slide()
+## Updates the body's position by the velocity
+func move(body: CharacterBody2D) -> void:
+	body.velocity = self.velocity
+	body.move_and_slide()
+
+func knockback(strength: float, direction: Vector2) -> void:
+	set_velocity(direction * strength)
+	knockback_recieved.emit(strength)

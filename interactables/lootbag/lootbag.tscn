@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0kpk33phak3x"]
+
+[ext_resource type="Script" path="res://interactables/lootbag/lootbag.gd" id="1_umg1q"]
+[ext_resource type="PackedScene" uid="uid://brwcuxfey5gph" path="res://components/interactable/interactable_component.tscn" id="2_xdhg5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2b3sa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w616s"]
+
+[node name="Lootbag" type="StaticBody2D" node_paths=PackedStringArray("interactable_component")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_umg1q")
+interactable_component = NodePath("InteractableComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2b3sa")
+debug_color = Color(0.862745, 0, 0.870588, 0.419608)
+
+[node name="InteractableComponent" parent="." instance=ExtResource("2_xdhg5")]
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+shape = SubResource("RectangleShape2D_w616s")
+debug_color = Color(0, 0.6, 0.701961, 0)

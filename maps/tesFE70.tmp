@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://dap4fb6jeula0"]
+
+[ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/mobs/players/warrior/warrior.tscn" id="1_fiui5"]
+[ext_resource type="PackedScene" uid="uid://skvi6j3iivg0" path="res://entities/projectiles/fireball/fireball.tscn" id="2_ijalr"]
+[ext_resource type="PackedScene" uid="uid://cbyp6u3r6r346" path="res://entities/mobs/dummy/dummy.tscn" id="3_q3wdq"]
+[ext_resource type="PackedScene" uid="uid://c0kpk33phak3x" path="res://interactables/lootbag/lootbag.tscn" id="4_5mxsy"]
+[ext_resource type="Script" path="res://items/item.gd" id="5_5q022"]
+
+[sub_resource type="Resource" id="Resource_axge7"]
+script = ExtResource("5_5q022")
+name = "Cheese"
+description = "Stinky!"
+max_stack = 99
+
+[node name="TestMap" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Warrior" parent="." instance=ExtResource("1_fiui5")]
+
+[node name="Fireball" parent="." instance=ExtResource("2_ijalr")]
+position = Vector2(-89, 0)
+pierce = 0
+duration = 0.0
+
+[node name="Fireball2" parent="." instance=ExtResource("2_ijalr")]
+position = Vector2(111, 0)
+pierce = 5
+duration = 0.0
+
+[node name="Dummy" parent="." instance=ExtResource("3_q3wdq")]
+position = Vector2(0, -129)
+
+[node name="Lootbag" parent="." instance=ExtResource("4_5mxsy")]
+position = Vector2(0, 107)
+item = SubResource("Resource_axge7")
+amount = 4

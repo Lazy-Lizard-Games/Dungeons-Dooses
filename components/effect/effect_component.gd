@@ -1,31 +1,59 @@
-extends Node2D
 class_name EffectComponent
+extends Node
+
+## The effect component controls the effect lifecycle for an entity or other object.
 
 signal effect_added(effect: Effect)
+signal effect_removed(effect: Effect)
+signal effects_cleared
 
-@export_category("Components")
-@export var stats_component: StatsComponent
+## The health component useable by effects.
 @export var health_component: HealthComponent
-@export var projectile_component: ProjectileComponent
+## The stamina component useable by effects.
+@export var stamina_component: StaminaComponent
+## The velocity component useable by effects.
+@export var velocity_component: VelocityComponent
+## The hitbox component useable by effects.
 @export var hitbox_component: HitboxComponent
-@export var hurtbox_component: HurtboxComponent
+## The stats component useable by effects.
+@export var stats_component: StatsComponent
 
-var effects: Array[Effect]
+var effects: Array[Effect] = []
 
+func get_effect(search: StringName) -> Effect:
+	for effect in effects:
+		if effect.name == search:
+			return effect
+	return null
 
-func add_effect(effect_instance: EffectInstance) -> void:
-	var effect: Effect = effect_instance.effect_scene.instantiate()
-	for child in effects:
-		if child.effect_instance == effect_instance:
-			child._add_stack()
-			return
-	effect.effect_instance = effect_instance
-	effects.append(effect)
-	effect.container = self
-	add_child(effect)
-	effect._add_stack()
-	effect_added.emit(effect)
+func clear_effects() -> void:
+	for effect in effects:
+		effect.exit()
+	effects.clear()
+	effects_cleared.emit()
 
-func remove_effect(effect: Effect) -> void:
-	var effect_index = effects.find(effect)
-	effects.remove_at(effect_index)
+## Adds an effect.
+func add_effect(effect: Effect) -> void:
+	var existing_effect = get_effect(effect.name)
+	if existing_effect:
+		existing_effect.add_stack(1)
+	else:
+		effect.stacks = 1
+		effect.init(self)
+		effects.append(effect)
+		effect.expired.connect(_on_effect_expired.bind(effect), CONNECT_ONE_SHOT)
+		effect_added.emit(effect)
+
+## Removes an effect that matches the search string.
+func remove_effect(effect) -> void:
+	effect.exit()
+	effects.erase(effect)
+	effect_removed.emit(effect)
+
+## Called whenever an effect expires.
+func _on_effect_expired(effect: Effect) -> void:
+	remove_effect(effect)
+
+func _process(delta):
+	for effect in effects:
+		effect.process(delta)

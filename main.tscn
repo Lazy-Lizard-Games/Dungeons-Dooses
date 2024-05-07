@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://ldjvd2vwp618"]
+
+[ext_resource type="PackedScene" uid="uid://dap4fb6jeula0" path="res://maps/test_map.tscn" id="1_240sg"]
+[ext_resource type="Script" path="res://main.gd" id="1_xmm6q"]
+[ext_resource type="PackedScene" uid="uid://cbyp6u3r6r346" path="res://entities/mobs/dummy/dummy.tscn" id="4_1v8qg"]
+[ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/mobs/players/warrior/warrior.tscn" id="4_trt7i"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("projectiles", "entities")]
+y_sort_enabled = true
+script = ExtResource("1_xmm6q")
+projectiles = NodePath("Projectiles")
+entities = NodePath("Entities")
+
+[node name="TestMap" parent="." instance=ExtResource("1_240sg")]
+
+[node name="Entities" type="Node2D" parent="."]
+z_index = 2
+y_sort_enabled = true
+
+[node name="Dummy2" parent="Entities" instance=ExtResource("4_1v8qg")]
+position = Vector2(-54, -129)
+
+[node name="Dummy3" parent="Entities" instance=ExtResource("4_1v8qg")]
+position = Vector2(-29, -168)
+
+[node name="Dummy4" parent="Entities" instance=ExtResource("4_1v8qg")]
+position = Vector2(0, -210)
+
+[node name="Dummy" parent="Entities" instance=ExtResource("4_1v8qg")]
+position = Vector2(0, -129)
+
+[node name="Warrior" parent="Entities" instance=ExtResource("4_trt7i")]
+
+[node name="Projectiles" type="Node2D" parent="."]
+z_index = 2
+y_sort_enabled = true
