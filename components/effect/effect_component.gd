@@ -34,7 +34,6 @@ func clear_effects() -> void:
 
 ## Adds an effect.
 func add_effect(effect: Effect, stacks: int) -> void:
-	print_debug("Adding effect: ", effect.name)
 	var existing_effect = get_effect(effect.name)
 	if existing_effect:
 		existing_effect.add_stack(stacks)

@@ -23,7 +23,6 @@ func process(delta: float) -> void:
 	else:
 		interval_timer += delta
 		if interval_timer >= interval_time:
-			print(damage_data.amount)
 			health_component.damage(damage_data)
 			interval_timer -= interval_time
 		duration_timer += delta
