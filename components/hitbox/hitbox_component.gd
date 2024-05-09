@@ -32,21 +32,10 @@ func handle_damages(damage_datas: Array[DamageData], from: HurtboxComponent) -> 
 		if health_component:
 			for damage_data in damage_datas:
 				var outcome = health_component.damage(damage_data)
-				TextHandler.create_damage_text(damage_data, self.global_position)
 				if outcome.final_health_state == health_component.HealthState.Dead:
 					from.death_dealt.emit(damage_data, self)
 				else:
 					from.damage_dealt.emit(damage_data, self)
-
-func apply_damage_transforms(damages: Array[DamageData]) -> Array[DamageData]:
-	if stats_component:
-		var transformed_damages: Array[DamageData] = []
-		for d in damages:
-			var resistance = stats_component.get_damage_resistance(d.type)
-			var transformed_damage = DamageData.new(d.amount * (1 - resistance.get_final_value()), d.type)
-			transformed_damages.append(transformed_damage)
-		return transformed_damages
-	return damages
 
 func handle_knockback(knockback: float, from: HurtboxComponent) -> void:
 	if velocity_component:

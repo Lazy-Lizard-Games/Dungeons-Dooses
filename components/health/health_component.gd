@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name HealthComponent
 
 enum HealthState {
@@ -75,8 +75,9 @@ func damage(damage_data: DamageData) -> DamageOutcome:
 	if state == HealthState.Dead:
 		damage_data.amount = 0
 		return DamageOutcome.new(damage_data, state)
-	var final_damage_data = damage_data
+	var final_damage_data = apply_damage_reistances(damage_data)
 	current -= final_damage_data.amount
+	TextHandler.create_damage_text(final_damage_data, self.global_position)
 	if current == 0:
 		state = HealthState.Dead
 		died.emit(final_damage_data)
@@ -85,6 +86,13 @@ func damage(damage_data: DamageData) -> DamageOutcome:
 		state = HealthState.Regenerating
 		damaged.emit(final_damage_data)
 	return DamageOutcome.new(final_damage_data, state)
+
+func apply_damage_reistances(damage_data: DamageData) -> DamageData:
+	if stats_component:
+		var resistance = 1 - stats_component.get_damage_resistance(damage_data.type).get_final_value()
+		var resisted_damage = DamageData.new(damage_data.amount * resistance, damage_data.type)
+		return resisted_damage
+	return damage_data
 
 ## Restores amount to the current health.
 func heal(amount: float) -> void:
