@@ -33,12 +33,12 @@ func clear_effects() -> void:
 	effects_cleared.emit()
 
 ## Adds an effect.
-func add_effect(effect: Effect) -> void:
+func add_effect(effect: Effect, stacks: int) -> void:
 	var existing_effect = get_effect(effect.name)
 	if existing_effect:
-		existing_effect.add_stack(1)
+		existing_effect.add_stack(stacks)
 	else:
-		effect.stacks = 1
+		effect.stacks = stacks
 		effect.init(self)
 		effects.append(effect)
 		effect.expired.connect(_on_effect_expired.bind(effect), CONNECT_ONE_SHOT)

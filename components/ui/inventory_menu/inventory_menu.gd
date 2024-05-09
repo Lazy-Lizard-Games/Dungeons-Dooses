@@ -8,9 +8,8 @@ class_name InventoryMenu
 @onready var inventory_grid_container: GridContainer = $HSplitContainer/Backpack/MarginContainer/GridContainer
 @onready var grabbed_slot_container: SlotContainer = $SlotContainer
 
-var slot_container_scene = preload("res://components/ui/slot/slot_container.tscn")
+var slot_container_scene = preload ("res://components/ui/slot/slot_container.tscn")
 var grabbed_slot: Slot = Slot.new()
-
 
 func _ready() -> void:
 	grabbed_slot.updated.connect(update_grabbed_slot)
@@ -18,12 +17,10 @@ func _ready() -> void:
 	grabbed_slot_container.slot = grabbed_slot
 	inventory_component.inventory.updated.connect(update_inventory)
 
-
 func _process(_delta: float) -> void:
 	if grabbed_slot.item:
 		grabbed_slot_container.global_position = get_global_mouse_position()
-		grabbed_slot_container.global_position -= grabbed_slot_container.custom_minimum_size/2
-
+		grabbed_slot_container.global_position -= grabbed_slot_container.custom_minimum_size / 2
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
@@ -31,12 +28,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			[null, _]:
 				return
 			[_, MOUSE_BUTTON_LEFT]:
-				var drop_item = DropItemAction.new()
-				drop_item.amount = grabbed_slot.stack
-				drop_item.execute(entity, grabbed_slot.item)
-				grabbed_slot.set_slot(null, 0)
+				# var drop_item = DropItemAction.new()
+				# drop_item.amount = grabbed_slot.stack
+				# drop_item.execute(entity, grabbed_slot.item)
+				# grabbed_slot.set_slot(null, 0)
 				return
-
 
 func update_grabbed_slot() -> void:
 	grabbed_slot_container.hide()
@@ -44,8 +40,6 @@ func update_grabbed_slot() -> void:
 	if grabbed_slot.item:
 		grabbed_slot_container.global_position = get_global_mouse_position()
 		grabbed_slot_container.show()
-	
-
 
 func update_inventory() -> void:
 	for child in inventory_grid_container.get_children():
@@ -69,7 +63,6 @@ func update_inventory() -> void:
 		inventory_grid_container.add_child(slot_container)
 		index += 1
 
-
 func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 	var inventory = inventory_component.inventory
 	match [grabbed_slot.item, slot.item, button]:
@@ -82,7 +75,7 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 			slot.set_slot(null, 0)
 			return
 		[null, _, MOUSE_BUTTON_RIGHT]:
-			grabbed_slot.set_slot(slot.item, int(ceilf(slot.stack/2.0)))
+			grabbed_slot.set_slot(slot.item, int(ceilf(slot.stack / 2.0)))
 			slot.remove_stack(grabbed_slot.stack)
 			if slot.stack == 0:
 				if slot.item_type == Enums.ItemType.Equipment:

@@ -2,9 +2,9 @@ extends Area2D
 class_name HurtboxComponent
 
 ## Emitted when damage has caused a health component to die.
-signal death_dealt(amount: float, type: Enums.DamageType, to: HitboxComponent)
+signal death_dealt(damage_data: DamageData, to: HitboxComponent)
 ## Emitted when damage has just done damage to a health component.
-signal damage_dealt(amount: float, type: Enums.DamageType, to: HitboxComponent)
+signal damage_dealt(damage_data: DamageData, to: HitboxComponent)
 ## Emiited when knockback has been applied to a velocity component.
 signal knockback_applied(strength: float, to: HitboxComponent)
 ## Emitted when an effect as been added to an entity component.

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 class_name HealthComponent
 
 enum HealthState {
@@ -8,8 +8,16 @@ enum HealthState {
 	Invincible,
 }
 
-signal damaged(amount: float, type: Enums.DamageType)
-signal died(amount: float, type: Enums.DamageType)
+class DamageOutcome:
+	var final_damage_data: DamageData
+	var final_health_state: HealthState
+
+	func _init(damage_data: DamageData, health_state: HealthState):
+		final_damage_data = damage_data
+		final_health_state = health_state
+
+signal damaged(damage_data: DamageData)
+signal died(damage_data: DamageData)
 signal current_updated(previous: float, current: float)
 signal maximum_updated(previous: Attribute, current: Attribute)
 signal state_updated(previous: HealthState, current: HealthState)
@@ -59,21 +67,32 @@ var state: HealthState = HealthState.Healthy:
 		state_updated.emit(old, state)
 var delay_timer: float = 0
 
-## Deals damage to the current health and returns the healths state.
-func damage(amount: float, type: Enums.DamageType) -> HealthState:
-	if invulnerable:
-		return HealthState.Invincible
-	if is_dead:
-		return HealthState.Dead
-	current = clampf(current - amount, 0, maximum)
+## Deals damage to the current health and returns the outcome.
+func damage(damage_data: DamageData) -> DamageOutcome:
+	if state == HealthState.Invincible:
+		damage_data.amount = 0
+		return DamageOutcome.new(damage_data, state)
+	if state == HealthState.Dead:
+		damage_data.amount = 0
+		return DamageOutcome.new(damage_data, state)
+	var final_damage_data = apply_damage_reistances(damage_data)
+	current -= final_damage_data.amount
+	TextHandler.create_damage_text(final_damage_data, self.global_position)
 	if current == 0:
 		state = HealthState.Dead
-		died.emit(amount, type)
+		died.emit(final_damage_data)
 	else:
 		delay_timer = -0.5
 		state = HealthState.Regenerating
-		damaged.emit(amount, type)
-	return state
+		damaged.emit(final_damage_data)
+	return DamageOutcome.new(final_damage_data, state)
+
+func apply_damage_reistances(damage_data: DamageData) -> DamageData:
+	if stats_component:
+		var resistance = 1 - stats_component.get_damage_resistance(damage_data.type).get_final_value()
+		var resisted_damage = DamageData.new(damage_data.amount * resistance, damage_data.type)
+		return resisted_damage
+	return damage_data
 
 ## Restores amount to the current health.
 func heal(amount: float) -> void:

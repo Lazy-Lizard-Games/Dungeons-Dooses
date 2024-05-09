@@ -50,7 +50,8 @@ func _on_animation_finished(_animation) -> void:
 func _on_casted():
 	if stamina_component:
 		stamina_component.exhaust(cost * cost_modifier)
-	var impact_data = ImpactData.new([], 0, [mend_effect])
+	var effect_data = EffectData.new(mend_effect, 1)
+	var impact_data = ImpactData.new([], 0, [effect_data])
 	var projectile: Projectile = projectile_scene.instantiate()
 	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, true)
 	ProjectileHandler.add_projectile(projectile)
