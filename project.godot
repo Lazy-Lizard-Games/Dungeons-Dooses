@@ -33,7 +33,6 @@ window/stretch/aspect="expand"
 
 folder_colors={
 "res://abilities/": "teal",
-"res://actions/": "blue",
 "res://components/": "green",
 "res://data/": "pink",
 "res://effects/": "yellow",

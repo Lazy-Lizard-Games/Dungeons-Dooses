@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlu0jxlcc8rms"]
+
+[ext_resource type="Script" path="res://abilities/slam/slam.gd" id="1_obio2"]
+[ext_resource type="Script" path="res://effects/status/bleeding.gd" id="3_suaih"]
+[ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="5_mvxkh"]
+
+[sub_resource type="Resource" id="Resource_46p4v"]
+script = ExtResource("3_suaih")
+interval_time = 3.0
+damage_amount = 1.0
+name = &"Bleeding"
+duration_time = 5.0
+max_stacks = 5
+
+[node name="Slam" type="Node"]
+script = ExtResource("1_obio2")
+damage = 5.0
+effect = SubResource("Resource_46p4v")
+knockback = 250.0
+projectile_scene = ExtResource("5_mvxkh")
+description = "Smash the ground beneath your feet and send your enemies flying."
+cost = 5
+casting_time = 0.9
+refreshing_time = 1.0
+
+[connection signal="casted" from="." to="." method="_on_casted"]
+[connection signal="refreshed" from="." to="." method="_on_refreshed"]

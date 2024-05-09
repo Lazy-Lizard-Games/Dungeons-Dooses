@@ -38,7 +38,7 @@ func add_stack(amount: int) -> void:
 		stacks = clamp(stacks + amount, 0, max_stacks)
 		stacks_changed.emit(old, stacks)
 
-## Removes the given amount from the current stacks and signals the abilities expiration if it reaches zero.
+## Removes the given amount from the current stacks and signals the ability's expiration if it reaches zero.
 func remove_stacks(amount: int) -> void:
 	var old = stacks
 	stacks = clamp(stacks - amount, 0, max_stacks)

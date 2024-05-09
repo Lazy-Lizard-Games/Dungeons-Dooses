@@ -28,16 +28,15 @@ func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
 	invulnerability_timer.start(invulnerability_duration)
 	impacted.emit(from)
 
-func handle_damages(damages: Array[DamageData], from: HurtboxComponent) -> void:
+func handle_damages(damage_datas: Array[DamageData], from: HurtboxComponent) -> void:
 		if health_component:
-			var final_damages = apply_damage_transforms(damages)
-			for d in final_damages:
-				var state = health_component.damage(d.amount, d.type)
-				TextHandler.create_damage_text(d.type, d.amount, self.global_position)
-				if state == health_component.HealthState.Dead:
-					from.death_dealt.emit(d.amount, d.type, self)
+			for damage_data in damage_datas:
+				var outcome = health_component.damage(damage_data)
+				TextHandler.create_damage_text(damage_data, self.global_position)
+				if outcome.final_health_state == health_component.HealthState.Dead:
+					from.death_dealt.emit(damage_data, self)
 				else:
-					from.damage_dealt.emit(d.amount, d.type, self)
+					from.damage_dealt.emit(damage_data, self)
 
 func apply_damage_transforms(damages: Array[DamageData]) -> Array[DamageData]:
 	if stats_component:
@@ -60,11 +59,11 @@ func apply_knockback_transforms(strength: float) -> float:
 		return strength * (1 - stats_component.knockback_resistance.get_final_value())
 	return strength
 
-func handle_effects(effects: Array[Effect], from: HurtboxComponent) -> void:
+func handle_effects(effect_datas: Array[EffectData], from: HurtboxComponent) -> void:
 	if effect_component:
-		for effect in effects:
-			var duplicated_effect = effect.duplicate(true)
-			effect_component.add_effect(duplicated_effect)
+		for effect_data in effect_datas:
+			var duplicated_effect = effect_data.effect.duplicate(true)
+			effect_component.add_effect(duplicated_effect, effect_data.stacks)
 			from.effect_applied.emit(duplicated_effect, self)
 
 func _ready():

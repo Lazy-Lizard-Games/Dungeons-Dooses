@@ -10,6 +10,9 @@ extends Effect
 
 var health_component: HealthComponent
 var interval_timer: float
+var damage_data: DamageData:
+	get:
+		return DamageData.new(damage_amount * stacks, Enums.DamageType.Slash)
 
 func init(effect_component: EffectComponent) -> void:
 	health_component = effect_component.health_component
@@ -20,7 +23,8 @@ func process(delta: float) -> void:
 	else:
 		interval_timer += delta
 		if interval_timer >= interval_time:
-			health_component.damage(damage_amount * stacks, Enums.DamageType.Slash)
+			print(damage_data.amount)
+			health_component.damage(damage_data)
 			interval_timer -= interval_time
 		duration_timer += delta
 		if duration_timer >= duration_time:
