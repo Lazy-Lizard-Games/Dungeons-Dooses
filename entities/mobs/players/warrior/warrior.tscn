@@ -1199,7 +1199,7 @@ states/walk/position = Vector2(147, 79)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3d2vt"), "idle", "strike", SubResource("AnimationNodeStateMachineTransition_c0us6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_xxjuk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fmvqr"), "strike", "idle", SubResource("AnimationNodeStateMachineTransition_mms1k"), "stab", "idle", SubResource("AnimationNodeStateMachineTransition_4oqv2"), "idle", "stab", SubResource("AnimationNodeStateMachineTransition_15i4u"), "idle", "mend", SubResource("AnimationNodeStateMachineTransition_pn35s"), "mend", "idle", SubResource("AnimationNodeStateMachineTransition_a357h"), "idle", "inspire", SubResource("AnimationNodeStateMachineTransition_6puto"), "inspire", "idle", SubResource("AnimationNodeStateMachineTransition_8fiu0"), "idle", "slam", SubResource("AnimationNodeStateMachineTransition_dvjrr"), "slam", "idle", SubResource("AnimationNodeStateMachineTransition_md2kb")]
 graph_offset = Vector2(0.471701, -105.592)
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "animation_tree", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("state_component", "interactor_component", "inventory_component", "ability_component", "stamina_component", "skill_component", "animation_tree", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
@@ -1209,6 +1209,7 @@ interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 ability_component = NodePath("AbilityComponent")
 stamina_component = NodePath("StaminaComponent")
+skill_component = NodePath("SkillComponent")
 animation_tree = NodePath("AnimationTree")
 primary = 0
 secondary = 1

@@ -22,7 +22,7 @@ anti_aliasing = false
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4obwu"]
 
-[node name="AbilityContainer" type="MarginContainer"]
+[node name="AbilityContainer" type="MarginContainer" node_paths=PackedStringArray("icon")]
 custom_minimum_size = Vector2(125, 125)
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,6 +42,7 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_3nubo")
+icon = NodePath("AspectRatioContainer/MarginContainer/TextureRect")
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
 layout_mode = 2

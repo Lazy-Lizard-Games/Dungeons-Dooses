@@ -30,3 +30,6 @@ visible = false
 modulate = Color(1, 1, 1, 0.25098)
 layout_mode = 2
 mouse_filter = 2
+
+[connection signal="ability_clicked" from="HBoxContainer/Abilities" to="." method="_on_abilities_ability_clicked"]
+[connection signal="ability_hovered" from="HBoxContainer/Abilities" to="." method="_on_abilities_ability_hovered"]

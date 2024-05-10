@@ -6,7 +6,7 @@ extends MarginContainer
 signal clicked(button_index: MouseButton)
 signal hovered
 
-@onready var icon: TextureRect = $AspectRatioContainer/MarginContainer/TextureRect
+@export var icon: TextureRect
 
 ## The currently stored ability, if any.
 var ability: Ability

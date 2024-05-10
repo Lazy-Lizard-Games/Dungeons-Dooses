@@ -13,12 +13,18 @@ signal ability_started(ability: Ability)
 
 var abilities: Array[Ability]:
 	get:
-		return get_children() as Array[Ability]
+		var children: Array[Ability] = []
+		for child in get_children():
+			if child is Ability:
+				children.append(child)
+		return children
 
 ## Starts the ability found at the index, if any.
 func start_ability(index: int) -> void:
+	if index < 0 or !can_attack:
+		return
 	var ability = get_ability(index)
-	if ability and can_attack:
+	if ability.state == Enums.AbilityState.Ready:
 		state_component.change_state(ability)
 		ability_started.emit(ability)
 

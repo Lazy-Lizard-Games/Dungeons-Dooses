@@ -6,7 +6,6 @@ extends MarginContainer
 
 var player: Player
 var ability_component: AbilityComponent
-var ability_set_container_scene = preload ("res://features/abilities/ability_set_container/ability_set_container.tscn")
 
 func init(player_in: Player) -> void:
 	player = player_in

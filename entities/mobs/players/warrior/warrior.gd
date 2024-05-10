@@ -28,13 +28,13 @@ func equip_ability(type: Enums.AbilityType, ability_index: int) -> void:
 		Enums.AbilityType.Passive:
 			passive = ability_index
 
-func start_ability(ability: Ability) -> void:
-	if ability:
-		if ability.state == Enums.AbilityState.Ready:
-			if stamina_component.current > (ability.cost * stats_component.ability_efficiency.get_final_value()):
-				state_component.change_state(ability)
-				return
-		ability.failed.emit()
+# func start_ability(ability: Ability) -> void:
+# 	if ability:
+# 		if ability.state == Enums.AbilityState.Ready:
+# 			if stamina_component.current > (ability.cost * stats_component.ability_efficiency.get_final_value()):
+# 				state_component.change_state(ability)
+# 				return
+# 		ability.failed.emit()
 
 func _ready() -> void:
 	state_component.init()
@@ -63,8 +63,8 @@ func _on_interactor_component_interactables_updated() -> void:
 func _on_ability_pressed(type: Enums.AbilityType):
 	match type:
 		Enums.AbilityType.Primary:
-			ability_component.start(primary)
+			ability_component.start_ability(primary)
 		Enums.AbilityType.Secondary:
-			ability_component.start(secondary)
+			ability_component.start_ability(secondary)
 		Enums.AbilityType.Support:
-			ability_component.start(support)
+			ability_component.start_ability(support)
