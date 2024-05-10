@@ -1,6 +1,6 @@
 extends State
 
-signal ability_pressed(index: int)
+signal ability_pressed(type: Enums.AbilityType)
 
 @export var player: Player
 @export var idle_state: State
@@ -23,11 +23,9 @@ func process_physics(_delta: float) -> State:
 	velocity_component.move(player)
 	animation_tree['parameters/walk/blend_position'] = direction.normalized()
 	if Input.is_action_pressed("ability_1"):
-		ability_pressed.emit(0)
+		ability_pressed.emit(Enums.AbilityType.Primary)
 	elif Input.is_action_pressed("ability_2"):
-		ability_pressed.emit(1)
+		ability_pressed.emit(Enums.AbilityType.Secondary)
 	elif Input.is_action_pressed("ability_3"):
-		ability_pressed.emit(2)
-	elif Input.is_action_pressed("ability_4"):
-		ability_pressed.emit(3)
+		ability_pressed.emit(Enums.AbilityType.Support)
 	return null

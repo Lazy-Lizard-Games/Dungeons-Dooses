@@ -7,39 +7,26 @@ extends Mob
 @export var inventory_component: InventoryComponent
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
+@export var skill_component: SkillComponent
 @export var animation_tree: AnimationTree
 @export_category('Player Abilities')
-@export var primary: Ability
-@export var secondary: Ability
-@export var defence: Ability
-@export var support: Ability
+@export var primary: int = -1
+@export var secondary: int = -1
+@export var support: int = -1
+@export var passive: int = -1
 
 var interactable: InteractableComponent
 
-## Fetches the ability associated with the index, if any.
-func get_ability(index: int) -> Ability:
-	match index:
-		0:
-			return primary
-		1:
-			return secondary
-		2:
-			return defence
-		3:
-			return support
-		_:
-			return null
-
-func set_ability(index: int, ability: Ability) -> void:
-	match index:
-		0:
-			primary = ability
-		1:
-			secondary = ability
-		2:
-			defence = ability
-		3:
-			support = ability
+# func set_ability(index: int, ability: Ability) -> void:
+# 	match index:
+# 		0:
+# 			primary = ability
+# 		1:
+# 			secondary = ability
+# 		2:
+# 			defence = ability
+# 		3:
+# 			support = ability
 
 func start_ability(ability: Ability) -> void:
 	if ability:
@@ -73,9 +60,11 @@ func _physics_process(delta):
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()
 
-func _on_ability_menu_equipped_ability_updated(index: int, ability: Ability):
-	set_ability(index, ability)
-
-func _on_ability_pressed(index: int):
-	var ability = get_ability(index)
-	start_ability(ability)
+func _on_ability_pressed(type: Enums.AbilityType):
+	match type:
+		Enums.AbilityType.Primary:
+			ability_component.start(primary)
+		Enums.AbilityType.Secondary:
+			ability_component.start(secondary)
+		Enums.AbilityType.Support:
+			ability_component.start(support)

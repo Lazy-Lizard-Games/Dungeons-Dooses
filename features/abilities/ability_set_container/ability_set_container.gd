@@ -10,11 +10,10 @@ signal ability_hovered(ability: Ability)
 
 @export var data: AbilitySetData
 
-@onready var offensive_row: HBoxContainer = $AspectRatioContainer/SetRows/OffensiveRow
-@onready var defensive_row: HBoxContainer = $AspectRatioContainer/SetRows/DefensiveRow
-@onready var supportive_row: HBoxContainer = $AspectRatioContainer/SetRows/SupportiveRow
-@onready var dash_row: HBoxContainer = $AspectRatioContainer/SetRows/DashRow
-@onready var special_row: HBoxContainer = $AspectRatioContainer/SetRows/SpecialRow
+@onready var primary_abilities: HBoxContainer = $AspectRatioContainer/SetRows/OffensiveRow
+@onready var secondary_abilities: HBoxContainer = $AspectRatioContainer/SetRows/DefensiveRow
+@onready var support_abilities: HBoxContainer = $AspectRatioContainer/SetRows/SupportiveRow
+@onready var passive_abilities: HBoxContainer = $AspectRatioContainer/SetRows/DashRow
 
 var ability_container_scene = preload ("res://features/abilities/ability_container/ability_container.tscn")
 
@@ -27,7 +26,7 @@ func set_data(new_data: AbilitySetData) -> void:
 	# Do stuff with colour or whatever...
 
 func set_abilities(abilities: Array) -> void:
-	clear_children([offensive_row, defensive_row, supportive_row, dash_row, special_row])
+	clear_children([primary_abilities, secondary_abilities, support_abilities, passive_abilities])
 	for ability in abilities:
 		if ability is Ability:
 			if ability.group != data.group:
@@ -37,16 +36,14 @@ func set_abilities(abilities: Array) -> void:
 			ability_container.clicked.connect(on_ability_clicked.bind(ability))
 			ability_container.hovered.connect(on_ability_hovered.bind(ability))
 			match ability.type:
-				Enums.AbilityType.Attack:
-					offensive_row.add_child(ability_container)
-				Enums.AbilityType.Defend:
-					offensive_row.add_child(ability_container)
+				Enums.AbilityType.Primary:
+					primary_abilities.add_child(ability_container)
+				Enums.AbilityType.Secondary:
+					secondary_abilities.add_child(ability_container)
 				Enums.AbilityType.Support:
-					offensive_row.add_child(ability_container)
-				Enums.AbilityType.Dash:
-					offensive_row.add_child(ability_container)
-				Enums.AbilityType.Special:
-					offensive_row.add_child(ability_container)
+					support_abilities.add_child(ability_container)
+				Enums.AbilityType.Passive:
+					passive_abilities.add_child(ability_container)
 
 func clear_children(nodes: Array[Control]) -> void:
 	for node in nodes:
