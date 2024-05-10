@@ -39,7 +39,7 @@ func set_ability(index: int, ability: Ability) -> void:
 func get_ability(index: int) -> Ability:
 	if get_child_count() <= index:
 		return null
-	var ability = get_children()[index]
+	var ability = abilities[index] if index >= 0 else null
 	if !ability:
 		return null
 	return ability

@@ -16,6 +16,15 @@ extends Mob
 @export var passive: int = -1
 
 var interactable: InteractableComponent
+var passive_ability: Ability
+
+func set_passive_ability(index: int) -> void:
+	var ability = ability_component.get_ability(index)
+	if passive_ability:
+		passive_ability.exit()
+	passive_ability = ability
+	if passive_ability:
+		passive_ability.enter()
 
 func equip_ability(type: Enums.AbilityType, ability_index: int) -> void:
 	match type:
@@ -27,17 +36,11 @@ func equip_ability(type: Enums.AbilityType, ability_index: int) -> void:
 			support = ability_index
 		Enums.AbilityType.Passive:
 			passive = ability_index
-
-# func start_ability(ability: Ability) -> void:
-# 	if ability:
-# 		if ability.state == Enums.AbilityState.Ready:
-# 			if stamina_component.current > (ability.cost * stats_component.ability_efficiency.get_final_value()):
-# 				state_component.change_state(ability)
-# 				return
-# 		ability.failed.emit()
+			set_passive_ability(passive)
 
 func _ready() -> void:
 	state_component.init()
+	set_passive_ability(passive)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("consumable_1"):
@@ -49,9 +52,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
 	
+	if passive_ability:
+		passive_ability.process_input(event)
 	state_component.process_input(event)
 
 func _process(delta: float) -> void:
+	if passive_ability:
+		passive_ability.process_frame(delta)
 	state_component.process_frame(delta)
 	for ability in ability_component.abilities:
 		if ability.state == ability.AbilityState.Refreshing:
@@ -61,6 +68,8 @@ func _process(delta: float) -> void:
 				ability.refreshed.emit()
 
 func _physics_process(delta):
+	if passive_ability:
+		passive_ability.process_physics(delta)
 	state_component.process_physics(delta)
 
 func _on_interactor_component_interactables_updated() -> void:
