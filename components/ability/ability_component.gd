@@ -11,6 +11,10 @@ signal ability_started(ability: Ability)
 ## Controls whether abilities can be started.
 @export var can_attack: bool
 
+var abilities: Array[Ability]:
+	get:
+		return get_children() as Array[Ability]
+
 ## Starts the ability found at the index, if any.
 func start_ability(index: int) -> void:
 	var ability = get_ability(index)

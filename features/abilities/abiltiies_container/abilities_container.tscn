@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfoyr8sifim7t"]
+
+[ext_resource type="Script" path="res://features/abilities/abiltiies_container/abilities_container.gd" id="1_c6wxw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3502b"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.99046, 0.771204, 0.669485, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.658824, 0.329412, 0.105882, 1)
+border_blend = true
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 3
+anti_aliasing = false
+
+[node name="Abilities" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_stretch_ratio = 2.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3502b")
+script = ExtResource("1_c6wxw")
+
+[node name="RowContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PrimaryRow" type="HBoxContainer" parent="RowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="SecondaryRow" type="HBoxContainer" parent="RowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="SupportRow" type="HBoxContainer" parent="RowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="PassiveRow" type="HBoxContainer" parent="RowContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1

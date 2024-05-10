@@ -120,13 +120,6 @@ enum AbilityType
 	Special,
 }
 
-enum AbilityGroup
-{
-	Mercenary,
-	Crusader,
-	Legionnaire
-}
-
 enum AbilityState
 {
 	Ready,

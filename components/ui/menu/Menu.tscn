@@ -7,7 +7,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4geu"]
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("inventory_menu")]
+[node name="Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,7 +15,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_u5fo5")
-inventory_menu = NodePath("MarginContainer/VBoxContainer/TabContainer/InventoryMenu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -46,7 +45,7 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m4geu")
-current_tab = 1
+current_tab = 2
 tab_focus_mode = 0
 
 [node name="InventoryMenu" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("1_s13v6")]
@@ -54,8 +53,8 @@ visible = false
 layout_mode = 2
 
 [node name="SkillMenu" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("2_vj2x8")]
+visible = false
 layout_mode = 2
 
 [node name="AbilityMenu" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("4_yq6ri")]
-visible = false
 layout_mode = 2

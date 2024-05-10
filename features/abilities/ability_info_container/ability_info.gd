@@ -1,14 +1,10 @@
 class_name AbilityInfoContainer
 extends MarginContainer
 
-@export var ability: Ability
+var ability: Ability
 
 @onready var name_label: Label = $Panel/MarginContainer/VBoxContainer/Name
 @onready var description_label: Label = $Panel/MarginContainer/VBoxContainer/Description
-
-func _ready():
-	if ability:
-		set_ability(ability)
 
 func set_ability(new_ability: Ability) -> void:
 	if new_ability:

@@ -1319,6 +1319,7 @@ animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
 stats_component = NodePath("../../StatsComponent")
+type = 3
 casting_time = 1.5
 
 [node name="Inspire" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_tree", "velocity", "stamina_component", "stats_component") instance=ExtResource("23_eo67p")]
@@ -1330,8 +1331,7 @@ animation_tree = NodePath("../../AnimationTree")
 velocity = NodePath("../../VelocityComponent")
 stamina_component = NodePath("../../StaminaComponent")
 stats_component = NodePath("../../StatsComponent")
-group = 2
-type = 2
+type = 3
 description = "Channel your inner commander and inspire all nearby allies with increased attack and defence."
 cost = 15
 casting_time = 1.5

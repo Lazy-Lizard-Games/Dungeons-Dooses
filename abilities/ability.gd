@@ -22,8 +22,6 @@ signal readied
 
 ## Stats component used for modifying charge, cast, refresh speeds.
 @export var stats_component: StatsComponent
-## The group organises the ability into separate sets of abilities.
-@export var group: Enums.AbilityGroup
 ## The type controls which slots the ability may be equipped in for players.
 @export var type: Enums.AbilityType
 ## A short description of what the ability does.

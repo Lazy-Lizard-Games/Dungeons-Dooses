@@ -17,16 +17,16 @@ extends Mob
 
 var interactable: InteractableComponent
 
-# func set_ability(index: int, ability: Ability) -> void:
-# 	match index:
-# 		0:
-# 			primary = ability
-# 		1:
-# 			secondary = ability
-# 		2:
-# 			defence = ability
-# 		3:
-# 			support = ability
+func equip_ability(type: Enums.AbilityType, ability_index: int) -> void:
+	match type:
+		Enums.AbilityType.Primary:
+			primary = ability_index
+		Enums.AbilityType.Secondary:
+			secondary = ability_index
+		Enums.AbilityType.Support:
+			support = ability_index
+		Enums.AbilityType.Passive:
+			passive = ability_index
 
 func start_ability(ability: Ability) -> void:
 	if ability:
