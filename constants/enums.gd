@@ -119,11 +119,3 @@ enum AbilityType
 	Dash,
 	Special,
 }
-
-enum AbilityState
-{
-	Ready,
-	Charging,
-	Casting,
-	Refreshing,
-}

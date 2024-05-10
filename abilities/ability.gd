@@ -3,6 +3,14 @@ extends State
 
 ## Takes control of an entity or other, and performs some unique action using them.
 
+enum AbilityState
+{
+	Ready,
+	Charging,
+	Casting,
+	Refreshing,
+}
+
 ## Emitted when an ability starts charging.
 signal charging
 ## Emitted when an ability finishes charging.
@@ -20,8 +28,6 @@ signal failed
 ## Emitted when the ability is ready again.
 signal readied
 
-## Stats component used for modifying charge, cast, refresh speeds.
-@export var stats_component: StatsComponent
 ## The type controls which slots the ability may be equipped in for players.
 @export var type: Enums.AbilityType
 ## A short description of what the ability does.
@@ -38,74 +44,32 @@ signal readied
 @export var refreshing_time: float
 
 ## The abilities current state.
-var state: Enums.AbilityState = Enums.AbilityState.Ready
+var state: AbilityState = AbilityState.Ready
 ## Counter used for timing the charging.
 var charging_timer: float = 0
 ## Counter used for timing the casting.
 var casting_timer: float = 0
 ## Counter used for timing the refreshing.
 var refreshing_timer: float = 0
-## Boolean to check if ability is charging.
-var is_charging: bool = false
-## Boolean to check if ability is casting.
-var is_casting: bool = false
-## Boolean to check if ability is refreshing.
-var is_refreshing: bool = false
-
-var charge_modifier: float:
-	get:
-		if stats_component:
-			return stats_component.charge_rate.get_final_value()
-		return 1
-var cast_modifier: float:
-	get:
-		if stats_component:
-			return stats_component.cast_rate.get_final_value()
-		return 1
-var refresh_modifier: float:
-	get:
-		if stats_component:
-			return stats_component.refresh_rate.get_final_value()
-		return 1
 
 ## Sets the the ability as charging.
 func charge() -> void:
-	state = Enums.AbilityState.Charging
-	is_charging = true
+	charging_timer = 0
+	state = AbilityState.Charging
 	charging.emit()
 
 ## Sets the ability as casting.
 func cast() -> void:
-	state = Enums.AbilityState.Casting
-	is_casting = true
+	casting_timer = 0
+	state = AbilityState.Casting
 	casting.emit()
 
 ## Sets the ability as refreshing.
 func refresh() -> void:
-	state = Enums.AbilityState.Refreshing
-	is_refreshing = true
+	refreshing_timer = 0
+	state = AbilityState.Refreshing
 	refreshing.emit()
 
 func ready() -> void:
-	state = Enums.AbilityState.Ready
+	state = AbilityState.Ready
 	readied.emit()
-
-func _process(delta):
-	if is_charging:
-			charging_timer += delta * charge_modifier
-			if charging_timer > charging_time:
-				is_charging = false
-				charging_timer = 0
-				charged.emit()
-	elif is_casting:
-				casting_timer += delta * cast_modifier
-				if casting_timer > casting_time:
-					is_casting = false
-					casting_timer = 0
-					casted.emit()
-	elif is_refreshing:
-				refreshing_timer += delta * refresh_modifier
-				if refreshing_timer > refreshing_time:
-					is_refreshing = false
-					refreshing_timer = 0
-					refreshed.emit()

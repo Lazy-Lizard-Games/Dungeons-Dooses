@@ -13,6 +13,7 @@ extends Node
 @export var movement_speed := Attribute.new(1, 1)
 @export var movement_acceleration := Attribute.new(1, 1)
 @export var movement_friction := Attribute.new(1, 1)
+@export var threat := Attribute.new(1, 1)
 @export_category("Ability Stats")
 @export var ability_power := Attribute.new(1, 1)
 @export var ability_efficiency := Attribute.new(1, 1)

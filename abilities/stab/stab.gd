@@ -22,18 +22,22 @@ extends Ability
 
 var is_finished := false
 var direction := Vector2.ZERO
-
-var cost_modifier: float:
-	get:
-		if stats_component:
-			return stats_component.ability_efficiency.get_final_value()
-		return 1
+var has_casted := false
 
 func enter() -> void:
 	animation_tree['parameters/playback'].travel('stab')
 	animation_tree['parameters/stab/blend_position'] = player.looking_at
 	animation_tree.animation_finished.connect(_on_animation_finished, CONNECT_ONE_SHOT)
 	cast()
+
+func process_frame(delta: float) -> State:
+	if state == AbilityState.Casting and !has_casted:
+		casting_timer += delta * player.stats_component.cast_rate.get_final_value()
+		if casting_timer >= casting_time:
+			casting_timer -= casting_time
+			has_casted = true
+			casted.emit()
+	return null
 
 func process_physics(_delta: float) -> State:
 	if is_finished:
@@ -45,18 +49,18 @@ func process_physics(_delta: float) -> State:
 
 func exit() -> void:
 	is_finished = false
+	has_casted = false
 	refresh()
 
 func _on_animation_finished(_animation) -> void:
 	is_finished = true
 
 func _on_casted():
-	if stamina_component:
-		stamina_component.exhaust(cost * cost_modifier)
-	var affinity = stats_component.get_damage_affinity(damage.type)
+	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
+	var affinity = player.stats_component.get_damage_affinity(damage.type)
 	var impact_data = ImpactData.new([DamageData.new(damage.amount * (1 + affinity.get_final_value()), damage.type)], knockback, [])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
-	stab_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
+	stab_projectile.init(player.centre_position, animation_tree['parameters/stab/blend_position'], impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(stab_projectile)
 
 func _on_refreshed():

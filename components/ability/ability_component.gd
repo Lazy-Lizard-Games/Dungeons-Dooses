@@ -24,7 +24,7 @@ func start_ability(index: int) -> void:
 	if index < 0 or !can_attack:
 		return
 	var ability = get_ability(index)
-	if ability.state == Enums.AbilityState.Ready:
+	if ability.state == ability.AbilityState.Ready:
 		state_component.change_state(ability)
 		ability_started.emit(ability)
 

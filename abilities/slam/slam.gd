@@ -18,17 +18,21 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 @export var idle_state: State
 
 var is_finished: bool
-
-var cost_modifier: float:
-	get:
-		if stats_component:
-			return stats_component.ability_efficiency.get_final_value()
-		return 1
+var has_casted := false
 
 func enter() -> void:
 	player.animation_tree['parameters/playback'].travel('slam')
 	player.animation_tree.animation_finished.connect(_on_animation_tree_animation_finished, CONNECT_ONE_SHOT)
 	cast()
+
+func process_frame(delta: float) -> State:
+	if state == AbilityState.Casting and !has_casted:
+		casting_timer += delta * player.stats_component.cast_rate.get_final_value()
+		if casting_timer >= casting_time:
+			casting_timer -= casting_time
+			has_casted = true
+			casted.emit()
+	return null
 
 func process_physics(_delta: float) -> State:
 	if is_finished:
@@ -40,14 +44,15 @@ func process_physics(_delta: float) -> State:
 
 func exit() -> void:
 	is_finished = false
+	has_casted = false
 	refresh()
 
 func _on_animation_tree_animation_finished(_anim_name: StringName) -> void:
 	is_finished = true
 
 func _on_casted():
-	player.stamina_component.exhaust(cost * cost_modifier)
-	var affinity_modifier = 1 + stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
+	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
+	var affinity_modifier = 1 + player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
 	var damage_data = DamageData.new(damage * affinity_modifier, DAMAGE_TYPE)
 	var effect_data = EffectData.new(effect.duplicate(true), 1)
 	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])

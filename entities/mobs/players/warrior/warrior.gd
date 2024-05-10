@@ -53,6 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	state_component.process_frame(delta)
+	for ability in ability_component.abilities:
+		if ability.state == ability.AbilityState.Refreshing:
+			ability.refreshing_timer += delta * stats_component.refresh_rate.get_final_value()
+			if ability.refreshing_timer >= ability.refreshing_time:
+				ability.refreshing_timer -= ability.refreshing_time
+				ability.refreshed.emit()
 
 func _physics_process(delta):
 	state_component.process_physics(delta)
