@@ -9,10 +9,10 @@ extends Mob
 @export var stamina_component: StaminaComponent
 @export var skill_component: SkillComponent
 @export_category('Player Abilities')
-@export var primary: int = -1
-@export var secondary: int = -1
-@export var support: int = -1
-@export var passive: int = -1
+@export var primary: int
+@export var secondary: int
+@export var support: int
+@export var passive: int
 
 var interactable: InteractableComponent
 var passive_ability: Ability

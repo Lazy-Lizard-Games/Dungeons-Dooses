@@ -30,7 +30,6 @@ position = Vector2(0, -210)
 position = Vector2(0, -129)
 
 [node name="Warrior" parent="Entities" instance=ExtResource("4_trt7i")]
-primary = -1
 
 [node name="Projectiles" type="Node2D" parent="."]
 z_index = 2

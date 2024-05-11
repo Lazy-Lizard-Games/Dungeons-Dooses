@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://5detw0usmk0y"]
 
-[ext_resource type="Script" path="res://abilities/inspire/inspire.gd" id="1_cyxvi"]
+[ext_resource type="Script" path="res://abilities/warrior/passive/inspire/inspire.gd" id="1_cyxvi"]
 
 [node name="Inspire" type="Node"]
 script = ExtResource("1_cyxvi")
