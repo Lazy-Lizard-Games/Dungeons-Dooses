@@ -1,3 +1,38 @@
-[gd_scene format=3 uid="uid://bm6bj5u081ip1"]
+[gd_scene load_steps=9 format=3 uid="uid://bm6bj5u081ip1"]
+
+[ext_resource type="Script" path="res://abilities/warrior/secondary/blast/blast.gd" id="1_gcf24"]
+[ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="2_daqxp"]
+[ext_resource type="Script" path="res://effects/status/bleeding.gd" id="3_mkii7"]
+[ext_resource type="Script" path="res://effects/effect_data.gd" id="4_qiflo"]
+[ext_resource type="PackedScene" uid="uid://01mfloxbcrcs" path="res://entities/projectiles/cleave/cleave.tscn" id="5_cg2ga"]
+
+[sub_resource type="Resource" id="Resource_d3i75"]
+script = ExtResource("2_daqxp")
+amount = 15.0
+type = 0
+
+[sub_resource type="Resource" id="Resource_tmad8"]
+script = ExtResource("3_mkii7")
+interval_time = 3.0
+damage_amount = 1.0
+name = &"Bleeding"
+duration_time = 5.0
+max_stacks = 5
+
+[sub_resource type="Resource" id="Resource_fkf2c"]
+script = ExtResource("4_qiflo")
+effect = SubResource("Resource_tmad8")
+stacks = 1
 
 [node name="Blast" type="Node"]
+script = ExtResource("1_gcf24")
+damage = SubResource("Resource_d3i75")
+effect = SubResource("Resource_fkf2c")
+knockback = 250.0
+blast_projectile = ExtResource("5_cg2ga")
+type = 1
+description = "Fire shrapnel shot at enemies "
+charging_time = 0.9
+refreshing_time = 1.0
+
+[connection signal="refreshed" from="." to="." method="_on_refreshed"]
