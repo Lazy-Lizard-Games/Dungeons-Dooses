@@ -8,7 +8,6 @@ extends Mob
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
 @export var skill_component: SkillComponent
-@export var animation_tree: AnimationTree
 @export_category('Player Abilities')
 @export var primary: int = -1
 @export var secondary: int = -1

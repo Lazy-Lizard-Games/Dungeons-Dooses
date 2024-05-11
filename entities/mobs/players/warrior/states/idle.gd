@@ -5,10 +5,10 @@ signal ability_pressed(type: Enums.AbilityType)
 @export var player: Player
 @export var walk_state: State
 @export var velocity_component: VelocityComponent
-@export var animation_tree: AnimationTree
+@export var animation_player: AnimationPlayer
 
 func enter() -> void:
-	animation_tree['parameters/playback'].start('idle')
+	animation_player.play("idle")
 
 func exit() -> void:
 	pass
