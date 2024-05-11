@@ -10,7 +10,7 @@ signal ability_pressed(type: Enums.AbilityType)
 var direction := Vector2.ZERO
 
 func enter() -> void:
-	pass
+	animation_player.play("walk_right")
 
 func exit() -> void:
 	pass

@@ -16,13 +16,13 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 @export var projectile_scene: PackedScene
 ## The state moved to when the ability has finished.
 @export var idle_state: State
+## Plays the animations for the ability.
+@export var animation_player: AnimationPlayer
 
-var is_finished: bool
 var has_casted := false
 
 func enter() -> void:
-	player.animation_tree['parameters/playback'].travel('slam')
-	player.animation_tree.animation_finished.connect(_on_animation_tree_animation_finished, CONNECT_ONE_SHOT)
+	animation_player.play('slam')
 	cast()
 
 func process_frame(delta: float) -> State:
@@ -35,7 +35,7 @@ func process_frame(delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	if is_finished:
+	if animation_player.current_animation_position >= animation_player.current_animation_length:
 		return idle_state
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	player.velocity_component.accelerate_in_direction(direction * 0.1)
@@ -43,12 +43,8 @@ func process_physics(_delta: float) -> State:
 	return null
 
 func exit() -> void:
-	is_finished = false
 	has_casted = false
 	refresh()
-
-func _on_animation_tree_animation_finished(_anim_name: StringName) -> void:
-	is_finished = true
 
 func _on_casted():
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
