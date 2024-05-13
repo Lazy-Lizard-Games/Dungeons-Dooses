@@ -1,21 +1,20 @@
 extends MarginContainer
 class_name InventoryMenu
 
-@export var inventory_component: InventoryComponent
-@export var entity: Entity
-
 @onready var equipment_grid_container: GridContainer = $HSplitContainer/Equipment/MarginContainer/GridContainer
 @onready var inventory_grid_container: GridContainer = $HSplitContainer/Backpack/MarginContainer/GridContainer
 @onready var grabbed_slot_container: SlotContainer = $SlotContainer
 
+var inventory_component: InventoryComponent
 var slot_container_scene = preload ("res://components/ui/slot/slot_container.tscn")
 var grabbed_slot: Slot = Slot.new()
 
-func _ready() -> void:
-	grabbed_slot.updated.connect(update_grabbed_slot)
+func init(player: Player) -> void:
+	inventory_component = player.inventory_component
 	update_inventory()
-	grabbed_slot_container.slot = grabbed_slot
 	inventory_component.inventory.updated.connect(update_inventory)
+	grabbed_slot_container.slot = grabbed_slot
+	grabbed_slot.updated.connect(update_grabbed_slot)
 
 func _process(_delta: float) -> void:
 	if grabbed_slot.item:
@@ -69,8 +68,8 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 		[null, null, _]:
 			return
 		[null, _, MOUSE_BUTTON_LEFT]:
-			if slot.item_type == Enums.ItemType.Equipment:
-				slot.item.unequip(entity)
+			# if slot.item_type == Enums.ItemType.Equipment:
+			# 	slot.item.unequip(entity)
 			grabbed_slot.set_slot(slot.item, slot.stack)
 			slot.set_slot(null, 0)
 			return
@@ -78,8 +77,8 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 			grabbed_slot.set_slot(slot.item, int(ceilf(slot.stack / 2.0)))
 			slot.remove_stack(grabbed_slot.stack)
 			if slot.stack == 0:
-				if slot.item_type == Enums.ItemType.Equipment:
-					slot.item.unequip(entity)
+				# if slot.item_type == Enums.ItemType.Equipment:
+				# 	slot.item.unequip(entity)
 				slot.set_slot(null, 0)
 				
 			return
@@ -87,8 +86,8 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 			if slot.item_type == Enums.ItemType.Item or slot.item_type == grabbed_slot.item.item_type:
 				slot.set_slot(grabbed_slot.item, grabbed_slot.stack)
 				grabbed_slot.set_slot(null, 0)
-				if slot.item_type == Enums.ItemType.Equipment:
-					slot.item.equip(entity)
+				# if slot.item_type == Enums.ItemType.Equipment:
+				# 	slot.item.equip(entity)
 			return
 		[_, null, MOUSE_BUTTON_RIGHT]:
 			if slot.item_type == Enums.ItemType.Item or slot.item_type == grabbed_slot.item.item_type:
@@ -96,8 +95,8 @@ func on_slot_clicked(slot: Slot, index: int, button: MouseButton) -> void:
 				grabbed_slot.remove_stack(1)
 				if grabbed_slot.stack == 0:
 					grabbed_slot.set_slot(null, 0)
-				if slot.item_type == Enums.ItemType.Equipment:
-					slot.item.equip(entity)
+				# if slot.item_type == Enums.ItemType.Equipment:
+				# 	slot.item.equip(entity)
 			return
 		[_, _, MOUSE_BUTTON_LEFT]:
 			if grabbed_slot.item.name == slot.item.name:

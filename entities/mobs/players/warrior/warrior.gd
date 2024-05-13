@@ -7,50 +7,39 @@ extends Mob
 @export var inventory_component: InventoryComponent
 @export var ability_component: AbilityComponent
 @export var stamina_component: StaminaComponent
-@export var animation_tree: AnimationTree
+@export var skill_component: SkillComponent
 @export_category('Player Abilities')
-@export var primary: Ability
-@export var secondary: Ability
-@export var defence: Ability
-@export var support: Ability
+@export var primary: int
+@export var secondary: int
+@export var support: int
+@export var passive: int
 
 var interactable: InteractableComponent
+var passive_ability: Ability
 
-## Fetches the ability associated with the index, if any.
-func get_ability(index: int) -> Ability:
-	match index:
-		0:
-			return primary
-		1:
-			return secondary
-		2:
-			return defence
-		3:
-			return support
-		_:
-			return null
+func set_passive_ability(index: int) -> void:
+	var ability = ability_component.get_ability(index)
+	if passive_ability:
+		passive_ability.exit()
+	passive_ability = ability
+	if passive_ability:
+		passive_ability.enter()
 
-func set_ability(index: int, ability: Ability) -> void:
-	match index:
-		0:
-			primary = ability
-		1:
-			secondary = ability
-		2:
-			defence = ability
-		3:
-			support = ability
-
-func start_ability(ability: Ability) -> void:
-	if ability:
-		if ability.state == Enums.AbilityState.Ready:
-			if stamina_component.current > (ability.cost * stats_component.ability_efficiency.get_final_value()):
-				state_component.change_state(ability)
-				return
-		ability.failed.emit()
+func equip_ability(type: Enums.AbilityType, ability_index: int) -> void:
+	match type:
+		Enums.AbilityType.Primary:
+			primary = ability_index
+		Enums.AbilityType.Secondary:
+			secondary = ability_index
+		Enums.AbilityType.Support:
+			support = ability_index
+		Enums.AbilityType.Passive:
+			passive = ability_index
+			set_passive_ability(passive)
 
 func _ready() -> void:
 	state_component.init()
+	set_passive_ability(passive)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("consumable_1"):
@@ -62,20 +51,34 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
 	
+	if passive_ability:
+		passive_ability.process_input(event)
 	state_component.process_input(event)
 
 func _process(delta: float) -> void:
+	if passive_ability:
+		passive_ability.process_frame(delta)
 	state_component.process_frame(delta)
+	for ability in ability_component.abilities:
+		if ability.state == ability.AbilityState.Refreshing:
+			ability.refreshing_timer += delta * stats_component.refresh_rate.get_final_value()
+			if ability.refreshing_timer >= ability.refreshing_time:
+				ability.refreshing_timer -= ability.refreshing_time
+				ability.refreshed.emit()
 
 func _physics_process(delta):
+	if passive_ability:
+		passive_ability.process_physics(delta)
 	state_component.process_physics(delta)
 
 func _on_interactor_component_interactables_updated() -> void:
 	interactable = interactor_component.get_first_interactable()
 
-func _on_ability_menu_equipped_ability_updated(index: int, ability: Ability):
-	set_ability(index, ability)
-
-func _on_ability_pressed(index: int):
-	var ability = get_ability(index)
-	start_ability(ability)
+func _on_ability_pressed(type: Enums.AbilityType):
+	match type:
+		Enums.AbilityType.Primary:
+			ability_component.start_ability(primary)
+		Enums.AbilityType.Secondary:
+			ability_component.start_ability(secondary)
+		Enums.AbilityType.Support:
+			ability_component.start_ability(support)

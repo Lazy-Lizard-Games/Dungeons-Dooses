@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://5detw0usmk0y"]
+
+[ext_resource type="Script" path="res://abilities/warrior/passive/inspire/inspire.gd" id="1_cyxvi"]
+
+[node name="Inspire" type="Node"]
+script = ExtResource("1_cyxvi")
+type = 3
+description = "Your commanding presence inspires nearby allies to fight with ferocity."
+casting_time = 1.5
+
+[connection signal="casted" from="." to="." method="_on_casted"]

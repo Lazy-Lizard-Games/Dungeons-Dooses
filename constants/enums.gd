@@ -112,24 +112,10 @@ enum ItemActionType
 
 enum AbilityType
 {
-	Attack,
-	Defend,
+	Primary,
+	Secondary,
 	Support,
+	Passive,
 	Dash,
 	Special,
-}
-
-enum AbilityGroup
-{
-	Mercenary,
-	Crusader,
-	Legionnaire
-}
-
-enum AbilityState
-{
-	Ready,
-	Charging,
-	Casting,
-	Refreshing,
 }

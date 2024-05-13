@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://5ks2vltfgpme"]
 
-[ext_resource type="Script" path="res://abilities/stab/stab.gd" id="1_wrlun"]
+[ext_resource type="Script" path="res://abilities/warrior/primary/stab/stab.gd" id="1_wrlun"]
 [ext_resource type="PackedScene" uid="uid://cskur4kawkovi" path="res://entities/projectiles/smite/smite.tscn" id="2_5dq1y"]
 [ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="2_8ansc"]
-[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/strike/strike_icon.jpg" id="3_12051"]
+[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/warrior/primary/strike/strike_icon.jpg" id="3_12051"]
 [ext_resource type="Script" path="res://effects/status/burning.gd" id="3_cdcc6"]
 
 [sub_resource type="Resource" id="Resource_cmr51"]

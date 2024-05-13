@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvkc7xc2c838p"
-path="res://.godot/imported/strike_icon.jpg-55cafe60d41d1fb96fddd98d33995187.ctex"
+path="res://.godot/imported/strike_icon.jpg-11be3335487b3902ea7d3d00628d50dd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://abilities/strike/strike_icon.jpg"
-dest_files=["res://.godot/imported/strike_icon.jpg-55cafe60d41d1fb96fddd98d33995187.ctex"]
+source_file="res://abilities/warrior/primary/strike/strike_icon.jpg"
+dest_files=["res://.godot/imported/strike_icon.jpg-11be3335487b3902ea7d3d00628d50dd.ctex"]
 
 [params]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlu0jxlcc8rms"]
 
-[ext_resource type="Script" path="res://abilities/slam/slam.gd" id="1_obio2"]
+[ext_resource type="Script" path="res://abilities/warrior/primary/slam/slam.gd" id="1_obio2"]
 [ext_resource type="Script" path="res://effects/status/bleeding.gd" id="3_suaih"]
 [ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="5_mvxkh"]
 
