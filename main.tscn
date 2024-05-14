@@ -5,11 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cbyp6u3r6r346" path="res://entities/mobs/dummy/dummy.tscn" id="4_1v8qg"]
 [ext_resource type="PackedScene" uid="uid://dfvqrbc7yfp3e" path="res://entities/mobs/players/warrior/warrior.tscn" id="4_trt7i"]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("projectiles", "entities")]
+[node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_xmm6q")
-projectiles = NodePath("Projectiles")
-entities = NodePath("Entities")
 
 [node name="TestMap" parent="." instance=ExtResource("1_240sg")]
 
