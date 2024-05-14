@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bb0kgyyqest6"]
+
+[ext_resource type="Script" path="res://abilities/warrior/secondary/snipe/snipe.gd" id="1_uep48"]
+[ext_resource type="PackedScene" uid="uid://uxywh0niyeux" path="res://entities/projectiles/snipe/snipe.tscn" id="2_t45mp"]
+
+[node name="Snipe" type="Node" node_paths=PackedStringArray("raycast")]
+script = ExtResource("1_uep48")
+damage = 25.0
+knockback = 25.0
+snipe_projectile = ExtResource("2_t45mp")
+raycast = NodePath("RayCast2D")
+type = 1
+description = "Fire a high velocity projectile strong enough to bring down even the mightiest of foes."
+cost = 15
+charging_time = 0.9
+refreshing_time = 1.0
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(300, 0)
+collision_mask = 4
+collide_with_areas = true
+collide_with_bodies = false
+
+[connection signal="refreshed" from="." to="." method="_on_refreshed"]

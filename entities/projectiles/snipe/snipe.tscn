@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://uxywh0niyeux"]
+
+[ext_resource type="Script" path="res://entities/projectiles/snipe/snipe.gd" id="1_teaxx"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_85hwo"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="3_i8nw8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nffb8"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_01aif"]
+radius = 1.0
+
+[node name="Snipe" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "velocity_component")]
+script = ExtResource("1_teaxx")
+hurtbox_component = NodePath("HurtboxComponent")
+id = "Snipe"
+velocity_component = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nffb8")
+disabled = true
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_85hwo")]
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("3_i8nw8")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_01aif")
