@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdhqewgm6m3p6"]
+
+[ext_resource type="Script" path="res://effects/status/stunned/state/stunned.gd" id="1_cujh3"]
+
+[node name="Stunned" type="Node"]
+script = ExtResource("1_cujh3")

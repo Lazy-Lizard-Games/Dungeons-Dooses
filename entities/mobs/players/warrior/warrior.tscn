@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=98 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
@@ -16,9 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
 [ext_resource type="PackedScene" uid="uid://cp74lofv8h4fl" path="res://abilities/warrior/passive/mend/mend.tscn" id="20_tsbi3"]
 [ext_resource type="Script" path="res://effects/ability/mend.gd" id="21_dhwru"]
+[ext_resource type="Script" path="res://effects/status/stunned/stunned.gd" id="21_gdbm0"]
 [ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="21_kkfl7"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="22_gwluk"]
+[ext_resource type="PackedScene" uid="uid://cdhqewgm6m3p6" path="res://effects/status/stunned/state/stunned.tscn" id="22_y6u7x"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/warrior/primary/strike/strike.tscn" id="23_413do"]
 [ext_resource type="PackedScene" uid="uid://5detw0usmk0y" path="res://abilities/warrior/passive/inspire/inspire.tscn" id="23_eo67p"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
@@ -1037,6 +1039,13 @@ script = ExtResource("21_kkfl7")
 amount = 7.5
 type = 1
 
+[sub_resource type="Resource" id="Resource_258lg"]
+script = ExtResource("21_gdbm0")
+stunned_state_scene = ExtResource("22_y6u7x")
+name = &"Stunned"
+duration_time = 3.0
+max_stacks = 1
+
 [sub_resource type="Resource" id="Resource_6uo0j"]
 script = ExtResource("21_dhwru")
 interval_time = 1.5
@@ -1130,15 +1139,19 @@ skill_trees = Array[ExtResource("29_uqb7t")]([SubResource("Resource_nqfhd")])
 [node name="InventoryComponent" parent="." instance=ExtResource("14_mdvh5")]
 inventory = SubResource("Resource_bia7r")
 
-[node name="EffectComponent" parent="." node_paths=PackedStringArray("health_component", "stamina_component", "velocity_component", "stats_component") instance=ExtResource("33_n4u06")]
+[node name="EffectComponent" parent="." node_paths=PackedStringArray("health_component", "stamina_component", "velocity_component", "hitbox_component", "stats_component", "ability_component", "state_component") instance=ExtResource("33_n4u06")]
 health_component = NodePath("../HealthComponent")
 stamina_component = NodePath("../StaminaComponent")
 velocity_component = NodePath("../VelocityComponent")
+hitbox_component = NodePath("../HitboxComponent")
 stats_component = NodePath("../StatsComponent")
+ability_component = NodePath("../AbilityComponent")
+state_component = NodePath("../StateComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("18_wakcv")]
 
-[node name="StateComponent" parent="." node_paths=PackedStringArray("starting_state") instance=ExtResource("2_e5t7x")]
+[node name="StateComponent" parent="." node_paths=PackedStringArray("entity", "starting_state") instance=ExtResource("2_e5t7x")]
+entity = NodePath("..")
 starting_state = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("player", "walk_state", "velocity_component", "animation_player")]
@@ -1179,8 +1192,22 @@ sprite = NodePath("../../Sprite2D")
 
 [node name="Slam" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player") instance=ExtResource("26_5eo5r")]
 player = NodePath("../..")
+effect = SubResource("Resource_258lg")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
+
+[node name="Blast" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite") instance=ExtResource("27_o1ixq")]
+player = NodePath("../..")
+idle_state = NodePath("../../StateComponent/Idle")
+damage = 15.0
+animation_player = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
+
+[node name="Snipe" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite") instance=ExtResource("28_ksl4h")]
+player = NodePath("../..")
+idle_state = NodePath("../../StateComponent/Idle")
+animation_player = NodePath("../../AnimationPlayer")
+sprite = NodePath("../../Sprite2D")
 
 [node name="Mend" parent="AbilityComponent" node_paths=PackedStringArray("player") instance=ExtResource("20_tsbi3")]
 player = NodePath("../..")
@@ -1194,18 +1221,6 @@ projectile_scene = ExtResource("25_w3f32")
 description = "Channel your inner commander and inspire all nearby allies with increased attack and defence."
 cost = 15
 refreshing_time = 1.0
-
-[node name="Blast" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite") instance=ExtResource("27_o1ixq")]
-player = NodePath("../..")
-idle_state = NodePath("../../StateComponent/Idle")
-animation_player = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
-
-[node name="Snipe" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite") instance=ExtResource("28_ksl4h")]
-player = NodePath("../..")
-idle_state = NodePath("../../StateComponent/Idle")
-animation_player = NodePath("../../AnimationPlayer")
-sprite = NodePath("../../Sprite2D")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)

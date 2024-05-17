@@ -1,6 +1,7 @@
-extends Node
 class_name StateComponent
+extends Node
 
+@export var entity: Entity
 @export var starting_state: State
 var current_state: State
 

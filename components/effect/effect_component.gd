@@ -19,6 +19,8 @@ signal effects_cleared
 @export var stats_component: StatsComponent
 ## The ability component useable by effects.
 @export var ability_component: AbilityComponent
+## The state component useable by effects.
+@export var state_component: StateComponent
 
 var effects: Array[Effect] = []
 
