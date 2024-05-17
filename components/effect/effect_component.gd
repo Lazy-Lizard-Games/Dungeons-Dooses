@@ -37,7 +37,7 @@ func clear_effects() -> void:
 	effects_cleared.emit()
 
 ## Adds an effect.
-func add_effect(effect: Effect, stacks: int) -> void:
+func add_effect(effect: Effect, stacks: int=1) -> void:
 	var existing_effect = get_effect(effect.name)
 	if existing_effect:
 		existing_effect.add_stack(stacks)

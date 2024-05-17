@@ -51,9 +51,10 @@ func apply_knockback_transforms(strength: float) -> float:
 func handle_effects(effect_datas: Array[EffectData], from: HurtboxComponent) -> void:
 	if effect_component:
 		for effect_data in effect_datas:
-			var duplicated_effect = effect_data.effect.duplicate(true)
-			effect_component.add_effect(duplicated_effect, effect_data.stacks)
-			from.effect_applied.emit(duplicated_effect, self)
+			if randf() <= effect_data.chance:
+				var duplicated_effect = effect_data.effect.duplicate(true)
+				effect_component.add_effect(duplicated_effect, effect_data.stacks)
+				from.effect_applied.emit(duplicated_effect, self)
 
 func _ready():
 	invulnerability_timer = Timer.new()
