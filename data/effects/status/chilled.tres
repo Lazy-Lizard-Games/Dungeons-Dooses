@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ChilledEffect" load_steps=2 format=3 uid="uid://cq307yir1opbb"]
+
+[ext_resource type="Script" path="res://effects/status/chilled/chilled.gd" id="1_2m5r6"]
+
+[resource]
+script = ExtResource("1_2m5r6")
+movement = 0.05
+attack = 0.05
+name = &"Chilled"
+duration_time = 5.0
+max_stacks = 5

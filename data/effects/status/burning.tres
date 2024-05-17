@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BurningEffect" load_steps=2 format=3 uid="uid://dk4uwh2f8gr11"]
+
+[ext_resource type="Script" path="res://effects/status/burning/burning.gd" id="1_y7tng"]
+
+[resource]
+script = ExtResource("1_y7tng")
+interval_time = 1.0
+damage_amount = 1.0
+name = &"Burning"
+duration_time = 5.0
+max_stacks = 5

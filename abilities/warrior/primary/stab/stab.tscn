@@ -1,29 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://5ks2vltfgpme"]
+[gd_scene load_steps=5 format=3 uid="uid://5ks2vltfgpme"]
 
 [ext_resource type="Script" path="res://abilities/warrior/primary/stab/stab.gd" id="1_wrlun"]
 [ext_resource type="PackedScene" uid="uid://cskur4kawkovi" path="res://entities/projectiles/smite/smite.tscn" id="2_5dq1y"]
-[ext_resource type="Script" path="res://scripts/damage/damage_data.gd" id="2_8ansc"]
+[ext_resource type="Resource" uid="uid://bo4wo4atfkehc" path="res://data/effects/status/pierced.tres" id="2_t1il5"]
 [ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/warrior/primary/strike/strike_icon.jpg" id="3_12051"]
-[ext_resource type="Script" path="res://effects/status/burning.gd" id="3_cdcc6"]
-
-[sub_resource type="Resource" id="Resource_cmr51"]
-script = ExtResource("2_8ansc")
-amount = 7.5
-type = 1
-
-[sub_resource type="Resource" id="Resource_q2exu"]
-script = ExtResource("3_cdcc6")
-interval_time = 0.5
-damage_amount = 2.5
-name = &"Burning"
-duration_time = 5.0
-max_stacks = 5
 
 [node name="Stab" type="Node"]
 script = ExtResource("1_wrlun")
-damage = SubResource("Resource_cmr51")
 knockback = 75.0
-burning_effect = SubResource("Resource_q2exu")
+effect = ExtResource("2_t1il5")
+chance = 0.25
 stab_projectile_scene = ExtResource("2_5dq1y")
 description = "Thrust your sword, skewering enemies hit and reducing their physical resistance."
 icon = ExtResource("3_12051")

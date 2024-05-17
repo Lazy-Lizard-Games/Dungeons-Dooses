@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PoisonedEffect" load_steps=2 format=3 uid="uid://d13dgpb3vwi3n"]
+
+[ext_resource type="Script" path="res://effects/status/poisoned/poisoned.gd" id="1_y4ni0"]
+
+[resource]
+script = ExtResource("1_y4ni0")
+interval_time = 2.0
+damage_amount = 1.0
+name = &"Poisoned"
+duration_time = 5.0
+max_stacks = 5

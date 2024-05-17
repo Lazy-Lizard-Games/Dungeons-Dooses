@@ -16,6 +16,7 @@ var damage_data: DamageData:
 
 func init(effect_component: EffectComponent) -> void:
 	health_component = effect_component.health_component
+	health_component.damage(damage_data)
 
 func process(delta: float) -> void:
 	if !health_component:

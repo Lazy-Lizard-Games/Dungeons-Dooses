@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="BleedingEffect" load_steps=2 format=3 uid="uid://besd1ghcgc2d4"]
+
+[ext_resource type="Script" path="res://effects/status/bleeding/bleeding.gd" id="1_mmq2l"]
+
+[resource]
+script = ExtResource("1_mmq2l")
+interval_time = 3.0
+damage_amount = 1.0
+name = &"Bleeding"
+duration_time = 5.0
+max_stacks = 5

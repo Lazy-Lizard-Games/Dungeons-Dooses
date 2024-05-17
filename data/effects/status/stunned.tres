@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="StunnedEffect" load_steps=3 format=3 uid="uid://bi6r48g05rqxm"]
+
+[ext_resource type="Script" path="res://effects/status/stunned/stunned.gd" id="1_ypgk7"]
+[ext_resource type="PackedScene" uid="uid://cdhqewgm6m3p6" path="res://effects/status/stunned/state/stunned.tscn" id="2_tjuau"]
+
+[resource]
+script = ExtResource("1_ypgk7")
+stunned_state_scene = ExtResource("2_tjuau")
+name = &"Stunned"
+duration_time = 5.0
+max_stacks = 1

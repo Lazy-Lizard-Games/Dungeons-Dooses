@@ -2,13 +2,17 @@ extends Ability
 
 ## Thrusts the sword forward, piercing hit enemies and reduces their physical resistance.
 
+const DAMAGE_TYPE = Enums.DamageType.Pierce
+
 @export var player: Player
 ## The damage dealt by this ability.
-@export var damage: DamageData
+@export var damage: float
 ## The knockback applied by this ability.
 @export var knockback: float
-## The effect dealt by the ability. TODO: change
-@export var burning_effect: BurningEffect
+## The effect dealt by the ability.
+@export var effect: Effect
+## The chance that the effect will be applied.
+@export_range(0, 1) var chance: float
 ## The projectile that will be created when the ability is casted.
 @export var stab_projectile_scene: PackedScene
 ## State to move to when ability is casted.
@@ -75,8 +79,10 @@ func exit() -> void:
 
 func _on_casted():
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
-	var affinity = player.stats_component.get_damage_affinity(damage.type)
-	var impact_data = ImpactData.new([DamageData.new(damage.amount * (1 + affinity.get_final_value()), damage.type)], knockback, [])
+	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE)
+	var damage_data = DamageData.new(damage * (1 + affinity.get_final_value()), DAMAGE_TYPE)
+	var effect_data = EffectData.new(effect, chance)
+	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
 	var stab_projectile: Projectile = stab_projectile_scene.instantiate()
 	stab_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(stab_projectile)

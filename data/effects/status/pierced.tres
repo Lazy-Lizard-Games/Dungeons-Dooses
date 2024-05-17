@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PiercedEffect" load_steps=2 format=3 uid="uid://bo4wo4atfkehc"]
+
+[ext_resource type="Script" path="res://effects/status/pierced/pierced.gd" id="1_p6nw2"]
+
+[resource]
+script = ExtResource("1_p6nw2")
+resistance = 0.05
+name = &"Pierced"
+duration_time = 5.0
+max_stacks = 5
