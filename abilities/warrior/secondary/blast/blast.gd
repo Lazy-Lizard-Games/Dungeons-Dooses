@@ -9,8 +9,8 @@ const DAMAGE_TYPE = Enums.DamageType.Slash
 @export var player: Player
 @export var idle_state: State
 @export var damage: float
-# TODO: Implement effects properly
-# @export var effect: BleedingEffect
+@export var effect: BleedingEffect
+@export_range(0, 1) var chance: float
 @export var knockback: float
 @export var blast_projectile: PackedScene
 @export var animation_player: AnimationPlayer
@@ -65,8 +65,10 @@ func fire_projectile() -> void:
 	has_fired = true
 	update_animation('blast_fire', 0)
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
-	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE)
-	var impact_data = ImpactData.new([DamageData.new(damage * (1 + affinity.get_final_value()), DAMAGE_TYPE)], knockback, [])
+	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
+	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
+	var effect_data = EffectData.new(effect, chance)
+	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
 	var projectile: Projectile = blast_projectile.instantiate()
 	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(projectile)

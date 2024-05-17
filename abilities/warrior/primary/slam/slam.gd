@@ -50,9 +50,9 @@ func exit() -> void:
 
 func _on_casted():
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
-	var affinity_modifier = 1 + player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
-	var damage_data = DamageData.new(damage * affinity_modifier, DAMAGE_TYPE)
-	var effect_data = EffectData.new(effect.duplicate(true), chance)
+	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
+	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
+	var effect_data = EffectData.new(effect, chance)
 	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
 	var projectile: Projectile = projectile_scene.instantiate()
 	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)

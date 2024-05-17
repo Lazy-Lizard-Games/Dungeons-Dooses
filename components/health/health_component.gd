@@ -89,9 +89,10 @@ func damage(damage_data: DamageData) -> DamageOutcome:
 
 func apply_damage_reistances(damage_data: DamageData) -> DamageData:
 	if stats_component:
-		var resistance = 1 - stats_component.get_damage_resistance(damage_data.type).get_final_value()
-		var resisted_damage = DamageData.new(damage_data.amount * resistance, damage_data.type)
-		return resisted_damage
+		var resistance = stats_component.get_damage_resistance(damage_data.type).get_final_value()
+		if resistance <= 0:
+			return DamageData.new(damage_data.amount * 2, damage_data.type)
+		return DamageData.new(damage_data.amount / resistance, damage_data.type)
 	return damage_data
 
 ## Restores amount to the current health.

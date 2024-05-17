@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=97 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
@@ -20,11 +20,13 @@
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
 [ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="22_gwluk"]
 [ext_resource type="PackedScene" uid="uid://cdhqewgm6m3p6" path="res://effects/status/stunned/state/stunned.tscn" id="22_y6u7x"]
+[ext_resource type="Resource" uid="uid://besd1ghcgc2d4" path="res://data/effects/status/bleeding.tres" id="23_5qj8q"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/warrior/primary/strike/strike.tscn" id="23_413do"]
 [ext_resource type="PackedScene" uid="uid://5detw0usmk0y" path="res://abilities/warrior/passive/inspire/inspire.tscn" id="23_eo67p"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
 [ext_resource type="Script" path="res://effects/ability/inspire.gd" id="24_hedtb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
+[ext_resource type="Resource" uid="uid://bo4wo4atfkehc" path="res://data/effects/status/pierced.tres" id="25_d030w"]
 [ext_resource type="PackedScene" uid="uid://cjdoso7d8t6km" path="res://entities/projectiles/inspire/inspire.tscn" id="25_w3f32"]
 [ext_resource type="PackedScene" uid="uid://dlu0jxlcc8rms" path="res://abilities/warrior/primary/slam/slam.tscn" id="26_5eo5r"]
 [ext_resource type="PackedScene" uid="uid://bm6bj5u081ip1" path="res://abilities/warrior/secondary/blast/blast.tscn" id="27_o1ixq"]
@@ -1111,9 +1113,8 @@ friction = 1.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_wj1h3")]
 stats_component = NodePath("../StatsComponent")
-maximum = 100.0
-regeneration = 5.0
-delay_time = 5.0
+maximum = 1e+07
+regeneration = 999999.0
 
 [node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("12_edvht")]
 stats_component = NodePath("../StatsComponent")
@@ -1164,6 +1165,7 @@ can_attack = true
 
 [node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite") instance=ExtResource("23_413do")]
 player = NodePath("../..")
+damage = 5.0
 knockback = 100.0
 idle_state = NodePath("../../StateComponent/Idle")
 velocity = NodePath("../../VelocityComponent")
@@ -1172,7 +1174,7 @@ sprite = NodePath("../../Sprite2D")
 
 [node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite") instance=ExtResource("32_50geu")]
 player = NodePath("../..")
-damage = 0.0
+damage = 10.0
 idle_state = NodePath("../../StateComponent/Idle")
 velocity = NodePath("../../VelocityComponent")
 animation_player = NodePath("../../AnimationPlayer")
@@ -1180,6 +1182,7 @@ sprite = NodePath("../../Sprite2D")
 
 [node name="Slam" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player") instance=ExtResource("26_5eo5r")]
 player = NodePath("../..")
+damage = 7.5
 effect = SubResource("Resource_258lg")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
@@ -1188,6 +1191,8 @@ animation_player = NodePath("../../AnimationPlayer")
 player = NodePath("../..")
 idle_state = NodePath("../../StateComponent/Idle")
 damage = 15.0
+effect = ExtResource("23_5qj8q")
+chance = 0.75
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 
@@ -1196,6 +1201,8 @@ player = NodePath("../..")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
+effect = ExtResource("25_d030w")
+chance = 1.0
 
 [node name="Mend" parent="AbilityComponent" node_paths=PackedStringArray("player") instance=ExtResource("20_tsbi3")]
 player = NodePath("../..")
