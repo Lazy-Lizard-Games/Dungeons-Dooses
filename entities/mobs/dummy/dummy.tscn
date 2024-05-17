@@ -1,13 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://cbyp6u3r6r346"]
+[gd_scene load_steps=24 format=3 uid="uid://cbyp6u3r6r346"]
 
 [ext_resource type="Script" path="res://entities/mobs/dummy/dummy.gd" id="1_gn2pe"]
 [ext_resource type="Texture2D" uid="uid://cq2bj8boayyhp" path="res://entities/mobs/dummy/dummy.png" id="4_3hsxe"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="4_6xhxw"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="5_12j2c"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="5_mdyo7"]
+[ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="6_bmyf2"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="6_c60ux"]
 [ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="7_fafbl"]
+[ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="7_wes5b"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="8_2b6gb"]
+[ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="8_o3fgx"]
+[ext_resource type="Script" path="res://entities/mobs/dummy/idle_state.gd" id="11_v37d3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o2tfs"]
 radius = 2.0
@@ -100,15 +104,17 @@ states/idle/node = SubResource("AnimationNodeAnimation_083vk")
 states/idle/position = Vector2(310, 100)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_b7o2i"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_ffw2r"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_0naha")]
 
-[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("animation_tree", "hitbox_component", "health_component", "effect_component", "stats_component", "velocity_component")]
+[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_gn2pe")
-animation_tree = NodePath("AnimationTree")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
+stamina_component = NodePath("StaminaComponent")
+ability_component = NodePath("AbilityComponent")
 effect_component = NodePath("EffectComponent")
 stats_component = NodePath("StatsComponent")
+state_component = NodePath("StateComponent")
 id = "Dummy"
 velocity_component = NodePath("VelocityComponent")
 
@@ -125,22 +131,39 @@ debug_color = Color(0, 0.52549, 1, 0.419608)
 [node name="ShadowComponent" parent="." instance=ExtResource("5_mdyo7")]
 scale = Vector2(0.5, 0.5)
 
+[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_12j2c")]
+stats_component = NodePath("../StatsComponent")
+
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("4_6xhxw")]
 stats_component = NodePath("../StatsComponent")
 maximum = 100.0
 regeneration = 100.0
 delay_time = 0.01
 
-[node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_12j2c")]
+[node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("6_bmyf2")]
 stats_component = NodePath("../StatsComponent")
 
-[node name="EffectComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "hitbox_component", "stats_component") instance=ExtResource("8_2b6gb")]
+[node name="AbilityComponent" parent="." node_paths=PackedStringArray("state_component") instance=ExtResource("7_wes5b")]
+state_component = NodePath("../StateComponent")
+
+[node name="EffectComponent" parent="." node_paths=PackedStringArray("health_component", "stamina_component", "velocity_component", "hitbox_component", "stats_component", "ability_component", "state_component") instance=ExtResource("8_2b6gb")]
 health_component = NodePath("../HealthComponent")
+stamina_component = NodePath("../StaminaComponent")
 velocity_component = NodePath("../VelocityComponent")
 hitbox_component = NodePath("../HitboxComponent")
 stats_component = NodePath("../StatsComponent")
+ability_component = NodePath("../AbilityComponent")
+state_component = NodePath("../StateComponent")
 
 [node name="StatsComponent" parent="." instance=ExtResource("7_fafbl")]
+
+[node name="StateComponent" parent="." node_paths=PackedStringArray("entity", "starting_state") instance=ExtResource("8_o3fgx")]
+entity = NodePath("..")
+starting_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateComponent" node_paths=PackedStringArray("animation_tree")]
+script = ExtResource("11_v37d3")
+animation_tree = NodePath("../../AnimationTree")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("6_c60ux")]
 health_component = NodePath("../HealthComponent")
@@ -166,4 +189,4 @@ tree_root = SubResource("AnimationNodeStateMachine_vkqpj")
 anim_player = NodePath("../AnimationPlayer")
 parameters/conditions/hit = false
 
-[connection signal="impacted" from="HitboxComponent" to="." method="_on_hitbox_component_impacted"]
+[connection signal="impacted" from="HitboxComponent" to="StateComponent/Idle" method="_on_hitbox_component_impacted"]
