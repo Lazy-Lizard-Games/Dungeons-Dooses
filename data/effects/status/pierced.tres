@@ -6,5 +6,5 @@
 script = ExtResource("1_p6nw2")
 resistance = 0.05
 name = &"Pierced"
-duration_time = 15.0
+duration_time = 5.0
 max_stacks = 5

@@ -1176,6 +1176,7 @@ sprite = NodePath("../../Sprite2D")
 [node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite") instance=ExtResource("32_50geu")]
 player = NodePath("../..")
 damage = 10.0
+chance = 1.0
 idle_state = NodePath("../../StateComponent/Idle")
 velocity = NodePath("../../VelocityComponent")
 animation_player = NodePath("../../AnimationPlayer")
