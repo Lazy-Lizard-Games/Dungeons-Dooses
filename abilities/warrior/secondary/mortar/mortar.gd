@@ -15,6 +15,7 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 
 var is_casted := false
 var has_fired := false
+var target := Vector2.ZERO
 
 func enter() -> void:
 	animation_player.play("mortar_load")
@@ -49,18 +50,18 @@ func get_target_position() -> Vector2:
 
 func fire() -> void:
 	has_fired = true
+	target = get_target_position()
 	animation_player.play("mortar_fire")
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
-	player.get_tree().create_timer(0.25).timeout.connect(_on_timeout)
+	player.get_tree().create_timer(0.5 * (min(player.centre_position.distance_to(target) / 250, 1))).timeout.connect(_on_timeout)
 
 func _on_timeout() -> void:
 	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
 	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
 	var effect_data = EffectData.new(effect, chance)
 	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
-	var target_position = get_target_position()
 	var projectile: Projectile = projectile_scene.instantiate()
-	projectile.init(target_position, player.looking_at, impact_data, player.faction, false)
+	projectile.init(target, player.looking_at, impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(projectile)
 
 func _on_refreshed():
