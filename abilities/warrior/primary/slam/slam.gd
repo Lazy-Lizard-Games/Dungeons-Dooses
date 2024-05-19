@@ -27,15 +27,6 @@ func enter() -> void:
 	animation_player.play('slam')
 	cast()
 
-func process_frame(delta: float) -> State:
-	if state == AbilityState.Casting and !has_casted:
-		casting_timer += delta * player.stats_component.cast_rate.get_final_value()
-		if casting_timer >= casting_time:
-			casting_timer -= casting_time
-			has_casted = true
-			casted.emit()
-	return null
-
 func process_physics(_delta: float) -> State:
 	if animation_player.current_animation_position >= animation_player.current_animation_length:
 		return idle_state
@@ -57,6 +48,3 @@ func _on_casted():
 	var projectile: Projectile = projectile_scene.instantiate()
 	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
 	ProjectileHandler.add_projectile(projectile)
-
-func _on_refreshed():
-	ready()

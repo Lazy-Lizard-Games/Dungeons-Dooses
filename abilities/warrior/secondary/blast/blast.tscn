@@ -9,7 +9,6 @@ knockback = 250.0
 blast_projectile = ExtResource("5_cg2ga")
 type = 1
 description = "Fire shrapnel shot at enemies "
-charging_time = 0.9
 refreshing_time = 1.0
 
-[connection signal="refreshed" from="." to="." method="_on_refreshed"]
+[connection signal="casted" from="." to="." method="_on_casted"]

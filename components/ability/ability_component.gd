@@ -43,3 +43,7 @@ func get_ability(index: int) -> Ability:
 	if !ability:
 		return null
 	return ability
+
+func process_ability_timers(delta: float) -> void:
+	for ability in abilities:
+		ability.process_timers(delta)

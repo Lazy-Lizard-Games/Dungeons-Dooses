@@ -17,4 +17,3 @@ casting_time = 0.9
 refreshing_time = 1.0
 
 [connection signal="casted" from="." to="." method="_on_casted"]
-[connection signal="refreshed" from="." to="." method="_on_refreshed"]

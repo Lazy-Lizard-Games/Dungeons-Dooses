@@ -13,7 +13,7 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 @export_range(0, 1) var chance: float
 @export var projectile_scene: PackedScene
 
-var is_casted := false
+var has_charged := false
 var has_fired := false
 var target := Vector2.ZERO
 
@@ -22,23 +22,16 @@ func enter() -> void:
 	cast()
 
 func exit() -> void:
-	is_casted = false
+	has_charged = false
 	has_fired = false
 	refresh()
 
-func process_frame(delta: float) -> State:
-	# animation_player.is_playing()
+func process_frame(_delta: float) -> State:
 	var current_position = animation_player.current_animation_position
 	if has_fired and current_position >= animation_player.current_animation_length:
 		return idle_state
-	if state == AbilityState.Casting and !is_casted:
-		casting_timer += delta * player.stats_component.charge_rate.get_final_value()
-		if casting_timer >= casting_time:
-			is_casted = true
-			animation_player.play("mortar_idle")
-			casted.emit()
 	if Input.is_action_just_released("ability_2"):
-		if is_casted:
+		if has_charged:
 			if !has_fired:
 				fire()
 		else:
@@ -64,5 +57,5 @@ func _on_timeout() -> void:
 	projectile.init(target, player.looking_at, impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(projectile)
 
-func _on_refreshed():
-	ready()
+func _on_casted():
+	has_charged = true

@@ -31,15 +31,6 @@ func enter() -> void:
 	animation_player.play("strike_side")
 	cast()
 
-func process_frame(delta: float) -> State:
-	if state == AbilityState.Casting and !has_casted:
-		casting_timer += delta * player.stats_component.cast_rate.get_final_value()
-		if casting_timer >= casting_time:
-			casting_timer -= casting_time
-			has_casted = true
-			casted.emit()
-	return null
-
 func process_physics(_delta: float) -> State:
 	var current_position = animation_player.current_animation_position
 
@@ -79,6 +70,4 @@ func _on_casted():
 	var strike_projectile: Projectile = strike_projectile_scene.instantiate()
 	strike_projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
 	ProjectileHandler.add_projectile(strike_projectile)
-
-func _on_refreshed():
-	ready()
+	

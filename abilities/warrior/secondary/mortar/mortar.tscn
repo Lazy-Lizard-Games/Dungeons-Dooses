@@ -17,4 +17,4 @@ cost = 5
 casting_time = 2.55
 refreshing_time = 1.0
 
-[connection signal="refreshed" from="." to="." method="_on_refreshed"]
+[connection signal="casted" from="." to="." method="_on_casted"]

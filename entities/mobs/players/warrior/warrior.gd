@@ -53,6 +53,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	state_component.process_input(event)
 
 func _process(delta: float) -> void:
+	ability_component.process_ability_timers(delta)
 	if passive_ability:
 		passive_ability.process_frame(delta)
 	state_component.process_frame(delta)

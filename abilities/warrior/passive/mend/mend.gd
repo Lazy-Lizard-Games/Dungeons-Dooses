@@ -12,14 +12,6 @@ extends Ability
 func enter() -> void:
 	cast()
 
-func process_frame(delta: float) -> State:
-	if state == AbilityState.Casting:
-		casting_timer += delta * player.stats_component.cast_rate.get_final_value()
-		if casting_timer >= casting_time:
-			casting_timer -= casting_time
-			casted.emit()
-	return null
-
 func exit() -> void:
 	ready()
 
@@ -29,3 +21,4 @@ func _on_casted():
 	var projectile: Projectile = projectile_scene.instantiate()
 	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, true)
 	ProjectileHandler.add_projectile(projectile)
+	cast()

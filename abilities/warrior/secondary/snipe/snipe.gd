@@ -15,7 +15,7 @@ const DAMAGE_TYPE = Enums.DamageType.Pierce
 @export var snipe_projectile: PackedScene
 @export var raycast: RayCast2D
 
-var is_charged := false
+var has_charged := false
 var has_fired := false
 var angle: float = 0
 
@@ -24,21 +24,16 @@ func _ready():
 
 func enter() -> void:
 	animation_player.play("snipe_charge_side")
-	charge()
+	cast()
 
 func exit() -> void:
-	is_charged = false
+	has_charged = false
 	has_fired = false
 	refresh()
 
-func process_frame(delta: float) -> State:
-	if state == AbilityState.Charging and !is_charged:
-		charging_timer += delta * player.stats_component.charge_rate.get_final_value()
-		if charging_timer >= charging_time:
-			is_charged = true
-			charged.emit()
+func process_frame(_delta: float) -> State:
 	if Input.is_action_just_released("ability_2"):
-		if is_charged:
+		if has_charged:
 			if !has_fired:
 				fire_projectile()
 		else:
@@ -56,7 +51,7 @@ func process_physics(_delta: float) -> State:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	player.velocity_component.accelerate_in_direction(direction * 0.1)
 	player.velocity_component.move(player)
-	if is_charged and !has_fired:
+	if has_charged and !has_fired:
 		raycast.position = player.centre_position
 		raycast.look_at(player.get_global_mouse_position())
 	return null
@@ -101,7 +96,7 @@ func get_target_position() -> Vector2:
 	return target_position
 
 func fire_projectile() -> void:
-	is_charged = false
+	has_charged = false
 	has_fired = true
 	update_animation('snipe_fire', 0)
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
@@ -114,5 +109,5 @@ func fire_projectile() -> void:
 	projectile.init(target_position, player.looking_at, impact_data, player.faction, false)
 	ProjectileHandler.add_projectile(projectile)
 
-func _on_refreshed():
-	ready()
+func _on_casted():
+	has_charged = true

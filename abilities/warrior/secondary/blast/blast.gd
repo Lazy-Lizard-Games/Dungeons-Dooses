@@ -16,27 +16,22 @@ const DAMAGE_TYPE = Enums.DamageType.Slash
 @export var animation_player: AnimationPlayer
 @export var sprite: Sprite2D
 
-var is_charged := false
+var has_casted := false
 var has_fired := false
 var angle: float = 0
 
 func enter() -> void:
 	animation_player.play("blast_charge_side")
-	charge()
+	cast()
 
 func exit() -> void:
-	is_charged = false
+	has_casted = false
 	has_fired = false
 	refresh()
 
-func process_frame(delta: float) -> State:
-	if state == AbilityState.Charging and !is_charged:
-		charging_timer += delta * player.stats_component.charge_rate.get_final_value()
-		if charging_timer >= charging_time:
-			is_charged = true
-			charged.emit()
+func process_frame(_delta: float) -> State:
 	if Input.is_action_just_released("ability_2"):
-		if is_charged:
+		if has_casted:
 			if !has_fired:
 				fire_projectile()
 		else:
@@ -61,7 +56,7 @@ func process_physics(_delta: float) -> State:
 	return null
 
 func fire_projectile() -> void:
-	is_charged = false
+	has_casted = false
 	has_fired = true
 	update_animation('blast_fire', 0)
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
@@ -93,5 +88,5 @@ func update_animation(base: String, position: float) -> void:
 		animation_player.play(base + '_down_side') # bottom-right
 	animation_player.seek(position)
 
-func _on_refreshed():
-	ready()
+func _on_casted():
+	has_casted = true

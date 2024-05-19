@@ -12,7 +12,6 @@ raycast = NodePath("RayCast2D")
 type = 1
 description = "Fire a high velocity projectile strong enough to bring down even the mightiest of foes."
 cost = 15
-charging_time = 0.9
 refreshing_time = 1.0
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
@@ -21,4 +20,4 @@ collision_mask = 4
 collide_with_areas = true
 collide_with_bodies = false
 
-[connection signal="refreshed" from="." to="." method="_on_refreshed"]
+[connection signal="casted" from="." to="." method="_on_casted"]
