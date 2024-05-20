@@ -30,7 +30,7 @@ signal readied
 ## The time in seconds taken to refresh the ability
 @export var refreshing_time: float
 
-var is_ready := false
+var is_ready := true
 var is_casting := false
 var is_refreshing := false
 ## Counter used for timing the casting.

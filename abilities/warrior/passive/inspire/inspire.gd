@@ -14,6 +14,7 @@ func enter() -> void:
 
 func exit() -> void:
 	ready()
+	is_casting = true
 
 func _on_casted():
 	var duplicated_effect = inspire_effect.duplicate(true) as InspireEffect

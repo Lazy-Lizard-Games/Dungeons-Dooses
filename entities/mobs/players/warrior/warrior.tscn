@@ -1068,7 +1068,6 @@ script = ExtResource("1_dwma1")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 skill_component = NodePath("SkillComponent")
-primary = null
 secondary = -1
 support = -1
 passive = -1
@@ -1165,7 +1164,7 @@ position = Vector2(0, -11)
 state_component = NodePath("../StateComponent")
 can_attack = true
 
-[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite") instance=ExtResource("23_413do")]
+[node name="Strike" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite", "stats") instance=ExtResource("23_413do")]
 player = NodePath("../..")
 damage = 5.0
 knockback = 100.0
@@ -1173,8 +1172,9 @@ idle_state = NodePath("../../StateComponent/Idle")
 velocity = NodePath("../../VelocityComponent")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
+stats = NodePath("../../StatsComponent")
 
-[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite") instance=ExtResource("32_50geu")]
+[node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite", "stats") instance=ExtResource("32_50geu")]
 player = NodePath("../..")
 damage = 10.0
 chance = 1.0
@@ -1182,15 +1182,17 @@ idle_state = NodePath("../../StateComponent/Idle")
 velocity = NodePath("../../VelocityComponent")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
+stats = NodePath("../../StatsComponent")
 
-[node name="Slam" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player") instance=ExtResource("26_5eo5r")]
+[node name="Slam" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "stats") instance=ExtResource("26_5eo5r")]
 player = NodePath("../..")
 damage = 7.5
 effect = SubResource("Resource_258lg")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
+stats = NodePath("../../StatsComponent")
 
-[node name="Blast" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite") instance=ExtResource("27_o1ixq")]
+[node name="Blast" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite", "stats") instance=ExtResource("27_o1ixq")]
 player = NodePath("../..")
 idle_state = NodePath("../../StateComponent/Idle")
 damage = 15.0
@@ -1198,29 +1200,34 @@ effect = ExtResource("23_5qj8q")
 chance = 0.75
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
+stats = NodePath("../../StatsComponent")
 
-[node name="Snipe" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite") instance=ExtResource("28_ksl4h")]
+[node name="Snipe" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite", "stats") instance=ExtResource("28_ksl4h")]
 player = NodePath("../..")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 effect = ExtResource("25_d030w")
 chance = 1.0
+stats = NodePath("../../StatsComponent")
 
-[node name="Mortar" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player") instance=ExtResource("26_spm02")]
+[node name="Mortar" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "stats") instance=ExtResource("26_spm02")]
 player = NodePath("../..")
 idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
+stats = NodePath("../../StatsComponent")
 
-[node name="Mend" parent="AbilityComponent" node_paths=PackedStringArray("player") instance=ExtResource("20_tsbi3")]
+[node name="Mend" parent="AbilityComponent" node_paths=PackedStringArray("player", "stats") instance=ExtResource("20_tsbi3")]
 player = NodePath("../..")
 mend_effect = SubResource("Resource_6uo0j")
 projectile_scene = ExtResource("22_gwluk")
+stats = NodePath("../../StatsComponent")
 
-[node name="Inspire" parent="AbilityComponent" node_paths=PackedStringArray("player") instance=ExtResource("23_eo67p")]
+[node name="Inspire" parent="AbilityComponent" node_paths=PackedStringArray("player", "stats") instance=ExtResource("23_eo67p")]
 player = NodePath("../..")
 inspire_effect = SubResource("Resource_ydyux")
 projectile_scene = ExtResource("25_w3f32")
+stats = NodePath("../../StatsComponent")
 description = "Channel your inner commander and inspire all nearby allies with increased attack and defence."
 cost = 15
 refreshing_time = 1.0

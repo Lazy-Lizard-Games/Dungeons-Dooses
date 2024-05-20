@@ -14,6 +14,7 @@ func enter() -> void:
 
 func exit() -> void:
 	ready()
+	is_casting = false
 
 func _on_casted():
 	var effect_data = EffectData.new(mend_effect, 1)
