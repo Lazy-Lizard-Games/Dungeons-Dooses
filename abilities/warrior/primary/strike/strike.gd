@@ -62,6 +62,7 @@ func exit() -> void:
 	refresh()
 
 func _on_casted():
+	has_casted = true
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
 	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
 	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
