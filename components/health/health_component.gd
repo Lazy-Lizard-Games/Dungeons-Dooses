@@ -75,24 +75,26 @@ func damage(damage_data: DamageData) -> DamageOutcome:
 	if state == HealthState.Dead:
 		damage_data.amount = 0
 		return DamageOutcome.new(damage_data, state)
-	var final_damage_data = apply_damage_reistances(damage_data)
-	current -= final_damage_data.amount
+	current -= damage_data.amount
 	if current == 0:
 		state = HealthState.Dead
-		died.emit(final_damage_data)
+		died.emit(damage_data)
 	else:
 		delay_timer = -0.5
 		state = HealthState.Regenerating
-		damaged.emit(final_damage_data)
-	return DamageOutcome.new(final_damage_data, state)
+		damaged.emit(damage_data)
+	return DamageOutcome.new(damage_data, state)
 
-func apply_damage_reistances(damage_data: DamageData) -> DamageData:
+func apply_reistances(damage_data: DamageData) -> DamageData:
 	if stats_component:
-		var resistance = stats_component.get_damage_resistance(damage_data.type).get_final_value()
-		if resistance <= 0:
+		var resistance = stats_component.get_final_affinity_for(damage_data.type)
+		if resistance <= 0.5:
 			return DamageData.new(damage_data.amount * 2, damage_data.type)
 		return DamageData.new(damage_data.amount / resistance, damage_data.type)
 	return damage_data
+
+func damage_with_transforms(damage_data: DamageData) -> DamageOutcome:
+	return damage(apply_reistances(damage_data))
 
 ## Restores amount to the current health.
 func heal(amount: float) -> void:

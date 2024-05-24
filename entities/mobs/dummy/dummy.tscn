@@ -57,10 +57,11 @@ _data = {
 "idle": SubResource("Animation_0taog")
 }
 
-[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
+[node name="Dummy" type="CharacterBody2D" node_paths=PackedStringArray("indicator_spawn_point", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
 collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_gn2pe")
+indicator_spawn_point = NodePath("Marker2D")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 stamina_component = NodePath("StaminaComponent")
@@ -138,4 +139,8 @@ libraries = {
 "": SubResource("AnimationLibrary_bdf68")
 }
 
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -19)
+
+[connection signal="damaged" from="HealthComponent" to="." method="_on_health_component_damaged"]
 [connection signal="impacted" from="HitboxComponent" to="StateComponent/Idle" method="_on_hitbox_component_impacted"]

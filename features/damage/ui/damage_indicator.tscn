@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://cb81yxv23ppe6"]
+
+[ext_resource type="Script" path="res://features/damage/ui/damage_indicator.gd" id="1_ubt8d"]
+[ext_resource type="Script" path="res://scripts/damage/damage_color_data.gd" id="2_vcvxa"]
+
+[sub_resource type="Resource" id="Resource_h71q7"]
+script = ExtResource("2_vcvxa")
+slash = Color(0.698039, 0.133333, 0.133333, 1)
+pierce = Color(0.817521, 0.817521, 0.817521, 1)
+blunt = Color(0.511878, 0.623264, 0.767332, 1)
+fire = Color(1, 0.341176, 0.0745098, 1)
+frost = Color(1.96373e-05, 0.885952, 0.794769, 1)
+shock = Color(0.867089, 0.86709, 0, 1)
+poison = Color(0.613202, 0.000277329, 0.613197, 1)
+light = Color(0.980392, 0.980392, 0.823529, 1)
+
+[node name="DamageIndicator" type="Node2D" node_paths=PackedStringArray("label")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_ubt8d")
+duration = 1.5
+colors = SubResource("Resource_h71q7")
+label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+z_index = 4
+offset_left = -19.0
+offset_top = -25.0
+offset_right = 21.0
+offset_bottom = 20.0
+theme_override_colors/font_color = Color(0.894521, 0.317578, 3.85046e-07, 1)
+theme_override_colors/font_shadow_color = Color(0.099986, 0.099986, 0.099986, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 32
+text = "55"

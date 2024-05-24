@@ -31,7 +31,7 @@ func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
 func handle_damages(damage_datas: Array[DamageData], from: HurtboxComponent) -> void:
 		if health_component:
 			for damage_data in damage_datas:
-				var outcome = health_component.damage(damage_data)
+				var outcome = health_component.damage_with_transforms(damage_data)
 				if outcome.final_health_state == health_component.HealthState.Dead:
 					from.death_dealt.emit(damage_data, self)
 				else:

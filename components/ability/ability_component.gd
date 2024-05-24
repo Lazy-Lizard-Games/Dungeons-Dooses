@@ -10,6 +10,11 @@ signal ability_started(ability: Ability)
 @export var state_component: StateComponent
 ## Controls whether abilities can be started.
 @export var can_attack: bool
+## Data that an ability can use to change how they work.
+# @export_group("Extra mods")
+# @export var damage_mods: Array[DamageData]
+# @export var effect_mods: Array[EffectData]
+# ^ Disabling for now until there is time and a better idea
 
 var abilities: Array[Ability]:
 	get:
