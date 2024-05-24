@@ -18,16 +18,16 @@ z_index = 2
 y_sort_enabled = true
 
 [node name="Dummy2" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-34, -172)
+position = Vector2(-83, 3)
 
 [node name="Dummy3" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-14, -172)
+position = Vector2(-63, 3)
 
 [node name="Dummy4" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-2, -191)
+position = Vector2(-51, -16)
 
 [node name="Dummy" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-3, -152)
+position = Vector2(-52, 23)
 
 [node name="Warrior" parent="Entities" instance=ExtResource("4_trt7i")]
 

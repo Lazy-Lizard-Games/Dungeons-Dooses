@@ -57,14 +57,12 @@ func ready() -> void:
 func process_casting_timer(delta: float) -> void:
 	casting_timer += delta * stats.cast_rate.get_final_value()
 	if casting_timer >= casting_time:
-		casting_timer -= casting_time
 		is_casting = false
 		casted.emit()
 
 func process_refreshing_timer(delta: float) -> void:
 	refreshing_timer += delta * stats.refresh_rate.get_final_value()
 	if refreshing_timer >= refreshing_time:
-		refreshing_timer -= refreshing_time
 		is_refreshing = false
 		refreshed.emit()
 

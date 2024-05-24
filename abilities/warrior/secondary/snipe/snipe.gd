@@ -14,6 +14,7 @@ const DAMAGE_TYPE = Enums.DamageType.Pierce
 @export var knockback: float
 @export var snipe_projectile: PackedScene
 @export var raycast: RayCast2D
+@export var line: Line2D
 
 var has_charged := false
 var has_fired := false
@@ -23,6 +24,8 @@ func _ready():
 	raycast.add_exception(player.hitbox_component)
 
 func enter() -> void:
+	line.points[1].x = 0
+	line.visible = true
 	animation_player.play("snipe_charge_side")
 	cast()
 
@@ -51,9 +54,16 @@ func process_physics(_delta: float) -> State:
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	player.velocity_component.accelerate_in_direction(direction * 0.1)
 	player.velocity_component.move(player)
-	if has_charged and !has_fired:
+	if !has_fired:
 		raycast.position = player.centre_position
 		raycast.look_at(player.get_global_mouse_position())
+		line.global_position = player.centre_position
+		line.look_at(player.get_global_mouse_position())
+		var collider = raycast.get_collider()
+		if (collider and collider is HitboxComponent and casting_timer / casting_time > 0.1):
+			line.points[1].x = player.centre_position.distance_to(collider.global_position)
+		else:
+			line.points[1].x = 150 * (casting_timer / casting_time)
 	return null
 
 func update_animation(base: String, position: float) -> void:
@@ -96,6 +106,7 @@ func get_target_position() -> Vector2:
 	return target_position
 
 func fire_projectile() -> void:
+	line.visible = false
 	has_charged = false
 	has_fired = true
 	update_animation('snipe_fire', 0)

@@ -77,7 +77,6 @@ func damage(damage_data: DamageData) -> DamageOutcome:
 		return DamageOutcome.new(damage_data, state)
 	var final_damage_data = apply_damage_reistances(damage_data)
 	current -= final_damage_data.amount
-	TextHandler.create_damage_text(final_damage_data, self.global_position)
 	if current == 0:
 		state = HealthState.Dead
 		died.emit(final_damage_data)
