@@ -10,7 +10,6 @@ const DAMAGE_TYPE = Enums.DamageType.Pierce
 @export var sprite: Sprite2D
 @export var damage: float
 @export var effect: PiercedEffect
-@export_range(0, 1) var chance: float
 @export var knockback: float
 @export var snipe_projectile: PackedScene
 @export var raycast: RayCast2D
@@ -111,9 +110,9 @@ func fire_projectile() -> void:
 	has_fired = true
 	update_animation('snipe_fire', 0)
 	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
-	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
+	var affinity = player.stats_component.get_final_affinity_for(DAMAGE_TYPE)
 	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
-	var effect_data = EffectData.new(effect, chance)
+	var effect_data = EffectData.new(effect, 1)
 	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
 	var target_position = get_target_position()
 	var projectile: Projectile = snipe_projectile.instantiate()

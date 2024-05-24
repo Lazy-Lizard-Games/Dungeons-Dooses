@@ -10,7 +10,6 @@ const DAMAGE_TYPE = Enums.DamageType.Slash
 @export var idle_state: State
 @export var damage: float
 @export var effect: BleedingEffect
-@export_range(0, 1) var chance: float
 @export var knockback: float
 @export var blast_projectile: PackedScene
 @export var animation_player: AnimationPlayer
@@ -55,19 +54,6 @@ func process_physics(_delta: float) -> State:
 
 	return null
 
-func fire_projectile() -> void:
-	has_casted = false
-	has_fired = true
-	update_animation('blast_fire', 0)
-	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
-	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
-	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
-	var effect_data = EffectData.new(effect, chance)
-	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
-	var projectile: Projectile = blast_projectile.instantiate()
-	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
-	ProjectileHandler.add_projectile(projectile)
-
 func update_animation(base: String, position: float) -> void:
 	sprite.flip_h = player.looking_at.x < 0
 	if angle >= 2.75 or angle < - 2.75:
@@ -87,6 +73,19 @@ func update_animation(base: String, position: float) -> void:
 	else:
 		animation_player.play(base + '_down_side') # bottom-right
 	animation_player.seek(position)
+
+func fire_projectile() -> void:
+	has_casted = false
+	has_fired = true
+	update_animation('blast_fire', 0)
+	player.stamina_component.exhaust(cost * player.stats_component.ability_efficiency.get_final_value())
+	var affinity = player.stats_component.get_final_affinity_for(DAMAGE_TYPE)
+	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
+	var effect_data = EffectData.new(effect, 1)
+	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
+	var projectile: Projectile = blast_projectile.instantiate()
+	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction, false)
+	ProjectileHandler.add_projectile(projectile)
 
 func _on_casted():
 	has_casted = true

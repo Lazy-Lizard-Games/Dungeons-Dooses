@@ -10,7 +10,6 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 @export var damage: float
 @export var knockback: float
 @export var effect: Effect
-@export_range(0, 1) var chance: float
 @export var projectile_scene: PackedScene
 
 var has_charged := false
@@ -49,9 +48,9 @@ func fire() -> void:
 	player.get_tree().create_timer(0.5 * (min(player.centre_position.distance_to(target) / 250, 1))).timeout.connect(_on_timeout)
 
 func _on_timeout() -> void:
-	var affinity = player.stats_component.get_damage_affinity(DAMAGE_TYPE).get_final_value()
+	var affinity = player.stats_component.get_final_affinity_for(DAMAGE_TYPE)
 	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
-	var effect_data = EffectData.new(effect, chance)
+	var effect_data = EffectData.new(effect, 1)
 	var impact_data = ImpactData.new([damage_data], knockback, [effect_data])
 	var projectile: Projectile = projectile_scene.instantiate()
 	projectile.init(target, player.looking_at, impact_data, player.faction, false)
