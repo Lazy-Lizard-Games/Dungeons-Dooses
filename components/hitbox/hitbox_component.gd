@@ -1,8 +1,8 @@
 extends Area2D
 class_name HitboxComponent
 
-## Perhaps deprecated...
-signal impacted(from: HurtboxComponent)
+## Triggered when the hitbox component handles impact from a hurtbox.
+signal impacted(data: ImpactData, from: HurtboxComponent, immunity: bool)
 
 ## The health component that will handle damages taken.
 @export var health_component: HealthComponent
@@ -19,14 +19,16 @@ signal impacted(from: HurtboxComponent)
 ## Duration of invulnerability after being hit, 0 if none.
 @export var invulnerability_duration: float
 var invulnerability_timer: Timer
+var is_immune = false
 
 func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
-	handle_damages(data.damages, from)
-	handle_knockback(data.knockback, from)
-	handle_effects(data.effects, from)
-	detect_only = true
-	invulnerability_timer.start(invulnerability_duration)
-	impacted.emit(from)
+	if !is_immune:
+		handle_damages(data.damages, from)
+		handle_knockback(data.knockback, from)
+		handle_effects(data.effects, from)
+		detect_only = true
+		invulnerability_timer.start(invulnerability_duration)
+	impacted.emit(data, from, is_immune)
 
 func handle_damages(damage_datas: Array[DamageData], from: HurtboxComponent) -> void:
 		if health_component:

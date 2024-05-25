@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=97 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
@@ -25,8 +25,10 @@
 [ext_resource type="Script" path="res://effects/ability/inspire.gd" id="24_hedtb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="Resource" uid="uid://bo4wo4atfkehc" path="res://data/effects/status/pierced.tres" id="25_d030w"]
+[ext_resource type="PackedScene" uid="uid://4w315qfhx0fo" path="res://abilities/warrior/support/guard/guard.tscn" id="25_n6nnd"]
 [ext_resource type="PackedScene" uid="uid://cjdoso7d8t6km" path="res://entities/projectiles/inspire/inspire.tscn" id="25_w3f32"]
 [ext_resource type="PackedScene" uid="uid://dlu0jxlcc8rms" path="res://abilities/warrior/primary/slam/slam.tscn" id="26_5eo5r"]
+[ext_resource type="PackedScene" uid="uid://d3d1by4pe1rt4" path="res://abilities/warrior/support/parry/parry.tscn" id="26_fqohc"]
 [ext_resource type="PackedScene" uid="uid://bqcmhxj81wjf4" path="res://abilities/warrior/secondary/mortar/mortar.tscn" id="26_spm02"]
 [ext_resource type="PackedScene" uid="uid://bm6bj5u081ip1" path="res://abilities/warrior/secondary/blast/blast.tscn" id="27_o1ixq"]
 [ext_resource type="PackedScene" uid="uid://bb0kgyyqest6" path="res://abilities/warrior/secondary/snipe/snipe.tscn" id="28_ksl4h"]
@@ -1088,7 +1090,7 @@ position = Vector2(0, -16)
 texture = ExtResource("2_4htdx")
 hframes = 15
 vframes = 51
-frame = 635
+frame = 216
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
@@ -1201,6 +1203,18 @@ stats = NodePath("../../StatsComponent")
 [node name="Mortar" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "stats") instance=ExtResource("26_spm02")]
 player = NodePath("../..")
 idle_state = NodePath("../../StateComponent/Idle")
+animation_player = NodePath("../../AnimationPlayer")
+stats = NodePath("../../StatsComponent")
+
+[node name="Guard" parent="AbilityComponent" node_paths=PackedStringArray("player", "sprite", "animation_player", "stats") instance=ExtResource("25_n6nnd")]
+player = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
+animation_player = NodePath("../../AnimationPlayer")
+stats = NodePath("../../StatsComponent")
+
+[node name="Parry" parent="AbilityComponent" node_paths=PackedStringArray("player", "sprite", "animation_player", "stats") instance=ExtResource("26_fqohc")]
+player = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
 animation_player = NodePath("../../AnimationPlayer")
 stats = NodePath("../../StatsComponent")
 

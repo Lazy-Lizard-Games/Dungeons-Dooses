@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3d1by4pe1rt4"]
+
+[ext_resource type="Script" path="res://abilities/warrior/support/parry/parry.gd" id="1_e0p4i"]
+
+[node name="Parry" type="Node"]
+script = ExtResource("1_e0p4i")
+window_time = 1.5
+type = 2
+description = "Prepares the warrior to intercept an incoming attack. If successful, deflect the attack and quickly counter strike."
+cost = 15
+casting_time = 1.05
+refreshing_time = 1.0
+
+[connection signal="casted" from="." to="." method="_on_casted"]
