@@ -24,6 +24,7 @@ signal knockback_recieved(strength: float)
 			return friction * stats_component.movement_friction.get_final_value()
 		return friction
 var velocity := Vector2.ZERO
+var knockback_control = 1
 
 ## Sets the current velocity to provided velocity. This method
 ## is designed to be used by knockback mechanics.
@@ -36,7 +37,7 @@ func add_velocity(_velocity: Vector2) -> void:
 ## Updates the the current velotiy by the provided velocity. 
 ## This method is designed to be used by 
 func accelerate_to_velocity(velocity_to: Vector2) -> void:
-	velocity = velocity.lerp(velocity_to, (acceleration / speed) * friction)
+	velocity = velocity.lerp(velocity_to, (acceleration / speed) * friction * knockback_control)
 
 ## Accelerates the velocity towards the provided direction.
 func accelerate_in_direction(direction: Vector2) -> void:
@@ -52,5 +53,16 @@ func move(body: CharacterBody2D) -> void:
 	body.move_and_slide()
 
 func knockback(strength: float, direction: Vector2) -> void:
-	set_velocity(direction * strength)
+	add_velocity(direction * strength)
+	knockback_control = 0
 	knockback_recieved.emit(strength)
+
+func apply_resistance(strength: float) -> float:
+	return strength * stats_component.knockback_resistance.get_final_value()
+
+func knockback_with_transforms(strength: float, direction: Vector2) -> void:
+	return knockback(apply_resistance(strength), direction)
+
+func _process(delta):
+	if knockback_control < 1:
+		knockback_control = min(knockback_control + delta, 1)

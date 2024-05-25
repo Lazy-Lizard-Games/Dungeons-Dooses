@@ -33,22 +33,16 @@ func handle_impact(data: ImpactData, from: HurtboxComponent) -> void:
 func handle_damages(damage_datas: Array[DamageData], from: HurtboxComponent) -> void:
 		if health_component:
 			for damage_data in damage_datas:
-				var outcome = health_component.damage_with_transforms(damage_data)
-				if outcome.final_health_state == health_component.HealthState.Dead:
-					from.death_dealt.emit(damage_data, self)
+				var result = health_component.damage_with_transforms(damage_data)
+				if result.final_health_state == health_component.HealthState.Dead:
+					from.death_dealt.emit(result.final_damage_data, self)
 				else:
-					from.damage_dealt.emit(damage_data, self)
+					from.damage_dealt.emit(result.final_damage_data, self)
 
 func handle_knockback(knockback: float, from: HurtboxComponent) -> void:
 	if velocity_component:
-		var final_knockback = apply_knockback_transforms(knockback)
-		velocity_component.knockback(final_knockback, from.global_position.direction_to(global_position))
+		velocity_component.knockback_with_transforms(knockback, from.global_position.direction_to(global_position))
 		from.knockback_applied.emit(knockback, self)
-
-func apply_knockback_transforms(strength: float) -> float:
-	if stats_component:
-		return strength * (1 - stats_component.knockback_resistance.get_final_value())
-	return strength
 
 func handle_effects(effect_datas: Array[EffectData], from: HurtboxComponent) -> void:
 	if effect_component:
