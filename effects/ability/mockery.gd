@@ -1,11 +1,10 @@
-class_name InspireEffect
+class_name MockeryEffect
 extends Effect
 
-## Increases physical defence and attack for short duration. Effect scales with stacks.
+## Reduces physical damage dealt from shear embarressment!
 
-const UID = &"Inspiration"
+const UID = &"Mockery"
 
-## The physical affinity increase per stack as percentage. I.e.: 0.5 -> 50% increase.
 @export var physical_affinity: float
 
 var stats_component: StatsComponent

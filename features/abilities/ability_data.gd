@@ -7,4 +7,5 @@ extends Resource
 @export var name: String
 @export_multiline var description: String
 @export var icon: Texture2D
+## The scene of the ability.
 @export var scene: PackedScene

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp74lofv8h4fl"]
+
+[ext_resource type="Script" path="res://abilities/warrior/passive/vigour/vigour.gd" id="1_gapus"]
+[ext_resource type="Script" path="res://effects/ability/vigour.gd" id="2_uho8o"]
+[ext_resource type="PackedScene" uid="uid://win1ihq0k8tb" path="res://entities/projectiles/aura/aura.tscn" id="3_4iblr"]
+
+[sub_resource type="Resource" id="Resource_wy6n0"]
+script = ExtResource("2_uho8o")
+stamina_regeneration = 0.25
+name = &"Vigour"
+duration_time = 1.0
+max_stacks = 1
+
+[node name="Vigour" type="Node"]
+script = ExtResource("1_gapus")
+vigour_effect = SubResource("Resource_wy6n0")
+projectile_scene = ExtResource("3_4iblr")
+type = 3
+description = "Your presence refreshes nearby allies, allowing them to recover from exhaustion faster."
+casting_time = 0.5
+
+[connection signal="casted" from="." to="." method="_on_casted"]

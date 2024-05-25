@@ -1,6 +1,6 @@
 extends Projectile
 
-## Projectile for the inspire ability of the warrior.
+## Projectile for the aura abilities of the warrior.
 
 func _ready():
 	get_tree().create_timer(0.5).timeout.connect(_on_timer_timeout)

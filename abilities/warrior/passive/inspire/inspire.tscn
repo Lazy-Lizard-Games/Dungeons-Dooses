@@ -1,11 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://5detw0usmk0y"]
+[gd_scene load_steps=5 format=3 uid="uid://5detw0usmk0y"]
 
 [ext_resource type="Script" path="res://abilities/warrior/passive/inspire/inspire.gd" id="1_cyxvi"]
+[ext_resource type="Script" path="res://effects/ability/inspire.gd" id="2_uavvj"]
+[ext_resource type="PackedScene" uid="uid://win1ihq0k8tb" path="res://entities/projectiles/aura/aura.tscn" id="3_8hp7r"]
+
+[sub_resource type="Resource" id="Resource_8mb4a"]
+script = ExtResource("2_uavvj")
+physical_affinity = 0.25
+name = &"Inspiration"
+duration_time = 1.0
+max_stacks = 1
 
 [node name="Inspire" type="Node"]
 script = ExtResource("1_cyxvi")
+inspire_effect = SubResource("Resource_8mb4a")
+projectile_scene = ExtResource("3_8hp7r")
 type = 3
 description = "Your commanding presence inspires nearby allies to fight with ferocity."
-casting_time = 1.5
+casting_time = 0.5
 
 [connection signal="casted" from="." to="." method="_on_casted"]

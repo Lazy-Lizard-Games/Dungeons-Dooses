@@ -2,15 +2,14 @@
 
 [ext_resource type="Script" path="res://abilities/warrior/secondary/mortar/mortar.gd" id="1_ppv6b"]
 [ext_resource type="Resource" uid="uid://bi6r48g05rqxm" path="res://data/effects/status/stunned.tres" id="2_rwspk"]
-[ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="3_wnxdu"]
+[ext_resource type="PackedScene" uid="uid://win1ihq0k8tb" path="res://entities/projectiles/aura/aura.tscn" id="3_ax3wb"]
 
 [node name="Mortar" type="Node"]
 script = ExtResource("1_ppv6b")
 damage = 12.5
 knockback = 250.0
 effect = ExtResource("2_rwspk")
-chance = 0.9
-projectile_scene = ExtResource("3_wnxdu")
+projectile_scene = ExtResource("3_ax3wb")
 type = 1
 description = "Launch an explosive device right into the middle of your enemies."
 cost = 5

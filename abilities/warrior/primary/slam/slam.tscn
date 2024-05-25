@@ -1,16 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlu0jxlcc8rms"]
+[gd_scene load_steps=3 format=3 uid="uid://dlu0jxlcc8rms"]
 
 [ext_resource type="Script" path="res://abilities/warrior/primary/slam/slam.gd" id="1_obio2"]
-[ext_resource type="Resource" uid="uid://bi6r48g05rqxm" path="res://data/effects/status/stunned.tres" id="2_1e1ng"]
-[ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="5_mvxkh"]
+[ext_resource type="PackedScene" uid="uid://win1ihq0k8tb" path="res://entities/projectiles/aura/aura.tscn" id="2_j1etp"]
 
 [node name="Slam" type="Node"]
 script = ExtResource("1_obio2")
 damage = 5.0
-effect = ExtResource("2_1e1ng")
-chance = 0.45
 knockback = 250.0
-projectile_scene = ExtResource("5_mvxkh")
+projectile_scene = ExtResource("2_j1etp")
 description = "Smash the ground beneath your feet and send your enemies flying."
 cost = 5
 casting_time = 0.9

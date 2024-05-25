@@ -6,16 +6,14 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 
 ## The player using the ability.
 @export var player: Player
+## Plays the animations for the ability.
+@export var animation_player: AnimationPlayer
 ## The damage dealt by the ability.
 @export var damage: float
 ## The knockback applied by the ability.
 @export var knockback: float
 ## The projectile that will deliver the impact.
 @export var projectile_scene: PackedScene
-## The state moved to when the ability has finished.
-@export var idle_state: State
-## Plays the animations for the ability.
-@export var animation_player: AnimationPlayer
 
 var has_casted := false
 
@@ -25,7 +23,7 @@ func enter() -> void:
 
 func process_physics(_delta: float) -> State:
 	if animation_player.current_animation_position >= animation_player.current_animation_length:
-		return idle_state
+		return player.state_component.starting_state
 	var direction = Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized()
 	player.velocity_component.accelerate_in_direction(direction * 0.1)
 	player.velocity_component.move(player)

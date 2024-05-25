@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=92 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
@@ -14,19 +14,15 @@
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/states/walk.gd" id="15_c1shl"]
 [ext_resource type="PackedScene" uid="uid://dexysxyieapfn" path="res://components/stats/stats_component.tscn" id="18_wakcv"]
 [ext_resource type="PackedScene" uid="uid://yx0wxii8oigk" path="res://components/interactor/interactor_component.tscn" id="20_rtrp4"]
-[ext_resource type="PackedScene" uid="uid://cp74lofv8h4fl" path="res://abilities/warrior/passive/mend/mend.tscn" id="20_tsbi3"]
-[ext_resource type="Script" path="res://effects/ability/mend.gd" id="21_dhwru"]
+[ext_resource type="PackedScene" uid="uid://cp74lofv8h4fl" path="res://abilities/warrior/passive/vigour/vigour.tscn" id="20_tsbi3"]
 [ext_resource type="Script" path="res://items/inventory.gd" id="21_oguyd"]
-[ext_resource type="PackedScene" uid="uid://dh4ssl81xbobg" path="res://entities/projectiles/mend/mend.tscn" id="22_gwluk"]
 [ext_resource type="Resource" uid="uid://besd1ghcgc2d4" path="res://data/effects/status/bleeding.tres" id="23_5qj8q"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/warrior/primary/strike/strike.tscn" id="23_413do"]
 [ext_resource type="PackedScene" uid="uid://5detw0usmk0y" path="res://abilities/warrior/passive/inspire/inspire.tscn" id="23_eo67p"]
 [ext_resource type="PackedScene" uid="uid://bop0ftormyju2" path="res://components/ui/hud/hud.tscn" id="24_8v6vb"]
-[ext_resource type="Script" path="res://effects/ability/inspire.gd" id="24_hedtb"]
 [ext_resource type="Script" path="res://entities/mobs/players/ui/ui_handler.gd" id="24_iql77"]
 [ext_resource type="Resource" uid="uid://bo4wo4atfkehc" path="res://data/effects/status/pierced.tres" id="25_d030w"]
 [ext_resource type="PackedScene" uid="uid://4w315qfhx0fo" path="res://abilities/warrior/support/guard/guard.tscn" id="25_n6nnd"]
-[ext_resource type="PackedScene" uid="uid://cjdoso7d8t6km" path="res://entities/projectiles/inspire/inspire.tscn" id="25_w3f32"]
 [ext_resource type="PackedScene" uid="uid://dlu0jxlcc8rms" path="res://abilities/warrior/primary/slam/slam.tscn" id="26_5eo5r"]
 [ext_resource type="PackedScene" uid="uid://d3d1by4pe1rt4" path="res://abilities/warrior/support/parry/parry.tscn" id="26_fqohc"]
 [ext_resource type="PackedScene" uid="uid://bqcmhxj81wjf4" path="res://abilities/warrior/secondary/mortar/mortar.tscn" id="26_spm02"]
@@ -34,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://bb0kgyyqest6" path="res://abilities/warrior/secondary/snipe/snipe.tscn" id="28_ksl4h"]
 [ext_resource type="PackedScene" uid="uid://vskc5vqm3r7d" path="res://components/skill/skill_component.tscn" id="28_nfmj8"]
 [ext_resource type="Script" path="res://skills/skill_tree.gd" id="29_uqb7t"]
+[ext_resource type="PackedScene" uid="uid://g87fl1vlube5" path="res://abilities/warrior/passive/mockery/mockery.tscn" id="30_mrb1g"]
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/warrior/primary/stab/stab.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
@@ -1031,22 +1028,6 @@ skills = Array[Resource("res://skills/skill.gd")]([])
 script = ExtResource("21_oguyd")
 slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null])
 
-[sub_resource type="Resource" id="Resource_6uo0j"]
-script = ExtResource("21_dhwru")
-interval_time = 1.5
-heal_amount = 5.0
-name = &"Mend"
-duration_time = 7.5
-max_stacks = 1
-
-[sub_resource type="Resource" id="Resource_ydyux"]
-script = ExtResource("24_hedtb")
-physical_resistance = 0.5
-physical_affinity = 0.5
-name = &"Inspired"
-duration_time = 2.0
-max_stacks = 1
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(14, 16)
 
@@ -1176,11 +1157,10 @@ animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 stats = NodePath("../../StatsComponent")
 
-[node name="Slam" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "stats") instance=ExtResource("26_5eo5r")]
+[node name="Slam" parent="AbilityComponent" node_paths=PackedStringArray("player", "animation_player", "stats") instance=ExtResource("26_5eo5r")]
 player = NodePath("../..")
-damage = 7.5
-idle_state = NodePath("../../StateComponent/Idle")
 animation_player = NodePath("../../AnimationPlayer")
+damage = 7.5
 stats = NodePath("../../StatsComponent")
 
 [node name="Blast" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "animation_player", "sprite", "stats") instance=ExtResource("27_o1ixq")]
@@ -1218,20 +1198,18 @@ sprite = NodePath("../../Sprite2D")
 animation_player = NodePath("../../AnimationPlayer")
 stats = NodePath("../../StatsComponent")
 
-[node name="Mend" parent="AbilityComponent" node_paths=PackedStringArray("player", "stats") instance=ExtResource("20_tsbi3")]
-player = NodePath("../..")
-mend_effect = SubResource("Resource_6uo0j")
-projectile_scene = ExtResource("22_gwluk")
-stats = NodePath("../../StatsComponent")
-
 [node name="Inspire" parent="AbilityComponent" node_paths=PackedStringArray("player", "stats") instance=ExtResource("23_eo67p")]
 player = NodePath("../..")
-inspire_effect = SubResource("Resource_ydyux")
-projectile_scene = ExtResource("25_w3f32")
 stats = NodePath("../../StatsComponent")
 description = "Channel your inner commander and inspire all nearby allies with increased attack and defence."
-cost = 15
-refreshing_time = 1.0
+
+[node name="Vigour" parent="AbilityComponent" node_paths=PackedStringArray("player", "stats") instance=ExtResource("20_tsbi3")]
+player = NodePath("../..")
+stats = NodePath("../../StatsComponent")
+
+[node name="Mockery" parent="AbilityComponent" node_paths=PackedStringArray("player", "stats") instance=ExtResource("30_mrb1g")]
+player = NodePath("../..")
+stats = NodePath("../../StatsComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)
