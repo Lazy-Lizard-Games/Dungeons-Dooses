@@ -35,3 +35,6 @@ func on_area_collision(area: Area2D) -> void:
 func force_check() -> void:
 	for area in get_overlapping_areas():
 		on_area_collision(area)
+
+func clear_targets() -> void:
+	hit_targets.clear()

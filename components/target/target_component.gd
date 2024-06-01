@@ -1,15 +1,17 @@
-extends ShapeCast2D
 class_name TargetComponent
+extends Area2D
 
-## Returns a target for the entity, or null if none.
-## Optionally allows for allies to be targetted.
-func get_target(entity: Entity, target_allies := false) -> Entity:
-	force_shapecast_update()
-	for i in range(get_collision_count()):
-		var body = get_collider(i)
-		if body is Entity:
-			if body == entity or (!target_allies and body.faction == entity.faction):
-				continue
-			return body
-	return null
+## This component allows the entity to be hunted.
 
+## Threat determines how much presence the target has.
+@export var threat: int = 1
+## The faction controls who can hunt this target.
+@export var faction: Enums.FactionType
+
+## Prevent the target from being detected.
+func vanish() -> void:
+	monitorable = false
+
+## Allow the target to be detected.
+func appear() -> void:
+	monitorable = true

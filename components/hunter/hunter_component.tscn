@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgrd5feghervg"]
+
+[ext_resource type="Script" path="res://components/hunter/hunter_component.gd" id="1_kljeh"]
+
+[node name="HunterComponent" type="Area2D"]
+monitorable = false
+script = ExtResource("1_kljeh")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

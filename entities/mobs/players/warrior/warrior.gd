@@ -1,6 +1,7 @@
 class_name Player
 extends Mob
 
+@export var target: TargetComponent
 @export_category('Player Components')
 @export var interactor_component: InteractorComponent
 @export var inventory_component: InventoryComponent
@@ -47,6 +48,12 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
+
+	if Input.is_action_just_pressed("dash"):
+		if target.monitorable:
+			target.vanish()
+		else:
+			target.appear()
 	
 	if passive_ability:
 		passive_ability.process_input(event)
@@ -72,3 +79,4 @@ func _on_ability_pressed(type: Enums.AbilityType):
 			ability_component.start_ability(secondary)
 		Enums.AbilityType.Support:
 			ability_component.start_ability(support)
+

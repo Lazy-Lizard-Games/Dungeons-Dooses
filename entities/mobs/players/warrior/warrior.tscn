@@ -1,10 +1,11 @@
-[gd_scene load_steps=92 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=94 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
+[ext_resource type="PackedScene" uid="uid://dnsrij0ocvedu" path="res://components/target/target_component.tscn" id="3_svv7w"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
@@ -34,6 +35,15 @@
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/warrior/primary/stab/stab.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
+size = Vector2(14, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tq1yn"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
+radius = 50.0
 
 [sub_resource type="Animation" id="Animation_42vbx"]
 resource_name = "blast_charge_down"
@@ -1028,17 +1038,12 @@ skills = Array[Resource("res://skills/skill.gd")]([])
 script = ExtResource("21_oguyd")
 slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null])
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
-size = Vector2(14, 16)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ep403"]
-radius = 50.0
-
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("interactor_component", "inventory_component", "skill_component", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("target", "interactor_component", "inventory_component", "skill_component", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_dwma1")
+target = NodePath("TargetComponent")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 skill_component = NodePath("SkillComponent")
@@ -1056,6 +1061,35 @@ id = "Warrior"
 faction = 1
 velocity_component = NodePath("VelocityComponent")
 position_offset = Vector2(0, -15)
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
+position = Vector2(0, -13)
+health_component = NodePath("../HealthComponent")
+velocity_component = NodePath("../VelocityComponent")
+effect_component = NodePath("../EffectComponent")
+stats_component = NodePath("../StatsComponent")
+faction = 1
+invulnerability_duration = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_fktii")
+debug_color = Color(0.796078, 0.423529, 0, 0.419608)
+
+[node name="TargetComponent" parent="." instance=ExtResource("3_svv7w")]
+position = Vector2(0, -1)
+faction = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TargetComponent"]
+shape = SubResource("CircleShape2D_tq1yn")
+debug_color = Color(0.695216, 0.281962, 1, 0.42)
+
+[node name="InteractorComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("20_rtrp4")]
+entity = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
+shape = SubResource("CircleShape2D_ep403")
+debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
@@ -1088,8 +1122,9 @@ friction = 1.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_wj1h3")]
 stats_component = NodePath("../StatsComponent")
-maximum = 1e+07
-regeneration = 999999.0
+maximum = 100.0
+regeneration = 1.0
+delay_time = 5.0
 
 [node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("12_edvht")]
 stats_component = NodePath("../StatsComponent")
@@ -1211,27 +1246,6 @@ stats = NodePath("../../StatsComponent")
 player = NodePath("../..")
 stats = NodePath("../../StatsComponent")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
-position = Vector2(0, -13)
-health_component = NodePath("../HealthComponent")
-velocity_component = NodePath("../VelocityComponent")
-effect_component = NodePath("../EffectComponent")
-stats_component = NodePath("../StatsComponent")
-faction = 1
-invulnerability_duration = 0.5
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, -1)
-shape = SubResource("RectangleShape2D_fktii")
-debug_color = Color(0.796078, 0.423529, 0, 0.419608)
-
-[node name="InteractorComponent" parent="." node_paths=PackedStringArray("entity") instance=ExtResource("20_rtrp4")]
-entity = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
-shape = SubResource("CircleShape2D_ep403")
-debug_color = Color(0.247059, 0.635294, 0, 0.0627451)
-
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("entity", "hud", "menu")]
 process_mode = 3
 script = ExtResource("24_iql77")
@@ -1249,6 +1263,6 @@ effect_component = NodePath("../../EffectComponent")
 visible = false
 player = NodePath("../..")
 
+[connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
 [connection signal="ability_pressed" from="StateComponent/Idle" to="." method="_on_ability_pressed"]
 [connection signal="ability_pressed" from="StateComponent/Walk" to="." method="_on_ability_pressed"]
-[connection signal="interactables_updated" from="InteractorComponent" to="." method="_on_interactor_component_interactables_updated"]
