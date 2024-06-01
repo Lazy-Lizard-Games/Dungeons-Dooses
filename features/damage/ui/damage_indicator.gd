@@ -23,12 +23,15 @@ func load_damage_data(damage_data: DamageData) -> void:
 	label.position = Vector2((label.size.x / - 2.0), (label.size.y / - 2.0))
 
 func _ready():
-	direction = (0.5 - randf()) * 0.5
+	scale *= 0.5
 
 func _process(delta):
-	scale *= 0.99
-	position.y -= delta * speed * (log(timer + 1) / log(0.5) + 1)
-	position.x += delta * speed * direction
+	if timer < duration * 0.1:
+		scale *= 1.15
+		position.y -= delta
+	else:
+		scale *= 0.95
+		modulate.a *= 0.95
 	timer += delta
 	if timer >= duration:
 		queue_free()
