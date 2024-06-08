@@ -1025,8 +1025,9 @@ _data = {
 "walk_up": SubResource("Animation_yqcgj")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sned3"]
-radius = 5.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gewg"]
+radius = 1.0
+height = 10.0
 
 [sub_resource type="Resource" id="Resource_nqfhd"]
 script = ExtResource("29_uqb7t")
@@ -1061,6 +1062,9 @@ id = "Warrior"
 faction = 1
 velocity_component = NodePath("VelocityComponent")
 position_offset = Vector2(0, -15)
+
+[node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
+scale = Vector2(0.825, 0.825)
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("3_58ky6")]
 position = Vector2(0, -13)
@@ -1109,10 +1113,8 @@ frame = 216
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1)
-shape = SubResource("CircleShape2D_sned3")
-
-[node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
-scale = Vector2(0.825, 0.825)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7gewg")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_ry1uk")]
 stats_component = NodePath("../StatsComponent")

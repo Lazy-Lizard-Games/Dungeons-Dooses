@@ -19,10 +19,6 @@
 [ext_resource type="Script" path="res://entities/mobs/slime/states/idle.gd" id="12_xubkm"]
 [ext_resource type="Script" path="res://entities/mobs/slime/states/hunt.gd" id="15_5e222"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vmnmc"]
-radius = 4.0
-height = 16.0
-
 [sub_resource type="Animation" id="Animation_mm4kq"]
 length = 0.001
 tracks/0/type = "value"
@@ -324,6 +320,10 @@ _data = {
 "jump_attack": SubResource("Animation_hp2nb")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vmnmc"]
+radius = 1.0
+height = 16.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pe1rr"]
 radius = 4.8
 height = 18.0
@@ -361,11 +361,8 @@ id = "Slime"
 faction = 4
 velocity_component = NodePath("VelocityComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -4)
-rotation = 1.5708
-shape = SubResource("CapsuleShape2D_vmnmc")
+[node name="ShadowComponent" parent="." instance=ExtResource("11_nyvyp")]
+scale = Vector2(0.7, 0.7)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -378,8 +375,9 @@ texture = ExtResource("2_e62wc")
 hframes = 10
 vframes = 3
 
-[node name="ShadowComponent" parent="." instance=ExtResource("11_nyvyp")]
-scale = Vector2(0.7, 0.7)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_vmnmc")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("9_4c2ah")]
 stats_component = NodePath("../StatsComponent")

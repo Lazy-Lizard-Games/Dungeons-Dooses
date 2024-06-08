@@ -72,6 +72,10 @@ state_component = NodePath("StateComponent")
 id = "Dummy"
 velocity_component = NodePath("VelocityComponent")
 
+[node name="ShadowComponent" parent="." instance=ExtResource("5_mdyo7")]
+position = Vector2(1, 0)
+scale = Vector2(0.55, 0.55)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 texture = ExtResource("4_3hsxe")
@@ -81,10 +85,6 @@ hframes = 6
 position = Vector2(0.5, -1.5)
 shape = SubResource("CircleShape2D_o2tfs")
 debug_color = Color(0, 0.52549, 1, 0.419608)
-
-[node name="ShadowComponent" parent="." instance=ExtResource("5_mdyo7")]
-position = Vector2(1, 0)
-scale = Vector2(0.55, 0.55)
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("5_12j2c")]
 stats_component = NodePath("../StatsComponent")
