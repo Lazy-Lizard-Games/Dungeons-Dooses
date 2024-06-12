@@ -49,11 +49,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
 
-	if Input.is_action_just_pressed("dash"):
-		if target.monitorable:
-			target.vanish()
-		else:
-			target.appear()
+	if Input.is_action_just_pressed("ui_up"):
+		set_elevation(elevation + 1)
+	
+	if Input.is_action_just_pressed("ui_down"):
+		set_elevation(elevation - 1)
 	
 	if passive_ability:
 		passive_ability.process_input(event)

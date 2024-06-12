@@ -7,6 +7,8 @@ class_name Entity
 @export var id: String = ""
 ## Faction of the entity.
 @export var faction: Enums.FactionType = Enums.FactionType.None
+## Elevation of the entity.
+@export var elevation: int = 0
 ## Velocity component for the entity.
 @export var velocity_component: VelocityComponent
 ## Used to offset the entities position to match the sprite more accurately.
@@ -19,3 +21,12 @@ var centre_position := Vector2.ZERO:
 var looking_at := Vector2.ZERO:
 	get:
 		return centre_position.direction_to(get_global_mouse_position())
+ 
+func set_elevation(to: int) -> void:
+	set_collision_layer_value(9 + elevation, false)
+	set_collision_mask_value(9 + elevation, false)
+	elevation = to
+	set_collision_layer_value(9 + elevation, true)
+	set_collision_mask_value(9 + elevation, true)
+	z_index = elevation
+

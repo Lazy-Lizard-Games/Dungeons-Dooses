@@ -1025,9 +1025,9 @@ _data = {
 "walk_up": SubResource("Animation_yqcgj")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7gewg"]
-radius = 1.0
-height = 10.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7nn8v"]
+radius = 4.0
+height = 12.0
 
 [sub_resource type="Resource" id="Resource_nqfhd"]
 script = ExtResource("29_uqb7t")
@@ -1040,17 +1040,22 @@ script = ExtResource("21_oguyd")
 slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null])
 
 [node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("target", "interactor_component", "inventory_component", "skill_component", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
-collision_layer = 4
-collision_mask = 7
+collision_layer = 260
+collision_mask = 260
 motion_mode = 1
 script = ExtResource("1_dwma1")
+primary = null
+secondary = -1
+support = -1
+passive = -1
+id = "Warrior"
+faction = 1
+elevation = null
+position_offset = Vector2(0, -15)
 target = NodePath("TargetComponent")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 skill_component = NodePath("SkillComponent")
-secondary = -1
-support = -1
-passive = -1
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 stamina_component = NodePath("StaminaComponent")
@@ -1058,10 +1063,7 @@ ability_component = NodePath("AbilityComponent")
 effect_component = NodePath("EffectComponent")
 stats_component = NodePath("StatsComponent")
 state_component = NodePath("StateComponent")
-id = "Warrior"
-faction = 1
 velocity_component = NodePath("VelocityComponent")
-position_offset = Vector2(0, -15)
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
 scale = Vector2(0.825, 0.825)
@@ -1112,9 +1114,8 @@ vframes = 51
 frame = 216
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_7gewg")
+shape = SubResource("CapsuleShape2D_7nn8v")
 
 [node name="VelocityComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("2_ry1uk")]
 stats_component = NodePath("../StatsComponent")

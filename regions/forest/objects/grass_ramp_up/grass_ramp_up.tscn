@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://2mryybu0isos"]
+
+[ext_resource type="Script" path="res://regions/forest/objects/grass_ramp_up/grass_ramp_up.gd" id="1_lx7qw"]
+[ext_resource type="Texture2D" uid="uid://dc0y3ivmf34o8" path="res://regions/forest/objects/grass_ramp_up/grass_ramp_up.png" id="2_tdaur"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2dw1f"]
+size = Vector2(28, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhba5"]
+size = Vector2(28, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dnf5f"]
+size = Vector2(2, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hwkra"]
+size = Vector2(2, 39)
+
+[node name="GrassRampUp" type="Node2D"]
+script = ExtResource("1_lx7qw")
+
+[node name="Offset" type="Node2D" parent="."]
+position = Vector2(0, -48)
+
+[node name="Sprite2D" type="Sprite2D" parent="Offset"]
+position = Vector2(0, -32)
+texture = ExtResource("2_tdaur")
+
+[node name="AreaUpTo" type="Area2D" parent="Offset"]
+position = Vector2(0, -32)
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/AreaUpTo"]
+position = Vector2(0, 16)
+shape = SubResource("RectangleShape2D_2dw1f")
+debug_color = Color(0.0431373, 0.490196, 0, 0.854902)
+
+[node name="AreaDownTo" type="Area2D" parent="Offset"]
+position = Vector2(0, -32)
+collision_layer = 0
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/AreaDownTo"]
+position = Vector2(0, 24)
+shape = SubResource("RectangleShape2D_fhba5")
+debug_color = Color(0.67451, 0, 0.207843, 0.788235)
+
+[node name="RampWallsUp" type="StaticBody2D" parent="Offset"]
+position = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/RampWallsUp"]
+position = Vector2(-15, 23)
+shape = SubResource("RectangleShape2D_dnf5f")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Offset/RampWallsUp"]
+position = Vector2(15, 22)
+shape = SubResource("RectangleShape2D_dnf5f")
+
+[node name="RampWallsDown" type="StaticBody2D" parent="Offset"]
+position = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Offset/RampWallsDown"]
+position = Vector2(-15, 4.5)
+shape = SubResource("RectangleShape2D_hwkra")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Offset/RampWallsDown"]
+position = Vector2(15, 5)
+shape = SubResource("RectangleShape2D_hwkra")
+
+[connection signal="body_entered" from="Offset/AreaUpTo" to="." method="_on_area_up_to_body_entered"]
+[connection signal="body_entered" from="Offset/AreaDownTo" to="." method="_on_area_down_to_body_entered"]
