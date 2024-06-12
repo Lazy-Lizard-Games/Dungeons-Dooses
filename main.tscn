@@ -19,17 +19,38 @@ z_index = 1
 y_sort_enabled = true
 position = Vector2(-7, -9)
 
-[node name="Dummy2" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-129, -15)
-
-[node name="Dummy3" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-113, -1)
-
-[node name="Dummy4" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-113, 19)
-
 [node name="Dummy" parent="Entities" instance=ExtResource("4_1v8qg")]
-position = Vector2(-126, 33)
+z_index = 2
+position = Vector2(-49, 66)
+elevation = 2
+
+[node name="Dummy2" parent="Entities" node_paths=PackedStringArray("indicator_spawn_point", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component") instance=ExtResource("4_1v8qg")]
+z_index = 2
+position = Vector2(-4, 80)
+indicator_spawn_point = NodePath("../Dummy/Marker2D")
+hitbox_component = NodePath("../Dummy/HitboxComponent")
+health_component = NodePath("../Dummy/HealthComponent")
+stamina_component = NodePath("../Dummy/StaminaComponent")
+ability_component = NodePath("../Dummy/AbilityComponent")
+effect_component = NodePath("../Dummy/EffectComponent")
+stats_component = NodePath("../Dummy/StatsComponent")
+state_component = NodePath("../Dummy/StateComponent")
+elevation = 2
+velocity_component = NodePath("../Dummy/VelocityComponent")
+
+[node name="Dummy3" parent="Entities" node_paths=PackedStringArray("indicator_spawn_point", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component") instance=ExtResource("4_1v8qg")]
+z_index = 2
+position = Vector2(-66, 95)
+indicator_spawn_point = NodePath("../Dummy/Marker2D")
+hitbox_component = NodePath("../Dummy/HitboxComponent")
+health_component = NodePath("../Dummy/HealthComponent")
+stamina_component = NodePath("../Dummy/StaminaComponent")
+ability_component = NodePath("../Dummy/AbilityComponent")
+effect_component = NodePath("../Dummy/EffectComponent")
+stats_component = NodePath("../Dummy/StatsComponent")
+state_component = NodePath("../Dummy/StateComponent")
+elevation = 2
+velocity_component = NodePath("../Dummy/VelocityComponent")
 
 [node name="Warrior" parent="Entities" instance=ExtResource("4_trt7i")]
 position = Vector2(-65, 17)

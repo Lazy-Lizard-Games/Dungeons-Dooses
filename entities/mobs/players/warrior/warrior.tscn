@@ -1185,6 +1185,7 @@ velocity = NodePath("../../VelocityComponent")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Sprite2D")
 stats = NodePath("../../StatsComponent")
+casting_time = 0.35
 
 [node name="Stab" parent="AbilityComponent" node_paths=PackedStringArray("player", "idle_state", "velocity", "animation_player", "sprite", "stats") instance=ExtResource("32_50geu")]
 player = NodePath("../..")
