@@ -24,10 +24,9 @@ z_index = 2
 position = Vector2(-49, 66)
 elevation = 2
 
-[node name="Dummy2" parent="Entities" node_paths=PackedStringArray("indicator_spawn_point", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component") instance=ExtResource("4_1v8qg")]
+[node name="Dummy2" parent="Entities" node_paths=PackedStringArray("hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component") instance=ExtResource("4_1v8qg")]
 z_index = 2
 position = Vector2(-4, 80)
-indicator_spawn_point = NodePath("../Dummy/Marker2D")
 hitbox_component = NodePath("../Dummy/HitboxComponent")
 health_component = NodePath("../Dummy/HealthComponent")
 stamina_component = NodePath("../Dummy/StaminaComponent")
@@ -38,10 +37,9 @@ state_component = NodePath("../Dummy/StateComponent")
 elevation = 2
 velocity_component = NodePath("../Dummy/VelocityComponent")
 
-[node name="Dummy3" parent="Entities" node_paths=PackedStringArray("indicator_spawn_point", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component") instance=ExtResource("4_1v8qg")]
+[node name="Dummy3" parent="Entities" node_paths=PackedStringArray("hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component") instance=ExtResource("4_1v8qg")]
 z_index = 2
 position = Vector2(-66, 95)
-indicator_spawn_point = NodePath("../Dummy/Marker2D")
 hitbox_component = NodePath("../Dummy/HitboxComponent")
 health_component = NodePath("../Dummy/HealthComponent")
 stamina_component = NodePath("../Dummy/StaminaComponent")
@@ -53,7 +51,12 @@ elevation = 2
 velocity_component = NodePath("../Dummy/VelocityComponent")
 
 [node name="Warrior" parent="Entities" instance=ExtResource("4_trt7i")]
-position = Vector2(-65, 17)
+z_index = 2
+position = Vector2(-34, 90)
+collision_layer = 1028
+collision_mask = 1028
+primary = 0
+elevation = 2
 
 [node name="Slime" parent="Entities" instance=ExtResource("5_exgc2")]
 position = Vector2(-3, 29)

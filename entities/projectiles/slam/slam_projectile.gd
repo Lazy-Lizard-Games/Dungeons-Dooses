@@ -1,11 +1,10 @@
 extends Projectile
 
-## Projectile for the slash ability of the warrior
-
 @export var animation: AnimationPlayer
+@export var sprite: Sprite2D
 
 func _ready():
-	look_at(direction)
+	sprite.flip_h = direction.x < 0
 	animation.play('trail')
 	animation.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
 

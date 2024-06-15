@@ -1,12 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://4w315qfhx0fo"]
+[gd_scene load_steps=3 format=3 uid="uid://4w315qfhx0fo"]
 
 [ext_resource type="Script" path="res://abilities/warrior/support/guard/guard.gd" id="1_dybhj"]
+[ext_resource type="Texture2D" uid="uid://bcjwvt4v8fh8" path="res://abilities/warrior/support/guard/icon.png" id="2_60d8d"]
 
 [node name="Guard" type="Node"]
 script = ExtResource("1_dybhj")
 resistance = 0.5
 type = 2
 description = "Raises the warrior's shield while active, increasing physical resistance but reducing movement speed. Drains stamina based on the damage taken."
+icon = ExtResource("2_60d8d")
 casting_time = 0.9
 refreshing_time = 1.0
 

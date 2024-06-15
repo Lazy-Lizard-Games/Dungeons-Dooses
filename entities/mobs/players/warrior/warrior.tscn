@@ -1,13 +1,13 @@
 [gd_scene load_steps=94 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
-[ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="PackedScene" uid="uid://dnsrij0ocvedu" path="res://components/target/target_component.tscn" id="3_svv7w"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="Texture2D" uid="uid://bun6vgtrsa6a7" path="res://entities/mobs/players/warrior/sprites/spritesheet.png" id="6_pkhsx"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
@@ -416,9 +416,9 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_0dfrp"]
 resource_name = "mortar_idle"
-length = 0.3
+length = 0.8
 loop_mode = 1
-step = 0.15
+step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -426,10 +426,10 @@ tracks/0/path = NodePath("Sprite2D:frame_coords")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(4, 49), Vector2i(0, 50)]
+"values": [Vector2i(0, 51), Vector2i(1, 51), Vector2i(2, 51), Vector2i(3, 51)]
 }
 
 [sub_resource type="Animation" id="Animation_fedpn"]
@@ -1039,23 +1039,19 @@ skills = Array[Resource("res://skills/skill.gd")]([])
 script = ExtResource("21_oguyd")
 slots = Array[Resource("res://items/slot.gd")]([null, null, null, null, null, null, null, null, null, null])
 
-[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("target", "interactor_component", "inventory_component", "skill_component", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("target", "interactor_component", "inventory_component", "skill_component", "sprite", "hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
 collision_layer = 260
 collision_mask = 260
 motion_mode = 1
 script = ExtResource("1_dwma1")
-primary = null
-secondary = -1
-support = -1
-passive = -1
-id = "Warrior"
-faction = 1
-elevation = null
-position_offset = Vector2(0, -15)
 target = NodePath("TargetComponent")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 skill_component = NodePath("SkillComponent")
+sprite = NodePath("Sprite2D")
+secondary = -1
+support = -1
+passive = -1
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
 stamina_component = NodePath("StaminaComponent")
@@ -1063,7 +1059,10 @@ ability_component = NodePath("AbilityComponent")
 effect_component = NodePath("EffectComponent")
 stats_component = NodePath("StatsComponent")
 state_component = NodePath("StateComponent")
+id = "Warrior"
+faction = 1
 velocity_component = NodePath("VelocityComponent")
+position_offset = Vector2(0, -15)
 
 [node name="ShadowComponent" parent="." instance=ExtResource("7_47ooj")]
 scale = Vector2(0.825, 0.825)
@@ -1108,10 +1107,10 @@ libraries = {
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("2_4htdx")
+texture = ExtResource("6_pkhsx")
 hframes = 15
-vframes = 51
-frame = 216
+vframes = 52
+frame = 616
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 rotation = 1.5708
@@ -1124,6 +1123,7 @@ acceleration = 25.0
 friction = 1.0
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_wj1h3")]
+position = Vector2(0, -21)
 stats_component = NodePath("../StatsComponent")
 maximum = 100.0
 regeneration = 1.0

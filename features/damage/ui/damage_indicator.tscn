@@ -15,21 +15,22 @@ poison = Color(0.613202, 0.000277329, 0.613197, 1)
 light = Color(0.980392, 0.980392, 0.823529, 1)
 
 [node name="DamageIndicator" type="Node2D" node_paths=PackedStringArray("label")]
-scale = Vector2(0.5, 0.5)
+z_index = 5
 script = ExtResource("1_ubt8d")
 duration = 1.5
 colors = SubResource("Resource_h71q7")
 label = NodePath("Label")
 
 [node name="Label" type="Label" parent="."]
-z_index = 4
-offset_left = -19.0
-offset_top = -25.0
-offset_right = 21.0
-offset_bottom = 20.0
+offset_left = -45.0
+offset_top = -22.5
+offset_right = 45.0
+offset_bottom = 22.5
 theme_override_colors/font_color = Color(0.894521, 0.317578, 3.85046e-07, 1)
 theme_override_colors/font_shadow_color = Color(0.099986, 0.099986, 0.099986, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 32
-text = "55"
+theme_override_font_sizes/font_size = 24
+text = "55555"
+horizontal_alignment = 1
+vertical_alignment = 1

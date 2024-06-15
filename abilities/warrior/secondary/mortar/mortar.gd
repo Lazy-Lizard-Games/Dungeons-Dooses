@@ -57,4 +57,5 @@ func _on_timeout() -> void:
 	ProjectileHandler.add_projectile(projectile)
 
 func _on_casted():
+	animation_player.play("mortar_idle")
 	has_charged = true

@@ -66,6 +66,8 @@ var state: HealthState = HealthState.Healthy:
 		state = new
 		state_updated.emit(old, state)
 var delay_timer: float = 0
+var damage_indicator_scene = preload ("res://features/damage/ui/damage_indicator.tscn")
+
 
 ## Deals damage to the current health and returns the outcome.
 func damage(damage_data: DamageData) -> DamageOutcome:
@@ -76,6 +78,10 @@ func damage(damage_data: DamageData) -> DamageOutcome:
 		damage_data.amount = 0
 		return DamageOutcome.new(damage_data, state)
 	current -= damage_data.amount
+	var damage_indicator: DamageIndicator = damage_indicator_scene.instantiate()
+	damage_indicator.load_damage_data(damage_data)
+	damage_indicator.position = self.position
+	add_child(damage_indicator)
 	if current == 0:
 		state = HealthState.Dead
 		died.emit(damage_data)

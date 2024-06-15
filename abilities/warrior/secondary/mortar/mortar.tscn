@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqcmhxj81wjf4"]
+[gd_scene load_steps=5 format=3 uid="uid://bqcmhxj81wjf4"]
 
 [ext_resource type="Script" path="res://abilities/warrior/secondary/mortar/mortar.gd" id="1_ppv6b"]
 [ext_resource type="Resource" uid="uid://bi6r48g05rqxm" path="res://data/effects/status/stunned.tres" id="2_rwspk"]
 [ext_resource type="PackedScene" uid="uid://win1ihq0k8tb" path="res://entities/projectiles/aura/aura.tscn" id="3_ax3wb"]
+[ext_resource type="Texture2D" uid="uid://06ify30jy1s1" path="res://abilities/warrior/secondary/mortar/icon.png" id="4_7i0jr"]
 
 [node name="Mortar" type="Node"]
 script = ExtResource("1_ppv6b")
@@ -12,6 +13,7 @@ effect = ExtResource("2_rwspk")
 projectile_scene = ExtResource("3_ax3wb")
 type = 1
 description = "Launch an explosive device right into the middle of your enemies."
+icon = ExtResource("4_7i0jr")
 cost = 5
 casting_time = 2.55
 refreshing_time = 1.0

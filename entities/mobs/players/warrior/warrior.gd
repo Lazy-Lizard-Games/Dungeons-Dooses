@@ -6,6 +6,7 @@ extends Mob
 @export var interactor_component: InteractorComponent
 @export var inventory_component: InventoryComponent
 @export var skill_component: SkillComponent
+@export var sprite: Sprite2D
 @export_category('Player Abilities')
 @export var primary: int
 @export var secondary: int
