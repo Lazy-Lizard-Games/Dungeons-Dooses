@@ -16,8 +16,11 @@ const DAMAGE_TYPE = Enums.DamageType.Blunt
 @export var projectile_scene: PackedScene
 
 var has_casted := false
+var direction: Vector2
 
 func enter() -> void:
+	direction = player.looking_at
+	player.sprite.flip_h = direction.x < 0
 	animation_player.play('slam')
 	cast()
 
@@ -39,5 +42,5 @@ func _on_casted():
 	var damage_data = DamageData.new(damage * affinity, DAMAGE_TYPE)
 	var impact_data = ImpactData.new([damage_data], knockback, [])
 	var projectile: Projectile = projectile_scene.instantiate()
-	projectile.init(player.centre_position, player.looking_at, impact_data, player.faction)
+	projectile.init(player.centre_position, direction, impact_data, player.faction)
 	ProjectileHandler.add_projectile(projectile)

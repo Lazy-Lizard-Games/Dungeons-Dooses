@@ -6,6 +6,7 @@ extends Mob
 @export var interactor_component: InteractorComponent
 @export var inventory_component: InventoryComponent
 @export var skill_component: SkillComponent
+@export var sprite: Sprite2D
 @export_category('Player Abilities')
 @export var abilities: AbilitySet
 @export var loadout: AbilityLoadout
@@ -51,11 +52,11 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("interact"):
 		interactor_component.interact()
 
-	if Input.is_action_just_pressed("dash"):
-		if target.monitorable:
-			target.vanish()
-		else:
-			target.appear()
+	if Input.is_action_just_pressed("ui_up"):
+		set_elevation(elevation + 1)
+	
+	if Input.is_action_just_pressed("ui_down"):
+		set_elevation(elevation - 1)
 	
 	if passive_ability:
 		passive_ability.process_input(event)

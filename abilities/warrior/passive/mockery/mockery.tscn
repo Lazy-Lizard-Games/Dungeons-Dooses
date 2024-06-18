@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://g87fl1vlube5"]
+[gd_scene load_steps=6 format=3 uid="uid://g87fl1vlube5"]
 
 [ext_resource type="Script" path="res://abilities/warrior/passive/mockery/mockery.gd" id="1_xd2w4"]
 [ext_resource type="Script" path="res://effects/ability/mockery.gd" id="2_4ve4e"]
 [ext_resource type="PackedScene" uid="uid://win1ihq0k8tb" path="res://entities/projectiles/aura/aura.tscn" id="3_tj6vj"]
+[ext_resource type="Texture2D" uid="uid://ttmnk5p6ajda" path="res://abilities/warrior/passive/mockery/icon.png" id="4_tknih"]
 
 [sub_resource type="Resource" id="Resource_xqqvq"]
 script = ExtResource("2_4ve4e")
@@ -18,6 +19,7 @@ mockery_effect = SubResource("Resource_xqqvq")
 projectile_scene = ExtResource("3_tj6vj")
 type = 3
 description = "Humiliate nearby enemies with your presence, reducing the physical damage they deal and making them likely to target you."
+icon = ExtResource("4_tknih")
 casting_time = 0.5
 
 [connection signal="casted" from="." to="." method="_on_casted"]

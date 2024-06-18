@@ -38,7 +38,8 @@ folder_colors={
 "res://effects/": "yellow",
 "res://entities/": "orange",
 "res://items/": "purple",
-"res://projectiles/": "red"
+"res://projectiles/": "red",
+"res://regions/": "red"
 }
 
 [input]
@@ -129,6 +130,10 @@ ability_4={
 2d_physics/layer_3="Entities"
 2d_physics/layer_4="Projectiles"
 2d_physics/layer_5="Traps"
+2d_physics/layer_9="Level0"
+2d_physics/layer_10="Level1"
+2d_physics/layer_11="Level2"
+2d_physics/layer_12="level3"
 
 [rendering]
 

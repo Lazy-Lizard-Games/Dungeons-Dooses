@@ -69,6 +69,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtboxComponent:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
 
 [sub_resource type="Animation" id="Animation_qxsbg"]
 resource_name = "death"
@@ -310,6 +322,18 @@ tracks/6/keys = {
 "method": &"clear_targets"
 }]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HurtboxComponent:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6, 0.8, 1, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, -6), Vector2(0, -10), Vector2(0, -15), Vector2(0, -14), Vector2(0, -11), Vector2(0, -2)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uqhh3"]
 _data = {
@@ -336,7 +360,7 @@ radius = 100.0
 
 [sub_resource type="Resource" id="Resource_jgp4q"]
 script = ExtResource("9_3nlnd")
-amount = 25.0
+amount = 5.0
 type = 2
 
 [sub_resource type="Resource" id="Resource_yr7k5"]
@@ -346,9 +370,12 @@ knockback = 25.0
 effects = Array[Resource("res://effects/effect_data.gd")]([])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2bamf"]
-radius = 22.0
+radius = 13.0
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component", "health_component", "stamina_component", "ability_component", "effect_component", "stats_component", "state_component", "velocity_component")]
+collision_layer = 260
+collision_mask = 260
+motion_mode = 1
 script = ExtResource("1_0wyur")
 hitbox_component = NodePath("HitboxComponent")
 health_component = NodePath("HealthComponent")
@@ -386,7 +413,6 @@ acceleration = 10.0
 friction = 1.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "velocity_component", "effect_component", "stats_component") instance=ExtResource("2_vhuxq")]
-visible = false
 health_component = NodePath("../HealthComponent")
 velocity_component = NodePath("../VelocityComponent")
 effect_component = NodePath("../EffectComponent")
@@ -399,7 +425,6 @@ rotation = 1.5708
 shape = SubResource("CapsuleShape2D_pe1rr")
 
 [node name="TargetComponent" parent="." instance=ExtResource("6_jwcl3")]
-visible = false
 faction = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetComponent"]
@@ -423,7 +448,9 @@ faction = 4
 shape = SubResource("CircleShape2D_2bamf")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("3_oqi6j")]
+position = Vector2(0, -8)
 stats_component = NodePath("../StatsComponent")
+maximum = 25.0
 
 [node name="StaminaComponent" parent="." node_paths=PackedStringArray("stats_component") instance=ExtResource("4_w2iwv")]
 stats_component = NodePath("../StatsComponent")

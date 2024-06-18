@@ -23,15 +23,11 @@ func load_damage_data(damage_data: DamageData) -> void:
 	label.position = Vector2((label.size.x / - 2.0), (label.size.y / - 2.0))
 
 func _ready():
-	scale *= 0.5
+	scale = Vector2(0.5, 0.5)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, 'position', Vector2(self.position.x, self.position.y - 5), 0.25)
+	tween.parallel().tween_property(self, 'scale', Vector2(1, 1), 0.35)
+	tween.tween_property(self, 'scale', Vector2(0.25, 0.25), 0.35)
+	tween.parallel().tween_property(self, 'modulate', Color(1,1,1,0), 0.35)
+	tween.tween_callback(self.queue_free)
 
-func _process(delta):
-	if timer < duration * 0.1:
-		scale *= 1.15
-		position.y -= delta
-	else:
-		scale *= 0.95
-		modulate.a *= 0.95
-	timer += delta
-	if timer >= duration:
-		queue_free()

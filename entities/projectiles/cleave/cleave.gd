@@ -5,6 +5,7 @@ extends Projectile
 @export var animation: AnimationPlayer
 
 func _ready():
+	look_at(direction)
 	animation.play('trail')
 	animation.animation_finished.connect(on_finished, CONNECT_ONE_SHOT)
 

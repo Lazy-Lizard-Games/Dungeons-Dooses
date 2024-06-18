@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://botnjc1ljvhme"]
+
+[ext_resource type="Script" path="res://entities/projectiles/slam/slam_projectile.gd" id="1_b6hox"]
+[ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_pwivn"]
+[ext_resource type="Texture2D" uid="uid://glxfgxsii4xt" path="res://entities/projectiles/slam/slam_effects.png" id="3_vnk54"]
+[ext_resource type="PackedScene" uid="uid://jik04cg2nmq5" path="res://components/hurtbox/hurtbox_component.tscn" id="4_jyb80"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m0er8"]
+
+[sub_resource type="Animation" id="Animation_lg2gj"]
+resource_name = "trail"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6]
+}
+
+[sub_resource type="Animation" id="Animation_lup7b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ppxay"]
+_data = {
+"RESET": SubResource("Animation_lup7b"),
+"trail": SubResource("Animation_lg2gj")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f81w1"]
+radius = 35.0
+
+[node name="SlamProjectile" type="CharacterBody2D" node_paths=PackedStringArray("animation", "sprite", "hurtbox_component", "velocity_component")]
+script = ExtResource("1_b6hox")
+animation = NodePath("AnimationPlayer")
+sprite = NodePath("Sprite2D")
+hurtbox_component = NodePath("HurtboxComponent")
+velocity_component = NodePath("VelocityComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m0er8")
+
+[node name="VelocityComponent" parent="." instance=ExtResource("2_pwivn")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_vnk54")
+hframes = 7
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ppxay")
+}
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("4_jyb80")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("CircleShape2D_f81w1")
