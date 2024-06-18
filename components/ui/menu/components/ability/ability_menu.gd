@@ -5,24 +5,29 @@ extends MarginContainer
 @onready var details_container: AbilityInfoContainer = $HBoxContainer/Details
 
 var player: Player
-var ability_component: AbilityComponent
 
 func init(player_in: Player) -> void:
 	player = player_in
-	ability_component = player.ability_component
-	load_abilities(ability_component.abilities)
-
-func load_abilities(abilities: Array[Ability]) -> void:
 	abilities_container.clear_abilities()
-	for ability in abilities:
-		abilities_container.add_ability(ability)
+	for ability in player.abilities.primary:
+		abilities_container.add_ability(ability, Enums.AbilityType.Primary)
+	for ability in player.abilities.secondary:
+		abilities_container.add_ability(ability, Enums.AbilityType.Secondary)
+	for ability in player.abilities.support:
+		abilities_container.add_ability(ability, Enums.AbilityType.Support)
+	for ability in player.abilities.passive:
+		abilities_container.add_ability(ability, Enums.AbilityType.Passive)
 
-func _on_abilities_ability_clicked(button_index: MouseButton, ability: Ability):
-	match button_index:
-		MOUSE_BUTTON_LEFT:
-			player.equip_ability(ability.type, ability.get_index())
-		MOUSE_BUTTON_RIGHT:
-			player.equip_ability(ability.type, -1)
+func _on_abilities_ability_clicked(button: MouseButton, ability: AbilityData, type: Enums.AbilityType):
+	match type:
+		Enums.AbilityType.Primary:
+			player.loadout.primary = ability if button == MOUSE_BUTTON_LEFT else null
+		Enums.AbilityType.Secondary:
+			player.loadout.secondary = ability if button == MOUSE_BUTTON_LEFT else null
+		Enums.AbilityType.Support:
+			player.loadout.support = ability if button == MOUSE_BUTTON_LEFT else null
+		Enums.AbilityType.Passive:
+			player.loadout.passive = ability if button == MOUSE_BUTTON_LEFT else null
 
-func _on_abilities_ability_hovered(ability: Ability):
-	details_container.set_ability(ability)
+func _on_abilities_ability_hovered(ability: AbilityData, type: Enums.AbilityType):
+	details_container.set_ability(ability, type)

@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="AbilitySet" load_steps=14 format=3 uid="uid://cajq60b56dlt8"]
+
+[ext_resource type="Resource" uid="uid://df03woyue0yr8" path="res://entities/mobs/players/warrior/abilities/primary/slash.tres" id="1_1hy04"]
+[ext_resource type="Script" path="res://features/abilities/ability_set.gd" id="1_o6o5i"]
+[ext_resource type="Resource" uid="uid://bptbt4nqxacs" path="res://entities/mobs/players/warrior/abilities/passive/inspire.tres" id="1_recmk"]
+[ext_resource type="Resource" uid="uid://k0sjvrfbebj8" path="res://entities/mobs/players/warrior/abilities/primary/stab.tres" id="2_k44x0"]
+[ext_resource type="Resource" uid="uid://cf1i1r0kcn3he" path="res://entities/mobs/players/warrior/abilities/passive/recovery.tres" id="2_y2ws2"]
+[ext_resource type="Resource" uid="uid://b1q81d5cu2jbf" path="res://entities/mobs/players/warrior/abilities/primary/slam.tres" id="3_b3umv"]
+[ext_resource type="Resource" uid="uid://ddsk6nsayu1fi" path="res://entities/mobs/players/warrior/abilities/passive/taunt.tres" id="3_hh5bt"]
+[ext_resource type="Resource" uid="uid://chm82ij2fvydy" path="res://entities/mobs/players/warrior/abilities/secondary/blast.tres" id="5_7jus3"]
+[ext_resource type="Resource" uid="uid://r6absdnc8mn" path="res://entities/mobs/players/warrior/abilities/secondary/snipe.tres" id="6_3b8h0"]
+[ext_resource type="Resource" uid="uid://bbhl18ti28c3p" path="res://entities/mobs/players/warrior/abilities/secondary/bombard.tres" id="7_fy7eu"]
+[ext_resource type="Resource" uid="uid://cnbrfibw6eixg" path="res://entities/mobs/players/warrior/abilities/support/guard.tres" id="11_lqra3"]
+[ext_resource type="Resource" uid="uid://bog70la1usgyp" path="res://entities/mobs/players/warrior/abilities/support/parry.tres" id="12_odxg5"]
+[ext_resource type="Resource" uid="uid://mh116dm0bent" path="res://entities/mobs/players/warrior/abilities/support/aid.tres" id="13_hxh7d"]
+
+[resource]
+script = ExtResource("1_o6o5i")
+primary = Array[Resource("res://features/abilities/ability_data.gd")]([ExtResource("1_1hy04"), ExtResource("2_k44x0"), ExtResource("3_b3umv")])
+secondary = Array[Resource("res://features/abilities/ability_data.gd")]([ExtResource("5_7jus3"), ExtResource("6_3b8h0"), ExtResource("7_fy7eu")])
+support = Array[Resource("res://features/abilities/ability_data.gd")]([ExtResource("11_lqra3"), ExtResource("12_odxg5"), ExtResource("13_hxh7d")])
+passive = Array[Resource("res://features/abilities/ability_data.gd")]([ExtResource("1_recmk"), ExtResource("2_y2ws2"), ExtResource("3_hh5bt")])

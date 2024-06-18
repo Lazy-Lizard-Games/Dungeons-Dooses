@@ -7,6 +7,8 @@ extends Mob
 @export var inventory_component: InventoryComponent
 @export var skill_component: SkillComponent
 @export_category('Player Abilities')
+@export var abilities: AbilitySet
+@export var loadout: AbilityLoadout
 @export var primary: int
 @export var secondary: int
 @export var support: int
@@ -79,4 +81,3 @@ func _on_ability_pressed(type: Enums.AbilityType):
 			ability_component.start_ability(secondary)
 		Enums.AbilityType.Support:
 			ability_component.start_ability(support)
-

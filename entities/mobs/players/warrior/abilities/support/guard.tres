@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://cnbrfibw6eixg"]
+
+[ext_resource type="PackedScene" uid="uid://4w315qfhx0fo" path="res://abilities/warrior/support/guard/guard.tscn" id="1_odqlr"]
+[ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_v2byq"]
+
+[resource]
+script = ExtResource("1_v2byq")
+locked = false
+name = "Guard"
+description = "Carry your shield with confidence to deflect blow after blow"
+ability = ExtResource("1_odqlr")

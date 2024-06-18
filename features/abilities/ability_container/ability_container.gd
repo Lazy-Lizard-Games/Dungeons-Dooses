@@ -9,10 +9,10 @@ signal hovered
 @export var icon: TextureRect
 
 ## The currently stored ability, if any.
-var ability: Ability
+var ability: AbilityData
 var empty_icon: CompressedTexture2D = preload ("res://features/abilities/ability_container/empty_icon.jpg")
 
-func set_ability(new_ability: Ability) -> void:
+func set_ability(new_ability: AbilityData) -> void:
 	ability = new_ability
 	icon.texture = ability.icon if ability else empty_icon
 

@@ -1,13 +1,18 @@
-[gd_scene load_steps=94 format=3 uid="uid://dfvqrbc7yfp3e"]
+[gd_scene load_steps=100 format=3 uid="uid://dfvqrbc7yfp3e"]
 
 [ext_resource type="Script" path="res://entities/mobs/players/warrior/warrior.gd" id="1_dwma1"]
 [ext_resource type="Texture2D" uid="uid://tqhwd1b7f36m" path="res://entities/mobs/players/warrior/sprites/knight_spritesheet.png" id="2_4htdx"]
 [ext_resource type="PackedScene" uid="uid://bhnl54yfhv2cl" path="res://components/state/state_component.tscn" id="2_e5t7x"]
+[ext_resource type="Resource" uid="uid://cajq60b56dlt8" path="res://entities/mobs/players/warrior/abilities/abilities.tres" id="2_o8j4r"]
 [ext_resource type="PackedScene" uid="uid://tovqio0ufan6" path="res://components/velocity/velocity_component.tscn" id="2_ry1uk"]
+[ext_resource type="Resource" uid="uid://df03woyue0yr8" path="res://entities/mobs/players/warrior/abilities/primary/slash.tres" id="3_2o686"]
 [ext_resource type="PackedScene" uid="uid://ctexjtf10m8x2" path="res://components/hitbox/hitbox_component.tscn" id="3_58ky6"]
 [ext_resource type="PackedScene" uid="uid://dnsrij0ocvedu" path="res://components/target/target_component.tscn" id="3_svv7w"]
 [ext_resource type="PackedScene" uid="uid://b23qvw2iygdut" path="res://components/health/health_component.tscn" id="3_wj1h3"]
+[ext_resource type="Script" path="res://features/abilities/ability_loadout.gd" id="4_cc1n1"]
 [ext_resource type="PackedScene" uid="uid://c85a28w4mmbak" path="res://components/ability/ability_component.tscn" id="4_qstg1"]
+[ext_resource type="Resource" uid="uid://chm82ij2fvydy" path="res://entities/mobs/players/warrior/abilities/secondary/blast.tres" id="5_3vvrr"]
+[ext_resource type="Resource" uid="uid://cnbrfibw6eixg" path="res://entities/mobs/players/warrior/abilities/support/guard.tres" id="6_iff7u"]
 [ext_resource type="PackedScene" uid="uid://dl0a6p001h8ea" path="res://components/shadow/shadow_component.tscn" id="7_47ooj"]
 [ext_resource type="PackedScene" uid="uid://651c5uaw2i5w" path="res://components/stamina/stamina_component.tscn" id="12_edvht"]
 [ext_resource type="PackedScene" uid="uid://dbr3mboxvngfv" path="res://components/inventory/inventory_component.tscn" id="14_mdvh5"]
@@ -35,6 +40,12 @@
 [ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/warrior/primary/stab/stab.tscn" id="32_50geu"]
 [ext_resource type="PackedScene" uid="uid://b2xuxm77exq2w" path="res://components/effect/effect_component.tscn" id="33_n4u06"]
 [ext_resource type="PackedScene" uid="uid://dhsd8as4dv5oa" path="res://components/ui/menu/Menu.tscn" id="36_kpxb1"]
+
+[sub_resource type="Resource" id="Resource_kwx16"]
+script = ExtResource("4_cc1n1")
+primary = ExtResource("3_2o686")
+secondary = ExtResource("5_3vvrr")
+support = ExtResource("6_iff7u")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fktii"]
 size = Vector2(14, 16)
@@ -1048,6 +1059,8 @@ target = NodePath("TargetComponent")
 interactor_component = NodePath("InteractorComponent")
 inventory_component = NodePath("InventoryComponent")
 skill_component = NodePath("SkillComponent")
+abilities = ExtResource("2_o8j4r")
+loadout = SubResource("Resource_kwx16")
 secondary = -1
 support = -1
 passive = -1

@@ -1,12 +1,10 @@
 class_name AbilityInfoContainer
 extends MarginContainer
 
-var ability: Ability
-
 @onready var name_label: Label = $Panel/MarginContainer/VBoxContainer/Name
 @onready var description_label: Label = $Panel/MarginContainer/VBoxContainer/Description
 
-func set_ability(new_ability: Ability) -> void:
+func set_ability(new_ability: AbilityData, _type: Enums.AbilityType) -> void:
 	if new_ability:
 		name_label.text = new_ability.name
 		description_label.text = new_ability.description

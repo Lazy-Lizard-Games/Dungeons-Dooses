@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://mh116dm0bent"]
+
+[ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_bi7rx"]
+
+[resource]
+script = ExtResource("1_bi7rx")
+locked = true
+name = "Aid"
+description = "Sound the horn of battle and call forth friendly company to fight your foes"

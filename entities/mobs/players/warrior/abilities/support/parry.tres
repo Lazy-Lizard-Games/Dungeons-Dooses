@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://bog70la1usgyp"]
+
+[ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_hgbsc"]
+[ext_resource type="PackedScene" uid="uid://d3d1by4pe1rt4" path="res://abilities/warrior/support/parry/parry.tscn" id="1_j2gxc"]
+
+[resource]
+script = ExtResource("1_hgbsc")
+locked = false
+name = "Parry"
+description = "Prepare yourself for an incoming blow and throw your opponents off balance with a counter strike when it comes"
+ability = ExtResource("1_j2gxc")

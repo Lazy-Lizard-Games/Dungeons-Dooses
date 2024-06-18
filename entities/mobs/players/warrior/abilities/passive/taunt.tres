@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://ddsk6nsayu1fi"]
+
+[ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_7nmsp"]
+[ext_resource type="PackedScene" uid="uid://g87fl1vlube5" path="res://abilities/warrior/passive/mockery/mockery.tscn" id="1_oru1k"]
+
+[resource]
+script = ExtResource("1_7nmsp")
+locked = false
+name = "Aura of Mockery"
+description = "Enrage nearby foes with your presence by reducing their damage and causing them to more likely target you"
+ability = ExtResource("1_oru1k")

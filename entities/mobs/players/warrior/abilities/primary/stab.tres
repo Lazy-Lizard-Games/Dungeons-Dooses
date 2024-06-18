@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://k0sjvrfbebj8"]
+
+[ext_resource type="PackedScene" uid="uid://5ks2vltfgpme" path="res://abilities/warrior/primary/stab/stab.tscn" id="1_e3le7"]
+[ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_vnsiu"]
+[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/warrior/primary/strike/strike_icon.jpg" id="2_k65bl"]
+
+[resource]
+script = ExtResource("1_vnsiu")
+locked = false
+name = "Impale"
+description = "Thrust your sword with deadly precision and pierce even the thickest armour"
+icon = ExtResource("2_k65bl")
+ability = ExtResource("1_e3le7")

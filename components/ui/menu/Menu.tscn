@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhsd8as4dv5oa"]
+[gd_scene load_steps=5 format=3 uid="uid://dhsd8as4dv5oa"]
 
 [ext_resource type="PackedScene" uid="uid://c0isv7vr83ts4" path="res://components/ui/inventory_menu/inventory_menu.tscn" id="1_s13v6"]
 [ext_resource type="Script" path="res://components/ui/menu/Menu.gd" id="1_u5fo5"]
-[ext_resource type="PackedScene" uid="uid://dbib2fjatckxd" path="res://components/ui/skill_menu/skill_menu.tscn" id="2_vj2x8"]
 [ext_resource type="PackedScene" uid="uid://cvhbawqbvysa1" path="res://components/ui/menu/components/ability/ability_menu.tscn" id="4_yq6ri"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m4geu"]
@@ -45,14 +44,10 @@ theme_override_constants/separation = 0
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m4geu")
-current_tab = 2
+current_tab = 1
 tab_focus_mode = 0
 
 [node name="InventoryMenu" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("1_s13v6")]
-visible = false
-layout_mode = 2
-
-[node name="SkillMenu" parent="MarginContainer/VBoxContainer/TabContainer" instance=ExtResource("2_vj2x8")]
 visible = false
 layout_mode = 2
 

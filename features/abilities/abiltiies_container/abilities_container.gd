@@ -3,8 +3,8 @@ extends Panel
 
 ## Keeps abilities in one neat spot for ease of use.
 
-signal ability_hovered(ability: Ability)
-signal ability_clicked(button_index: MouseButton, ability: Ability)
+signal ability_hovered(ability: AbilityData, type: Enums.AbilityType)
+signal ability_clicked(button_index: MouseButton, ability: AbilityData, type: Enums.AbilityType)
 
 @onready var primary_row = get_node("RowContainer/PrimaryRow")
 @onready var secondary_row = get_node("RowContainer/SecondaryRow")
@@ -19,12 +19,12 @@ func clear_abilities() -> void:
 	queue_free_children(support_row)
 	queue_free_children(passive_row)
 
-func add_ability(ability: Ability) -> void:
+func add_ability(ability: AbilityData, type: Enums.AbilityType) -> void:
 	var ability_container: AbilityContainer = ability_container_scene.instantiate()
 	ability_container.set_ability(ability)
-	ability_container.hovered.connect(_on_ability_container_hovered.bind(ability))
-	ability_container.clicked.connect(_on_ability_container_clicked.bind(ability))
-	match ability.type:
+	ability_container.hovered.connect(_on_ability_container_hovered.bind(ability, type))
+	ability_container.clicked.connect(_on_ability_container_clicked.bind(ability, type))
+	match type:
 		Enums.AbilityType.Primary:
 			primary_row.add_child(ability_container)
 		Enums.AbilityType.Secondary:
@@ -38,8 +38,8 @@ func queue_free_children(node: Node) -> void:
 	for idx in node.get_child_count():
 		node.get_child(idx).queue_free()
 
-func _on_ability_container_hovered(ability: Ability) -> void:
-	ability_hovered.emit(ability)
+func _on_ability_container_hovered(ability: AbilityData, type: Enums.AbilityType) -> void:
+	ability_hovered.emit(ability, type)
 
-func _on_ability_container_clicked(button_index: MouseButton, ability: Ability) -> void:
-	ability_clicked.emit(button_index, ability)
+func _on_ability_container_clicked(button_index: MouseButton, ability: AbilityData, type: Enums.AbilityType) -> void:
+	ability_clicked.emit(button_index, ability, type)
