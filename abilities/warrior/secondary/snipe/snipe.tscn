@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb0kgyyqest6"]
+[gd_scene load_steps=3 format=3 uid="uid://bb0kgyyqest6"]
 
 [ext_resource type="Script" path="res://abilities/warrior/secondary/snipe/snipe.gd" id="1_uep48"]
 [ext_resource type="PackedScene" uid="uid://uxywh0niyeux" path="res://entities/projectiles/snipe/snipe.tscn" id="2_t45mp"]
-[ext_resource type="Texture2D" uid="uid://dp44348eewvig" path="res://abilities/warrior/secondary/snipe/icon.png" id="3_7tmbs"]
 
 [node name="Snipe" type="Node" node_paths=PackedStringArray("raycast", "line")]
 script = ExtResource("1_uep48")
@@ -11,9 +10,6 @@ knockback = 25.0
 snipe_projectile = ExtResource("2_t45mp")
 raycast = NodePath("RayCast2D")
 line = NodePath("Line2D")
-type = 1
-description = "Fire a high velocity projectile strong enough to bring down even the mightiest of foes."
-icon = ExtResource("3_7tmbs")
 cost = 15
 casting_time = 0.75
 refreshing_time = 1.0

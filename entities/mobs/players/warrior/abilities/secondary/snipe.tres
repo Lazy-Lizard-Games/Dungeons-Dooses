@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://r6absdnc8mn"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://r6absdnc8mn"]
 
 [ext_resource type="PackedScene" uid="uid://bb0kgyyqest6" path="res://abilities/warrior/secondary/snipe/snipe.tscn" id="1_cpjtq"]
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_w5owq"]
+[ext_resource type="Texture2D" uid="uid://dp44348eewvig" path="res://abilities/warrior/secondary/snipe/icon.png" id="2_cq5nb"]
 
 [resource]
 script = ExtResource("1_w5owq")
 locked = false
 name = "Snipe"
 description = "Take out high threath targets with a carefully placed shot using your rifle"
+icon = ExtResource("2_cq5nb")
 ability = ExtResource("1_cpjtq")

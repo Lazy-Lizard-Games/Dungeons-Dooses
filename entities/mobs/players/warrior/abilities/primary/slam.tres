@@ -2,12 +2,12 @@
 
 [ext_resource type="PackedScene" uid="uid://dlu0jxlcc8rms" path="res://abilities/warrior/primary/slam/slam.tscn" id="1_2gwqg"]
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_j10yr"]
-[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/warrior/primary/strike/strike_icon.jpg" id="2_eebca"]
+[ext_resource type="Texture2D" uid="uid://dggi0wegi65oc" path="res://abilities/warrior/primary/slam/icon.png" id="2_rgc35"]
 
 [resource]
 script = ExtResource("1_j10yr")
 locked = false
 name = "Slam"
 description = "Wield your blade with fury and shatter the ground beneath you feet"
-icon = ExtResource("2_eebca")
+icon = ExtResource("2_rgc35")
 ability = ExtResource("1_2gwqg")

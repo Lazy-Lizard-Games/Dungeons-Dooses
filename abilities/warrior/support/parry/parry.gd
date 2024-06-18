@@ -2,10 +2,6 @@ extends Ability
 
 ## Prepares the warrior to intercept an incoming attack. If successful, deflect the attack and quickly counter strike.
 
-
-@export var player: Player
-@export var sprite: Sprite2D
-@export var animation_player: AnimationPlayer
 @export var window_time: float
 
 var has_casted = false
@@ -15,7 +11,7 @@ var window_timer = 0.0
 
 func enter() -> void:
 	cast()
-	animation_player.play("parry_start")
+	mob.animation_player.play("parry_start")
 
 func exit() -> void:
 	has_casted = false
@@ -31,30 +27,33 @@ func process_frame(delta: float) -> State:
 	return null
 
 func process_physics(_delta: float) -> State:
-	player.velocity_component.accelerate_in_direction(Vector2.ZERO)
-	player.velocity_component.move(player)
+	mob.velocity_component.accelerate_in_direction(Vector2.ZERO)
+	mob.velocity_component.move(mob)
 	return null
 
 func _on_casted() -> void:
 	has_casted = true
-	player.hitbox_component.is_immune = true
-	player.hitbox_component.impacted.connect(_on_player_hitbox_component_impacted)
-	animation_player.play("parry_idle")
+	mob.hitbox_component.is_immune = true
+	mob.hitbox_component.impacted.connect(_on_mob_hitbox_component_impacted)
+	mob.animation_player.play("parry_idle")
 
-func _on_player_hitbox_component_impacted(_data: ImpactData, _from: HurtboxComponent, _immunity: bool) -> void:
-	player.hitbox_component.impacted.disconnect(_on_player_hitbox_component_impacted)
+func _on_mob_hitbox_component_impacted(_data: ImpactData, _from: HurtboxComponent, _immunity: bool) -> void:
+	mob.hitbox_component.impacted.disconnect(_on_mob_hitbox_component_impacted)
 	has_countered = true
-	player.hitbox_component.is_immune = false
-	animation_player.play("parry_attack")
-	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
+	mob.hitbox_component.is_immune = false
+	mob.animation_player.play("parry_attack")
+	mob.animation_player.animation_finished.connect(_on_mob_animation_player_animation_finished)
 
 func _on_window_timer_timeout() -> void:
-	player.hitbox_component.impacted.disconnect(_on_player_hitbox_component_impacted)
+	mob.hitbox_component.impacted.disconnect(_on_mob_hitbox_component_impacted)
 	has_ended = true
-	player.hitbox_component.is_immune = false
-	animation_player.play("parry_end")
-	animation_player.animation_finished.connect(_on_animation_player_animation_finished)
+	mob.hitbox_component.is_immune = false
+	mob.animation_player.play("parry_end")
+	mob.animation_player.animation_finished.connect(_on_mob_animation_player_animation_finished)
 
-func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	animation_player.animation_finished.disconnect(_on_animation_player_animation_finished)
-	player.state_component.change_state(player.state_component.starting_state)
+func _on_mob_animation_player_animation_finished(_anim_name: StringName) -> void:
+	mob.animation_player.animation_finished.disconnect(_on_mob_animation_player_animation_finished)
+	mob.state_component.change_state(mob.state_component.starting_state)
+
+func _on_started() -> void:
+	mob.state_component.change_state(self)

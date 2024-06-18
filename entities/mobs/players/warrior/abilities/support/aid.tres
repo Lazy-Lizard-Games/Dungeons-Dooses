@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://mh116dm0bent"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://mh116dm0bent"]
 
+[ext_resource type="PackedScene" uid="uid://4w315qfhx0fo" path="res://abilities/warrior/support/guard/guard.tscn" id="1_8enxl"]
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_bi7rx"]
+[ext_resource type="Texture2D" uid="uid://bcjwvt4v8fh8" path="res://abilities/warrior/support/guard/icon.png" id="2_6f7td"]
 
 [resource]
 script = ExtResource("1_bi7rx")
 locked = true
 name = "Aid"
 description = "Sound the horn of battle and call forth friendly company to fight your foes"
+icon = ExtResource("2_6f7td")
+ability = ExtResource("1_8enxl")

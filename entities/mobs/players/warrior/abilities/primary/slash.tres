@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_8bhnj"]
 [ext_resource type="PackedScene" uid="uid://cjytli5qnj0cq" path="res://abilities/warrior/primary/strike/strike.tscn" id="1_33cx0"]
-[ext_resource type="Texture2D" uid="uid://dvkc7xc2c838p" path="res://abilities/warrior/primary/strike/strike_icon.jpg" id="2_oy4lb"]
+[ext_resource type="Texture2D" uid="uid://oxdgnspl4gw8" path="res://abilities/warrior/primary/strike/icon.png" id="2_xtf1l"]
 
 [resource]
 script = ExtResource("1_8bhnj")
 locked = false
 name = "Slash"
 description = "Swing your sword with might and cleave all who stand in your way."
-icon = ExtResource("2_oy4lb")
+icon = ExtResource("2_xtf1l")
 ability = ExtResource("1_33cx0")

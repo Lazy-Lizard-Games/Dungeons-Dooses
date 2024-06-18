@@ -3,6 +3,8 @@ extends State
 
 ## Takes control of an entity or other, and performs some unique action using them.
 
+## Emitted when the ability has succesfully started:
+signal started
 ## Emitted when the ability has started casting.
 signal casting
 ## Emitted when the ability has finished casting.
@@ -16,13 +18,6 @@ signal failed
 ## Emitted when the ability is ready again.
 signal readied
 
-@export var stats: StatsComponent
-## The type controls which slots the ability may be equipped in for players.
-@export var type: Enums.AbilityType
-## A short description of what the ability does.
-@export_multiline var description: String
-## An icon for rendering the ability in UI.
-@export var icon: Texture2D
 ## Minimum stamina required to start this ability.
 @export var cost: int
 ## The time in seconds taken to cast the ability.
@@ -37,6 +32,20 @@ var is_refreshing := false
 var casting_timer: float = 0
 ## Counter used for timing the refreshing.
 var refreshing_timer: float = 0
+## The mob used by the ability. 
+var mob: Mob
+
+## Initialises or resets an ability when controlled by a new ability component.
+func init(ability: AbilityComponent) -> void:
+	mob = ability.mob
+
+## Attempts to start the ability and returns the result.
+func start() -> bool:
+	if mob.stamina_component.current >= cost:
+		started.emit()
+		_on_started()
+		return true
+	return false
 
 ## Sets the ability as casting.
 func cast() -> void:
@@ -55,13 +64,13 @@ func ready() -> void:
 	readied.emit()
 
 func process_casting_timer(delta: float) -> void:
-	casting_timer += delta * stats.cast_rate.get_final_value()
+	casting_timer += delta * mob.stats_component.cast_rate.get_final_value()
 	if casting_timer >= casting_time:
 		is_casting = false
 		casted.emit()
 
 func process_refreshing_timer(delta: float) -> void:
-	refreshing_timer += delta * stats.refresh_rate.get_final_value()
+	refreshing_timer += delta * mob.stats_component.refresh_rate.get_final_value()
 	if refreshing_timer >= refreshing_time:
 		is_refreshing = false
 		refreshed.emit()
@@ -71,3 +80,6 @@ func process_timers(delta: float) -> void:
 		process_casting_timer(delta)
 	if is_refreshing:
 		process_refreshing_timer(delta)
+
+func _on_started() -> void:
+	pass

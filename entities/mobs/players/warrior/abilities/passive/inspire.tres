@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://bptbt4nqxacs"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://bptbt4nqxacs"]
 
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_5fot8"]
 [ext_resource type="PackedScene" uid="uid://5detw0usmk0y" path="res://abilities/warrior/passive/inspire/inspire.tscn" id="1_283pw"]
+[ext_resource type="Texture2D" uid="uid://5j56cfa4jo86" path="res://abilities/warrior/passive/inspire/icon.png" id="2_1dycb"]
 
 [resource]
 script = ExtResource("1_5fot8")
 locked = false
 name = "Aura of Inspiration"
 description = "Bolster nearby allies with your presence by increasing their damage"
+icon = ExtResource("2_1dycb")
 ability = ExtResource("1_283pw")

@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://chm82ij2fvydy"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://chm82ij2fvydy"]
 
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_aexhk"]
 [ext_resource type="PackedScene" uid="uid://bm6bj5u081ip1" path="res://abilities/warrior/secondary/blast/blast.tscn" id="1_sxcpc"]
+[ext_resource type="Texture2D" uid="uid://boouobyyj3nm5" path="res://abilities/warrior/secondary/blast/icon.png" id="2_flh74"]
 
 [resource]
 script = ExtResource("1_aexhk")
 locked = false
 name = "Blast"
 description = "Wield a powerful handcannon capable of turning nearby enemies into swiss cheese"
+icon = ExtResource("2_flh74")
 ability = ExtResource("1_sxcpc")

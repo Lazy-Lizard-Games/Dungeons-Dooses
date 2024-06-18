@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://cf1i1r0kcn3he"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://cf1i1r0kcn3he"]
 
 [ext_resource type="PackedScene" uid="uid://cp74lofv8h4fl" path="res://abilities/warrior/passive/vigour/vigour.tscn" id="1_3hv2t"]
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_qn55n"]
+[ext_resource type="Texture2D" uid="uid://t3ljn1jj6l2g" path="res://abilities/warrior/passive/vigour/icon.png" id="2_y17ag"]
 
 [resource]
 script = ExtResource("1_qn55n")
 locked = false
 name = "Aura of Recovery"
 description = "Radiate a soothing presence that aids allies in stamina regeneration"
+icon = ExtResource("2_y17ag")
 ability = ExtResource("1_3hv2t")

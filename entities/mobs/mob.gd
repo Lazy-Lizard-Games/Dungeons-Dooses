@@ -17,3 +17,7 @@ extends Entity
 @export var stats_component: StatsComponent
 ## State component for the mob.
 @export var state_component: StateComponent
+## Stores the spritesheet for the mob.
+@export var sprite: Sprite2D
+## Stores the animations for the mob.
+@export var animation_player: AnimationPlayer

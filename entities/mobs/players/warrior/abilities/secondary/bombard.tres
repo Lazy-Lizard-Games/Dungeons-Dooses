@@ -1,11 +1,13 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=3 format=3 uid="uid://bbhl18ti28c3p"]
+[gd_resource type="Resource" script_class="AbilityData" load_steps=4 format=3 uid="uid://bbhl18ti28c3p"]
 
 [ext_resource type="Script" path="res://features/abilities/ability_data.gd" id="1_e3hen"]
 [ext_resource type="PackedScene" uid="uid://bqcmhxj81wjf4" path="res://abilities/warrior/secondary/mortar/mortar.tscn" id="1_n27tx"]
+[ext_resource type="Texture2D" uid="uid://06ify30jy1s1" path="res://abilities/warrior/secondary/mortar/icon.png" id="2_0fbg1"]
 
 [resource]
 script = ExtResource("1_e3hen")
 locked = false
 name = "Bombard"
 description = "Scatter your foes with heavy artillery fired from a portable mortar"
+icon = ExtResource("2_0fbg1")
 ability = ExtResource("1_n27tx")
